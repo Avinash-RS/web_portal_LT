@@ -214,7 +214,7 @@ export class CoursedetailsComponent implements OnInit {
   currentModuleTitle: any;
   topicInfo: any;
   bkup_Toc: any;
-  filterData: any;
+  filterData: any = [];
   myQuestionList: any = [];
   allQuestionList: any = [];
   isQALoading: boolean;
@@ -280,6 +280,7 @@ export class CoursedetailsComponent implements OnInit {
   bkmrk_module: number;
   bkmrk_subModuleHolder: any;
   bkup_topicInfo: any;
+  bkup_moduleName: any;
 
   // FOR DRM(Restriction for right click)
   @HostListener("document:keydown", ["$event"])
@@ -469,6 +470,7 @@ export class CoursedetailsComponent implements OnInit {
     this.translate.use(localStorage.getItem("language"));
 
     // if (!resumeInit) {
+      var resumeCounter = 0
     this.socketService.socketReceiver();
 
     this.socketEmitReciver = this.socketService.change.subscribe(
@@ -477,42 +479,61 @@ export class CoursedetailsComponent implements OnInit {
         if(result.data.course_id===this.courseid)
         {
           if (result.data.resume) {
-          if (result && this.weekHolder) {
-          } else {
+            
+          if (result && resumeCounter==0) {
+          // } else {
             // replace resume data from socket for TOC
             this.scromModuleData = [...result.data.message];
-            // get current resume topic (from expanded socket data)
-            var resultData;
-            var getResumeTopic = function (data) {
-              for (let i = 0; i < data.length; i++) {
-                const e = data[i];
-                if (e.childData) {
-                  if (
-                    _.find(e.childData, {
-                      expanded: true,
-                    })
-                  ) {
-                    getResumeTopic(e.childData);
-                  }
-                } else {
-                  if (e.link && e.expanded == true) {
-                    resultData = e;
-                  }
-                }
-              }
-              return resultData;
-            };
-            if(!this.topicInfo)
-            {this.topicInfo = this.bkup_topicInfo =  getResumeTopic(this.scromModuleData);}
+            // // get current resume topic (from expanded socket data)
+            // to get week index
+            if (this.checkDetails.checklevel) {
+              this.scromModuleData.forEach((element, index) => {
+                if (element.expanded) {
+                  this.weekHolderUI = this.weekHolder = index;
+                  element.childData.forEach((module, mi) => {
+                    if (module.expanded) {
+                      this.moduleHolder = mi;
+                      module.childData.forEach((smodule, smi) => {
+                        if (smodule.expanded) {
+                          this.subModuleHolder = smi;
+                          this.bkup_moduleName  = smodule.module_name
+                          smodule.childData.forEach((topic, ti) => {
+                            if (topic.link && topic.expanded == true) {
+                              this.nextPrevHolder = this.topiccurrentPage = ti;
+                              this.topicInfo = this.bkup_topicInfo = topic
             this.currentTopicTitle = this.topicInfo.topic_name;
             this.bookmarkedCount = result.data.bookmarkCount;
-            console.log(this.topicInfo,'resume')
-            // to get week index
-            this.scromModuleData.forEach((element,index )=> {
-              if(element.expanded)
-              {this.weekHolderUI = index}
-            });
+                            }
+                          });
+                        }
+                      });
+                    }
+                  });
+                }
+              });
+            } else {
+              this.scromModuleData.forEach((element, index) => {
+                if (element.expanded) {
+                  this.weekHolderUI = this.weekHolder = index;
+                  element.childData.forEach((module, mi) => {
+                    if (module.expanded) {
+                      this.moduleHolder = mi;
+                      this.bkup_moduleName  = module.module_name
+                      module.childData.forEach((topic, ti) => {
+                        if (topic.link && topic.expanded == true) {
+                          this.nextPrevHolder = this.topiccurrentPage = ti;
+                          this.topicInfo = this.bkup_topicInfo = topic;
+            this.currentTopicTitle = this.topicInfo.topic_name;
+            this.bookmarkedCount = result.data.bookmarkCount;
+                        }
+                      });
+                    }
+                  });
+                }
+              });
+            }
           }
+          resumeCounter++
         } else {
           this.bookmarkedCount = result.data.bookmarkCount;
           if (this.checkDetails.checklevel) {
@@ -814,10 +835,13 @@ export class CoursedetailsComponent implements OnInit {
       this.bkmrk_week = weekIndex;
       this.bkmrk_topic = topindex;
       this.bkmrk_module = Number(smi);
+      this.currentTopicTitle = topicName;
+      this.currentModuleTitle = moduleName;
       if (moduleIdx >= 0) {
         this.bkmrk_subModuleHolder = moduleIdx;
         this.submoduleTitle = moduleName;
       }
+      this.topicInfo = topicDetail;
     }else
     {
       this.weekHolder = weekIndex;
@@ -836,12 +860,12 @@ export class CoursedetailsComponent implements OnInit {
     this.topiccurrentPage = this.nextPrevHolder;
     this.moduleHolder = Number(smi);
     this.currentPage = Number(smi);
-
+    this.topicInfo = this.bkup_topicInfo = topicDetail;
+    this.bkup_moduleName = moduleName
     localStorage.setItem('resumeData', JSON.stringify({'link':url,'lastModule':this.currentModuleTitle,'lastTopic':this.currentTopicTitle,'module_id':topicDetail.parent,'topic_id':topicDetail.id,'checklevel':this.scromApiData.checkLevel,'course_status': this.checkDetails.course_status,}));
   }
     // this.isprevEnable = true;
     // this.isNextEnable = true;
-    this.topicInfo = topicDetail;
     console.log(this.topicInfo,'PLaytopic click')
     this.playURLConstructor(
       url,
@@ -1354,19 +1378,20 @@ export class CoursedetailsComponent implements OnInit {
       this.filterkey = "All";
       // on all toc list
       let moduleName
-      if(this.weekHolder){
-       if(this.scromApiData.checkLevel)
-      {
-        this.topicInfo = this.scromModuleData[this.weekHolder].childData[this.moduleHolder].childData[this.subModuleHolder].childData[this.nextPrevHolder];
-         moduleName = this.scromModuleData[this.weekHolder].childData[this.moduleHolder].childData[this.subModuleHolder].module_name
-      }
-      else{
-        this.topicInfo = this.scromModuleData[this.weekHolder].childData[this.moduleHolder].childData[this.nextPrevHolder];
-          moduleName = this.scromModuleData[this.weekHolder].childData[this.moduleHolder].module_name;
-      }
-    }else{
+    //   if(this.weekHolder){
+    //    if(this.scromApiData.checkLevel)
+    //   {
+    //     this.topicInfo = this.scromModuleData[this.weekHolder].childData[this.moduleHolder].childData[this.subModuleHolder].childData[this.nextPrevHolder];
+    //      moduleName = this.scromModuleData[this.weekHolder].childData[this.moduleHolder].childData[this.subModuleHolder].module_name
+    //   }
+    //   else{
+    //     this.topicInfo = this.scromModuleData[this.weekHolder].childData[this.moduleHolder].childData[this.nextPrevHolder];
+    //       moduleName = this.scromModuleData[this.weekHolder].childData[this.moduleHolder].module_name;
+    //   }
+    // }else{
       this.topicInfo = this.bkup_topicInfo
-    }
+      moduleName = this.bkup_moduleName
+    // }
       console.log(this.topicInfo,'tabchange')
       this.playURLConstructor(
         this.topicInfo.link,
