@@ -153,6 +153,10 @@ export class AskQuestionsComponent implements OnInit {
         this.mainModuleName = this.mainModule?this.mainModule.module_name:null;
         this.mainTopic=null
       }
+      else{
+        this.mainModuleName = null;
+        this.mainTopic=null;
+      }
     }
     this.getQuestionsAnswerlists()
 
