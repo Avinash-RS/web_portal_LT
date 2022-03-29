@@ -1369,7 +1369,7 @@ export class CoursedetailsComponent implements OnInit {
   tabClick(tab) {
     if (tab.index == 1) {
       this.filterkey = "Bookmarked";
-      this.bkmrk_week = undefined;
+      this.bkmrk_week = this.weekHolderUI;
       this.bkmrk_topic = undefined;
       this.bkmrk_module = null
         this.bkmrk_subModuleHolder = undefined;
@@ -1391,6 +1391,8 @@ export class CoursedetailsComponent implements OnInit {
     // }else{
       this.topicInfo = this.bkup_topicInfo
       moduleName = this.bkup_moduleName
+      this.currentTopicTitle = this.topicInfo.topic_name;
+      this.currentModuleTitle = moduleName;
     // }
       console.log(this.topicInfo,'tabchange')
       this.playURLConstructor(
