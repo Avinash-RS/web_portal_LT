@@ -1,0 +1,14 @@
+<app-header></app-header>
+<div class="quizReport d-flex justify-content-between">
+    <div class="leftContainer">
+        <ul class="breadcrumb">
+            <li><em routerLink="/Learner/MyCourse" class="lxp-Go backArrow"></em> {{courseName}}</li>
+            <li>{{'Quiz Report' | translate}}</li>
+        </ul>
+        <div class="col">
+            <ag-grid-angular [columnDefs]="cols" [rowData]="rows" style="width:100%; height:300px" class="ag-theme-alpine"></ag-grid-angular>
+        </div>
+    </div>
+    <div class="rightContainer">
+    </div>
+</div>

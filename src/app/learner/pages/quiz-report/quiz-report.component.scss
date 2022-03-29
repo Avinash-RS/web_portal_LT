@@ -1,0 +1,78 @@
+@import "variable";
+
+.quizReport {
+    flex-direction: column;
+    @media only screen and (min-width: 992px) {
+        flex-direction: row;
+    }
+    .leftContainer {
+        width: 100%;
+        background: #F2F2F2;
+        padding: 20px 0;
+        @media only screen and (min-width: 992px) {
+          width: calc(100% - 360px);
+        }
+        @media only screen and (min-width: 1140px) {
+          width: calc(100% - 400px);
+        }
+        .breadcrumb {
+            margin: 0;
+            padding: 0 20px !important;
+            background-color: transparent !important;
+            li {
+                color: #333333;
+                font-size: 14px;
+                font-weight: 400;
+                line-height: normal;
+                position: relative;
+                margin-right: 15px;
+                display: inline-block;
+                em {
+                    display: inline-block;
+                    transform: scale(-1);
+                    color: #666666;
+                    margin-right: 8px;
+                    cursor: pointer;
+                }
+                &:last-child {
+                    color: #999999;
+                    &::before {
+                        content: "/";
+                        position: absolute;
+                        left: -10px;
+                        top: auto;
+                        bottom: auto;
+                        color: #c02222;
+                    }
+                }
+            }
+        }
+    }
+    .rightContainer {
+        width: 100%;
+        background-color: #fff;
+        padding: 1.5em;
+        box-shadow: 0 0 2px 0 #0000006b;
+        position: relative;
+        right: 0;
+        top: 0;
+        height: 100%;
+        @media only screen and (min-width: 720px) {
+          padding: 1em 2em 3em 2em;
+        }
+        @media only screen and (min-width: 992px) {
+          width: 360px;
+          position: fixed;
+          top: 72px;
+          padding: 3em 1em;
+        }
+        @media only screen and (min-width: 1140px) {
+          width: 400px;
+        }
+      }
+}
+
+::ng-deep.ag-theme-alpine .ag-root:not(.ag-context-menu-open) .ag-body-viewport:not(.ag-has-focus) .ag-cell-range-selected-1:not(.ag-cell-inline-editing) {
+    background-color: transparent;
+    border-color: transparent;
+}
