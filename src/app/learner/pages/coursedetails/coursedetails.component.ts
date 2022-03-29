@@ -1400,6 +1400,12 @@ export class CoursedetailsComponent implements OnInit {
         this.topicInfo.parent,
         this.topicInfo.id
       );
+      setTimeout(() => {
+        this.inputEl
+      ? this.inputEl.nativeElement.scrollIntoView({ behavior: "smooth" })
+      : "";
+      }, 2000);
+      
     }
   }
 
