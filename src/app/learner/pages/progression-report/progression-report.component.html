@@ -94,7 +94,7 @@
                       </span>
                       <span *ngIf="showWeek">
                         <div [ngStyle]="(moduleItem.week!==apidata[number-1]?.week || moduleItem.isOpened) ? {'color': 'inherit'} : {'color': 'white'}" class="week-text">{{'Week' | translate}}</div>
-                        <div [ngStyle]="(moduleItem.week!==apidata[number-1]?.week || moduleItem.isOpened) ? {'color': 'inherit'} : {'color': 'white'}" class="week-number">{{numPrefix(number + 1)}}</div>
+                        <div [ngStyle]="(moduleItem.week!==apidata[number-1]?.week || moduleItem.isOpened) ? {'color': 'inherit'} : {'color': 'white'}" class="week-number">{{numPrefix(UserDetails?.org_type == 'Corporate' ? moduleItem.week -1 : moduleItem.week)}}</div>
                       </span>
                     </div>
 
