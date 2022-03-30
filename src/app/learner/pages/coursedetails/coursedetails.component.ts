@@ -1369,7 +1369,7 @@ export class CoursedetailsComponent implements OnInit {
   tabClick(tab) {
     if (tab.index == 1) {
       this.filterkey = "Bookmarked";
-      this.bkmrk_week = this.weekHolderUI;
+      this.bkmrk_week = this.weekHolderUI+1;
       this.bkmrk_topic = undefined;
       this.bkmrk_module = null
         this.bkmrk_subModuleHolder = undefined;
