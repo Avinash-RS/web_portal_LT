@@ -479,8 +479,31 @@ export class CoursedetailsComponent implements OnInit {
         if(result.data.course_id===this.courseid)
         {
           if (result.data.resume) {
+
+            var resultData;
+            var getResumeTopic = function (data) {
+              for (let i = 0; i < data.length; i++) {
+                const e = data[i];
+                if (e.childData) {
+                  if (
+                    _.find(e.childData, {
+                      expanded: true,
+                    })
+                  ) {
+                    getResumeTopic(e.childData);
+                  }
+                } else {
+                  if (e.link && e.expanded == true) {
+                    resultData = e;
+                  }
+                }
+              }
+                return resultData;
+              };
+              
+
             
-          if (result && resumeCounter==0) {
+          if (result&&(getResumeTopic(result.data.message).id===this.topicInfo?.id||(this.topicInfo==undefined))) {
           // } else {
             // replace resume data from socket for TOC
             this.scromModuleData = [...result.data.message];
