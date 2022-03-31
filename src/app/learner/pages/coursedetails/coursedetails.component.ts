@@ -281,6 +281,7 @@ export class CoursedetailsComponent implements OnInit {
   bkmrk_subModuleHolder: any;
   bkup_topicInfo: any;
   bkup_moduleName: any;
+  bkmrk_weekDisp: number;
 
   // FOR DRM(Restriction for right click)
   @HostListener("document:keydown", ["$event"])
@@ -470,7 +471,6 @@ export class CoursedetailsComponent implements OnInit {
     this.translate.use(localStorage.getItem("language"));
 
     // if (!resumeInit) {
-      var resumeCounter = 0
     this.socketService.socketReceiver();
 
     this.socketEmitReciver = this.socketService.change.subscribe(
@@ -556,7 +556,6 @@ export class CoursedetailsComponent implements OnInit {
               });
             }
           }
-          resumeCounter++
         } else {
           this.bookmarkedCount = result.data.bookmarkCount;
           if (this.checkDetails.checklevel) {
@@ -855,7 +854,8 @@ export class CoursedetailsComponent implements OnInit {
   ) {
     
     if(this.filterkey == "Bookmarked"){
-      this.bkmrk_week = weekIndex;
+      this.bkmrk_week = weekIndex.wi;
+      this.bkmrk_weekDisp = weekIndex.wn;
       this.bkmrk_topic = topindex;
       this.bkmrk_module = Number(smi);
       this.currentTopicTitle = topicName;
@@ -1392,7 +1392,8 @@ export class CoursedetailsComponent implements OnInit {
   tabClick(tab) {
     if (tab.index == 1) {
       this.filterkey = "Bookmarked";
-      this.bkmrk_week = this.weekHolderUI+1;
+      this.bkmrk_weekDisp = this.weekHolderUI+1
+      this.bkmrk_week = undefined;
       this.bkmrk_topic = undefined;
       this.bkmrk_module = null
         this.bkmrk_subModuleHolder = undefined;
