@@ -2846,3 +2846,38 @@ export const getStepCourseByLearner = gql`
     }
   }
 `;
+export const getlearnerquiz = gql `
+  query getlearnerquiz($email: String!){
+    getlearnerquiz(email:$email){
+      success
+      error_msg
+      message{
+        doughnut_chart{
+          to_score
+          count
+          percent
+        }
+        bar_chart{
+          user
+          quiz_name
+          batchid
+          score_earned
+          points_earned
+          max_score
+          max_point
+          color
+        }
+        table_chart{
+          quiz_name
+          status
+          color
+          no_of_question
+          correct_answer
+          score
+          start_date
+          end_date
+        }
+      }
+    }
+  }
+`;

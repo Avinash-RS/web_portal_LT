@@ -5,10 +5,40 @@
             <li><em routerLink="/Learner/MyCourse" class="lxp-Go backArrow"></em> {{courseName}}</li>
             <li>{{'Quiz Report' | translate}}</li>
         </ul>
-        <div class="col">
-            <ag-grid-angular [columnDefs]="cols" [rowData]="rows" style="width:100%; height:300px" class="ag-theme-alpine"></ag-grid-angular>
+        <div class="col agquiz">
+            <mat-card class="mat-elevation-z8">
+                <ag-grid-angular [columnDefs]="cols" [rowData]="rows" style="width:100%; height:500px" class="ag-theme-alpine"></ag-grid-angular>
+            </mat-card>
         </div>
     </div>
     <div class="rightContainer">
+        <div class="performanceChart">
+            <span class="chartHeading">{{'My Quiz Performance'}}</span>
+            <h6 class="ylabel">{{'Percentage'}}</h6>
+            <canvas height="210px" baseChart [datasets]="barChartDataSet" [labels]="barLabel"  [options]="courseChartOptions"
+            [plugins]="ChartPlugins" [legend]="coursebarChartLegend" [chartType]="ChartType"></canvas>
+            <h6 class="xlabel">{{'Quiz Topics'}}</h6>
+        </div>
+        <div class="quizAverage">
+            <span class="chartHeading">{{'Quiz Average Score'}}</span>
+            <div class="wrapper d-flex justify-content-between align-items-center">
+                <div class="circleProgress">
+                    <circle-progress [title]= "quizData?.doughnut_chart?.percent ? quizData.doughnut_chart.percent : '0'"
+                    [titleFontSize] = "10" [titleFontWeight] = "600" [showUnits]= "true" 
+                    [percent]="quizData?.doughnut_chart?.percent ? quizData.doughnut_chart.percent : '0'"
+                    [radius]=25  [space]=-6 [outerStrokeGradient]=true [outerStrokeWidth]=6 [outerStrokeColor]="'#17B15C'" 
+                    [outerStrokeGradientStopColor]="'#17B15C'" [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]=6 
+                    [animation]="true" [animationDuration]="300" [responsive]="true" [showSubtitle]="false" ></circle-progress>
+                </div>
+                <div class="points">
+                    <ul>
+                        <li class="d-flex align-items-center" *ngFor="let item of points">
+                            <div [ngStyle]="{'background-color': item.color =='good' ? '#49AE31' : (item.color =='avg' ? '#FFA800' : '#C02222') }"></div><span>{{item.label}}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
     </div>
 </div>
