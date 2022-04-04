@@ -9,6 +9,7 @@ import { MaskingPipePipe } from '@core/core/masking-pipe.pipe';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory, CoreModule } from '@core/core.module';
 import { HttpClient } from '@angular/common/http';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 import { NgOtpInputModule } from  'ng-otp-input';
 
 // import { MaterialModule } from '@core/material.module';
@@ -25,13 +26,13 @@ const routes: Routes = [
     path: '',
     component: LoginComponent,
     canActivate: [IsLoggedInAuthGuard],
-    data: { title: 'Learner Login' }
+    data: { title: 'College Connect Login' }
   },
   {
     path: 'Learner/login',
     component: LoginComponent,
     canActivate: [IsLoggedInAuthGuard],
-    data: { title: 'Learner Login' }
+    data: { title: 'College Connect Login' }
   },
   {
     path: 'Learner/authentication',
@@ -68,6 +69,7 @@ const routes: Routes = [
     MatCheckboxModule,
     MatSelectModule,
     // MatIconModule,
+    CarouselModule,
     MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,

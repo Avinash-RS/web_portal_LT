@@ -1,15 +1,74 @@
 <div class="loginWrapper">
   <mat-card class="h-100 loginContainer d-flex justify-content-start">
+
+    <div class="topSection">
+      <span class="visitWebsite"><em class="lxp-monitor"></em> Visit our website : &nbsp;<a href="https://lntedutech.com/" target="dontopen">www.lntedutech.com</a></span>
+    </div>
+    <!-- <div class="bottomSection d-flex justify-content-between align-items-center">
+      <span class="copyRights">© 2021 L&T Edutech. All rights reserved</span>
+      <span class="terms"><a href="https://lntedutech.com/privacy-policy-2/" target="clickbuster">Privacy Policy</a></span>
+    </div> -->
+
+    <div class="bottomSection d-flex justify-content-between align-items-center">
+      <span class="copyRights">© {{currentYear}} L&T EduTech. All rights reserved</span>
+      <div class="terms">
+        <a href="https://lntedutech.com/support-form/" target="newTab"><em class="lxp-Support"></em> <span>Technical Support</span></a>
+        <a href="https://lntedutech.com/feedback-form/" target="newTab"><em class="lxp-Feedback"></em> <span>Feedback</span></a>
+        <a class="privacyPolicy" href="https://lntedutech.com/privacy-policy-2/" target="privacyPolicy"><span>Privacy policies</span></a>
+      </div>
+    </div>
     <div class="brandLogo d-lg-flex justify-content-between align-items-center flex-column">
       <div class="topImage">
         <figure class="logo">
           <img alt="" src="https://assets.lntedutech.com/edutech_logo.svg">
         </figure>
       </div>
-      <div class="middleImage">
-        <figure class="obstacles">
+      <div class="middleImage" (mouseleave)="stop($event)">
+        <owl-carousel-o [options]="TopicsOptions" class="questionList">
+        <ng-template carouselSlide>
+          <div class="promotionSlides">
+            <figure>
+              <img src="assets/images/img01.svg" alt="Application oriented courses" />
+            </figure>
+            <h3>Application oriented courses</h3>
+            <p>All courses are designed for learner engagement to promote effective learning through hybrid delivery modes. The College Connect series has an immersive learning experience and a competitive edge for participating students.</p>
+            <a href="https://engineering.lntedutech.com/" target="dontopen" class="explore">Explore <em class="lxp-Right_Direction_Arrow"></em></a>
+          </div>
+        </ng-template>
+        <ng-template carouselSlide>
+          <div class="promotionSlides">
+            <figure>
+              <img src="assets/images/img02.svg" alt="Professional Skilling" />
+            </figure>
+            <h3>Professional Skilling</h3>
+            <p>Certification of workplace readiness in knowledge areas and various skills across Core Engineering, Coding & Industry 4.0 . The training enables learning best practices and industry benchmarks followed by L&T. Individuals and Employers stand to benefit from these programs designed for capability development, up-skilling and re-skilling.</p>
+            <a href="https://lntedutech.com/professional-skilling/" target="dontopen" class="explore">Explore <em class="lxp-Right_Direction_Arrow"></em></a>
+          </div>
+        </ng-template>
+        <ng-template carouselSlide>
+          <div class="promotionSlides">
+            <figure>
+              <img src="assets/images/img03.svg" alt="Assessments & Certifications" />
+            </figure>
+            <h3>Assessments & Certifications</h3>
+            <p>Scientifically designed on the premise that Assessments help identify proficiency levels, cause improvement and Certifications indicate readiness in Knowledge, Skills, Abilities and Personality competencies, a variety of offerings in this category aids students, academic institutions and employers in the context of selection and development.</p>
+            <a href="https://lntedutech.com/assessment/" target="dontopen" class="explore">Explore <em class="lxp-Right_Direction_Arrow"></em></a>
+          </div>
+        </ng-template>
+        <ng-template carouselSlide>
+          <div class="promotionSlides">
+            <figure>
+              <img src="assets/images/img04.svg" alt="Skills Exchange" />
+            </figure>
+            <h3>Skills Exchange</h3>
+            <p>L&T EduTech’s – Skills Exchange is a talent pool of pre-assessed and certified candidates for employers looking to hire. It contains detailed profiles of registered, skilled & talented individuals, derived via Assessments and Certifications. Employers can work directly with the colleges & institutions to conduct placement programs to complete the recruitment process.</p>
+            <a href="https://lntedutech.com/skills-exchange/" target="dontopen" class="explore">Explore <em class="lxp-Right_Direction_Arrow"></em></a>
+          </div>
+        </ng-template>
+      </owl-carousel-o>
+        <!-- <figure class="obstacles">
           <img src="https://assets.lntedutech.com/EntryImage.svg" alt="" />
-        </figure>
+        </figure> -->
       </div>
       <div class="downloadApp d-flex justify-content-center align-items-center">
         <span>{{'Download our Mobile app'| translate}}</span>
@@ -83,10 +142,10 @@
                 </div>
               </button>
             </div>
-            <div class="dontHaveAccount">
+           <!-- <div class="dontHaveAccount">
               <span>{{'Don\'t have an account yet?' | translate}} <a class="signup" (click)="viewSignin()">
                   {{'Sign up' | translate }}</a></span>
-            </div>
+            </div> -->
           </form>
           <div class="info-card animate" *ngIf="infoClose">
             <div class="info-bodyWrapper">
@@ -100,7 +159,7 @@
               <div class="info-content">
                 <ul>
                   <li>{{'Please clear browser cache before logging into the application.' | translate}}</li>
-                  <li>{{'If you need any assistance, kindly reach us at ' | translate}}<a href="noMailForYou@spambot.com" rel="nofollow" onclick="this.href='mailto:' + 'collegeconnect.support' + '@' + 'lntedutech.com'">collegeconnect.support@lntedutech.com</a>.</li>
+                  <li>{{'If you need any assistance, kindly reach us at'| translate}} <a href="mailto:collegeconnect.support@lntedutech.com">collegeconnect.support@lntedutech.com</a>.</li>
                 </ul>
               </div>
             </div>
@@ -143,7 +202,7 @@
             <mat-form-field appearance="outline">
               <mat-label class="label-color">{{'Title' | translate}}</mat-label>
               <mat-select formControlName="title" required>
-                <mat-option *ngFor="let value of titleData" [value]="value.title">
+                <mat-option *ngFor="let value of titleData" [value]="value._id">
                   {{value.title}}
                 </mat-option>
               </mat-select>
@@ -172,7 +231,7 @@
 
             <mat-form-field appearance="outline">
               <mat-label class="label-color">{{'Email' | translate}}</mat-label>
-              <input matInput id="email" #email placeholder="'Enter the email' | translate" formControlName="email" maxlength="250" required>
+              <input matInput id="email" #email placeholder="Enter the email" formControlName="email" maxlength="250" required>
               <em class="icon-color lxp-MailOutline" matPrefix></em>
               <mat-error class="error" *ngIf="registerForm.get('email').hasError('required') && !registerSuccess">
                 {{'Email is required' | translate}}</mat-error>
@@ -182,7 +241,7 @@
 
             <mat-form-field appearance="outline">
               <mat-label class="label-color">{{'Mobile number' | translate}}</mat-label>
-              <input matInput type="tel" [placeholder]="'Enter mobile number without country code' | translate" minlength="10" mask="0000000000" maxlength="10" formControlName="mobile">
+              <input matInput type="tel" [placeholder]="'Enter mobile number without country code'" minlength="10" mask="0000000000" maxlength="10" formControlName="mobile">
               <em class="icon-color lxp-Phone" matPrefix></em>
 
               <mat-error class="error" *ngIf="registerForm.get('mobile').hasError('minlength') || registerForm.get('mobile').hasError('pattern')">
@@ -224,10 +283,10 @@
             </div>
           </form>
         </div>
-        <div>Language:&nbsp;<select [(ngModel)]="selectedLanguage" (change)="onSelection()">
+        <!-- <div>Language:&nbsp;<select [(ngModel)]="selectedLanguage" (change)="onSelection()">
           <option value="en" selected>English</option>
           <option value="ta">Tamil</option>
-        </select></div>
+        </select></div> -->
       </div>
     </div>
   </mat-card>

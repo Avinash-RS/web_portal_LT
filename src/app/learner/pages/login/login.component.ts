@@ -9,6 +9,8 @@ import { ToastrService } from 'ngx-toastr';
 import * as CryptoJS from 'crypto-js';
 import { RecaptchaErrorParameters } from "ng-recaptcha";
 import { environment } from '../../../../environments/environment';
+import { OwlOptions } from 'ngx-owl-carousel-o';
+
 import { Title } from '@angular/platform-browser';
 import { GoogleAnalyticsService } from '@learner/services/google-analytics.service';
 declare var gtag;
@@ -36,8 +38,27 @@ export class LoginComponent implements OnInit {
   fullname: any;
   resolvedCaptcha: any;
   registerSuccess = false;
-  titleData = [{'title':'Mr'},{'title':'Ms'},];
+  titleData = [];
   siteKey: any = environment.captachaSiteKey;
+  TopicsOptions: OwlOptions = {
+    loop: true,
+    autoplay: true,
+    mouseDrag: false,
+    touchDrag: false,
+    pullDrag: false,
+    dots: true,
+    autoplaySpeed: 500,
+    dotsSpeed: 500,
+    autoplayHoverPause: true,
+    slideBy: 1,
+    navText: ['', ''],
+    responsive: {
+      0: {
+        items: 1
+      },
+    },
+    nav: false
+  };
   env_Version = environment.appVersion;
   recaptchaStr = '';
   recaptchaForgetStr = '';
@@ -56,8 +77,6 @@ export class LoginComponent implements OnInit {
       translate.addLangs(['en', 'ta']);
       translate.setDefaultLang('en');
       const browserLang = translate.getBrowserLang();
-      let lang = localStorage.getItem('language')
-      this.translate.use(lang?lang:'en') 
   }
 
   ngOnInit() {
@@ -70,12 +89,14 @@ export class LoginComponent implements OnInit {
       language: new FormControl(false, [])
     });    
   }
-
+  stop(event){
+    event.stopPropagation();
+  }
   viewChange(){
     this.signInPage = false;
     this.forgotPage = true;
     this.titleService.setTitle('Forgot Password');
-    this.gaService.setInnerPage('Forgot Password')
+    this.gaService.setInnerPage('Forgot Password');
     setTimeout(()=>{
       this.captchaRef.reset();
     },1000)
@@ -139,6 +160,34 @@ export class LoginComponent implements OnInit {
       }
     });
   }
+/*
+  portalToIggnite() {
+    this.activatedRoute.queryParams.subscribe(params => {
+      if (params && params['email_id']) {
+        this.learnerService.getLoginUserDetail(params.email_id).subscribe((isValidEmailResult: any) => {
+          if (isValidEmailResult.data.get_login_details.success === true) {
+            sessionStorage.setItem('token', isValidEmailResult.data.get_login_details.message.token);
+            localStorage.setItem('language', this.loginForm?.value?.language || 'en'  );
+            localStorage.setItem('Fullname', isValidEmailResult.data.get_login_details.message.full_name);
+            sessionStorage.setItem('UserDetails', JSON.stringify(isValidEmailResult.data.get_login_details.message));
+            sessionStorage.setItem('remember_me', 'true');
+            sessionStorage.setItem('user_img', isValidEmailResult.data.get_login_details.message.profile_img);
+            sessionStorage.setItem('role', 'learner');
+            this.router.navigate(['/Learner/MyCourse']);
+          } else {
+            this.toastr.error(isValidEmailResult.data.get_login_details.error_msg, null);
+            localStorage.clear();
+            sessionStorage.clear();
+          }
+        });  
+      } else {
+        localStorage.removeItem('UserDetails');
+        localStorage.removeItem('role');
+        localStorage.removeItem('token');
+        localStorage.removeItem('adminDetails');
+      }
+    });
+  }*/
 
   get f() {
     return this.loginForm.controls;
@@ -187,7 +236,7 @@ export class LoginComponent implements OnInit {
     this.loader = true;
     var encryptedname = CryptoJS.AES.encrypt(this.loginForm.value.username.toLowerCase(), this.secretKey.trim()).toString();
     var encryptedpassword = CryptoJS.AES.encrypt(this.loginForm.value.password, this.secretKey.trim()).toString();
-    this.service.login(encryptedname, encryptedpassword, false,this.recaptchaStr)
+    this.service.login(encryptedname, encryptedpassword, false,'microsetportal')
       .subscribe((loginresult: any) => {
         if(loginresult.data.login){
           if (loginresult.data.login.success) {
@@ -239,7 +288,7 @@ export class LoginComponent implements OnInit {
         }else{
           sessionStorage.setItem('token', loginresult.data.login.message.token);
         }
-        // localStorage.setItem('language', this.loginForm?.value?.language || 'en'  );
+        localStorage.setItem('language', this.loginForm?.value?.language || 'en'  );
         localStorage.setItem('Fullname', loginresult.data.login.message.full_name);
         var id = CryptoJS.AES.encrypt(loginresult.data.login.message.user_id, this.secretKey.trim()).toString(); 
         loginresult.data.login.message.user_id = id
@@ -289,7 +338,7 @@ export class LoginComponent implements OnInit {
       this.signUpPage = true;
       this.titleService.setTitle('Sign up')
       this.gaService.setInnerPage('Sign up')
-      // this.gettitleData();
+      this.gettitleData();
       this.registerForm = this.formBuilder.group({
         recaptchaReactive: [null],
         title: ['', [Validators.required]],
@@ -355,14 +404,24 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  technicalSupport() {
+    window.open('https://lntedutech.com/support-form/', 'technical');
+  }
+  feedback() {
+    window.open('https://lntedutech.com/feedback-form/', 'feedback');
+  }
+
   gettitleData() {
-    // this.service.getRegisterTitle().subscribe((data: any) => {
-    // this.titleData = data.data.user_mstr_data.data;
-    // });
+    this.service.getRegisterTitle().subscribe((data: any) => {
+    this.titleData = data.data.user_mstr_data.data;
+    });
   }
   backToIn(){
     this.signUpPage = false;
     this.signInPage = true;
     this.registerForm.reset();
+  }
+  openPlayStore(){
+    window.open("https://play.google.com/store/apps/details?id=com.lntedutech.collegeconnect","playystore");
   }
 }
