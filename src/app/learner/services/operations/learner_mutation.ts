@@ -1178,6 +1178,7 @@ data{
     module_id
     topic_id
     toc
+    extracted
     checklevel
     self_paced_learning
     liveclassroom
