@@ -1541,6 +1541,8 @@
   .mat-dialog-content {
     height: 100% !important;
     max-height: inherit !important;
+    margin: 0;
+    padding: 0;
   }
   .mat-dialog-container {
     padding: 0 !important;
@@ -1864,7 +1866,7 @@
     width: 30% !important;
   }
   .mat-dialog-container {
-    padding: 20px !important;
+    padding: 24px !important;
   }
 }
 .aboutpopupTab {
