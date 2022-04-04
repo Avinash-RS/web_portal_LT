@@ -14,25 +14,7 @@
     </div>
   </div>
 </div>
-<!-- <p>
-  <span class="redHover">
-    <mat-icon class="material-icons f_size_15 backIc pointer" (click)="goBack()">arrow_back_ios
-    </mat-icon>
-    <span class="f_size_19 pointer" (click)="goBack()">
-      Back
-    </span>
-  </span>
-</p> -->
-<!-- <div class="f_wt_600 f_size_16 m-l-13 display_flex">
-  <span>
-    {{course?.name}}
-  </span>
-  <mat-icon class="material-icons brdcrmb f_size_25 " >chevron_right
-  </mat-icon>
-  <span>Discussion Forum</span>
-</div>
-<br> -->
-<!-- *ngIf="course?.isBatch" -->
+
 <div class="row">
   <div
     *ngIf="isMobile ? (!isHideAccord ? true : false) : true"
@@ -76,22 +58,10 @@
                   class="expandCollapse"
                   [ngClass]="res.expanded ? 'lxp-Collapse' : 'lxp-Expand'"
                 ></i>
-                <!-- <mat-icon  class="f_size_23 colorBlack">
-                  {{res.expanded?'remove_circle_outline':'add_circle_outline'}}
-              </mat-icon> -->
+             
               </div>
             </mat-card-title>
-            <!-- <mat-card-subtitle (click)="moduleExpand(res,i)" class="d-flex justify-content-start align-items-center tocSubTitle">
-         
-          <div>
-              <span *ngIf="res?.title?.length >= 67" class="moduleName" tooltip="{{res?.title}}"
-                  placement="right">
-                  {{res?.title | slice:0:71}}...</span>
-              <span *ngIf="res?.title?.length < 67" class="moduleName">
-                  {{res?.title}}
-              </span>
-          </div>
-      </mat-card-subtitle> -->
+      
             <mat-card-content *ngIf="res.expanded">
               <mat-vertical-stepper
                 [ngClass]="res?.title?.length > 39 ? 'headerDown' : ''"
@@ -154,22 +124,10 @@
                   class="expandCollapse"
                   [ngClass]="res.expanded ? 'lxp-Collapse' : 'lxp-Expand'"
                 ></i>
-                <!-- <mat-icon  class="f_size_23 colorBlack">
-                  {{res.expanded?'remove_circle_outline':'add_circle_outline'}}
-              </mat-icon> -->
+             
               </div>
             </mat-card-title>
-            <!-- <mat-card-subtitle (click)="moduleExpand(res,i)" class="d-flex justify-content-start align-items-center tocSubTitle">
-         
-          <div>
-              <span *ngIf="res?.title?.length >= 67" class="moduleName" tooltip="{{res?.title}}"
-                  placement="right">
-                  {{res?.title | slice:0:71}}...</span>
-              <span *ngIf="res?.title?.length < 67" class="moduleName">
-                  {{res?.title}}
-              </span>
-          </div>
-      </mat-card-subtitle> -->
+          
             <mat-card-content *ngIf="res.expanded">
               <mat-vertical-stepper
                 [ngClass]="res?.title?.length > 39 ? 'headerDown' : ''"
@@ -756,10 +714,7 @@
                 *ngIf="userDetail.is_thread_config"
                 class="col-xl-4 col-lg-4 col-md-12 col-sm-12 p-5px"
               >
-                <!-- <button mat-button (click)="gotoNewThread(createThreadDialog)"
-                                  [disabled]="course === null || selectedModuleData === null || disableThreads"
-                                  class="new_Thread " style="border-radius: 0 !important;">
-                                  {{'New thread' | translate }}</button> -->
+             
 
                 <button
                   mat-button
@@ -1085,13 +1040,7 @@
                           ({{ posts?.bookmarks || 0 }})
                         </button>
                         &nbsp;&nbsp;
-                        <!-- // commented by Mythreyi - no need child's child comment -->
-                        <!-- <button mat-button
-                                              (click)="showCommentEditor[pjn] = !showCommentEditor[pjn]"
-                                              class="f_size_12 no_padding">
-                                              <mat-icon class="action_icon">
-                                                  comment</mat-icon>Comment
-                                          </button> -->
+                     
                       </div>
                     </div>
                     <div class="row p-lr-30" *ngIf="showCommentEditor[pjn]">
@@ -1140,9 +1089,7 @@
                               float_right
                             "
                           >
-                            <!-- <mat-checkbox class="width_100 f_size_13 align-middle" [(ngModel)]="a2iFlag">
-                              &nbsp;{{'Ask the instructor' | translate }}
-                            </mat-checkbox> -->
+                          
                           </div>
                           <div
                             class="
