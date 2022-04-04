@@ -2,18 +2,7 @@
 <app-performance-page-mobile [performDetailPageData]="perfornDetaildata" *ngIf="performdetailPageView"></app-performance-page-mobile>
 <div class="activitiesWrapper" *ngIf="!performdetailPageView">
 
-  <!-- <div style="margin-bottom: 5px;" class="">
-    <div class="commonBackStyle">
-      <i class="lxp-Arrow backArrow" (click)="goToCourse()"></i>
-      <span (click)="goToCourse()">Back</span>
-      <div class="courseNameBreadcrum">
-        <span class="pipeLine"> | </span>
-        <span>{{courseName}}</span>
-        <i class="lxp-Arrow"></i>
-        <span>Activities</span>
-      </div>
-    </div>
-  </div> -->
+
 
   <ul class="breadcrumb">
     <li><em (click)="goToCourse()" class="lxp-Go backArrow"></em> <span class="name">{{courseName}}</span> <span class="bar">/</span> </li>
@@ -93,13 +82,11 @@
                             <mat-card class="p-0 carouselCard" (click)="projectPreviewDoc(projectPreviewDialog, videoDialog, material, 'material')">
                               <div class="row ml-0 mr-0 carouselRow1">
                                 <div class="col-12 m-auto">
-                                  <!-- <mat-icon class="imageIcon" *ngIf="material.doc_type =='image/jpeg'  || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'">
-                                    photo_size_select_actual</mat-icon> -->
+                          
                                   <em class="lxp-photo imageIcon" *ngIf="material.doc_type =='image/jpeg'  || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'"></em>
-                                  <!-- <mat-icon class="imageIcon" *ngIf="material.doc_type =='video/mp4' || material.doc_type =='video/quicktime'">play_circle_outline</mat-icon> -->
+                                
                                   <em class="lxp-PlayCircle imageIcon" *ngIf="material.doc_type =='video/mp4' || material.doc_type =='video/quicktime'"></em>
-                                  <!-- <i class="fa fa-file-pdf-o pdfIcon" *ngIf="material.doc_type =='application/pdf'"
-                                    aria-hidden="true"></i> -->
+                                 
                                     <em class="lxp-pdf pdfIcon" *ngIf="material.doc_type =='application/pdf'"></em>
                                 </div>
                               </div>
@@ -139,13 +126,13 @@
 
                         <ng-container *ngIf="assignment.files.grade_status == 'Evaluated'">
                         <span (click)="previewAssignment(previewDialog,assignment.files)" matTooltip="View" matTooltipClass="custom-mat-tooltip">
-                          <!-- <mat-icon matTooltipClass="custom-mat-tooltip" class="assignmentpdf"  *ngIf="assignment.files.doc_type == 'image/jpeg'|| assignment.files.doc_type == 'image/png' || assignment.files.doc_type =='image/jpg'">photo_size_select_actual</mat-icon> -->
+                         
                           <em class="lxp-photo assignmentpdf"  *ngIf="assignment.files.doc_type == 'image/jpeg'|| assignment.files.doc_type == 'image/png' || assignment.files.doc_type =='image/jpg'"></em>
-                          <!-- <i class="fa fa-file-pdf-o assignmentpdf" *ngIf="assignment.files.doc_type == 'application/pdf'" aria-hidden="true"></i> -->
+                        
                           <em class="lxp-pdf assignmentpdf" *ngIf="assignment.files.doc_type == 'application/pdf'" aria-hidden="true"></em>
                         </span>
                         <span (click)="downloadDoc(assignment.files, 'material')">
-                          <!-- <i matTooltip="Download" matTooltipClass="custom-mat-tooltip" class="fa fa-download assignmentdownload" aria-hidden="true"></i> -->
+                      
                           <em  matTooltip="Download" matTooltipClass="custom-mat-tooltip" class="lxp-filedownload assignmentdownload"></em>
                         </span>
                       </ng-container>
@@ -258,8 +245,7 @@
                 <span class="gradedot"></span>{{'Graded' | translate}}</span>
               
               <mat-icon class="f_size_16 arr" aria-hidden="false" (click)="resourseAccord(performDetails, i);">{{perform.isOpen?'keyboard_arrow_up':'keyboard_arrow_down'}}</mat-icon>
-              <!-- <mat-icon class="f_size_16 arr" aria-hidden="false" *ngIf="!isperformColaps || performId !== i" (click)="resourseAccord(performDetails, i)">keyboard_arrow_down</mat-icon>
-              <mat-icon class="f_size_16 arr" aria-hidden="false" *ngIf="isperformColaps && performId === i" (click)="isperformColaps = !isperformColaps; performId = i; selectedIndex = null">keyboard_arrow_up</mat-icon> -->
+         
 
               <div *ngIf="perform.performActivity.submittedTotal == 0" [ngClass]="perform.performActivity.submittedTotal > 0 ? 'mt-2 mb-2 itrationTxts' : 'mt-2 mb-2 itrationTxt'"
                 class=""> {{'Iterations :' | translate}} <span *ngIf="perform.performActivity.submittedTotal > 0">{{perform.performActivity.submittedTotal}} / </span>{{perform.performActivity.iterationTotal}}
@@ -292,15 +278,11 @@
                         <mat-card class="p-0 carouselCard" (click)="playVideo(projectPreviewDialog, videoDialog, material, material.doc_type)">
                           <div class="row ml-0 mr-0 carouselRow1">
                             <div class="col-12 m-auto">
-                              <!-- <mat-icon class="imageIcon"
-                                *ngIf="material.doc_type =='image/jpeg'  || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'">
-                                photo_size_select_actual</mat-icon> -->
+                            
                                 <em class="lxp-photo imageIcon"   *ngIf="material.doc_type =='image/jpeg'  || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'"></em>
-                              <!-- <mat-icon class="imageIcon" *ngIf="material.doc_type =='video/mp4' || material.doc_type =='video/quicktime'">play_circle_outline
-                              </mat-icon> -->
+                            
                               <em class="lxp-PlayCircle imageIcon" *ngIf="material.doc_type =='video/mp4' || material.doc_type =='video/quicktime'"></em>
-                              <!-- <i class="fa fa-file-pdf-o pdfIcon" *ngIf="material.doc_type =='application/pdf'"
-                                aria-hidden="true"></i> -->
+                          
                                 <em class="lxp-pdf pdfIcon" *ngIf="material.doc_type =='application/pdf'"></em>
                             </div>
                           </div>
@@ -356,7 +338,7 @@
                     <div class="align-center" *ngIf="itrdata.grade_status !== 'Evaluated'">
                       <div class="videoPreview d-flex align-items-center mt-2 ml-auto mr-auto mb-3" *ngFor="let videoName of itrdata.videodetails">
                         <mat-icon class="videoPlay" *ngIf="videoName.doc_type == 'application/pdf'">picture_as_pdf</mat-icon>
-                        <!-- <mat-icon class="videoPlay" *ngIf="videoName.doc_type == 'video/mp4' || videoName.doc_type == 'video/quicktime'">play_circle_outline</mat-icon> -->
+                      
                         <em class="lxp-PlayCircle imageIcon" *ngIf="videoName.doc_type == 'video/mp4' || videoName.doc_type == 'video/quicktime'"></em>
                         <span class="videoName"  matTooltip="{{videoName.name}}" matTooltipClass="custom-mat-tooltip">{{(videoName.name| slice:0:18)+'...'}}</span>
                         <mat-icon class="deleteBtn" *ngIf="itrdata.submit_status == 'notsubmitted'" (click)="submitDeleteVideo(videoName, itrdata, perform.performActivity , submitType = 'delete')">close</mat-icon>
@@ -389,11 +371,11 @@
                               <mat-card class="materialCard p-0 mr-2 .m-l" (mouseover)="hoverfile = true; mouseover(i)" (mouseleave)="hoverfile = false">
                                 <div class="row ml-0 mr-0 matCardIconRow1">
                                   <div class="col-12 pl-0 pr-0" (click)="playVideo(projectPreviewDialog, videoDialog, videoName, videoName.doc_type)">
-                                    <!-- <i class="fa fa-file-pdf-o icons" *ngIf="videoName.doc_type == 'file/pdf' || videoName.doc_type == 'application/pdf'" aria-hidden="true"></i> -->
+                                  
                                     <em class="lxp-pdf icons" *ngIf="videoName.doc_type == 'file/pdf' || videoName.doc_type == 'application/pdf'" ></em>
-                                    <!-- <mat-icon class="icons" *ngIf="videoName.doc_type == 'image/png' || videoName.doc_type == 'image/jpg' || videoName.doc_type == 'image/jpeg'">photo_size_select_actual</mat-icon> -->
+                                    
                                     <em class="lxp-photo icons"   *ngIf="videoName.doc_type == 'image/png' || videoName.doc_type == 'image/jpg' || videoName.doc_type == 'image/jpeg'"></em>
-                                    <!-- <mat-icon class="icons" *ngIf="videoName.doc_type =='video/mp4' || videoName.doc_type =='video/quicktime'">play_circle_outline</mat-icon> -->
+                                    
                                     <em class="lxp-PlayCircle icons" *ngIf="videoName.doc_type =='video/mp4' || videoName.doc_type =='video/quicktime'"></em>
                                   </div>
                                 
@@ -404,20 +386,19 @@
                                         <div class="col-12 pl-0 pr-0">
                                           <div class="row ml-0 mr-0 playActions">
                                             <div  (click)="playVideo(projectPreviewDialog, videoDialog, videoName, videoName.doc_type)" class="col-5 text-left pr-0 colAction">
-                                              <!-- <mat-icon class="position-absolute text-white playBtnmobile" *ngIf="videoName.doc_type =='video/mp4' || videoName.doc_type =='video/quicktime'">play_circle_outline</mat-icon> -->
+                                           
                                               <em class="lxp-PlayCircle position-absolute text-white playBtnmobile" *ngIf="videoName.doc_type =='video/mp4' || videoName.doc_type =='video/quicktime'"></em>
-                                              <!-- <mat-icon class="position-absolute text-white playBtn" *ngIf="videoName.doc_type =='image/jpeg'">photo_size_select_actual</mat-icon> -->
+                                            
                                               <em class="lxp-photo position-absolute text-white playBtn"  *ngIf="videoName.doc_type =='image/jpeg'"></em>
-                                                <!-- <i class="fa fa-file-pdf-o position-absolute text-white playBtnmobile" *ngIf="videoName.doc_type =='application/pdf'"
-                                                aria-hidden="true"></i> -->
+                                           
                                                 <em class="lxp-pdf position-absolute text-white playBtnmobile" *ngIf="videoName.doc_type =='application/pdf'"></em>
                                               <span class="text-white actionBtnmobile" *ngIf="videoName.doc_type =='video/mp4' || videoName.doc_type =='video/quicktime'">{{'Play' | translate}}</span>
                                               <span class="text-white actionBtnmobile" *ngIf="videoName.doc_type == 'image/jpeg' || videoName.doc_type == 'application/pdf'">{{'View' | translate}}</span>
                                             </div>
                                             <div class="col-7 text-center pr-0 colActionDownload">
-                                              <!-- <a (click)="downloadDoc(videoName, 'files')"> -->
+                                         
                                                 <a (click)="downloadProject(videoName.videourl + blobKey, videoName.name)">
-                                                <!-- <i class="fa fa-download text-white position-absolute downloadBtnMobile" aria-hidden="true"></i> -->
+                                          
                                                 <em class="lxp-filedownload text-white position-absolute downloadBtn"></em>
                                                 <span class="text-white actionBtn1Mobile">{{'Download' | translate}}</span>
                                               </a>
@@ -441,52 +422,10 @@
                           </div>
                         </div>
                       </div>
-                      <!-- <owl-carousel-o [options]="trendingItration" [ngClass]="itrdata.videodetails.length >= 4 ? 'arrow' : 'owlItration arrow'">
-                        <ng-template carouselSlide *ngFor="let videoName of itrdata.videodetails; let i = index">
-                          <div class="col-6">
-                            <mat-card class="materialCard p-0 mr-2 .m-l" (mouseover)="hoverfile = true; mouseover(i)" (mouseleave)="hoverfile = false">
-                              <div class="row ml-0 mr-0 matCardIconRow1">
-                                <div class="col-12 pl-0 pr-0">
-                                  <i class="fa fa-file-pdf-o icons" *ngIf="videoName.doc_type == 'file/pdf' || videoName.doc_type == 'application/pdf'" aria-hidden="true"></i>
-                                  <mat-icon class="icons" *ngIf="videoName.doc_type == 'image/png' || videoName.doc_type == 'image/jpg' || videoName.doc_type == 'image/jpeg'">photo_size_select_actual</mat-icon>
-                                  <mat-icon class="icons" *ngIf="videoName.doc_type =='video/mp4'">play_circle_outline</mat-icon> 
-                                </div>
-                              </div>
-                              <div class="row ml-0 mr-0 h-40" (mouseleave)="hoverfile = false; mouseover(i)" [ngClass]="hoverfile && mouseOverIndex == i ? 'row ml-0 mr-0 fileSelDetHover' : 'row ml-0 mr-0 fileSelDet'">
-                                <div class="col-12 pr-0 fileNameCol">
-                                  <span class="fileColor">{{(videoName.name| slice:0:18)+'...'}}</span>
-                                  <div class="row ml-0 mr-0" *ngIf="hoverfile && mouseOverIndex == i">
-                                    <div class="col-12 pl-0 pr-0">
-                                      <div class="row ml-0 mr-0 playActions">
-                                        <div class="col-5 text-left pr-0 colAction" (click)="playVideo(projectPreviewDialog, videoDialog, videoName, videoName.doc_type)">
-                                          <mat-icon class="position-absolute text-white playBtnmobile" *ngIf="videoName.doc_type =='video/mp4'">play_circle_outline</mat-icon>
-                                          <mat-icon class="position-absolute text-white playBtn" *ngIf="videoName.doc_type =='image/jpeg'">photo_size_select_actual</mat-icon>
-                                            <i class="fa fa-file-pdf-o position-absolute text-white playBtn" *ngIf="videoName.doc_type =='application/pdf'"
-                                            aria-hidden="true"></i>
-                                          <span class="text-white actionBtnmobile" *ngIf="videoName.doc_type =='video/mp4'">Play</span>
-                                          <span class="text-white actionBtn" *ngIf="videoName.doc_type == 'image/jpeg' || videoName.doc_type == 'application/pdf'">Preview</span>
-                                        </div>
-                                        <div class="col-7 text-center pr-0 colActionDownload">
-                                          <a [href]="videoName.path" [download]="videoName.name">
-                                            <i class="fa fa-download text-white position-absolute downloadBtnMobile" aria-hidden="true"></i>
-                                            <span class="text-white actionBtn1Mobile">Download</span>
-                                          </a>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </mat-card>
-                          </div>
-                        </ng-template>
-                      </owl-carousel-o> -->
+
                       <div class="" *ngIf="itrdata?.comments && itrdata.comments!= ''">
                         <div class="text-left">
                           <p class="feedBackTxt">{{'Feedback' | translate}}</p>
-                          <!-- <textarea disabled rows="4" cols="50" class="textArea">
-                            {{itrdata.comments}}
-                            </textarea> -->
                             <textarea disabled class="textArea">{{itrdata.comments}}</textarea>
                         </div>
                       </div>
@@ -608,13 +547,11 @@
                             <mat-card class="p-0 carouselCard" (click)="projectPreviewDoc(projectPreviewDialog, videoDialog, material, 'material')">
                               <div class="row ml-0 mr-0 carouselRow1">
                                 <div class="col-12 m-auto">
-                                  <!-- <mat-icon class="imageIcon" *ngIf="material.doc_type =='image/jpeg'  || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'">
-                                    photo_size_select_actual</mat-icon> -->
+                            
                                     <em class="lxp-photo imageIcon" *ngIf="material.doc_type =='image/jpeg'  || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'"></em>
-                                  <!-- <mat-icon class="imageIcon" *ngIf="material.doc_type =='video/mp4' || material.doc_type =='video/quicktime'">play_circle_outline</mat-icon> -->
+                                 
                                   <em class="lxp-PlayCircle imageIcon" *ngIf="material.doc_type =='video/mp4' || material.doc_type =='video/quicktime'"></em>
-                                  <!-- <i class="fa fa-file-pdf-o pdfIcon" *ngIf="material.doc_type =='application/pdf' || material.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"
-                                    aria-hidden="true"></i> -->
+                                
                                     <em class="lxp-pdf pdfIcon" *ngIf="material.doc_type =='application/pdf' || material.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"></em>
                                 </div>
                               </div>
@@ -644,7 +581,7 @@
                     <div class="f_size_16 f_wt_600 align-center work">{{'Your work' | translate}}</div>
                     <div [ngClass]="project.projectActivity.showLearnerList ? 'box-0-3' : 'box-0-2'">
                       <div class="fileData ml-auto mr-auto mb-3" *ngFor="let item of project.projectActivity.videodetails">
-                        <!-- <mat-icon *ngIf="item.doc_type == 'video/mp4' || item.doc_type == 'video/quicktime'" class="videoPlay float-left">play_circle_outline</mat-icon> -->
+                      
                         <em class="lxp-PlayCircle videoPlay float-left" *ngIf="item.doc_type == 'video/mp4' || item.doc_type == 'video/quicktime'"></em>
                         <mat-icon *ngIf="item.doc_type == 'image/jpeg'|| item.doc_type == 'image/png' || item.doc_type =='image/jpg'" class="videoPlay float-left">photo</mat-icon>
                         <mat-icon *ngIf="item.doc_type == 'application/pdf' || item.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'" class="videoPlay float-left">picture_as_pdf </mat-icon>
@@ -662,10 +599,7 @@
                         <p class="uploadMessage" >{{'Max File Size : 150 MB, Format : JPEG,PNG,PDF,MP4,MOV' | translate}}</p>
                         <button mat-stroked-button class="submit-btn" [disabled]="project.submitType == false || project.enableSubmit == false" (click)="learnerSumbitdeleteVideo(project, '' ,'submit')" 
                         *ngIf="project.projectActivity.videodetails.length > 0">{{'Submit' | translate}}</button>
-                        <!-- <button mat-stroked-button class="submitted-btn mt-2" *ngIf="(project.projectActivity.videodetails.length == 0 || project.enableSubmit == false)"> Submit </button> -->
                       
-                        <!-- <button mat-stroked-button class="submitted-btn" [disabled]="true" *ngIf="project.projectActivity.submitAction == 'submit'">Submitted</button>
-                        <p *ngIf="project.projectActivity.submit_status == 'notsubmitted'">Submitted files cannot be edited</p> -->
                         <p *ngIf="project.projectActivity.submitAction == 'submit'">{{'Submitted on:' | translate}} {{project.submittedOn | date:'MMM dd, yyyy'}}</p>
                       </div>
                     </div>
@@ -685,11 +619,11 @@
 
                               <div class="row ml-0 mr-0 carouselRow1">
                                 <div class="col-12 m-auto" (click)="projectPreviewDoc(projectPreviewDialog,videoDialog, video, 'files')">
-                                  <!-- <mat-icon class="imageIcon" *ngIf="video.doc_type =='image/jpeg'  || video.doc_type == 'image/png' || video.doc_type == 'image/jpg'">photo_size_select_actual</mat-icon> -->
+                                 
                                   <em class="lxp-photo imageIcon" *ngIf="video.doc_type =='image/jpeg'  || video.doc_type == 'image/png' || video.doc_type == 'image/jpg'"></em>
-                                  <!-- <mat-icon class="imageIcon" *ngIf="video.doc_type =='video/mp4' || video.doc_type =='video/quicktime'">play_circle_outline</mat-icon> -->
+                                
                                   <em class="lxp-PlayCircle imageIcon" *ngIf="video.doc_type =='video/mp4' || video.doc_type =='video/quicktime'"></em>
-                                  <!-- <i class="fa fa-file-pdf-o pdfIcon" *ngIf="video.doc_type =='application/pdf' || video.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'" aria-hidden="true"></i> -->
+                              
                                   <em class="lxp-pdf pdfIcon"*ngIf="video.doc_type =='application/pdf' || video.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"></em>
                                 </div>
                                 <div (mouseleave)="hover = false" [ngClass]="hover && mouseOverIndex == i ? 'row ml-0 mr-0 carouselRowHover' : 'row ml-0 mr-0 carouselRow'">
@@ -700,17 +634,16 @@
                                       <div class="col-12 pl-0 pr-0">
                                         <div class="row ml-0 mr-0 mt-2 playActions">
                                           <div class="col-5 text-left pr-0 colAction" (click)="projectPreviewDoc(projectPreviewDialog,videoDialog, video, 'files')">
-                                            <!-- <mat-icon class="position-absolute text-white playBtn" *ngIf="video.doc_type =='video/mp4' || video.doc_type =='video/quicktime'">play_circle_outline</mat-icon> -->
+                                          
                                             <em class="lxp-PlayCircle position-absolute text-white playBtn" *ngIf="video.doc_type =='video/mp4' || video.doc_type =='video/quicktime'"></em>
-                                            <!-- <mat-icon class="position-absolute text-white playBtn" *ngIf="video.doc_type =='image/jpeg' || video.doc_type == 'image/jpg' || video.doc_type == 'image/png'">photo_size_select_actual</mat-icon> -->
+                                          
                                             <em class="lxp-photo position-absolute text-white playBtn" *ngIf="video.doc_type =='image/jpeg' || video.doc_type == 'image/jpg' || video.doc_type == 'image/png'"></em>
-                                              <!-- <i class="fa fa-file-pdf-o position-absolute text-white playBtn" *ngIf="video.doc_type =='application/pdf'"
-                                              aria-hidden="true"></i> -->
+                                         
                                             <span class="text-white actionBtn" *ngIf="video.doc_type =='video/mp4' || video.doc_type =='video/quicktime'">Play</span>
                                             <span class="text-white actionBtn" *ngIf="video.doc_type == 'image/jpeg' || video.doc_type == 'application/pdf' || video.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' || video.doc_type == 'image/jpg' || video.doc_type == 'image/png'">View</span>
                                           </div>
                                           <div class="col-7 text-center pr-0 colAction" (click)="downloadProject(video.videourl + blobKey, video.name)">
-                                            <!-- <i class="fa fa-download text-white position-absolute downloadBtn" aria-hidden="true"></i> -->
+                                          
                                             <em class="lxp-filedownload text-white position-absolute downloadBtn"></em>
                                             <span class="text-white actionBtn1">{{'Download' | translate}}</span>
                                           </div>
@@ -733,45 +666,7 @@
                         </div>
                       </div>
                     </div>
-                    
-                    <!-- <owl-carousel-o [options]="trendingCategorires" [ngClass]="project.projectActivity.videodetails.length >= 4 ? 'arrow': 'widthClass arrow' ">
-                      <ng-template class="row ml-0 mr-0" carouselSlide *ngFor="let video of project.projectActivity.videodetails; let i = index">
-                        <div [ngClass]="project.projectActivity.videodetails.length >= 4 ? 'col-3 w-100 pt-2 pb-2  carouselCol': 'col-3 w-100 pt-2 pb-2  carouselCol1'">
-                          <mat-card class="p-0 carouselCard" (mouseover)="hover = true; mouseover(i)" (mouseleave)="hover = false">
-                            <div class="row ml-0 mr-0 carouselRow1">
-                              <div class="col-12 m-auto">
-                                <mat-icon class="imageIcon" *ngIf="video.doc_type =='image/jpeg'  || video.doc_type == 'image/png' || video.doc_type == 'image/jpg'">photo_size_select_actual</mat-icon>
-                                <mat-icon class="imageIcon" *ngIf="video.doc_type =='video/mp4'">play_circle_outline</mat-icon>
-                                <i class="fa fa-file-pdf-o pdfIcon" *ngIf="video.doc_type =='application/pdf' || video.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'" aria-hidden="true"></i>
-                              </div>
-                            </div>
-                            <div (mouseleave)="hover = false" [ngClass]="hover && mouseOverIndex == i ? 'row ml-0 mr-0 carouselRowHover' : 'row ml-0 mr-0 carouselRow'">
-                              <div class="col-12 text-center mt-2 mb-2 pl-0 pr-0">
-                                <span class="carouselText" *ngIf="video.name?.length > 19">{{(video.name| slice:0:20)+'...'}}</span>
-                                <span class="carouselText" *ngIf="video.name?.length < 19">{{video.name}}</span>
-                                <div class="row ml-0 mr-0" *ngIf="hover && mouseOverIndex == i">
-                                  <div class="col-12 pl-0 pr-0">
-                                    <div class="row ml-0 mr-0 mt-2 playActions">
-                                      <div class="col-5 text-left pr-0 colAction" (click)="projectPreviewDoc(projectPreviewDialog,videoDialog, video, 'files')">
-                                        <mat-icon class="position-absolute text-white playBtn" *ngIf="video.doc_type =='video/mp4'">play_circle_outline</mat-icon>
-                                        <mat-icon class="position-absolute text-white playBtn" *ngIf="video.doc_type =='image/jpeg' || video.doc_type == 'image/jpg' || video.doc_type == 'image/png'">photo_size_select_actual</mat-icon>
-                                          <i class="fa fa-file-pdf-o position-absolute text-white playBtn" *ngIf="video.doc_type =='application/pdf'"
-                                          aria-hidden="true"></i>
-                                        <span class="text-white actionBtn" *ngIf="video.doc_type =='video/mp4'">Play</span>
-                                        <span class="text-white actionBtn" *ngIf="video.doc_type == 'image/jpeg' || video.doc_type == 'application/pdf' || video.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' || video.doc_type == 'image/jpg' || video.doc_type == 'image/png'">View</span>
-                                      </div>
-                                      <div class="col-7 text-center pr-0 colAction" (click)="downloadDoc(video, 'files')">
-                                        <i class="fa fa-download text-white position-absolute downloadBtn" aria-hidden="true"></i><span class="text-white actionBtn1">Download</span>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </mat-card>
-                        </div>
-                      </ng-template>
-                    </owl-carousel-o> -->
+                  
                   </div>
                   <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 d-flex justify-content-end flex-column">
                     <div class="" *ngIf="project?.projectActivity?.comments && project.projectActivity.comments!=''">
@@ -807,7 +702,7 @@
                   <mat-icon class="arrBack">arrow_forward</mat-icon>
                 </button>
               </div>
-              <!-- </div> -->
+             
               <div class="list learnerData">
                 <ul class="list-group" *ngFor="let learner of project.projectActivity.groupDetails">
                   <li class="list-group-item">{{learner.name}}</li>
@@ -843,7 +738,6 @@
                 </div>
                 <div class="labLeftContent">
                   <div class="topic text-left d-flex">
-                    <!-- <mat-icon class="assignIcon">assignment</mat-icon> -->
                     <span class="f_size_16 f_wt_600 projHead">{{lab.labActivity.ebox_attempt_title}}</span>
                   </div>
                   <div class="t-l-1">
@@ -897,9 +791,7 @@
       <mat-icon class="download-icon" (click)="closedialogbox()">close</mat-icon>
     </button>
   </div>
-  <!-- <div *ngIf="previewDoc">
-    <app-pdfreader [url]="previewDoc"></app-pdfreader>
-  </div> -->
+
 
   <div class="row" *ngIf="previewDoc">
     <div class="col-12">
@@ -927,9 +819,7 @@
 <ng-template #videoDialog>
   <div class="closeButton" (click)="closedialogbox()">
       <em class="lxp-Close"></em>
-    <!-- <button mat-mini-fab class="close-buttonVideo">
-      <mat-icon class="download-icon" (click)="closedialogbox()">close</mat-icon>
-    </button> -->
+   
   </div>
   <div class="playerWrapper">
     <app-video-player [url]="videoSource + blobKey"></app-video-player>
