@@ -1,31 +1,14 @@
 <div class="pl-0 pr-0">
-  <!-- <div class="row ml-0 mr-0">
-  </div> -->
-
   <div class="row ml-0 mr-0">
     <div class="col-12 pl-0 pr-0">
-      <!-- <div class="row ml-0 mr-0">
-        <div class="col-12 text-left">
-          <p class="subTittle">{{courseName}}</p>
-        </div>
-      </div> -->
       <mat-accordion class="example-headers-align" multi *ngIf="assignmentContent?.coursedetails.length > 0">
           <ng-container *ngFor="let res of assignmentContent?.coursedetails; let i = index">
               <mat-expansion-panel class="expand" *ngFor="let mod of res?.moduledetails">
                   <mat-expansion-panel-header class="height">
-                      <!-- <mat-panel-title>
-                        <span>{{res?.modulename}}
-                        </span>
-                      </mat-panel-title> -->
                       <div class="height">
                         <div class="">
-                          <!-- <p class="subTittle">{{courseName}}</p> -->
                           <span>{{res?.modulename}}</span>
                         </div>
-                        <!-- <div class="col-5 text-right pl-0">
-                          <p class="yettoSubmit"><span class="dot"></span> Yet to submit</p>
-                        </div> -->
-                        <!-- <br /> -->
                         <div class="moduleTopicName">
                           <span class="font-weight-bold">{{mod?.topicname}}</span>
                         </div>
@@ -33,12 +16,6 @@
                       
                     </mat-expansion-panel-header>
                       <ng-container *ngFor="let file of mod.resourse?.files">
-                          <!-- <div class="row ml-0 mr-0 mt-3 width">
-                            <div class="col-12 pr-0 text-left">
-                              <p class="activityDisc font-weight-bold">Total score</p>
-                              <p class="brickMaking score">{{file.score_mark}} / {{file.score}}</p>
-                            </div>
-                          </div> -->
                         <div class="width assignmentNameQuestion d-flex justify-content-between">
                           <div class="assignmentName">
                             <span class="activityDisc font-weight-bold">Assignment name</span>
@@ -84,7 +61,6 @@
                           </div>
                         </div>
                       </ng-container>
-                    <!-- </div> -->
               </mat-expansion-panel>
             </ng-container>
       </mat-accordion>

@@ -45,7 +45,6 @@
             <span *ngIf="activity.activitytype == 'Assignment'" class="icon lxp-Edit_Document">i</span>
             <span *ngIf="activity.activitytype == 'Project'" class="icon lxp-User_Settings">i</span>
             <div class="htxt">
-              <!-- <span>Type</span> -->
               <div *ngIf="activity.activitytype != 'Live Classroom' && activity.activitytype != 'Self Learning'" class="notifi activity">{{activity.activitytype}}</div>
               <div *ngIf="activity.activitytype == 'Self Learning'" class="notifi selfplacedlearning">{{activity.activitytype}}</div>
               <div *ngIf="activity.activitytype == 'Live Classroom'" class="notifi virtualinstructorled">
@@ -117,7 +116,6 @@
     </button>
   </div>
   <div class="calender-section">
-    <!-- calender html start-->
     <div class="calendarInfo">
       <div class="currentMonth"> {{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}
       </div>
@@ -139,7 +137,6 @@
       </mwl-calendar-month-view>
     </span>
     </div>
-    <!-- calender html end #00a99d-->
   </div>
   <div class="activInfo">
     <span class="self">{{'Self Learning' | translate}}</span>

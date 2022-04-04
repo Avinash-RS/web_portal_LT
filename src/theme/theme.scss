@@ -6,11 +6,11 @@
 // // @import '../app/admin/dashboard-widget/profile-card/profile-card.component.scss';
 // @import '../app/admin/dashboard-widget/round-progressbar/round-progressbar.component.scss';
 // @import '../app/admin/dashboard-widget/sales-list/sales-list.component.scss';
+
 @include mat-core();
 $primary : $mat-blue;
 $accent  : $mat-orange;
 $warn    : $mat-red;
-
 
 $lxp-theme-primary:mat-palette($mat-blue , 800);
 $lxp-theme-accent:mat-palette($accent , 900);
@@ -38,70 +38,6 @@ $theme-pink:   mat-light-theme($theme-pink-primary, $theme-pink-accent, $theme-p
 }
 
 
-
-html {
-  height:100%;
-  scroll-behavior: smooth !important;
-  behavior: 'smooth' !important;
- 
-}
-body{
-  padding: 0px !important;
-  margin: 0px !important;
-  height:100%;
-  scroll-behavior: smooth !important;
-  behavior: 'smooth' !important;
-}
-.components-container-gt-xs {
-    padding: 20px;
-    // background-color: #fdfdfd;
-}
-.components-container-xs {
-    padding: 5px !important;
-    // background-color: #fdfdfd;
-}
-.component-preview {
-    padding: 20px;
-}
-.ps-content {
-  height: 100%;
-}
-
-.loader-container {
-    background-color: white;
-    width: 100vw;
-    height: 100vh;
-    z-index: 2000;
-    position: absolute;
-
-    -moz-animation: cssAnimation 1s ease-in 3s forwards;
-    /* Firefox */
-    animation: cssAnimation 1s ease-in 3s forwards;
-    /* Safari and Chrome */
-    -o-animation: cssAnimation 1s ease-in 3s forwards;
-    /* Opera */
-    animation: cssAnimation 1s ease-in 3s forwards;
-    animation-fill-mode: forwards;
-    animation-fill-mode: forwards;
-}
-
-@keyframes cssAnimation {
-    to {
-        opacity:0;
-        display: none;
-        visibility:hidden;
-    }
-}
-@keyframes cssAnimation {
-    to {
-        visibility:hidden;
-        opacity:0;
-        display: none;
-    }
-}
-
-
-
 .spinner {
     margin: 50vh auto 0;
     width: 70px;
@@ -111,8 +47,6 @@ body{
 .spinner > div {
   width: 18px;
   height: 18px;
-
-
   border-radius: 100%;
   display: inline-block;
   animation: sk-bouncedelay 1.4s infinite ease-in-out both;
