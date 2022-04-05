@@ -33,7 +33,6 @@
             },
             "styles": [
               "src/styles.scss",
-              "src/app/learner/learner.scss",
               "node_modules/ngx-toastr/toastr.css",
               "node_modules/videogular2/fonts/videogular.css",
               "node_modules/animate.css/animate.min.css",
@@ -126,7 +125,6 @@
             },
             "styles": [
               "src/styles.scss",
-              "src/app/learner/learner.scss",
               "node_modules/ngx-toastr/toastr.css",
               "node_modules/videogular2/fonts/videogular.css",
               "node_modules/animate.css/animate.min.css",
