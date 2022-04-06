@@ -9,26 +9,26 @@ const routes: Routes = [
 
   {
     path: '',
-    loadChildren: './learner/login.module#LoginModule',
+    loadChildren: () => import('./learner/login.module').then(m => m.LoginModule),
     canActivate: [IsLoggedInAuthGuard],
      data : {title: 'Welcome to EduTech'}
   },
 
   {
     path: 'Learner',
-    loadChildren: './learner/learner.module#LearnerModule',
+    loadChildren: () => import('./learner/learner.module').then(m => m.LearnerModule),
     canLoad: [AuthGuard],
     data : {title: 'My Course'}
   },
 
   {
     path: 'Player',
-    loadChildren: './core/core.module#CoreModule',
+    loadChildren: () => import('./core/core.module').then(m => m.CoreModule),
     data : {title: 'Course Player'}
   },
   {
     path: 'Player',
-    loadChildren: './core/core.module#CoreModule',
+    loadChildren: () => import('./core/core.module').then(m => m.CoreModule),
     data : {title: 'Course Player'}
   },
   {

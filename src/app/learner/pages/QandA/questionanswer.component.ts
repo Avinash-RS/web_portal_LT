@@ -11,7 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 
 export class QuestionanswerComponent implements OnInit {
-  @ViewChild('leftContainer') leftContainer: ElementRef;
+  @ViewChild('leftContainer', { static: true }) leftContainer: ElementRef;
 
   htmlContent = '';
   selectedIndex = 0;

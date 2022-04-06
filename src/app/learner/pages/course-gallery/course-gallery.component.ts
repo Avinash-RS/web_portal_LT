@@ -14,7 +14,7 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./course-gallery.component.scss']
 })
 export class CourseGalleryComponent implements OnInit {
-  @ViewChild('nav') ds: DragScrollComponent;
+  @ViewChild('nav', { static: false }) ds: DragScrollComponent;
   course: any;
   coursedata;
   selectedTopic;

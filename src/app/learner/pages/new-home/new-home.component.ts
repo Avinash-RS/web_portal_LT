@@ -16,7 +16,7 @@ export class NewHomeComponent implements OnInit {
   qrCode;
   userDetail;
   secondStep = false;
-  @ViewChild('authInput') authInput;
+  @ViewChild('authInput', { static: false }) authInput;
   constructor(public translate: TranslateService, public learnerService: LearnerServicesService,
               private gs: GlobalServiceService, private router: Router,private toastr: ToastrService,location: PlatformLocation) {
     let lang = localStorage.getItem('language')

@@ -51,7 +51,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 const routes: Routes = [
   {
     path: '',
-    loadChildren: './mycourses.module#MycoursesModule',
+    loadChildren: () => import('./mycourses.module').then(m => m.MycoursesModule),
     canLoad: [AuthGuard],
   },
   {
@@ -62,7 +62,7 @@ const routes: Routes = [
   },
   {
     path: 'knowledge',
-    loadChildren: './knowledgeresources.module#KnowledgeresourcesModule',
+    loadChildren: () => import('./knowledgeresources.module').then(m => m.KnowledgeresourcesModule),
     canLoad: [AuthGuard],
     data: { animation: 'activitycenterhomescreen' , title: 'Knowledge Resources' }
   },

@@ -20,13 +20,13 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./activities.component.scss'],
 })
 export class ActivitiesComponent implements OnInit {
-  @ViewChild('nav', { read: DragScrollComponent }) ds: DragScrollComponent;
-  @ViewChild('navWork', { read: DragScrollComponent }) dsWork: DragScrollComponent;
-  @ViewChild('navActivity', { read: DragScrollComponent }) dsActivity: DragScrollComponent;
-  @ViewChild('navSubmissions', { read: DragScrollComponent }) dsSubmissions: DragScrollComponent;
-  @ViewChild('fileInput') fileInput;
-  @ViewChild('videoInput') videoInput;
-  @ViewChild('uploadInput') uploadInput;
+  @ViewChild('nav', { read: DragScrollComponent, static: false }) ds: DragScrollComponent;
+  @ViewChild('navWork', { read: DragScrollComponent, static: false }) dsWork: DragScrollComponent;
+  @ViewChild('navActivity', { read: DragScrollComponent, static: false }) dsActivity: DragScrollComponent;
+  @ViewChild('navSubmissions', { read: DragScrollComponent, static: false }) dsSubmissions: DragScrollComponent;
+  @ViewChild('fileInput', { static: false }) fileInput;
+  @ViewChild('videoInput', { static: false }) videoInput;
+  @ViewChild('uploadInput', { static: false }) uploadInput;
   blobKey = environment.blobKey;
   perfornDetaildata: any;
   performdetailPageView = false;
@@ -48,7 +48,7 @@ export class ActivitiesComponent implements OnInit {
   docpath: any = null;
   assignmentFile: File;
   openList = false;
-  @ViewChild(MatAccordion) accordion: MatAccordion;
+  @ViewChild(MatAccordion, { static: false }) accordion: MatAccordion;
   isCollapsed = false;
   projectId: any;
   isperformColaps = false;

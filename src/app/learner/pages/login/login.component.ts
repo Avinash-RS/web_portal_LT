@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
   recaptchaStr = '';
   recaptchaForgetStr = '';
   recaptchaSignInStr = '';
-  @ViewChild('captchaRef') captchaRef;
+  @ViewChild('captchaRef', { static: false }) captchaRef;
   selectedLanguage: any = 'en';
   getErrorMessage() {
     return this.username.hasError('required') ? 'Email or Username is required' :

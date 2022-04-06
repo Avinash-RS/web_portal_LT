@@ -17,7 +17,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class ProjectMobileComponent implements OnInit {
 
-  @ViewChild('uploadFile') uploadFile;
+  @ViewChild('uploadFile', { static: false }) uploadFile;
   @Input() projectDetailPageData: any;
   blobKey = environment.blobKey;
   userDetail: any;
