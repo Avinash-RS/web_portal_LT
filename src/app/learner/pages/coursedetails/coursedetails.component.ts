@@ -469,7 +469,7 @@ export class CoursedetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.translate.use(localStorage.getItem("language"));
-
+    // let resumeInit = true
     // if (!resumeInit) {
     this.socketService.socketReceiver();
 
@@ -805,6 +805,7 @@ export class CoursedetailsComponent implements OnInit {
       this.secretKey.trim()
     ).toString(CryptoJS.enc.Utf8);
     //  this.sanitizer.bypassSecurityTrustResourceUrl(
+      // var checkURL = 
     this.urlSafe =  environment.scormUrl +
         "/scormPlayer.html?content_id=" +
         this.courseid +
@@ -830,6 +831,16 @@ export class CoursedetailsComponent implements OnInit {
         "&courseType=" +
         this.courseType
     // );
+
+    this.service.urlStatusCheck(this.urlSafe).subscribe((data)=>{
+      
+    },(error:any)=>{
+      console.log(error)
+      // if(error.status!==200)
+      // {
+        this.IframeErrorHandle(error)
+      // }
+    })
     if(actiondat == "entry")
     {setTimeout(() => {
       this.iframe.nativeElement.contentWindow.location.replace(this.urlSafe)
@@ -839,6 +850,14 @@ export class CoursedetailsComponent implements OnInit {
       this.iframe.nativeElement.contentWindow.location.replace(this.urlSafe)
     }
   }
+  IframeErrorHandle(error) {
+    setTimeout(() => {
+      this.iframe.nativeElement.contentWindow.location.replace("assets/images/error.html")
+    }, 1000);
+    // this.iframe.nativeElement.contentWindow.location.replace("assets/images/error.html")
+    // console.error('Error loading iframe contents: ' + error);
+    return true;
+  };
 
   playTopic(
     url,
