@@ -32,8 +32,8 @@ export class ProjectMobileComponent implements OnInit {
   fileName: any;
   groupDetails = [];
   groupName: any;
-  groupCount:any;
-  learnerGroupDetails =[];
+  groupCount: any;
+  learnerGroupDetails = [];
   previewDoc: any;
   videoSource: any;
   openedIndex;
@@ -42,13 +42,13 @@ export class ProjectMobileComponent implements OnInit {
   currentFile: any;
   uploadedPercentage;
   fileSize = 0;
-  flag:any;
-  type:any;
-  splitSize:any;
-  fileTotalSize:any;
-  verfyingCondition:any;
+  flag: any;
+  type: any;
+  splitSize: any;
+  fileTotalSize: any;
+  verfyingCondition: any;
   isProgress = false;
-  jsonData:any;
+  jsonData: any;
   indexNumber: number;
   projectActivityData: any;
   ongoingProjectTask;
@@ -89,9 +89,10 @@ export class ProjectMobileComponent implements OnInit {
   noofItems = 0;
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService,
               private dialog: MatDialog, private toastr: ToastrService,
-              public route: Router,  private commonServices: CommonServicesService,private ngxLoader: NgxUiLoaderService,public translate: TranslateService) {
-                let lang = localStorage.getItem('language')
-                this.translate.use(lang ? lang : 'en') 
+              public route: Router,  private commonServices: CommonServicesService,
+              private ngxLoader: NgxUiLoaderService, public translate: TranslateService) {
+                let lang = localStorage.getItem('language');
+                this.translate.use(lang ? lang : 'en') ;
                 const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.data);
                 this.checkDetails = detail;
@@ -102,13 +103,13 @@ export class ProjectMobileComponent implements OnInit {
                 this.courseName = this.checkDetails ? this.checkDetails.courseName : localStorage.getItem('CourseName');
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.ngxLoader.stop();
   }
   ngOnInit() {
     this.projectDetails = this.projectDetailPageData;
     this.getprojectActivityData();
-    if(this.projectDetails){
+    if (this.projectDetails) {
       this.projectDetails.forEach(element => {
         this.groupDetails = element.projectActivity.groupDetails;
         element.showLearnerList = false;
@@ -129,15 +130,15 @@ export class ProjectMobileComponent implements OnInit {
         element.activityEndDate = moment(endDate).format('ll');
         // const submitDate = new Date(element.projectActivity.submitted_on);
         // element.submittedOn = moment(submitDate).format('ll');
-        element.submittedOn = element.projectActivity.submitted_date
+        element.submittedOn = element.projectActivity.submitted_date;
         if (moment().format('DD-MM-YYYY HH:mm') < element.startdate) {
           element.enableSubmit = false;
         } else {
           element.enableSubmit = true;
         }
       });
-    } else{
-      this.projectDetails = []
+    } else {
+      this.projectDetails = [];
     }
   }
   emiteData() {
@@ -156,20 +157,20 @@ export class ProjectMobileComponent implements OnInit {
   }
 
   uploadDoc(event, project, submitAction) {
-    if(project?.projectActivity.videodetails.length == 3) {
-      this.toastr.warning("You are allowed only to upload a maximum of 3 files");
+    if (project?.projectActivity.videodetails.length == 3) {
+      this.toastr.warning('You are allowed only to upload a maximum of 3 files');
       if (this.uploadFile) {
         this.uploadFile.nativeElement.value = '';
-      } 
+      }
       return false;
     }
     const filePath = event.target.files[0].name;
     var re = /(\.jpg|\.jpeg|\.png|\.pdf|\.mp4|\.mov)$/i;
     if (!re.exec(filePath)) {
-      this.toastr.warning("Upload a valid file format");
+      this.toastr.warning('Upload a valid file format');
       if (this.uploadFile) {
         this.uploadFile.nativeElement.value = '';
-      } 
+      }
       return;
     }
     let fileSizeval = 0;
@@ -178,8 +179,8 @@ export class ProjectMobileComponent implements OnInit {
       fileSizeval += event.target.files[i].size;
       this.selectfile.push(event.target.files[i]);
     }
-    if(fileSizeval/1024/1024 > 150){
-      this.toastr.warning("The file size can not exceed 150 MB"); 
+    if (fileSizeval / 1024 / 1024 > 150) {
+      this.toastr.warning('The file size can not exceed 150 MB');
       this.selectfile = [];
       if (this.uploadFile) {
         this.uploadFile.nativeElement.value = '';
@@ -194,10 +195,10 @@ export class ProjectMobileComponent implements OnInit {
   }
 
   getprojectActivityData() {
-    this.Lservice.getprojectActivityData(this.userDetail.user_id, this.courseid,this.pagination,this.page,this.noofItems).subscribe((data: any) => {
+    this.Lservice.getprojectActivityData(this.userDetail.user_id, this.courseid,
+      this.pagination, this.page, this.noofItems).subscribe((data: any) => {
       if (data && data.data && data.data.getprojectActivityData && data.data.getprojectActivityData.data) {
       this.projectDetails = data.data.getprojectActivityData.data;
-      
       this.projectDetails.forEach((element, i) => {
         if (this.openedIndex === i) {
           if (element.isOpen) {
@@ -214,15 +215,13 @@ export class ProjectMobileComponent implements OnInit {
         // Batch date
         const batchEndDate = new Date(element.projectActivity.batchenddate);
         element.batchEndDate = moment(batchEndDate).format('DD-MM-YYYY HH:mm');
-        
         element.submitType = moment().isSameOrBefore(batchEndDate);
         if (moment().format('DD-MM-YYYY') == moment(batchEndDate).format('DD-MM-YYYY')) {
           element.submitType = true;
         }
-        
-        // if (moment().format('DD-MM-YYYY HH:mm') <= element.batchEndDate) {       
+        // if (moment().format('DD-MM-YYYY HH:mm') <= element.batchEndDate) {
         //   element.submitType = true;
-        // } else {      
+        // } else {
         //   element.submitType = false;
         // }
         // Activity Dates
@@ -243,7 +242,7 @@ export class ProjectMobileComponent implements OnInit {
         element.enableSubmit = moment().isSameOrAfter(startDate);
         // const submitDate = new Date(element.projectActivity.submitted_on);
         // element.submittedOn = moment(submitDate).format('ll');
-        element.submittedOn = element.projectActivity.submitted_date
+        element.submittedOn = element.projectActivity.submitted_date;
         // if (moment().format('DD-MM-YYYY HH:mm') < element.startdate) {
         //   element.enableSubmit = false;
         // } else {
@@ -263,12 +262,11 @@ export class ProjectMobileComponent implements OnInit {
     }
   }
 
- async learnerUploadVideo(project, submitAction) {
-  this.ngxLoader.start();
+  async learnerUploadVideo(project, submitAction) {
+    this.ngxLoader.start();
     const startDate1 = new Date(project.projectActivity.activitystartdate);
     // project.actstartDate = moment(startDate1).format('DD-MM-YYYY HH:mm');
     project.actstartDate = moment(startDate1);
-
     const endDate1 = new Date(project.projectActivity.activityenddate);
     // project.actendDate = moment(endDate1).format('DD-MM-YYYY HH:mm');
     project.actendDate = moment(endDate1);
@@ -293,18 +291,18 @@ export class ProjectMobileComponent implements OnInit {
       payload.append('uploadvideo', this.selectfile[i]);
       this.currentFile = this.selectfile[i];
       this.fileSize = this.currentFile.size;
-       this.type=this.selectfile[i].type
-       var sizeData = this.currentFile.size / 1024
-       var sizeDatakb = sizeData / 1024
-       var finalSize = sizeDatakb.toFixed(2)
-       this.splitSize = finalSize.split('.');
-       if (this.splitSize[0] == 0) {
-           this.fileTotalSize = sizeData.toFixed(2) + ' KB'
-           this.verfyingCondition=sizeDatakb.toFixed(2)
-       } else {
-           this.verfyingCondition=sizeDatakb.toFixed(2)
-           this.fileTotalSize = sizeDatakb.toFixed(2) + ' MB'
-       }
+      this.type = this.selectfile[i].type;
+      var sizeData = this.currentFile.size / 1024;
+      var sizeDatakb = sizeData / 1024;
+      var finalSize = sizeDatakb.toFixed(2);
+      this.splitSize = finalSize.split('.');
+      if (this.splitSize[0] == 0) {
+        this.fileTotalSize = sizeData.toFixed(2) + ' KB';
+        this.verfyingCondition = sizeDatakb.toFixed(2);
+      } else {
+        this.verfyingCondition = sizeDatakb.toFixed(2);
+        this.fileTotalSize = sizeDatakb.toFixed(2) + ' MB';
+      }
     }
     // payload.append('uploadvideo', this.selectfile, this.selectfile.name);
     payload.append('course_id', this.courseid);
@@ -317,7 +315,7 @@ export class ProjectMobileComponent implements OnInit {
     payload.append('submitAction', submitAction);
     payload.append('iterationid', project.projectActivity.project_id);
     payload.append('object_id', project.projectActivity.project_id);
-    this.Lservice.learnerUploadVideo(payload).subscribe(async(data: any) => {
+    this.Lservice.learnerUploadVideo(payload).subscribe(async (data: any) => {
       if (data.success === true) {
         const sas = data.data;
         const pipeline = newPipeline(new AnonymousCredential(), {
@@ -335,7 +333,7 @@ export class ProjectMobileComponent implements OnInit {
         }
         const client = containerClient.getBlockBlobClient(this.currentFile.name);
         this.isProgress = true;
-        this.uploadedPercentage=0
+        this.uploadedPercentage = 0;
         const response = await client.uploadBrowserData(this.currentFile, {
           blockSize: 4 * 1024 * 1024, // 4MB block size
           concurrency: 20, // 20 concurrency
@@ -343,71 +341,69 @@ export class ProjectMobileComponent implements OnInit {
             const uploaded = ev.loadedBytes;
             const percnt = uploaded * 100 / this.fileSize;
             this.uploadedPercentage = percnt.toFixed(2);
-            this.Lservice.sendMessage('',this.uploadedPercentage.toString());
+            this.Lservice.sendMessage('', this.uploadedPercentage.toString());
           },
           blobHTTPHeaders: { blobContentType: this.currentFile.type }
         });
-        
+
         if (response._response.status === 201) {
-        
-           this.jsonData = {
-            'course_id': this.courseid,
-            'module_id': project.projectActivity.module_id,
-            'topic_id':project.projectActivity.topic_id,
-            'user_id': this.userDetail.user_id,
-            'submit_status': submitStatus,
-            'total_mark':  project.projectActivity.total_mark,
-            'submitType': 'project',
-            'submitAction': submitAction,
-            'iterationid':project.projectActivity.project_id,
-            'object_id':project.projectActivity.project_id,
-            videodetails:[{
-              doc_type:this.type,
+
+          this.jsonData = {
+            ' course_id ': this.courseid,
+            ' module_id ': project.projectActivity.module_id,
+            ' topic_id ': project.projectActivity.topic_id,
+            ' user_id ': this.userDetail.user_id,
+            ' submit_status ': submitStatus,
+            ' total_mark ': project.projectActivity.total_mark,
+            ' submitType ': 'project',
+            ' submitAction ': submitAction,
+            ' iterationid ': project.projectActivity.project_id,
+            ' object_id ': project.projectActivity.project_id,
+            videodetails: [{
+              doc_type: this.type,
               videourl: sas.storageUri + sas.containerName + '/' + this.currentFile.name,
               name: this.currentFile.name,
               size: this.fileTotalSize,
-              id:  project.projectActivity.project_id,
+              id: project.projectActivity.project_id,
               uploaded_date: new Date(),
               is_active: true
             }]
-            
-          }
-        let checkRes=await this.insertActivityRecordProject(this.jsonData)
-        this.toastr.success(data.message);
-        this.ngxLoader.stop();
-        this.showSubmittedon = true;
-       // this.getprojectActivityData();
-        this.selectfile = [];
-        this.flag=1
-        setTimeout(()=>{
-          this.Lservice.sendMessage('','0.00');
-        },1000)
+
+          };
+          let checkRes = await this.insertActivityRecordProject(this.jsonData);
+          this.toastr.success(data.message);
+          this.ngxLoader.stop();
+          this.showSubmittedon = true;
+          // this.getprojectActivityData();
+          this.selectfile = [];
+          this.flag = 1;
+          setTimeout(() => {
+            this.Lservice.sendMessage('', '0.00');
+          }, 1000);
         }
       } else {
         this.ngxLoader.stop();
         this.toastr.warning(data.message);
-        setTimeout(()=>{
-          this.Lservice.sendMessage('','0.00');
-        },1000)
+        setTimeout(() => {
+          this.Lservice.sendMessage('', '0.00');
+        }, 1000);
       }
     });
   }
-  insertActivityRecordProject=async(performVideo)=>{
-  
+  insertActivityRecordProject = async (performVideo) => {
     this.Lservice.insertRecord(performVideo).subscribe(async (data: any) => {
-      if(data.success){
-        this.flag=1
+      if (data.success) {
+        this.flag = 1;
         this.getprojectActivityData();
-      }else{
-        this.flag=0
+      } else {
+        this.flag = 0;
       }
-      
-    })
-  }	
+    });
+  }
   // Submit or Delete
   learnerSumbitdeleteVideo(project, deleteItem, submitAction) {
     if (this.ongoingProjectTask) {
-      return false
+      return false;
     }
     this.ongoingProjectTask = true;
     const startDate1 = new Date(project.projectActivity.activitystartdate);
@@ -435,7 +431,7 @@ export class ProjectMobileComponent implements OnInit {
       videodetails : submitAction === 'delete' ? [deleteItem] : []
     };
     this.Lservice.learnerSumbitdeleteVideo(submitData).subscribe((data: any) => {
-      this.ongoingProjectTask = false
+      this.ongoingProjectTask = false;
       if (data.success === true) {
         this.toastr.success(data.message);
         this.showSubmittedon = true;
@@ -463,12 +459,11 @@ export class ProjectMobileComponent implements OnInit {
         this.dialog.closeAll();
       }
       openDocument(templateRef: TemplateRef<any>, path, docType) {
-        if(path == null) {
-          this.toastr.warning("No Reports Found")
+        if (path == null) {
+          this.toastr.warning('No Reports Found');
           return false;
         }
         path.path = path.imageurl;
-        
         this.dialog.open(templateRef, {
           width: '100%',
           height: '100%',
@@ -477,11 +472,10 @@ export class ProjectMobileComponent implements OnInit {
         });
         if (path.path.includes('?sv=')) {
         } else {
-          path.path = path.path + this.blobKey;          
-        }  
+          path.path = path.path + this.blobKey;
+        }
         this.previewDoc = path;
       }
-      
       playVideo(templateRef: TemplateRef<any>, videoDialog,  path, docType) {
         if (docType !== 'video/mp4' || docType !== 'video/quicktime') {
           this.dialog.open(templateRef, {
@@ -493,8 +487,8 @@ export class ProjectMobileComponent implements OnInit {
           });
           if (path.path.includes('?sv=')) {
           } else {
-            path.path = path.path + this.blobKey;          
-          }    
+            path.path = path.path + this.blobKey;
+          }
           this.previewDoc = path;
       } else {
         this.videoPreview(videoDialog, path.path);
@@ -523,7 +517,7 @@ export class ProjectMobileComponent implements OnInit {
           });
           if (path.path.includes('?sv=')) {
           } else {
-            path.path = path.path + this.blobKey;          
+            path.path = path.path + this.blobKey;
           }
           this.previewDoc = path;
         } else {
@@ -542,7 +536,7 @@ export class ProjectMobileComponent implements OnInit {
           path.path = path.videourl;
           if (path.path.includes('?sv=')) {
           } else {
-            path.path = path.path + this.blobKey;          
+            path.path = path.path + this.blobKey;
           }
           this.previewDoc = path;
         } else {
@@ -568,7 +562,7 @@ export class ProjectMobileComponent implements OnInit {
       }
     }
     resourseAccord(courseResource, index) {
-      this.openedIndex = index
+      this.openedIndex = index;
       if (courseResource) {
         courseResource.forEach((element, i) => {
           if (index === i) {

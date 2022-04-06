@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { CommonServicesService } from '@core/services/common-services.service';
@@ -32,7 +32,7 @@ export const MY_FORMATS = {
   selector: 'app-progression-report',
   templateUrl: './progression-report.component.html',
   styleUrls: ['./progression-report.component.scss'],
-  providers :[
+  providers : [
     {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
     {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
   ]
@@ -48,11 +48,11 @@ export class ProgressionReportComponent implements OnInit {
   bufferValue = 100;
 
   apidata: any = [];
-  showWeek = true;;
+  showWeek = true;
   public chartPlugins = [pluginDataLabels];
   public barChartOptions: ChartOptions = {
-    responsive: true, 
-    tooltips:{
+    responsive: true,
+    tooltips: {
       enabled: true,
       displayColors: false,
       callbacks: {
@@ -66,23 +66,23 @@ export class ProgressionReportComponent implements OnInit {
         display: false
       }
     },
-    scales:{
-      xAxes:[{
-        gridLines:{
-          display:false
+    scales: {
+      xAxes: [{
+        gridLines: {
+          display: false
         },
       }],
-      yAxes:[{
-        gridLines:{
+      yAxes: [{
+        gridLines: {
           borderDash: [1, 3],
-          color: "#2280C1"
+          color: '#2280C1'
         },
         ticks: {
           min: 0,
-          //max: 180,
-          stepSize:1,
+          // max: 180,
+          stepSize: 1,
           callback: function(value) {
-            return value + '  '
+            return value + '  ';
           }
         }
       }],
@@ -110,12 +110,12 @@ export class ProgressionReportComponent implements OnInit {
         usePointStyle: true
       }
     }
-  }
+  };
   public barChartData: ChartDataSets[] = [
     {
       data: [],
       backgroundColor: '#2280C1',
-      hoverBackgroundColor:'#2280C1',
+      hoverBackgroundColor: '#2280C1',
       barThickness: 12,
     }
   ];
@@ -139,9 +139,9 @@ export class ProgressionReportComponent implements OnInit {
   pieData: any;
   doughnutChartData;
   isTableData: boolean;
-  weekWiseChartDatalabel:any = [];
-  weekWiseChartData:any = [];
-  totalhoursSpend:string = "0 mins";
+  weekWiseChartDatalabel: any = [];
+  weekWiseChartData: any = [];
+  totalhoursSpend: string = '0 mins';
   weekWiseDate;
   today = new Date();
   pipe = new DatePipe('en-US');
@@ -149,16 +149,16 @@ export class ProgressionReportComponent implements OnInit {
     public learnerService: LearnerServicesService,
     private gs: GlobalServiceService,
     public CommonServices: CommonServicesService,
-    public route: Router,private activeRoute: ActivatedRoute,
+    public route: Router, private activeRoute: ActivatedRoute,
     public translate: TranslateService) {
-      let lang = localStorage.getItem('language')
-    this.translate.use(lang ? lang : 'en') 
+    let lang = localStorage.getItem('language');
+    this.translate.use(lang ? lang : 'en');
     // const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().query &&
     //   this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.data);
     this.activeRoute.queryParams.subscribe(res => {
-      if(res){
-        this.courseId = atob(res.CourseId)
-        this.courseName = atob(res.CourseName)        
+      if (res) {
+        this.courseId = atob(res.CourseId);
+        this.courseName = atob(res.CourseName);
       }
     });
     this.UserDetails = JSON.parse(localStorage.getItem('UserDetails')) || null;
@@ -168,158 +168,158 @@ export class ProgressionReportComponent implements OnInit {
   ngOnInit() {
     this.getprogression();
     this.getAssignmentmoduleData();
-    this.getPieChartData()
+    this.getPieChartData();
     this.getDoughnutChartData();
     this.setStartdate();
     this.getWeekCourseData();
   }
-  setStartdate(){
+  setStartdate() {
     var curr = new Date;
     var first = curr.getDate() - curr.getDay();
     var firstday = new Date(curr.setDate(first)).toUTCString();
-    this.weekWiseDate = new Date(firstday,);
+    this.weekWiseDate = new Date(firstday);
   }
-  getWeekCourseData(){
+  getWeekCourseData() {
     this.weekWiseChartDatalabel = [];
     this.weekWiseChartData = [];
     var myFormattedDate = moment(this.weekWiseDate).format('yyyy-MM-DD');
-    this.learnerService.getweekWiseCourseChart(this.courseId,this.userId,myFormattedDate,"").subscribe((result:any)=>{
-      if(result.data.weekWiseCourseChart.success){
+    this.learnerService.getweekWiseCourseChart(this.courseId, this.userId, myFormattedDate, '').subscribe((result: any) => {
+      if (result.data.weekWiseCourseChart.success) {
         this.totalhoursSpend = result.data.weekWiseCourseChart.data.totalhoursSpend;
-        result.data.weekWiseCourseChart.data.chartdata.forEach((data:any)=>{
+        result.data.weekWiseCourseChart.data.chartdata.forEach((data: any) => {
           this.weekWiseChartDatalabel.push(data.day);
-          this.weekWiseChartData.push({y:parseInt(data.minutes)/60,mins:data.minutes});
+          this.weekWiseChartData.push({y: parseInt(data.minutes) / 60, mins: data.minutes});
         });
         this.generateWeekwiseChart();
-      }
-      else{
-        this.weekWiseChartDatalabel = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-        this.weekWiseChartData = [0,0,0,0,0,0,0,0];
+      } else {
+        this.weekWiseChartDatalabel = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        this.weekWiseChartData = [0, 0, 0, 0, 0, 0, 0, 0];
         this.generateWeekwiseChart();
       }
     });
   }
-  changeWeekDate(){
+  changeWeekDate() {
     this.getWeekCourseData();
   }
-  generateWeekwiseChart(){
+  generateWeekwiseChart() {
     this.barChartLabels = this.weekWiseChartDatalabel;
     this.barChartData = [
       {
         data: this.weekWiseChartData,
         backgroundColor: '#2280C1',
-        hoverBackgroundColor:'#2280C1',
+        hoverBackgroundColor: '#2280C1',
         barThickness: 12,
       }
     ];
   }
-  getPieChartData(){
+  getPieChartData() {
 
-    //activity chart data
+    // activity chart data
     let defaultData = {
-              "assignment_total": 0,
-              "assignment_completed": 0,
-              "project_total": 0,
-              "project_completed": 0,
-              "perform_total": 0,
-              "perform_completed": 0,
-              "liveclassroom_total": 0,
-              "liveclassroom_completed": 0
+              ' assignment_total ': 0,
+              ' assignment_completed ': 0,
+              ' project_total ': 0,
+              ' project_completed ': 0,
+              ' perform_total ': 0,
+              ' perform_completed ': 0,
+              ' liveclassroom_total ': 0,
+              ' liveclassroom_completed ': 0
             };
     this.pieData = defaultData;
-    this.learnerService.getProgressionActivitydata(this.userId, this.courseId).subscribe((data:any)=>{
-      if(data?.data?.getProgressionActivitydata?.success){
-     this.pieData = data.data.getProgressionActivitydata.data[0]
+    this.learnerService.getProgressionActivitydata(this.userId, this.courseId).subscribe((data: any) => {
+      if (data?.data?.getProgressionActivitydata?.success) {
+     this.pieData = data.data.getProgressionActivitydata.data[0];
       }
-    })
+    });
   }
 
   tabChanged(event) {
     this.currentTab = event.index;
     if (this.currentTab == 0) {
       this.getAssignmentmoduleData();
-    }
-    else if (this.currentTab == 1) {
+    } else if (this.currentTab == 1) {
       this.getprojectActivityData();
-    }
-    else if (this.currentTab == 2) {
+    } else if (this.currentTab == 2) {
       this.getperformActivityData();
     }
   }
-  //Assignment Module
+  // Assignment Module
   getAssignmentmoduleData() {
     this.showSkeleton = true;
-    this.learnerService.getAssignmentmoduleData(this.userId, this.courseId, this.pagination, this.page, this.noofItems).subscribe((data: any) => {
+    this.learnerService.getAssignmentmoduleData(this.userId, this.courseId, this.pagination,
+      this.page, this.noofItems).subscribe((data: any) => {
       if (data.data.getAssignmentmoduleData.success) {
         this.assignmentContent = new MatTableDataSource(data?.data?.getAssignmentmoduleData?.data);
-        setTimeout(()=>{
+        setTimeout(() => {
           this.assignmentContent.paginator = this.firstPaginator;
           this.assignmentPage = this.assignmentContent.connect();
-        },1000)
+        }, 1000);
         if (this.assignmentContent?.data?.length > 0) {
           this.emptyAssignment = false;
         } else {
-          this.emptyAssignment = true
+          this.emptyAssignment = true;
         }
       }
       this.showSkeleton = false;
-    })
+    });
   }
 
-  //Project Module
+  // Project Module
   getprojectActivityData() {
     this.showSkeleton = true;
-    this.learnerService.getprojectActivityData(this.userId, this.courseId, this.pagination, this.page, this.noofItems).subscribe((data: any) => {
+    this.learnerService.getprojectActivityData(this.userId, this.courseId, this.pagination,
+      this.page, this.noofItems).subscribe((data: any) => {
       if (data.data.getprojectActivityData.success) {
         this.projectContent = new MatTableDataSource(data?.data?.getprojectActivityData?.data);
-        setTimeout(()=>{
+        setTimeout(() => {
           this.projectContent.paginator = this.secondPaginator;
           this.projectPage = this.projectContent.connect();
-        },1000)
+        }, 1000);
         if (this.projectContent?.data?.length > 0) {
           this.emptyProject = false;
         } else {
-          this.emptyProject = true
+          this.emptyProject = true;
         }
       } else {
         this.emptyProject = true;
       }
       this.showSkeleton = false;
-    })
+    });
   }
 
-  //Perform Module
+  // Perform Module
   getperformActivityData() {
     this.showSkeleton = true;
-    this.learnerService.getperformActivityData(this.userId, this.courseId, this.pagination, this.page, this.noofItems).subscribe((data: any) => {
+    this.learnerService.getperformActivityData(this.userId, this.courseId, this.pagination,
+      this.page, this.noofItems).subscribe((data: any) => {
       if (data.data.getperformActivityData.success) {
         this.performContent = data?.data?.getperformActivityData?.data;
         var performIteration = [];
-        this.performContent.forEach((value)=>{
+        this.performContent.forEach((value) => {
           value.performActivity.iterationDetails.forEach(element => {
-            element.activityenddate = value.performActivity.activityenddate
-            element.activityname = value.performActivity.activityname
-            element.module_id = value.performActivity.module_id
-            element.topic_id = value.performActivity.topic_id
+            element.activityenddate = value.performActivity.activityenddate;
+            element.activityname = value.performActivity.activityname;
+            element.module_id = value.performActivity.module_id;
+            element.topic_id = value.performActivity.topic_id;
           });
-          performIteration.push(...value.performActivity.iterationDetails)
-        })
-        this.performContentData = new MatTableDataSource(performIteration)
-        setTimeout(()=>{
+          performIteration.push(...value.performActivity.iterationDetails);
+        });
+        this.performContentData = new MatTableDataSource(performIteration);
+        setTimeout(() => {
           this.performContentData.paginator = this.thirdPaginator;
           this.performPage = this.performContentData.connect();
-        },1000)
+        }, 1000);
         if (this.performContentData?.data.length > 0) {
           this.emptyPerform = false;
         } else {
           this.emptyPerform = true;
         }
-      } else{
+      } else {
         this.emptyPerform = true;
       }
 
       this.showSkeleton = false;
-    })
+    });
   }
 
   numPrefix(num) {
@@ -328,26 +328,25 @@ export class ProgressionReportComponent implements OnInit {
     }
     return num;
   }
-  secondsTimeConverter(secs){
-    if(isNaN(secs)){
+  secondsTimeConverter(secs) {
+    if (isNaN(secs)) {
       return '-- : -- : --';
-    }
-    else{
+    } else {
       return new Date(secs * 1000).toISOString().substr(11, 8);
     }
   }
-  percentageCalc(score, total){
-    return (score/total)*100
+  percentageCalc(score, total) {
+    return (score / total) * 100;
   }
-  //get progression table data
+  // get progression table data
   getprogression() {
-    this.showProgReport = false
+    this.showProgReport = false;
     this.learnerService.getProgressionData(this.userId, this.courseId).subscribe((data: any) => {
       this.apidata = data.data.getCourseReportByUserid.data.module;
-      if(this.UserDetails?.org_type == 'Corporate'){
-        this.apidata = this.apidata.filter(e => e.modulestatus != "false");
+      if (this.UserDetails?.org_type == 'Corporate') {
+        this.apidata = this.apidata.filter(e => e.modulestatus != 'false');
       }
-      if(this.apidata && this.apidata[0]?.moduleName){
+      if (this.apidata && this.apidata[0]?.moduleName) {
         this.showWeek = false;
       } else {
         this.showWeek = true;
@@ -365,38 +364,38 @@ export class ProgressionReportComponent implements OnInit {
     return week;
   }
 
-  getDoughnutChartData(){
-    this.learnerService.getSelfLearningdata('topic',this.userId, this.courseId).subscribe((data:any)=>{
-      console.log(data)
+  getDoughnutChartData() {
+    this.learnerService.getSelfLearningdata('topic',this.userId, this.courseId).subscribe((data: any) => {
+      console.log(data);
       if(data?.data?.selfLearningdatabyUserId?.success) {
         this.doughnutChartData = data?.data?.selfLearningdatabyUserId.data[0];
-        setTimeout(()=>{
+        setTimeout(() => {
           this.createChart();
-        })
+        });
       }
-    })
+    });
 
   }
   createChart() {
     let data_load  = [];
     let data_labels = [];
     let data_colors = [];
-    if(this.doughnutChartData.completed){
+    if (this.doughnutChartData.completed) {
       data_load.push(this.doughnutChartData.completed);
       data_labels.push('Completed');
       data_colors.push('#32CE6A');
     }
-    if(this.doughnutChartData.inprogress){
+    if (this.doughnutChartData.inprogress) {
       data_load.push(this.doughnutChartData.inprogress);
       data_labels.push('Inprogress');
-      data_colors.push('#FFA800')
+      data_colors.push('#FFA800');
     }
-    if(this.doughnutChartData.yettostart){
+    if (this.doughnutChartData.yettostart) {
       data_load.push(this.doughnutChartData.yettostart);
       data_labels.push('Yet to start');
       data_colors.push('#CCCCCC');
     }
-    if(this.doughnutChartData.completed==0 && this.doughnutChartData.inprogress==0 && this.doughnutChartData.yettostart==0){
+    if (this.doughnutChartData.completed == 0 && this.doughnutChartData.inprogress == 0 && this.doughnutChartData.yettostart == 0) {
       data_load.push(100);
       data_labels.push('Yet to start');
       data_colors.push('#CCCCCC');
@@ -421,7 +420,7 @@ export class ProgressionReportComponent implements OnInit {
         legend: {
           display: false,
           position: 'bottom',
-          align:'center'
+          align: 'center'
 
         },
         maintainAspectRatio: false,
@@ -440,32 +439,32 @@ export class ProgressionReportComponent implements OnInit {
             // align: 'end',
             font: {
               size: 12,
-              weight:'bold'
+              weight: 'bold'
             },
             formatter: (value, ctx) => {
-              let percentage = value + "%  ";
+              let percentage = value + '%  ';
               return percentage;
-          },
+            },
           }
         },
-        layout:{
+        layout: {
           padding: {
             left: 0,
             right: 0,
             top: 0,
             bottom: 40
-        }
+          }
         },
         title: {
           display: true,
           text: ''
-        },tooltips: {
+        }, tooltips: {
           callbacks: {
             label: function(tooltipItem, data) {
               return data['labels'][tooltipItem['index']] + ': ' + data['datasets'][0]['data'][tooltipItem['index']] + '%';
             }
           }
-      }
+        }
       }
     });
   }
@@ -481,15 +480,14 @@ export class ProgressionReportComponent implements OnInit {
         }]
       },
       options: {
-
       }
     });
   }
 
-  handleOpened(moduleItem){
+  handleOpened(moduleItem) {
     moduleItem.isOpened = true;
   }
-  handleClosed(moduleItem){
+  handleClosed(moduleItem) {
     moduleItem.isOpened = false;
   }
 }

@@ -31,20 +31,16 @@
 <ng-template #thenBlock>
   <div class="content">
     <div class="notificationWrapper" *ngFor="let notification of notifications | slice:0:5">
-      <!-- fxLayout="row" fxLayoutAlign="start center"  -->
       <div class="notification d-flex justify-content-between align-items-center" mat-ripple>
         <div class="title" fxLayout="column" (click)="markAsRead(notification)">
           <a class="message wordWrap" *ngIf="notification.notifiedStatus != true" >{{ notification.notificationMessage }}</a>
           <a class="readed wordWrap" *ngIf="notification.notifiedStatus == true">{{ notification.notificationMessage }}</a>
           <div class="time">{{ notification.created_on | date: 'MMM d, y, h:mm a' }}</div>
         </div>
-        <!-- <span fxFlex></span> -->
         <div class="notifiedStatus">
           <em *ngIf="notification.notifiedStatus == true" class="lxp-Mail_Read mailRead"></em>
           <em *ngIf="notification.notifiedStatus != true" (click)="markAsRead(notification)" class="lxp-Mail_UnRead mailUnRead"></em>
 
-          <!-- <mat-icon *ngIf="notification.notifiedStatus == true" class="close closeBtn">drafts</mat-icon>
-          <mat-icon *ngIf="notification.notifiedStatus != true" class="close closeBtn" (click)="markAsRead(notification)">markunread</mat-icon> -->
         </div>
         
       </div>
@@ -73,7 +69,6 @@
 </ng-template>
 
 <ng-template #elseBlock>
-  <!-- <div class="no" fxLayout="row" fxLayoutAlign="center center">No new notifications</div> -->
   <div class="noCard">
     <figure>
       <img alt="assignment" src="https://assets.lntedutech.com/application_images/nocardNotification.svg" />
