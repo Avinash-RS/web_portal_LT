@@ -262,5 +262,11 @@ export class CommonServicesService {
     this.getToken()
     return this.http.post(environment.apiUrl+'navTreeV2',postParam,this.httpOptions);
   }
+  urlStatusCheck(url) {
+   let httpOpt = {
+       responseType:"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9"
+    };
+    return this.http.get(url,httpOpt)
+}
   
 }
