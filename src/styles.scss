@@ -123,6 +123,12 @@ body {
   stroke: #ddd;
 }
 
+.contentSetter {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 @keyframes rotate {
   100% {
     transform: rotate(360deg);
@@ -213,6 +219,44 @@ body {
 .width_80 {
   width: 80% !important;
 }
+
+.m-l-13 {
+  margin-left: 13px;
+}
+
+.p-5px {
+  padding: 5px !important;
+}
+
+.lxp-text {
+  color: $lxp-text;
+}
+
+.no_margin {
+  margin: 0 !important;
+}
+
+.no_padding {
+  padding: 0 !important;
+}
+
+.no_border {
+  border: none !important;
+  box-shadow: none;
+}
+
+.color_blue {
+  color: $lxp-theme-green !important; //red color
+}
+
+.color_white {
+  color: $color-white !important;
+}
+
+.color_black {
+  color: $color-blank !important;
+}
+
 
 .mat-spinner-color::ng-deep circle {
   stroke: $lxp-theme-yellow-sec !important;
@@ -392,7 +436,6 @@ ngx-skeleton-loader {
     background-color: $skeletonColor;
   }
 }
-
 
 :host p:last-child {
   margin-bottom: none !important;
@@ -580,11 +623,17 @@ button:disabled:hover {
 .h-100 {
   height: 100%;
 }
+.w-100 {
+  width: 100%;
+}
+.text-right {
+  text-align: right;
+}
+.font-weight-bold {
+  font-weight: 700!important;
+}
 .d-flex {
   display: flex;
-}
-.justify-content-between {
-  justify-content: space-between;
 }
 .justify-content-start {
   justify-content: flex-start;
@@ -609,4 +658,10 @@ button:disabled:hover {
 }
 .flex-column {
   flex-direction: column;
+}
+.flex-nowrap {
+  flex-wrap: nowrap;
+}
+.flex-wrap {
+  flex-wrap: wrap;
 }
