@@ -1,4 +1,4 @@
-//this is wrong file not use in our project
+// this is wrong file not use in our project
 
 // import { EventEmitter, Output } from '@angular/core';
 // import { Observable } from 'rxjs';

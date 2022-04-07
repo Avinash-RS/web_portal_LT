@@ -43,7 +43,7 @@ const routes: Routes = [
     component: KnowledgeLandingPageComponent,
     data: { animation: 'activitycenterhomescreen', title: 'Knowledge Resource' }
   },
-]
+];
 @NgModule({
   declarations: [
     KnowledgeResourceHomeComponent,

@@ -9,7 +9,7 @@ export class SocketioService {
     loginDetails: any;
     observer: any;
     @Output() change: EventEmitter<boolean> = new EventEmitter();
-    secretKey = "(!@#Passcode!@#)";
+    secretKey = '(!@#Passcode!@#)';
     constructor() {
         this.loginDetails = JSON.parse(localStorage.getItem('UserDetails')) ;
        // this.socket = io(environment.socketio);
@@ -27,7 +27,6 @@ export class SocketioService {
         });
         this.loginDetails = JSON.parse(localStorage.getItem('UserDetails')) ;
         this.loginDetails.user_id = CryptoJS.AES.decrypt( this.loginDetails.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
-        
         if (type.type === 'disconnect') {
             this.socket.emit('logout', this.loginDetails.user_id);
         }
@@ -36,13 +35,12 @@ export class SocketioService {
                 this.socket.emit('info', this.loginDetails.user_id);
             }
         }
-        
         return this.createObservable();
     }
-    socketReceiver(){
+    socketReceiver() {
        // console.log(this.loginDetails.user_id,"inside serveive")
         this.socket.on('coursePlayerStatus', (msg: any) => {
-            console.log(msg,"inside serveive")
+            console.log(msg, 'inside serveive');
             if (this.loginDetails.user_id === msg.user_id) {
 
                 this.changeTrigger({
@@ -72,13 +70,13 @@ export class SocketioService {
     }
     closeSocket() {
         if (this.socket.connected) {
-        this.socket.removeAllListeners('coursePlayerStatus')
+        this.socket.removeAllListeners('coursePlayerStatus');
         this.socket.off('coursePlayerStatus');
         this.socket.off('disconnect', this.Connectsocket);
         }
     }
 
-    socketStatus(){
+    socketStatus() {
         if (this.socket) {
             return this.socket.disconnected;
         } else {
