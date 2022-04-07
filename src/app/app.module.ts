@@ -23,7 +23,7 @@ import { ConfigsLoaderService } from '@core/services/configs-loader.service';
 import { NotFoundComponent } from './not-found/not-found.component';
 // import {IvyCarouselModule} from 'angular-responsive-carousel';
 import { DatePipe } from '@angular/common';
-//import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+// import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { SocketioService } from '@learner/services/socketio.service';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '@core/core.module';
@@ -32,7 +32,7 @@ import { NgxUiLoaderModule } from 'ngx-ui-loader';
 import { KnowledgePreviewComponent } from '@learner/pages/knowledge-preview/knowledge-preview.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { GoogleAnalyticsService } from '@learner/services/google-analytics.service';
-import {GtagModule} from "angular-gtag";
+import {GtagModule} from 'angular-gtag';
 import { environment } from '@env/environment';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { RedirectionComponent } from './redirection/redirection.component';
@@ -40,7 +40,7 @@ import { RedirectionComponent } from './redirection/redirection.component';
 
 // import { JwtInterceptor } from './core/services/_helpers/jwt.interceptor';
 // import { HTTP_INTERCEPTORS } from '@angular/common/http';
-//const config: SocketIoConfig = { url: 'http://localhost:4444', options: {} };
+// const config: SocketIoConfig = { url: 'http://localhost:4444', options: {} };
 export function getBaseHref(platformLocation: PlatformLocation): string {
   return platformLocation.getBaseHrefFromDOM();
 }
@@ -75,7 +75,7 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
     GraphqlModule,
     NgxUiLoaderModule,
     AngularEditorModule,
-    PdfViewerModule,    
+    PdfViewerModule,
     GtagModule.forRoot({ trackingId: environment.gaTrackingId, trackPageviews: false }),
     TranslateModule.forRoot({
       loader: {
@@ -86,7 +86,7 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
     }),
 
   ],
-  providers: [AlertComponentComponent, DatePipe, SocketioService,GoogleAnalyticsService, InterceptorService,
+  providers: [AlertComponentComponent, DatePipe, SocketioService, GoogleAnalyticsService, InterceptorService,
     {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true},
     {
       provide: APP_BASE_HREF,
@@ -99,7 +99,7 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
-  entryComponents: [AlertComponentComponent,KnowledgePreviewComponent]
+  entryComponents: [AlertComponentComponent, KnowledgePreviewComponent]
 })
 export class AppModule { }
 export function appInitializerFactory(configsLoaderService: ConfigsLoaderService) {

@@ -119,7 +119,7 @@ export class CalendarActivityComponent implements OnInit {
     const topicStart = new Date();
     this.getCalendarCount(topicStart);
     this.getLearnerActivity('month', topicStart);
-    if (this.userDetailes.org_type == 'collegeconnect') {
+    if (this.userDetailes.org_type === 'collegeconnect') {
       this.filterBy[2].key = 'Industry Talk';
     }
     if (this.userDetailes.org_type !== 'collegeconnect') {
@@ -141,7 +141,7 @@ export class CalendarActivityComponent implements OnInit {
         });
         this.courseDetailsList.push(...this.enrolledCourses);
         this.courseDetailsList.some((item, idx) =>
-        item.course_name == 'All Courses' &&
+        item.course_name === 'All Courses' &&
         this.courseDetailsList.unshift(
           this.courseDetailsList.splice(idx, 1)[0]));
       });
@@ -164,9 +164,9 @@ export class CalendarActivityComponent implements OnInit {
         element.color = {primary : element.color};
       //  element.allDay = true;
       });
-      this.events = activityDetailsList;​
+      this.events = activityDetailsList;
       setTimeout(() => {
-        var eventsParent = document.querySelectorAll('.cal-events');
+        const eventsParent = document.querySelectorAll('.cal-events');
         eventsParent.forEach((element: any) => {
           var children = Array.from(element.children);
           var duplicateColor = [];
@@ -174,7 +174,7 @@ export class CalendarActivityComponent implements OnInit {
             var style = window.getComputedStyle(dayEvent as HTMLElement);
             var color = style.getPropertyValue('background-color');
             var found = duplicateColor.find((element) => {
-              return element == color;
+              return element === color;
             });
             if (found) {
               dayEvent['style'].display = 'none';
@@ -189,12 +189,12 @@ export class CalendarActivityComponent implements OnInit {
   }
   getLearnerActivity(view, selectedDate, day?: CalendarMonthViewDay) {
     this.showSkeleton = true;
-    if (this.courseValue == 'All') {
+    if (this.courseValue === 'All') {
       var courseValue = '';
    } else {
     courseValue = this.courseValue;
    }
-    if (this.activityValue == 'All') {
+    if (this.activityValue === 'All') {
       var activityValue = '';
     } else {
       activityValue = this.activityValue;
@@ -248,7 +248,7 @@ export class CalendarActivityComponent implements OnInit {
   onSortChange(value) {
     if (this.courseDetailsList?.length > 0) {
       this.courseDetailsList.forEach((course) => {
-        if (course.course_id == value.value) {
+        if (course.course_id === value.value) {
           this.CourseName = course.course_name;
         }
       });
@@ -292,7 +292,7 @@ export class CalendarActivityComponent implements OnInit {
     goToActivities(value) {
       if (value.activitytype === 'Live Classroom') {
         return false;
-      } else if (value.activitytype == 'Self Learning') {
+      } else if (value.activitytype === 'Self Learning') {
 
         value.batch_end_date_Timer = new Date(value.batch_end_date).getTime(); // need
 

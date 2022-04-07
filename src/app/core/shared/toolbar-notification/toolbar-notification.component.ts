@@ -45,7 +45,7 @@ export class ToolbarNotificationComponent implements OnInit {
                 ).subscribe((e: any) => {
                   const urlHeader = e.url.split('/');
                   const headerPages = 'MyCourse';
-                  if (urlHeader[2] == headerPages) {
+                  if (urlHeader[2] === headerPages) {
                     this.getNotification();
                   } else {
                     this.unreadCount = JSON.parse(localStorage.getItem('NotificationCount'));
@@ -94,6 +94,7 @@ notificationOpen(data) {
     this.router.navigate(['/Learner/viewAllnotifications']);
   }
 
+  // tslint:disable-next-line:use-life-cycle-interface
   ngOnDestroy() {
     if (this.routedSubs) {
       this.routedSubs.unsubscribe();
