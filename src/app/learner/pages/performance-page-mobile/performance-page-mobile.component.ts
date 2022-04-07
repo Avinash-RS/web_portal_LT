@@ -110,7 +110,7 @@ export class PerformancePageMobileComponent implements OnInit {
     private ngxLoader: NgxUiLoaderService,
     public translate: TranslateService
   ) {
-    let lang = localStorage.getItem('language');
+    const lang = localStorage.getItem('language');
     this.translate.use(lang ? lang : 'en');
 
     const detail =
@@ -129,6 +129,7 @@ export class PerformancePageMobileComponent implements OnInit {
         : localStorage.getItem('CourseName');
     }
   }
+  // tslint:disable-next-line: use-life-cycle-interface
   ngOnDestroy() {
     this.ngxLoader.stop();
   }
@@ -229,7 +230,7 @@ export class PerformancePageMobileComponent implements OnInit {
           const batchEndDate = new Date(element.performActivity.batchenddate);
           element.batchEndDate = moment(batchEndDate).format('DD-MM-YYYY HH:mm');
           element.performSubmitType = moment().isSameOrBefore(batchEndDate);
-          if (moment().format('DD-MM-YYYY') == moment(batchEndDate).format('DD-MM-YYYY')) {
+          if (moment().format('DD-MM-YYYY') === moment(batchEndDate).format('DD-MM-YYYY')) {
             element.performSubmitType = true;
           }
           const crrDate = new Date();
@@ -301,7 +302,7 @@ export class PerformancePageMobileComponent implements OnInit {
       var sizeDatakb = sizeData / 1024;
       var finalSize = sizeDatakb.toFixed(2);
       this.splitSize = finalSize.split('.');
-      if (this.splitSize[0] == 0) {
+      if (this.splitSize[0] === 0) {
            this.fileTotalSize = sizeData.toFixed(2) + ' KB';
            this.verfyingCondition = sizeDatakb.toFixed(2);
        } else {
@@ -392,7 +393,9 @@ export class PerformancePageMobileComponent implements OnInit {
               is_active: true
             }]
           };
+           // tslint:disable-next-line: prefer-const
            let checkRes = await this.insertActivityRecord(this.jsonData);
+           // tslint:disable-next-line: triple-equals
            if (this.selectPerformfile.length == len) {
           this.toastr.success(data.message);
           this.ngxLoader.stop();
@@ -424,6 +427,7 @@ export class PerformancePageMobileComponent implements OnInit {
       return;
     }
     let fileSize = 0;
+    // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < event.target.files.length; i++) {
       fileSize += event.target.files[i].size;
       this.selectPerformfile.push(event.target.files[i]);
@@ -440,7 +444,7 @@ export class PerformancePageMobileComponent implements OnInit {
   }
 
   uploadDocuments(itration, perform) {
-    if (itration.videodetails.length == 3) {
+    if (itration.videodetails.length === 3) {
       this.toastr.warning('You are allowed only to upload a maximum of 3 files');
       if (this.videoInputPerform) {
         this.videoInputPerform.nativeElement.value = '';
@@ -485,7 +489,7 @@ export class PerformancePageMobileComponent implements OnInit {
   }
 
 playVideoMaterial(templateRef: TemplateRef<any>, videoDialog,  path, docType) {
-  let pathdata = {videourl:  path.path};
+  const pathdata = {videourl:  path.path};
   if (docType !== 'video/mp4' || docType !== 'video/quicktime') {
     this.dialog.open(templateRef, {
       width: '100%',

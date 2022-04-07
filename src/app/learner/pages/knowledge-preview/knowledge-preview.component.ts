@@ -28,13 +28,13 @@ export class KnowledgePreviewComponent implements OnInit {
     this.fileType = this.batchdialogdata.fileType;
     if (this.fileType === 'pdf') {
       this.batchdialogdata.file = this.batchdialogdata.file;
-      if (this.batchdialogdata?.internal == 'yes' || this.batchdialogdata?.internal == 'Yes') {
+      if (this.batchdialogdata?.internal === 'yes' || this.batchdialogdata?.internal === 'Yes') {
         this.file = this.batchdialogdata.file + this.blobToken;
       } else {
         this.file = this.batchdialogdata.file;
       }
     } else {
-      if (this.batchdialogdata?.internal == 'yes' || this.batchdialogdata?.internal == 'Yes') {
+      if (this.batchdialogdata?.internal === 'yes' || this.batchdialogdata?.internal === 'Yes') {
         this.file = this.sanitizer.bypassSecurityTrustResourceUrl(this.batchdialogdata.file + this.blobToken);
       } else {
         this.file = this.sanitizer.bypassSecurityTrustResourceUrl(this.batchdialogdata.file);
