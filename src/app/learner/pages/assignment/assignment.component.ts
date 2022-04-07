@@ -29,9 +29,9 @@ export class AssignmentComponent implements OnInit {
   noofItems = 0;
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService,
               public route: Router,
-              private toastr: ToastrService, private dialog: MatDialog, public translate: TranslateService,) {
-    let lang = localStorage.getItem('language')
-      this.translate.use(lang?lang:'en')
+              private toastr: ToastrService, private dialog: MatDialog, public translate: TranslateService, ) {
+    const lang = localStorage.getItem('language');
+    this.translate.use(lang ? lang : 'en');
     const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.data);
     this.checkDetails = detail;
@@ -62,10 +62,9 @@ export class AssignmentComponent implements OnInit {
   getAssignmentmoduleData() {
     this.Lservice.getAssignmentmoduleData(
       this.courseid,
-      this.userDetail.user_id,this.pagination,this.page,this.noofItems
+      this.userDetail.user_id, this.pagination, this.page, this.noofItems
     ).subscribe((data: any) => {
       if (data.data.getAssignmentmoduleData.success) {
-        // this.assignmentMessage = true;
         this.assignmentContent = data.data.getAssignmentmoduleData.data[0];
         if (
           this.assignmentContent.courseStartDate &&
@@ -73,24 +72,15 @@ export class AssignmentComponent implements OnInit {
         ) {
           const batchStartDate = new Date(this.assignmentContent.courseStartDate);
           const batchEndDate = new Date(this.assignmentContent.courseEndDate);
-          // this.courseStartDate = moment(batchStartDate).format('DD-MM-YYYY HH:mm A');
-          // this.courseEndDate = moment(batchEndDate).format('DD-MM-YYYY HH:mm A');
           this.courseStartDate = moment(batchStartDate);
           this.courseEndDate = moment(batchEndDate);
-          
           this.assignmentContent.coursedetails.forEach((element) => {
             element.moduledetails.forEach((moduleData) => {
               moduleData.resourse.files.forEach((fileData) => {
                 if (fileData.startDate && fileData.endDate) {
-                  // const date1 = JSON.parse(JSON.stringify(fileData.startDate));
-                  // const date2 = JSON.parse(JSON.stringify(fileData.endDate));
-                  // const startDate = new Date(date1);
-                  // const endDate = new Date(date2);
-                  // fileData.assignmentStartDate = moment(startDate).format('DD-MM-YYYY HH:mm');
-                  // fileData.assignmentEndDate = moment(endDate).format('DD-MM-YYYY HH:mm');
-                  let date1 = new Date(fileData.startDate);
+                  const date1 = new Date(fileData.startDate);
                   fileData.assignmentStartDate = moment(date1);
-                  let date2 = new Date(fileData.endDate);
+                  const date2 = new Date(fileData.endDate);
                   fileData.assignmentEndDate = moment(date2);
 
                   if (moment() >= fileData.assignmentStartDate) {
@@ -98,7 +88,7 @@ export class AssignmentComponent implements OnInit {
                   } else {
                     fileData.enableView = false;
                   }
-                  if (moment() >=fileData.assignmentStartDate && moment() <= this.courseEndDate) {
+                  if (moment() >= fileData.assignmentStartDate && moment() <= this.courseEndDate) {
                     fileData.enableUpload = true;
                   } else if (moment() < fileData.assignmentStartDate || moment() > this.courseEndDate) {
                     fileData.enableUpload = false;
@@ -108,9 +98,6 @@ export class AssignmentComponent implements OnInit {
             });
           });
         }
-
-      } else {
-        // this.assignmentMessage = false;
       }
     });
   }
@@ -149,7 +136,7 @@ export class AssignmentComponent implements OnInit {
     if (!score) {
       score = 50;
     }
-    let submitStatus = 'ontime';
+    let submitStatus ;
     const todayDate = moment().toDate();
     const startDate = moment(endDate).toDate();
     if (todayDate > startDate) {
@@ -198,7 +185,6 @@ export class AssignmentComponent implements OnInit {
   }
   closedialogbox() {
     this.dialog.closeAll();
-    // this.addThreadForm?.reset();
   }
 
 }

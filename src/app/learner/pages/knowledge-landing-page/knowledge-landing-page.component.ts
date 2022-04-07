@@ -55,9 +55,9 @@ export class KnowledgeLandingPageComponent implements OnInit {
               public apiService: knowledgeService,
               public dialog: MatDialog,
               private toastr: ToastrService,
-              public translate: TranslateService) { 
-                let lang = localStorage.getItem('language')
-                this.translate.use(lang?lang:'en') 
+              public translate: TranslateService) {
+                const lang = localStorage.getItem('language');
+                this.translate.use(lang ? lang : 'en');
               }
 
   ngOnInit() {
@@ -98,14 +98,10 @@ export class KnowledgeLandingPageComponent implements OnInit {
         const extIdx = d.url.search(/\.pdf|.mp4|.jpg|.mp3|.png|.jpeg/);
         if (extIdx >= 0) {
           d.fileType = d.url.substring(extIdx + 1, extIdx + 4);
-          
         }
         if (d.fileType === 'jpe') {
           d.fileType = 'jpeg';
-          
         }
-        // let idx = d.file.search(/\d[-]/g) + 2;
-        // d.fileName = idx > 0 ? d.file.substring(idx) : "";
         const isPushed = this.topicList.find(tpc => tpc === d.topic);
         if (!isPushed) {
           this.topicList.push(d.topic);
@@ -139,7 +135,7 @@ export class KnowledgeLandingPageComponent implements OnInit {
         fileType,
         fileTypePrew: resData.fileType,
         filename: resData.filename,
-        internal:resData.internal
+        internal: resData.internal
       },
       height,
       width,

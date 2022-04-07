@@ -13,22 +13,13 @@ export class TermsconditionsComponent implements OnInit {
                public dialog: MatDialog,
                public dialogRef: MatDialogRef<TermsconditionsComponent>,
                @Inject(MAT_DIALOG_DATA) public data: any,
-               public translate: TranslateService) { 
-                let lang = localStorage.getItem('language')
-                this.translate.use(lang ? lang : 'en')
+               public translate: TranslateService) {
+                const lang = localStorage.getItem('language');
+                this.translate.use(lang ? lang : 'en');
                 }
 
   ngOnInit() {
-  //   this.dialogRef.keydownEvents().subscribe(event => {
-  //     if (event.key === "Escape") {
-  //         this.onCancel();
-  //     }
-  // });
   }
-//   onCancel(): void {
-//     this.data.cancel = true;
-//     this.dialogRef.close(this.data);
-// }
   closedialogbox() {
     this.dialog.closeAll();
   }

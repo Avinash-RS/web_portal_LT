@@ -24,22 +24,6 @@
                             <em class="lxp-Dropdown "></em>
                         </span>
                     </div>
-                    <!-- <div class="selectview ">
-                        <div class="btn-group ">
-                            <div class="btn1 " (click)="setView(CalendarView.Month) "
-                                [class.active]="view===CalendarView.Month ">
-                                Monthly
-                            </div>
-                            <div class="btn1 " (click)="setView(CalendarView.Week) "
-                                [class.active]="view===CalendarView.Week ">
-                                Weekly
-                            </div>
-                            <div class="btn1 " (click)="setView(CalendarView.Day) "
-                                [class.active]="view===CalendarView.Day ">
-                                Daily
-                            </div>
-                        </div>
-                    </div> -->
                 </div>
                 <br />
                 <div [ngSwitch]="view ">
@@ -70,22 +54,6 @@
                     ({{activityData?.completedActivityCount}})</span>
             </div>
             <div class="rightPan">
-                <!-- <span>{{'Filter:' | translate}} </span>
-                <mat-form-field class="mr-2" appearance="outline">
-                    <mat-select (selectionChange)="onSortChange($event) " matTooltip="{{CourseName}} "
-                        [(ngModel)]="courseValue ">
-                        <mat-option *ngFor="let course of courseDetailsList " [value]="course.course_id ">
-                            {{course.course_name}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <mat-form-field appearance="outline">
-                    <mat-select (selectionChange)="onSortChange($event) " [(ngModel)]="activityValue ">
-                        <mat-option *ngFor="let filter of filterBy " [value]="filter.value ">
-                            {{filter.key}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field> -->
                 <button mat-stroked-button class="filterBtn " (click)="openFilterDialog()">
                     <em class="lxp-Filter "></em> <span>{{'Filter' | translate}}</span> 
                </button>
