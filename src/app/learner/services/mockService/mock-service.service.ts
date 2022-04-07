@@ -32,7 +32,7 @@ export class MockServiceService {
           "__typename": "loginresponse"
         }
       }
-    }
+    };
   }
 
 }
