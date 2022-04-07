@@ -629,6 +629,15 @@ button:disabled:hover {
 .text-right {
   text-align: right;
 }
+.text-left {
+  text-align: left;
+}
+.text-center {
+  text-align: center;
+}
+.text-white {
+  color: #ffffff;
+}
 .font-weight-bold {
   font-weight: 700!important;
 }
@@ -643,6 +652,9 @@ button:disabled:hover {
 }
 .justify-content-between {
   justify-content: space-between;
+}
+.justify-content-around {
+  justify-content: space-around;
 }
 .justify-content-center {
   justify-content: center;
@@ -664,4 +676,13 @@ button:disabled:hover {
 }
 .flex-wrap {
   flex-wrap: wrap;
+}
+hr {
+  box-sizing: content-box;
+  height: 0;
+  overflow: visible;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 1px solid rgba(0,0,0,.1);
 }

@@ -51,10 +51,106 @@
   }
 }
 
+.assignmentTab, 
+.performTab {
+  flex-wrap: wrap;
+  @include lg {
+    flex-wrap: nowrap;
+  }
+  .leftContainer {
+    width: 100%;
+    @include lg {
+      width: calc(100% - 310px);
+    }
+    @include xl {
+      width: calc(100% - 405px);
+    }
+    @media only screen and (min-width: 1540px) {
+      width: calc(100% - 530px);
+    }
+  }
+  .rightContainer {
+    width: 100%;
+    margin-top: 20px;
+    @include lg {
+      width: 310px;
+      margin: 0 0 0 20px;
+    }
+    @include xl {
+      width: 405px;
+    }
+    @media only screen and (min-width: 1540px) {
+      width: 530px;
+    }
+  }
+}
+
+.assignmentActivityDetails, 
+.performActivityDetails {
+  flex-wrap: wrap;
+  @include md {
+    flex-wrap: nowrap;
+  }
+  .projectLeftContent, 
+  .performLeftContent {
+    width: 100%;
+    @include md {
+      width: 275px;
+    }
+    @include lg {
+      width: 450px;
+    }
+    @include xl {
+      width: 750px;
+    }
+    @media only screen and (min-width: 1540px) {
+      width: 1000px;
+    }
+  }
+  .projectRightContent, 
+  .performRightContent {
+    width: 100%;
+    @include md {
+      width: calc(100% - 275px);
+    }
+    @include lg {
+      width: calc(100% - 450px);
+    }
+    @include xl {
+      width: calc(100% - 750px);
+    }
+    @media only screen and (min-width: 1540px) {
+      width: calc(100% - 1000px);
+    }
+  }
+}
+
+.assignmentTab, 
+.performTab {
+  .textArea {
+    color: $label2;
+    width: 100%;
+    padding: 5px 7px;
+    font-size: 15px;
+    border: 1px solid rgba(112, 112, 112, 0.5);
+    background-color: #ffffff;
+    font-family: 'Roboto', sans-serif;
+  }
+  .fileData {
+    background-color: #d5d5d5;
+    border: 0.25px solid #707070;
+    width: 100%;
+    height: 2.8rem;
+    padding: 0.3rem 5px;
+    cursor: pointer;
+    margin-bottom: 15px;
+  }
+}
+
 ::ng-deep.materialsScrollActivity .drag-scroll-wrapper.drag-scroll-container {
   height: auto !important;
   @media only screen and (max-width: 767px) {
-    height: 97px !important;
+    height: auto !important;
   }
 }
 ::ng-deep.materialsScrollActivity .drag-scroll-content {
@@ -181,14 +277,21 @@
   width: 100%;
   text-align: right;
 }
+.itrCount {
+  margin: 10px 0;
+}
 .startEndDate {
+  justify-content: flex-start;
+  @include md {
+    justify-content: flex-end;
+  }
   span {
     display: block;
   }
 }
 
 .endDate {
-  margin-left: 15px;
+  margin-left: 10px;
 }
 .box-0-1 {
   width: 99%;
@@ -220,8 +323,9 @@
 .gradeStatus {
   color: #0c781b;
   position: relative;
-  left: 98px;
   font-size: 15px;
+  text-align: right;
+  display: block;
 }
 .projectSubmitstatus {
   color: #ffa04e;
@@ -243,7 +347,9 @@
   // right: 42px;
 }
 .performRightContent {
-  padding-right: 30px;
+  @include md {
+    padding-right: 30px;
+  }
 }
 .submitted-btn {
   color: $color-white !important;
@@ -600,6 +706,11 @@
   display: inline-block;
   text-align: left;
   vertical-align: top;
+  &:last-child {
+    .carouselCol {
+      margin-right: 0;
+    }
+  }
 }
 ::ng-deep.groupBtn.mat-mini-fab .mat-button-wrapper,
 ::ng-deep.arrBtn.mat-mini-fab .mat-button-wrapper {
@@ -736,14 +847,7 @@
 .submission {
   margin-left: 2px;
 }
-.fileData {
-  background-color: #d5d5d5;
-  border: 0.25px solid #707070;
-  width: 100%;
-  height: 2.8rem;
-  padding: 0.3rem 5px;
-  cursor: pointer;
-}
+
 .uploadfileName {
   position: relative;
   left: 10px;
@@ -895,16 +999,12 @@
   background-color: #5c6873;
   width: 100%;
 }
-
-.playActions {
-  margin-bottom: 10px;
+.materialActivityHeading {
+  margin-bottom: 16px;
 }
-
-// .carouselHoverCol {
-//   max-width: 100% !important;
-//   height: 11rem;
-// }
-
+.spacing {
+  margin: 8px;
+}
 .carouselText {
   font-size: 12px;
   color: #ffffff;
@@ -943,14 +1043,7 @@
   color: $label2;
   font-size: 16px;
 }
-.textArea {
-  color: $label2;
-  width: 100%;
-  padding: 5px 7px;
-  font-size: 15px;
-  border: 1px solid rgba(112, 112, 112, 0.5);
-  background-color: #ffffff;
-}
+
 .AssignmentBtn {
   font-size: 15px;
   border: 1px solid rgba(112, 112, 112, 0.5);
@@ -1090,7 +1183,7 @@
   height: auto !important;
   overflow: visible !important;
   @media only screen and (max-width: 767px) {
-    height: 97px !important;
+    height: auto !important;
     margin-bottom: 15px;
   }
 }
@@ -1113,16 +1206,32 @@
 ::ng-deep.scrollingData .drag-scroll-content {
   text-align: left;
 }
+.scrollingData  {
+  margin-top: 8px;
+}
 .slideLoop {
   display: inline-block;
   text-align: left;
   vertical-align: top;
 }
+.performTab {
+  .slideLoop {
+    .materialCard {
+      margin-right: 8px;
+    }
+    &:last-child {
+      .materialCard {
+        margin-right: 0;
+      }
+    }
+  }
+}
 .materialCard {
+  padding: 4px 0 0 0;
   width: 8rem;
-  height: 7rem;
-  cursor: pointer;
+  // height: 7rem;
   // margin-left: 1rem;
+  cursor: pointer;
   border: 0.5px solid #707070;
   display: inline-block;
   text-align: center;
@@ -1274,9 +1383,9 @@
   left: 0.2rem;
 }
 
-.actionBtnmobile {
+.actionBtnmobile, .actionBtn1Mobile {
   font-size: 10px;
-  margin-left: 1rem;
+  margin-left: 5px;
 }
 
 .downloadBtnMobile {
@@ -1285,13 +1394,7 @@
 }
 
 .colActionDownload {
-  padding-left: 0px;
   cursor: pointer;
-}
-
-.actionBtn1Mobile {
-  font-size: 10px;
-  margin-left: 1rem;
 }
 
 .m-l {
@@ -1463,10 +1566,6 @@
 }
 .projectActivityDetails {
   .assignmentActivityDetails {
-    flex-wrap: wrap;
-    @media only screen and (min-width: 720px) {
-      flex-wrap: nowrap;
-    }
     .iconcontent {
       width: 3%;
       @media only screen and (max-width: 767px) {
