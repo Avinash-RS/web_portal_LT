@@ -31,7 +31,7 @@ export class HeaderComponent implements OnInit {
   isAvailOpen = false;
   loading = false;
   hideHeaderMenu: boolean = false;
-  expandTxt:boolean = false;
+  expandTxt: boolean = false;
   calendarActive;
   @HostBinding('class') componentCssClass;
   innerWidth: number;
@@ -40,41 +40,40 @@ export class HeaderComponent implements OnInit {
   constructor(public services: CommonServicesService, private alert: AlertServiceService,
               private http: HttpClient, public overlayContainer: OverlayContainer, public socketService: SocketioService,
               public router: Router, private gs: GlobalServiceService, public translate: TranslateService) {
-    let lang = localStorage.getItem('language')
-    this.translate.use(lang ? lang : 'en') 
+    const lang = localStorage.getItem('language');
+    this.translate.use(lang ? lang : 'en');
     // this.getScreenSize();
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
-      ).subscribe((e: any) => {
-        const urlHeader= e.url.split("/")
-      const headerPages = ['courseDetail']
+    ).subscribe((e: any) => {
+      const urlHeader = e.url.split('/');
+      const headerPages = ['courseDetail'];
       // debugger
       if (headerPages.includes(urlHeader[2])) {
         this.hideHeaderMenu = true;
       }
-    })
+    });
   }
   @HostListener('window:resize', ['$event'])
   ngOnInit() {
     this.innerWidth = window.innerWidth;
-    if(this.innerWidth <= 767) {
+    if (this.innerWidth <= 767) {
       this.expandTxt = true;
-    }
-    else {
+    } else {
       this.expandTxt = false;
     }
     this.services.closeAvailPopup$.subscribe((data: any) => {
       this.isAvailOpen = data;
     });
     this.activeUrl = this.router.url;
-    if(this.activeUrl == '/Learner/upskillcalendar' || this.activeUrl == '/Learner/calendaractivity'){
+    if (this.activeUrl === '/Learner/upskillcalendar' || this.activeUrl === '/Learner/calendaractivity') {
       this.calendarActive = true;
     } else {
-      this.calendarActive = false
+      this.calendarActive = false;
     }
     this.orgDetails = JSON.parse(localStorage.getItem('organizationDetails')) || null;
     this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(localStorage.getItem('UserDetails')) || null;
-    //this.profilepic = this.userDetailes.profile_img;
+    // this.profilepic = this.userDetailes.profile_img;
     this.role = localStorage.getItem('role') || sessionStorage.getItem('role');
     this.userimage = localStorage.getItem('user_img') || sessionStorage.getItem('user_img');
     this.fullName = localStorage.getItem('Fullname');
@@ -83,31 +82,27 @@ export class HeaderComponent implements OnInit {
       this.userDetailes = this.gs.checkLogout();
       this.profilepic = this.userDetailes.profile_img;
     }, 1000);
-    if(this.profilepic == "" || this.profilepic == null){
+    if (this.profilepic === '' || this.profilepic == null) {
       this.profilepic = this.userimage;
     }
     this.updateProfilePic();
   }
-  
-  updateProfilePic(){
-    this.services.updateProfilePic.subscribe((data:any)=>{
+  updateProfilePic() {
+    this.services.updateProfilePic.subscribe((data: any) => {
       this.profilepic = localStorage.getItem('user_img') || sessionStorage.getItem('user_img');
-    })
+    });
   }
 
   onResize(event) {
     this.innerWidth = window.innerWidth;
-    if(this.innerWidth <= 767) {
+    if (this.innerWidth <= 767) {
       this.expandTxt = true;
-    }
-    else {
+    } else {
       this.expandTxt = false;
     }
   }
-  
   getShortName(fullName) {
-    // tslint:disable-next-line:only-arrow-functions
-    const Name = fullName?.split(' ').map(function(str) {
+    const Name = fullName?.split(' ').map((str: any) => {
       return str ? str[0].toUpperCase() : '';
     }).join('');
     if (Name?.length === 1) {
@@ -150,7 +145,7 @@ export class HeaderComponent implements OnInit {
       if (result.value) {
         // this.loading = true;
 
-        //SOCKET DISCONNECTION START
+        // SOCKET DISCONNECTION START
 
         if (this.socketService?.socket?.connected) {
           this.socketService.Connectsocket({ type: 'disconnect' }).subscribe(quote => {
@@ -172,12 +167,12 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/Learner/MyCourse']);
   }
 
-  openCalendar(){
-    if(this.userDetailes.org_type == 'Corporate'){
+  openCalendar() {
+    if (this.userDetailes.org_type === 'Corporate') {
       this.router.navigate(['/Learner/upskillcalendar']);
     } else {
       this.router.navigate(['/Learner/calendaractivity']);
-    } 
+    }
   }
   openAvailableCources(isAvailOpen) {
     this.services.openAvailCourcePopup$.next(isAvailOpen);

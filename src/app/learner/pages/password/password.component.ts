@@ -33,53 +33,40 @@ export class PasswordComponent implements OnInit {
   useridData: any;
   email: any;
   emailid: any;
-  secretKey = "(!@#Passcode!@#)";
+  secretKey = '(!@#Passcode!@#)';
   currentYear = new Date().getFullYear();
   loader = false;
-  expiryMessage = "";
+  expiryMessage = '';
   constructor(public translate: TranslateService,
               private router: Router,
               private formBuilder: FormBuilder,
               private toastr: ToastrService,
               private activeroute: ActivatedRoute,
               public service: LearnerServicesService) {
-                let lang = localStorage.getItem('language')
-                this.translate.use(lang ? lang : 'en') 
+                let lang = localStorage.getItem('language');
+                this.translate.use(lang ? lang : 'en');
                 this.activeroute.queryParams.subscribe(params => {
                   this.email = params.code;
                   var input = {
-                    "userSecretkey" : params.code
-                }
-                 // const decryptedString = atob(params.code);
-                  // this.service.getEmail(input).subscribe((data)=>{
-                  //   var userValue = data['data']
-                  //   if(userValue['email']){
-                  //     this.emailid =  userValue['email'];
-                  //     this.userid = userValue['user_id'];
-                  //     localStorage.setItem('key', this.userid);
-                  //   }
-                  // })
-                  this.service.getUser(this.email).subscribe((data:any)=>{
-                    this.expiryMessage = data?.data?.getuserRecordbasedonSecretKey?.message ? data?.data?.getuserRecordbasedonSecretKey?.message :'';
+                    ' userSecretkey ' : params.code
+                };
+                  this.service.getUser(this.email).subscribe((data: any) => {
+                    this.expiryMessage = data?.data?.getuserRecordbasedonSecretKey?.message ?
+                    data?.data?.getuserRecordbasedonSecretKey?.message : '';
                     var userValue = data?.data?.getuserRecordbasedonSecretKey?.data;
-                    if(userValue['email']){
-                      this.emailid =  userValue['email'];
-                      this.userid = userValue['user_id'];
+                    if (userValue[' email ']) {
+                      this.emailid =  userValue[' email '];
+                      this.userid = userValue[' user_id '];
                       localStorage.setItem('key', this.userid);
                     }
-                })
-                  // localStorage.setItem('OTPFeature', this.otpFeature);
-                  //this.get_user_detail(this.email);
+                });
                 });
                }
 
   ngOnInit() {
-    // this.translate.use(localStorage.getItem('language'));
     this.translate.use(localStorage.getItem('language') ? localStorage.getItem('language') : 'en');
     this.systemip = localStorage.getItem('Systemip');
-    // this.userNamesuggestion();
     this.passwordForm = this.formBuilder.group({
-      // username: new FormControl('', myGlobals.usernamesplVal),
       username: [''],
       password: ['', [Validators.required, Validators.minLength(8),  Validators.maxLength(20),
       Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])(?=.*?^[A-Za-z0-9!<>?/{}\|+-_=@#%$^*()]*$)/)]],
@@ -137,40 +124,16 @@ export class PasswordComponent implements OnInit {
       this.loader = false;
       if (data.data.user_registration_done.success === 'true') {
         // Added by Mythreyi - for user story 19 first time login
-        this.toastr.success("Your registration is successful")                
+        this.toastr.success('Your registration is successful');
         this.router.navigate(['/Learner/login']);
-        // this.service.login(this.emailid, this.passwordForm.value.password, false)
-        //   .subscribe((loginresult: any) => {
-        //     if (loginresult.data.login) {
-        //       if (loginresult.data.login.success) {
-        //         this.toastr.success("Your registration is successful")                
-        //         this.router.navigate(['/Learner/login']);
-        //       }
-        //     } else {
-        //       
-        //       this.passwordForm.reset();
-        //       this.toastr.error(loginresult.data.login.error_msg, null);
-        //     }
-        //   });
       } else {
         this.toastr.error(data.data.user_registration_done.message, null);
       }
     },
-    err =>{
+    err => {
       this.loader = false;
     });
   }
- // new flow removed
-   // userNamesuggestion() {
-  //   this.userid = localStorage.getItem('key');
-  //   this.service.userNamesuggestion(this.userid).subscribe((data: any) => {
-  //     if (data.data.user_registration_username_suggestion.success === 'true') {
-  //       this.options = data.data.user_registration_username_suggestion.data;
-  //     } else {
-  //       this.toastr.error(data.data.user_registration_username_suggestion.message, null);
-  //     }
-  //   });
-  // }
 
   /* function that checks for existing user or not on blur event in username field */
   checkForExistingUser() {

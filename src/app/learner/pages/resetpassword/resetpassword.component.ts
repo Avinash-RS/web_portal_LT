@@ -8,7 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import * as CryptoJS from 'crypto-js';
 import { environment } from '../../../../environments/environment';
-import { RecaptchaErrorParameters } from "ng-recaptcha";
+import { RecaptchaErrorParameters } from 'ng-recaptcha';
 
 
 @Component({
@@ -33,7 +33,7 @@ export class ResetpasswordComponent implements OnInit {
   isLink = false;
   hide = true;
   hide2 = true;
-  secretKey = "(!@#Passcode!@#)";
+  secretKey = '(!@#Passcode!@#)';
   siteKey: any = environment.captachaSiteKey;
   resolvedCaptcha: any;
   currentYear = new Date().getFullYear();
@@ -47,8 +47,8 @@ export class ResetpasswordComponent implements OnInit {
     private activeroute: ActivatedRoute,
     private toastr: ToastrService,
     public service: LearnerServicesService) {
-      let lang = localStorage.getItem('language')
-      this.translate.use(lang ? lang : 'en') 
+      const lang = localStorage.getItem('language');
+      this.translate.use(lang ? lang : 'en');
       const language = localStorage.getItem('language') || 'en';
       this.translate.setDefaultLang(language);
       this.translate.use(language);
@@ -57,56 +57,39 @@ export class ResetpasswordComponent implements OnInit {
   ngOnInit() {
     this.activeroute.queryParams.subscribe(params => {
       if (params.code) {
-        this.resetCode = params.code
-      // var input = {
-      //     "userSecretkey" : params.code
-      // }
-      this.service.getUser(this.resetCode).subscribe((data:any)=>{
-          var userValue = data?.data?.getuserRecordbasedonSecretKey?.data
-          if(userValue['email']){
-            this.user = userValue['email'].toLowerCase();
+        this.resetCode = params.code;
+        this.service.getUser(this.resetCode).subscribe((data: any) => {
+          const userValue = data?.data?.getuserRecordbasedonSecretKey?.data;
+          if (userValue[' email ']) {
+            this.user = userValue[' email '].toLowerCase();
             this.get_user_detail_username(this.user);
           }
-      })
-        // this.service.getEmail(input).subscribe((data)=>{
-        //   var userValue = data['data']
-        //   if(userValue['email']){
-        //     this.user = userValue['email'].toLowerCase();
-        //     this.get_user_detail_username(this.user);
-        //   }
-        // })
-       
+      });
       } else {
         this.user = localStorage.getItem('Username');
         this.isLinkActive = true;
       }
     });
-
-
-
     this.resetForm = this.formBuilder.group({
       recaptchaReactive: [null],
       password: ['', [Validators.required, ,
-        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/),Validators.minLength(8),  Validators.maxLength(20)]],
+        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/),
+        Validators.minLength(8),  Validators.maxLength(20)]],
         confirmpassword: new FormControl('', [Validators.required, Validators.minLength(8),
           Validators.maxLength(20), Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/)])
-      // password: new FormControl('', myGlobals.passwordVal),
-      // confirmpassword: new FormControl('', [Validators.required,
-      // Validators.minLength(8), Validators.maxLength(20),
-      // Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/)])
     }, {
       validator: MustMatch('password', 'confirmpassword'),
     });
   }
-  checkCaptchaReset(captchaRefReset){
+  checkCaptchaReset(captchaRefReset) {
     if (this.recaptchaResetStr) {
       captchaRefReset.reset();
   }
-  captchaRefReset.execute();
+    captchaRefReset.execute();
   }
   resolvedReset(captchaResponse: string) {
     this.recaptchaResetStr = captchaResponse;
-        if (this.recaptchaResetStr) {
+    if (this.recaptchaResetStr) {
             this.resetpassword();
         }
   }
@@ -150,15 +133,12 @@ export class ResetpasswordComponent implements OnInit {
 
 
   resetpassword() {
-    this.loader = true
-    var encryptedname = CryptoJS.AES.encrypt(this.user.toLowerCase(), this.secretKey.trim()).toString();
-    var encryptedpassword = CryptoJS.AES.encrypt(this.resetForm.value.password, this.secretKey.trim()).toString();
-    // var decryptname = CryptoJS.AES.decrypt(encryptedname, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
-    // var decryptpassword = CryptoJS.AES.decrypt(encryptedpassword, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
-    // return
-    this.service.resetPassword(encryptedname,encryptedpassword,this.resetCode,this.recaptchaResetStr).subscribe((data: any) => {
+    this.loader = true;
+    const encryptedname = CryptoJS.AES.encrypt(this.user.toLowerCase(), this.secretKey.trim()).toString();
+    const encryptedpassword = CryptoJS.AES.encrypt(this.resetForm.value.password, this.secretKey.trim()).toString();
+    this.service.resetPassword(encryptedname, encryptedpassword, this.resetCode, this.recaptchaResetStr).subscribe((data: any) => {
       if (data.data.get_forgot_password_byresetpassword.success === 'true') {
-        this.loader = false
+        this.loader = false;
         this.toastr.success(data.data.get_forgot_password_byresetpassword.message);
         localStorage.removeItem('Username');
         localStorage.removeItem('Details_user');
@@ -179,8 +159,8 @@ export class ResetpasswordComponent implements OnInit {
       this.service.get_user_detail_username(name).subscribe((data: any) => {
         this.isLinkActive = data.data.get_user_detail_username && data.data.get_user_detail_username.message === 'Link not expired' ?
           true : false;
-          if(!this.isLinkActive){
-            this.isLink = true
+        if (!this.isLinkActive) {
+            this.isLink = true;
           }
       });
     } catch (error) {

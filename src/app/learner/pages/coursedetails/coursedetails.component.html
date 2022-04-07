@@ -4,74 +4,20 @@
 <div oncontextmenu="return false" class="coursePlayerContainer" [ngClass]="checkDetails?.toc != '0' ? 'nonITCourses':'ITcourses'" *ngIf="scromModuleData;else skeletonLoader">
     <!-- TITLE AND BACK -->
     <div class="titlebar">
-        <!-- <div class="downTitle"><em (click)="titleBar?titleBar=false:titleBar=true" [ngClass]="titleBar?'arrUp':'arrDown'" class="lxp-Arrow"></em></div>
-        <div class="collapseFill"><i class="lxp-CollapseFill"></i></div> -->
 
-        <!-- <div class="collapseFill"><em (click)="titleBar = !titleBar" [ngClass]="titleBar?'arrDown lxp-Arrow':'arrUp lxp-CollapseFill'"></em></div> -->
-        <!-- <div class="collapseFill"><em (click)="!titleBar ? titleBar = true : ''" [ngClass]="!titleBar?'arrUp':'arrDown'" class="lxp-CollapseFill"></em></div> -->
-
-        <!-- <div class="d-flex align-items-center titleBack animateAnimate" [ngClass]="titleBar==true?'fadeOutUp':'fadeInDown'">
-            <div class="pointer d-flex align-items-center backcolor redHover" *ngIf="scromApiData?.toc != '0'" (click)="goBack()">
-                <i class="lxp-Arrow backArrow"></i><span>Back</span>
-            </div>
-            <ng-container *ngIf="scromApiData?.toc != '0'">
-                <div class="navigation d-flex align-items-center" *ngIf="scromModuleData&&filterkey==='All'&&drawersOpen===false">
-                    <span class="pipeLine">|</span> 
-                    <div class="leftArrow">                
-                     <i class="lxp-Next-Previous previousTopic" title="Previous Topic" [ngClass]="isprevEnable?'disableColor':''" (click)="isprevEnable?false:topicPrve()"></i>
-                    </div>
-                    <div class="currentTopic" >
-                     <span title="{{scromModuleData[weekHolderUI].childData[moduleHolder]?.childData[nextPrevHolder].title}}">{{scromModuleData[weekHolderUI].childData[moduleHolder]?.childData[nextPrevHolder].title}}</span>
-                    </div>
-                    <div class="rightArrow">                
-                     <i class="lxp-Next-Previous" title="Next Topic" [ngClass]="isNextEnable?'disableColor':''" (click)="isNextEnable?false:topicNext()"></i>
-                    </div>
-                </div>
-            </ng-container>
-            <div class="courseTitle" *ngIf="drawersOpen!==false||filterkey!=='All'"> | <span>{{this.course?.course_name}}</span></div>
-        </div> -->
         <div class="titleBack animateAnimate d-flex justify-content-between align-items-center" [ngClass]="titleBar==true?'fadeOutUp':'fadeInDown'">
             <div class="breadCrumbWrapper">
                 <ul class="breadcrumb" [ngClass]="checkDetails?.toc != '0' ? 'no':'yes'">
                     <li [ngClass]="drawersOpen ? 'no':'yes'">
-                        <!-- <em (click)="goBack()" class="lxp-Go backArrow"></em> -->
                         <span>{{course?.course_name}}</span>
                     </li>
-                    <!-- <ng-container  *ngIf="checkDetails?.toc != '0' && !checkDetails.checkLevel">
-                        <div class="navigation d-flex align-items-center" style="display: none;" *ngIf="scromModuleData && filterkey==='All' && drawersOpen===false">
-                            <div class="leftArrow">                
-                                <em class="lxp-Next-Previous previousTopic" title="Previous Topic" [ngClass]="isprevEnable?'disableColor':''" (click)="isprevEnable?false:topicPrve()"></em>
-                            </div>
-                            <div class="currentTopic" >
-                                <span title="{{scromModuleData[weekHolderUI].childData[moduleHolder]?.childData[nextPrevHolder].title}}">{{scromModuleData[weekHolderUI].childData[moduleHolder]?.childData[nextPrevHolder].title}}</span>
-                            </div>
-                            <div class="rightArrow">                
-                                <em class="lxp-Next-Previous" title="Next Topic" [ngClass]="isNextEnable?'disableColor':''" (click)="isNextEnable?false:topicNext()"></em>
-                            </div>
-                        </div>
-                    </ng-container> -->
-                    <!-- <li><div class="courseTitle" *ngIf="drawersOpen!==false||filterkey!=='All'"><span>{{this.course?.course_name}}</span></div></li> -->
                 </ul>
             </div>
            
         </div>
     </div>
     <!-- COURSE TOOL BAR -->
-    <!-- <div class="d-flex justify-content-between align-items-center toolBar">
-       <div class="d-flex align-items-center leftContent">
-           <div class="navigation d-flex align-items-center" *ngIf="scromModuleData">
-               <div class="leftArrow">                
-                <i class="lxp-Next-Previous previousTopic" title="Previous Topic" [ngClass]="isprevEnable?'disableColor':''" (click)="isprevEnable?false:topicPrve()"></i>
-               </div>
-               <div class="currentTopic" title="{{scromModuleData[moduleHolder]?.childData[nextPrevHolder].title}}">
-                <span >{{scromModuleData[moduleHolder]?.childData[nextPrevHolder].title}}</span>
-               </div>
-               <div class="rightArrow">                
-                <i class="lxp-Next-Previous" title="Next Topic" [ngClass]="isNextEnable?'disableColor':''" (click)="isNextEnable?false:topicNext()"></i>
-               </div>
-           </div>
-       </div>
-    </div> -->
+
     <!-- TOC AND PLAYER -->
     <div class="contentHeight d-flex">
         <!-- TOC DATA -->
@@ -97,73 +43,12 @@
                         <ng-template [ngTemplateOutlet]="tocContent"></ng-template>
                     </mat-tab>
                   
-                    <!-- <mat-tab>
-                      <ng-template mat-tab-label>
-                        <span class="tabLabel">Notes</span> <span class="labelcount">3</span>
-                      </ng-template>
-                      Content 3
-                    </mat-tab> -->
                 </mat-tab-group>
             </div>
 
             <!-- Commented Filter -->
-            <!-- <div *ngIf="scromApiData?.toc != '0'" class="filterSection d-flex justify-content-between">
-                <div class="hamburgerPosition" [ngClass]="drawersOpen?'position-relative':'position-fixed-burgur'">
-                    <em class="lxp-HamburgerMenu" (click)="drawersOpen=drawersOpen?false:true"></em>
-                </div>
-                <div>
-                    Filter by: 
-                    <select class="sel-pad" [(ngModel)]="filterkey" (change)="filterToc()">
-                        <option [value]="'All'">All</option>
-                        <option [value]="'Bookmarked'">Bookmarks</option>
-                    </select>
-                </div>
-            </div> -->
 
             <!-- Commented TOC -->
-            <!-- <div class="xyz" *ngIf="filterkey=='Bookmarked'?(filterData.length>0?true:false):(scromModuleData.length>0?true:true);else emptyTOC">
-                <mat-card *ngFor="let resDat of filterkey=='Bookmarked'?filterData:scromModuleData; let wi = index" [ngClass]="resDat.expanded ? 'expandClass':'collapseClass'" multi displayMode=""
-                    class="topicCard" >                            <mat-card-title  class="d-flex justify-content-between align-items-center pointer">
-                                <div class="tocTitle">Week - {{resDat.week?resDat.week:wi+1}}</div>
-                                <div>
-                                </div>
-                            </mat-card-title>
-                            <span *ngFor="let res of resDat.childData let mi = index" (load)="mi==moduleHolder?res.expanded=true:res.expanded=false;">
-                            <mat-card-subtitle (click)="moduleExpand(wi,mi,res)" class="d-flex justify-content-start align-items-center tocSubTitle" [ngClass]="(wi===weekHolderUI&&mi==moduleHolder)?'titleSelected':''">
-                                <div>
-                                    <mat-icon *ngIf="res?.status == 'Passed'" class="material-icons passColor" >done </mat-icon>
-                                   < mat-icon *ngIf="res?.status == 'process'" class="material-icons processColor" >done </mat-icon>
-                                    <mat-icon *ngIf="res?.status == null" class="material-icons mar" >done </mat-icon>
-                                </div>
-                                <div>
-                                    <span *ngIf="res?.title?.length >= 67" class="moduleName" tooltip="{{res?.title}}"
-                                        placement="right">
-                                        {{res?.title | slice:0:71}}...</span>
-                                    <span *ngIf="res?.title?.length < 67" class="moduleName">
-                                        {{res?.title}}
-                                    </span>
-                                </div>
-                                <div style="margin-left:auto">
-                                    <mat-icon class="material-icon">{{res.expanded?'expand_less':'expand_more'}}</mat-icon>
-                                </div>
-                            </mat-card-subtitle>
-                    <mat-card-content *ngIf="(res.expanded)">
-                        <div class="bs-vertical-wizard">
-                            <ul>
-                                <li  [ngClass]="mod?.status === 'Passed' ? 'complete' :  mod?.status === 'process' ? 'current' : ''" *ngFor="let mod of res?.childData; let ti = index">
-                                    <div *ngIf="wi==weekHolderUI&&ti==nextPrevHolder && mi==moduleHolder" #focuser ></div>
-                                    <span class="icov" [ngClass]="(wi==weekHolderUI&&ti==nextPrevHolder && mi==moduleHolder) ? 'titleSelected' : ''" (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,wi,ti,mi);drawersOpen=performOverLay?(drawersOpen?false:true):true">
-                                        {{mod?.title}}
-                                        <em class="ico" [ngClass]="mod?.status === 'Passed' ? 'fa fa-check ico-green' :  mod?.status === 'process' ? 'fa fa-circle ico-yellow' : ''"></em>
-                                        <span *ngIf="mod.bookmark===true "><em class="lxp-bookmark" style="color:blue"></em></span>
-                                    </span>
-                                </li>
-                            </ul>
-                        </div>
-                        </mat-card-content>
-                    </span>
-                </mat-card>
-            </div> -->
             <ng-template #emptyTOC>
                 <div class="leftTocContent p-xy-10 d-flex justify-content-around align-items-center">
                     {{'You have not added any bookmarks!' | translate}}
@@ -174,11 +59,9 @@
                 <div class="leftTocContent" *ngIf="filterkey=='Bookmarked'?(filterData.length>0?true:false):(scromModuleData.length>0?true:true);else emptyTOC">
                     <mat-card *ngFor="let resDat of filterkey=='Bookmarked'?filterData:scromModuleData; let wi = index" [ngClass]="resDat.expanded ? 'expandClass':'collapseClass'" multi displayMode=""
                         class="topicCardLevel" >
-                        <!-- (click)="moduleExpand(resDat,i)" -->
                         <mat-card-title  class="d-flex justify-content-between align-items-center pointer">
                             <div class="tocTitle" *ngIf="userType!=='vocational'&&userType!=='Corporate'" >{{'Week -' | translate}} {{resDat.week?resDat.week:wi+1}}</div>
                             <div>
-                                <!-- <i class="expandCollapse" [ngClass]="resDat.expanded?'lxp-Collapse':'lxp-Expand'"></i> -->
                             </div>
                         </mat-card-title>
                         <!-- moduleExpand(wi,mi,null,res) -->
@@ -196,15 +79,9 @@
                                         {{res?.module_name}}
                                     </h4>
                                 </div>
-                                <!-- <div class="progressBar">
-                                    <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
-                                    <span>3/5</span>
-                                </div> -->
                                 <div class="arrowExpandCollapse">
                                     <div>
                                         <em class="rotate lxp-DownArrow" [ngClass]="res.expanded?'expand_less':'expand_more'"></em>
-                                        <!-- <em *ngIf="res.expanded" class="lxp-Arrow"></em> -->
-                                        <!-- <mat-icon class="material-icon">{{res.expanded?'expand_less':'expand_more'}}</mat-icon> -->
                                     </div>
                                 </div>
                             </mat-card-subtitle>
@@ -223,10 +100,6 @@
                                                 {{subData?.module_name}}
                                             </h4>
                                         </div>
-                                        <!-- <div class="progressBar">
-                                            <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
-                                            <span>3/5</span>
-                                        </div> -->
                                         <div class="subModuleExpandCollapse">
                                             <div>
                                                 <em class="lxp-Expand" *ngIf="!subData.expanded"></em>
@@ -242,8 +115,6 @@
                                                     <div class="icov" [ngClass]="filterkey == 'Bookmarked'?(wi==bkmrk_week&&ti==bkmrk_topic && smi==bkmrk_subModuleHolder && mi==bkmrk_module)?'topicTitleSelected' : '':(wi==weekHolderUI&&ti==nextPrevHolder && smi==subModuleHolder && mi==moduleHolder)||(this.weekHolder==undefined&& mod.expanded) ? 'topicTitleSelected' : ''" (click)="playTopic(mod.link,mod?.topic_name,mod.status,subData?.module_name,res?.status,mod,(filterkey == 'Bookmarked'?{'wn':resDat.week,'wi':wi}:wi),ti,mi,smi);drawersOpen=performOverLay?(drawersOpen?false:true):true">
                                                         <div class="modTitle">
                                                             <h3 tooltip="{{mod?.topic_name}}">{{mod?.topic_name}}</h3>
-                                                            <!-- <span class="playVideo"><em class="lxp-PlayCircle"></em> Video</span>
-                                                            <span class="videoDuration"><em class="lxp-Clock"></em> 30:00 min</span> -->
                                                         </div>
                                                         <span *ngIf="mod?.status === 'Passed'" [ngClass]="mod?.status === 'Passed' ? 'bgGreen' : ''">
                                                             <em *ngIf="mod?.status === 'Passed'" class="lxp-Right"></em>
@@ -252,8 +123,6 @@
                                                             <em *ngIf="mod?.status === 'process'" class="lxp-Timer_Outlined"></em>
                                                         </span>
                                                         <span *ngIf="mod?.status === null" [ngClass]="mod?.status === null ? 'bgGrey' : ''"></span>
-                                                        <!-- <em class="ico" [ngClass]="mod?.status === 'Passed' ? 'fa fa-check ico-green' :  mod?.status === 'process' ? 'fa fa-circle ico-yellow' : ''"></em> -->
-                                                        <!-- <span class="desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, cumque.</span> -->
                                                         <span class="bookmarkTopic d-flex justify-content-center align-items-center" *ngIf="mod.bookmark===true ">
                                                             <em class="lxp-bookmark"></em></span>
                                                     </div>
@@ -267,14 +136,11 @@
                             <mat-card-content *ngIf="(res.expanded)">
                                 <div class="bs-vertical-wizard">
                                     <ul>
-                                        <!-- <ng-container *ngIf="(topicData$|async).data.playerstatus.message"></ng-container> -->
                                         <li  [ngClass]="mod?.status === 'Passed' ? 'complete' :  mod?.status === 'process' ? 'current' : ''" *ngFor="let mod of( res.childData) let ti = index">
                                             <div *ngIf="(wi==weekHolderUI&&ti==nextPrevHolder && mi==moduleHolder)||(this.weekHolder==undefined&& mod.expanded)" #focuser ></div>
                                             <div class="icov" [ngClass]="filterkey == 'Bookmarked'?(wi==bkmrk_week&&ti==bkmrk_topic && mi==bkmrk_module)?'topicTitleSelected' : '':(wi==weekHolderUI&&ti==nextPrevHolder && mi==moduleHolder)||(this.weekHolder==undefined&& mod.expanded) ? 'topicTitleSelected' : ''" (click)="playTopic(mod.link,mod.topic_name,mod.status,res?.module_name,res?.status,mod,(filterkey == 'Bookmarked'?{'wn':resDat.week,'wi':wi}:wi),ti,mi);drawersOpen=performOverLay?(drawersOpen?false:true):true">
                                                 <div class="modTitle">
                                                     <h3 tooltip="{{mod?.topic_name}}">{{mod?.topic_name}}</h3>
-                                                    <!-- <span class="playVideo"><em class="lxp-PlayCircle"></em> Video</span>
-                                                    <span class="videoDuration"><em class="lxp-Clock"></em> 30:00 min</span> -->
                                                 </div>
                                                 <span *ngIf="mod?.status === 'Passed'" [ngClass]="mod?.status === 'Passed' ? 'bgGreen' : ''">
                                                     <em *ngIf="mod?.status === 'Passed'" class="lxp-Right"></em>
@@ -283,8 +149,6 @@
                                                     <em *ngIf="mod?.status === 'process'" class="lxp-Timer_Outlined"></em>
                                                 </span>
                                                 <span *ngIf="mod?.status === null" [ngClass]="mod?.status === null ? 'bgGrey' : ''"></span>
-                                                <!-- <em class="ico" [ngClass]="mod?.status === 'Passed' ? 'fa fa-check ico-green' :  mod?.status === 'process' ? 'fa fa-circle ico-yellow' : ''"></em> -->
-                                                <!-- <span class="desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, cumque.</span> -->
                                                 <span class="bookmarkTopic d-flex justify-content-center align-items-center" *ngIf="mod.bookmark===true ">
                                                     <em class="lxp-bookmark"></em></span>
                                             </div>
@@ -309,38 +173,6 @@
                 <div (click)="makeFullScreen()" data-title="Fullscreen" class="fullScr d-flex align-items-center iconSize">
                     <em class="lxp-Fullscreen"></em>
                 </div>
-                <!-- <div class="mixed" [ngClass]="isShowDiv ? 'paddingTop' : 'paddingZero'">
-                    <div *ngIf="isShowDiv" class="allIcons">
-                        <div class="smile">
-                            <button data-title="Understood" *ngIf="userType=='Corporate'" type="button" [disabled]="topicPageStatus !== 'Passed'" [ngClass]="topicPageStatus==='Passed'&& topicInfo?.user_experience === 'like'?'btn btn-outline-success':'btn btn-outline-light'" (click)="understoodClick('like')">
-                                <i class="lxp-smile"></i>
-                            </button>
-                        </div>
-                        <div class="sad">
-                            <button data-title="Not Understood" *ngIf="userType=='Corporate'" type="button" [disabled]="topicPageStatus !== 'Passed'" [ngClass]="topicPageStatus==='Passed' && topicInfo?.user_experience === 'dislike'?'btn btn-outline-danger':'btn btn-outline-light'" (click)="understoodClick('dislike')">
-                                <i class="lxp-sad"></i>
-                            </button>
-                        </div>
-                        <div class="resource">
-                            <button data-title="Resources"  type="button" ngClass="btn btn-outline-light" (click)="openResourse(resourseWindow)">
-                                <em class="lxp-res-popout"></em>
-                            </button>
-                        </div>
-                        <div class="askquestion">
-                            <button data-title="Ask Question" *ngIf="userType!=='collegeconnect'" type="button" ngClass="btn btn-outline-light" (click)="openAskQuestions(askQuestions)">
-                                <em class="lxp-lifebuoy"></em>
-                            </button>
-                        </div>
-                        <div class="bookmark" *ngIf="userType == 'collegeconnect'">
-                            <button data-title="Bookmark" type="button" [disabled]="filterkey==='Bookmarked'" ngClass="btn btn-outline-light" (click)="bookmarkClick(topicInfo?.bookmark?false:true)">
-                                <em [ngClass]="topicInfo?.bookmark?'lxp-bookmark':filterkey==='Bookmarked'? 'lxp-bookmark':'lxp-bookmark-o'"></em>
-                            </button>
-                        </div>
-                    </div>
-                    <div (click)="toggleDisplayDiv()" class="d-flex align-items-center iconSize allTabs">
-                        <em [ngClass]="isShowDiv ? 'closeIcon' : 'addIcon'" class="lxp-Close f_size_14"></em>
-                    </div>
-                </div> -->
             </div>
         </div>
         
@@ -375,21 +207,15 @@
             </div>
 
             <div class="wrapppper d-flex align-items-center">
-                <!-- <div class="upSkill" *ngIf="showlab"> "*ngIf="showlab"-->
                 <div class="upSkill" *ngIf="userType==='Corporate'">
                     <button data-title="Practice online" *ngIf="userType==='Corporate'" class="practiceOnline" [ngClass]="!showlab?'btn-transp':''" [disabled]="!showlab" type="button" (click)="navigatePractice()">
                         <em class="lxp-Lab_Practice"></em> <span>{{'Practice Online' | translate}}</span>
                     </button>
-                    <!-- <button data-title="Practice online" (click)="showlab = showlab?false:true" class="onlineEditor" type="button">
-                        <em class="lxp-Online_Code_Editor"></em> <span>Online Code Editor</span>
-                    </button> -->
                 </div>
                 <div class="notesBookmarks">
-                    <!-- [disabled]="topicInfo.status !== 'Passed'" -->
                     <div *ngIf="userType=='vocational'"  (click)="understoodClick('like')" data-title="Understood" class="smile" [ngClass]="topicInfo?.status==='Passed'&& topicInfo?.user_experience === 'like'?'fillcol':'nofill'">
                         <em class="lxp-smile"></em> <span>{{'Understood' | translate}}</span>
                     </div>
-                    <!-- [disabled]="topicInfo.status !== 'Passed'" -->
                     <div *ngIf="userType=='vocational'"   (click)="understoodClick('dislike')" data-title="Not Understood" class="sad" [ngClass]="topicInfo?.status==='Passed' && topicInfo?.user_experience === 'dislike'?'fillcol':'nofill'">
                         <em class="lxp-sad"></em> <span>{{'Not Understood' | translate}}</span>
                     </div>
@@ -399,28 +225,11 @@
                     <button data-title="Ask A Question" class="askAQuestion" *ngIf="userType=='collegeconnect'" type="button" (click)="openQuestionDialog(questionDialog)">
                         <em class="lxp-question"></em> <span>{{'Ask A Question' | translate}}</span>
                     </button>
-                    <!-- <button class="notesBtn"><em class="lxp-Notes"></em> <span>Notes</span></button> -->
                      <button class="bookmarkBtn" *ngIf="userType!=='Corporate' && userType!=='vocational'" data-title="Bookmark" type="button" [disabled]="filterkey==='Bookmarked'" ngClass="btn btn-outline-light" (click)="bookmarkClick(topicInfo?.bookmark?false:true)">
                          <em [ngClass]="topicInfo?.bookmark?'lxp-bookmark':filterkey==='Bookmarked'? 'lxp-bookmark':'lxp-bookmark-o'"></em> <span [ngClass]="topicInfo?.bookmark?'bold':'normal'">{{topicInfo?.bookmark?'Bookmarked': filterkey==='Bookmarked'? translate.instant('Bookmarked'): translate.instant('Bookmark')}}</span>
                      </button>
                 </div>
             </div>
-             <!-- <div class="d-flex justify-content-between align-items-center understoodButton">
-                 <button *ngIf="userType!=='collegeconnect'&&userType!=='Corporate'" type="button" [disabled]="topicPageStatus !== 'Passed'" [ngClass]="topicPageStatus==='Passed'&& topicInfo?.user_experience === 'like'?'btn btn-outline-success':'btn btn-outline-light'" (click)="understoodClick('like')">
-                     <i class="lxp-smile"></i> Understood
-                 </button>
-                 <button *ngIf="userType!=='collegeconnect'&&userType!=='Corporate'" type="button" [disabled]="topicPageStatus !== 'Passed'" [ngClass]="topicPageStatus==='Passed' && topicInfo?.user_experience === 'dislike'?'btn btn-outline-danger':'btn btn-outline-light'" (click)="understoodClick('dislike')">
-                     <i class="lxp-sad"></i> Not Understood
-                 </button>
-             </div> -->
-            <!-- <div class="d-flex bookmarkButton">
-                 <button type="button" [disabled]="filterkey==='Bookmarked'" ngClass="btn btn-outline-light mr-10px" (click)="bookmarkClick(topicInfo?.bookmark?false:true)">
-                     <i [ngClass]="topicInfo?.bookmark?'lxp-bookmark':filterkey==='Bookmarked'? 'lxp-bookmark':'lxp-bookmark-o'"></i> {{topicInfo?.bookmark?'Bookmarked': filterkey==='Bookmarked'? 'Bookmarked':'Add to Bookmark'}}
-                 </button>
-                 <button *ngIf="userType!=='collegeconnect'" type="button" [disabled]="batchEndTime<currentDate" ngClass="btn btn-outline-light" (click)="openAskQuestions(askQuestions)">
-                     <i class="lxp-lifebuoy"></i> Ask Questions
-                 </button>
-             </div> -->
         </div>
     </div>
 </div>
@@ -497,7 +306,7 @@
                                             
                                                 <ng-container *ngIf="fileType == 'video'">
                                                     <div class="videoContainer">
-                                                        <video  oncontextmenu="return false;" [src]="URIData" title="" controls controlsList="nodownload"></video>
+                                                        <video  oncontextmenu="return false;" [src]="URIData" title="" controls controlsList="nodownload" ><track label="English" kind="captions" srclang="en" default></video>
                                                     </div>
                                                 </ng-container>
                                             
@@ -543,7 +352,7 @@
                     
                         <ng-container *ngIf="fileType == 'video'">
                             <div class="videoContainer">
-                                <video  oncontextmenu="return false;" [src]="URIData" title="image" controls controlsList="nodownload"></video>
+                                <video  oncontextmenu="return false;" [src]="URIData" title="image" controls controlsList="nodownload"><track label="English" kind="captions" srclang="en" default></video>
                             </div>
                         </ng-container>
                     
@@ -568,10 +377,6 @@
             <div class="aboutCourseTab">
                 <h2>{{'About the Course' | translate}}</h2>
                 <div class="descriptionContent">
-                    <!-- <p id="courseDesc" [innerHTML]="course?.course_long_description">
-                        <a href="javascript:;" *ngIf="!isReadMore && longDesc?.length>250" (click)="showText()"> More</a>
-                        <a href="javascript:;" *ngIf="isReadMore" (click)="showText()"> Less</a>
-                    </p> -->
                     <p>
                         <span id="courseDesc" class="hideDesc" [innerHTML]="course?.course_long_description"></span>
 
@@ -602,7 +407,6 @@
                    
                 </div>
                 <div class="poweredBy">
-                    <!-- <h2>Course offered by: <span><img src="/assets/images/lNTlogo.svg" alt="" /></span></h2> -->
                     <h2>{{'Course offered by:' | translate}} <span><img src="https://assets.lntedutech.com/edutech_logo.svg" alt="" /></span></h2>
                 </div>
             </div>
@@ -638,9 +442,6 @@
                             
                         </div>
                         <p class="answer" *ngIf="item.ansDate">{{item.ans}}</p>
-                        <!-- <div class="QuestionMeta" *ngIf="item.ansDate">
-                            <p>Answered on {{item.ansDate}}</p>
-                        </div> -->
                     </div>
                 </div>
                 <ng-template #noitems>
@@ -661,7 +462,6 @@
                 </div>
                 <div class="myQuestions" *ngIf="allQuestionList.length;else noallitems">
                     <div class="qaBox" *ngFor="let item of allQuestionList">
-                        <!-- <div class="userAccount"><i class="lxp-AccountCircle"></i>&nbsp; {{item.user_id}}</div> -->
                         <span class="userAccount"><em class="lxp-AccountCircle align-text-bottom font-weight-bold"></em>&nbsp;<span class="font-weight-bold">{{item.user_id}}</span></span>&nbsp;|&nbsp;
                         <span class="QuestionMeta d-inline-flex">
                         <p>{{'Asked on:' | translate}} &nbsp;{{item.askDate}},&nbsp;{{item.askTime}}</p>
@@ -672,9 +472,6 @@
                             <p>&nbsp; {{item.ansDate}},&nbsp;{{item.ansTime}}</p>
                         </div>
                         <p class="answer"*ngIf="item.ansDate">{{item.ans}}</p>
-                        <!-- <div class="QuestionMeta">
-                            <p>{{item.ansDate}}</p>
-                        </div> -->
                     </div>
                     
                 </div>
@@ -736,12 +533,7 @@
         <div>
             <angular-editor [(ngModel)]="htmlContent" [config]="config"></angular-editor>
         </div>
-        <!-- <div [innerHTML]="htmlContent"></div> -->
         <div>
-            <!-- <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Notify by e-mail for incomming answers</label>
-            </div> -->
         </div>
         <div class="d-flex justify-content-between cancelSubmit">
             <button class="btn btn-outline-dark btn-block" (click)="dialogClose()">{{'Cancel' | translate}}</button>

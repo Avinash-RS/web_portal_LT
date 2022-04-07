@@ -10,10 +10,10 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory, CoreModule } from '@core/core.module';
 import { HttpClient } from '@angular/common/http';
 import { CarouselModule } from 'ngx-owl-carousel-o';
-import { NgOtpInputModule } from  'ng-otp-input';
+import { NgOtpInputModule } from 'ng-otp-input';
 
 // import { MaterialModule } from '@core/material.module';
-//Materials import 
+// Materials import
 import { MatButtonModule, MatInputModule, MatCheckboxModule, MatFormFieldModule, MatSelectModule } from '@angular/material';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -49,7 +49,7 @@ const routes: Routes = [
     component: ResetpasswordComponent,
     data: { title: 'Learner Reset password' }
   },
-]
+];
 
 @NgModule({
   declarations: [

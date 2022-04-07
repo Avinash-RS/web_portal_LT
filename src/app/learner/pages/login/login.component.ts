@@ -1,13 +1,13 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup,Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import * as myGlobals from '@core/globals';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
-//import { SocketioService } from '@learner/services/socketio.service';
+// import { SocketioService } from '@learner/services/socketio.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import * as CryptoJS from 'crypto-js';
-import { RecaptchaErrorParameters } from "ng-recaptcha";
+import { RecaptchaErrorParameters } from 'ng-recaptcha';
 import { environment } from '../../../../environments/environment';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 
@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
   show = false;
   loginForm: FormGroup;
   languages: any;
-  secretKey = "(!@#Passcode!@#)";
+  secretKey = '(!@#Passcode!@#)';
   currentYear = new Date().getFullYear();
   infoClose = true;
   loader = false;
@@ -70,13 +70,15 @@ export class LoginComponent implements OnInit {
         this.username.hasError('email') ? 'Please enter a valid email address' :
             '';
   }
-  constructor(public translate: TranslateService, private router: Router, private formBuilder: FormBuilder, public learnerService: LearnerServicesService,public gaService:GoogleAnalyticsService,
-             // public socketService: SocketioService,
-              private service: LearnerServicesService, private toastr: ToastrService, private activatedRoute: ActivatedRoute,private titleService: Title) {
-      this.languages = [{lang: 'ta' , languagename: 'Tamil' } , { lang: 'en' , languagename: 'English'  }] ;
-      translate.addLangs(['en', 'ta']);
-      translate.setDefaultLang('en');
-      const browserLang = translate.getBrowserLang();
+  constructor(public translate: TranslateService, private router: Router, private formBuilder: FormBuilder,
+              public learnerService: LearnerServicesService, public gaService: GoogleAnalyticsService,
+              // public socketService: SocketioService,
+              private service: LearnerServicesService, private toastr: ToastrService,
+              private activatedRoute: ActivatedRoute, private titleService: Title) {
+    this.languages = [{ lang: 'ta', languagename: 'Tamil' }, { lang: 'en', languagename: 'English' }];
+    translate.addLangs(['en', 'ta']);
+    translate.setDefaultLang('en');
+    const browserLang = translate.getBrowserLang();
   }
 
   ngOnInit() {
@@ -87,33 +89,33 @@ export class LoginComponent implements OnInit {
       password: new FormControl('', myGlobals.req),
       remember_me: new FormControl(false, []),
       language: new FormControl(false, [])
-    });    
+    });
   }
-  stop(event){
+  stop(event) {
     event.stopPropagation();
   }
-  viewChange(){
+  viewChange() {
     this.signInPage = false;
     this.forgotPage = true;
     this.titleService.setTitle('Forgot Password');
     this.gaService.setInnerPage('Forgot Password');
-    setTimeout(()=>{
+    setTimeout(() => {
       this.captchaRef.reset();
-    },1000)
+    }, 1000);
   }
-  backToSignin(){
+  backToSignin() {
     this.forgotPage = false;
     this.signInPage = true;
     this.titleService.setTitle('Learner Login');
-    this.gaService.setInnerPage('Learner Login')
+    this.gaService.setInnerPage('Learner Login');
     this.username.reset();
-    setTimeout(()=>{
+    setTimeout(() => {
       this.captchaRef.reset();
-    },1000)
+    }, 1000);
   }
   forgotPassword() {
       var encryptedmail = CryptoJS.AES.encrypt(this.username.value, this.secretKey.trim()).toString();
-      this.service.forgotUsernameandPassword('password', 'email','', encryptedmail,this.recaptchaForgetStr)
+      this.service.forgotUsernameandPassword('password', 'email', '', encryptedmail, this.recaptchaForgetStr)
         .subscribe((data: any) => {
           this.loader = true;
           if (data?.data?.get_forgot_username_mobile_email?.success === 'true') {
@@ -128,7 +130,7 @@ export class LoginComponent implements OnInit {
             this.username.reset();
           }
         },
-        err =>{
+        err => {
           this.toastr.error('Email or Username not found');
         });
   }
@@ -150,7 +152,7 @@ export class LoginComponent implements OnInit {
             sessionStorage.clear();
             localStorage.clear();
           }
-        });  
+        });
       } else {
         localStorage.removeItem('UserDetails');
         localStorage.removeItem('role');
@@ -179,7 +181,7 @@ export class LoginComponent implements OnInit {
             localStorage.clear();
             sessionStorage.clear();
           }
-        });  
+        });
       } else {
         localStorage.removeItem('UserDetails');
         localStorage.removeItem('role');
@@ -192,38 +194,38 @@ export class LoginComponent implements OnInit {
   get f() {
     return this.loginForm.controls;
   }
-  checkCaptchaLogin(captchaRef){
+  checkCaptchaLogin(captchaRef) {
     if (this.recaptchaStr) {
       captchaRef.reset();
   }
-  captchaRef.execute();
+    captchaRef.execute();
   }
 
-  checkCaptchaForget(captchaForget){
+  checkCaptchaForget(captchaForget) {
     if (this.recaptchaForgetStr) {
       captchaForget.reset();
   }
-  captchaForget.execute();
+    captchaForget.execute();
   }
-  checkCaptchaSignIn(captchaSignIn){
+  checkCaptchaSignIn(captchaSignIn) {
     if (this.recaptchaSignInStr) {
       captchaSignIn.reset();
   }
-  captchaSignIn.execute();
+    captchaSignIn.execute();
   }
   resolvedLogin(captchaResponse: string) {
     this.recaptchaStr = captchaResponse;
-        if (this.recaptchaStr) {
-            this.login();
-        }
+    if (this.recaptchaStr) {
+      this.login();
+    }
   }
-  resolvedForget(captchaForgetResponse: string){
+  resolvedForget(captchaForgetResponse: string) {
     this.recaptchaForgetStr = captchaForgetResponse;
     if (this.recaptchaForgetStr) {
         this.forgotPassword();
     }
   }
-  resolvedSignIn(captchaSignInResponse: string){
+  resolvedSignIn(captchaSignInResponse: string) {
     this.recaptchaSignInStr = captchaSignInResponse;
     if (this.recaptchaSignInStr) {
         this.Submit();
@@ -236,18 +238,18 @@ export class LoginComponent implements OnInit {
     this.loader = true;
     var encryptedname = CryptoJS.AES.encrypt(this.loginForm.value.username.toLowerCase(), this.secretKey.trim()).toString();
     var encryptedpassword = CryptoJS.AES.encrypt(this.loginForm.value.password, this.secretKey.trim()).toString();
-    this.service.login(encryptedname, encryptedpassword, false,'microsetportal')
+    this.service.login(encryptedname, encryptedpassword, false, 'microsetportal')
       .subscribe((loginresult: any) => {
-        if(loginresult.data.login){
+        if (loginresult.data.login) {
           if (loginresult.data.login.success) {
-            let userId = loginresult.data.login.message.user_id
-            gtag('config', environment.gaTrackingId, {'user_id': userId});
-            gtag('set', 'user_properties', { 'crm_id' : userId });
-            this.loginMovement(loginresult)
-            if(loginresult.data.login?.message?.TFAsetup?.main_config_TFA){
-              if(loginresult.data.login?.message?.TFAsetup?.user_config_TFA){
+            let userId = loginresult.data.login.message.user_id;
+            gtag('config', environment.gaTrackingId, {' user_id ': userId});
+            gtag('set', 'user_properties', { ' crm_id ' : userId });
+            this.loginMovement(loginresult);
+            if (loginresult.data.login?.message?.TFAsetup?.main_config_TFA) {
+              if (loginresult.data.login?.message?.TFAsetup?.user_config_TFA) {
                 this.router.navigate(['/Learner/authentication']);
-              } else{
+              } else {
                 this.setAuthentication();
               }
             } else {
@@ -258,22 +260,20 @@ export class LoginComponent implements OnInit {
             this.loginForm.reset();
             this.toastr.error(loginresult.data.login.error_msg, null);
           }
-        }
-        else {
+        } else {
           this.loader = false;
           this.loginForm.reset();
           this.toastr.warning('Please try again later', null);
         }
-        
       });
   }
 
-  setAuthentication(){
-    let userDetail =JSON.parse(localStorage.getItem('UserDetails'))
-    userDetail['specific_report_value'] = Math.floor(Math.random() * 1000000000).toString()
+  setAuthentication() {
+    let userDetail = JSON.parse(localStorage.getItem('UserDetails'));
+    userDetail['specific_report_value'] = Math.floor(Math.random() * 1000000000).toString();
     localStorage.setItem('UserDetails', JSON.stringify(userDetail));
-    if(userDetail.is_password_updated){
-      if(userDetail.org_type == 'Corporate'){
+    if (userDetail.is_password_updated) {
+      if (userDetail.org_type == 'Corporate') {
         this.router.navigate(['/Learner/upskillcalendar']);
       } else {
         this.router.navigate(['/Learner/MyCourse']);
@@ -282,29 +282,29 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/Learner/profile']);
     }
   }
-  loginMovement(loginresult){
-        if(this.loginForm.value.remember_me === true){
-          localStorage.setItem('token', loginresult.data.login.message.token);
-        }else{
-          sessionStorage.setItem('token', loginresult.data.login.message.token);
-        }
-        localStorage.setItem('language', this.loginForm?.value?.language || 'en'  );
-        localStorage.setItem('Fullname', loginresult.data.login.message.full_name);
-        var id = CryptoJS.AES.encrypt(loginresult.data.login.message.user_id, this.secretKey.trim()).toString(); 
-        loginresult.data.login.message.user_id = id
-        loginresult.data.login.message.specific_report_value = '';
-          localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message));
-          localStorage.setItem('remember_me', 'false');
-          localStorage.setItem('user_img', loginresult.data.login.message.profile_img);
-          localStorage.setItem('role', 'learner');
-        if (loginresult.data.login && this.loginForm.value.remember_me === true) {
-          localStorage.setItem('remember_me', 'true');
-        } else {
-          localStorage.setItem('remember_me', 'false');
-        }
-        setTimeout(()=>{
-          this.loader = false;
-        },5000)
+  loginMovement(loginresult) {
+    if (this.loginForm.value.remember_me === true) {
+      localStorage.setItem('token', loginresult.data.login.message.token);
+    } else {
+      sessionStorage.setItem('token', loginresult.data.login.message.token);
+    }
+    localStorage.setItem('language', this.loginForm?.value?.language || 'en');
+    localStorage.setItem('Fullname', loginresult.data.login.message.full_name);
+    var id = CryptoJS.AES.encrypt(loginresult.data.login.message.user_id, this.secretKey.trim()).toString();
+    loginresult.data.login.message.user_id = id;
+    loginresult.data.login.message.specific_report_value = '';
+    localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message));
+    localStorage.setItem('remember_me', 'false');
+    localStorage.setItem('user_img', loginresult.data.login.message.profile_img);
+    localStorage.setItem('role', 'learner');
+    if (loginresult.data.login && this.loginForm.value.remember_me === true) {
+      localStorage.setItem('remember_me', 'true');
+    } else {
+      localStorage.setItem('remember_me', 'false');
+    }
+    setTimeout(() => {
+      this.loader = false;
+    }, 5000);
   }
   forgotusername(type) {
     this.router.navigateByUrl('/Learner/recover', { state: { type } });
@@ -331,13 +331,12 @@ export class LoginComponent implements OnInit {
         }
       });
     }
-  
-    // Go to signin 
-    viewSignin(){
+    // Go to signin
+    viewSignin() {
       this.signInPage = false;
       this.signUpPage = true;
-      this.titleService.setTitle('Sign up')
-      this.gaService.setInnerPage('Sign up')
+      this.titleService.setTitle('Sign up');
+      this.gaService.setInnerPage('Sign up');
       this.gettitleData();
       this.registerForm = this.formBuilder.group({
         recaptchaReactive: [null],
@@ -398,7 +397,6 @@ export class LoginComponent implements OnInit {
     this.router.navigateByUrl('/Learner/login');
   }
   onSubmit() {
-    
     if (this.registerForm.valid) {
       this.Submit();
     }
@@ -416,12 +414,12 @@ export class LoginComponent implements OnInit {
     this.titleData = data.data.user_mstr_data.data;
     });
   }
-  backToIn(){
+  backToIn() {
     this.signUpPage = false;
     this.signInPage = true;
     this.registerForm.reset();
   }
-  openPlayStore(){
-    window.open("https://play.google.com/store/apps/details?id=com.lntedutech.collegeconnect","playystore");
+  openPlayStore() {
+    window.open('https://play.google.com/store/apps/details?id=com.lntedutech.collegeconnect', 'playystore');
   }
 }

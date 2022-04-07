@@ -66,18 +66,12 @@
           </div>
         </ng-template>
       </owl-carousel-o>
-        <!-- <figure class="obstacles">
-          <img src="https://assets.lntedutech.com/EntryImage.svg" alt="" />
-        </figure> -->
       </div>
       <div class="downloadApp d-flex justify-content-center align-items-center">
         <span>{{'Download our Mobile app'| translate}}</span>
         <figure class="googlePlay">
           <img alt="" src="https://assets.lntedutech.com/googlePlay.png">
         </figure>
-        <!-- <figure class="appStore">
-          <img src="assets/learner/appStore.png" alt="" />
-        </figure> -->
       </div>
     </div>
     <div class="loginSection">
@@ -142,10 +136,6 @@
                 </div>
               </button>
             </div>
-           <!-- <div class="dontHaveAccount">
-              <span>{{'Don\'t have an account yet?' | translate}} <a class="signup" (click)="viewSignin()">
-                  {{'Sign up' | translate }}</a></span>
-            </div> -->
           </form>
           <div class="info-card animate" *ngIf="infoClose">
             <div class="info-bodyWrapper">
@@ -247,9 +237,6 @@
               <mat-error class="error" *ngIf="registerForm.get('mobile').hasError('minlength') || registerForm.get('mobile').hasError('pattern')">
                 {{'Mobile number is invalid or must be 10 digits' | translate }}
               </mat-error>
-              <!-- <mat-error class="error" *ngIf="registerForm.get('mobile').hasError('pattern')">
-                {{'Mobile number is invalid' | translate }}
-              </mat-error> -->
             </mat-form-field>
 
             <div class="row">
@@ -283,13 +270,8 @@
             </div>
           </form>
         </div>
-        <!-- <div>Language:&nbsp;<select [(ngModel)]="selectedLanguage" (change)="onSelection()">
-          <option value="en" selected>English</option>
-          <option value="ta">Tamil</option>
-        </select></div> -->
       </div>
     </div>
   </mat-card>
 </div>
 <sample></sample>
-<!-- <div>App version: {{env_Version}}</div> -->

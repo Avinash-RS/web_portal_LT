@@ -80,8 +80,6 @@
           <ng-container  *ngFor="let moduleItem of apidata let i = index">
           <div *ngIf="moduleItem.week !== apidata[i-1]?.week" [ngClass]="moduleItem.overAllPercentage>0?moduleItem.overAllPercentage>99?'bar-complete':'bar-inprogress':'bar-inprogress'">
             <div class="loopClass">
-            <!-- <mat-progress-bar [mode]="mode" [value]="moduleItem.overAllPercentage" [bufferValue]="bufferValue">
-            </mat-progress-bar> -->
               <ng-container *ngFor="let moduleItem of apidata;let number = index">
                 <div class="innerLoop" *ngIf="moduleItem.week === apidata[i]?.week">
             <mat-accordion>
@@ -110,7 +108,6 @@
                         </div>
                         <div>
                           <div class="week-text">{{'Knowledge Check' | translate}}</div>
-                          <!-- <div>{{moduleItem.knowledgeCount.completed+'/'+moduleItem.knowledgeCount.total}}</div> -->
                           <div>-- / --</div>
                         </div>
                         <div>
@@ -414,38 +411,10 @@
       <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType"></canvas>
     </div>
   </div>
-    <!-- <div class="col d-flex mt-3 justify-content-center">
-      <div class="col-5 content-border">
-        <div class="d-flex left-content">
-          <div class="hours">68</div>
-          <div class="hrs">hrs</div>
-          <div class="week-percentage color-green"><em class="lxp-Up"></em><span class="percentage-text">12%</span>
-          </div>
-        </div>
-        <div class="left-week">This Week</div>
-      </div>
-      <div class="col-6">
-        <div class="d-flex right-content">
-          <div class="hours">43</div>
-          <div class="hrs">hrs</div>
-          <div class="week-percentage color-red"><em class="lxp-Down"></em><span class="percentage-text">8%</span></div>
-        </div>
-        <div class="right-week">Last Week</div>
-      </div>
-    </div> -->
-    <!-- <div class="d-flex growth">
-      <div>You have a </div>
-      <div class="text-green">&nbsp;12% learning growth</div>
-    </div> -->
     <div class="col mt-4">
-      <!-- <div class="col">
-        <div class="statistics">Course Statistics</div>
-      </div> -->
       <div class="col d-flex">
         <div class="numbers">87%</div>
         <div class="mr-2 numbers-text">{{'completion' | translate}} <br /> {{'Rate' | translate}}</div>
-        <!-- <div class="numbers">35</div>
-        <div class="numbers-text">Questions <br />Asked</div> -->
       </div>
       <div class="col d-flex mt-3">
         <div class="font-weight-bold">24&nbsp;</div>

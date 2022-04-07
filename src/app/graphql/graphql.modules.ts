@@ -33,7 +33,7 @@ const defaultOptions: DefaultOptions = {
 })
 
 export class GraphqlModule {
-  secretKey = "(!@#Passcode!@#)";
+  secretKey = '(!@#Passcode!@#)';
   envWcaApi: any = environment.wcaapiurl;
   envApi: any = environment.apiUrl;
   envApiImg: any = environment.apiUrlImg;
@@ -44,19 +44,18 @@ export class GraphqlModule {
     const middleware = new ApolloLink((operation, forward) => {
 
       // Check for token
-      const token = localStorage.getItem('token')||sessionStorage.getItem('token');
-      var userDetails = JSON.parse(localStorage.getItem('UserDetails'))
+      const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+      var userDetails = JSON.parse(localStorage.getItem('UserDetails'));
       // tslint:disable-next-line:max-line-length
       // const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoibHhwYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJ1c2VyX2lkIjoiMTIzNGFiIiwic2VjX2tleSI6IjEyM0FhIUAjIiwiaWF0IjoxNTk4NDUwMjk3LCJleHAiOjE1OTg0NzE4OTcsImlzcyI6Imh0dHBzOi8vd3d3LmxhcnNlbnRvdWJyby5jb20vIn0.y9YcBFZc43QtAP2Wep7rSI1wHtIMkTBeseAb-n0qvpc'
       if (!token) { return forward(operation); }
 
       operation.setContext({
-        headers: new HttpHeaders({ 
-          Authorization: 'Bearer '+token,
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token,
           requestId: userDetails['user_id']
          }),
       });
-      
       return forward(operation);
     });
 

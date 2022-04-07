@@ -25,7 +25,7 @@ import { NgOtpInputModule } from 'ng-otp-input';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { CalendarModule } from 'angular-calendar';
-import { PopoverModule } from "ngx-smart-popover";
+import { PopoverModule } from 'ngx-smart-popover';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { InstructorLedComponent } from './pages/instructor-led/instructor-led.component';
 import { DiscussionForumComponent } from './pages/discussion-forum/discussion-forum.component';
@@ -33,7 +33,7 @@ import { ActivitiesComponent } from './pages/activities/activities.component';
 import { AssignmentComponent } from './pages/assignment/assignment.component';
 import { ProjectMobileComponent } from './pages/project-mobile/project-mobile.component';
 import { PerformancePageMobileComponent } from './pages/performance-page-mobile/performance-page-mobile.component';
-import { CourseGalleryComponent } from './pages/course-gallery/course-gallery.component'
+import { CourseGalleryComponent } from './pages/course-gallery/course-gallery.component';
 import { AskQuestionsComponent } from './pages/ask-questions/ask-questions.component';
 import { CourseReportComponent } from './pages/course-report/course-report.component';
 import { CalendarActivityComponent } from './pages/calendar-activity/calendar-activity.component';
@@ -45,7 +45,6 @@ import { UpskillCalendarComponent } from './pages/upskill-calendar/upskill-calen
 import { CalendarFilterComponent } from './pages/calendar-filter/calendar-filter.component';
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
-  
 }
 
 const routes: Routes = [
@@ -111,7 +110,7 @@ const routes: Routes = [
     component: QuestionanswerComponent,
     data: { animation: 'questionanswer', title: 'Question and Answer'}
   }
-]
+];
 @NgModule({
   declarations: [
     CoursedetailsComponent,
