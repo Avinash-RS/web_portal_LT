@@ -78,8 +78,8 @@ export class CustomDateFormatter extends CalendarDateFormatter {
 })
 
 export class LearnerNewMyCourseComponent implements OnInit {
-  @ViewChild('completedTopics', { read: DragScrollComponent }) ds: DragScrollComponent;
-  @ViewChild('inProgress', { read: DragScrollComponent }) dsInProgress: DragScrollComponent;
+  @ViewChild('completedTopics', { read: DragScrollComponent, static: false }) ds: DragScrollComponent;
+  @ViewChild('inProgress', { read: DragScrollComponent, static: false }) dsInProgress: DragScrollComponent;
   showJobRole = false;
   isReadMore = true;
   show = true;
@@ -123,7 +123,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
   };
   weekDaysdat: any;
   userDetailes: any;
-  @ViewChild('infoPopup') infoPopWindow: TemplateRef<any>;
+  @ViewChild('infoPopup', { static: true }) infoPopWindow: TemplateRef<any>;
   availableCource: any;
   screenWidth: number;
   keyboardUp: boolean = true;

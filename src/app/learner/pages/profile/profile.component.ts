@@ -24,8 +24,8 @@ import { ToastrService } from 'ngx-toastr';
 // AFTER restructure - Mythreyi
 
 export class ProfileComponent implements OnInit {
-  @ViewChild('passwordDialog') passwordDialog: TemplateRef<any>;
-  @ViewChild('fileInput') fileInput;
+  @ViewChild('passwordDialog', { static: true }) passwordDialog: TemplateRef<any>;
+  @ViewChild('fileInput', { static: true }) fileInput;
   blobKey = environment.blobKey;
   loader: boolean = false;
   constructor(public translate: TranslateService,

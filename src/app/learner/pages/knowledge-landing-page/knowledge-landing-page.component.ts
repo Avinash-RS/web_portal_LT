@@ -14,7 +14,7 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./knowledge-landing-page.component.scss']
 })
 export class KnowledgeLandingPageComponent implements OnInit {
-  @ViewChild(DragScrollComponent) ds: DragScrollComponent;
+  @ViewChild(DragScrollComponent, { static: true }) ds: DragScrollComponent;
   resourceParams: any;
   showSkeleton = true;
   topicList = [

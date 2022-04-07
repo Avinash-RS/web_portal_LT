@@ -197,36 +197,36 @@
     border: 1px solid grey;
 }
 
-/deep/ .angular-editor-button[title="Undo"],
-/deep/ .angular-editor-button[title="Redo"],
-/deep/ .angular-editor-button[title="Strikethrough"],
-/deep/ .angular-editor-button[title="Superscript"],
-/deep/ .angular-editor-select[title="Formatting"],
-/deep/ .angular-editor-button[title="Font Name"],
-/deep/ .angular-editor-button[title="Subscript"],
-/deep/ .angular-editor-button[title="Justify Left"],
-/deep/ .angular-editor-button[title="Justify Center"],
-/deep/ .angular-editor-button[title="Justify Right"],
-/deep/ .angular-editor-button[title="Justify Full"],
-/deep/ .angular-editor-button[title="Indent"],
-/deep/ .angular-editor-button[title="Outdent"],
-/deep/ .angular-editor-button[title="Heading"],
-/deep/ .angular-editor-select[title="Font Name"],
-/deep/ .angular-editor-button[title="Font Size"],
-/deep/ .angular-editor-button[title="Text Color"],
-/deep/ .angular-editor-button[title="Custom Classes"],
-/deep/ .angular-editor-button[title="Background Color"],
-/deep/ .angular-editor-button[title="Unlink"],
-/deep/ .angular-editor-button[title="Clear Formatting"],
-/deep/ .angular-editor-button[title="HTML Code"],
-/deep/ .angular-editor-button[title="Insert Video"],
-/deep/ .angular-editor-button[title="Toggle Editor Mode"],
-/deep/ .angular-editor-button[title="Remove Format"],
-/deep/ .angular-editor-button[title="Horizontal Line"] {
+::ng-deep .angular-editor-button[title="Undo"],
+::ng-deep .angular-editor-button[title="Redo"],
+::ng-deep .angular-editor-button[title="Strikethrough"],
+::ng-deep .angular-editor-button[title="Superscript"],
+::ng-deep .angular-editor-select[title="Formatting"],
+::ng-deep .angular-editor-button[title="Font Name"],
+::ng-deep .angular-editor-button[title="Subscript"],
+::ng-deep .angular-editor-button[title="Justify Left"],
+::ng-deep .angular-editor-button[title="Justify Center"],
+::ng-deep .angular-editor-button[title="Justify Right"],
+::ng-deep .angular-editor-button[title="Justify Full"],
+::ng-deep .angular-editor-button[title="Indent"],
+::ng-deep .angular-editor-button[title="Outdent"],
+::ng-deep .angular-editor-button[title="Heading"],
+::ng-deep .angular-editor-select[title="Font Name"],
+::ng-deep .angular-editor-button[title="Font Size"],
+::ng-deep .angular-editor-button[title="Text Color"],
+::ng-deep .angular-editor-button[title="Custom Classes"],
+::ng-deep .angular-editor-button[title="Background Color"],
+::ng-deep .angular-editor-button[title="Unlink"],
+::ng-deep .angular-editor-button[title="Clear Formatting"],
+::ng-deep .angular-editor-button[title="HTML Code"],
+::ng-deep .angular-editor-button[title="Insert Video"],
+::ng-deep .angular-editor-button[title="Toggle Editor Mode"],
+::ng-deep .angular-editor-button[title="Remove Format"],
+::ng-deep .angular-editor-button[title="Horizontal Line"] {
     display: none !important;
 }
 
-/deep/ .angular-editor-toolbar .angular-editor-toolbar-set {
+::ng-deep .angular-editor-toolbar .angular-editor-toolbar-set {
     display: inline-block;
     /* border-radius: 5px; */
     background-color: transparent !important;
@@ -236,20 +236,20 @@
     margin-bottom: none !important;
 }
 
-/deep/ .angular-editor-toolbar .angular-editor-toolbar-set select {
+::ng-deep .angular-editor-toolbar .angular-editor-toolbar-set select {
     display: none !important;
 }
 
-/deep/ .angular-editor {
+::ng-deep .angular-editor {
     border-right: none !important;
 }
 
-/deep/ .angular-editor img {
+::ng-deep .angular-editor img {
     width: 100% !important;
 }
 
 @media only screen and(min-width: 770px) {
-    /deep/ .angular-editor img {
+    ::ng-deep .angular-editor img {
         width: 70% !important;
     }
 }

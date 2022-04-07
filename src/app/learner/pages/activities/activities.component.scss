@@ -149,11 +149,11 @@
 .back :hover {
   color: $lxp-theme-green !important;
 }
-// :host /deep/ .mat-ink-bar {
+// :host ::ng-deep .mat-ink-bar {
 //     height: 2px !important;
 //     background-color: $lxp-theme-green !important;
 //   }
-// :host /deep/  .mat-expansion-panel:not([class*='mat-elevation-z']) {
+// :host ::ng-deep  .mat-expansion-panel:not([class*='mat-elevation-z']) {
 //      box-shadow: none !important;
 //      border: 1px solid $color-border !important;
 // }

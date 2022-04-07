@@ -391,22 +391,22 @@
 }
 
 .throughTPO {
-  /deep/ .mat-checkbox-frame {
+  ::ng-deep .mat-checkbox-frame {
     border-radius: 100px !important;
   }
 
-  /deep/ &.mat-checkbox-checked .mat-checkbox-background {
+  ::ng-deep &.mat-checkbox-checked .mat-checkbox-background {
     background-color: white;
     border: 1px solid $lxp-theme-green ;
     border-radius: 100px !important;
   }
 
-  /deep/ .mat-checkbox-checkmark-path {
+  ::ng-deep .mat-checkbox-checkmark-path {
     stroke: $lxp-theme-green  !important;
     border-radius: 100px !important;
   }
 }
-/deep/ .mat-pseudo-checkbox-checked, .mat-pseudo-checkbox-indeterminate, .mat-accent .mat-pseudo-checkbox-checked, .mat-accent .mat-pseudo-checkbox-indeterminate {
+::ng-deep .mat-pseudo-checkbox-checked, .mat-pseudo-checkbox-indeterminate, .mat-accent .mat-pseudo-checkbox-checked, .mat-accent .mat-pseudo-checkbox-indeterminate {
   background: $lxp-theme-green !important;
 }
 
@@ -1062,7 +1062,7 @@ hr {
   padding: 6px;
 }
 
-/deep/ .swal2-styled.swal2-confirm {
+::ng-deep .swal2-styled.swal2-confirm {
   background-color: #1B4E9B !important;
   border-radius: 0 !important;
 }
