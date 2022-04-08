@@ -772,10 +772,11 @@ export class CoursedetailsComponent implements OnInit {
         let moduletopicApiData = data.message;
         body.childData = [...moduletopicApiData];
         if (modul === "start") {
+          let upskillurl = this.checkDetails.link
           this.topicInfo = moduletopicApiData[0];
           if(this.checkDetails.course_status == "completed"||this.checkDetails.link == ""){
             this.playURLConstructor(
-              this.topicInfo.link,
+              body.week!==1?upskillurl:this.topicInfo.link,
               body.module_name,
               this.topicInfo.topic_name,
               this.topicInfo.parent,
