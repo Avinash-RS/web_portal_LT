@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, Input, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
 import { CommonServicesService } from '@core/services/common-services.service';
@@ -15,7 +15,7 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './project-mobile.component.html',
   styleUrls: ['./project-mobile.component.scss']
 })
-export class ProjectMobileComponent implements OnInit {
+export class ProjectMobileComponent implements OnInit, OnDestroy {
 
   @ViewChild('uploadFile') uploadFile;
   @Input() projectDetailPageData: any;
@@ -91,7 +91,7 @@ export class ProjectMobileComponent implements OnInit {
               private dialog: MatDialog, private toastr: ToastrService,
               public route: Router,  private commonServices: CommonServicesService,
               private ngxLoader: NgxUiLoaderService, public translate: TranslateService) {
-                let lang = localStorage.getItem('language');
+                const lang = localStorage.getItem('language');
                 this.translate.use(lang ? lang : 'en') ;
                 const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.data);
@@ -157,7 +157,7 @@ export class ProjectMobileComponent implements OnInit {
   }
 
   uploadDoc(event, project, submitAction) {
-    if (project?.projectActivity.videodetails.length == 3) {
+    if (project?.projectActivity.videodetails.length === 3) {
       this.toastr.warning('You are allowed only to upload a maximum of 3 files');
       if (this.uploadFile) {
         this.uploadFile.nativeElement.value = '';
@@ -165,7 +165,7 @@ export class ProjectMobileComponent implements OnInit {
       return false;
     }
     const filePath = event.target.files[0].name;
-    var re = /(\.jpg|\.jpeg|\.png|\.pdf|\.mp4|\.mov)$/i;
+    const re = /(\.jpg|\.jpeg|\.png|\.pdf|\.mp4|\.mov)$/i;
     if (!re.exec(filePath)) {
       this.toastr.warning('Upload a valid file format');
       if (this.uploadFile) {
@@ -216,7 +216,7 @@ export class ProjectMobileComponent implements OnInit {
         const batchEndDate = new Date(element.projectActivity.batchenddate);
         element.batchEndDate = moment(batchEndDate).format('DD-MM-YYYY HH:mm');
         element.submitType = moment().isSameOrBefore(batchEndDate);
-        if (moment().format('DD-MM-YYYY') == moment(batchEndDate).format('DD-MM-YYYY')) {
+        if (moment().format('DD-MM-YYYY') === moment(batchEndDate).format('DD-MM-YYYY')) {
           element.submitType = true;
         }
         // if (moment().format('DD-MM-YYYY HH:mm') <= element.batchEndDate) {
@@ -292,11 +292,11 @@ export class ProjectMobileComponent implements OnInit {
       this.currentFile = this.selectfile[i];
       this.fileSize = this.currentFile.size;
       this.type = this.selectfile[i].type;
-      var sizeData = this.currentFile.size / 1024;
-      var sizeDatakb = sizeData / 1024;
-      var finalSize = sizeDatakb.toFixed(2);
+      const sizeData = this.currentFile.size / 1024;
+      const sizeDatakb = sizeData / 1024;
+      const finalSize = sizeDatakb.toFixed(2);
       this.splitSize = finalSize.split('.');
-      if (this.splitSize[0] == 0) {
+      if (this.splitSize[0] === 0) {
         this.fileTotalSize = sizeData.toFixed(2) + ' KB';
         this.verfyingCondition = sizeDatakb.toFixed(2);
       } else {
@@ -370,7 +370,7 @@ export class ProjectMobileComponent implements OnInit {
             }]
 
           };
-          let checkRes = await this.insertActivityRecordProject(this.jsonData);
+          const checkRes = await this.insertActivityRecordProject(this.jsonData);
           this.toastr.success(data.message);
           this.ngxLoader.stop();
           this.showSubmittedon = true;

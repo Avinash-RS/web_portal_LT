@@ -1038,6 +1038,7 @@ mat-header-cell,
           background: #D6D6D6;
           display: block;
           -webkit-backface-visibility: visible;
+          backface-visibility: visible;
           transition: opacity .2s ease;
           border-radius: 0;
         }

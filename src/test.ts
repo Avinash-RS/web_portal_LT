@@ -37,7 +37,8 @@ const context = require.context('./app/learner/pages/login', true, /login.compon
 
 // const context = require.context('./app/learner/pages/landingpage', false, /landingpage.component\.spec\.ts$/);
 // const context = require.context('./app/core/shared/wishlist-courses', false, /wishlist-courses.component\.spec\.ts$/);
-// const context = require.context('./app/core/shared/list-view-course-component', false, /list-view-course-component.component\.spec\.ts$/);
+// const context = require.context('./app/core/shared/list-view-course-component',
+// false, /list-view-course-component.component\.spec\.ts$/);
 
 
 // const context = require.context('./app/core/shared/alert-component', false, /alert-component.component\.spec\.ts$/);
