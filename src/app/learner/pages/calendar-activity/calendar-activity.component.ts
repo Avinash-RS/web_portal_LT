@@ -1,16 +1,11 @@
 import { Component, OnInit, Injectable, Input } from '@angular/core';
-import { startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours} from 'date-fns';
 import { formatDate } from '@angular/common';
 import { CalendarEvent, CalendarView, CalendarMonthViewDay, DateFormatterParams, CalendarDateFormatter, CalendarEventTitleFormatter } from 'angular-calendar';
-import { getmoduleData } from '@learner/services/operations/learner_query';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import * as moment from 'moment';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { getWeekYearWithOptions } from 'date-fns/fp';
-import { TranslateService } from '@ngx-translate/core';
 @Injectable()
 export class CustomDateFormatter extends CalendarDateFormatter {
 
@@ -189,15 +184,17 @@ export class CalendarActivityComponent implements OnInit {
   }
   getLearnerActivity(view, selectedDate, day?: CalendarMonthViewDay) {
     this.showSkeleton = true;
+    let courseValueDetail;
+    let activityValueDetail;
     if (this.courseValue === 'All') {
-      const courseValue = '';
+      courseValueDetail = '';
    } else {
-    courseValue = this.courseValue;
+    courseValueDetail = this.courseValue;
    }
     if (this.activityValue === 'All') {
-      const activityValue = '';
+      activityValueDetail = '';
     } else {
-      activityValue = this.activityValue;
+      activityValueDetail = this.activityValue;
     }
     if (selectedDate.date) {
       this.daySelected = true;
@@ -206,7 +203,7 @@ export class CalendarActivityComponent implements OnInit {
     }
     const dateValue = moment(selectedDate).format('YYYY-MM-DD');
     this.activityData = [];
-    this.learnerService.getLearnerActivity(courseValue, this.status, view, dateValue, activityValue,
+    this.learnerService.getLearnerActivity(courseValueDetail, this.status, view, dateValue, activityValueDetail,
        this.userDetails.user_id).subscribe((result: any) => {
       if (result?.data?.getActivityCalendar?.success) {
         this.activityData = result?.data?.getActivityCalendar?.data;
@@ -253,8 +250,9 @@ export class CalendarActivityComponent implements OnInit {
         }
       });
     }
+    let view;
     if (this.daySelected) {
-      const view = 'day';
+      view = 'day';
     } else {
       view = 'month';
     }
