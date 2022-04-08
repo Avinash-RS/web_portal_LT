@@ -218,7 +218,7 @@
 
             <div class="performRightContent">
               <span class="f_wt_600 statusTxt" *ngIf="perform.performActivity.submit_status == 'notsubmitted'">
-                <span class="dot"></span><!-- 'notsubmitted' --> {{'Yet to submit' | translate}}</span>
+                <span class="dot"></span> {{'Yet to submit' | translate}}</span>
 
               <span class="f_wt_600 submitstatus" *ngIf=" perform.performActivity.submit_status == 'submitted'">
                 <span class="submitdot"></span>{{'Submitted' | translate}}</span>
@@ -259,15 +259,8 @@
                         <mat-card class="p-0 carouselCard" (click)="playVideo(projectPreviewDialog, videoDialog, material, material.doc_type)">
                           <div class="row ml-0 mr-0 carouselRow1">
                             <div class="col-12 m-auto">
-                              <!-- <mat-icon class="imageIcon"
-                                *ngIf="material.doc_type =='image/jpeg'  || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'">
-                                photo_size_select_actual</mat-icon> -->
                                 <em class="lxp-photo imageIcon"   *ngIf="material.doc_type =='image/jpeg'  || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'"></em>
-                              <!-- <mat-icon class="imageIcon" *ngIf="material.doc_type =='video/mp4' || material.doc_type =='video/quicktime'">play_circle_outline
-                              </mat-icon> -->
                               <em class="lxp-PlayCircle imageIcon" *ngIf="material.doc_type =='video/mp4' || material.doc_type =='video/quicktime'"></em>
-                              <!-- <i class="fa fa-file-pdf-o pdfIcon" *ngIf="material.doc_type =='application/pdf'"
-                                aria-hidden="true"></i> -->
                                 <em class="lxp-pdf pdfIcon" *ngIf="material.doc_type =='application/pdf'"></em>
                             </div>
                           </div>
@@ -447,8 +440,8 @@
 
           <!-- Project Tab Desktop -->
           <div class="d-flex justify-content-between">
-            <div class="projectActivityDetails" [ngClass]="project.projectActivity.showLearnerList ? 'activityhalfWidth' : 'activityFullWidth'">
-              <div class="d-flex justify-content-between">
+            <div class="projectActivityDetailsWrapper" [ngClass]="project.projectActivity.showLearnerList ? 'activityhalfWidth' : 'activityFullWidth'">
+              <div class="d-flex justify-content-between projectActivityDetails">
                 <div class="projectLeftContent">
                   <div class="topic text-left d-flex">
                     <mat-icon class="assignIcon">assignment</mat-icon>
@@ -471,31 +464,39 @@
                     </button>
                     <span class="teamName" *ngIf="project.projectActivity.groupname && !project.projectActivity.showLearnerList">
                       {{project.projectActivity.groupname}} ({{project.projectActivity.groupDetails.length}})
-                    </span>&nbsp;
-                    <button mat-mini-fab class="arrBtn" *ngIf="!project.projectActivity.showLearnerList"
-                      (click)="project.projectActivity.showLearnerList = !project.projectActivity.showLearnerList">
-                      <mat-icon class="arrBack">arrow_back</mat-icon>
-                    </button>
-                  </div>
-                  <div class="text-right activityStatus">
-                    <span class="f_wt_600 alignRight status" *ngIf="(project.projectActivity.submitAction !== 'submit' || project.projectActivity.submit_status == 'notsubmitted') && project.projectActivity.grade_status != 'Evaluated'">
-                      <span class="dot"></span>{{'Yet to submit' | translate}}
                     </span>
-                    <span class="f_wt_600 alignRight projectSubmitstatus submitted" *ngIf="project.projectActivity.submitAction == 'submit' && project.projectActivity.grade_status == 'Not Evaluated'">
-                      <span class="submitdot"></span>{{'Submitted' | translate}}
-                    </span>
-                    <span class="f_wt_600 alignRight graded" *ngIf="project.projectActivity.grade_status == 'Evaluated'">
-                      <span class="gradedot"></span>{{'Graded' | translate}}
-                    </span>
-                  </div>
-                  <div class="projTotalScore">
-                    <div class="text-right">
-                      <span class="totscore">
-                        {{'Total score:' | translate}} <span *ngIf="!project.projectActivity.score_mark">-</span> <span *ngIf="project.projectActivity.score_mark">{{project.projectActivity.score_mark}}</span>
-                        /{{project.projectActivity.total_mark}}</span>
+                    <div class="popoverInfoFinal">
+                      <button mat-mini-fab class="arrBtn">
+                        <mat-icon class="arrBack">arrow_back</mat-icon>
+                      </button>
+                      <div class="popoverContainer">
+                        <ul class="list-group" *ngFor="let learner of project.projectActivity.groupDetails">
+                          <li class="list-group-item">{{learner.name}}</li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
-                  <div class="d-flex justify-content-end projDate">
+                  <div class="statusScore d-flex">
+                    <div class="text-right activityStatus">
+                      <span class="f_wt_600 alignRight status" *ngIf="(project.projectActivity.submitAction !== 'submit' || project.projectActivity.submit_status == 'notsubmitted') && project.projectActivity.grade_status != 'Evaluated'">
+                        <span class="dot"></span>{{'Yet to submit' | translate}}
+                      </span>
+                      <span class="f_wt_600 alignRight projectSubmitstatus submitted" *ngIf="project.projectActivity.submitAction == 'submit' && project.projectActivity.grade_status == 'Not Evaluated'">
+                        <span class="submitdot"></span>{{'Submitted' | translate}}
+                      </span>
+                      <span class="f_wt_600 alignRight graded" *ngIf="project.projectActivity.grade_status == 'Evaluated'">
+                        <span class="gradedot"></span>{{'Graded' | translate}}
+                      </span>
+                    </div>
+                    <div class="projTotalScore">
+                      <div class="text-right">
+                        <span class="totscore">
+                          {{'Total score:' | translate}} <span *ngIf="!project.projectActivity.score_mark">-</span> <span *ngIf="project.projectActivity.score_mark">{{project.projectActivity.score_mark}}</span>
+                          /{{project.projectActivity.total_mark}}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="d-flex projDate">
                     <div class="">
                       <span class="font-weight-bold">{{'Start date:' | translate}}</span>
                       <span class="textGrayColor1"> {{project.projectActivity.activitystartdate | date:'MMM dd, yyyy hh:mm a'}}</span>
@@ -511,8 +512,8 @@
               <!-----------------------------Materials for activity--------------------->
               <div class="panel1" *ngIf="project.isOpen">
                 <hr>
-                <div class="row">
-                  <div class="col-md-8 col-sm-12 col-12 second">
+                <div class="projectTab d-flex align-items-start">
+                  <div class="leftContainer">
                     <div style="margin-bottom: 10px;" class="f_size_16 f_wt_600">
                       {{'Materials for activity' | translate}} ({{project.projectActivity.materialDetails.length}})
                     </div>
@@ -525,14 +526,9 @@
                             <mat-card class="p-0 carouselCard" (click)="projectPreviewDoc(projectPreviewDialog, videoDialog, material, 'material')">
                               <div class="row ml-0 mr-0 carouselRow1">
                                 <div class="col-12 m-auto">
-                                  <!-- <mat-icon class="imageIcon" *ngIf="material.doc_type =='image/jpeg'  || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'">
-                                    photo_size_select_actual</mat-icon> -->
-                                    <em class="lxp-photo imageIcon" *ngIf="material.doc_type =='image/jpeg'  || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'"></em>
-                                  <!-- <mat-icon class="imageIcon" *ngIf="material.doc_type =='video/mp4' || material.doc_type =='video/quicktime'">play_circle_outline</mat-icon> -->
+                                  <em class="lxp-photo imageIcon" *ngIf="material.doc_type =='image/jpeg'  || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'"></em>
                                   <em class="lxp-PlayCircle imageIcon" *ngIf="material.doc_type =='video/mp4' || material.doc_type =='video/quicktime'"></em>
-                                  <!-- <i class="fa fa-file-pdf-o pdfIcon" *ngIf="material.doc_type =='application/pdf' || material.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"
-                                    aria-hidden="true"></i> -->
-                                    <em class="lxp-pdf pdfIcon" *ngIf="material.doc_type =='application/pdf' || material.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"></em>
+                                  <em class="lxp-pdf pdfIcon" *ngIf="material.doc_type =='application/pdf' || material.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"></em>
                                 </div>
                               </div>
                               <div class="row ml-0 mr-0 carouselRow">
@@ -557,7 +553,7 @@
                     </div>
                   </div>
 
-                  <div class="col-md-4 col-sm-12 col-12 third" *ngIf="project.projectActivity.grade_status !== 'Evaluated'">
+                  <div class="rightContainer" *ngIf="project.projectActivity.grade_status !== 'Evaluated'">
                     <div class="f_size_16 f_wt_600 align-center work">{{'Your work' | translate}}</div>
                     <div [ngClass]="project.projectActivity.showLearnerList ? 'box-0-3' : 'box-0-2'">
                       <div class="fileData ml-auto mr-auto mb-3" *ngFor="let item of project.projectActivity.videodetails">
@@ -591,8 +587,8 @@
               </div>
               <!-------------------------------------Your files--------------------------------------->
               <div class="panel1 yourSubmissions" *ngIf="project.isOpen && project.projectActivity.grade_status == 'Evaluated'">
-                <div class="row">
-                  <div [ngClass]="project.projectActivity.showLearnerList ? 'col-xl-7 col-lg-7 col-md-7 col-sm-12 col-12' : 'col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12'">
+                <div class="projectTab d-flex align-items-start">
+                  <div class="leftContainer" [ngClass]="project.projectActivity.showLearnerList ? 'col-xl-7 col-lg-7 col-md-7 col-sm-12 col-12' : 'col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12'">
                     <div class="f_size_16 f_wt_600">{{'Your submissions' | translate}} ({{project.projectActivity.videodetails.length}})</div>
                     <div class="submissionsWrapper">
                       <drag-scroll #navSubmissions (reachesLeftBound)="leftBoundStatSubmissions($event)" (reachesRightBound)="rightBoundStatSubmissions($event)" class="trendingCategoriesScrollActivity" [scrollbar-hidden] = true [drag-scroll-y-disabled] = true>
@@ -690,7 +686,7 @@
                       </ng-template>
                     </owl-carousel-o> -->
                   </div>
-                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 d-flex justify-content-end flex-column">
+                  <div class="rightContainer d-flex justify-content-end flex-column">
                     <div class="" *ngIf="project?.projectActivity?.comments && project.projectActivity.comments!=''">
                       <div class="text-left">
                         <p class="feedBackTxt">{{'Feedback' | translate}}</p>
@@ -711,7 +707,7 @@
             </div>
 
             <!------------------------------------Learner list------------------------------->
-            <div class="learnerList first" *ngIf="project.projectActivity.showLearnerList">
+            <!-- <div class="learnerList first" *ngIf="project.projectActivity.showLearnerList">
               <div class="align-center groupData">
                 <button mat-mini-fab class="groupBtn" *ngIf="project.projectActivity.showLearnerList">
                   <mat-icon class="grpIcon">group</mat-icon>
@@ -724,13 +720,13 @@
                   <mat-icon class="arrBack">arrow_forward</mat-icon>
                 </button>
               </div>
-              <!-- </div> -->
+
               <div class="list learnerData">
                 <ul class="list-group" *ngFor="let learner of project.projectActivity.groupDetails">
                   <li class="list-group-item">{{learner.name}}</li>
                 </ul>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </ng-container>
