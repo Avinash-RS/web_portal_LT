@@ -168,12 +168,12 @@ export class CalendarActivityComponent implements OnInit {
       setTimeout(() => {
         const eventsParent = document.querySelectorAll('.cal-events');
         eventsParent.forEach((element: any) => {
-          var children = Array.from(element.children);
-          var duplicateColor = [];
+          let children = Array.from(element.children);
+          const duplicateColor = [];
           children = children.filter((dayEvent, index, self) => {
-            var style = window.getComputedStyle(dayEvent as HTMLElement);
-            var color = style.getPropertyValue('background-color');
-            var found = duplicateColor.find((element) => {
+            const style = window.getComputedStyle(dayEvent as HTMLElement);
+            const color = style.getPropertyValue('background-color');
+            const found = duplicateColor.find((element) => {
               return element === color;
             });
             if (found) {
@@ -190,12 +190,12 @@ export class CalendarActivityComponent implements OnInit {
   getLearnerActivity(view, selectedDate, day?: CalendarMonthViewDay) {
     this.showSkeleton = true;
     if (this.courseValue === 'All') {
-      var courseValue = '';
+      const courseValue = '';
    } else {
     courseValue = this.courseValue;
    }
     if (this.activityValue === 'All') {
-      var activityValue = '';
+      const activityValue = '';
     } else {
       activityValue = this.activityValue;
     }
@@ -254,7 +254,7 @@ export class CalendarActivityComponent implements OnInit {
       });
     }
     if (this.daySelected) {
-      var view = 'day';
+      const view = 'day';
     } else {
       view = 'month';
     }
@@ -275,7 +275,7 @@ export class CalendarActivityComponent implements OnInit {
     if (this.monthView) {
       this.daySelection = this.monthView;
     }
-    this.getLearnerActivity(view, this.daySelection);
+    this.getLearnerActivity(this.view, this.daySelection);
     }
 
     launchAssignment(value) {
