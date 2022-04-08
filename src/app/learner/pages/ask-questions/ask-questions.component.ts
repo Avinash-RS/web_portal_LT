@@ -52,7 +52,7 @@ export class AskQuestionsComponent implements OnInit {
               public commonService: CommonServicesService
     // private ngxLoader: NgxUiLoaderService
   ) {
-    let lang = localStorage.getItem('language');
+    const lang = localStorage.getItem('language');
     this.translate.use(lang ? lang : 'en');
     this.screenWidth = window.innerWidth;
     const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
@@ -110,7 +110,7 @@ export class AskQuestionsComponent implements OnInit {
     this.commonService.getTOC(param).subscribe((data: any) => {
       if (data.success === true) {
         this.checkLevel = data.checkLevel;
-        let tmpData = data?.message;
+        const tmpData = data?.message;
         this.moduleTopicData = [];
         tmpData.forEach(element => {
           this.moduleTopicData.push(... element.childData);

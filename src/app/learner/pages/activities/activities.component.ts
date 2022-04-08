@@ -191,7 +191,7 @@ export class ActivitiesComponent implements OnInit {
               private ngxLoader: NgxUiLoaderService,
               public activateroute: ActivatedRoute,
               public translate: TranslateService) {
-    let lang = localStorage.getItem('language');
+    const lang = localStorage.getItem('language');
     this.translate.use(lang ? lang : 'en') ;
     console.log(route);
     if (this.gs.checkLogout()) {
@@ -215,11 +215,11 @@ export class ActivitiesComponent implements OnInit {
     var index;
     if (this.checkDetails?.activityType) {
       this.fromCalender = true;
-      if (this.checkDetails?.activityType == 'Assignment') {
+      if (this.checkDetails?.activityType === 'Assignment') {
         index = '0';
-      } else if (this.checkDetails?.activityType == 'Perform') {
+      } else if (this.checkDetails?.activityType === 'Perform') {
         index = '1';
-      } else if (this.checkDetails?.activityType == 'Lab Practical') {
+      } else if (this.checkDetails?.activityType === 'Lab Practical') {
         index = '3';
       } else {
         index = '2';
@@ -233,11 +233,11 @@ export class ActivitiesComponent implements OnInit {
       // tslint:disable-next-line:radix
       this.demo1TabIndex = parseInt(index);
     }
-    if (this.demo1TabIndex.toString() == '0') {
+    if (this.demo1TabIndex.toString() === '0') {
       this.getAssignmentmoduleData();
-    } else if (this.demo1TabIndex.toString() == '1') {
+    } else if (this.demo1TabIndex.toString() === '1') {
       this.getperformActivityData();
-    } else if (this.demo1TabIndex.toString() == '3') {
+    } else if (this.demo1TabIndex.toString() === '3') {
       this.getLabPracticeData();
     } else {
       this.getprojectActivityData();
@@ -382,7 +382,7 @@ export class ActivitiesComponent implements OnInit {
 
   goToCourse() {
     if (this.fromCalender) {
-      if (this.userDetail.org_type == 'Corporate') {
+      if (this.userDetail.org_type === 'Corporate') {
         this.route.navigate(['/Learner/upskillcalendar']);
       } else {
         this.route.navigate(['/Learner/calendaractivity']);
@@ -412,7 +412,7 @@ export class ActivitiesComponent implements OnInit {
       return false;
     }
     let fileSizeval = 0;
-    if (event.target.files.length == 1) {
+    if (event.target.files.length === 1) {
     for (let i = 0; i < event.target.files.length; i++) {
       fileSizeval += event.target.files[i].size;
       this.selectfile.push(event.target.files[i]);
@@ -436,7 +436,7 @@ export class ActivitiesComponent implements OnInit {
   // getLabPracticeData
   getLabPracticeData() {
     this.praticalsLoader = true;
-    var labdata = {
+    const labdata = {
       userId: this.userDetail.user_id,
       courseId: this.courseid,
       pagination: false,
@@ -457,7 +457,7 @@ export class ActivitiesComponent implements OnInit {
   }
 
   getEboxURL(eAttemptId) {
-      var labactivitydetails = {
+      const labactivitydetails = {
         username: this.userDetail.username,
         attempt_id: eAttemptId
       };
@@ -506,9 +506,9 @@ export class ActivitiesComponent implements OnInit {
               fileData.isOpen = false;
             }
             if (fileData.files.activitystartdate && fileData.files.activityenddate) {
-                  let date1 = new Date(fileData.files.activitystartdate);
+                  const date1 = new Date(fileData.files.activitystartdate);
                   fileData.files.assignmentStartDate = moment(date1);
-                  let date2 = new Date(fileData.files.activityenddate);
+                  const date2 = new Date(fileData.files.activityenddate);
                   fileData.files.assignmentEndDate = moment(date2);
                   if (moment() >= fileData.files.assignmentStartDate) {
                     fileData.files.enableView = true;
@@ -704,7 +704,7 @@ export class ActivitiesComponent implements OnInit {
           element.batchEndDate = moment(batchEndDate).format('DD-MM-YYYY HH:mm');
 
           element.submitType = moment().isSameOrBefore(batchEndDate);
-          if (moment().format('DD-MM-YYYY') == moment(batchEndDate).format('DD-MM-YYYY')) {
+          if (moment().format('DD-MM-YYYY') === moment(batchEndDate).format('DD-MM-YYYY')) {
             element.submitType = true;
           }
           // Activity Dates
@@ -766,7 +766,7 @@ export class ActivitiesComponent implements OnInit {
           element.batchEndDate = moment(batchEndDate).format('DD-MM-YYYY HH:mm');
 
           element.performSubmitType = moment().isSameOrBefore(batchEndDate);
-          if (moment().format('DD-MM-YYYY') == moment(batchEndDate).format('DD-MM-YYYY')) {
+          if (moment().format('DD-MM-YYYY') === moment(batchEndDate).format('DD-MM-YYYY')) {
             element.performSubmitType = true;
           }
 
@@ -814,7 +814,7 @@ export class ActivitiesComponent implements OnInit {
       var sizeDatakb = sizeData / 1024;
       var finalSize = sizeDatakb.toFixed(2);
       this.splitSize = finalSize.split('.');
-      if (this.splitSize[0] == 0) {
+      if (this.splitSize[0] === 0) {
         this.fileTotalSize = sizeData.toFixed(2) + ' KB';
         this.verfyingCondition = sizeDatakb.toFixed(2);
       } else {
@@ -887,7 +887,7 @@ export class ActivitiesComponent implements OnInit {
             }]
 
           };
-          let checkRes = await this.insertActivityRecordProject(this.jsonData);
+          const checkRes = await this.insertActivityRecordProject(this.jsonData);
           this.ngxLoader.stop();
           this.toastr.success(data.message);
           setTimeout(() => {
@@ -975,7 +975,7 @@ export class ActivitiesComponent implements OnInit {
 
   uploadDocument(event, perform) {
     // this.selectPerformfile.push(event.target.files[0] as File);
-    if (event.target.files.length == 1) {
+    if (event.target.files.length === 1) {
     const filePath = event.target.files[0].name;
     const allowedExtensions = /(\.mp4|\.mov|\.pdf)$/i;
     if (!allowedExtensions.exec(filePath)) {
@@ -985,8 +985,8 @@ export class ActivitiesComponent implements OnInit {
       }
       return;
     } else {
-      // tslint:disable-next-line: prefer-for-of
       let fileSize = 0;
+      // tslint:disable-next-line: prefer-for-of
       for (let i = 0; i < event.target.files.length; i++) {
         fileSize += event.target.files[i].size;
         this.selectPerformfile.push(event.target.files[i]);
@@ -1007,7 +1007,7 @@ export class ActivitiesComponent implements OnInit {
   }
 
   uploadDocuments(e, perform, performans) {
-    if (perform.videodetails.length == 3) {
+    if (perform.videodetails.length === 3) {
       this.toastr.warning('You are allowed only to upload a maximum of 3 files');
       if (this.videoInput) {
         this.videoInput.nativeElement.value = '';
@@ -1043,7 +1043,7 @@ export class ActivitiesComponent implements OnInit {
       var sizeDatakb = sizeData / 1024;
       var finalSize = sizeDatakb.toFixed(2);
       this.splitSize = finalSize.split('.');
-      if (this.splitSize[0] == 0) {
+      if (this.splitSize[0] === 0) {
         this.fileTotalSize = sizeData.toFixed(2) + ' KB';
         this.verfyingCondition = sizeDatakb.toFixed(2);
       } else {
@@ -1144,8 +1144,8 @@ export class ActivitiesComponent implements OnInit {
         }]
 
       };
-      let checkRes = await this.insertActivityRecord(this.jsonData);
-      if (this.selectPerformfile.length == len) {
+      const checkRes = await this.insertActivityRecord(this.jsonData);
+      if (this.selectPerformfile.length === len) {
         this.toastr.success(data.message);
         this.ngxLoader.stop();
         setTimeout(() => {
@@ -1313,7 +1313,7 @@ this.isDownloadLoader = true;
 fetch(url)
   .then(res => res.blob()) // Gets the response and returns it as a blob
   .then(blob => {
-    let objectURL = URL.createObjectURL(blob);
+    const objectURL = URL.createObjectURL(blob);
     const link = document.createElement('a');
     if (link.download !== undefined) {
       link.setAttribute('href', objectURL);

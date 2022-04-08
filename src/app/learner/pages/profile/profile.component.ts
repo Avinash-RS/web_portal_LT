@@ -35,7 +35,7 @@ export class ProfileComponent implements OnInit {
               private services: CommonServicesService,
               private toastr: ToastrService,
               private location: LocationStrategy) {
-    let lang = localStorage.getItem('language');
+    const lang = localStorage.getItem('language');
     this.translate.use(lang ? lang : 'en');
     if (this.gs.checkLogout()) {
       // this.urlImage = localStorage.getItem('user_img')
@@ -158,6 +158,7 @@ showNew = true;
   college_name;
   profileDetails;
   certificationDetails;
+  // tslint:disable-next-line: use-life-cycle-interface
   ngOnDestroy() {
   this.dialog.closeAll();
   }
@@ -226,8 +227,8 @@ showNew = true;
         this.profileDetails = data.data.view_profile.message && data.data.view_profile.message[0].profileObject;
         this.userData = data.data.view_profile.message[0];
         if (this.userData?.mobile_no) {
-          let mobNumber = this.userData.mobile_no;
-          let morphed = mobNumber[0] + mobNumber[1] + '******' + mobNumber[8] + mobNumber[9];
+          const mobNumber = this.userData.mobile_no;
+          const morphed = mobNumber[0] + mobNumber[1] + '******' + mobNumber[8] + mobNumber[9];
           this.userData.mobile_no = morphed;
         }
         if (this.profileDetails) {
@@ -272,7 +273,7 @@ showNew = true;
       this.toastr.warning('Gender cannot be empty');
       return false;
     }
-    if (this.profileForm.value.country == 'null' || this.profileForm.value.state == 'null' || this.profileForm.value.city_town == 'null') {
+    if (this.profileForm.value.country === 'null' || this.profileForm.value.state == 'null' || this.profileForm.value.city_town == 'null') {
       this.toastr.warning('Location details cannot be empty');
       return false;
     }
@@ -285,7 +286,7 @@ showNew = true;
       && this.profileForm.value.city_town) {
       this.profileForm.controls.progress.setValue(60);
     }
-    if (this.deptname || this.deptname == '') {
+    if (this.deptname || this.deptname === '') {
       this.profileForm.controls.deptName.setValue(this.deptname);
     }
 

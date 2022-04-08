@@ -79,7 +79,7 @@ export class DiscussionForumComponent implements OnInit {
   constructor(public Lservice: LearnerServicesService, public route: Router, private formBuilder: FormBuilder,
               private gs: GlobalServiceService, private toastr: ToastrService, private dialog: MatDialog,
               public cS: CommonServicesService, public translate: TranslateService) {
-                let lang = localStorage.getItem('language');
+                const lang = localStorage.getItem('language');
                 this.translate.use(lang ? lang : 'en');
                 const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
@@ -89,6 +89,7 @@ export class DiscussionForumComponent implements OnInit {
   }
 
   ngOnInit() {
+    // tslint:disable-next-line: deprecation
     if (!this.runnablePlatforms.includes(navigator.platform)) {
         this.isMobile = true;
       }
