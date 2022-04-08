@@ -1,12 +1,12 @@
 <app-header></app-header>
 <div class="breadcrum-content d-flex">
   <div class="commonBackStyle">
-    <i class="lxp-Arrow backArrow" (click)="getBack()"></i>
+    <em class="lxp-Arrow backArrow" (click)="getBack()"></em>
     <span (click)="getBack()">{{'Back' | translate}}</span>
     <div class="courseNameBreadcrum">
       <span class="pipeLine"> | </span>
       <span class="ledCourseName">{{course?.name}}</span>
-      <i class="lxp-Arrow"></i>
+      <em class="lxp-Arrow"></em>
       <span>{{'Course Gallery' | translate}}</span>
     </div>
   </div>
@@ -117,11 +117,6 @@ class="col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 gallery-contai
                     <div class="card-img">
                           <img src="https://assets.lntedutech.com/application_images/video-res.svg" class="thumbImg" alt="video">
                     </div>
-                    <!-- <div class="card-name">
-                      <div class="file-name" matTooltip="{{videoFile.fileName}}"  matTooltipClass="tooltip-show">
-                       {{videoFile.fileName}}
-                      </div>
-                    </div> -->
                   </div>
                 </div>
               </ng-container>
