@@ -30,7 +30,6 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { InstructorLedComponent } from './pages/instructor-led/instructor-led.component';
 import { DiscussionForumComponent } from './pages/discussion-forum/discussion-forum.component';
 import { ActivitiesComponent } from './pages/activities/activities.component';
-import { AssignmentComponent } from './pages/assignment/assignment.component';
 import { ProjectMobileComponent } from './pages/project-mobile/project-mobile.component';
 import { PerformancePageMobileComponent } from './pages/performance-page-mobile/performance-page-mobile.component';
 import { CourseGalleryComponent } from './pages/course-gallery/course-gallery.component';
@@ -117,7 +116,6 @@ const routes: Routes = [
     InstructorLedComponent,
     DiscussionForumComponent,
     ActivitiesComponent,
-    AssignmentComponent,
     ProjectMobileComponent,
     PerformancePageMobileComponent,
     CourseGalleryComponent,

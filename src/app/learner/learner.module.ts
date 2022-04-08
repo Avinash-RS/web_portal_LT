@@ -21,7 +21,6 @@ import { CoreModule } from '@core/core.module';
 import { MaterialModule } from '@core/material.module';
 import { AuthGuard } from '@core/services/_helpers/auth.guard';
 import { ProfileComponent } from '@learner/pages/profile/profile.component';
-import { TermsconditionsComponent } from '@learner/pages/termsconditions/termsconditions.component';
 import { NgOtpInputModule } from 'ng-otp-input';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -83,7 +82,6 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     ProfileComponent,
-    TermsconditionsComponent,
     ForbiddenComponent,
     ViewAllnotificationsComponent,
     VideoPreviewModalComponent,
