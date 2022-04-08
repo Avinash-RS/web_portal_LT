@@ -265,7 +265,7 @@
                                             <mat-card class="handPointer d-flex justify-content-start" mat-ripple (click)="urlBinder(file); add_topic_reference(res); cloneTemplate(mod.topicname,res?.modulename)" *ngFor="let file of mod.resourse?.files">
                                                 <div class="mr-2">
                                                     <img *ngIf="file.doc_type == 'application/pdf'" class="size" alt=""
-                                                        src="https://assets.lntedutech.com/application_images/PDF_Icon.svg">
+                                                        src="https://assets.lntedutech.com/application_images/pdf-icon.webp">
                                                     <img *ngIf="file.doc_type == 'link'" class="size" alt="" src="https://assets.lntedutech.com/application_images/Link_Icon.svg">
                                                     <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"
                                                         class="size" alt="" src="https://assets.lntedutech.com/application_images/Excel_Icon.svg">
@@ -279,7 +279,7 @@
                                                         src="https://assets.lntedutech.com/application_images/Word_Icon.svg">
                                                     <img *ngIf="file.doc_type == 'application/vnd.ms-excel'" class="size" alt=""
                                                         src="https://assets.lntedutech.com/application_images/Excel_Icon.svg">
-                                                    <img *ngIf="file.doc_type == 'video/mp4'" class="size" style="width: 16px;" alt="" src="https://assets.lntedutech.com/application_images/Video_Icon.svg">
+                                                    <img *ngIf="file.doc_type == 'video/mp4'" class="size" style="width: 16px;" alt="" src="https://assets.lntedutech.com/application_images/video-icon.webp">
                                                     <mat-icon class="docType" *ngIf="file.doc_type == 'text/plain' "> {{'description' | translate}} </mat-icon>
                                                 </div>
                                                 <div>{{file.type_name}}</div>
@@ -394,7 +394,7 @@
                             <div class="instructionBox">
                                 <div class="d-flex justify-content-between">
                                     <figure>
-                                        <img class="img-inst" [src]="author.image ? (author?.image + blobKey) : 'https://assets.lntedutech.com/application_images/pro2.png'" alt="" />
+                                        <img class="img-inst" [src]="author.image ? (author?.image + blobKey) : 'https://assets.lntedutech.com/application_images/pro2.webp'" alt="" />
                                     </figure>
                                     <div class="authorDescription">
                                         <h5>{{author?.author_name | titlecase| translate}}</h5>
@@ -407,7 +407,7 @@
                    
                 </div>
                 <div class="poweredBy">
-                    <h2>{{'Course offered by:' | translate}} <span><img src="https://assets.lntedutech.com/edutech_logo.svg" alt="" /></span></h2>
+                    <h2>{{'Course offered by:' | translate}} <span><img src="https://assets.lntedutech.com/application_images/edutech-logo.webp" alt="" /></span></h2>
                 </div>
             </div>
         </div>

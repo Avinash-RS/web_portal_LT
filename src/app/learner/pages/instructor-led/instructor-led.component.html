@@ -15,7 +15,7 @@
       </ul>
       <div class="noCard" *ngIf="!showContent && !showSkeleton">
         <figure>
-          <img alt="assignment" src="https://assets.lntedutech.com/application_images/noassignment.svg">
+          <img alt="assignment" src="https://assets.lntedutech.com/application_images/noassignment.webp">
         </figure>
         <p> {{'You have no sessions at the moment!' | translate}}</p>
       </div>
@@ -66,7 +66,7 @@
           <app-video-player  [url]="videoSource"></app-video-player>
           </div>
           <figure *ngIf="!activityShow?.activity_details.livethumbnail && activityShow?.activity_details.activitytype != 'Recorded'">
-            <img class="sessionImage" alt="instructor" src="https://assets.lntedutech.com/lxpicons/instructor_image.png" />
+            <img class="sessionImage" alt="instructor" src="https://assets.lntedutech.com/application_images/instructor-image.webp" />
           </figure>
           <figure *ngIf="activityShow?.activity_details.livethumbnail && activityShow?.activity_details.activitytype != 'Recorded'">
             <img class="sessionImage" alt="instructor" [src]="activityShow?.activity_details.livethumbnail + blobKey" />
@@ -270,7 +270,7 @@
                   [src]="los.activity_details.livethumbnail + blobKey">
                 <img *ngIf="!los.activity_details.livethumbnail" alt="image"
                   style="width: 100%; height: 130px !important;object-fit: cover !important;"
-                  src="https://assets.lntedutech.com/lxpicons/instructor_image.png">
+                  src="https://assets.lntedutech.com/application_images/instructor-image.webp">
                 <!-- <div class="bottom-right" [ngClass]="los.status == 'Ongoing' ? 'organge' : los.status == 'UpComing' ? 'grey' : los.status == 'Completed' ? 'greenColor':''" >{{los.status}}</div> -->
                 <!-- <mat-icon class="rec-center" *ngIf="los.activity_details.activitytype == 'Recorded'"> play_circle
                 </mat-icon> -->
