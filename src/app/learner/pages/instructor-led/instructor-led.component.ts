@@ -35,7 +35,7 @@ export class InstructorLedComponent implements OnInit {
               private dialog: MatDialog,
               private activeRoute: ActivatedRoute,
               public translate: TranslateService) {
-              let lang = localStorage.getItem('language');
+              const lang = localStorage.getItem('language');
               this.translate.use(lang ? lang : 'en');
               this.activeRoute.queryParams.subscribe(res => {
                   this.course = res;
@@ -73,11 +73,11 @@ export class InstructorLedComponent implements OnInit {
         }
       });
       this.recordedCount = this.listOfSessions.filter( element => {
-        return element.activity_details.activitytype.toLowerCase() == 'recorded';
+        return element.activity_details.activitytype.toLowerCase() === 'recorded';
       });
       this.sessionAttendance = data.Attendance;
       this.attendedCount = this.sessionAttendance.filter(element => {
-        return element.activity.attendencedetails.Attendence.toLowerCase() == 'yes';
+        return element.activity.attendencedetails.Attendence.toLowerCase() === 'yes';
       });
       for (const los of this.listOfSessions) {
         los.duration = this.getTimes(los.activity_details.enddate, los.activity_details.startdate);
@@ -94,7 +94,7 @@ export class InstructorLedComponent implements OnInit {
     this.listOfSessions.forEach( los => {
       los.isactive = false;
     });
-    if (los.activity_details.activitytype == 'Recorded') {
+    if (los.activity_details.activitytype === 'Recorded') {
       this.videoSource = los.activity_details.link + this.blobKey;
     }
     this.activityShow = los;

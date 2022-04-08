@@ -43,11 +43,11 @@ export class PasswordComponent implements OnInit {
               private toastr: ToastrService,
               private activeroute: ActivatedRoute,
               public service: LearnerServicesService) {
-                let lang = localStorage.getItem('language');
+                const lang = localStorage.getItem('language');
                 this.translate.use(lang ? lang : 'en');
                 this.activeroute.queryParams.subscribe(params => {
                   this.email = params.code;
-                  var input = {
+                  const input = {
                     ' userSecretkey ' : params.code
                 };
                   this.service.getUser(this.email).subscribe((data: any) => {
