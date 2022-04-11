@@ -54,7 +54,7 @@ class="col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 gallery-contai
                     <div class="card-img">
                           <img *ngIf="file.type == 'video'" src="https://assets.lntedutech.com/application_images/video-res.webp" class="thumbImg" alt="video">
                           <img *ngIf="file.type == 'image'" src="https://assets.lntedutech.com/application_images/image-res.webp" class="thumbImg" alt="image">
-                          <img *ngIf="file.type == 'HTML'" src="https://assets.lntedutech.com/application_images/knowledge.svg" class="thumbImg" alt="image">
+                          <img *ngIf="file.type == 'HTML'" src="https://assets.lntedutech.com/application_images/knowledge.webp" class="thumbImg" alt="image">
                     </div>
                     <div *ngIf="file.type != 'video'" class="card-name" matTooltip="{{file.fileName}}"  matTooltipClass="tooltip-show">
                       <div class="file-name">
@@ -177,7 +177,7 @@ class="col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 gallery-contai
                   <div class="resource-card" (click)="onPreviewgallery('HTML','',topic.link,'',content.modulename,topic.topicname)">
                     <div class="card-img">
                       <ng-container>
-                        <img src="https://assets.lntedutech.com/application_images/knowledge.svg" class="thumbImg" alt="image">
+                        <img src="https://assets.lntedutech.com/application_images/knowledge.webp" class="thumbImg" alt="image">
                       </ng-container>
                     </div>
                     <div class="card-name">
