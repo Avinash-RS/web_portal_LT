@@ -827,13 +827,37 @@
       color: #5B5B5B;
       font-size: 15px;
       font-weight: 700;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
-      width: 95%;
-      display: inline-block;
       margin: 0;
       line-height: normal;
+      position: relative;
+      .titleName {
+        display: inline-block;
+        width: 95%;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+      &:hover {
+        .toolTip {
+          visibility: visible;
+          opacity: 1;
+        }
+      }
+      .toolTip {
+        visibility: hidden;
+        position: absolute;
+        bottom: 125%;
+        left: 0;
+        width: auto;
+        background-color: #555;
+        color: #fff;
+        font-weight: 400;
+        text-align: center;
+        padding: 5px;
+        border-radius: 6px;
+        opacity: 0;
+        transition: opacity .6s;
+      }
     }
   }
   .progressBar {
