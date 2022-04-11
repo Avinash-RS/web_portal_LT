@@ -1,12 +1,6 @@
 @import "variable";
 
 // forum CSS
-:host ::ng-deep .row {
-    display: flex;
-    flex-wrap: wrap;
-    margin-right: 0 !important;
-    margin-left: 0 !important;
-}
 .commonBackStyle {
     width: 100%;
     display: inline-block;
@@ -167,11 +161,6 @@
         border-right: none !important;
     }
 
-    .bg_color {
-        // margin-left: 18px !important;
-        margin-left: 0 !important;
-    }
-
     .courseTime {
         font-size: 16px;
         display: block;
@@ -297,14 +286,18 @@
     pointer-events: none !important;
     opacity: 0.5;
 }
+.tocSubTitle {
+    padding-left: 0 !important;
+    span {
+        margin-left: 0 !important;
+    }
+}
 
 .new_Thread {
     color: $color-white !important;
     border-radius: none !important;
     background-color: $color-blue; // red color
     border: none;
-    // margin-right: 10px !important;
-    float: right !important;
     margin-top: 2px;
 }
 
@@ -312,7 +305,6 @@
     color: $color-white !important;
     border-radius: none !important;
     background-color: $color-blue; // red color
-    // width: 70px !important;
     height: 30px !important;
     display: inline-flex !important;
     align-items: center;
@@ -339,10 +331,6 @@
 
 .color-blue {
     color: $color-blue; // red color
-}
-
-.black_border {
-    border: 1px solid $color-border;
 }
 
 .m-b-10 {
@@ -398,12 +386,6 @@
     text-align: center;
 }
 
-.position_hgt {
-    font-size: large;
-    padding-top: 12px;
-    font-weight: normal;
-}
-
 .position {
     padding-top: 2px;
     color: #7e7e7e !important;
@@ -411,10 +393,6 @@
 
 .titlecolor {
     color: #333333;
-}
-
-.date_color {
-    color: #7e7e7e !important;
 }
 
 .m-bt-4 {
@@ -430,23 +408,15 @@
     height: 64px !important;
 }
 
-.box_shadow {
-    transition: none !important;
-    box-shadow: none !important;
-    border-radius: 0 !important;
-    &.pointer {
-        padding: 16px 0;
-        .bg_color {
-            p {
-                margin-bottom: 0 !important;
-                padding-bottom: 15px;
-            }
-        }
-    }
-}
 .comment_card {
     .padding_matcard {
-        padding: 5px 15px !important;
+        padding: 10px 15px !important;
+        display: flex;
+        > div {
+            &:first-child {
+                margin-right: 8px;
+            }
+        }
     }
 }
 
@@ -465,11 +435,6 @@
 
 .black_bo {
     border: none;
-}
-
-.alignment {
-    padding-top: 15px !important;
-    padding-bottom: 12px !important;
 }
 
 .m-b-0 {
@@ -539,10 +504,10 @@
     }
 }
 
-::ng-deep .topicCard{
-    padding: 12px;
+::ng-deep .topicCard {
+    padding: 12px !important;
     background: rgba(0,0,0,.04)!important;
-    height: auto!important;
+    height: auto !important;
     border: 1px solid #ccc;
     width: 100%;
   }
@@ -558,3 +523,101 @@
     color: #333333 !important;
   }
 
+.discussionForumWrapper {
+    flex-wrap: wrap;
+    padding: 0 20px;
+    @include lg {
+        flex-wrap: nowrap;
+    }
+    .leftContainer {
+        width: 100%;
+        @include lg {
+            width: 425px;
+            padding-right: 15px;
+        }
+    }
+    .rightContainer {
+        width: 100%;
+        margin-top: 20px;
+        @include lg {
+            width: calc(100% - 425px);
+            margin: 0 0 0 15px;
+        }
+    }
+}
+.createdThread {
+    .threadCard {
+        cursor: pointer;
+        padding: 15px;
+        background-color: $color-white;
+        border: 1px solid $color-border;
+        margin: 5px 0;
+    }
+}
+.sortSearchThread {
+    padding: 15px;
+    background-color: $color-white;
+    border: 1px solid $color-border;
+    margin: 5px 0;
+    .searchForm {
+        margin-left: 10px;
+    }
+}
+.postComments {
+    flex-wrap: wrap;
+    @include md {
+        flex-wrap: nowrap;
+    }
+    .lastPost {
+        width: 100%;
+        @include md {
+            width: 75%;
+        }
+    }
+    .commentsWrapper {
+        width: 100%;
+        text-align: left;
+        @include md {
+            width: 25%;
+            text-align: right;
+        }
+    }
+    .comments {
+        display: inline-flex;
+        background-color: $profile-t-grey;
+        padding: 8px;
+        margin-top: 15px;
+        @include md {
+            margin-top: 0;
+        }
+        span {
+            display: inline-block;
+            font-size: 14px;
+            font-weight: 400;
+            color: $label2;
+            margin-right: 8px;
+        }
+        p {
+            color: $color-lightGray;
+            margin: 0;
+        }
+    }
+    .date_color {
+        color: #7e7e7e !important;
+        strong {
+            color: $label2;
+        }
+        p {
+            margin: 0;
+        }
+    }
+    
+}
+::ng-deep.sortSearchThread {
+    .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+        padding-bottom: 0;
+    }
+    .mat-form-field-appearance-legacy .mat-form-field-underline {
+        bottom: 0;
+    }
+}
