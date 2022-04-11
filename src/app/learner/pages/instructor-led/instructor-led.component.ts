@@ -1,5 +1,5 @@
 import { Component, OnInit, TemplateRef,ViewChild, ElementRef } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '@env/environment';
 import * as moment from 'moment';

@@ -24,7 +24,9 @@ import { AlertServiceService } from '@core/services/handlers/alert-service.servi
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { MatDialog, MatSidenav, MatTabGroup } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSidenav } from '@angular/material/sidenav';
+import { MatTabGroup } from '@angular/material/tabs';
 import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment';
 import { SocketioService } from '@learner/services/socketio.service';

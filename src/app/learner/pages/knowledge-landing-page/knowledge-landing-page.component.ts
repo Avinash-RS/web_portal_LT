@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { knowledgeService } from '@learner/services/knowledge-resource/knowledge-resource.service';
 import { ToastrService } from 'ngx-toastr';

@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { E } from '@angular/cdk/keycodes';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import el from 'date-fns/locale/el';
 @Component({

@@ -14,7 +14,11 @@ import { NgOtpInputModule } from 'ng-otp-input';
 
 // import { MaterialModule } from '@core/material.module';
 // Materials import
-import { MatButtonModule, MatInputModule, MatCheckboxModule, MatFormFieldModule, MatSelectModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ResetpasswordComponent } from './pages/resetpassword/resetpassword.component';

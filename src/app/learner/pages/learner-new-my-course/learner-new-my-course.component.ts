@@ -8,7 +8,7 @@ import { CommonServicesService } from '@core/services/common-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { formatDate } from '@angular/common';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { environment } from '@env/environment';
 import { Router } from '@angular/router';
 import { DragScrollComponent } from 'ngx-drag-scroll';

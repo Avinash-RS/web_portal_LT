@@ -4,7 +4,7 @@ import { LearnerServicesService } from '../../services/learner-services.service'
 import { DragScrollComponent } from 'ngx-drag-scroll';
 import { KnowledgePreviewComponent } from '../knowledge-preview/knowledge-preview.component';
 import { environment } from '../../../../environments/environment';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import * as CryptoJS from 'crypto-js';
 import { TranslateService } from '@ngx-translate/core';

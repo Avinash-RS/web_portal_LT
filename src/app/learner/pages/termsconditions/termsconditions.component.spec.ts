@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TermsconditionsComponent } from './termsconditions.component';
 import { RouterModule } from '@angular/router';
-import { MatDialogModule, MatDialogRef, MatDialogTitle, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogModule, MatDialogRef, MatDialogTitle, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 describe('TermsconditionsComponent', () => {
   let component: TermsconditionsComponent;
