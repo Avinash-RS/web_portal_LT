@@ -19,7 +19,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class PerformancePageMobileComponent implements OnInit {
   // @Input() performDetailsSend: any;
   @Input() performDetailPageData: any;
-  @ViewChild('VideoInputPerform', { static: false }) videoInputPerform;
+  @ViewChild('VideoInputPerform') videoInputPerform;
   blobKey = environment.blobKey;
   selectedName = 'Perform';
   selectedTabIndex: number;

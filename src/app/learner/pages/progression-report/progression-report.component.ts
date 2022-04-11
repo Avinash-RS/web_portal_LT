@@ -38,9 +38,9 @@ export const MY_FORMATS = {
   ]
 })
 export class ProgressionReportComponent implements OnInit {
-  @ViewChild('firstPaginator', { static: false }) firstPaginator: MatPaginator;
-  @ViewChild('secondPaginator', { static: false }) secondPaginator: MatPaginator;
-  @ViewChild('thirdPaginator', { static: false }) thirdPaginator: MatPaginator;
+  @ViewChild('firstPaginator') firstPaginator: MatPaginator;
+  @ViewChild('secondPaginator') secondPaginator: MatPaginator;
+  @ViewChild('thirdPaginator') thirdPaginator: MatPaginator;
   assignmentPage: Observable<any>;
   performPage: Observable<any>;
   projectPage: Observable<any>;

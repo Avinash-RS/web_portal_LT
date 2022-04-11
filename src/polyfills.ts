@@ -59,11 +59,8 @@ import '@angular/localize/init';
  * Zone JS is required by default for Angular itself.
 //  */
 import 'zone.js/dist/zone';  // Included with Angular CLI.
-(window as any).global = window;
 
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */
 
-const w: any = window;
-w.__importDefault = (w && w.__importDefault) || function (mod) { return (mod && mod.__esModule) ? mod : { default: mod }; }

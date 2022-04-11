@@ -34,6 +34,8 @@ export const MY_FORMATS = {
 };
 @Injectable()
 export class CustomDateFormatter extends CalendarDateFormatter {
+  // TODO: add explicit constructor
+
   weekViewColumnSubHeader({ date, locale, }: DateFormatterParams): string {
     return formatDate(date, 'dd', locale);
   }
@@ -78,8 +80,8 @@ export class CustomDateFormatter extends CalendarDateFormatter {
 })
 
 export class LearnerNewMyCourseComponent implements OnInit {
-  @ViewChild('completedTopics', { read: DragScrollComponent, static: false }) ds: DragScrollComponent;
-  @ViewChild('inProgress', { read: DragScrollComponent, static: false }) dsInProgress: DragScrollComponent;
+  @ViewChild('completedTopics', { read: DragScrollComponent }) ds: DragScrollComponent;
+  @ViewChild('inProgress', { read: DragScrollComponent }) dsInProgress: DragScrollComponent;
   showJobRole = false;
   isReadMore = true;
   show = true;

@@ -28,7 +28,7 @@ export class InstructorLedComponent implements OnInit {
   showSkeleton;
   showContent;
   userDetails;
-  @ViewChild('attended', { static: false }) attended: ElementRef;
+  @ViewChild('attended') attended: ElementRef;
 
   constructor(private router: Router,
               private learnerService: LearnerServicesService,

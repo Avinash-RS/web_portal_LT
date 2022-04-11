@@ -184,10 +184,10 @@ export class CoursedetailsComponent implements OnInit {
   pagination = false;
   page = 0;
   noofItems = 0;
-  @ViewChild('demo3Tab', { static: false }) demo3Tab: MatTabGroup;
-  @ViewChild('rationPopup', { static: false }) rationPopup: TemplateRef<any>;
-  @ViewChild('focuser', { static: false }) inputEl: ElementRef;
-  @ViewChild('scromPlayer', { static: false }) iframe: ElementRef;
+  @ViewChild('demo3Tab') demo3Tab: MatTabGroup;
+  @ViewChild('rationPopup') rationPopup: TemplateRef<any>;
+  @ViewChild('focuser') inputEl: ElementRef;
+  @ViewChild('scromPlayer') iframe: ElementRef;
   getModuleandtopicInfo: any;
   moduleSatusCheck: any;
   tabInd: any;

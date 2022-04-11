@@ -13,6 +13,8 @@ import { getWeekYearWithOptions } from 'date-fns/fp';
 import { TranslateService } from '@ngx-translate/core';
 @Injectable()
 export class CustomDateFormatter extends CalendarDateFormatter {
+  // TODO: add explicit constructor
+
 
   public monthViewColumnHeader({ date, locale }: DateFormatterParams): string {
     return formatDate(date, 'EEE', locale);
@@ -21,6 +23,7 @@ export class CustomDateFormatter extends CalendarDateFormatter {
     return formatDate(date, 'EEE', locale);
   }
 }
+@Injectable()
 export class CustomEventTitleFormatter extends CalendarEventTitleFormatter {
   // you can override any of the methods defined in the parent class
 
