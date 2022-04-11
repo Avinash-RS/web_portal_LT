@@ -114,7 +114,7 @@ export class LoginComponent implements OnInit {
     }, 1000);
   }
   forgotPassword() {
-      var encryptedmail = CryptoJS.AES.encrypt(this.username.value, this.secretKey.trim()).toString();
+      const encryptedmail = CryptoJS.AES.encrypt(this.username.value, this.secretKey.trim()).toString();
       this.service.forgotUsernameandPassword('password', 'email', '', encryptedmail, this.recaptchaForgetStr)
         .subscribe((data: any) => {
           this.loader = true;
@@ -236,13 +236,13 @@ export class LoginComponent implements OnInit {
       return this.validateAllFields(this.loginForm);
     }
     this.loader = true;
-    var encryptedname = CryptoJS.AES.encrypt(this.loginForm.value.username.toLowerCase(), this.secretKey.trim()).toString();
-    var encryptedpassword = CryptoJS.AES.encrypt(this.loginForm.value.password, this.secretKey.trim()).toString();
+    const encryptedname = CryptoJS.AES.encrypt(this.loginForm.value.username.toLowerCase(), this.secretKey.trim()).toString();
+    const encryptedpassword = CryptoJS.AES.encrypt(this.loginForm.value.password, this.secretKey.trim()).toString();
     this.service.login(encryptedname, encryptedpassword, false, 'microsetportal')
       .subscribe((loginresult: any) => {
         if (loginresult.data.login) {
           if (loginresult.data.login.success) {
-            let userId = loginresult.data.login.message.user_id;
+            const userId = loginresult.data.login.message.user_id;
             gtag('config', environment.gaTrackingId, {' user_id ': userId});
             gtag('set', 'user_properties', { ' crm_id ' : userId });
             this.loginMovement(loginresult);
@@ -269,11 +269,11 @@ export class LoginComponent implements OnInit {
   }
 
   setAuthentication() {
-    let userDetail = JSON.parse(localStorage.getItem('UserDetails'));
+    const userDetail = JSON.parse(localStorage.getItem('UserDetails'));
     userDetail['specific_report_value'] = Math.floor(Math.random() * 1000000000).toString();
     localStorage.setItem('UserDetails', JSON.stringify(userDetail));
     if (userDetail.is_password_updated) {
-      if (userDetail.org_type == 'Corporate') {
+      if (userDetail.org_type === 'Corporate') {
         this.router.navigate(['/Learner/upskillcalendar']);
       } else {
         this.router.navigate(['/Learner/MyCourse']);
@@ -290,7 +290,7 @@ export class LoginComponent implements OnInit {
     }
     localStorage.setItem('language', this.loginForm?.value?.language || 'en');
     localStorage.setItem('Fullname', loginresult.data.login.message.full_name);
-    var id = CryptoJS.AES.encrypt(loginresult.data.login.message.user_id, this.secretKey.trim()).toString();
+    const id = CryptoJS.AES.encrypt(loginresult.data.login.message.user_id, this.secretKey.trim()).toString();
     loginresult.data.login.message.user_id = id;
     loginresult.data.login.message.specific_report_value = '';
     localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message));
@@ -365,9 +365,9 @@ export class LoginComponent implements OnInit {
       this.loader = true;
       this.fullname = this.registerForm.value.fullname.trimLeft();
       // this.registerForm.value.termsandconditions
-      var encryptedmail = CryptoJS.AES.encrypt(this.registerForm.value.email.toLowerCase(), this.secretKey.trim()).toString();
-      var encryptedname = CryptoJS.AES.encrypt(this.fullname, this.secretKey.trim()).toString();
-      var encryptedmobile = CryptoJS.AES.encrypt(this.registerForm.value.mobile, this.secretKey.trim()).toString();
+      const encryptedmail = CryptoJS.AES.encrypt(this.registerForm.value.email.toLowerCase(), this.secretKey.trim()).toString();
+      const encryptedname = CryptoJS.AES.encrypt(this.fullname, this.secretKey.trim()).toString();
+      const encryptedmobile = CryptoJS.AES.encrypt(this.registerForm.value.mobile, this.secretKey.trim()).toString();
       this.service.user_registration(encryptedmail, encryptedname,
         encryptedmobile ?  encryptedmobile : '' ,
        this.registerForm.value.title , true, this.recaptchaSignInStr).subscribe((data: any) => {

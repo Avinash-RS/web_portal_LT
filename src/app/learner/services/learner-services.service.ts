@@ -32,7 +32,7 @@ boarddetail, checkExistingUser, getActivityDetailsByBatchAndCourseID, getAssignm
      getUserdetailUsername, listContent, login, playerModuleAndTopic, singleBatchInfo,
      syllabusofParticularScorm, ViewAllThreadData, ViewAllThreadDataBid, ViewSingleTopicDiscussionData,
      get_batchwise_learner_dashboard_data, get_learner_dashboard_count,
-     getCourseGallery , getLearnerNewCourseReport, getCourseReportByUserid, getProgressionActivitydata,
+     getCourseGallery, getLearnerNewCourseReport, getCourseReportByUserid, getProgressionActivitydata,
      selfLearningdatabyUserId, getengineersForumQA_Count, recentlycourse,
      getlabactivity, labactivity, weekWiseCourseChart, overAllCourseProgressByUserId,
      getlabActivityData, getStepCourseByLearner, playerstatus
@@ -68,7 +68,7 @@ export class LearnerServicesService {
 
   getToken() {
     const token = localStorage.getItem('token') || sessionStorage.getItem('token');
-    var userDetails = JSON.parse(localStorage.getItem('UserDetails'));
+    const userDetails = JSON.parse(localStorage.getItem('UserDetails'));
     this.httpOptions = {
       headers: new HttpHeaders({
         Authorization: 'Bearer ' + token,
@@ -1289,10 +1289,10 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
     return this.Apollo.query({
       query: weekWiseCourseChart,
       variables: {
-        courseId: courseId,
-        userId: userId,
-        startDate: startDate,
-        type: type
+        courseId,
+        userId,
+        startDate,
+        type
       }
     });
   }
@@ -1300,9 +1300,9 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
     return this.Apollo.query({
       query: overAllCourseProgressByUserId,
       variables: {
-        userId: userId,
-        startDate: startDate,
-        endDate: endDate,
+        userId,
+        startDate,
+        endDate,
       }
     });
   }
@@ -1311,7 +1311,7 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
     return this.Apollo.query({
       query: getStepCourseByLearner,
       variables: {
-        user_id: user_id
+        user_id
       }
     });
   }

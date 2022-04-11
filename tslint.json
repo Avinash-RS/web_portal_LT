@@ -14,6 +14,7 @@
     },
     "no-shadowed-variable": false,
     "no-string-literal": false,
+    "prefer-for-of": false,
     "array-type": false,
     "arrow-parens": false,
     "deprecation": {

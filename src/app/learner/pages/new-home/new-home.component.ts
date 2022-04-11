@@ -19,7 +19,7 @@ export class NewHomeComponent implements OnInit {
   @ViewChild('authInput', { static: false }) authInput;
   constructor(public translate: TranslateService, public learnerService: LearnerServicesService,
               private gs: GlobalServiceService, private router: Router, private toastr: ToastrService, location: PlatformLocation) {
-    let lang = localStorage.getItem('language');
+    const lang = localStorage.getItem('language');
     this.translate.use(lang ? lang : 'en');
     location.onPopState(() => {
       localStorage.clear();
@@ -59,7 +59,7 @@ export class NewHomeComponent implements OnInit {
           this.userDetail['specific_report_value'] = Math.floor(Math.random() * 1000000000).toString();
           localStorage.setItem('UserDetails', JSON.stringify(this.userDetail));
           if (this.userDetail.is_password_updated) {
-            if (this.userDetail.org_type == 'Corporate') {
+            if (this.userDetail.org_type === 'Corporate') {
               this.router.navigate(['/Learner/upskillcalendar']);
             } else {
               this.router.navigate(['/Learner/MyCourse']);
