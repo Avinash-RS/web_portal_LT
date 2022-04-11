@@ -1,5 +1,5 @@
 import { Component, OnInit, TemplateRef, ViewChild, Input, OnDestroy } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
@@ -17,7 +17,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class ProjectMobileComponent implements OnInit, OnDestroy {
 
-  @ViewChild('uploadFile', { static: false }) uploadFile;
+  @ViewChild('uploadFile') uploadFile;
   @Input() projectDetailPageData: any;
   blobKey = environment.blobKey;
   userDetail: any;
