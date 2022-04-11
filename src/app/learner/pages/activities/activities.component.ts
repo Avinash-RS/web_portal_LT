@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { MatAccordion } from '@angular/material/expansion';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
@@ -19,13 +19,13 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./activities.component.scss'],
 })
 export class ActivitiesComponent implements OnInit {
-  @ViewChild('nav', { read: DragScrollComponent, static: false }) ds: DragScrollComponent;
-  @ViewChild('navWork', { read: DragScrollComponent, static: false }) dsWork: DragScrollComponent;
-  @ViewChild('navActivity', { read: DragScrollComponent, static: false }) dsActivity: DragScrollComponent;
-  @ViewChild('navSubmissions', { read: DragScrollComponent, static: false }) dsSubmissions: DragScrollComponent;
-  @ViewChild('fileInput', { static: false }) fileInput;
-  @ViewChild('videoInput', { static: false }) videoInput;
-  @ViewChild('uploadInput', { static: false }) uploadInput;
+  @ViewChild('nav', { read: DragScrollComponent }) ds: DragScrollComponent;
+  @ViewChild('navWork', { read: DragScrollComponent }) dsWork: DragScrollComponent;
+  @ViewChild('navActivity', { read: DragScrollComponent }) dsActivity: DragScrollComponent;
+  @ViewChild('navSubmissions', { read: DragScrollComponent }) dsSubmissions: DragScrollComponent;
+  @ViewChild('fileInput') fileInput;
+  @ViewChild('videoInput') videoInput;
+  @ViewChild('uploadInput') uploadInput;
   blobKey = environment.blobKey;
   perfornDetaildata: any;
   performdetailPageView = false;
@@ -47,7 +47,7 @@ export class ActivitiesComponent implements OnInit {
   docpath: any = null;
   assignmentFile: File;
   openList = false;
-  @ViewChild(MatAccordion, { static: false }) accordion: MatAccordion;
+  @ViewChild(MatAccordion) accordion: MatAccordion;
   isCollapsed = false;
   projectId: any;
   isperformColaps = false;

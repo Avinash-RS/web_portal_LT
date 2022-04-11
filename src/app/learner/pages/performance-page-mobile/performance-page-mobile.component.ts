@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
@@ -19,7 +19,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class PerformancePageMobileComponent implements OnInit {
   // @Input() performDetailsSend: any;
   @Input() performDetailPageData: any;
-  @ViewChild('VideoInputPerform', { static: false }) videoInputPerform;
+  @ViewChild('VideoInputPerform') videoInputPerform;
   blobKey = environment.blobKey;
   selectedName = 'Perform';
   selectedTabIndex: number;

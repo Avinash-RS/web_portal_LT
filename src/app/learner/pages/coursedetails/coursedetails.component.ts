@@ -24,7 +24,9 @@ import { AlertServiceService } from '@core/services/handlers/alert-service.servi
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { MatDialog, MatSidenav, MatTabGroup } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSidenav } from '@angular/material/sidenav';
+import { MatTabGroup } from '@angular/material/tabs';
 import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment';
 import { SocketioService } from '@learner/services/socketio.service';
@@ -184,10 +186,10 @@ export class CoursedetailsComponent implements OnInit {
   pagination = false;
   page = 0;
   noofItems = 0;
-  @ViewChild('demo3Tab', { static: false }) demo3Tab: MatTabGroup;
-  @ViewChild('rationPopup', { static: false }) rationPopup: TemplateRef<any>;
-  @ViewChild('focuser', { static: false }) inputEl: ElementRef;
-  @ViewChild('scromPlayer', { static: false }) iframe: ElementRef;
+  @ViewChild('demo3Tab') demo3Tab: MatTabGroup;
+  @ViewChild('rationPopup') rationPopup: TemplateRef<any>;
+  @ViewChild('focuser') inputEl: ElementRef;
+  @ViewChild('scromPlayer') iframe: ElementRef;
   getModuleandtopicInfo: any;
   moduleSatusCheck: any;
   tabInd: any;

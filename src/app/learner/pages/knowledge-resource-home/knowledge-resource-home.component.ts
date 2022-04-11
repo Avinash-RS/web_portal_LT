@@ -25,8 +25,8 @@ export class KnowledgeResourceHomeComponent implements OnInit {
   showSkeleton = true;
   userDetailes;
   sampleFileLink = 'https://edutechstorage.blob.core.windows.net/container1/resource/739113684616842-Sample-file.csv';
-  @ViewChild('fileInput3', { static: false }) fileInput3;
-  @ViewChild('ResourceData', { static: false }) searchedData: ElementRef;
+  @ViewChild('fileInput3') fileInput3;
+  @ViewChild('ResourceData') searchedData: ElementRef;
   tempDetailsList = [];
 
   constructor(public apiService: knowledgeService,

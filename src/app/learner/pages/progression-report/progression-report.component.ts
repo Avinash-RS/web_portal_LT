@@ -5,7 +5,9 @@ import { CommonServicesService } from '@core/services/common-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { DatePipe } from '@angular/common';
@@ -38,9 +40,9 @@ export const MY_FORMATS = {
   ]
 })
 export class ProgressionReportComponent implements OnInit {
-  @ViewChild('firstPaginator', { static: false }) firstPaginator: MatPaginator;
-  @ViewChild('secondPaginator', { static: false }) secondPaginator: MatPaginator;
-  @ViewChild('thirdPaginator', { static: false }) thirdPaginator: MatPaginator;
+  @ViewChild('firstPaginator') firstPaginator: MatPaginator;
+  @ViewChild('secondPaginator') secondPaginator: MatPaginator;
+  @ViewChild('thirdPaginator') thirdPaginator: MatPaginator;
   assignmentPage: Observable<any>;
   performPage: Observable<any>;
   projectPage: Observable<any>;

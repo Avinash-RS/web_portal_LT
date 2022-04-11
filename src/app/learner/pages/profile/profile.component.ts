@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { LocationStrategy } from '@angular/common';
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatTreeFlatDataSource } from '@angular/material';
+import { MatDialog} from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as myGlobals from '@core/globals';
 import { CommonServicesService } from '@core/services/common-services.service';

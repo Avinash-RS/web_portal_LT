@@ -1,5 +1,5 @@
 import { Component, OnInit, TemplateRef,ViewChild, ElementRef } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '@env/environment';
 import * as moment from 'moment';
@@ -28,7 +28,7 @@ export class InstructorLedComponent implements OnInit {
   showSkeleton;
   showContent;
   userDetails;
-  @ViewChild('attended', { static: false }) attended: ElementRef;
+  @ViewChild('attended') attended: ElementRef;
 
   constructor(private router: Router,
               private learnerService: LearnerServicesService,
