@@ -13,13 +13,13 @@
             width: 100%;
             order: 1;
             @media screen and (min-width: 992px) {
+                width: calc(100% - 360px);
+            }
+            @media screen and (min-width: 1140px) {
                 width: calc(100% - 400px);
             }
-            @media screen and (min-width: 1200px) {
-                width: calc(100% - 450px);
-            }
             @media screen and (min-width: 1540px) {
-                width: calc(100% - 550px);
+                width: calc(100% - 500px);
             }
             .calendar {
                 display: flex;
@@ -146,13 +146,13 @@
                 position: fixed;
                 right: 0;
                 top: 70px;
+                width: 360px
+            }
+            @media screen and (min-width: 1140px) {
                 width: 400px
             }
-            @media screen and (min-width: 1200px) {
-                width: 450px
-            }
             @media screen and (min-width: 1540px) {
-                width: 550px
+                width: 500px
             }
             .viewInfotxt {
                 display: flex;
@@ -484,14 +484,17 @@
                                 width: 100%;
                                 margin-top: 10px;
                             }
-                            @media only screen and (min-width:1200px) {
-                                width: 39%;
+                            @media only screen and (min-width:1140px) {
+                                width: 44%;
                                 margin-top: 0;
                                 justify-content: flex-end;
                             }
+                            @media only screen and (min-width:1540px) {
+                                width: 39%;
+                            }
                             .icon {
                                 width: 8%;
-                                @media only screen and (min-width:1200px) {
+                                @media only screen and (min-width:1140px) {
                                     width: 14%;
                                 }
                                 @media only screen and (min-width:1540px) {

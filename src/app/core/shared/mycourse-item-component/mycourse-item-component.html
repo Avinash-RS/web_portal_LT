@@ -77,6 +77,10 @@
                       <span><em class="lxp-Assessment_Report"></em></span>
                       <p>{{'Assessment Report' | translate}}</p>
                   </div>
+                  <div class="icons" *ngIf="userDetail.org_type === 'Corporate'"  (click)="gotoQuiz(course)">
+                    <span><em class="lxp-Quiz_Report"></em></span>
+                    <p>{{'Quiz Report' | translate}}</p>
+                </div>
                   <div class="icons" (click)="gotoProgression(course)">
                       <span><em class="lxp-Analytics"></em></span>
                       <p>{{'Learning Progression' | translate}}</p>

@@ -45,6 +45,10 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { DateAdapter as AngularCalendarDateAdapter } from 'angular-calendar';
 import { UpskillCalendarComponent } from './pages/upskill-calendar/upskill-calendar.component';
 import { CalendarFilterComponent } from './pages/calendar-filter/calendar-filter.component';
+import { QuizReportComponent } from './pages/quiz-report/quiz-report.component';
+import 'ag-grid-enterprise';
+import { AgGridModule } from 'ag-grid-angular';
+
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
 }
@@ -108,6 +112,11 @@ const routes: Routes = [
     data: { animation: 'progressionReport' , title: 'Progression Report'}
   },
   {
+    path: 'quizreport',
+    component: QuizReportComponent,
+    data: { animation: 'quizreport' , title: 'Quiz Report'}
+  },
+  {
     path: 'questionanswer',
     component: QuestionanswerComponent,
     data: { animation: 'questionanswer', title: 'Question and Answer'}
@@ -130,7 +139,8 @@ const routes: Routes = [
     ProgressionReportComponent,
     QuestionanswerComponent,
     UpskillCalendarComponent,
-    CalendarFilterComponent
+    CalendarFilterComponent,
+    QuizReportComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   imports: [
@@ -165,6 +175,7 @@ const routes: Routes = [
     PdfViewerModule,
     NgxSkeletonLoaderModule,
     NgxPaginationModule,
+    AgGridModule.withComponents([]),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

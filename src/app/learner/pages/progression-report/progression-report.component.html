@@ -5,19 +5,19 @@
       <li><em routerLink="/Learner/MyCourse" class="lxp-Go backArrow"></em> {{courseName}}</li>
       <li>{{'Learning Progression' | translate}}</li>
     </ul>
-    <div class="col">
+    <!-- <div class="col">
       <div class="flag-line">
 
       </div>
-    </div>
-    <div class="col secPie">
-      <div class="col-md-6">
+    </div> -->
+    <div class="secPie">
+      <div class="col-md-6 selfLearning">
         <div class="learning-label">{{'Self Learning' | translate}}</div>
         <div class="pieChart" [ngStyle]="{'width': '300px',  'height':'300px'}">
           <canvas id="piechart" [plugins]="chartPlugins"></canvas>
         </div>
       </div>
-      <div class="col-md-6 d-flex align-item-center">
+      <div class="col-md-6 activitiesSec d-flex align-item-center">
         <div class="activities-progress w-100">
           <div class="progress-label">{{'Activities' | translate}}</div>
           <div class="d-flex  h-10 ml-4" [ngClass]="pieData.assignment_total==pieData.assignment_completed?'color-green':'color-yellow'">
@@ -92,7 +92,7 @@
                       </span>
                       <span *ngIf="showWeek">
                         <div [ngStyle]="(moduleItem.week!==apidata[number-1]?.week || moduleItem.isOpened) ? {'color': 'inherit'} : {'color': 'white'}" class="week-text">{{'Week' | translate}}</div>
-                        <div [ngStyle]="(moduleItem.week!==apidata[number-1]?.week || moduleItem.isOpened) ? {'color': 'inherit'} : {'color': 'white'}" class="week-number">{{numPrefix(UserDetails?.org_type == 'Corporate' ? moduleItem.week -1 : moduleItem.week)}}</div>
+                        <div [ngStyle]="(moduleItem.week!==apidata[number-1]?.week || moduleItem.isOpened) ? {'color': 'inherit'} : {'color': 'white'}" class="week-number">{{numPrefix(UserDetails?.org_type == 'Corporate' ? (moduleItem.week == 1 ? 1 :moduleItem.week -1) : moduleItem.week)}}</div>
                       </span>
                     </div>
 
