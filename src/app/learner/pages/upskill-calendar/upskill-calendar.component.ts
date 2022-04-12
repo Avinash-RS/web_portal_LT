@@ -30,34 +30,34 @@ export class UpskillCalendarComponent implements OnInit {
   activeDayIsOpen = false;
   daySelection;
   courseDetailsList = [{
-    'course_name': 'All Courses',
-    'course_id': 'All'
+    course_name: 'All Courses',
+    course_id: 'All'
   }];
   enrolledCourses;
   userDetails;
   filterBy = [{
-    ' key ': 'All Activities',
-    ' value ': 'All'
+    key : 'All Activities',
+    value : 'All'
   },
   {
-    'key': 'Self Learning',
-    ' value ': 'selfpacedlearning'
+    key : 'Self Learning',
+    value : 'selfpacedlearning'
   },
   {
-    'key': 'Live Interactions',
+    key: 'Live Interactions',
     ' value ': 'liveclassroom'
   },
   {
-    'key': 'Assignment',
-    ' value ': 'assignment'
+    key: 'Assignment',
+    value : 'assignment'
   },
   {
-    'key': 'Perform',
-    ' value ': 'perform'
+    key: 'Perform',
+    value : 'perform'
   },
   {
-    'key': 'Project',
-    ' value ': 'project'
+    key: 'Project',
+    value : 'project'
   }
   ];
   courseValue = 'All';
@@ -109,8 +109,8 @@ export class UpskillCalendarComponent implements OnInit {
         const EcourseDetail = EcourseData.data.get_learner_dashboard.message.enrolled_course_details;
         this.enrolledCourses = EcourseDetail && EcourseDetail !== null ? EcourseDetail : [];
         this.courseDetailsList.push({
-          'course_name': 'All Courses',
-          'course_id': 'All'
+          course_name: 'All Courses',
+          course_id: 'All'
         });
         this.courseDetailsList.push(...this.enrolledCourses);
         this.courseDetailsList.some((item, idx) =>
@@ -365,7 +365,9 @@ getLearnerActivity(view, selectedDate, day?: CalendarMonthViewDay) {
         localStorage.setItem('Courseid', value.courseid);
         localStorage.setItem('persentage', null);
         localStorage.setItem('currentBatchId', value.batch_id);
-        localStorage.setItem('resumeData', JSON.stringify({'link': value.link, 'lastModule': value.modulename, 'lastTopic': value.topicname, 'module_id': value.module_id, 'topic_id': value.topic_id, 'checklevel': value.checklevel, 'course_status': value.status, 'toc': value.toc, 'extracted': value.extracted}));
+        localStorage.setItem('resumeData', JSON.stringify({link: value.link, lastModule: value.modulename,
+          lastTopic: value.topicname, module_id: value.module_id, topic_id: value.topic_id, checklevel: value.checklevel,
+          course_status: value.status, toc: value.toc, extracted: value.extracted}));
         this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
       } else {
         const data1 = {
