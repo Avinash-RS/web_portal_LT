@@ -1,18 +1,15 @@
 import { Component, OnInit, Injectable, Input } from '@angular/core';
-import { startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours} from 'date-fns';
 import { formatDate } from '@angular/common';
 import { CalendarEvent, CalendarView, CalendarMonthViewDay, DateFormatterParams, CalendarDateFormatter, CalendarEventTitleFormatter } from 'angular-calendar';
-import { getmoduleData } from '@learner/services/operations/learner_query';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import * as moment from 'moment';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { getWeekYearWithOptions } from 'date-fns/fp';
-import { TranslateService } from '@ngx-translate/core';
 @Injectable()
 export class CustomDateFormatter extends CalendarDateFormatter {
+  // TODO: add explicit constructor
+
 
   public monthViewColumnHeader({ date, locale }: DateFormatterParams): string {
     return formatDate(date, 'EEE', locale);
@@ -21,6 +18,7 @@ export class CustomDateFormatter extends CalendarDateFormatter {
     return formatDate(date, 'EEE', locale);
   }
 }
+@Injectable()
 export class CustomEventTitleFormatter extends CalendarEventTitleFormatter {
   // you can override any of the methods defined in the parent class
 
@@ -168,12 +166,12 @@ export class CalendarActivityComponent implements OnInit {
       setTimeout(() => {
         const eventsParent = document.querySelectorAll('.cal-events');
         eventsParent.forEach((element: any) => {
-          var children = Array.from(element.children);
-          var duplicateColor = [];
+          let children = Array.from(element.children);
+          const duplicateColor = [];
           children = children.filter((dayEvent, index, self) => {
-            var style = window.getComputedStyle(dayEvent as HTMLElement);
-            var color = style.getPropertyValue('background-color');
-            var found = duplicateColor.find((element) => {
+            const style = window.getComputedStyle(dayEvent as HTMLElement);
+            const color = style.getPropertyValue('background-color');
+            const found = duplicateColor.find((element) => {
               return element === color;
             });
             if (found) {
@@ -189,15 +187,17 @@ export class CalendarActivityComponent implements OnInit {
   }
   getLearnerActivity(view, selectedDate, day?: CalendarMonthViewDay) {
     this.showSkeleton = true;
+    let courseValueDetail;
+    let activityValueDetail;
     if (this.courseValue === 'All') {
-      var courseValue = '';
+      courseValueDetail = '';
    } else {
-    courseValue = this.courseValue;
+    courseValueDetail = this.courseValue;
    }
     if (this.activityValue === 'All') {
-      var activityValue = '';
+      activityValueDetail = '';
     } else {
-      activityValue = this.activityValue;
+      activityValueDetail = this.activityValue;
     }
     if (selectedDate.date) {
       this.daySelected = true;
@@ -206,7 +206,7 @@ export class CalendarActivityComponent implements OnInit {
     }
     const dateValue = moment(selectedDate).format('YYYY-MM-DD');
     this.activityData = [];
-    this.learnerService.getLearnerActivity(courseValue, this.status, view, dateValue, activityValue,
+    this.learnerService.getLearnerActivity(courseValueDetail, this.status, view, dateValue, activityValueDetail,
        this.userDetails.user_id).subscribe((result: any) => {
       if (result?.data?.getActivityCalendar?.success) {
         this.activityData = result?.data?.getActivityCalendar?.data;
@@ -253,8 +253,9 @@ export class CalendarActivityComponent implements OnInit {
         }
       });
     }
+    let view;
     if (this.daySelected) {
-      var view = 'day';
+      view = 'day';
     } else {
       view = 'month';
     }
@@ -275,7 +276,7 @@ export class CalendarActivityComponent implements OnInit {
     if (this.monthView) {
       this.daySelection = this.monthView;
     }
-    this.getLearnerActivity(view, this.daySelection);
+    this.getLearnerActivity(this.view, this.daySelection);
     }
 
     launchAssignment(value) {

@@ -24,7 +24,9 @@ import { AlertServiceService } from '@core/services/handlers/alert-service.servi
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { MatDialog, MatSidenav, MatTabGroup } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSidenav } from '@angular/material/sidenav';
+import { MatTabGroup } from '@angular/material/tabs';
 import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment';
 import { SocketioService } from '@learner/services/socketio.service';
@@ -184,10 +186,10 @@ export class CoursedetailsComponent implements OnInit {
   pagination = false;
   page = 0;
   noofItems = 0;
-  @ViewChild('demo3Tab', { static: false }) demo3Tab: MatTabGroup;
-  @ViewChild('rationPopup', { static: false }) rationPopup: TemplateRef<any>;
-  @ViewChild('focuser', { static: false }) inputEl: ElementRef;
-  @ViewChild('scromPlayer', { static: false }) iframe: ElementRef;
+  @ViewChild('demo3Tab') demo3Tab: MatTabGroup;
+  @ViewChild('rationPopup') rationPopup: TemplateRef<any>;
+  @ViewChild('focuser') inputEl: ElementRef;
+  @ViewChild('scromPlayer') iframe: ElementRef;
   getModuleandtopicInfo: any;
   moduleSatusCheck: any;
   tabInd: any;
@@ -287,8 +289,8 @@ export class CoursedetailsComponent implements OnInit {
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
     if (
-      (event.key == '67' && event.ctrlKey && event.shiftKey) ||
-      event.key == '123'
+      (event.key === '67' && event.ctrlKey && event.shiftKey) ||
+      event.key === '123'
     ) {
       event.returnValue = false;
       event.preventDefault();
@@ -445,7 +447,7 @@ export class CoursedetailsComponent implements OnInit {
               value.resourse.files.length
             ) {
               this.fileRef = value.resourse.files.filter(
-                (type) => type.fileType == 'Reference'
+                (type) => type.fileType === 'Reference'
               );
               if (this.fileRef && this.fileRef.length) {
                 resourceFile = true;
@@ -476,11 +478,11 @@ export class CoursedetailsComponent implements OnInit {
     this.socketEmitReciver = this.socketService.change.subscribe(
       (result: any) => {
 
-        if (result.data.course_id == this.courseid) {
+        if (result.data.course_id === this.courseid) {
           if (result.data.resume) {
 
             let resultData;
-            let getResumeTopic = function(data) {
+            const getResumeTopic = (data) => {
               for (let i = 0; i < data.length; i++) {
                 const e = data[i];
                 if (e.childData) {
@@ -492,7 +494,7 @@ export class CoursedetailsComponent implements OnInit {
                     getResumeTopic(e.childData);
                   }
                 } else {
-                  if (e.link && e.expanded == true) {
+                  if (e.link && e.expanded === true) {
                     resultData = e;
                   }
                 }
@@ -502,7 +504,7 @@ export class CoursedetailsComponent implements OnInit {
 
 
 
-            if (result && (getResumeTopic(result.data.message).id == this.topicInfo?.id || (this.topicInfo == undefined))) {
+            if (result && (getResumeTopic(result.data.message).id === this.topicInfo?.id || (this.topicInfo === undefined))) {
           // } else {
             // replace resume data from socket for TOC
             this.scromModuleData = [...result.data.message];
@@ -542,7 +544,7 @@ export class CoursedetailsComponent implements OnInit {
                       this.moduleHolder = mi;
                       this.bkup_moduleName  = module.module_name;
                       module.childData.forEach((topic, ti) => {
-                        if (topic.link && topic.expanded == true) {
+                        if (topic.link && topic.expanded === true) {
                           this.nextPrevHolder = this.topiccurrentPage = ti;
                           this.topicInfo = this.bkup_topicInfo = topic;
                           this.currentTopicTitle = this.topicInfo.topic_name;
@@ -561,7 +563,7 @@ export class CoursedetailsComponent implements OnInit {
             console.log(this.scromModuleData);
             if (
               this.scromModuleData[this.weekHolder]?.childData[this.moduleHolder]?.
-              childData[this.subModuleHolder]?.id == result.data.message[0].parent
+              childData[this.subModuleHolder]?.id === result.data.message[0].parent
             ) {
               this.scromModuleData[this.weekHolder].childData[
                 this.moduleHolder
@@ -583,7 +585,7 @@ export class CoursedetailsComponent implements OnInit {
             if (
               this.scromModuleData[this.weekHolder]?.childData[
                 this.moduleHolder
-              ]?.id == result.data.message[0].parent
+              ]?.id === result.data.message[0].parent
             ) {
               this.scromModuleData[this.weekHolder].childData[
                 this.moduleHolder
@@ -609,7 +611,7 @@ export class CoursedetailsComponent implements OnInit {
           if (result.data.course_id === this.courseid) {
             // if(this.userType=="Corporate"){
             // Lab URL and btn display
-            if (result?.data?.url !== '' && result.data.labActivity == true) {
+            if (result?.data?.url !== '' && result.data.labActivity === true) {
               this.eboxUrl = result.data.url;
               this.showlab = result.data.labActivity;
             } else {
@@ -738,7 +740,7 @@ export class CoursedetailsComponent implements OnInit {
       }
 
       setTimeout(() => {
-        this.checkDetails.course_status = this.checkDetails.course_status == null || this.checkDetails.course_status == 'completed'
+        this.checkDetails.course_status = this.checkDetails.course_status == null || this.checkDetails.course_status === 'completed'
             ? 'start'
             : this.checkDetails.course_status;
         if (
@@ -770,9 +772,9 @@ export class CoursedetailsComponent implements OnInit {
       this.service.getTOC(param).subscribe((data: any) => {
         const moduletopicApiData = data.message;
         body.childData = [...moduletopicApiData];
-        if (modul == 'start') {
+        if (modul === 'start') {
           this.topicInfo = moduletopicApiData[0];
-          if (this.checkDetails.course_status == 'completed' || this.checkDetails.link == '') {
+          if (this.checkDetails.course_status === 'completed' || this.checkDetails.link === '') {
             this.playURLConstructor(
               this.topicInfo.link,
               body.module_name,
@@ -822,14 +824,14 @@ export class CoursedetailsComponent implements OnInit {
         '&topic=' +
         encodedTopicName +
         '&action=' +
-        (actiondat == 'entry' ? 'resume' : 'Click') +
+        (actiondat === 'entry' ? 'resume' : 'Click') +
         // '&week=' + (this.weekHolder+1) +
         '&lastLogIndex=' +
         this.lastLogIndex +
         '&courseType=' +
         this.courseType;
     // );
-    if (actiondat == 'entry') {setTimeout(() => {
+    if (actiondat === 'entry') {setTimeout(() => {
       this.iframe.nativeElement.contentWindow.location.replace(this.urlSafe);
     }, 1000);
       } else {
@@ -850,7 +852,7 @@ export class CoursedetailsComponent implements OnInit {
     moduleIdx?
   ) {
 
-    if (this.filterkey == 'Bookmarked') {
+    if (this.filterkey === 'Bookmarked') {
       this.bkmrk_week = weekIndex.wi;
       this.bkmrk_weekDisp = weekIndex.wn;
       this.bkmrk_topic = topindex;
@@ -908,9 +910,9 @@ export class CoursedetailsComponent implements OnInit {
   checkLastFirstIndexReached() {
     // check 1stweek 1stmodule 1stopic
     if (
-      this.weekHolder == 0 &&
-      this.moduleHolder == 0 &&
-      this.nextPrevHolder == 0
+      this.weekHolder === 0 &&
+      this.moduleHolder === 0 &&
+      this.nextPrevHolder === 0
     ) {
       this.isprevEnable = true;
     } else {
@@ -940,7 +942,7 @@ export class CoursedetailsComponent implements OnInit {
   cloneTemplate(topicName, moduleName) {
     this.content.coursedetails.forEach((course) => {
       course.moduledetails.forEach((module) => {
-        if (module.topicname == topicName && course.modulename == moduleName) {
+        if (module.topicname === topicName && course.modulename === moduleName) {
           module.showPreview = true;
         } else {
           module.showPreview = false;
@@ -1158,7 +1160,7 @@ export class CoursedetailsComponent implements OnInit {
       );
     }
 
-    if (this.fileType == 'pdf') {
+    if (this.fileType === 'pdf') {
       // file.gdocs = '';
       // file.gdocs = 'https://docs.google.com/gview?url=' + file.path + this.blobKey + '&embedded=true';
       // this.URIData = file;
@@ -1251,7 +1253,7 @@ export class CoursedetailsComponent implements OnInit {
   resourseAccord(courseResource, index) {
     if (courseResource) {
       courseResource.forEach((element, i) => {
-        if (index == i) {
+        if (index === i) {
           if (element.isOpen) {
             element.isOpen = false;
           } else {
@@ -1265,7 +1267,7 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   understoodClick(ux) {
-    if (this.userType == 'vocational') {
+    if (this.userType === 'vocational') {
     const current_Status = this.scromModuleData[0].childData[0].childData[0].status;
     this.topicInfo.status = current_Status;
     }
@@ -1388,7 +1390,7 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   tabClick(tab) {
-    if (tab.index == 1) {
+    if (tab.index === 1) {
       this.filterkey = 'Bookmarked';
       this.bkmrk_weekDisp = this.weekHolderUI + 1;
       this.bkmrk_week = undefined;
@@ -1601,7 +1603,7 @@ export class CoursedetailsComponent implements OnInit {
       ).subscribe((rdata: any) => {
         if (
           rdata?.errors &&
-          rdata?.errors[0]?.message == 'Request failed with status code 413'
+          rdata?.errors[0]?.message === 'Request failed with status code 413'
         ) {
           this.toastr.warning('Content limit exceeded!!');
         } else {

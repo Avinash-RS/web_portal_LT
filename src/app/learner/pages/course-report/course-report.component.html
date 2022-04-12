@@ -47,49 +47,47 @@
            </div>
        </mat-card>
         <mat-card class="selflearningCard">
-                <div class="card-head d-flex align-items-center justify-content-center">{{'Q&A Score' | translate}}</div>
-                  <div class="card-content d-flex align-items-center">
-                  <div class="graph-content">
-                    <circle-progress [title]="QAscore" [titleFontSize] = "10" [titleFontWeight] = "600" [showUnits]= "false" 
-                    [percent]="courseReportData.QA_Card.QA_points_percentage" [radius]=25  [space]=-6
-                    [outerStrokeGradient]=true [outerStrokeWidth]=6 [outerStrokeColor]="'#5850E0'"
-                    [outerStrokeGradientStopColor]="'#5850E0'" [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]=6
-                    [animation]="true" [animationDuration]="300" [responsive]="true" [showSubtitle]="false"></circle-progress>
-                  </div>
-                  <div class="text-content">
-                    <ul>
-                      <li>
-                       <label>{{'No. of questions asked' | translate}} </label> <span>{{courseReportData.QA_Card.QA_total_no_of_quetions}}</span>
-                      </li>
-                    </ul>
-                  </div>
+          <div class="card-head d-flex align-items-center justify-content-center">{{'Q&A Score' | translate}}</div>
+            <div class="card-content d-flex align-items-center">
+            <div class="graph-content">
+              <circle-progress [title]="QAscore" [titleFontSize] = "10" [titleFontWeight] = "600" [showUnits]= "false" 
+              [percent]="courseReportData.QA_Card.QA_points_percentage" [radius]=25  [space]=-6
+              [outerStrokeGradient]=true [outerStrokeWidth]=6 [outerStrokeColor]="'#5850E0'"
+              [outerStrokeGradientStopColor]="'#5850E0'" [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]=6
+              [animation]="true" [animationDuration]="300" [responsive]="true" [showSubtitle]="false"></circle-progress>
+            </div>
+            <div class="text-content">
+              <ul>
+                <li>
+                  <label>{{'No. of questions asked' | translate}} </label> <span>{{courseReportData.QA_Card.QA_total_no_of_quetions}}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="card-foot d-flex align-items-center">
+            <!-- <popover-content #QAPopover> -->
+            <div class="popoverInfoFinal">
+              <button class="popover-info"><span><img src="https://assets.lntedutech.com/application_images/Group 14025.svg" alt="" /></span></button>
+              <div class="popoverContainer">
+                <div class="calculation">{{'Calculation formula' | translate}}</div>
+                <div>
+                  <table>
+                    <tr>
+                      <th>{{'No. of questions' | translate}}</th>
+                      <th>{{'Score' | translate}}</th>
+                      <th>{{'Percentage' | translate}}</th>
+                    </tr>
+                    <tr *ngFor = "let row of QAPopoverContent">
+                      <td>{{row.ques}}</td>
+                      <td>{{row.score}}</td>
+                      <td>{{row.percentage}}</td>
+                    </tr>
+                  </table> 
                 </div>
-                <div class="card-foot d-flex align-items-center">
-                  <popover-content #QAPopover>
-                    <div class="popoverContainer">
-                      <div class="calculation">{{'Calculation formula' | translate}}</div>
-                      <div>
-                        <table>
-                          <caption></caption>
-                          <tr>
-                            <th>{{'No. of questions' | translate}}</th>
-                            <th>{{'Score' | translate}}</th>
-                            <th>{{'Percentage' | translate}}</th>
-                          </tr>
-                          <tr *ngFor = "let row of QAPopoverContent">
-                            <td>{{row.ques}}</td>
-                            <td>{{row.score}}</td>
-                            <td>{{row.percentage}}</td>
-                          </tr>
-                        </table> 
-                      </div>
-                    </div>
-                  </popover-content>
-                 <div>
-                  <button class="popover-info" popoverPlacement="right" [popover]="QAPopover"><span><img  src="https://assets.lntedutech.com/application_images/group-14025.webp" alt="" /></span></button>
-                 </div>
-                   <div>{{'Q&A score is based on the number of relevant questions you ask' | translate}}</div>
-                </div>
+              </div>
+            </div>
+              <div>{{'Q&A score is based on the number of relevant questions you ask' | translate}}</div>
+          </div>
         </mat-card>
       </div>
 
@@ -109,7 +107,7 @@
                 <mat-card class="week-card" *ngFor="let selfValue of courseReportData?.selflearning;let i = index" [ngClass]="selfValue.week == 'Week 8' || selfValue.week == 'Week 16' ? 'disable-card' : ''">
                   <ng-container *ngIf ="selfValue.weekwiseTask == '' ">
                       <div class="week-card-head d-flex">
-                        <popover-content #selfPopover>
+                        <!-- <popover-content #selfPopover>
                           <div class="popoverContainer">
                             <div class="items">{{'(A) Estimated Duration - ' | translate}}<span>{{selfValue.actualtopicduration}} {{'mins' | translate}}</span></div>
                             <div class="items">{{'(B) Completed Duration - ' | translate}}<span>{{selfValue.completedtopicduration}} {{'mins' | translate}}</span></div>
@@ -119,11 +117,23 @@
                             <div class="calcFormula">={{selfValue.calculation}}</div>
                             <div class="calcPercentage">= {{selfValue.selflearningscore}}</div>
                           </div>
-                        </popover-content>
+                        </popover-content> -->
                         <label>{{selfValue.week}}</label>
-                        <button class="popover-info" popoverPlacement="right" [popover]="selfPopover"><span>
-                          <img  src="https://assets.lntedutech.com/application_images/group-14025.webp" alt="" />
-                        </span></button>
+                        <div class="popoverInfoFinal">
+                          <button class="popover-info"><span>
+                            <img alt="" src="https://assets.lntedutech.com/application_images/Group 14025.svg" />
+                          </span>
+                          </button>
+                          <div class="popoverContainer">
+                            <div class="items">{{'(A) Estimated Duration - ' | translate}}<span>{{selfValue.actualtopicduration}} {{'mins' | translate}}</span></div>
+                            <div class="items">{{'(B) Completed Duration - ' | translate}}<span>{{selfValue.completedtopicduration}} {{'mins' | translate}}</span></div>
+                            <div class="items">{{'(C) No. of Topics - ' | translate}}<span>{{selfValue.no_of_topic}}</span></div>
+                            <div class="items">{{'(D) Completed Topics - ' | translate}}<span>{{selfValue.Completedfortheweek}}</span></div>
+                            <div class="calculation">{{'Calculation formula' | translate}}</div>
+                            <div class="calcFormula">={{selfValue.calculation}}</div>
+                            <div class="calcPercentage">= {{selfValue.selflearningscore}}</div>
+                          </div>
+                        </div>
                       </div>
                       <ul>
                           <li class="d-flex">
@@ -277,40 +287,42 @@
         <div class="finalScoreCard">
           <div class="d-flex">
             <h3>{{'Final Score' | translate}}</h3>
-            <button class="popoverInfoFinal" popoverPlacement="right" [popover]="finalPopover"><span>
-              <img  src="https://assets.lntedutech.com/application_images/group-14025.webp" alt="" />
-            </span></button>
-          </div>
-          <popover-content #finalPopover placement="right" [animation]="true" popoverSize="large">
-            <div style="width: 200px;">
-              <div style="color: red;">
-                {{'Calculation' | translate}}
-              </div>
-              <div style="color: #49AE31;">
-                = {{courseReportData.finalscore.calculation}}
-              </div>
-              <div style="color: #49AE31;">
-                = {{courseReportData.finalscore.rawscore}}
-              </div>
-              <div>
-                <table>
-                  <caption></caption>
-                    <tr>
-                      <td>{{'Score' | translate}}</td>
-                      <td>{{'Grade Point' | translate}}</td>
-                      <td>{{'Grade' | translate}}</td>
-                    </tr>
-                  <tbody>
-                    <tr style="color: red;text-align: center;" *ngFor="let value of courseReportData.finalscore.formula">
-                      <td>{{value.rawscore}}</td>
-                      <td>{{value.gradepoint}}</td>
-                      <td>{{value.grade}}</td>
-                    </tr>
-                  </tbody>
-                </table>
+            <div class="popoverInfoFinal">
+              <button class="popover-info">
+                <span> <img alt="" src="https://assets.lntedutech.com/application_images/Group 14025.svg" /> </span>
+              </button>
+              <div class="popoverContainer">
+                <div class="calculation">{{'Calculation' | translate}}</div>
+                <div style="color: #49AE31;">
+                  = {{courseReportData.finalscore.calculation}}
+                </div>
+                <div style="color: #49AE31;">
+                  = {{courseReportData.finalscore.rawscore}}
+                </div>
+                <div>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>{{'Score' | translate}}</th>
+                        <th>{{'Grade Point' | translate}}</th>
+                        <th>{{'Grade' | translate}}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let value of courseReportData.finalscore.formula">
+                        <td>{{value.rawscore}}</td>
+                        <td>{{value.gradepoint}}</td>
+                        <td>{{value.grade}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
-          </popover-content>
+          </div>
+          <!-- <popover-content #finalPopover placement="right" [animation]="true" popoverSize="large">
+            
+          </popover-content> -->
           <div class="finalScore d-flex justify-content-between align-items-center">
             <div class="progressFinal">
               <circle-progress [showUnits]= "false"  [percent]='courseReportData.finalscore.rawscore' [radius]=40 [space]=-6 [outerStrokeGradient]=true [outerStrokeWidth]=6 [outerStrokeColor]="'#2A4DC1'" [outerStrokeGradientStopColor]="'#0FD3D3'" [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]=6 [animation]="true" [animationDuration]="300" [showSubtitle]="false"></circle-progress>

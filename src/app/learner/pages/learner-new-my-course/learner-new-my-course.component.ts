@@ -8,7 +8,7 @@ import { CommonServicesService } from '@core/services/common-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { formatDate } from '@angular/common';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { environment } from '@env/environment';
 import { Router } from '@angular/router';
 import { DragScrollComponent } from 'ngx-drag-scroll';
@@ -34,6 +34,8 @@ export const MY_FORMATS = {
 };
 @Injectable()
 export class CustomDateFormatter extends CalendarDateFormatter {
+  // TODO: add explicit constructor
+
   weekViewColumnSubHeader({ date, locale, }: DateFormatterParams): string {
     return formatDate(date, 'dd', locale);
   }
@@ -78,8 +80,24 @@ export class CustomDateFormatter extends CalendarDateFormatter {
 })
 
 export class LearnerNewMyCourseComponent implements OnInit {
-  @ViewChild('completedTopics', { read: DragScrollComponent, static: false }) ds: DragScrollComponent;
-  @ViewChild('inProgress', { read: DragScrollComponent, static: false }) dsInProgress: DragScrollComponent;
+
+  constructor(private dialog: MatDialog, private router: Router,
+              public learnerService: LearnerServicesService,
+              private gs: GlobalServiceService, public CommonServices: CommonServicesService,
+              public translate: TranslateService) {
+    const lang = localStorage.getItem('language');
+    this.translate.use(lang ? lang : 'en');
+    this.userDetailes = this.gs.checkLogout();
+    if (!this.userDetailes?.is_password_updated) {
+      this.router.navigate(['/Learner/profile']);
+      return;
+    }
+    if (this.userDetailes) {
+      this.getDashboardMyCourse(this.userDetailes.user_id, this.userDetailes._id);
+    }
+  }
+  @ViewChild('completedTopics', { read: DragScrollComponent }) ds: DragScrollComponent;
+  @ViewChild('inProgress', { read: DragScrollComponent }) dsInProgress: DragScrollComponent;
   showJobRole = false;
   isReadMore = true;
   show = true;
@@ -178,7 +196,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
       enabled: true,
       displayColors: false,
       callbacks: {
-        label: function(tooltipItem, data) {
+        label(tooltipItem, data) {
           return  data['datasets'][0]['data'][tooltipItem['index']]['hourString'];
         }
       }
@@ -211,7 +229,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
           min: 0,
           max: 8,
           stepSize: 1,
-          callback: function(value) {
+          callback(value) {
             return value + '  ';
           }
         }
@@ -261,13 +279,13 @@ export class LearnerNewMyCourseComponent implements OnInit {
       footerMarginTop: 8,
       footerSpacing: 8,
       callbacks: {
-        label: function(tooltipItem, data) {
-          var text  = [];
+        label(tooltipItem, data) {
+          const text  = [];
           text.push('Self Learning :    ' + data['datasets'][0]['data'][tooltipItem['index']]['y'] + '%');
           return  text;
         },
-        footer: function(tooltipItem, data) {
-        var subtext = [];
+        footer(tooltipItem, data) {
+        const subtext = [];
         subtext.push('Modules                        ' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['module']['completedCount'] + '/' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['module']['totalCount']);
         subtext.push('Topics                           ' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['topic']['completedCount'] + '/' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['topic']['totalCount']);
         // subtext.push('Other Activities:   ');
@@ -291,7 +309,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
           size: 12,
         },
         formatter: (value, ctx) => {
-          let percentage = value.y + '%';
+          const percentage = value.y + '%';
           return percentage;
       },
       }
@@ -322,7 +340,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
           min: 0,
           max: 100,
           stepSize: 25,
-          callback: function(value) {
+          callback(value) {
             return value + '  ';
           }
         }
@@ -361,28 +379,14 @@ export class LearnerNewMyCourseComponent implements OnInit {
   currentYear: number;
   stepUrl;
 
-  constructor(private dialog: MatDialog, private router: Router,
-              public learnerService: LearnerServicesService,
-              private gs: GlobalServiceService, public CommonServices: CommonServicesService,
-              public translate: TranslateService) {
-    let lang = localStorage.getItem('language');
-    this.translate.use(lang ? lang : 'en');
-    this.userDetailes = this.gs.checkLogout();
-    if (!this.userDetailes?.is_password_updated) {
-      this.router.navigate(['/Learner/profile']);
-      return;
-    }
-    if (this.userDetailes) {
-      this.getDashboardMyCourse(this.userDetailes.user_id, this.userDetailes._id);
-    }
-  }
+  info = 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like). like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like). like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).';
 
   @HostListener('window:resize', ['$event'])
 
   ngOnInit() {
     // console.log('json', link );
     this.innerWidth = window.innerWidth;
-    let showAppBanner = localStorage.getItem('appBanner');
+    const showAppBanner = localStorage.getItem('appBanner');
     if (!showAppBanner) {
       this.openInfoPopup();
     }
@@ -401,7 +405,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
     //   this.getCountForCategories();
     // }, 500);
     this.getMyJobRole();
-    if (this.userDetailes.org_type != 'collegeconnect') {
+    if (this.userDetailes.org_type !== 'collegeconnect') {
       this.shotDotSearch = false;
     }
     this.getModuleStatus();
@@ -417,7 +421,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
     });
   }
 
-  //Recently completed topics
+  // Recently completed topics
   moveLeft() {
     this.ds.moveLeft();
   }
@@ -431,7 +435,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
     this.rightNavDisabled = reachesRightBound;
   }
 
-  //InProgress Module
+  // InProgress Module
   moveLeftInProgress() {
     this.dsInProgress.moveLeft();
   }
@@ -491,8 +495,6 @@ export class LearnerNewMyCourseComponent implements OnInit {
     this.isReadMore = !this.isReadMore;
   }
 
-  info = 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like). like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like). like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).';
-
   // NEW API T0 GET DASHBOARD DATA
 
   getDashboardMyCourse(userId, userObjId) {
@@ -511,7 +513,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
     }
     let jobRoleId = this.jobroleCategoryId;
     let jobRoleIdSEQ = this.jobroleCategoryId;
-    //condition for vocational & course Sequence
+    // condition for vocational & course Sequence
     if (this.jobroleCategoryId === 'All') {
       jobRoleIdSEQ = 'all';
     } else {
@@ -678,16 +680,16 @@ export class LearnerNewMyCourseComponent implements OnInit {
       this.dateSelected = moment(this.viewDate).format('YYYY-MM-DD');
       this.getLearnerActivity(this.viewDate);
       // tslint:disable-next-line: no-var-keyword
-      var parentcal = document.getElementsByClassName('cal-day-headers');
+      const parentcal = document.getElementsByClassName('cal-day-headers');
       parentcal[0].childNodes.forEach((element: any) => {
                   if (element?.style) {
                      // tslint:disable-next-line: no-var-keyword
-                     var currdate =  moment(this.viewDate).format('DD');
+                     const currdate =  moment(this.viewDate).format('DD');
                      // tslint:disable-next-line: no-var-keyword
-                     var ele = element.children[2].innerHTML;
+                     const ele = element.children[2].innerHTML;
                      element.classList.remove('cal-today');
 
-                     if (currdate == ele) {
+                     if (currdate === ele) {
                       element.classList.add('cal-today');
                      }
                   }
@@ -698,7 +700,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
   highlightSelectday(data) {
     // tslint:disable-next-line: no-var-keyword
     // tslint:disable-next-line: prefer-const
-    var parentcal = document.getElementsByClassName('cal-day-headers');
+    const parentcal = document.getElementsByClassName('cal-day-headers');
     parentcal[0].childNodes.forEach((element: any) => {
                 if (element?.style) {
                    element.classList.remove('cal-today');
@@ -749,7 +751,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
     if (this.vocationalselectjobRole?.length > 0) {
       this.vocationalselectjobRole.forEach((jobRole) => {
         // console.log(jobRole, '349258324098520');
-        if (jobRole.jobroleCategoryId == event.value) {
+        if (jobRole.jobroleCategoryId === event.value) {
           this.tooltipJobRole = jobRole.jobroleCategoryName;
         }
       });
@@ -760,16 +762,6 @@ export class LearnerNewMyCourseComponent implements OnInit {
     if (event.source.selected) {
       this.selectedJobRoleData = value;
     }
-  }
-
-  openGallery(c) {
-    this.router.navigate(['/Learner/coursegallery'], {
-      queryParams:
-      {
-        id: btoa(c.course_id),
-        name: c.course_name
-      }
-    });
   }
 
   openReport(c) {
@@ -854,9 +846,9 @@ getVideoLink(course) {
 // Date initialize
 setdateForprogress() {
   // week wise date
- var curr = new Date;
- var first = curr.getDate() - curr.getDay();
- var firstday = new Date(curr.setDate(first)).toUTCString();
+ const curr = new Date();
+ const first = curr.getDate() - curr.getDay();
+ const firstday = new Date(curr.setDate(first)).toUTCString();
  this.weekWiseDate = new Date(firstday, );
  // Course Start & End date
  this.courseStartDate  = this.UserDetails.created_on;
@@ -906,7 +898,7 @@ getWeekCourseData() {
   this.weekWiseChartDatalabel = [];
   this.weekWiseChartData = [];
   // tslint:disable-next-line: no-var-keyword
-  var myFormattedDate = moment(this.weekWiseDate).format('yyyy-MM-DD');
+  const myFormattedDate = moment(this.weekWiseDate).format('yyyy-MM-DD');
   this.learnerService.getweekWiseCourseChart('', this.userId, myFormattedDate, 'allcourse').subscribe((result: any) => {
 
     if (result.data.weekWiseCourseChart.success) {

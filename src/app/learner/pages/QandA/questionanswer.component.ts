@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef} from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { ToastrService } from 'ngx-toastr';
@@ -137,7 +137,7 @@ export class QuestionanswerComponent implements OnInit {
       obj.innerHTML = end;
     } else {
       const range = end - start;
-      var current = start;
+      let current = start;
       const increment = end > start ? 1 : -1;
       const stepTime = Math.abs(Math.floor(duration / range));
 

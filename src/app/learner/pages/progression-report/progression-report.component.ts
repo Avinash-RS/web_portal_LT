@@ -5,7 +5,9 @@ import { CommonServicesService } from '@core/services/common-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { DatePipe } from '@angular/common';
@@ -38,9 +40,9 @@ export const MY_FORMATS = {
   ]
 })
 export class ProgressionReportComponent implements OnInit {
-  @ViewChild('firstPaginator', { static: false }) firstPaginator: MatPaginator;
-  @ViewChild('secondPaginator', { static: false }) secondPaginator: MatPaginator;
-  @ViewChild('thirdPaginator', { static: false }) thirdPaginator: MatPaginator;
+  @ViewChild('firstPaginator') firstPaginator: MatPaginator;
+  @ViewChild('secondPaginator') secondPaginator: MatPaginator;
+  @ViewChild('thirdPaginator') thirdPaginator: MatPaginator;
   assignmentPage: Observable<any>;
   performPage: Observable<any>;
   projectPage: Observable<any>;
@@ -56,7 +58,7 @@ export class ProgressionReportComponent implements OnInit {
       enabled: true,
       displayColors: false,
       callbacks: {
-        label: function(tooltipItem, data) {
+        label(tooltipItem, data) {
           return  data['datasets'][0]['data'][tooltipItem['index']]['mins'] + ' mins';
         }
       }
@@ -81,7 +83,7 @@ export class ProgressionReportComponent implements OnInit {
           min: 0,
           // max: 180,
           stepSize: 1,
-          callback: function(value) {
+          callback(value) {
             return value + '  ';
           }
         }
@@ -151,7 +153,7 @@ export class ProgressionReportComponent implements OnInit {
     public CommonServices: CommonServicesService,
     public route: Router, private activeRoute: ActivatedRoute,
     public translate: TranslateService) {
-    let lang = localStorage.getItem('language');
+    const lang = localStorage.getItem('language');
     this.translate.use(lang ? lang : 'en');
     // const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().query &&
     //   this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.data);
@@ -174,15 +176,15 @@ export class ProgressionReportComponent implements OnInit {
     this.getWeekCourseData();
   }
   setStartdate() {
-    var curr = new Date;
-    var first = curr.getDate() - curr.getDay();
-    var firstday = new Date(curr.setDate(first)).toUTCString();
+    const curr = new Date();
+    const first = curr.getDate() - curr.getDay();
+    const firstday = new Date(curr.setDate(first)).toUTCString();
     this.weekWiseDate = new Date(firstday);
   }
   getWeekCourseData() {
     this.weekWiseChartDatalabel = [];
     this.weekWiseChartData = [];
-    var myFormattedDate = moment(this.weekWiseDate).format('yyyy-MM-DD');
+    const myFormattedDate = moment(this.weekWiseDate).format('yyyy-MM-DD');
     this.learnerService.getweekWiseCourseChart(this.courseId, this.userId, myFormattedDate, '').subscribe((result: any) => {
       if (result.data.weekWiseCourseChart.success) {
         this.totalhoursSpend = result.data.weekWiseCourseChart.data.totalhoursSpend;
@@ -215,7 +217,7 @@ export class ProgressionReportComponent implements OnInit {
   getPieChartData() {
 
     // activity chart data
-    let defaultData = {
+    const defaultData = {
               ' assignment_total ': 0,
               ' assignment_completed ': 0,
               ' project_total ': 0,
@@ -235,11 +237,11 @@ export class ProgressionReportComponent implements OnInit {
 
   tabChanged(event) {
     this.currentTab = event.index;
-    if (this.currentTab == 0) {
+    if (this.currentTab === 0) {
       this.getAssignmentmoduleData();
-    } else if (this.currentTab == 1) {
+    } else if (this.currentTab === 1) {
       this.getprojectActivityData();
-    } else if (this.currentTab == 2) {
+    } else if (this.currentTab === 2) {
       this.getperformActivityData();
     }
   }
@@ -294,7 +296,7 @@ export class ProgressionReportComponent implements OnInit {
       this.page, this.noofItems).subscribe((data: any) => {
       if (data.data.getperformActivityData.success) {
         this.performContent = data?.data?.getperformActivityData?.data;
-        var performIteration = [];
+        const performIteration = [];
         this.performContent.forEach((value) => {
           value.performActivity.iterationDetails.forEach(element => {
             element.activityenddate = value.performActivity.activityenddate;
@@ -343,8 +345,8 @@ export class ProgressionReportComponent implements OnInit {
     this.showProgReport = false;
     this.learnerService.getProgressionData(this.userId, this.courseId).subscribe((data: any) => {
       this.apidata = data.data.getCourseReportByUserid.data.module;
-      if (this.UserDetails?.org_type == 'Corporate') {
-        this.apidata = this.apidata.filter(e => e.modulestatus != 'false');
+      if (this.UserDetails?.org_type === 'Corporate') {
+        this.apidata = this.apidata.filter(e => e.modulestatus !== 'false');
       }
       if (this.apidata && this.apidata[0]?.moduleName) {
         this.showWeek = false;
@@ -365,9 +367,9 @@ export class ProgressionReportComponent implements OnInit {
   }
 
   getDoughnutChartData() {
-    this.learnerService.getSelfLearningdata('topic',this.userId, this.courseId).subscribe((data: any) => {
+    this.learnerService.getSelfLearningdata('topic', this.userId, this.courseId).subscribe((data: any) => {
       console.log(data);
-      if(data?.data?.selfLearningdatabyUserId?.success) {
+      if (data?.data?.selfLearningdatabyUserId?.success) {
         this.doughnutChartData = data?.data?.selfLearningdatabyUserId.data[0];
         setTimeout(() => {
           this.createChart();
@@ -377,9 +379,9 @@ export class ProgressionReportComponent implements OnInit {
 
   }
   createChart() {
-    let data_load  = [];
-    let data_labels = [];
-    let data_colors = [];
+    const data_load  = [];
+    const data_labels = [];
+    const data_colors = [];
     if (this.doughnutChartData.completed) {
       data_load.push(this.doughnutChartData.completed);
       data_labels.push('Completed');
@@ -395,11 +397,12 @@ export class ProgressionReportComponent implements OnInit {
       data_labels.push('Yet to start');
       data_colors.push('#CCCCCC');
     }
-    if (this.doughnutChartData.completed == 0 && this.doughnutChartData.inprogress == 0 && this.doughnutChartData.yettostart == 0) {
+    if (this.doughnutChartData.completed === 0 && this.doughnutChartData.inprogress === 0 && this.doughnutChartData.yettostart === 0) {
       data_load.push(100);
       data_labels.push('Yet to start');
       data_colors.push('#CCCCCC');
     }
+    // tslint:disable-next-line:no-unused-expression
     new Chart('piechart', {
       type: 'doughnut',
       data: {
@@ -441,8 +444,8 @@ export class ProgressionReportComponent implements OnInit {
               size: 12,
               weight: 'bold'
             },
-            formatter: (value, ctx) => {
-              let percentage = value + '%  ';
+            formatter: (value: string) => {
+              const percentage = value + '%  ';
               return percentage;
             },
           }
@@ -460,7 +463,7 @@ export class ProgressionReportComponent implements OnInit {
           text: ''
         }, tooltips: {
           callbacks: {
-            label: function(tooltipItem, data) {
+            label(tooltipItem: { [x: string]: string | number; }, data: { [x: string]: { [x: string]: { [x: string]: string; }; }[]; }) {
               return data['labels'][tooltipItem['index']] + ': ' + data['datasets'][0]['data'][tooltipItem['index']] + '%';
             }
           }

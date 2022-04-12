@@ -9,7 +9,10 @@ import { CoreModule } from '@core/core.module';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Apollo, ApolloModule } from 'apollo-angular';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { MatMenuModule, MatSidenavModule, MatExpansionModule, MatStepperModule} from '@angular/material';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatStepperModule } from '@angular/material/stepper';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { NgxMaskModule } from 'ngx-mask';
 import { MaterialModule } from '@core/material.module';
@@ -30,7 +33,6 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { InstructorLedComponent } from './pages/instructor-led/instructor-led.component';
 import { DiscussionForumComponent } from './pages/discussion-forum/discussion-forum.component';
 import { ActivitiesComponent } from './pages/activities/activities.component';
-import { AssignmentComponent } from './pages/assignment/assignment.component';
 import { ProjectMobileComponent } from './pages/project-mobile/project-mobile.component';
 import { PerformancePageMobileComponent } from './pages/performance-page-mobile/performance-page-mobile.component';
 import { CourseGalleryComponent } from './pages/course-gallery/course-gallery.component';
@@ -43,6 +45,10 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { DateAdapter as AngularCalendarDateAdapter } from 'angular-calendar';
 import { UpskillCalendarComponent } from './pages/upskill-calendar/upskill-calendar.component';
 import { CalendarFilterComponent } from './pages/calendar-filter/calendar-filter.component';
+import { QuizReportComponent } from './pages/quiz-report/quiz-report.component';
+import 'ag-grid-enterprise';
+import { AgGridModule } from 'ag-grid-angular';
+
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
 }
@@ -106,6 +112,11 @@ const routes: Routes = [
     data: { animation: 'progressionReport' , title: 'Progression Report'}
   },
   {
+    path: 'quizreport',
+    component: QuizReportComponent,
+    data: { animation: 'quizreport' , title: 'Quiz Report'}
+  },
+  {
     path: 'questionanswer',
     component: QuestionanswerComponent,
     data: { animation: 'questionanswer', title: 'Question and Answer'}
@@ -117,7 +128,6 @@ const routes: Routes = [
     InstructorLedComponent,
     DiscussionForumComponent,
     ActivitiesComponent,
-    AssignmentComponent,
     ProjectMobileComponent,
     PerformancePageMobileComponent,
     CourseGalleryComponent,
@@ -129,7 +139,8 @@ const routes: Routes = [
     ProgressionReportComponent,
     QuestionanswerComponent,
     UpskillCalendarComponent,
-    CalendarFilterComponent
+    CalendarFilterComponent,
+    QuizReportComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   imports: [
@@ -164,6 +175,7 @@ const routes: Routes = [
     PdfViewerModule,
     NgxSkeletonLoaderModule,
     NgxPaginationModule,
+    AgGridModule.withComponents([]),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

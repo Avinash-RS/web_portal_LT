@@ -21,7 +21,6 @@ import { CoreModule } from '@core/core.module';
 import { MaterialModule } from '@core/material.module';
 import { AuthGuard } from '@core/services/_helpers/auth.guard';
 import { ProfileComponent } from '@learner/pages/profile/profile.component';
-import { TermsconditionsComponent } from '@learner/pages/termsconditions/termsconditions.component';
 import { NgOtpInputModule } from 'ng-otp-input';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -37,7 +36,7 @@ import { ViewAllnotificationsComponent } from './pages/view-allnotifications/vie
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatTooltipModule } from '@angular/material';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { VideoPreviewModalComponent } from './pages/video-preview-modal/video-preview-modal.component';
@@ -83,7 +82,6 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     ProfileComponent,
-    TermsconditionsComponent,
     ForbiddenComponent,
     ViewAllnotificationsComponent,
     VideoPreviewModalComponent,
