@@ -11,7 +11,7 @@
       </span>
     </span>
   </div>
-  <div class="row details-row d-flex">
+  <div class="details-row">
 
     <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 order-2 order-sm-2 order-lg-1 align-self-end third">
       <div class="row info-row" *ngIf="userData">
@@ -131,8 +131,8 @@
         <hr *ngIf="!cannotEdit" class="p-b-10px">
         <!-- Location Starts -->
         <label class="p-b-10px" class="f_size_19"> {{'Location' | translate}} <span class="mand"> *</span></label>
-        <div class="row p-b-10px locationFields">
-          <div class="col-md-4 col-lg-4 col-xl-3 col-sm-12 col-12">
+        <div class="locationFields">
+          <div class="rowWrapper">
             <div class="form-group width_100 p-b-10px">
               <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs lap_s95' : 'inputs lap_s95'"  [placeholder]="'Country' | translate" formControlName="country" name="country" (selectionChange)="getAllState()">
                 <mat-option [value]="country._id" *ngFor="let country of countryValue">
@@ -141,7 +141,7 @@
               </mat-select>
             </div>
           </div>
-          <div class="col-md-4 col-lg-4 col-xl-3 col-sm-12 col-12 p-b-10px">
+          <div class="rowWrapper">
             <div class="form-group width_100">
               <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs lap_s95' : 'inputs lap_s95'" [placeholder]="'State' | translate" formControlName="state" name="state"  (selectionChange)="getDistrict()">
                 <mat-option [value]="state._id" *ngFor="let state of stateValue">
@@ -150,7 +150,7 @@
               </mat-select>
             </div>
           </div>
-          <div class="col-md-4 col-lg-4 col-xl-3 col-sm-12 col-12 p-b-10px">
+          <div class="rowWrapper">
             <div class="form-group width_100">
               <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs lap_s95' : 'inputs lap_s95'" [placeholder]="'District' | translate" formControlName="city_town" name="City">
                 <mat-option [value]="city._id" *ngFor="let city of cityValue">
