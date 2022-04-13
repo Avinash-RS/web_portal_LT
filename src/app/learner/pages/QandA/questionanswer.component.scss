@@ -356,8 +356,21 @@
 .cancelSubmit {
   margin-top: 30px;
   button {
-    margin-top: 0;
+    cursor: pointer;
+    width: 49.5%;
+    padding: 0.75em  0.375em;
+    border-radius: 5px;
     font-size: 14px;
+  }
+  .cancelButton {
+    color: $label2;
+    border: 1px solid $label2;
+    background-color: $color-white;
+  }
+  .submitButton {
+    color: $color-white;
+    background-color: $lxp-theme-green;
+    border: 1px solid $lxp-theme-green;
   }
 }
 ::ng-deep.QAContainer {
