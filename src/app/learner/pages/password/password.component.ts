@@ -54,9 +54,9 @@ export class PasswordComponent implements OnInit {
                     this.expiryMessage = data?.data?.getuserRecordbasedonSecretKey?.message ?
                     data?.data?.getuserRecordbasedonSecretKey?.message : '';
                     var userValue = data?.data?.getuserRecordbasedonSecretKey?.data;
-                    if (userValue[' email ']) {
-                      this.emailid =  userValue[' email '];
-                      this.userid = userValue[' user_id '];
+                    if (userValue['email']) {
+                      this.emailid =  userValue['email'];
+                      this.userid = userValue['user_id'];
                       localStorage.setItem('key', this.userid);
                     }
                 });

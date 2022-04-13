@@ -202,7 +202,7 @@ monthChange(value) {
               return element == color;
             });
             if (found) {
-              dayEvent[' style'].display = 'none';
+              dayEvent['style'].display = 'none';
             } else {
               duplicateColor.push(color);
             }
