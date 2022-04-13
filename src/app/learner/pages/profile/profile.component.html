@@ -98,7 +98,7 @@
           <mat-icon [ngClass]="cannotEdit ? 'm-n f_size_17 bb' : 'f_size_17 bb'" style="width: 17px;" class="tooltip-350" [tooltip]="'Enter your department name'| translate" placement="bottom"> create</mat-icon>
         </div>
       </div>
-    </div>
+    </div> 
   </div>
 
   <div class="container-reg200 fourth">
@@ -142,7 +142,7 @@
             </div>
           </div>
           <div class="rowWrapper">
-            <div class="form-group width_100">
+            <div class="form-group width_100 p-b-10px">
               <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs lap_s95' : 'inputs lap_s95'" [placeholder]="'State' | translate" formControlName="state" name="state"  (selectionChange)="getDistrict()">
                 <mat-option [value]="state._id" *ngFor="let state of stateValue">
                   {{state.statename}}
@@ -151,7 +151,7 @@
             </div>
           </div>
           <div class="rowWrapper">
-            <div class="form-group width_100">
+            <div class="form-group width_100 p-b-10px">
               <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs lap_s95' : 'inputs lap_s95'" [placeholder]="'District' | translate" formControlName="city_town" name="City">
                 <mat-option [value]="city._id" *ngFor="let city of cityValue">
                   {{city.districtname}}
@@ -161,7 +161,7 @@
           </div>
         </div>
         <!-- //.Button -Submit -->
-        <div class="row" *ngIf="!cannotEdit">
+        <div class="submitbtnArea" *ngIf="!cannotEdit">
           <button mat-raised-button class="submit f_size_17 color_white f_wt_400" [disabled]="profileForm.invalid"
             (click)="updateProfile()">{{'SAVE' | translate}}</button>
         </div>

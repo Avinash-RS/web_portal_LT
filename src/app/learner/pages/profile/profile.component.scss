@@ -16,16 +16,18 @@
   justify-content: center;
   .container-reg200 {
     padding: 35px 15px;
-    background-color: transparent;
+    background-color: $color-white;
     @media only screen and (min-width:992px) {
       padding: 35px;
     }
-    .dis {
-      background-color: $color-white !important;
-    }
+    // .dis {
+    //   background-color: $color-white !important;
+    // }
   }
 }
-
+.center_align {
+  text-align: center;
+}
 .certificateWrapper {
   display: flex;
   flex-direction: column;
@@ -206,8 +208,19 @@
   }
 }
 .genderRow {
-  margin-left: -15px !important;
-  margin-right: -15px !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 -15px 24px -15px;
+  .genderCol,.languagesKnown {
+    width: 100%;
+    @include md {
+      width: 50%;
+    }
+    .form-group,mat-select {
+      margin-top: 0.75em;
+    }
+  }
 }
 
 @media screen and (min-width:270px) and (max-width:335px) {
@@ -293,11 +306,12 @@
   }
 
   .details-row {
+    position: relative;
     display: flex;
     margin-top: -15% !important;
     width: 100%;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
     padding: 10px 15px 20px 15px;
   }
@@ -342,8 +356,12 @@
   flex-wrap: wrap;
   margin-top: 0.75em;
   .rowWrapper {
-    flex: 0 0 25%;
-    max-width: 25%;
+    flex: 0 0 100%;
+    max-width: 100%;
+    @include md {
+      flex: 0 0 25%;
+      max-width: 25%;
+    }
   }
 }
 .width_100 {
@@ -573,13 +591,17 @@
   }
 
   .details-row {
+    position: relative;
     display: flex;
     margin-top: -8% !important;
     width: 100%;
     flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 35px 35px 35px;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 10px 40px 35px 40px;
+    .first,.second,.third {
+      width: 33%;
+    }
   }
 
 }
@@ -660,9 +682,9 @@ div.account {
   // margin-right: 15px;
 }
 
-// .p-b-10px {
-//   padding-bottom: 15px !important;
-// }
+.p-b-10px {
+  padding-bottom: 15px !important;
+}
 
 .head {
   font-weight: lighter !important;
@@ -769,16 +791,21 @@ div.account {
   margin-bottom: 5px;
 }
 
-.submit {
-  width: 25%;
-  background-color: $lxp-theme-green;
-  margin: auto;
-  height: 45px;
-  letter-spacing: 1px;
-  border-radius: 50px !important;
-  font-size: 16px;
-
+.submitbtnArea {
+  text-align: center;
+  margin-top: 1.5em;
+  .submit {
+    width: 25%;
+    background-color: $lxp-theme-green;
+    margin: auto;
+    height: 45px;
+    letter-spacing: 1px;
+    border-radius: 50px !important;
+    font-size: 16px;
+  
+  }
 }
+
 
 .errspan {
   float: right;
