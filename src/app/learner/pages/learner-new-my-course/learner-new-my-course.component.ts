@@ -841,6 +841,10 @@ getVideoLink(course) {
     window.open(environment.resourcelinkurl +"?course=" + course, 'blank').focus();
 }
 
+programReport() {
+  this.router.navigate(['/Learner/programreport'], {})
+}
+
 //Date initialize
 setdateForprogress(){
   //week wise date

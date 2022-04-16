@@ -46,6 +46,7 @@ import { CalendarFilterComponent } from './pages/calendar-filter/calendar-filter
 import { QuizReportComponent } from './pages/quiz-report/quiz-report.component';
 import 'ag-grid-enterprise';
 import { AgGridModule } from 'ag-grid-angular';
+import { ProgramReportComponent } from './pages/program-report/program-report.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -116,6 +117,11 @@ const routes: Routes = [
     data: { animation: 'quizreport' , title: 'Quiz Report'}
   },
   {
+    path: 'programreport',
+    component: ProgramReportComponent,
+    data: { animation: 'programreport' , title: 'Program Report'}
+  },
+  {
     path: 'questionanswer',
     component: QuestionanswerComponent,
     data: { animation: 'questionanswer', title: 'Question and Answer'}
@@ -140,7 +146,8 @@ const routes: Routes = [
     QuestionanswerComponent,
     UpskillCalendarComponent,
     CalendarFilterComponent,
-    QuizReportComponent
+    QuizReportComponent,
+    ProgramReportComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   imports: [

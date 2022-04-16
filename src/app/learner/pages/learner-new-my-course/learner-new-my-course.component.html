@@ -327,6 +327,12 @@
                                     <span>{{'Reference video links' | translate}}</span> 
                                 </h4>
                             </div>
+                            <div class="programReport" *ngIf="UserDetails.org_type === 'Corporate'" (click)="programReport()">
+                                <h4>
+                                    <em class="lxp-video_links"></em>
+                                    <span>{{'Program Report' | translate}}</span> 
+                                </h4>
+                            </div>
                         </div>
 
                         <mat-tab-group #tabs (selectedTabChange)="courseTabChange($event,userDetailes.user_id,userDetailes._id);" [(selectedIndex)]="selectedIndex">
