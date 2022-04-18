@@ -96,6 +96,24 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+  .lxp-TestName:before {
+    content: "\e971";
+  }
+  .lxp-ThumpsUp:before {
+    content: "\e972";
+  }
+  .lxp-ThumpsDown:before {
+    content: "\e973";
+  }
+  .lxp-Score:before {
+    content: "\e974";
+  }
+  .lxp-Indicator:before {
+    content: "\e975";
+  }
+  .lxp-Rating:before {
+    content: "\e976";
+  }
   .lxp-Quiz_Report:before {
     content: "\e970";
   }
