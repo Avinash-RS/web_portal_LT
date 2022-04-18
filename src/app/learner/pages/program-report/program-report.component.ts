@@ -1,3 +1,4 @@
+import { BreakpointObserver, BreakpointState } from "@angular/cdk/layout";
 import { Component, OnInit } from "@angular/core";
 
 @Component({
@@ -15,6 +16,7 @@ export class ProgramReportComponent implements OnInit {
     "Activity Report",
     "Quiz Report"
   ]
+  isDesktop:Boolean = false;
   courses:any = [
     {label:"All Courses", id:"all"},
     {label:"course1", id:"course1"},
@@ -22,11 +24,21 @@ export class ProgramReportComponent implements OnInit {
     {label:"course3", id:"course3"},
   ];
   courseValue ="all";
-  constructor() { 
+  constructor(public breakpointObserver: BreakpointObserver) { 
 
   }
 
   ngOnInit() {
-
+    this.breakPoints();
+  }
+  breakPoints() {
+    this.breakpointObserver.observe(['(min-width: 720px)']).subscribe((state: BreakpointState) => {
+      if (state.matches) {
+        this.isDesktop = true;
+      }
+      else {
+        this.isDesktop = false;
+      }
+    });
   }
 }

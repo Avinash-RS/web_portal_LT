@@ -140,8 +140,14 @@
                 </mat-accordion>                  
             </div>
         </div>
+        <div *ngIf="!isDesktop">
+            <ng-container *ngTemplateOutlet="dropDown"></ng-container>
+        </div>
     </div>
     <div class="rightContainer">
+        <div *ngIf="isDesktop">
+            <ng-container *ngTemplateOutlet="dropDown"></ng-container>
+        </div>
         <div class="desktopWrapper jobRole">
             <div class="vocationalJobRole" style="display: inline-block;">
               <mat-form-field appearance="fill" [(ngModel)]="courses">
@@ -151,8 +157,8 @@
                 </mat-select>
               </mat-form-field>
             </div>
-          </div>
-          <div class="reportListContainer">
+        </div>
+        <div class="reportListContainer">
             <ul>
                 <li *ngFor="let item of reportList">
                     <div class="reportItem">
@@ -160,11 +166,17 @@
                     </div>
                 </li>
             </ul>
-          </div>
-          <div class="rightImageContainer">
+        </div>
+        <div class="rightImageContainer">
             <figure>
                 <img src="../../../../assets/images/milestoneright.svg" alt="">
             </figure>
-          </div>
+        </div>
     </div>
 </div>
+
+<ng-template #dropDown>
+    <div>
+        text
+    </div>
+</ng-template>
