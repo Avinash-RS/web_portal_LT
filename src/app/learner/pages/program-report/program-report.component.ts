@@ -15,6 +15,13 @@ export class ProgramReportComponent implements OnInit {
     "Activity Report",
     "Quiz Report"
   ]
+  courses:any = [
+    {label:"All Courses", id:"all"},
+    {label:"course1", id:"course1"},
+    {label:"course2", id:"course2"},
+    {label:"course3", id:"course3"},
+  ];
+  courseValue ="all";
   constructor() { 
 
   }

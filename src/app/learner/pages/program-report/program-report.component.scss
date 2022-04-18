@@ -181,17 +181,27 @@
             font-size: 0.9375em;
             font-weight: 500;
             padding: 1em;
-            color: #222222;
-            background-color: #F9F9F9;
-            box-shadow: 0px 1px 3px #00000029;
             border-radius: 5px;
             transition: 0.3s ease-in-out;
             margin-bottom: 0.75em;
+            // background-color: #F9F9F9;
+            box-shadow: 0px 1px 3px #00000029;
             border-left: 5px solid #1B4E9B;
+            background: linear-gradient(to right, #1B4E9B 50%, #F9F9F9 50%);
+            background-size: 200% 100%;
+            background-position: right bottom;
+            transition: all .5s ease-out;
+            span {
+              color: #222222;
+              transition: all .6s ease-out;
+            }
             &:hover {
-              color: $color-white;
-              background-color: #1B4E9B;
+              // background-color: #1B4E9B;
               border-left: 5px solid #27BBEE;
+              background-position: left bottom;
+              span {
+                color: $color-white;
+              }
             }
            }
          }
