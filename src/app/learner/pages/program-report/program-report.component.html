@@ -36,14 +36,50 @@
             </div>
             <div class="assessmentDetails">
                 <h5>Assessment Details</h5>
-                <mat-accordion>
+                <mat-accordion class="expansionPanel">
                     <mat-expansion-panel hideToggle>
                         <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            Personal data
-                        </mat-panel-title>
+                            <mat-panel-title>
+                                <div class="title d-flex align-items-center">
+                                    <div class="left">
+                                        <em class="lxp-TestName"></em>
+                                    </div>
+                                    <div class="right d-flex">
+                                        <span>Test Name:</span>
+                                        <h6>Milestone 1</h6>
+                                    </div>
+                                </div>
+                            </mat-panel-title>
                             <mat-panel-description>
-                                Type your name and age
+                                <div class="status d-flex align-items-center">
+                                    <div class="score average d-flex align-items-center">
+                                        <div class="left">
+                                            <em class="lxp-Score"></em>
+                                        </div>
+                                        <div class="right d-flex">
+                                            <span>Score:</span>
+                                            <h6>43/100</h6>
+                                        </div>
+                                    </div>
+                                    <div class="rating average d-flex align-items-center">
+                                        <div class="left">
+                                            <em class="lxp-Rating"></em>
+                                        </div>
+                                        <div class="right d-flex">
+                                            <span>Rating:</span>
+                                            <h6>Average</h6>
+                                        </div>
+                                    </div>
+                                    <div class="completion d-flex align-items-center">
+                                        <div class="left">
+                                            <em class="lxp-Completion"></em>
+                                        </div>
+                                        <div class="right d-flex">
+                                            <span>Completion:</span>
+                                            <h6>Completed</h6>
+                                        </div>
+                                    </div>
+                                </div>
                             </mat-panel-description>
                         </mat-expansion-panel-header>
                   
@@ -55,10 +91,46 @@
                     <mat-expansion-panel hideToggle>
                         <mat-expansion-panel-header>
                             <mat-panel-title>
-                                Self aware panel
+                                <div class="title d-flex align-items-center">
+                                    <div class="left">
+                                        <em class="lxp-TestName"></em>
+                                    </div>
+                                    <div class="right d-flex">
+                                        <span>Test Name:</span>
+                                        <h6>Milestone 1</h6>
+                                    </div>
+                                </div>
                             </mat-panel-title>
                             <mat-panel-description>
-                                Currently I am {{panelOpenState ? 'open' : 'closed'}}
+                                <div class="status d-flex align-items-center">
+                                    <div class="score good d-flex align-items-center">
+                                        <div class="left">
+                                            <em class="lxp-Score"></em>
+                                        </div>
+                                        <div class="right d-flex">
+                                            <span>Score:</span>
+                                            <h6>78/100</h6>
+                                        </div>
+                                    </div>
+                                    <div class="rating good d-flex align-items-center">
+                                        <div class="left">
+                                            <em class="lxp-Rating"></em>
+                                        </div>
+                                        <div class="right d-flex">
+                                            <span>Rating:</span>
+                                            <h6>Good</h6>
+                                        </div>
+                                    </div>
+                                    <div class="completion d-flex align-items-center">
+                                        <div class="left">
+                                            <em class="lxp-Completion"></em>
+                                        </div>
+                                        <div class="right d-flex">
+                                            <span>Completion:</span>
+                                            <h6>Completed</h6>
+                                        </div>
+                                    </div>
+                                </div>
                             </mat-panel-description>
                         </mat-expansion-panel-header>
                         <div class="bodyContent">

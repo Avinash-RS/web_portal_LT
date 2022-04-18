@@ -96,6 +96,9 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+  .lxp-Completion:before {
+    content: "\e977";
+  }
   .lxp-TestName:before {
     content: "\e971";
   }
