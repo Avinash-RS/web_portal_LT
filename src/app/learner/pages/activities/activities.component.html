@@ -108,7 +108,7 @@
                                 </div>
                               </div>
                               <div class="row ml-0 mr-0 carouselRow">
-                                <div class="col-12 text-center mt-2 mb-2 pl-0 pr-0">
+                                <div class="materialTxt">
                                   <span class="carouselText" *ngIf="material.filename?.length > 19"
                                     matTooltip="{{material.filename}}" matTooltipClass="custom-mat-tooltip">{{(material.filename| slice:0:20)+'...'}}</span>
                                   <span class="carouselText" *ngIf="material.filename?.length < 19">{{material.filename}}</span>
@@ -532,7 +532,7 @@
                                 </div>
                               </div>
                               <div class="row ml-0 mr-0 carouselRow">
-                                <div class="col-12 text-center mt-2 mb-2 pl-0 pr-0">
+                                <div class="materialTxt">
                                   <span class="carouselText" *ngIf="material.filename?.length > 19"
                                     matTooltip="{{material.filename}}" matTooltipClass="custom-mat-tooltip">{{(material.filename| slice:0:20)+'...'}}</span>
                                   <span class="carouselText" *ngIf="material.filename?.length < 19">{{material.filename}}</span>
@@ -606,7 +606,7 @@
                                   <em class="lxp-pdf pdfIcon"*ngIf="video.doc_type =='application/pdf' || video.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"></em>
                                 </div>
                                 <div (mouseleave)="hover = false" [ngClass]="hover && mouseOverIndex == i ? 'row ml-0 mr-0 carouselRowHover' : 'row ml-0 mr-0 carouselRow'">
-                                  <div class="col-12 text-center mt-2 mb-2 pl-0 pr-0">
+                                  <div class="carouselRowHoverChild">
                                     <span class="carouselText" *ngIf="video.name?.length > 19">{{(video.name| slice:0:20)+'...'}}</span>
                                     <span class="carouselText" *ngIf="video.name?.length < 19">{{video.name}}</span>
                                     <div class="row ml-0 mr-0" *ngIf="hover && mouseOverIndex == i">
