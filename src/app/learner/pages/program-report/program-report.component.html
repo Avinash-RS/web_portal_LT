@@ -9,6 +9,65 @@
                 <h4>Java Full Stack Developer</h4>
             </div>
         </div>
+        <div class="chartSection">
+            <div class="heading d-flex align-items-center">
+                <figure>
+                    <img src="/assets/images/milestone.svg" alt="Milestone" />
+                </figure>
+                <span>Milestone Assessment</span>
+            </div>
+            <p>This is a comprehensive assessment which is conducted at the end of the training to evaluate the performance of the candidate. The milestone assessment is the combination of KBA (technical Multiple-choice questions on Java, SQL and Web designing) and SBA (Java Coding based on Real field Scenarios). The abbreviation of KBA is Knowledge Based Assessment and SBA is Skill based Assessment.</p>
+            <div class="indicator">
+                <h4>Overall Milestone Assessment Score</h4>
+                <div class="indicatorBG d-flex align-items-center">
+                    <div class="grade">
+                        <div class="poor">
+                            <span>Poor</span>
+                        </div>
+                        <div class="average">
+                            <span>Average</span>
+                        </div>
+                        <div class="good">
+                            <span>Good</span>
+                        </div>
+                    </div>
+                    <div class="percentageCircle"></div>
+                </div>
+            </div>
+            <div class="assessmentDetails">
+                <h5>Assessment Details</h5>
+                <mat-accordion>
+                    <mat-expansion-panel hideToggle>
+                        <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Personal data
+                        </mat-panel-title>
+                            <mat-panel-description>
+                                Type your name and age
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+                  
+                        <div class="bodyContent">
+                            Panel 1
+                        </div>
+                    </mat-expansion-panel>
+
+                    <mat-expansion-panel hideToggle>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Self aware panel
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                Currently I am {{panelOpenState ? 'open' : 'closed'}}
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <div class="bodyContent">
+                            Panel 2
+                        </div>
+                    </mat-expansion-panel>
+                </mat-accordion>                  
+            </div>
+        </div>
     </div>
     <div class="rightContainer"></div>
 </div>
