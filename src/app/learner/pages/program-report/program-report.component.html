@@ -141,5 +141,30 @@
             </div>
         </div>
     </div>
-    <div class="rightContainer"></div>
+    <div class="rightContainer">
+        <div class="desktopWrapper jobRole">
+            <div class="vocationalJobRole" style="display: inline-block;">
+              <mat-form-field appearance="fill" [(ngModel)]="courses">
+                <mat-label>{{'Courses For :' | translate}}</mat-label>
+                <mat-select [(ngModel)]="courseValue">
+                    <mat-option *ngFor="let course of courses" [value]="course.id">{{course.label}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="reportListContainer">
+            <ul>
+                <li *ngFor="let item of reportList">
+                    <div class="reportItem">
+                        <span>{{item}}</span>
+                    </div>
+                </li>
+            </ul>
+          </div>
+          <div class="rightImageContainer">
+            <figure>
+                <img src="../../../../assets/images/milestoneright.svg" alt="">
+            </figure>
+          </div>
+    </div>
 </div>
