@@ -4,11 +4,11 @@
     display: inline-block;
     margin-bottom: 0 !important;
     &:hover {
-        i, span {
+        em, span {
             color: #C02222;
         }
         .courseNameBreadcrum {
-          span, i {
+          span, em {
             color: #333333;
             cursor: auto;
           }

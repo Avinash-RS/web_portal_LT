@@ -4,12 +4,12 @@
 </div>
 <div style="padding: 15px" class="">
   <div class="commonBackStyle">
-    <i class="lxp-Arrow backArrow" (click)="goBack()"></i>
+    <em class="lxp-Arrow backArrow" (click)="goBack()"></em>
     <span (click)="goBack()">{{'Back' | translate}}</span>
     <div class="courseNameBreadcrum">
       <span class="pipeLine"> | </span>
       <span class="forumCourseName">{{ course?.name }}</span>
-      <i class="lxp-Arrow"></i>
+      <em class="lxp-Arrow"></em>
       <span>{{'Discussion Forum' | translate}}</span>
     </div>
   </div>
@@ -57,7 +57,7 @@
                   </span>
                 </div>
                 <div>
-                  <i class="expandCollapse" [ngClass]="res.expanded ? 'lxp-Collapse' : 'lxp-Expand'"></i>
+                  <em class="expandCollapse" [ngClass]="res.expanded ? 'lxp-Collapse' : 'lxp-Expand'"></em>
                   <!-- <mat-icon  class="f_size_23 colorBlack">
                   {{res.expanded?'remove_circle_outline':'add_circle_outline'}}
               </mat-icon> -->
@@ -117,7 +117,7 @@
                 </span>
               </div>
               <div>
-                <i class="expandCollapse" [ngClass]="res.expanded ? 'lxp-Collapse' : 'lxp-Expand'"></i>
+                <em class="expandCollapse" [ngClass]="res.expanded ? 'lxp-Collapse' : 'lxp-Expand'"></em>
                 <!-- <mat-icon  class="f_size_23 colorBlack">
                   {{res.expanded?'remove_circle_outline':'add_circle_outline'}}
               </mat-icon> -->

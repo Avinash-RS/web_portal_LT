@@ -16,16 +16,18 @@
   justify-content: center;
   .container-reg200 {
     padding: 35px 15px;
-    background-color: transparent;
+    background-color: $color-white;
     @media only screen and (min-width:992px) {
       padding: 35px;
     }
-    .dis {
-      background-color: $color-white !important;
-    }
+    // .dis {
+    //   background-color: $color-white !important;
+    // }
   }
 }
-
+.center_align {
+  text-align: center;
+}
 .certificateWrapper {
   display: flex;
   flex-direction: column;
@@ -147,15 +149,20 @@
 }
 .cameraIcon {
   z-index: 11;
-  margin-top: 12px;
-  margin-left: 12px;
   position: absolute;
+  left: 12px;
+  top: 12px;
   background: $color-white;
   width: 25px !important
 }
 
 .profile-pic {
   margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  figure {
+    position: relative;
+  }
 }
 
 :host ::ng-deep .mat-checkbox-layout {
@@ -206,8 +213,20 @@
   }
 }
 .genderRow {
-  margin-left: -15px !important;
-  margin-right: -15px !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 -15px 24px -15px;
+  flex-wrap: wrap;
+  .genderCol,.languagesKnown {
+    width: 100%;
+    @include md {
+      width: 50%;
+    }
+    .form-group,mat-select {
+      margin-top: 0.75em;
+    }
+  }
 }
 
 @media screen and (min-width:270px) and (max-width:335px) {
@@ -248,7 +267,7 @@
 
 }
 
-@media screen and (min-width:320px) and (max-width:767px) {
+@media screen and (min-width:320px) and (max-width:719px) {
   .profile {
     justify-content: space-between;
   }
@@ -269,22 +288,18 @@
     margin-right: 4% !important;
   }
 
-  // .first {
-  //   order: 1;
-  //   align-items: center;
-
-  // }
-
-  // .second {
-  //   order: 2;
-  //   margin-top: 20px !important;
-
-  // }
-
-  // .third {
-  //   order: 3;
-  //   margin-top: 30px !important;
-  // }
+  .first {
+    order: 1;
+    align-items: center;
+  }
+  .second {
+    order: 3;
+    margin-top: 20px !important;
+  }
+  .third {
+    order: 2;
+    margin-top: 30px !important;
+  }
 
   .profile-progress {
     width: 100%;
@@ -293,13 +308,15 @@
   }
 
   .details-row {
+    position: relative;
     display: flex;
     margin-top: -15% !important;
     width: 100%;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
     padding: 10px 15px 20px 15px;
+    flex-wrap: wrap;
   }
 
   .user-info {
@@ -333,6 +350,18 @@
 }
   
 }
+
+
+.first,.second,.third {
+  width: 100%;
+  @include md {
+    width: 30%;
+  }
+  @include lg {
+    width: 33%;
+  }
+}
+
 // .locationFields .form-group {
 //   margin-bottom: 0;
 // }
@@ -342,8 +371,12 @@
   flex-wrap: wrap;
   margin-top: 0.75em;
   .rowWrapper {
-    flex: 0 0 25%;
-    max-width: 25%;
+    flex: 0 0 100%;
+    max-width: 100%;
+    @include md {
+      flex: 0 0 25%;
+      max-width: 25%;
+    }
   }
 }
 .width_100 {
@@ -353,7 +386,7 @@
   width: 465px;
 }
 
-@media screen and (min-width:768px) and (max-width:991px) {
+@media screen and (min-width:720px) and (max-width:991px) {
 
   .lap_95 {
     width: 95% !important;
@@ -367,21 +400,19 @@
     display: block;
   }
 
-  // .first {
-  //   order: 1;
-  //   align-items: center;
+  .first {
+    order: 2;
+    align-items: center;
 
-  // }
+  }
+  .second {
+    order: 3;
+  }
+  .third {
+    order: 1;
+    margin-top: 20px !important;
 
-  // .second {
-  //   order: 2;
-  // }
-
-  // .third {
-  //   order: 3;
-  //   margin-top: 20px !important;
-
-  // }
+  }
 
   .profile-progress {
     width: 100%;
@@ -394,12 +425,12 @@
     display: flex !important;
     margin-top: -15% !important;
     width: 100%;
-    margin-left: 10% !important;
+    // margin-left: 10% !important;
     flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 35px 25px 35px;
-    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 10px 25px 25px 25px;
+    flex-wrap: nowrap;
   }
 
   .user-info {
@@ -573,13 +604,15 @@
   }
 
   .details-row {
+    position: relative;
     display: flex;
     margin-top: -8% !important;
     width: 100%;
     flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 35px 35px 35px;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 10px 40px 35px 40px;
+    // flex-wrap: wrap;
   }
 
 }
@@ -660,9 +693,9 @@ div.account {
   // margin-right: 15px;
 }
 
-// .p-b-10px {
-//   padding-bottom: 15px !important;
-// }
+.p-b-10px {
+  padding-bottom: 15px !important;
+}
 
 .head {
   font-weight: lighter !important;
@@ -698,7 +731,7 @@ div.account {
 }
 
 .avatar {
-  margin: auto;
+  // margin: auto;
   display: block;
   background: $color-white !important;
   border: 8px solid $color-white;
@@ -769,16 +802,21 @@ div.account {
   margin-bottom: 5px;
 }
 
-.submit {
-  width: 25%;
-  background-color: $lxp-theme-green;
-  margin: auto;
-  height: 45px;
-  letter-spacing: 1px;
-  border-radius: 50px !important;
-  font-size: 16px;
-
+.submitbtnArea {
+  text-align: center;
+  margin-top: 1.5em;
+  .submit {
+    width: 25%;
+    background-color: $lxp-theme-green;
+    margin: auto;
+    height: 45px;
+    letter-spacing: 1px;
+    border-radius: 50px !important;
+    font-size: 16px;
+  
+  }
 }
+
 
 .errspan {
   float: right;
@@ -1298,5 +1336,12 @@ hr {
   }
   100% {
     box-shadow: 10014px 15px 0 0 rgba(152, 128, 255, 0);
+  }
+}
+.info-row,.dept {
+  display: inline-flex;
+  width: 100%;
+  .bb {
+    width: 100%;
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef,ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, ElementRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '@env/environment';
@@ -56,7 +56,7 @@ export class InstructorLedComponent implements OnInit {
     this.learnerService.getAttendanceByUsername(atob(this.course.id), this.userDetails.full_name,
     this.userDetails.user_id).subscribe(async res => {
       this.showSkeleton = false;
-      const data = res.data[' getTopicAttendanceDetailsByUsername '][' data '];
+      const data = res.data['getTopicAttendanceDetailsByUsername']['data'];
       this.listOfSessions = data.Activity;
       if (this.listOfSessions.length > 0) {
         this.showContent = true;

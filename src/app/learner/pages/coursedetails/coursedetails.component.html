@@ -121,8 +121,6 @@
                                                     <div class="icov" [ngClass]="filterkey == 'Bookmarked'?(wi==bkmrk_week&&ti==bkmrk_topic && smi==bkmrk_subModuleHolder && mi==bkmrk_module)?'topicTitleSelected' : '':(wi==weekHolderUI&&ti==nextPrevHolder && smi==subModuleHolder && mi==moduleHolder)||(this.weekHolder==undefined&& mod.expanded) ? 'topicTitleSelected' : ''" (click)="playTopic(mod.link,mod?.topic_name,mod.status,subData?.module_name,res?.status,mod,(filterkey == 'Bookmarked'?{'wn':resDat.week,'wi':wi}:wi),ti,mi,smi);drawersOpen=performOverLay?(drawersOpen?false:true):true">
                                                         <div class="modTitle">
                                                             <h3>{{mod?.topic_name}}</h3>
-                                                            <!-- <span class="playVideo"><em class="lxp-PlayCircle"></em> Video</span>
-                                                            <span class="videoDuration"><em class="lxp-Clock"></em> 30:00 min</span> -->
                                                         </div>
                                                         <span *ngIf="mod?.status === 'Passed'" [ngClass]="mod?.status === 'Passed' ? 'bgGreen' : ''">
                                                             <em *ngIf="mod?.status === 'Passed'" class="lxp-Right"></em>
@@ -149,8 +147,6 @@
                                             <div class="icov" [ngClass]="filterkey == 'Bookmarked'?(wi==bkmrk_week&&ti==bkmrk_topic && mi==bkmrk_module)?'topicTitleSelected' : '':(wi==weekHolderUI&&ti==nextPrevHolder && mi==moduleHolder)||(this.weekHolder==undefined&& mod.expanded) ? 'topicTitleSelected' : ''" (click)="playTopic(mod.link,mod.topic_name,mod.status,res?.module_name,res?.status,mod,(filterkey == 'Bookmarked'?{'wn':resDat.week,'wi':wi}:wi),ti,mi);drawersOpen=performOverLay?(drawersOpen?false:true):true">
                                                 <div class="modTitle">
                                                     <h3>{{mod?.topic_name}}</h3>
-                                                    <!-- <span class="playVideo"><em class="lxp-PlayCircle"></em> Video</span>
-                                                    <span class="videoDuration"><em class="lxp-Clock"></em> 30:00 min</span> -->
                                                 </div>
                                                 <span *ngIf="mod?.status === 'Passed'" [ngClass]="mod?.status === 'Passed' ? 'bgGreen' : ''">
                                                     <em *ngIf="mod?.status === 'Passed'" class="lxp-Right"></em>

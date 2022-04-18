@@ -3,6 +3,7 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatAccordion } from '@angular/material/expansion';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CommonServicesService } from '@core/services/common-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import * as moment from 'moment';
@@ -184,6 +185,7 @@ export class ActivitiesComponent implements OnInit {
   praticalsLoader = false;
   constructor(public Lservice: LearnerServicesService,
               private gs: GlobalServiceService,
+              private commonServices: CommonServicesService,
               private dialog: MatDialog,
               private toastr: ToastrService,
               public route: Router,
@@ -404,7 +406,7 @@ export class ActivitiesComponent implements OnInit {
       }
       return false;
     }
-    if (project?.projectActivity.videodetails.length == 3) {
+    if (project?.projectActivity.videodetails.length === 3) {
       this.toastr.warning('You are allowed only to upload a maximum of 3 files');
       if (this.uploadInput) {
         this.uploadInput.nativeElement.value = '';
@@ -624,7 +626,7 @@ export class ActivitiesComponent implements OnInit {
     payload.append('type_name', assignemtname);
     payload.append('submit_status', 'notsubmitted');
     payload.append('total_mark', score);
-    payload.append('assignmentAction', ' upload');
+    payload.append('assignmentAction', 'upload');
     this.AssigmnemtPayload = payload;
     this.Lservice.uploadAssignments(this.AssigmnemtPayload).subscribe((data: any) => {
       if (data.success === true) {
@@ -665,11 +667,11 @@ export class ActivitiesComponent implements OnInit {
   }
   deleteAssigmnemtData(assignemnt) {
     const apidata = {
-      ' course_id ': assignemnt.course_id,
-      ' file_id ': assignemnt.file_id,
-      ' user_id ': this.userDetail.user_id,
-      ' assignmentAction ': 'delete',
-      ' submit_status ' : 'notsubmitted'
+      course_id : assignemnt.course_id,
+      file_id : assignemnt.file_id,
+      user_id : this.userDetail.user_id,
+      assignmentAction : 'delete',
+      submit_status : 'notsubmitted'
   };
     this.Lservice.assignmentAction(apidata).subscribe((data: any) => {
       if (data.success === true) {
@@ -866,16 +868,16 @@ export class ActivitiesComponent implements OnInit {
         if (response._response.status === 201) {
 
           this.jsonData = {
-            ' course_id ': this.courseid,
-            ' module_id ': project.projectActivity.module_id,
-            ' topic_id ': project.projectActivity.topic_id,
-            ' user_id ': this.userDetail.user_id,
-            ' submit_status ': submitStatus,
-            ' total_mark ': project.projectActivity.total_mark,
-            ' submitType ': 'project',
-            ' submitAction ': submitAction,
-            iterationid: project.projectActivity.project_id,
-            object_id: project.projectActivity.project_id,
+            course_id : this.courseid,
+            module_id : project.projectActivity.module_id,
+            topic_id : project.projectActivity.topic_id,
+            user_id : this.userDetail.user_id,
+            submit_status : submitStatus,
+            total_mark : project.projectActivity.total_mark,
+            submitType : 'project',
+            submitAction,
+            iterationid : project.projectActivity.project_id,
+            object_id : project.projectActivity.project_id,
             videodetails: [{
               doc_type: this.type,
               videourl: sas.storageUri + sas.containerName + '/' + this.currentFile.name,
@@ -1124,15 +1126,15 @@ export class ActivitiesComponent implements OnInit {
 
       this.jsonData = {
         course_id: this.performsData.performActivity.course_id,
-        ' module_id ': this.performsData.performActivity.module_id,
-        ' topic_id ': this.performsData.performActivity.topic_id,
-        ' user_id ': this.userDetail.user_id,
-        ' submit_status ': this.submitStatus,
-        ' total_mark ': this.itrationData.total_mark,
-        ' submitType ': 'perform',
-        ' submitAction ': this.submitType,
-        ' iterationid ': this.itrationData.iterationid,
-        ' object_id ': this.performsData.performActivity.perform_id,
+        module_id : this.performsData.performActivity.module_id,
+        topic_id : this.performsData.performActivity.topic_id,
+        user_id : this.userDetail.user_id,
+        submit_status : this.submitStatus,
+        total_mark : this.itrationData.total_mark,
+        submitType : 'perform',
+        submitAction : this.submitType,
+        iterationid : this.itrationData.iterationid,
+        object_id : this.performsData.performActivity.perform_id,
         videodetails: [{
           doc_type: this.type,
           videourl: sas.storageUri + sas.containerName + '/' + this.currentFile.name,

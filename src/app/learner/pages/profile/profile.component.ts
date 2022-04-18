@@ -657,8 +657,8 @@ showNew = true;
         const fb = new FormData();
         fb.append('image', this.selectfile, this.selectfile.name);
         this.service.imageupload(fb).subscribe(data => {
-          this.profileForm.controls.profile_img.setValue(data[' url ']);
-          this.currentUser.profile_img = data[' url '];
+          this.profileForm.controls.profile_img.setValue(data['url']);
+          this.currentUser.profile_img = data['url'];
         });
       }
     }

@@ -6,7 +6,7 @@
     display: inline-block;
     margin-bottom: 0 !important;
     &:hover {
-        i, span {
+        em, span {
             color: #C02222;
         }
         .courseNameBreadcrum {
@@ -63,7 +63,7 @@
         margin-left: 0;
       }
     }
-    i {
+    em {
         display: inline-block;
         transform: rotate(90deg);
         font-size: 8px;

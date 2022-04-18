@@ -1306,15 +1306,15 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
       }
     });
   }
-  getlearnerquiz(email){
+  getlearnerquiz(email) {
     return this.Apollo.query({
-      query:getlearnerquiz,
-      variables:{
-        email:email
+      query: getlearnerquiz,
+      variables: {
+        email
       }
-    })
+    });
   }
-  getStepDetails(user_id){
+  getStepDetails(user_id) {
     return this.Apollo.query({
       query: getStepCourseByLearner,
       variables: {

@@ -106,6 +106,9 @@
     padding: 0.3rem 5px;
     cursor: pointer;
     margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 }
 
@@ -720,7 +723,7 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  margin: 10px 0;
+  margin: 10px 0; 
   @include md {
     margin: 0;
   }
@@ -1029,9 +1032,10 @@
 .videoPreview {
   background-color: #d5d5d5;
   border: 0.25px solid #707070;
-  width: 70%;
+  width: 100%;
   // height: 2.8rem;
   padding: 8px 5px;
+  margin: 2em 0;
 }
 .videoPlay {
   color: #898989;
@@ -1077,6 +1081,7 @@
   cursor: pointer;
   height: 100%;
   position: relative;
+  padding: 16px 0 0 0;
 }
 // .carouselCard :hover  {
 //   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
@@ -1084,6 +1089,7 @@
 
 .carouselRow1 {
   height: 100%;
+  position: relative;
   // height: 7rem;
 }
 // .carouselRow2 {
@@ -1117,27 +1123,30 @@
 
 .downloadBtn {
   top: 0.3rem;
+  font-size: 18px;
 }
 
 .playBtn {
   font-size: 18px;
-  top: 3px;
-  left: 0.6rem;
+  // top: 3px;
+  // left: 0.6rem;
 }
 
 .actionBtn {
   font-size: 12px;
-  margin-left: 2rem;
+  // margin-left: 2rem;
 }
 
 .actionBtn1 {
   font-size: 12px;
-  margin-left: 1.5rem;
+  // margin-left: 1.5rem;
 }
 
 .colAction {
-  padding-left: 5px;
+  // padding-left: 5px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 .imageIcon {
   font-size: 50px;
@@ -1562,9 +1571,6 @@
 }
 ::ng-deep.activitiesTab {
   margin-top: 20px;
-  .mat-tab-body, .mat-tab-body-wrapper, .mat-tab-body.mat-tab-body-active, .mat-tab-body-content {
-    // overflow: initial;
-  }
   .mat-ink-bar {
     background-color: transparent !important;
     display: none !important;
@@ -1776,4 +1782,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.playActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  em {
+    margin-right: 0.5em;
+  }
+}
+.carouselRowHoverChild {
+  padding: 1em;
+}
+.materialTxt {
+  padding: 0.75em;
 }
