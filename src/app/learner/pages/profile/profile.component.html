@@ -50,9 +50,11 @@
       <div class="imgSize" *ngIf="!cannotEdit">{{'Max size: 5 mb, upload format: jpg & png' | translate }}</div>
       <div class="row">
         <div class="profile-pic">
-          <mat-icon *ngIf="!cannotEdit" class="cameraIcon" for="fileInput" (click)="fileInput.click()">camera_alt </mat-icon>
-          <img [src]="profileForm.value.profile_img != 'null' && profileForm.value.profile_img != null && profileForm.value.profile_img != ''  ? (profileForm.value.profile_img + blobKey) : 'https://assets.lntedutech.com/application_images/pro2.webp'" id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput alt="Avatar" [ngClass]="profileForm.value.profile_img ? 'avatar' : 'iconImg'">
-          <input style="display: none;" id="fileInput" type='file' #fileInput (change)="onSelectFile($event)">
+          <figure>
+            <mat-icon *ngIf="!cannotEdit" class="cameraIcon" for="fileInput" (click)="fileInput.click()">camera_alt </mat-icon>
+            <img [src]="profileForm.value.profile_img != 'null' && profileForm.value.profile_img != null && profileForm.value.profile_img != ''  ? (profileForm.value.profile_img + blobKey) : 'https://assets.lntedutech.com/application_images/pro2.webp'" id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput alt="Avatar" [ngClass]="profileForm.value.profile_img ? 'avatar' : 'iconImg'">
+            <input style="display: none;" id="fileInput" type='file' #fileInput (change)="onSelectFile($event)">
+          </figure>
         </div>
       </div>
 
@@ -85,12 +87,12 @@
           <span class="f_size_15 f_wt_500 ">{{'College :' | translate}} {{profileDetails?.college_name ? profileDetails?.college_name: ''  | translate }}</span>
         </div>
       </div>
-      <div class="row m-t-25px" *ngIf="cannotEdit">
+      <div class="row m-t-25px dept" *ngIf="cannotEdit">
         <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10 bb user-info">
           <span class="f_size_15 f_wt_500">{{'Dept :' | translate}} {{profileDetails?.department ? profileDetails?.department: ''  | translate }}</span>
         </div>
         </div>
-        <div class="row m-t-25px" *ngIf="!cannotEdit">
+        <div class="row m-t-25px dept" *ngIf="!cannotEdit">
           <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10 bb user-info">
               <input [(ngModel)]="deptname" class="dept-input" placeholder="Enter department name...">
           </div>
