@@ -69,5 +69,30 @@
             </div>
         </div>
     </div>
-    <div class="rightContainer"></div>
+    <div class="rightContainer">
+        <div class="desktopWrapper jobRole">
+            <div class="vocationalJobRole" style="display: inline-block;">
+              <mat-form-field appearance="fill">
+                <mat-label>{{'Courses For :' | translate}}</mat-label>
+                <mat-select>
+                    <mat-option>Opt1</mat-option>
+                    <mat-option>Opt2</mat-option>
+                    <mat-option>Opt3</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="reportListContainer">
+            <ul>
+                <li *ngFor="let item of reportList">
+                    <div class="reportItem">{{item}}</div>
+                </li>
+            </ul>
+          </div>
+          <div class="rightImageContainer">
+            <figure>
+                <img src="../../../../assets/images/milestoneright.svg" alt="">
+            </figure>
+          </div>
+    </div>
 </div>

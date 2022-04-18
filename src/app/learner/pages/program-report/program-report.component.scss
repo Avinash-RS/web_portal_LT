@@ -156,9 +156,127 @@
         @media only screen and (min-width: 1140px) {
             width: 400px;
         }
+        .desktopWrapper {
+          label {
+              font-weight: 500;
+              display: inline-block;
+              margin: 0 10px 0 0;
+              color: $label2;
+              // width: 28%;
+            }
+            .vocationalJobRole {
+              width: 100%;
+              text-align: right;
+            }
+      }
+      .reportListContainer, .rightImageContainer {
+        margin-top: 2em;
+      }
+      .reportListContainer {
+       ul {
+         list-style: none;
+         li {
+           cursor: pointer;
+           .reportItem {
+            font-size: 0.9375em;
+            font-weight: 500;
+            padding: 1em;
+            color: #222222;
+            background-color: #F9F9F9;
+            box-shadow: 0px 1px 3px #00000029;
+            border-radius: 5px;
+            transition: 0.3s ease-in-out;
+            margin-bottom: 0.75em;
+            border-left: 5px solid #1B4E9B;
+            &:hover {
+              color: $color-white;
+              background-color: #1B4E9B;
+              border-left: 5px solid #27BBEE;
+            }
+           }
+         }
+       }
+      }
+    
     }
+   
 }
-
+::ng-deep.vocationalJobRole {
+  .mat-form-field {
+    width: 100%;
+  }
+  .mat-form-field-appearance-fill .mat-form-field-flex {
+    background-color: $color-white;
+    // box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 0px 6px $blackshade;
+    // }
+  }
+}
+::ng-deep.jobRole {
+  .mat-form-field-wrapper {
+    padding-bottom: 0;
+  }
+  .mat-form-field-infix {
+    border-top: 0 solid transparent;
+  }
+  .mat-form-field-label-wrapper {
+    top: -0.99375em;
+  }
+  .mat-select-value {
+    color: $blackcolor;
+    font-weight: 500;
+  }
+  .mat-form-field-appearance-fill .mat-form-field-flex {
+    padding: 1.5em .75em 0 .75em;
+    border-radius: 6px 6px 6px 6px;
+  }
+  .mat-form-field-appearance-fill .mat-select-arrow-wrapper {
+    transform: translateY(0%);
+  }
+  .mat-form-field-ripple, 
+  .mat-form-field.mat-focused .mat-form-field-ripple, 
+  .mat-form-field-appearance-fill .mat-form-field-underline::before {
+    background-color: transparent;
+  }
+  .mat-form-field-underline {
+    // border: 1px solid #cdcdcd;
+    height: 100%;
+    bottom: 0;
+  }
+  .mat-form-field.mat-focused .mat-form-field-label, .mat-form-field-label {
+    color: $color-lightGray;
+  }
+  .mat-form-field.mat-focused.mat-primary .mat-select-arrow, 
+  .mat-select-arrow {
+    color: $black2;
+  }
+  .mat-select {
+    text-transform: capitalize;
+  }
+  .noHandIcon {
+    .mat-select-trigger {
+      cursor: not-allowed;
+    }
+    .mat-form-field-type-mat-select:not(.mat-form-field-disabled) .mat-form-field-flex {
+      cursor: not-allowed;
+    }
+  }
+}
+::ng-deep.jobRolecustomClass {
+  position: relative;
+  .mat-select-panel .mat-option.mat-selected:not(.mat-option-multiple) {
+    background-color:$blackshade;
+  }
+  .mat-option.mat-selected:not(.mat-option-multiple):not(.mat-option-disabled) {
+    background-color: $blackshade;
+  }
+  .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+    color: $label2 !important;
+  }
+  .mat-option-text {
+    text-transform: capitalize;
+  }
+}
 ::ng-deep.assessmentDetails {
     .mat-accordion {
         .mat-expansion-panel {

@@ -7,7 +7,14 @@ import { Component, OnInit } from "@angular/core";
 })
 
 export class ProgramReportComponent implements OnInit {
-  
+  reportList = [
+    "Overall Report",
+    "Benchmark Assessment",
+    "Milestone Assessment",
+    "Training Report",
+    "Activity Report",
+    "Quiz Report"
+  ]
   constructor() { 
 
   }
