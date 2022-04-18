@@ -1571,9 +1571,6 @@
 }
 ::ng-deep.activitiesTab {
   margin-top: 20px;
-  .mat-tab-body, .mat-tab-body-wrapper, .mat-tab-body.mat-tab-body-active, .mat-tab-body-content {
-    // overflow: initial;
-  }
   .mat-ink-bar {
     background-color: transparent !important;
     display: none !important;
