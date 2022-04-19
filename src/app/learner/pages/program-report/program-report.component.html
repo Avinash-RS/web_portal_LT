@@ -178,14 +178,22 @@
                                         <span>Feedback:</span>
                                         <p>Likely to hold oneself accountable and accept responsibility for one’s actions and decisions.</p>
                                     </div>
-                                    <div class="right">
-                                        <span>Score:</span>
-                                        <circle-progress [title]= "90"
-                                        [titleFontSize] = "10" [titleFontWeight] = "600" [showUnits]= "true" 
-                                        [percent]="90"
-                                        [radius]=25  [space]=-6 [outerStrokeGradient]=true [outerStrokeWidth]=6 [outerStrokeColor]="'#17B15C'" 
-                                        [outerStrokeGradientStopColor]="'#17B15C'" [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]=6 
-                                        [animation]="true" [animationDuration]="300" [responsive]="true" [showSubtitle]="false" ></circle-progress>
+                                    <div class="right d-flex align-items-center justify-content-between">
+                                        <div class="circle">
+                                            <span>Score:</span>
+                                            <circle-progress [title]= "90"
+                                            [titleFontSize] = "10" [titleFontWeight] = "600" [showUnits]= "true" 
+                                            [percent]="90"
+                                            [radius]=25  [space]=-6 [outerStrokeGradient]=true [outerStrokeWidth]=6 [outerStrokeColor]="'#17B15C'" 
+                                            [outerStrokeGradientStopColor]="'#17B15C'" [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]=6 
+                                            [animation]="true" [animationDuration]="300" [responsive]="true" [showSubtitle]="false" ></circle-progress>
+                                        </div>
+                                        <div class="circleDesc">
+                                            <ul>
+                                                <li>Total Score : <span>60</span></li>
+                                                <li>Score Obtained : <span>42</span></li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

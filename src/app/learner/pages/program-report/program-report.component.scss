@@ -418,7 +418,8 @@
                               font-weight: 400;
                             }
                           }
-                         .left {                          
+                         .left {   
+                           width: 65%;                       
                           p {
                             color: #004684;
                             font-size: 14px;
@@ -427,6 +428,25 @@
                          }
                         }
                         .right {
+                          width: 35%;
+                          .circle {
+                            width: 40%;
+                          }
+                          .circleDesc {
+                            width: 60%;
+                           ul {
+                             list-style: none;
+                             li {
+                              color: $color-lightGray;
+                              font-size: 10px;
+                              font-weight: 400;
+                              span {
+                                color: $blackcolor;
+                                font-weight: 500;
+                              }
+                             }
+                           }
+                          }
                         }
                       }
                     }
