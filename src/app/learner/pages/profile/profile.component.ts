@@ -158,8 +158,7 @@ showNew = true;
   college_name;
   profileDetails;
   certificationDetails;
-  // tslint:disable-next-line: use-life-cycle-interface
-  // tslint:disable-next-line:use-lifecycle-interface
+  // tslint:disable-next-line: use-lifecycle-interface
   ngOnDestroy() {
   this.dialog.closeAll();
   }
@@ -246,6 +245,7 @@ showNew = true;
           this.getDistrict();
           this.deptname = this.profileDetails?.department ? this.profileDetails?.department : '';
           if (this.userData.language_detail?.length > 0) {
+                      // tslint:disable-next-line: no-var-keyword
                       var result = this.userData.language_detail.map(a => a.name);
                     } else {
                       result = [];
@@ -270,10 +270,12 @@ showNew = true;
     });
   }
   updateProfile() {
+    // tslint:disable-next-line: triple-equals
     if (this.profileForm.value.gender == '0') {
       this.toastr.warning('Gender cannot be empty');
       return false;
     }
+    // tslint:disable-next-line: triple-equals
     if (this.profileForm.value.country === 'null' || this.profileForm.value.state == 'null' || this.profileForm.value.city_town == 'null') {
       this.toastr.warning('Location details cannot be empty');
       return false;

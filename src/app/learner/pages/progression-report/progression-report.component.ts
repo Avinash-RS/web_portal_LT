@@ -190,6 +190,7 @@ export class ProgressionReportComponent implements OnInit {
         this.totalhoursSpend = result.data.weekWiseCourseChart.data.totalhoursSpend;
         result.data.weekWiseCourseChart.data.chartdata.forEach((data: any) => {
           this.weekWiseChartDatalabel.push(data.day);
+          // tslint:disable-next-line: radix
           this.weekWiseChartData.push({y: parseInt(data.minutes) / 60, mins: data.minutes});
         });
         this.generateWeekwiseChart();
