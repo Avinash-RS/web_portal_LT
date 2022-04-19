@@ -1622,6 +1622,7 @@ export class CoursedetailsComponent implements OnInit {
     }
   }
 
+  // tslint:disable-next-line:use-lifecycle-interface
   ngOnDestroy() {
     const loginDetails = JSON.parse(localStorage.getItem('UserDetails'));
     if (loginDetails) {

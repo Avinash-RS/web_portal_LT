@@ -159,6 +159,7 @@ showNew = true;
   profileDetails;
   certificationDetails;
   // tslint:disable-next-line: use-life-cycle-interface
+  // tslint:disable-next-line:use-lifecycle-interface
   ngOnDestroy() {
   this.dialog.closeAll();
   }

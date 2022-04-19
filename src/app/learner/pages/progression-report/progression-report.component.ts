@@ -472,21 +472,6 @@ export class ProgressionReportComponent implements OnInit {
     });
   }
 
-  createBarChart() {
-    new Chart('barchart', {
-      type: 'bar',
-      data: {
-        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-        datasets: [{
-          data: [65, 59, 80, 81, 56, 55, 40],
-          backgroundColor: ['#03C88D'],
-        }]
-      },
-      options: {
-      }
-    });
-  }
-
   handleOpened(moduleItem) {
     moduleItem.isOpened = true;
   }
