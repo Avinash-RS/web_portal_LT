@@ -284,72 +284,72 @@
         @media only screen and (min-width: 1140px) {
             width: 400px;
         }
-        .desktopWrapper {
-          label {
-              font-weight: 500;
-              display: inline-block;
-              margin: 0 10px 0 0;
-              color: $label2;
-              // width: 28%;
+        .reportListContainer, .rightImageContainer {
+            margin-top: 2em;
+        }
+        .reportListContainer {
+            ul {
+                list-style: none;
+                li {
+                    cursor: pointer;
+                    .reportItem {
+                            font-size: 0.9375em;
+                            font-weight: 500;
+                            padding: 1em;
+                            border-radius: 5px;
+                            transition: 0.3s ease-in-out;
+                            margin-bottom: 0.75em;
+                            box-shadow: 0px 1px 3px #00000029;
+                            border-left: 5px solid #1B4E9B;
+                            background: linear-gradient(to right, #1B4E9B 50%, #F9F9F9 50%);
+                            background-size: 200% 100%;
+                            background-position: right bottom;
+                            transition: all .5s ease-out;
+                        span {
+                            color: #222222;
+                            transition: all .6s ease-out;
+                        }
+                        &:hover {
+                            border-left: 5px solid #27BBEE;
+                            background-position: left bottom;
+                            span {
+                                color: $color-white;
+                            }
+                        }
+                    }
+                }
             }
-            .vocationalJobRole {
-              width: 100%;
-              text-align: right;
-            }
-      }
-      .reportListContainer, .rightImageContainer {
-        margin-top: 2em;
-      }
-      .reportListContainer {
-       ul {
-         list-style: none;
-         li {
-           cursor: pointer;
-           .reportItem {
-            font-size: 0.9375em;
-            font-weight: 500;
-            padding: 1em;
-            border-radius: 5px;
-            transition: 0.3s ease-in-out;
-            margin-bottom: 0.75em;
-            // background-color: #F9F9F9;
-            box-shadow: 0px 1px 3px #00000029;
-            border-left: 5px solid #1B4E9B;
-            background: linear-gradient(to right, #1B4E9B 50%, #F9F9F9 50%);
-            background-size: 200% 100%;
-            background-position: right bottom;
-            transition: all .5s ease-out;
-            span {
-              color: #222222;
-              transition: all .6s ease-out;
-            }
-            &:hover {
-              // background-color: #1B4E9B;
-              border-left: 5px solid #27BBEE;
-              background-position: left bottom;
-              span {
-                color: $color-white;
-              }
-            }
-           }
-         }
-       }
-      }
-    
+        }
     }
-   
 }
+
+//Dropdown
+.mobDevice {
+    margin-bottom: 20px;
+}
+.desktopWrapper {
+    label {
+        font-weight: 500;
+        display: inline-block;
+        margin: 0 10px 0 0;
+        color: $label2;
+    }
+    .vocationalJobRole {
+        width: 100%;
+        text-align: right;
+    }
+}
+
 ::ng-deep.vocationalJobRole {
-  .mat-form-field {
-    width: 100%;
-  }
-  .mat-form-field-appearance-fill .mat-form-field-flex {
-    background-color: $color-white;
-    // box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.15);
-    box-shadow: 0px 0px 6px $blackshade;
-    // }
-  }
+    .mat-form-field {
+        width: 100%;
+    }
+    .mat-form-field-appearance-fill .mat-form-field-flex {
+        background-color: $color-white;
+        box-shadow: 0px 0px 6px $blackshade;
+    }
 }
+
 ::ng-deep.jobRole {
   .mat-form-field-wrapper {
     padding-bottom: 0;
@@ -377,7 +377,6 @@
     background-color: transparent;
   }
   .mat-form-field-underline {
-    // border: 1px solid #cdcdcd;
     height: 100%;
     bottom: 0;
   }
@@ -400,21 +399,7 @@
     }
   }
 }
-::ng-deep.jobRolecustomClass {
-  position: relative;
-  .mat-select-panel .mat-option.mat-selected:not(.mat-option-multiple) {
-    background-color:$blackshade;
-  }
-  .mat-option.mat-selected:not(.mat-option-multiple):not(.mat-option-disabled) {
-    background-color: $blackshade;
-  }
-  .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
-    color: $label2 !important;
-  }
-  .mat-option-text {
-    text-transform: capitalize;
-  }
-}
+
 ::ng-deep.assessmentDetails {
     .mat-accordion {
         .mat-expansion-panel {

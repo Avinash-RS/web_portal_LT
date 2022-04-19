@@ -96,6 +96,9 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+  .lxp-ProgramReport:before {
+    content: "\e978";
+  }
   .lxp-Completion:before {
     content: "\e977";
   }
