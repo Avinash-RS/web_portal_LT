@@ -87,7 +87,108 @@
                         </mat-expansion-panel-header>
                   
                         <div class="bodyContent">
-                            Panel 1
+                            <h6>KBA (Knowledge based Assessment)</h6>
+                            <div class="duration">
+                                <ul class="d-flex align-items-center justify-content-between">
+                                    <li>
+                                        <span>Scheduled Duration</span>
+                                        <p><span>50</span>/Min</p>
+                                    </li>
+                                    <li>
+                                        <span>Time Spent</span>
+                                        <p><span>36</span>/Min 46s sec</p>
+                                    </li>
+                                    <li>
+                                        <span>Marks Scored</span>
+                                        <p><span>26</span>/ 40</p>
+                                    </li>
+                                    <li>
+                                        <span>Held on:</span>
+                                        <p><span>June 15, 2021 10:30:00 AM IST</span></p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="subHeading">
+                                Sectional Summary
+                            </div>
+                          
+                            <table class="summaryTable" border="0" cellpadding="0" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Section Name</th>
+                                        <th>Questions Attempted</th>
+                                        <th>Score Obtained</th>
+                                        <th>Percentage</th>
+                                        <th>Time Taken</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Java</td>
+                                        <td>
+                                            <div class="progressbar color-bluebar" [ngStyle]="{
+                                              width: 90 + '%' }"></div>
+                                            <div class="progressdata">
+                                                <span>{{'15'}}</span>
+                                                <!-- <p>/ {{ '15' }}</p> -->
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="progressbar color-pinkbar" [ngStyle]="{
+                                             width:80 +'%'}"></div>
+                                            <div class="progressdata">
+                                                <span>{{ 80 }}</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="progressbar color-greenbar" [ngStyle]="{
+                                             width:70 +'%'}"></div>
+                                            <div class="progressdata">
+                                                <span>{{ 70 }}</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="minutes">17 Mins 47 sec</div>
+                                        </td>
+                                        <td>
+                                            <div class="likeSec">
+                                                <em class="lxp-ThumpsUp"></em>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <h6 class="subHeading">SBA (Skill based Assessment)</h6>
+                            <div class="description">
+                                <div class="topicheld">
+                                    <ul class="d-flex align-items-center justify-content-between">
+                                        <li>
+                                            <span>Topic</span>
+                                            <p>Likely to hold oneself accountable and accept responsibility.</p>
+                                        </li>
+                                        <li>
+                                            <span>Held on:</span>
+                                            <p>June 15, 2021 10:30:00 AM IST</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="feedback d-flex align-items-center justify-content-between">
+                                    <div class="left">
+                                        <span>Feedback:</span>
+                                        <p>Likely to hold oneself accountable and accept responsibility for one’s actions and decisions.</p>
+                                    </div>
+                                    <div class="right">
+                                        <span>Score:</span>
+                                        <circle-progress [title]= "90"
+                                        [titleFontSize] = "10" [titleFontWeight] = "600" [showUnits]= "true" 
+                                        [percent]="90"
+                                        [radius]=25  [space]=-6 [outerStrokeGradient]=true [outerStrokeWidth]=6 [outerStrokeColor]="'#17B15C'" 
+                                        [outerStrokeGradientStopColor]="'#17B15C'" [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]=6 
+                                        [animation]="true" [animationDuration]="300" [responsive]="true" [showSubtitle]="false" ></circle-progress>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </mat-expansion-panel>
 
@@ -168,17 +269,7 @@
 <ng-template #dropDown>
     <div class="desktopWrapper jobRole">
         <div class="vocationalJobRole" style="display: inline-block;">
-          <mat-form-field appearance="fill" [(ngModel)]="courses">
-            <mat-label>{{'Courses For :' | translate}}</mat-label>
-            <mat-select [(ngModel)]="courseValue">
-                <mat-option *ngFor="let course of courses" [value]="course.id">{{course.label}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-    </div>
-    <div class="desktopWrapper jobRole">
-        <div class="vocationalJobRole" style="display: inline-block;">
-          <mat-form-field appearance="fill" [(ngModel)]="courses">
+          <mat-form-field appearance="fill">
             <mat-label>{{'Courses For :' | translate}}</mat-label>
             <mat-select [(ngModel)]="courseValue">
                 <mat-option *ngFor="let course of courses" [value]="course.id">{{course.label}}</mat-option>
