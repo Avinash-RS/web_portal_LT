@@ -100,10 +100,10 @@ export class MycourseItemComponent implements OnInit {
   }
 
   gotoQuiz(course) {
-    let data = {
+    const data = {
       courseId : course.course_id,
       courseName: course.course_name
-    }
+    };
     this.router.navigate(['/Learner/quizreport'], {
       queryParams:
       {
@@ -112,7 +112,7 @@ export class MycourseItemComponent implements OnInit {
       }
     });
   }
-  //PLAYER PAGE NAVIGATION
+  // PLAYER PAGE NAVIGATION
   gotoDesc(c) {
     c.batch_end_date_Timer = new Date(c.batch_end_date).getTime();
 

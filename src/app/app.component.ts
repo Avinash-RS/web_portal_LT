@@ -27,34 +27,6 @@ LicenseManager.setLicenseKey('CompanyName=LARSEN & TOUBRO LIMITED,LicensedGroup=
   animations: [ slideInAnimation ]
 })
 export class AppComponent implements OnInit {
-  runnablePlatforms = ['MacIntel', 'Win32', 'Linux x86_64'];
-  ipAddress = '';
-  title = 'LXP';
-  isLoader = false;
-  loaderSubscription: Subscription;
-  isMobile = false;
-  platformTxt = navigator.platform;
-  isProgressBar = false;
-  isFooterVisible: string = '';
-  percentage = 'Upload in progress';
-  loadersubscription: Subscription;
-  hideLeftMenu: boolean = false;
-  chatbotShow: boolean = false;
-  UserDetails: any;
-  secretKey = '(!@#Passcode!@#)';
-  botUrl;
-  urlSafe: SafeResourceUrl;
-  languages: { lang: string; languagename: string; }[];
-   // FOR DRM(Restriction for right click)
-   @HostListener('document:keydown', ['$event'])
-   handleKeyboardEvent(event: KeyboardEvent) {
-     if ( (event.which === 67 && event.ctrlKey && event.shiftKey) || (event.which === 123) ||
-      (event.which === 73 && event.ctrlKey && event.shiftKey) ) {
-       event.returnValue = false;
-       event.preventDefault();
-     }
- }
- private destroy$ = new Subject<void>();
   constructor(private router: Router,
               private gs: GlobalServiceService,
               private ga_service: GoogleAnalyticsService,
@@ -75,7 +47,7 @@ export class AppComponent implements OnInit {
       this.translate.setDefaultLang('en');
     }
 
-    let userDetail = JSON.parse(localStorage.getItem('UserDetails'));
+    const userDetail = JSON.parse(localStorage.getItem('UserDetails'));
     if (!userDetail?.specific_report_value) {
       localStorage.clear();
       sessionStorage.clear();
@@ -109,6 +81,34 @@ export class AppComponent implements OnInit {
     document.head.appendChild(gaScript);
   // }
   }
+  runnablePlatforms = ['MacIntel', 'Win32', 'Linux x86_64'];
+  ipAddress = '';
+  title = 'LXP';
+  isLoader = false;
+  loaderSubscription: Subscription;
+  isMobile = false;
+  platformTxt = navigator.platform;
+  isProgressBar = false;
+  isFooterVisible: string = '';
+  percentage = 'Upload in progress';
+  loadersubscription: Subscription;
+  hideLeftMenu: boolean = false;
+  chatbotShow: boolean = false;
+  UserDetails: any;
+  secretKey = '(!@#Passcode!@#)';
+  botUrl;
+  urlSafe: SafeResourceUrl;
+  languages: { lang: string; languagename: string; }[];
+ private destroy$ = new Subject<void>();
+   // FOR DRM(Restriction for right click)
+   @HostListener('document:keydown', ['$event'])
+   handleKeyboardEvent(event: KeyboardEvent) {
+     if ( (event.which === 67 && event.ctrlKey && event.shiftKey) || (event.which === 123) ||
+      (event.which === 73 && event.ctrlKey && event.shiftKey) ) {
+       event.returnValue = false;
+       event.preventDefault();
+     }
+ }
 
   ngOnInit() {
 // GOOGLE ANALYTICS
@@ -291,6 +291,7 @@ myUnload() {
 
   }
   // tslint:disable-next-line:use-life-cycle-interface
+  // tslint:disable-next-line:use-lifecycle-interface
   ngOnDestroy(): void {
     this.loaderSubscription.unsubscribe();
     this.loadersubscription.unsubscribe();
