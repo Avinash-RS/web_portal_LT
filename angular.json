@@ -17,6 +17,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "crypto-js"
+           ],
             "aot": true,
             "outputPath": "dist/lxpfrontend",
             "index": "src/index.html",
