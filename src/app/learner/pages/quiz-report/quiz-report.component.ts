@@ -18,7 +18,7 @@ export class QuizReportComponent implements OnInit {
   courseId: any;
   courseName: any;
   cols = [
-    { headerName: 'Quiz Topics', field: 'quiz_name',width: 200,
+    { headerName: 'Quiz Topics', field: 'quiz_name',width: 220,
     cellRenderer: (params) => {
       if(params?.data) {
         return `<div class="countWrapper d-flex align-items-center">
@@ -30,7 +30,7 @@ export class QuizReportComponent implements OnInit {
         return '';
       }
     }},
-    { headerName: 'Date', field: 'start_date', minWidth: 150, width: 150,
+    { headerName: 'Date', field: 'start_date', minWidth: 130, width: 130,
     cellRenderer: (params) => {
       if (params?.data?.start_date) { 
         // let result = params?.data?.start_date.substring(0, 10);
@@ -42,7 +42,7 @@ export class QuizReportComponent implements OnInit {
       }
     }
   },
-    { headerName: 'Total Questions', field: 'no_of_question', minWidth: 150, width: 150},
+    { headerName: 'Total Questions', field: 'no_of_question', minWidth: 140, width: 140},
     { headerName: 'No. of Correct Answers', field: 'correct_answer', minWidth: 170, width: 170},
     { headerName: 'Score', field: 'score',width: 100, minWidth: 100,
     cellRenderer: (params) => {
