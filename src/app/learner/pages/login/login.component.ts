@@ -365,4 +365,8 @@ export class LoginComponent implements OnInit {
     this.signInPage = true;
     this.registerForm.reset();
   }
+
+  openPlayStore() {
+    window.open('https://play.google.com/store/apps/details?id=com.lntedutech.collegeconnect', 'playStore');
+  }
 }

@@ -7,7 +7,7 @@
         </ul>
         <div class="col agquiz">
             <mat-card class="mat-elevation-z8">
-                <ag-grid-angular [columnDefs]="cols" [rowData]="rows" style="width:100%; height:500px" class="ag-theme-alpine"></ag-grid-angular>
+                <ag-grid-angular [columnDefs]="cols" [rowData]="rows" style="width:100%; height:500px" class="ag-theme-alpine" (gridReady)="onGridReady($event)"></ag-grid-angular>
             </mat-card>
         </div>
     </div>
@@ -26,8 +26,8 @@
                     <circle-progress [title]= "quizData?.doughnut_chart?.percent ? quizData.doughnut_chart.percent : '0'"
                     [titleFontSize] = "10" [titleFontWeight] = "600" [showUnits]= "true" 
                     [percent]="quizData?.doughnut_chart?.percent ? quizData.doughnut_chart.percent : '0'"
-                    [radius]=25  [space]=-6 [outerStrokeGradient]=true [outerStrokeWidth]=6 [outerStrokeColor]="'#17B15C'" 
-                    [outerStrokeGradientStopColor]="'#17B15C'" [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]=6 
+                    [radius]=25  [space]=-6 [outerStrokeGradient]=true [outerStrokeWidth]=6 [outerStrokeColor]="quizData?.doughnut_chart?.color" 
+                    [outerStrokeGradientStopColor]="quizData?.doughnut_chart?.color" [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]=6 
                     [animation]="true" [animationDuration]="300" [responsive]="true" [showSubtitle]="false" ></circle-progress>
                 </div>
                 <div class="points">

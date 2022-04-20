@@ -12,7 +12,7 @@ import * as moment from 'moment';
 })
 
 export class QuizReportComponent implements OnInit {
-
+  gridApi:any;
   UserDetails: any;
   userId: any;
   courseId: any;
@@ -42,15 +42,15 @@ export class QuizReportComponent implements OnInit {
       }
     }
   },
-    { headerName: 'Total Questions', field: 'no_of_question', minWidth: 170, width: 170 },
-    { headerName: 'No. of Correct Answers', field: 'correct_answer', minWidth: 200, width: 200},
+    { headerName: 'Total Questions', field: 'no_of_question', minWidth: 150, width: 150},
+    { headerName: 'No. of Correct Answers', field: 'correct_answer', minWidth: 170, width: 170},
     { headerName: 'Score', field: 'score',width: 100, minWidth: 100,
     cellRenderer: (params) => {
       if (params?.data?.score) { 
         return params?.data?.score + "%";
       }
     }},
-    { headerName: 'Status', field: 'status', minWidth: 150, width: 150,
+    { headerName: 'Status', field: 'status', minWidth: 150, width: 150, 
     cellRenderer: (params) => {
       if(params?.data?.status == 'Good'){
         return `<div class="d-flex align-items-center justify-content-center statusBtn good">Good</div>`;      
@@ -171,9 +171,10 @@ export class QuizReportComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.geTQuizData();
+    
   }
   geTQuizData(){
+    this.gridApi.showLoadingOverlay();
     this.learnerService.getlearnerquiz(this.UserDetails?.username ? this.UserDetails?.username : '').subscribe((result:any)=>{
       if(result?.data?.getlearnerquiz?.success){
         this.quizData =  {
@@ -182,9 +183,12 @@ export class QuizReportComponent implements OnInit {
           table_chart:result?.data?.getlearnerquiz?.message?.table_chart,
         }
         this.rows = this.quizData.table_chart;
+        this.gridApi.hideOverlay();
         this.generateBarChart();
       }
       else{
+        this.gridApi.hideOverlay();
+        this.gridApi.showNoRowsOverlay();
         this.quizData =  {
           bar_chart : [],
           doughnut_chart:{"to_score": 0,"count": 0,"percent": 0},
@@ -213,5 +217,10 @@ export class QuizReportComponent implements OnInit {
         }
       ];
     }
+  }
+  onGridReady(params: any) {
+    this.gridApi = params.api;
+    this.gridApi.sizeColumnsToFit();
+    this.geTQuizData();
   }
 }
