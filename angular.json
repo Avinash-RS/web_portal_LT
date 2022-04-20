@@ -18,7 +18,15 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "allowedCommonJsDependencies": [
-              "crypto-js"
+              "crypto-js",
+              "zen-observable",
+              "videogular2",
+              "socket.io-client",
+              "ag-grid-enterprise",
+              "public-ip",
+              "ng-defer-load",
+              "pdfjs-dist",
+              "rxjs-compat"
            ],
             "aot": true,
             "outputPath": "dist/lxpfrontend",
