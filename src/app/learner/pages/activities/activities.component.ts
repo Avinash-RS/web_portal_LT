@@ -214,6 +214,7 @@ export class ActivitiesComponent implements OnInit {
       });
     this.courseid = this.checkDetails ? this.checkDetails.courseId : localStorage.getItem('Courseid');
     this.courseName = this.checkDetails ? this.checkDetails.courseName : localStorage.getItem('CourseName');
+    // tslint:disable-next-line: no-var-keyword
     var index;
     if (this.checkDetails?.activityType) {
       this.fromCalender = true;
@@ -812,6 +813,7 @@ export class ActivitiesComponent implements OnInit {
       this.currentFile = this.selectfile[i];
       this.fileSize = this.currentFile.size;
       this.type = this.selectfile[i].type;
+      // tslint:disable-next-line: prefer-const
       var sizeData = this.currentFile.size / 1024;
       var sizeDatakb = sizeData / 1024;
       var finalSize = sizeDatakb.toFixed(2);
@@ -1042,6 +1044,7 @@ export class ActivitiesComponent implements OnInit {
       this.fileSize = this.currentFile.size;
       this.type = this.selectPerformfile[i].type;
       var sizeData = this.currentFile.size / 1024;
+      // tslint:disable-next-line: prefer-const
       var sizeDatakb = sizeData / 1024;
       var finalSize = sizeDatakb.toFixed(2);
       this.splitSize = finalSize.split('.');

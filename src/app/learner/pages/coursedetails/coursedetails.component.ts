@@ -292,6 +292,7 @@ export class CoursedetailsComponent implements OnInit {
       (event.key === '67' && event.ctrlKey && event.shiftKey) ||
       event.key === '123'
     ) {
+      // tslint:disable-next-line: deprecation
       event.returnValue = false;
       event.preventDefault();
     }
@@ -522,6 +523,7 @@ export class CoursedetailsComponent implements OnInit {
                           this.subModuleHolder = smi;
                           this.bkup_moduleName  = smodule.module_name;
                           smodule.childData.forEach((topic, ti) => {
+                            // tslint:disable-next-line: triple-equals
                             if (topic.link && topic.expanded == true) {
                               this.nextPrevHolder = this.topiccurrentPage = ti;
                               this.topicInfo = this.bkup_topicInfo = topic;
@@ -706,8 +708,11 @@ export class CoursedetailsComponent implements OnInit {
       // single
       // start course
       if (
+        // tslint:disable-next-line: triple-equals
         this.checkDetails.course_status == 'start' || this.checkDetails.course_status == 'completed' ||
+        // tslint:disable-next-line: triple-equals
         this.checkDetails.course_status == null || this.checkDetails.link == '' ||
+        // tslint:disable-next-line: triple-equals
         this.userType == 'vocational'
       ) {
         let bodyData;
@@ -748,6 +753,7 @@ export class CoursedetailsComponent implements OnInit {
           this.userType !== 'vocational'
         ) {
           this.inputEl
+            // tslint:disable-next-line: no-unused-expression
             ? this.inputEl.nativeElement.scrollIntoView({ behavior: 'smooth' }) : '';
         }
       }, 4000);
@@ -756,7 +762,7 @@ export class CoursedetailsComponent implements OnInit {
 
   gettopicOnModule(week, modul, parent, body) {
     // this.topicData$ = this.gettopicapi(week,module,parent);
-    if (this.filterkey == 'Bookmarked') {
+    if (this.filterkey === 'Bookmarked') {
       return false;
     }
     const param: any = {};
@@ -1622,6 +1628,7 @@ export class CoursedetailsComponent implements OnInit {
     }
   }
 
+  // tslint:disable-next-line:use-lifecycle-interface
   ngOnDestroy() {
     const loginDetails = JSON.parse(localStorage.getItem('UserDetails'));
     if (loginDetails) {

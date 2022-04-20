@@ -141,9 +141,6 @@
   text-align: center;
 }
 // responsiveness starts here
-.m-t-9{
-  // margin-top: 9% !important;
-}
 .collDept {
   align-self: flex-end;
 }
@@ -319,10 +316,6 @@
     flex-wrap: wrap;
   }
 
-  .user-info {
-    // margin-left: auto !important;
-
-  }
   .passwordDialog {
     width: 450px !important;
     margin-top: 24px;
@@ -433,9 +426,6 @@
     flex-wrap: nowrap;
   }
 
-  .user-info {
-    // margin-left: auto !important;
-  }
 }
 
 .throughTPO {
@@ -688,10 +678,6 @@ div.account {
   margin-left: 15px;
 }
 
-.mat-select {
-  // width: 90%;
-  // margin-right: 15px;
-}
 
 .p-b-10px {
   padding-bottom: 15px !important;
@@ -895,12 +881,6 @@ input:focus {
   margin-top: 49px;
 }
 
-.institute {
-  // width: 90% !important;
-  // margin-right: 10px !important;
-  // border-radius: 10px !important;
-}
-
 .col-md-1.col-sm-4.col-4.ng-star-inserted {
   margin-left: 100% !important;
   margin-top: -3% !important;
@@ -980,7 +960,6 @@ hr {
   background-repeat: no-repeat;
   display: inline-block;
   cursor: pointer;
-  float: right;
   color: $color-blank;
   background: rgba(255, 255, 255, 0.6);
   font-size: 23px;

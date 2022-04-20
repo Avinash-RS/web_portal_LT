@@ -1825,9 +1825,6 @@
   .cal-week-view .cal-day-headers {
     padding-left: 0px;
   }
-  .cal-week-view .cal-day-headers .cal-header:hover, .cal-week-view .cal-day-headers .cal-drag-over {
-    // border: 1px solid $lxp-theme-green;
-  }
 }
 .cal-week-view {
   border-top: none;
@@ -1858,9 +1855,7 @@
     overflow: inherit;
   }
 }
-.infocontent{
-  // position: relative
-}
+
 .infoClose{
   cursor: pointer;
   position:absolute;

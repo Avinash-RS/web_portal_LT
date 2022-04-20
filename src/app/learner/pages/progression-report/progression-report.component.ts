@@ -190,6 +190,7 @@ export class ProgressionReportComponent implements OnInit {
         this.totalhoursSpend = result.data.weekWiseCourseChart.data.totalhoursSpend;
         result.data.weekWiseCourseChart.data.chartdata.forEach((data: any) => {
           this.weekWiseChartDatalabel.push(data.day);
+          // tslint:disable-next-line: radix
           this.weekWiseChartData.push({y: parseInt(data.minutes) / 60, mins: data.minutes});
         });
         this.generateWeekwiseChart();
@@ -468,21 +469,6 @@ export class ProgressionReportComponent implements OnInit {
             }
           }
         }
-      }
-    });
-  }
-
-  createBarChart() {
-    new Chart('barchart', {
-      type: 'bar',
-      data: {
-        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-        datasets: [{
-          data: [65, 59, 80, 81, 56, 55, 40],
-          backgroundColor: ['#03C88D'],
-        }]
-      },
-      options: {
       }
     });
   }
