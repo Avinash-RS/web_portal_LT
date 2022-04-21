@@ -1,6 +1,6 @@
 import { Output, EventEmitter, Injectable } from '@angular/core';
 // import { Observable } from 'rxjs/internal/Observable';
-import * as io from 'socket.io-client';
+import { io }from 'socket.io-client';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 import * as CryptoJS from 'crypto-js';
