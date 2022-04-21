@@ -130,6 +130,7 @@ export class PerformancePageMobileComponent implements OnInit {
     }
   }
   // tslint:disable-next-line: use-life-cycle-interface
+  // tslint:disable-next-line:use-lifecycle-interface
   ngOnDestroy() {
     this.ngxLoader.stop();
   }

@@ -100,9 +100,11 @@ export class AskQuestionsComponent implements OnInit {
   }
 
   getPlayerModuleTopic() {
+    // tslint:disable-next-line: prefer-const
     let param: any = {};
     param.parent = '';
     param.contentID = this.courseid;
+    // tslint:disable-next-line: prefer-const
     let id = CryptoJS.AES.decrypt(this.userDetail.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
     param.user_id = id;
     param.batchid = this.batchId;
@@ -155,9 +157,11 @@ export class AskQuestionsComponent implements OnInit {
 
   }
   getTopicV2(parent, call) {
+    // tslint:disable-next-line: prefer-const
     let param: any = {};
     param.parent = parent;
     param.contentID = this.courseid;
+    // tslint:disable-next-line: prefer-const
     let id = CryptoJS.AES.decrypt(this.userDetail.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
     param.user_id = id;
     param.batchid = this.batchId;
