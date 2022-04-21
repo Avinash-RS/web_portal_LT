@@ -18,7 +18,7 @@ export class QuizReportComponent implements OnInit {
   courseId: any;
   courseName: any;
   cols = [
-    { headerName: 'Quiz Topics', field: 'quiz_name',width: 200,
+    { headerName: 'Quiz Topics', field: 'quiz_name',width: 230,
     cellRenderer: (params) => {
       if(params?.data) {
         return `<div class="countWrapper d-flex align-items-center">
@@ -30,7 +30,7 @@ export class QuizReportComponent implements OnInit {
         return '';
       }
     }},
-    { headerName: 'Date', field: 'start_date', minWidth: 150, width: 150,
+    { headerName: 'Date', field: 'start_date', minWidth: 80, width: 80,
     cellRenderer: (params) => {
       if (params?.data?.start_date) { 
         // let result = params?.data?.start_date.substring(0, 10);
@@ -42,15 +42,15 @@ export class QuizReportComponent implements OnInit {
       }
     }
   },
-    { headerName: 'Total Questions', field: 'no_of_question', minWidth: 150, width: 150},
-    { headerName: 'No. of Correct Answers', field: 'correct_answer', minWidth: 170, width: 170},
-    { headerName: 'Score', field: 'score',width: 100, minWidth: 100,
+    { headerName: 'Total Questions', field: 'no_of_question', minWidth: 85, width: 85},
+    { headerName: 'No. of Correct Answers', field: 'correct_answer', minWidth: 110, width: 110},
+    { headerName: 'Score', field: 'score',width: 70, minWidth: 70,
     cellRenderer: (params) => {
       if (params?.data?.score) { 
         return params?.data?.score + "%";
       }
     }},
-    { headerName: 'Status', field: 'status', minWidth: 150, width: 150, 
+    { headerName: 'Status', field: 'status', minWidth: 80, width: 80, cellClass:'statusClass',
     cellRenderer: (params) => {
       if(params?.data?.status == 'Good'){
         return `<div class="d-flex align-items-center justify-content-center statusBtn good">Good</div>`;      
@@ -97,6 +97,11 @@ export class QuizReportComponent implements OnInit {
       footerFontColor:'#333333',
       footerMarginTop:8,
       footerSpacing:8,
+      callbacks: { 
+        label:function(tooltipItem, data){
+          return ""
+        }
+      }
     },
     plugins: {
       datalabels: {

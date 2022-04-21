@@ -7,10 +7,10 @@
     }
     .leftContainer {
         width: 100%;
-        background: #F2F2F2;
+        background: $grey1;
         padding: 20px 0;
         .col {
-          padding: 2em;
+          padding: 15px 20px;
         }
         @media only screen and (min-width: 992px) {
           width: calc(100% - 360px);
@@ -23,7 +23,7 @@
             padding: 0 20px !important;
             background-color: transparent !important;
             li {
-                color: #333333;
+                color: $label2;
                 font-size: 14px;
                 font-weight: 400;
                 line-height: normal;
@@ -45,7 +45,7 @@
                         left: -10px;
                         top: auto;
                         bottom: auto;
-                        color: #c02222;
+                        color: $lxp-theme-green;
                     }
                 }
             }
@@ -53,21 +53,20 @@
     }
     .rightContainer {
         width: 100%;
-        background-color: #fff;
+        background-color: $whitecolor1;
         padding: 1.5em;
-        box-shadow: 0 0 2px 0 #0000006b;
+        box-shadow: 0 0 2px 0 $blackshade3;
         position: relative;
         right: 0;
         top: 0;
         height: 100%;
         @media only screen and (min-width: 720px) {
-          padding: 1em 2em 3em 2em;
+          padding: 20px;
         }
         @media only screen and (min-width: 992px) {
           width: 360px;
           position: fixed;
           top: 72px;
-          padding: 3em 2em;
         }
         @media only screen and (min-width: 1140px) {
           width: 400px;
@@ -99,9 +98,9 @@
           }
       }
       .quizAverage {
-        margin-top: 3em;
+        margin-top: 20px;
         .wrapper{
-          margin-top: 1em;
+          margin-top: 0;
           .circleProgress {
             width: 51%;
           }
@@ -128,9 +127,28 @@
       }
 }
 
-::ng-deep.ag-theme-alpine .ag-root:not(.ag-context-menu-open) .ag-body-viewport:not(.ag-has-focus) .ag-cell-range-selected-1:not(.ag-cell-inline-editing) {
-    background-color: transparent;
-    border-color: transparent;
+::ng-deep.ag-theme-alpine {
+  .ag-header {
+    color:$label2;
+    background-color: $fadeGrey;
+    font-weight: 700;
+  }
+  .ag-root-wrapper {
+    border: none;
+  }
+  .ag-cell {
+    font-size: 14px;
+  }
+  .ag-header-cell-text {            
+    text-overflow: clip !important;
+    overflow: visible !important;
+    white-space: normal !important;
+    line-height: 16px!important;
+}
+  .ag-paging-panel {
+    padding-top: 10px;
+    height: 25px;
+  } 
 }
 
 
@@ -142,15 +160,20 @@
     .count {
       color: $blackcolor;
       font-weight: 600;
-      font-size: 1em;
+      font-size: 14px;
     }
   }
 
   .statusBtn {
-    font-size: 1em;
-    width: 75px;
+    font-size: 14px;
+    width: 70px;
     padding: 0.15em 0.5em;
     color: $color-white;
+  }
+  .statusClass {
+    line-height: normal;
+    display: inline-flex;
+    align-items: center;
   }
   .good {
     border: 1px solid $green1;
