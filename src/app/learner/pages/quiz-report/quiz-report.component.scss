@@ -10,7 +10,7 @@
         background: $grey1;
         padding: 20px 0;
         .col {
-          padding: 2em;
+          padding: 15px 20px;
         }
         @media only screen and (min-width: 992px) {
           width: calc(100% - 360px);
@@ -61,13 +61,12 @@
         top: 0;
         height: 100%;
         @media only screen and (min-width: 720px) {
-          padding: 1em 2em 3em 2em;
+          padding: 20px;
         }
         @media only screen and (min-width: 992px) {
           width: 360px;
           position: fixed;
           top: 72px;
-          padding: 3em 2em;
         }
         @media only screen and (min-width: 1140px) {
           width: 400px;
@@ -99,9 +98,9 @@
           }
       }
       .quizAverage {
-        margin-top: 3em;
+        margin-top: 20px;
         .wrapper{
-          margin-top: 1em;
+          margin-top: 0;
           .circleProgress {
             width: 51%;
           }
@@ -133,14 +132,23 @@
     color:$label2;
     background-color: $fadeGrey;
     font-weight: 700;
-    border-bottom: 1px solid $lightBorder;
   }
-  .ag-row {
+  .ag-root-wrapper {
+    border: none;
+  }
+  .ag-cell {
     font-size: 14px;
-    height: 45px;
-    padding: 1em 0;
-    border-bottom: 1px solid $lightBorder;
   }
+  .ag-header-cell-text {            
+    text-overflow: clip !important;
+    overflow: visible !important;
+    white-space: normal !important;
+    line-height: 16px!important;
+}
+  .ag-paging-panel {
+    padding-top: 10px;
+    height: 25px;
+  } 
 }
 
 
@@ -157,10 +165,15 @@
   }
 
   .statusBtn {
-    font-size: 1em;
-    width: 75px;
+    font-size: 14px;
+    width: 70px;
     padding: 0.15em 0.5em;
     color: $color-white;
+  }
+  .statusClass {
+    line-height: normal;
+    display: inline-flex;
+    align-items: center;
   }
   .good {
     border: 1px solid $green1;
