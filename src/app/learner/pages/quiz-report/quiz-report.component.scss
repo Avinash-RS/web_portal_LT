@@ -138,7 +138,7 @@
     border: none;
   }
   .ag-cell {
-    font-size: 12px;
+    font-size: 14px;
   }
   .ag-header-cell-text {            
     text-overflow: clip !important;
@@ -157,15 +157,19 @@
   mat-card {
     position: relative;
     min-height: 400px;
-    .loading{
-      width: 50px;
-      height: 50px;
-      position: absolute;
-      top: 0;
-      bottom: 155px;
-      left: 0;
-      right: 0;
-      margin: auto;
+    .noCard {
+      text-align: center;
+      margin-top: 5em;
+      figure {
+          margin: 15px 0;
+      }
+      p {
+          font-size: 14px;
+          color: #000000;
+          font-weight: 500;
+          line-height: normal;
+          margin-bottom: 30px ​!important;
+      }
     }
   }
   .countWrapper{
@@ -175,7 +179,7 @@
     .count {
       color: $blackcolor;
       font-weight: 600;
-      font-size: 12px;
+      font-size: 14px;
     }
   }
 
