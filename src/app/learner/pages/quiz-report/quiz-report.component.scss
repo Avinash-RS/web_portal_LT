@@ -74,15 +74,18 @@
       }
       .chartHeading {
         color: $blackcolor;
-        font-size: 1.25em;
+        font-size: 1.125em;
         font-weight: 500;
         margin: 0;
       }
       .performanceChart{
         position: relative;
-        .ylabel {
-          font-size: 0.85em;
+        .ylabel,.xlabel {
+          font-size: 0.75em;
           font-weight: 500;
+          color: $blackcolor;
+        }
+        .ylabel {
           position: absolute;
           left: -35px;
           top: 50%;
@@ -90,9 +93,6 @@
           color: $blackcolor;
         }
         .xlabel{
-          font-size: 0.85em;
-          font-weight: 500;
-          color: $blackcolor;
           margin: 1em auto;
           text-align: center;
           }
@@ -102,10 +102,11 @@
         .wrapper{
           margin-top: 0;
           .circleProgress {
-            width: 51%;
+            width: 49%;
           }
           .points {
-            width: 49%;
+            margin-top: 1em;
+            width: 47%;
             ul {
               list-style: none;
               li {
@@ -165,10 +166,10 @@
   }
 
   .statusBtn {
-    font-size: 14px;
-    width: 70px;
+    font-size: 10px;
+    width: 55px;
     padding: 0.15em 0.5em;
-    color: $color-white;
+    border-radius: 5px;
   }
   .statusClass {
     line-height: normal;

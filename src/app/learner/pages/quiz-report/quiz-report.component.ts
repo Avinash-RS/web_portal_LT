@@ -43,14 +43,14 @@ export class QuizReportComponent implements OnInit {
     }
   },
     { headerName: 'Total Questions', field: 'no_of_question', minWidth: 85, width: 85},
-    { headerName: 'No. of Correct Answers', field: 'correct_answer', minWidth: 110, width: 110},
-    { headerName: 'Score', field: 'score',width: 70, minWidth: 70,
+    { headerName: 'No. of Correct Answers', field: 'correct_answer', minWidth: 95, width: 95},
+    { headerName: 'Score', field: 'score',width: 60, minWidth: 60,
     cellRenderer: (params) => {
       if (params?.data?.score) { 
         return params?.data?.score + "%";
       }
     }},
-    { headerName: 'Status', field: 'status', minWidth: 80, width: 80, cellClass:'statusClass',
+    { headerName: 'Status', field: 'status', minWidth: 60, width: 60, cellClass:'statusClass',
     cellRenderer: (params) => {
       if(params?.data?.status == 'Good'){
         return `<div class="d-flex align-items-center justify-content-center statusBtn good">Good</div>`;      
@@ -163,7 +163,7 @@ export class QuizReportComponent implements OnInit {
     {color:'good',label:'71-100% Good'},
     {color:'avg',label:'31-70% Average'},
     {color:'poor',label:'0-30% poor'}
-  ]
+  ];
   constructor(private activeRoute: ActivatedRoute,public learnerService: LearnerServicesService,) { 
     this.activeRoute.queryParams.subscribe(res => {
       if(res){
