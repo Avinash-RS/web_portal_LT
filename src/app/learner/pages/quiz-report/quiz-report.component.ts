@@ -189,7 +189,7 @@ export class QuizReportComponent implements OnInit {
     this.geTQuizData();
   }
   geTQuizData(){
-    this.learnerService.getlearnerquiz(this.UserDetails?.username ? 'this.UserDetails?.username' : '').subscribe((result:any)=>{
+    this.learnerService.getlearnerquiz(this.UserDetails?.username ? this.UserDetails?.username : '').subscribe((result:any)=>{
       if(result?.data?.getlearnerquiz?.success){
         this.quizData =  {
           bar_chart : result?.data?.getlearnerquiz?.message?.bar_chart,
