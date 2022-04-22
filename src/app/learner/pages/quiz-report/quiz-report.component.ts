@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { LearnerServicesService } from "@learner/services/learner-services.service";
 import { ChartDataSets, ChartOptions, ChartType } from "chart.js";
 import { Label } from "ng2-charts";
-import * as moment from 'moment';
+
 
 @Component({
   selector: "app-quiz-report",
@@ -17,8 +17,17 @@ export class QuizReportComponent implements OnInit {
   userId: any;
   courseId: any;
   courseName: any;
+  defaultColDef = {
+    resizable: false,
+    floatingFilter: false,
+    enableColResize: false,
+    sortable: false,
+    lockPosition: true,
+    suppressMenu: true,
+    unSortIcon: true,
+  };
   cols = [
-    { headerName: 'Quiz Topics', field: 'quiz_name',width: 230,
+    { headerName: 'Quiz Topics', field: 'quiz_name',width: 230, tooltipField: 'quiz_name',
     cellRenderer: (params) => {
       if(params?.data) {
         return `<div class="countWrapper d-flex align-items-center">
@@ -30,7 +39,7 @@ export class QuizReportComponent implements OnInit {
         return '';
       }
     }},
-    { headerName: 'Date', field: 'start_date', minWidth: 80, width: 80,
+    { headerName: 'Date', field: 'start_date', minWidth: 90, width: 90,
     cellRenderer: (params) => {
       if (params?.data?.start_date) { 
         // let result = params?.data?.start_date.substring(0, 10);
@@ -43,8 +52,8 @@ export class QuizReportComponent implements OnInit {
     }
   },
     { headerName: 'Total Questions', field: 'no_of_question', minWidth: 85, width: 85},
-    { headerName: 'No. of Correct Answers', field: 'correct_answer', minWidth: 95, width: 95},
-    { headerName: 'Score', field: 'score',width: 60, minWidth: 60,
+    { headerName: 'No. of Correct Answers', field: 'correct_answer', minWidth: 110, width: 110},
+    { headerName: 'Score', field: 'score',width: 65, minWidth: 65,
     cellRenderer: (params) => {
       if (params?.data?.score) { 
         return params?.data?.score + "%";
@@ -164,6 +173,7 @@ export class QuizReportComponent implements OnInit {
     {color:'avg',label:'31-70% Average'},
     {color:'poor',label:'0-30% poor'}
   ];
+  noRecords:boolean = false;
   constructor(private activeRoute: ActivatedRoute,public learnerService: LearnerServicesService,) { 
     this.activeRoute.queryParams.subscribe(res => {
       if(res){
@@ -176,11 +186,10 @@ export class QuizReportComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+    this.geTQuizData();
   }
   geTQuizData(){
-    this.gridApi.showLoadingOverlay();
-    this.learnerService.getlearnerquiz(this.UserDetails?.username ? this.UserDetails?.username : '').subscribe((result:any)=>{
+    this.learnerService.getlearnerquiz(this.UserDetails?.username ? 'this.UserDetails?.username' : '').subscribe((result:any)=>{
       if(result?.data?.getlearnerquiz?.success){
         this.quizData =  {
           bar_chart : result?.data?.getlearnerquiz?.message?.bar_chart,
@@ -188,17 +197,16 @@ export class QuizReportComponent implements OnInit {
           table_chart:result?.data?.getlearnerquiz?.message?.table_chart,
         }
         this.rows = this.quizData.table_chart;
-        this.gridApi.hideOverlay();
+        this.noRecords = this.rows.length > 0 ? false : true;
         this.generateBarChart();
       }
       else{
-        this.gridApi.hideOverlay();
-        this.gridApi.showNoRowsOverlay();
         this.quizData =  {
           bar_chart : [],
           doughnut_chart:{"to_score": 0,"count": 0,"percent": 0},
           table_chart:[],
-        }
+        };
+        this.noRecords = true;
       }
     });
   }
@@ -226,6 +234,6 @@ export class QuizReportComponent implements OnInit {
   onGridReady(params: any) {
     this.gridApi = params.api;
     this.gridApi.sizeColumnsToFit();
-    this.geTQuizData();
+    // this.geTQuizData();
   }
 }
