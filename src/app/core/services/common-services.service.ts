@@ -8,7 +8,7 @@ import {
 import { getAllNotifications, getCoursesByName, get_all_course_by_usergroup, list_content, logout, syllabus_of_particular_scorm, viewcourse, view_wishlist, view_course_for_learner } from '@core/services/operations/common_query';
 import { environment } from '@env/environment';
 import { Apollo } from 'apollo-angular';
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs';
 import * as publicIp from 'public-ip';
 @Injectable({
   providedIn: 'root'
