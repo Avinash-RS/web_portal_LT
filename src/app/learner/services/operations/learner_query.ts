@@ -2857,6 +2857,7 @@ export const getlearnerquiz = gql `
           to_score
           count
           percent
+          color
         }
         bar_chart{
           user

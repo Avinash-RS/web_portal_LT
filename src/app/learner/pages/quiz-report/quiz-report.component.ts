@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { LearnerServicesService } from "@learner/services/learner-services.service";
 import { ChartDataSets, ChartOptions, ChartType } from "chart.js";
 import { Label } from "ng2-charts";
-import * as moment from 'moment';
+
 
 @Component({
   selector: "app-quiz-report",
@@ -12,13 +12,22 @@ import * as moment from 'moment';
 })
 
 export class QuizReportComponent implements OnInit {
-
+  gridApi:any;
   UserDetails: any;
   userId: any;
   courseId: any;
   courseName: any;
+  defaultColDef = {
+    resizable: false,
+    floatingFilter: false,
+    enableColResize: false,
+    sortable: false,
+    lockPosition: true,
+    suppressMenu: true,
+    unSortIcon: true,
+  };
   cols = [
-    { headerName: 'Quiz Topics', field: 'quiz_name',width: 200,
+    { headerName: 'Quiz Topics', field: 'quiz_name',width: 230, tooltipField: 'quiz_name',
     cellRenderer: (params) => {
       if(params?.data) {
         return `<div class="countWrapper d-flex align-items-center">
@@ -30,7 +39,7 @@ export class QuizReportComponent implements OnInit {
         return '';
       }
     }},
-    { headerName: 'Date', field: 'start_date', minWidth: 150, width: 150,
+    { headerName: 'Date', field: 'start_date', minWidth: 90, width: 90,
     cellRenderer: (params) => {
       if (params?.data?.start_date) { 
         // let result = params?.data?.start_date.substring(0, 10);
@@ -42,15 +51,15 @@ export class QuizReportComponent implements OnInit {
       }
     }
   },
-    { headerName: 'Total Questions', field: 'no_of_question', minWidth: 170, width: 170 },
-    { headerName: 'No. of Correct Answers', field: 'correct_answer', minWidth: 200, width: 200},
-    { headerName: 'Score', field: 'score',width: 100, minWidth: 100,
+    { headerName: 'Total Questions', field: 'no_of_question', minWidth: 85, width: 85},
+    { headerName: 'No. of Correct Answers', field: 'correct_answer', minWidth: 110, width: 110},
+    { headerName: 'Score', field: 'score',width: 65, minWidth: 65,
     cellRenderer: (params) => {
       if (params?.data?.score) { 
         return params?.data?.score + "%";
       }
     }},
-    { headerName: 'Status', field: 'status', minWidth: 150, width: 150,
+    { headerName: 'Status', field: 'status', minWidth: 60, width: 60, cellClass:'statusClass',
     cellRenderer: (params) => {
       if(params?.data?.status == 'Good'){
         return `<div class="d-flex align-items-center justify-content-center statusBtn good">Good</div>`;      
@@ -97,6 +106,11 @@ export class QuizReportComponent implements OnInit {
       footerFontColor:'#333333',
       footerMarginTop:8,
       footerSpacing:8,
+      callbacks: { 
+        label:function(tooltipItem, data){
+          return ""
+        }
+      }
     },
     plugins: {
       datalabels: {
@@ -158,7 +172,8 @@ export class QuizReportComponent implements OnInit {
     {color:'good',label:'71-100% Good'},
     {color:'avg',label:'31-70% Average'},
     {color:'poor',label:'0-30% poor'}
-  ]
+  ];
+  noRecords:boolean = false;
   constructor(private activeRoute: ActivatedRoute,public learnerService: LearnerServicesService,) { 
     this.activeRoute.queryParams.subscribe(res => {
       if(res){
@@ -182,6 +197,7 @@ export class QuizReportComponent implements OnInit {
           table_chart:result?.data?.getlearnerquiz?.message?.table_chart,
         }
         this.rows = this.quizData.table_chart;
+        this.noRecords = this.rows.length > 0 ? false : true;
         this.generateBarChart();
       }
       else{
@@ -189,7 +205,8 @@ export class QuizReportComponent implements OnInit {
           bar_chart : [],
           doughnut_chart:{"to_score": 0,"count": 0,"percent": 0},
           table_chart:[],
-        }
+        };
+        this.noRecords = true;
       }
     });
   }
@@ -213,5 +230,10 @@ export class QuizReportComponent implements OnInit {
         }
       ];
     }
+  }
+  onGridReady(params: any) {
+    this.gridApi = params.api;
+    this.gridApi.sizeColumnsToFit();
+    // this.geTQuizData();
   }
 }

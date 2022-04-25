@@ -262,5 +262,8 @@ export class CommonServicesService {
     this.getToken()
     return this.http.post(environment.apiUrl+'navTreeV2',postParam,this.httpOptions);
   }
+  urlStatusCheck(url) {
+    return this.http.get(url,{responseType:'text'})
+}
   
 }

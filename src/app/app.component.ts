@@ -3,7 +3,7 @@ import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { GlobalServiceService } from '././core/services/handlers/global-service.service';
 import { Title } from '@angular/platform-browser';
-import { filter, switchMap, take, takeUntil, tap } from 'rxjs/operators';
+import { filter, switchMap, take, takeUntil, tap, timeout } from 'rxjs/operators';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { Subject, Subscription, timer } from 'rxjs';
 import { slideInAnimation } from './router.animation';
@@ -20,6 +20,9 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { LicenseManager } from 'ag-grid-enterprise';
 LicenseManager.setLicenseKey('CompanyName=LARSEN & TOUBRO LIMITED,LicensedGroup=L&T EduTech,LicenseType=MultipleApplications,LicensedConcurrentDeveloperCount=3,LicensedProductionInstancesCount=3,AssetReference=AG-017299,ExpiryDate=15_July_2022_[v2]_MTY1NzgzOTYwMDAwMA==d6a472ece2e8481f35e75c20066f8e49');
+import { BnNgIdleService } from 'bn-ng-idle';
+import { SocketioService } from '@learner/services/socketio.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -66,7 +69,9 @@ export class AppComponent implements OnInit {
               public Lservice: LearnerServicesService,
               private gtag: Gtag,
               public sanitizer: DomSanitizer,
-
+              private bnIdle: BnNgIdleService,
+              public socketService: SocketioService,
+              private toast:ToastrService
   ) {
     this.languages = [{lang: 'ta' , languagename: 'Tamil' } , { lang: 'en' , languagename: 'English'  }] ;
       translate.addLangs(['en', 'ta']);
@@ -113,6 +118,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.checkIdleState();
 //GOOGLE ANALYTICS
 // this.UserDetails = JSON.parse(localStorage.getItem('UserDetails')) || null
 // timer(500)
@@ -311,5 +317,30 @@ myUnload() {
       this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.botUrl)
       this.chatbotShow = true;
   }
-
+  checkIdleState(){
+    this.bnIdle.startWatching(2700).subscribe((timeout)=>{
+      if(timeout) {
+        var userDetail =JSON.parse(localStorage.getItem('UserDetails'))
+        if(userDetail){
+          this.logout(userDetail)
+        }
+      }
+    })
+  }
+  logout(userDetail){
+    if (this.socketService?.socket?.connected) {
+      this.socketService.Connectsocket({ type: 'disconnect' }).subscribe(quote => {
+      });
+      this.socketService.closeSocket();
+    }
+      
+      this.commonService.getIpAddressByUrl();
+      this.commonService.logout(userDetail.user_id, false).subscribe((logout: any) => {
+        this.UserDetails = null;
+        localStorage.clear();
+        sessionStorage.clear();
+        this.router.navigate(['/Learner/login']);
+        this.toast.warning("Session Timed Out!!")
+      });
+    }
 }

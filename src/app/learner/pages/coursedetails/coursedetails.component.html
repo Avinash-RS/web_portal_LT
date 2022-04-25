@@ -301,7 +301,7 @@
         </div>
         <!-- COURSE PLAYER -->
         <div class="videoPlayer" [ngClass]="drawersOpen ? 'halfWidth' : 'fullWidth'">
-            <iframe title="player" #scromPlayer id="myPlayer" class="player" src="about:blank" allowfullscreen></iframe>
+            <iframe title="player" #scromPlayer id="myPlayer" class="player"  allowfullscreen></iframe>
             <div class="toccollapsed" *ngIf="!drawersOpen">
                 <em class="lxp-TOC_Collapse" (click)="drawersOpen=drawersOpen?false:true"></em>
             </div>
@@ -352,7 +352,7 @@
                     <span class="downloadCode" (click)="downloadResource();" *ngIf="scromApiData.resourceUrl"><em class="lxp-Download_Code"></em> <span>{{'Download Code exercises' | translate}}</span></span>
                 </div>
                 <div *ngIf="checkDetails?.toc != '0'" class="d-flex align-items-center moduleTopicWrapper">
-                    <div *ngIf="!drawersOpen" class="currentModuleTopic">
+                    <div *ngIf="!drawersOpen &&(userType!=='vocational'&&userType!=='Corporate')" class="currentModuleTopic">
                         <div class="curentVideoWeek">{{'Week' | translate}} <span>{{filterkey == "Bookmarked"?bkmrk_weekDisp:weekHolderUI +1}}</span></div>
                         <div class="currentVideoModuleTopic">
                             <h5>{{currentModuleTitle}}</h5>
