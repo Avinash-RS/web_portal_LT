@@ -237,7 +237,7 @@ export class LoginComponent implements OnInit {
         if(this.loginForm.value.remember_me === true){
           localStorage.setItem('token', loginresult.data.login.message.token);
         }else{
-          sessionStorage.setItem('token', loginresult.data.login.message.token);
+          localStorage.setItem('token', loginresult.data.login.message.token);
         }
         // localStorage.setItem('language', this.loginForm?.value?.language || 'en'  );
         localStorage.setItem('Fullname', loginresult.data.login.message.full_name);
