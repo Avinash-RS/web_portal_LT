@@ -4,6 +4,7 @@ import { AngularEditorConfig } from "@kolkov/angular-editor";
 import { LearnerServicesService } from "@learner/services/learner-services.service";
 import { ToastrService } from "ngx-toastr";
 import { TranslateService } from '@ngx-translate/core';
+import { Router } from "@angular/router";
 @Component({
   selector: "app-questionanswer",
   templateUrl: "./questionanswer.component.html",
@@ -78,7 +79,7 @@ export class QuestionanswerComponent implements OnInit {
   tabType ='user';
   fromSideBtn:boolean = false;
   batchId ="";
-  constructor(private dialog: MatDialog, private learnerService: LearnerServicesService,private toastr: ToastrService,public translate: TranslateService) {
+  constructor(public route: Router, private dialog: MatDialog, private learnerService: LearnerServicesService,private toastr: ToastrService,public translate: TranslateService) {
     let lang = localStorage.getItem('language')
     this.translate.use(lang ? lang : 'en') 
     this.UserDetails = JSON.parse(localStorage.getItem('UserDetails'))
@@ -89,7 +90,12 @@ export class QuestionanswerComponent implements OnInit {
 
   ngOnInit() {
     this.selectedIndex = 1;
+    if(this.courseId){
     this.contentChange();
+    }else{
+      this.toastr.warning("Failed to load.. redirecting to dashboard.");
+        this.route.navigateByUrl("/Learner/MyCourse");
+    }
   }
 
   contextmenu() {
