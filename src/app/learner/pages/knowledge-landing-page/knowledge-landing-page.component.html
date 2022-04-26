@@ -1,20 +1,5 @@
 <app-header></app-header>
 <div class="knowledge-landing-container">
-  <!-- <div style="margin-bottom: 5px;" class="">
-    <div class="commonBackStyle">
-      <span [routerLink]="['/Learner/knowledge']">
-        <i class="lxp-Arrow backArrow" [routerLink]="['/Learner/knowledge']"></i> 
-        <i class="backText">Back</i>
-      </span>
-    </div>
-    <div class="courseNameBreadcrum">
-      <span class="pipeLine"> | </span>
-      <span>Knowledge Resources</span>
-      <i class="lxp-Arrow"></i>
-      <span>{{resourceFile[0]?.area_of_interest}}</span>
-    </div>
-  </div> -->
-
   <ul class="breadcrumb">
     <li><em routerLink="/Learner/knowledge" class="lxp-Go backArrow"></em> <span>{{'Knowledge Resources' | translate}}</span></li>
     <li>{{resourceFile[0]?.area_of_interest}}</li>
@@ -26,8 +11,6 @@
       (reachesRightBound)="rightBoundStat($event)" [scrollbar-hidden] = true [drag-scroll-y-disabled] = true>
         <span drag-scroll-item *ngFor="let value of topicList;let i = index" class="tooltip-pos">
           <span class="topic-container" (click)="onTopicSelection(value)">
-            <!-- <span class="{{ selectedTopic == value ? 'topic-chip active-topic' : 'topic-chip'}}" 
-            [matTooltip]="value">{{value}}</span> -->
             <span *ngIf="value.length >=6 " class="{{ selectedTopic == value ? 'topic-chip active-topic chip-hover' : 'topic-chip chip-hover'}}"  matTooltip="{{value}}"  matTooltipClass="tooltip-show">
               {{value | slice:0:6}}...</span>
             <span *ngIf="value.length < 6"  class="{{ selectedTopic == value ? 'topic-chip active-topic chip-hover' : 'topic-chip chip-hover'}}" >
@@ -45,20 +28,8 @@
           <button [disabled]="rightNavDisabled" [ngClass]="rightNavDisabled ? 'disableArrow' : 'showArrow'" mat-raised-button (click)="moveRight()" class="draggable-button float-right"> <mat-icon> chevron_right </mat-icon> </button>
         </div>
       </div>
-      
-      <!-- <owl-carousel-o [options]="TopicsOptions" class="questionList">
-        <ng-template *ngFor="let value of topicList;let i = index" carouselSlide>
-          <div class="topic-container" (click)="onTopicSelection(value)">
-            <div class="{{ selectedTopic == value ? 'topic-chip active-topic' : 'topic-chip'}}" 
-            [matTooltip]="value">{{value}}</div>
-          </div>
-        </ng-template>
-      </owl-carousel-o> -->
-
-
     </div>
-
-    </div>
+ </div>
 
   <div class="main-section">
     <div class="item" *ngIf="showSkeleton">
@@ -80,7 +51,6 @@
         <div class="resource-card" (click)="onPreview(resData)">
           <div class="card-img">
             <ng-container *ngIf="resData.thumbnail && resData.thumbnail.length > 0">
-              <!-- <img [src]="resData.thumbnail" alt="" class="img-thumb"> -->
               <img alt="" *ngIf="resData?.internal == 'yes' || resData?.internal == 'Yes'" [src]="resData?.thumbnail + blobKey" alt="" class="img-thumb">
               <img alt="" *ngIf="!resData?.internal || resData?.internal == 'no' || resData?.internal == 'No'" [src]="resData?.thumbnail" alt="" class="img-thumb">
             </ng-container>

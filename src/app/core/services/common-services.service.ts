@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
   add_to_wishlist, delete_wishlist, enrollcourse,
@@ -14,7 +14,20 @@ import * as publicIp from 'public-ip';
   providedIn: 'root'
 })
 export class CommonServicesService {
+  httpOptions;
   constructor(private apollo: Apollo, private http: HttpClient, ) { }
+
+  getToken(){
+    const token = localStorage.getItem('token')||sessionStorage.getItem('token'); 
+    var userDetails = JSON.parse(localStorage.getItem('UserDetails'))
+    this.httpOptions = {
+      headers: new HttpHeaders({ 
+        Authorization: 'Bearer '+token,
+        requestId: userDetails['user_id']
+       })
+    };
+  }
+  
   // Search Component for search all courses
   globalSearch$ = new Subject<any>();
   globalSearch = this.globalSearch$.asObservable();
@@ -246,7 +259,11 @@ export class CommonServicesService {
   }
 
   getTOC(postParam){
-    return this.http.post(environment.scormUrl+'navTreeV2',postParam);
+    this.getToken()
+    return this.http.post(environment.apiUrl+'navTreeV2',postParam,this.httpOptions);
   }
+  urlStatusCheck(url) {
+    return this.http.get(url,{responseType:'text'})
+}
   
 }

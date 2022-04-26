@@ -99,6 +99,20 @@ export class MycourseItemComponent implements OnInit {
       }
     });
   }
+
+  gotoQuiz(course) {
+    let data = {
+      courseId : course.course_id,
+      courseName: course.course_name
+    }
+    this.router.navigate(['/Learner/quizreport'], {
+      queryParams:
+      {
+        CourseId: btoa(course.course_id),
+        CourseName: btoa(course.course_name)
+      }
+    });
+  }
   //PLAYER PAGE NAVIGATION
   gotoDesc(c) {
     c.batch_end_date_Timer = new Date(c.batch_end_date).getTime();
@@ -132,7 +146,7 @@ export class MycourseItemComponent implements OnInit {
     localStorage.setItem('persentage', c && c.coursePlayerStatus && c.coursePlayerStatus.course_percentage ? c.coursePlayerStatus.course_percentage : '');
     localStorage.setItem('currentBatchId', c.batchid);
 
-    localStorage.setItem('resumeData', JSON.stringify({'link':c.link,'lastModule':c.lastModule,'lastTopic':c.lastTopic,'module_id':c.module_id,'topic_id':c.topic_id,'checklevel':c.checklevel,course_status: c.course_status}));
+    localStorage.setItem('resumeData', JSON.stringify({'link':c.link,'lastModule':c.lastModule,'lastTopic':c.lastTopic,'module_id':c.module_id,'topic_id':c.topic_id,'checklevel':c.checklevel,course_status: c.course_status,toc: c.toc}));
     
     this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
 

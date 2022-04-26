@@ -314,14 +314,18 @@ export class CalendarActivityComponent implements OnInit {
           checklevel:value.checklevel,
           module_id:value.module_id,
           topic_id:value.topic_id,
-          course_type:value?.course_type
+          course_type:value?.course_type,
+          extracted:value.extracted
         };
-
+        if(value.extracted){
+          this.router.navigateByUrl('/Learner/MyCourse')
+          return false
+        }
         localStorage.setItem('currentBatchEndDate', value.batch_end_date_Timer)
         localStorage.setItem('Courseid', value.courseid);
         localStorage.setItem('persentage', null);
         localStorage.setItem('currentBatchId', value.batch_id);
-        localStorage.setItem('resumeData', JSON.stringify({'link':value.link,'lastModule':value.modulename,'lastTopic':value.topicname,'module_id':value.module_id,'topic_id':value.topic_id,'checklevel':value.checklevel,'course_status': value.status,}));
+        localStorage.setItem('resumeData', JSON.stringify({'link':value.link,'lastModule':value.modulename,'lastTopic':value.topicname,'module_id':value.module_id,'topic_id':value.topic_id,'checklevel':value.checklevel,'course_status': value.status,'extracted':value.extracted}));
         this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
 
         // this.router.navigate(['Learner/MyCourse']);

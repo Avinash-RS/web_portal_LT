@@ -239,7 +239,7 @@
                                             <ul>
                                                 <li  [ngClass]="mod?.status === 'Passed' ? 'complete' :  mod?.status === 'process' ? 'current' : ''" *ngFor="let mod of subData?.childData; let ti = index">
                                                     <div *ngIf="(wi==weekHolderUI&&ti==nextPrevHolder && smi==subModuleHolder && mi==moduleHolder)||(this.weekHolder==undefined&& mod.expanded)" #focuser ></div>
-                                                    <div class="icov" [ngClass]="filterkey == 'Bookmarked'?(wi==bkmrk_week&&ti==bkmrk_topic && smi==bkmrk_subModuleHolder && mi==bkmrk_module)?'topicTitleSelected' : '':(wi==weekHolderUI&&ti==nextPrevHolder && smi==subModuleHolder && mi==moduleHolder)||(this.weekHolder==undefined&& mod.expanded) ? 'topicTitleSelected' : ''" (click)="playTopic(mod.link,mod?.topic_name,mod.status,subData?.module_name,res?.status,mod,wi,ti,mi,smi);drawersOpen=performOverLay?(drawersOpen?false:true):true">
+                                                    <div class="icov" [ngClass]="filterkey == 'Bookmarked'?(wi==bkmrk_week&&ti==bkmrk_topic && smi==bkmrk_subModuleHolder && mi==bkmrk_module)?'topicTitleSelected' : '':(wi==weekHolderUI&&ti==nextPrevHolder && smi==subModuleHolder && mi==moduleHolder)||(this.weekHolder==undefined&& mod.expanded) ? 'topicTitleSelected' : ''" (click)="playTopic(mod.link,mod?.topic_name,mod.status,subData?.module_name,res?.status,mod,(filterkey == 'Bookmarked'?{'wn':resDat.week,'wi':wi}:wi),ti,mi,smi);drawersOpen=performOverLay?(drawersOpen?false:true):true">
                                                         <div class="modTitle">
                                                             <h3 tooltip="{{mod?.topic_name}}">{{mod?.topic_name}}</h3>
                                                             <!-- <span class="playVideo"><em class="lxp-PlayCircle"></em> Video</span>
@@ -270,7 +270,7 @@
                                         <!-- <ng-container *ngIf="(topicData$|async).data.playerstatus.message"></ng-container> -->
                                         <li  [ngClass]="mod?.status === 'Passed' ? 'complete' :  mod?.status === 'process' ? 'current' : ''" *ngFor="let mod of( res.childData) let ti = index">
                                             <div *ngIf="(wi==weekHolderUI&&ti==nextPrevHolder && mi==moduleHolder)||(this.weekHolder==undefined&& mod.expanded)" #focuser ></div>
-                                            <div class="icov" [ngClass]="filterkey == 'Bookmarked'?(wi==bkmrk_week&&ti==bkmrk_topic && smi==bkmrk_subModuleHolder && mi==bkmrk_module)?'topicTitleSelected' : '':(wi==weekHolderUI&&ti==nextPrevHolder && mi==moduleHolder)||(this.weekHolder==undefined&& mod.expanded) ? 'topicTitleSelected' : ''" (click)="playTopic(mod.link,mod.topic_name,mod.status,res?.module_name,res?.status,mod,wi,ti,mi);drawersOpen=performOverLay?(drawersOpen?false:true):true">
+                                            <div class="icov" [ngClass]="filterkey == 'Bookmarked'?(wi==bkmrk_week&&ti==bkmrk_topic && mi==bkmrk_module)?'topicTitleSelected' : '':(wi==weekHolderUI&&ti==nextPrevHolder && mi==moduleHolder)||(this.weekHolder==undefined&& mod.expanded) ? 'topicTitleSelected' : ''" (click)="playTopic(mod.link,mod.topic_name,mod.status,res?.module_name,res?.status,mod,(filterkey == 'Bookmarked'?{'wn':resDat.week,'wi':wi}:wi),ti,mi);drawersOpen=performOverLay?(drawersOpen?false:true):true">
                                                 <div class="modTitle">
                                                     <h3 tooltip="{{mod?.topic_name}}">{{mod?.topic_name}}</h3>
                                                     <!-- <span class="playVideo"><em class="lxp-PlayCircle"></em> Video</span>
@@ -301,7 +301,7 @@
         </div>
         <!-- COURSE PLAYER -->
         <div class="videoPlayer" [ngClass]="drawersOpen ? 'halfWidth' : 'fullWidth'">
-            <iframe title="player" id="myPlayer" class="player" [src]="urlSafe" allowfullscreen></iframe>
+            <iframe title="player" #scromPlayer id="myPlayer" class="player"  allowfullscreen></iframe>
             <div class="toccollapsed" *ngIf="!drawersOpen">
                 <em class="lxp-TOC_Collapse" (click)="drawersOpen=drawersOpen?false:true"></em>
             </div>
@@ -352,8 +352,8 @@
                     <span class="downloadCode" (click)="downloadResource();" *ngIf="scromApiData.resourceUrl"><em class="lxp-Download_Code"></em> <span>{{'Download Code exercises' | translate}}</span></span>
                 </div>
                 <div *ngIf="checkDetails?.toc != '0'" class="d-flex align-items-center moduleTopicWrapper">
-                    <div *ngIf="!drawersOpen" class="currentModuleTopic">
-                        <div class="curentVideoWeek">{{'Week' | translate}} <span>{{weekHolderUI +1}}</span></div>
+                    <div *ngIf="!drawersOpen &&(userType!=='vocational'&&userType!=='Corporate')" class="currentModuleTopic">
+                        <div class="curentVideoWeek">{{'Week' | translate}} <span>{{filterkey == "Bookmarked"?bkmrk_weekDisp:weekHolderUI +1}}</span></div>
                         <div class="currentVideoModuleTopic">
                             <h5>{{currentModuleTitle}}</h5>
                             <h4 title="{{currentTopicTitle}}">

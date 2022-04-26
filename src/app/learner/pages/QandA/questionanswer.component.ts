@@ -186,11 +186,12 @@ export class QuestionanswerComponent implements OnInit {
 
   createQuestion() {
     if (this.htmlContent) {
-      let regexKey = /[&<>#]/gi;
-      if (this.htmlContent.search(regexKey) == -1) {
-        this.toastr.warning("Please dont use special characters")
-        return false
-      }
+      // console.log(this.htmlContent)
+      // let regexKey = /[&<>#]/gi;
+      // if (this.htmlContent.search(regexKey) == -1) {
+      //   this.toastr.warning("Please dont use special characters")
+      //   return false
+      // }
 
       this.learnerService.createEngineersForumData(this.UserDetails.user_id, this.UserDetails.full_name, this.courseId, this.htmlContent, this.courseName, this.batchId,this.UserDetails.orgId).subscribe((rdata: any) => {
         if (rdata?.errors && rdata?.errors[0]?.message === "Request failed with status code 413") {

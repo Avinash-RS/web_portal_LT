@@ -78,7 +78,7 @@ export class UpskillCalendarComponent implements OnInit {
     activityValue:"All",
     courseValue :"All"
   }
-  constructor(public learnerService: LearnerServicesService,private gs: GlobalServiceService,private router: Router, public dialog: MatDialog, ) {
+  constructor(public learnerService: LearnerServicesService,private gs: GlobalServiceService,private router: Router, public dialog: MatDialog) {
     this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(localStorage.getItem('UserDetails')) || null;
                 if(!this.userDetailes?.is_password_updated){
                   this.router.navigate(['/Learner/profile']);
@@ -137,12 +137,13 @@ export class UpskillCalendarComponent implements OnInit {
     var description = [];
     if(events.length > 0){
       events.forEach((value:any)=>{
-        if(value.description.length > 0){
+        if(value.description.length > 0 && value.title){
           description.push(value.description)
         }
       })
     }
     if(description.length == 0){
+      this.activeDayIsOpen = false;
       return;
     }
     if (isSameMonth(date, this.viewDate)) {
@@ -168,7 +169,11 @@ export class UpskillCalendarComponent implements OnInit {
         element.start = new Date(element.start);
         element.end = new Date (element.end);
         element.color = {primary : element.color};
-        element.title = element.description;
+        if(element.title != 'Instruction'){
+          element.title = '';
+        } else {
+          element.title = element.description;
+        }
       //  element.allDay = true;
       });
       this.events = activityDetailsList;​
@@ -177,10 +182,10 @@ export class UpskillCalendarComponent implements OnInit {
         var today = new Date();
         activityDetailsList.forEach((value)=>{
           var dateAvailable = moment(today).isBetween(value.start, value.end);
-          if(dateAvailable && value.description){
+          if(dateAvailable && value.title){
             this.activeDayIsOpen = true;
           }
-          if(moment(value.start).isSame(new Date(),'day'))
+          if(moment(value.start).isSame(new Date(),'day') && value.title)
           this.activeDayIsOpen = true;
         })
       }
@@ -332,7 +337,7 @@ export class UpskillCalendarComponent implements OnInit {
 
         value.batch_end_date_Timer = new Date(value.batch_end_date).getTime();//need
 
-        const detail = {
+        var detail:any = {
           id: value.courseid,
           wishlist: false,
           wishlist_id: null,
@@ -349,13 +354,18 @@ export class UpskillCalendarComponent implements OnInit {
           checklevel:value.checklevel,
           module_id:value.module_id,
           topic_id:value.topic_id,
-          course_type:value?.course_type
+          course_type:value?.course_type,
+          extracted : value.extracted
         };
+        if(value.extracted){
+          this.router.navigateByUrl('/Learner/MyCourse')
+          return false
+        }
         localStorage.setItem('currentBatchEndDate', value.batch_end_date_Timer)
         localStorage.setItem('Courseid', value.courseid);
         localStorage.setItem('persentage', null);
         localStorage.setItem('currentBatchId', value.batch_id);
-        localStorage.setItem('resumeData', JSON.stringify({'link':value.link,'lastModule':value.modulename,'lastTopic':value.topicname,'module_id':value.module_id,'topic_id':value.topic_id,'checklevel':value.checklevel,'course_status': value.status,}));
+        localStorage.setItem('resumeData', JSON.stringify({'link':value.link,'lastModule':value.modulename,'lastTopic':value.topicname,'module_id':value.module_id,'topic_id':value.topic_id,'checklevel':value.checklevel,'course_status': value.status,'toc': value.toc,'extracted':value.extracted}));
         this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
 
         // this.router.navigate(['Learner/MyCourse']);

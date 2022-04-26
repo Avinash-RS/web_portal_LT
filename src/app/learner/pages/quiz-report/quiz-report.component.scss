@@ -1,0 +1,213 @@
+@import "variable";
+
+.quizReport {
+    flex-direction: column;
+    @media only screen and (min-width: 992px) {
+        flex-direction: row;
+    }
+    .leftContainer {
+        width: 100%;
+        background: $grey1;
+        padding: 20px 0;
+        .col {
+          padding: 15px 20px;
+        }
+        @media only screen and (min-width: 992px) {
+          width: calc(100% - 360px);
+        }
+        @media only screen and (min-width: 1140px) {
+          width: calc(100% - 400px);
+        }
+        .breadcrumb {
+            margin: 0;
+            padding: 0 20px !important;
+            background-color: transparent !important;
+            li {
+                color: $label2;
+                font-size: 14px;
+                font-weight: 400;
+                line-height: normal;
+                position: relative;
+                margin-right: 15px;
+                display: inline-block;
+                em {
+                    display: inline-block;
+                    transform: scale(-1);
+                    color: #666666;
+                    margin-right: 8px;
+                    cursor: pointer;
+                }
+                &:last-child {
+                    color: #999999;
+                    &::before {
+                        content: "/";
+                        position: absolute;
+                        left: -10px;
+                        top: auto;
+                        bottom: auto;
+                        color: $lxp-theme-green;
+                    }
+                }
+            }
+        }
+    }
+    .rightContainer {
+        width: 100%;
+        background-color: $whitecolor1;
+        padding: 1.5em;
+        box-shadow: 0 0 2px 0 $blackshade3;
+        position: relative;
+        right: 0;
+        top: 0;
+        height: 100%;
+        @media only screen and (min-width: 720px) {
+          padding: 20px;
+        }
+        @media only screen and (min-width: 992px) {
+          width: 360px;
+          position: fixed;
+          top: 72px;
+        }
+        @media only screen and (min-width: 1140px) {
+          width: 400px;
+        }
+      }
+      .chartHeading {
+        color: $blackcolor;
+        font-size: 1.125em;
+        font-weight: 500;
+        margin: 0;
+      }
+      .performanceChart{
+        position: relative;
+        .ylabel,.xlabel {
+          font-size: 0.75em;
+          font-weight: 500;
+          color: $blackcolor;
+        }
+        .ylabel {
+          position: absolute;
+          left: -35px;
+          top: 50%;
+          transform: translateY(-50%) rotate(-90deg);
+          color: $blackcolor;
+        }
+        .xlabel{
+          margin: 1em auto;
+          text-align: center;
+          }
+      }
+      .quizAverage {
+        margin-top: 20px;
+        .wrapper{
+          margin-top: 0;
+          .circleProgress {
+            width: 47%;
+          }
+          .points {
+            margin-top: 1em;
+            width: 47%;
+            ul {
+              list-style: none;
+              li {
+                line-height: 2.5;
+                div {
+                  height: 10px;
+                  width: 10px;
+                  margin-right: 0.5em;
+                }
+                span {
+                  font-size: 0.75em;
+                  font-weight: 400;
+                  color: $label2;
+                }
+              }
+            }
+          }
+        }
+      }
+}
+
+::ng-deep.ag-theme-alpine {
+  .ag-header {
+    color:$label2;
+    background-color: $fadeGrey;
+    font-weight: 700;
+  }
+  .ag-root-wrapper {
+    border: none;
+  }
+  .ag-cell {
+    font-size: 14px;
+  }
+  .ag-header-cell-text {            
+    text-overflow: clip !important;
+    overflow: visible !important;
+    white-space: normal !important;
+    line-height: 16px!important;
+}
+  .ag-paging-panel {
+    padding-top: 10px;
+    height: 25px;
+  } 
+}
+
+
+::ng-deep.agquiz { 
+  mat-card {
+    position: relative;
+    min-height: 400px;
+    .noCard {
+      text-align: center;
+      margin-top: 5em;
+      figure {
+          margin: 15px 0;
+      }
+      p {
+          font-size: 14px;
+          color: #000000;
+          font-weight: 500;
+          line-height: normal;
+          margin-bottom: 30px ​!important;
+      }
+    }
+  }
+  .countWrapper{
+    .icon {
+      margin-right: 0.75em;
+    }
+    .count {
+      color: $blackcolor;
+      font-weight: 600;
+      font-size: 14px;
+    }
+  }
+
+  .statusBtn {
+    font-size: 10px;
+    width: 55px;
+    padding: 0.15em 0.5em;
+    border-radius: 5px;
+  }
+  .statusClass {
+    line-height: normal;
+    display: inline-flex;
+    align-items: center;
+  }
+  .good {
+    border: 1px solid $green1;
+    color: $green1;
+    // background-color: $green1 ;
+
+  }
+  .avg {
+    border: 1px solid $yellow1;
+    color: $yellow1;
+    // background-color: $yellow1 ;
+  }
+  .poor {
+    border: 1px solid $lxp-theme-green;
+    color: $lxp-theme-green;
+    // background-color:$lxp-theme-green ;
+  }
+}

@@ -29,7 +29,7 @@ boarddetail, checkExistingUser, getActivityDetailsByBatchAndCourseID, getAssignm
      getUserdetailUsername, listContent, login, playerModuleAndTopic, singleBatchInfo,
      syllabusofParticularScorm, ViewAllThreadData, ViewAllThreadDataBid, ViewSingleTopicDiscussionData, get_batchwise_learner_dashboard_data, get_learner_dashboard_count,
      getCourseGallery , getLearnerNewCourseReport, getCourseReportByUserid, getProgressionActivitydata,selfLearningdatabyUserId, getengineersForumQA_Count,recentlycourse,
-     getlabactivity,labactivity,weekWiseCourseChart,overAllCourseProgressByUserId,getlabActivityData,getStepCourseByLearner, playerstatus
+     getlabactivity,labactivity,weekWiseCourseChart,overAllCourseProgressByUserId,getlabActivityData,getStepCourseByLearner, playerstatus,getlearnerquiz
 } from './operations/learner_query';
 
 
@@ -1303,7 +1303,15 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
       }
     });
   }
-
+  getlearnerquiz(email,courseid){
+    return this.Apollo.query({
+      query:getlearnerquiz,
+      variables:{
+        email:email,
+        courseid:courseid
+      }
+    })
+  }
   getStepDetails(user_id){
     return this.Apollo.query({
       query:getStepCourseByLearner,

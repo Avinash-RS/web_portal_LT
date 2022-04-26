@@ -16,17 +16,124 @@
   justify-content: center;
   .container-reg200 {
     padding: 35px 15px;
+    background-color: transparent;
     @media only screen and (min-width:992px) {
       padding: 35px;
     }
+    .dis {
+      background-color: $color-white !important;
+    }
   }
 }
+
+.certificateWrapper {
+  display: flex;
+  flex-direction: column;
+  .certificate {
+    // background-color: #F0F0F0;
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 12px 25px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    position: relative;
+    @media only screen and (min-width: 720px) {
+      flex-wrap: nowrap;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+    .cBadge {
+      width: 100%;
+      display: inline-flex;
+      @media only screen and (min-width: 720px) {
+        width: 10%;
+      }
+      em {
+        font-size: 30px;
+        color: #373331;
+      }
+    }
+    .common {
+      width: 100%;
+      margin-top: 20px;
+      @media only screen and (min-width: 576px) {
+        width: 48%;
+      }
+      @media only screen and (min-width: 720px) {
+        margin-top: 0;
+        width: 35%;
+      }
+      span {
+        display: block;
+        color: #808080;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: normal;
+      }
+      .heading {
+        color: #222222;
+        font-size: 15px;
+        font-weight: 400;
+        line-height: normal;
+        margin-top: 2px;
+        @media only screen and (min-width: 992px) {
+          margin-top: 8px;
+        }
+      }
+    }
+    .download {
+      width: 50%;
+      text-align: right;
+      position: absolute;
+      right: 25px;
+      top: 12px;
+      @media only screen and (min-width: 720px) {
+        width: 20%;
+        position: relative;
+        right: auto;
+        top: auto;
+      }
+      button {
+        background-color: $color-white;
+        border: 1px solid rgba(27, 78, 155, 0.5);
+        border-radius: 5px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        display: inline-flex;
+        align-items: center;
+        padding: 8px 25px;
+        @media only screen and (min-width: 720px) {
+          width: 100%;
+        }
+        @media only screen and (min-width: 992px) {
+          width: auto;
+        }
+        em {
+          font-size: 17px;
+          color: $color-blank;
+          margin-right: 10px;
+          line-height: normal;
+        }
+        span {
+          font-size: 14px;
+          font-weight: 400;
+          color: $color-blank;
+          line-height: normal;
+        }
+      }
+    }
+  }
+}
+
 ::ng-deep .custom-modalbox {
   width: 400px;
   .mat-dialog-container{
     overflow: inherit !important;
   }
 }
+
 .imgSize {
   color: #333;
   text-align: center;
@@ -547,11 +654,9 @@ div.account {
   color:#626262;
   cursor: pointer;
   font-size: 12px;
-  
 }
 
 .title {
-
   font-size: 18px;
   font-weight: 430;
 }
@@ -562,10 +667,6 @@ div.account {
   text-align: center !important;
   margin-left: 15px;
   cursor: pointer;
-}
-
-.m-l-10px {
-  margin-left: 10px;
 }
 
 .linkedin {
@@ -961,24 +1062,10 @@ hr {
   border-radius: 0 !important;
 }
 
-// :host ::ng-deep.footericon{
-//   width: 9%;
-//   position: absolute;
-//   margin-left: 5px;
-// }
-
 .downloadIcon {
   padding-bottom: 1px;
 }
-// html {
-//   overflow: scroll;
-//   overflow-x: hidden !important;
-// }
 
-// ::-webkit-scrollbar {
-//   width: 0px;
-//   background: transparent !important;
-// }
 .qual, .details-row {
   
 @media (min-width: 300px) {
@@ -1087,6 +1174,7 @@ hr {
 
   opacity: 1 !important;
 }
+
 :host ::ng-deep .tooltip-arrow {
   opacity: 1 !important;
 }

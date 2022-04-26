@@ -35,6 +35,7 @@ import { GoogleAnalyticsService } from '@learner/services/google-analytics.servi
 import {GtagModule} from "angular-gtag";
 import { environment } from '@env/environment';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { BnNgIdleService } from 'bn-ng-idle';
 import { RedirectionComponent } from './redirection/redirection.component';
 // import { ChartsModule } from 'ng2-charts';
 
@@ -86,7 +87,7 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
     }),
 
   ],
-  providers: [AlertComponentComponent, DatePipe, SocketioService,GoogleAnalyticsService, InterceptorService,
+  providers: [AlertComponentComponent, DatePipe, SocketioService,GoogleAnalyticsService, InterceptorService,BnNgIdleService,
     {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true},
     {
       provide: APP_BASE_HREF,

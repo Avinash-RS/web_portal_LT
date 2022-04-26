@@ -1406,6 +1406,7 @@ export const getAssignmentmoduleData = gql`
           activitystartdate
           activityenddate
           activityname
+          activityoutcome
           question_doc_type
           score_mark
           comments
@@ -1932,6 +1933,7 @@ export const getprojectActivityData = gql`
           activityId
           module_id
           activityname
+          activityoutcome
           topic_id
           projecttype
           total_mark
@@ -2007,6 +2009,7 @@ export const getperformActivityData = gql`
           iterationTotal
           module_id
           activityname
+          activityoutcome
           topic_id
           materialDetails {
             _id
@@ -2544,6 +2547,7 @@ export const getCourseReportByUserid = gql`
         _id
         module {
           moduleName
+          modulestatus
           name
           week
           totalDuration
@@ -2724,6 +2728,7 @@ export const getlabActivityData = gql`
           iterationTotal
           module_id
           activityname
+          activityoutcome
           topic_id
           projecttype
           url
@@ -2839,6 +2844,42 @@ export const getStepCourseByLearner = gql`
     getStepCourseByLearner(user_id: $user_id) {
       success
       stepRedirectUrl
+    }
+  }
+`;
+export const getlearnerquiz = gql `
+  query getlearnerquiz($email: String!,$courseid:String!){
+    getlearnerquiz(email:$email,courseid:$courseid){
+      success
+      error_msg
+      message{
+        doughnut_chart{
+          to_score
+          count
+          percent
+          color
+        }
+        bar_chart{
+          user
+          quiz_name
+          batchid
+          score_earned
+          points_earned
+          max_score
+          max_point
+          color
+        }
+        table_chart{
+          quiz_name
+          status
+          color
+          no_of_question
+          correct_answer
+          score
+          start_date
+          end_date
+        }
+      }
     }
   }
 `;

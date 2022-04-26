@@ -121,8 +121,6 @@ export class KnowledgeResourceHomeComponent implements OnInit {
   onSelectFile(fileInput) {
     this.CommonService.loader$.next(true);
     if (fileInput && fileInput.target && fileInput.target.files && fileInput.target.files[0]) {
-      // var allowedExtensions;
-      // var filePath = fileInput.target.files[0].name;
       this.imageView = fileInput.target.files[0];
       const formData = new FormData();
       formData.append('resource', this.imageView);
@@ -154,14 +152,12 @@ export class KnowledgeResourceHomeComponent implements OnInit {
       {
         queryParams: {
           domain: domains,
-          // tslint:disable-next-line: object-literal-shorthand
           area_of_interest: areaOfInterest
         }
       });
   }
 
   onTabChanged(event) {
-    // this.isReloaded=true;
     if (event.index === 0) {
       this.getResourceFiles();
     }

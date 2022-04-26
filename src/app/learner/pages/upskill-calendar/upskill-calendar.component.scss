@@ -13,13 +13,13 @@
             width: 100%;
             order: 1;
             @media screen and (min-width: 992px) {
+                width: calc(100% - 360px);
+            }
+            @media screen and (min-width: 1140px) {
                 width: calc(100% - 400px);
             }
-            @media screen and (min-width: 1200px) {
-                width: calc(100% - 450px);
-            }
             @media screen and (min-width: 1540px) {
-                width: calc(100% - 550px);
+                width: calc(100% - 500px);
             }
             .calendar {
                 display: flex;
@@ -146,13 +146,13 @@
                 position: fixed;
                 right: 0;
                 top: 70px;
+                width: 360px
+            }
+            @media screen and (min-width: 1140px) {
                 width: 400px
             }
-            @media screen and (min-width: 1200px) {
-                width: 450px
-            }
             @media screen and (min-width: 1540px) {
-                width: 550px
+                width: 500px
             }
             .viewInfotxt {
                 display: flex;
@@ -176,13 +176,12 @@
                         display: inline-block;
                         cursor: pointer;
                         // padding-bottom: 1em;
-                        padding: 6px 12px 6px 0;
+                        padding: 6px 8px 6px 0;
                         position: relative;
                         font-weight: 400;
-                        height: 35px;
                         transition: color 0.3s ease-in-out;
-                        @media only screen and (min-width: 370px) {
-                            padding: 6px 16px 6px 0;
+                        @media only screen and (min-width: 320px) {
+                            padding: 6px 19px 6px 0;
                         }
                         &:hover {
                             color: $gerycolor;
@@ -270,14 +269,12 @@
                     margin-top: 10px;
                     height: calc(100vh - 195px);
                 }
-                // @media only screen and (min-width: 1200px) {
-                //     height: calc(100vh - 195px);
-                //     padding: 0 10px 0 0;
-                //     margin-top: 10px;
-                // }
-                // @media only screen and (min-width: 1540px) {
-                //     height: calc(100vh - 215px);
-                // }
+                @media only screen and (min-width: 1200px) {
+                    height: calc(100vh - 195px);
+                }
+                @media only screen and (min-width: 1540px) {
+                    height: calc(100vh - 215px);
+                }
                 .contentbox {
                     flex-wrap: wrap;
                     flex-direction: row;
@@ -487,14 +484,17 @@
                                 width: 100%;
                                 margin-top: 10px;
                             }
-                            @media only screen and (min-width:1200px) {
-                                width: 39%;
+                            @media only screen and (min-width:1140px) {
+                                width: 44%;
                                 margin-top: 0;
                                 justify-content: flex-end;
                             }
+                            @media only screen and (min-width:1540px) {
+                                width: 39%;
+                            }
                             .icon {
                                 width: 8%;
-                                @media only screen and (min-width:1200px) {
+                                @media only screen and (min-width:1140px) {
                                     width: 14%;
                                 }
                                 @media only screen and (min-width:1540px) {
@@ -728,9 +728,16 @@
     .cal-month-view .cal-day-cell.cal-in-month.cal-has-events{
         position: relative;
     }
+
+    .cal-open-day-events{
+        .cal-event {
+            display: none;
+        }
+    }
 }
 ::ng-deep.filter-modal-box {
     .mat-dialog-container {
         padding:0px !important;
     }
 }
+
