@@ -650,7 +650,7 @@
                     <!-- <div class="spacer" *ngIf="!courseDetailsList.length"></div> -->
 
                     <!-- InProgressModule -->
-                    <!-- <ng-contaniner *ngIf="userDetailes.org_type == 'collegeconnect'">
+                    <ng-contaniner *ngIf="userDetailes.org_type == 'collegeconnect'">
                         <div class="inprogressModule" *ngIf="inProgress">
                             <h3>{{'Inprogress Modules' | translate}}</h3>
                             <div class="wrapper">
@@ -675,7 +675,7 @@
                                 </div>
                             </div>
                         </div>
-                    </ng-contaniner> -->
+                    </ng-contaniner>
                     <!-- Missed Topics & Knowledge Check -->
                     <div class="missedTopicsKnowledgeCheck d-none" *ngIf="courseDetailsList.length">
                         <h3>{{'Missed Topics & Knowledge Check' | translate}}</h3>
@@ -714,7 +714,7 @@
                     </div>
 
                     <!-- Recently Learned Topics -->
-                    <!-- <ng-contaniner *ngIf="userDetailes.org_type == 'collegeconnect'">
+                    <ng-contaniner *ngIf="userDetailes.org_type == 'collegeconnect'">
                         <div class="recentlyLearnedTopics" *ngIf="recentlyCompleted">
                             <h3>{{'Recently Completed Topics' | translate}}</h3>
                             <div class="wrapper">
@@ -741,7 +741,7 @@
                                 </div>
                             </div>
                         </div>
-                    </ng-contaniner> -->
+                    </ng-contaniner>
                 </div>
                 </div>
                 <div class="footer" [ngClass]="show ? 'noPadding': 'padd'"><span class="powered"><span class="forgot1">© {{currentYear}} {{' L&T EduTech. All Rights Reserved.' | translate}}</span></span></div>
