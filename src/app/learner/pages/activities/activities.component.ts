@@ -866,19 +866,11 @@ export class ActivitiesComponent implements OnInit {
           },
           blobHTTPHeaders: { blobContentType: this.currentFile.type }
         });
-
         if (response._response.status === 201) {
-
           this.jsonData = {
-            course_id : this.courseid,
-            module_id : project.projectActivity.module_id,
-            topic_id : project.projectActivity.topic_id,
-            user_id : this.userDetail.user_id,
-            submit_status : submitStatus,
-            total_mark : project.projectActivity.total_mark,
-            submitType : 'project',
-            submitAction,
-            iterationid : project.projectActivity.project_id,
+            course_id : this.courseid, module_id : project.projectActivity.module_id, topic_id : project.projectActivity.topic_id,
+            user_id : this.userDetail.user_id, submit_status : submitStatus, total_mark : project.projectActivity.total_mark,
+            submitType : 'project', submitAction, iterationid : project.projectActivity.project_id,
             object_id : project.projectActivity.project_id,
             videodetails: [{
               doc_type: this.type,
@@ -889,7 +881,6 @@ export class ActivitiesComponent implements OnInit {
               uploaded_date: new Date(),
               is_active: true
             }]
-
           };
           const checkRes = await this.insertActivityRecordProject(this.jsonData);
           this.ngxLoader.stop();
@@ -897,11 +888,8 @@ export class ActivitiesComponent implements OnInit {
           setTimeout(() => {
             this.Lservice.sendMessage('', '0.00');
           }, 1000);
-
           this.flag = 1;
         }
-
-
         this.selectPerformfile = [];
         this.showSubmittedon = true;
         this.selectfile = [];

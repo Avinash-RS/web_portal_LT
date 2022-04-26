@@ -298,20 +298,10 @@ export class CoursedetailsComponent implements OnInit {
     }
   }
   // initials: any;
-  constructor(
-    public translate: TranslateService,
-    private router: ActivatedRoute,
-    public socketService: SocketioService,
-    public Lservice: LearnerServicesService,
-    private cdr: ChangeDetectorRef,
-    public service: CommonServicesService,
-    private gs: GlobalServiceService,
-    private dialog: MatDialog,
-    public route: Router,
-    private formBuilder: FormBuilder,
-    public sanitizer: DomSanitizer,
-    private toastr: ToastrService
-  ) {
+  constructor(public translate: TranslateService, private router: ActivatedRoute, public socketService: SocketioService,
+              public Lservice: LearnerServicesService, private cdr: ChangeDetectorRef, public service: CommonServicesService,
+              private gs: GlobalServiceService, private dialog: MatDialog, public route: Router, private formBuilder: FormBuilder,
+              public sanitizer: DomSanitizer, private toastr: ToastrService) {
     const lang = localStorage.getItem('language');
     this.translate.use(lang ? lang : 'en');
     const loginDetails = JSON.parse(localStorage.getItem('UserDetails'));
@@ -323,18 +313,14 @@ export class CoursedetailsComponent implements OnInit {
     this.socketConnector = this.socketService
       .Connectsocket({ type: 'connect' })
       .subscribe((quote) => {});
-
-    // ::: about blank is to remove 404 error message on player start:::
     // this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl("about:blank");
     this.userType = loginDetails.org_type;
     const token = loginDetails.token;
-
     // const cryptoInfo = CryptoJS.AES.encrypt(JSON.stringify( {token} ), '(!@#graphql%^&facade!@#)').toString();
     this.user_token = CryptoJS.AES.decrypt(
       token,
       '(!@#graphql%^&facade!@#)'
     ).toString(CryptoJS.enc.Utf8);
-
     const Navdetail: any =
       this.route.getCurrentNavigation() &&
       this.route.getCurrentNavigation().extras &&
@@ -350,7 +336,6 @@ export class CoursedetailsComponent implements OnInit {
       this.drawersOpen = true;
       this.performOverLay = false;
     }
-
     if (this.checkDetails === undefined) {
       this.batchId = localStorage.getItem('currentBatchId');
       this.batchEndTime = localStorage.getItem('currentBatchEndDate');
@@ -363,9 +348,7 @@ export class CoursedetailsComponent implements OnInit {
       this.batchId = this.checkDetails.batch_id;
       this.batchEndTime = this.checkDetails.batchEndTime;
       this.courseType = this.checkDetails?.course_type;
-
     }
-
     if (this.gs.checkLogout()) {
       this.detailData = this.checkDetails;
       // this.courseid = detail && detail.id || this.localStoCourseid;
@@ -377,16 +360,12 @@ export class CoursedetailsComponent implements OnInit {
       // this.lastpersentage = detail  && detail.persentage || this.localper ;
       gtag('event', 'coursePlayerCID', { courseID: this.courseid });
       this.playerModuleAndTopic();
-
       this.service
         .viewCurseByIDForLearner(
           (this.checkDetails && this.checkDetails.id) || this.localStoCourseid
         )
         .subscribe((viewCourse: any) => {
-          if (
-            viewCourse.data.view_course_for_learner &&
-            viewCourse.data.view_course_for_learner.success
-          ) {
+          if (viewCourse.data.view_course_for_learner && viewCourse.data.view_course_for_learner.success) {
             this.course = viewCourse.data.view_course_for_learner.message;
             if (this.detailData !== undefined) {
               this.selectedName = this.detailData?.course_name;
@@ -405,7 +384,6 @@ export class CoursedetailsComponent implements OnInit {
             });
           }
         });
-
       // TOC handling
       if (this.checkDetails?.toc !== '0') {
         if (this.screenWidth < 800) {
@@ -416,7 +394,6 @@ export class CoursedetailsComponent implements OnInit {
       } else {
         this.drawersOpen = false;
       }
-
       // play initial/resume topic
       if (
         this.checkDetails?.lastLogIndex &&
@@ -426,9 +403,7 @@ export class CoursedetailsComponent implements OnInit {
       } else {
         this.lastLogIndex = 1;
       }
-
     }
-
     this.Lservice.getModuleData(
       (this.checkDetails && this.checkDetails.id) || this.localStoCourseid,
       this.userDetail.user_id
@@ -442,11 +417,7 @@ export class CoursedetailsComponent implements OnInit {
           let resourceFile = false;
           element.moduledetails.forEach((value) => {
             element.moduledetails.showPreview = false;
-            if (
-              value.resourse &&
-              value.resourse.files &&
-              value.resourse.files.length
-            ) {
+            if (value.resourse && value.resourse.files && value.resourse.files.length) {
               this.fileRef = value.resourse.files.filter(
                 (type) => type.fileType === 'Reference'
               );
@@ -460,9 +431,7 @@ export class CoursedetailsComponent implements OnInit {
         });
         // this.nextPrevHolder = this.topiccurrentPage = this.content.topicIndex == null ? 0 : this.content.topicIndex;
         // this.moduleHolder = this.currentPage = this.content.moduleIndex == null ? 0 : this.content.moduleIndex;
-
         this.content.noresource = noresource;
-
         this.modulength = this.content.coursedetails.length;
         this.courseTime = this.content.coursetime;
       }
@@ -472,16 +441,11 @@ export class CoursedetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.translate.use(localStorage.getItem('language'));
-
     // if (!resumeInit) {
     this.socketService.socketReceiver();
-
-    this.socketEmitReciver = this.socketService.change.subscribe(
-      (result: any) => {
-
+    this.socketEmitReciver = this.socketService.change.subscribe((result: any) => {
         if (result.data.course_id === this.courseid) {
           if (result.data.resume) {
-
             let resultData;
             const getResumeTopic = (data) => {
               for (let i = 0; i < data.length; i++) {
@@ -502,9 +466,6 @@ export class CoursedetailsComponent implements OnInit {
               }
               return resultData;
               };
-
-
-
             if (result && (getResumeTopic(result.data.message).id === this.topicInfo?.id || (this.topicInfo === undefined))) {
           // } else {
             // replace resume data from socket for TOC
@@ -604,12 +565,9 @@ export class CoursedetailsComponent implements OnInit {
             }
           }
         }
-
           console.log(this.scromModuleData);
-
           if (result && !Number.isNaN(this.weekHolder)) {
           // this.scromModuleData = result.message;
-
           if (result.data.course_id === this.courseid) {
             // if(this.userType=="Corporate"){
             // Lab URL and btn display
@@ -619,14 +577,11 @@ export class CoursedetailsComponent implements OnInit {
             } else {
               this.showlab = result.data.labActivity;
             }
-
             // }
             // this.scromModuleData = result.data.childData;
             // this.moduleExpand(this.weekHolder, this.moduleHolder, this.scromApiData.checkLevel ? this.subModuleHolder : null);
           }
-
           // expanding
-
           // replace data
           // this.weekHolderUI
           // this.subModuleHolderUI
