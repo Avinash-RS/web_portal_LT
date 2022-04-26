@@ -175,21 +175,22 @@ export class QuizReportComponent implements OnInit {
   ];
   noRecords:boolean = false;
   constructor(private activeRoute: ActivatedRoute,public learnerService: LearnerServicesService,) { 
-    this.activeRoute.queryParams.subscribe(res => {
-      if(res){
-        this.courseId = atob(res.CourseId)
-        this.courseName = atob(res.CourseName)        
-      }
-    });
     this.UserDetails = JSON.parse(localStorage.getItem('UserDetails')) || null;
     this.userId = this.UserDetails?.user_id;
+    this.activeRoute.queryParams.subscribe(res => {
+      if(res){
+        this.courseId = atob(res.CourseId);
+        this.courseName = atob(res.CourseName);
+        this.geTQuizData();        
+      }
+    });
   }
 
   ngOnInit() {
-    this.geTQuizData();
+   
   }
   geTQuizData(){
-    this.learnerService.getlearnerquiz(this.UserDetails?.username ? this.UserDetails?.username : '').subscribe((result:any)=>{
+    this.learnerService.getlearnerquiz(this.UserDetails?.username ? this.UserDetails?.username : '',this.courseId).subscribe((result:any)=>{
       if(result?.data?.getlearnerquiz?.success){
         this.quizData =  {
           bar_chart : result?.data?.getlearnerquiz?.message?.bar_chart,

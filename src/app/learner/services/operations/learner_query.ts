@@ -2848,8 +2848,8 @@ export const getStepCourseByLearner = gql`
   }
 `;
 export const getlearnerquiz = gql `
-  query getlearnerquiz($email: String!){
-    getlearnerquiz(email:$email){
+  query getlearnerquiz($email: String!,$courseid:String!){
+    getlearnerquiz(email:$email,courseid:$courseid){
       success
       error_msg
       message{

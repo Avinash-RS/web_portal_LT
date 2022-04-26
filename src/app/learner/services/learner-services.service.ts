@@ -1303,11 +1303,12 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
       }
     });
   }
-  getlearnerquiz(email){
+  getlearnerquiz(email,courseid){
     return this.Apollo.query({
       query:getlearnerquiz,
       variables:{
-        email:email
+        email:email,
+        courseid:courseid
       }
     })
   }
