@@ -77,7 +77,7 @@ export class AskQuestionsComponent implements OnInit {
     this.getPlayerModuleTopic();
     this.getQuestionsAnswerlists()
     }else{
-      this.toastr.warning("Failed to load.. redirecting to dashboard.");
+      // this.toastr.warning("Failed to load.. redirecting to dashboard.");
         this.route.navigateByUrl("/Learner/MyCourse");
     }
   }

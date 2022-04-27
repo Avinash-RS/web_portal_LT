@@ -373,7 +373,7 @@ export class CoursedetailsComponent implements OnInit {
       // this.lastpersentage = detail  && detail.persentage || this.localper ;
       //if no course id redirect back
       if (!this.courseid) {
-        this.toastr.warning("Failed to load.. redirecting to dashboard.");
+        // this.toastr.warning("Failed to load.. redirecting to dashboard.");
         this.route.navigateByUrl("/Learner/MyCourse");
       } else {
         gtag("event", "coursePlayerCID", { courseID: this.courseid });
