@@ -93,7 +93,7 @@ export class QuestionanswerComponent implements OnInit {
     if(this.courseId){
     this.contentChange();
     }else{
-      this.toastr.warning("Failed to load.. redirecting to dashboard.");
+      // this.toastr.warning("Failed to load.. redirecting to dashboard.");
         this.route.navigateByUrl("/Learner/MyCourse");
     }
   }
