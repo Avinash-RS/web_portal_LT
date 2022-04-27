@@ -6,9 +6,9 @@
             <li>{{'Quiz Report' | translate}}</li>
         </ul>
         <div class="col agquiz">
-            <mat-card class="mat-elevation-z8" style="overflow: hidden;">
+            <mat-card>
                 <div *ngIf="rows.length <= 0 && !noRecords" class="loading">
-                    <ngx-skeleton-loader count="5" [theme]="{ 'border-radius': '0', height: '50px' }"></ngx-skeleton-loader>
+                    <ngx-skeleton-loader count="6" [theme]="{ 'border-radius': '0', height: '50px' }"></ngx-skeleton-loader>
                 </div>
                 <div *ngIf="rows.length > 0 && !noRecords">
                     <ag-grid-angular class="ag-theme-alpine" [columnDefs]="cols" [rowData]="rows" style="width:100%; min-height: 400px;" [ngStyle]="{height:rows.length == 1 ? (rows.length * 50) + 'px' : ((rows.length * 50) - 52) + 'px' }" (gridReady)="onGridReady($event)" [defaultColDef]="defaultColDef"></ag-grid-angular>

@@ -157,6 +157,8 @@
   mat-card {
     position: relative;
     min-height: 400px;
+    padding: 0px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.2)!important;
     .noCard {
       text-align: center;
       margin-top: 5em;
