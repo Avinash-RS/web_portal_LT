@@ -73,9 +73,13 @@ export class AskQuestionsComponent implements OnInit {
       this.batchEndTime = detail.batchEndTime;
     }
     this.userDetail = this.gs.checkLogout();
-    
+    if(this.courseid){
     this.getPlayerModuleTopic();
     this.getQuestionsAnswerlists()
+    }else{
+      this.toastr.warning("Failed to load.. redirecting to dashboard.");
+        this.route.navigateByUrl("/Learner/MyCourse");
+    }
   }
 
   ngOnInit() {

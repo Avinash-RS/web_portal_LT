@@ -174,12 +174,16 @@
   padding: 3px;
   font-weight: 600;
 }
+.mobIterations {
+  visibility: hidden;
+}
 .itrCount,
 .itrationTxt,
 .itrationTxts {
   position: relative;
   width: 100%;
   text-align: right;
+  visibility: hidden;
 }
 .startEndDate {
   span {
@@ -210,18 +214,18 @@
   text-align: right;
   display: inline-block;
 }
-.submitstatus {
-  color: #ffa04e;
+.submitstatus, .gradeStatus {
   width: 100%;
   text-align: right;
   display: inline-block;
   font-size: 15px;
+  position: relative;
+}
+.submitstatus {
+  color: #ffa04e;
 }
 .gradeStatus {
   color: #0c781b;
-  position: relative;
-  left: 98px;
-  font-size: 15px;
 }
 .projectSubmitstatus {
   color: #ffa04e;
