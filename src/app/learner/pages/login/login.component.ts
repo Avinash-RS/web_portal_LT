@@ -185,7 +185,7 @@ export class LoginComponent implements OnInit {
       return this.validateAllFields(this.loginForm);
     }
     this.loader = true;
-    var encryptedname = CryptoJS.AES.encrypt(this.loginForm.value.username.toLowerCase(), this.secretKey.trim()).toString();
+    var encryptedname = CryptoJS.AES.encrypt(this.loginForm.value.username.toLowerCase().trim(), this.secretKey.trim()).toString();
     var encryptedpassword = CryptoJS.AES.encrypt(this.loginForm.value.password, this.secretKey.trim()).toString();
     this.service.login(encryptedname, encryptedpassword, false,this.recaptchaStr)
       .subscribe((loginresult: any) => {
