@@ -996,7 +996,12 @@ hr {
 .bb-icon {
   border-bottom: 1px solid $color-border;
 }
-
+.float_right {
+  float: right;
+  &.closebtn {
+    margin-right: 12px;
+  }
+}
 // :host ::ng-deep .mat-progress-bar-buffer {
 //   background-color: $profile-t-grey !important;
 // }
