@@ -2847,6 +2847,14 @@ export const getStepCourseByLearner = gql`
     }
   }
 `;
+export const insertModuleTopicSkeleton = gql`
+  query insertModuleTopicSkeleton($user_id: String!) {
+    insertModuleTopicSkeleton(user_id: $user_id) {
+      success
+      error_msg
+    }
+  }
+`;
 export const getlearnerquiz = gql `
   query getlearnerquiz($email: String!,$courseid:String!){
     getlearnerquiz(email:$email,courseid:$courseid){
