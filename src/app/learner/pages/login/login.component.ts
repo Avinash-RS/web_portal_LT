@@ -69,6 +69,9 @@ export class LoginComponent implements OnInit {
       remember_me: new FormControl(false, []),
       language: new FormControl(false, [])
     });    
+    setTimeout(()=>{
+      this.captchaRef.reset();
+    },1000)
   }
 
   viewChange(){
@@ -302,6 +305,9 @@ export class LoginComponent implements OnInit {
         termsandconditions: new FormControl('', [])
       }, {
       });
+      setTimeout(()=>{
+        this.captchaRef.reset();
+      },1000)
     }
 
     onError(errorDetails: RecaptchaErrorParameters): void {
@@ -364,6 +370,9 @@ export class LoginComponent implements OnInit {
     this.signUpPage = false;
     this.signInPage = true;
     this.registerForm.reset();
+    setTimeout(()=>{
+      this.captchaRef.reset();
+    },1000)
   }
 
   openPlayStore() {

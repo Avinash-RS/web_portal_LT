@@ -1240,3 +1240,11 @@ mutation verify_tfa_setup($user_id:String!,$token:String!){
 }
 }
 `;
+export const insertModuleTopicSkeleton = gql`
+mutation insertModuleTopicSkeleton($user_id:String!){
+  insertModuleTopicSkeleton(user_id:$user_id){
+    message
+    success
+}
+}
+`;

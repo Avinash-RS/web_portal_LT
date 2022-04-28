@@ -392,6 +392,9 @@ export class LearnerNewMyCourseComponent implements OnInit {
     this.UserDetails = JSON.parse(localStorage.getItem('UserDetails')) || null;
     this.userId = this.UserDetails.user_id;
     this.selectedDate = moment().format();
+    this.learnerService.insertSkeleton(this.userId).subscribe((result:any)=>{
+      console.log(result)
+    })
     this.getLearnerActivity(this.selectedDate);
     // this.triggerAvailablecourse = setInterval(() => {
     //   this.getCountForCategories();
