@@ -12,6 +12,7 @@
     <div class="bottomSection d-flex justify-content-between align-items-center">
       <span class="copyRights">© {{currentYear}} L&T EduTech. All rights reserved</span>
       <div class="terms">
+        <a (click)="openTroubleshootPopup()"><em class="lxp-Settings settingsIcon"></em> <span>Have issues? Troubleshoot</span></a>
         <a href="https://lntedutech.com/support-form/" target="newTab"><em class="lxp-Support"></em> <span>Technical Support</span></a>
         <a href="https://lntedutech.com/feedback-form/" target="newTab"><em class="lxp-Feedback"></em> <span>Feedback</span></a>
         <a class="privacyPolicy" href="https://lntedutech.com/privacy-policy-2/" target="privacyPolicy"><span>Privacy policies</span></a>
@@ -275,3 +276,43 @@
   </mat-card>
 </div>
 <sample></sample>
+<!-- <div>App version: {{env_Version}}</div> -->
+
+<ng-template #troubleshoot>
+  <div class="popupContainer">
+    <div class="mainHeader">
+      <div class="leftHeading">
+        <h3>Having issues? Troubleshoot it…</h3>
+        <p>If something isn’t working, running a troubleshooter might help. Troubleshooters can find and fix many common problems for you.</p>
+      </div>
+      <div class="rightContent">
+        <em (click)="onClose()" class="lxp-Close"></em>
+      </div>
+    </div>
+    <!-- <div class="searchBar">
+      <mat-form-field appearance="outline" class="pointer">
+        <em class="icon-Search"></em>
+        <input matInput placeholder="Search.." type="text">
+      </mat-form-field>
+    </div> -->
+    <div class="mainContent">
+      <div class="leftQA">
+        <div (click)="showRightContent(query)"  *ngFor="let query of queries">
+         <div class="titleContainer" [ngClass]="query.Active?'active':''">
+           <h5>{{query.title}}</h5>
+           <em class="lxp-Forward_Arrow"></em>
+         </div>
+        </div>
+      </div>
+      <div class="rightSteps">
+        <div class="stepsContent"  *ngFor="let query of rightHeader">
+          <h3>{{query.heading}}</h3>
+          <h5 *ngFor="let line of query.steps">{{line.value}}</h5>
+        </div>
+        <div class="contactSupport">
+           <h5>Still have issues? Contact - <a href="https://lntedutech.com/support-form/" target="newTab"><span>Technical Support</span></a></h5> 
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

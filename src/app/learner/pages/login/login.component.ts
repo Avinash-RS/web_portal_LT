@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit,ViewChild, TemplateRef, Optional } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup,Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import * as myGlobals from '@core/globals';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
@@ -14,6 +14,7 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 import { Title } from '@angular/platform-browser';
 import { GoogleAnalyticsService } from '@learner/services/google-analytics.service';
 declare var gtag;
+import { MatDialog, MatDialogRef } from '@angular/material';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -64,21 +65,164 @@ export class LoginComponent implements OnInit {
   recaptchaForgetStr = '';
   recaptchaSignInStr = '';
   @ViewChild('captchaRef') captchaRef;
+  @ViewChild('troubleshoot') troubleshoot: TemplateRef<any>;
   selectedLanguage: any = 'en';
+  commands;
+  rightHeader;
+  queries = [
+    {
+    'title': 'How to clear cache and cookies?',
+    'Active': true,
+    'commands': [
+      {
+        'heading': 'In chrome',
+        'steps': [
+          {
+          'value': '1. On your computer, open Chrome.'
+          },
+          {
+          'value': '2. At the top right, click More.'
+          },
+          {
+           'value': '3. Click More tools. Clear browsing data.'
+          },
+          {
+           'value': '4. At the top, choose a time range. To delete everything, select All time.'
+          },
+          {
+           'value': '5. Next to “Cookies and other site data” and “Cached images and files,” check the boxes.'
+          },
+          {
+           'value': '6. Click Clear data.'
+          }
+        ]
+      }
+    ]
+    },
+    {
+    'title': 'How to enable all cookies?',
+    'commands': [
+      {
+        'heading': 'Change your cookie settings',
+        'steps': [
+          {
+          'value': '1. On your computer, open Chrome.'
+          },
+          {
+          'value': '2. At the top right, click More Settings.'
+          },
+          {
+           'value': '3. Under “Privacy and security,” click Cookies and other site data.'
+          },
+          {
+           'value': '4. Select an option: Allow all cookies. Block all cookies (not recommended). Block third party cookies in Incognito. Block third-party cookies.'
+          }
+        ]
+      }
+    ],
+    },
+    {
+      'title': 'Browser Compatibility?',
+      'commands': [
+        {
+          'heading': 'Browser Compatibility',
+          'steps': [
+            {
+            'value': '1. Windows : Google Chrome, Mozilla Firefox, Microsoft Edge.'
+            },
+            {
+            'value': '2. Mac OS : Google Chrome.'
+            }
+          ]
+        }
+      ],
+    },
+    {
+      'title': 'Google Authenticator?',
+      'commands': [
+        {
+          'heading': 'Google Authenticator',
+          'steps': [
+            {
+            'value': '1. 2-step verification provides stronger security for your account and hence authentication using Google Authenticator is a mandatory step to log into L&T EduTech platform.'
+            },
+            {
+            'value': '2. Do not delete the account created in the authenticator app by scanning the QR code or the authenticator app itself, as you would require to enter the 6 digit code displayed in the app, everytime you login to L&T EduTech.'
+            }
+          ]
+        }
+      ],
+    },
+    {
+      'title': 'Invalid Auth code - while submitting the 6 digit code?',
+      'commands': [
+        {
+          'heading': 'Invalid Auth code - while submitting the 6 digit code',
+          'steps': [
+            {
+            'value': '1. Open Settings in Google Authenticator App.'
+            },
+            {
+            'value': '2. Select Time Correction for code'
+            },
+            {
+             'value': '3. Select Sync now'
+            },
+            {
+             'value': '4. Clear cache in browser and Login again'
+            }
+          ]
+        }
+      ],
+    },
+    {
+      'title': 'Login page loading continuously?',
+      'commands': [
+        {
+          'heading': 'Login page loading continuously',
+          'steps': [
+            {
+            'value': '1. 	Clear cache in browser and Login again'
+            },
+            {
+            'value': '2. (Or) Create a new profile in your browser and try to log into the application again'
+            }
+          ]
+        }
+      ],
+    },
+    {
+      'title': 'Invalid user name and password?',
+      'commands': [
+        {
+          'heading': 'Invalid user name and password',
+          'steps': [
+            {
+            'value': '1. Make sure you use the exact credentials you received from L&T EduTech in your registered email'
+            },
+            {
+            'value': '2. Ensure, there is no space before or after the username and password.'
+            }
+          ]
+        }
+      ],
+    }
+  ];
   getErrorMessage() {
     return this.username.hasError('required') ? 'Email or Username is required' :
         this.username.hasError('email') ? 'Please enter a valid email address' :
             '';
   }
-  constructor(public translate: TranslateService, private router: Router, private formBuilder: FormBuilder,
-              public learnerService: LearnerServicesService, public gaService: GoogleAnalyticsService,
-              // public socketService: SocketioService,
-              private service: LearnerServicesService, private toastr: ToastrService,
-              private activatedRoute: ActivatedRoute, private titleService: Title) {
-    this.languages = [{ lang: 'ta', languagename: 'Tamil' }, { lang: 'en', languagename: 'English' }];
-    translate.addLangs(['en', 'ta']);
-    translate.setDefaultLang('en');
-    const browserLang = translate.getBrowserLang();
+  constructor(public translate: TranslateService, private router: Router, private formBuilder: FormBuilder, public learnerService: LearnerServicesService,public gaService:GoogleAnalyticsService,
+             // public socketService: SocketioService,
+              private service: LearnerServicesService, private toastr: ToastrService, private activatedRoute: ActivatedRoute,private titleService: Title, private dialog: MatDialog, 
+              @Optional() public dialogRef: MatDialogRef<LoginComponent>) {
+      this.languages = [{lang: 'ta' , languagename: 'Tamil' } , { lang: 'en' , languagename: 'English'  }] ;
+      translate.addLangs(['en', 'ta']);
+      translate.setDefaultLang('en');
+      const browserLang = translate.getBrowserLang();
+      let lang = localStorage.getItem('language')
+      this.translate.use(lang?lang:'en') 
   }
 
   ngOnInit() {
@@ -421,5 +565,34 @@ export class LoginComponent implements OnInit {
   }
   openPlayStore() {
     window.open('https://play.google.com/store/apps/details?id=com.lntedutech.collegeconnect', 'playystore');
+  }
+
+  onClose() {
+    this.dialog.closeAll();
+  }
+
+  openTroubleshootPopup() {
+    this.rightHeader = this.queries[0].commands;
+    this.dialog.open(this.troubleshoot, {
+    width: '90%',
+    height: '85%',
+    panelClass: 'qnatroubleshoot'
+    });
+    // console.log(this.queries);
+  }
+
+  showRightContent(data) {
+    this.queries.forEach((value: any) => {
+    if (value.title === data.title) {
+    value.Active = true;
+    } else {
+    value.Active = false;
+    }
+    });
+    this.rightHeader = data.commands;
+  }
+
+  ngOnDestroy() {
+    this.dialog.closeAll();
   }
 }
