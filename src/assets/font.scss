@@ -97,6 +97,9 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+  .lxp-Settings:before {
+    content: "\e971";
+  }
   .lxp-Quiz_Report:before {
     content: "\e970";
   }

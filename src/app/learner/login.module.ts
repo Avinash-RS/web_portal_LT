@@ -11,7 +11,7 @@ import { HttpLoaderFactory, CoreModule } from '@core/core.module';
 import { HttpClient } from '@angular/common/http';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { NgOtpInputModule } from  'ng-otp-input';
-import { MatDialogModule } from '@angular/material';
+import { MatDialogModule } from '@angular/material/dialog';
 
 // import { MaterialModule } from '@core/material.module';
 // Materials import

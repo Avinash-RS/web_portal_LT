@@ -14,7 +14,7 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 import { Title } from '@angular/platform-browser';
 import { GoogleAnalyticsService } from '@learner/services/google-analytics.service';
 declare var gtag;
-import { MatDialog, MatDialogRef } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
