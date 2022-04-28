@@ -76,7 +76,11 @@
         color: $blackcolor;
         font-size: 1.125em;
         font-weight: 500;
-        margin: 0;
+        margin: 0 0 10px 0;
+        display: block;
+        &.quizScore {
+          margin: 0;
+        }
       }
       .performanceChart{
         position: relative;
@@ -93,7 +97,7 @@
           color: $blackcolor;
         }
         .xlabel{
-          margin: 1em auto;
+          margin: 0.5em auto;
           text-align: center;
           }
       }
@@ -103,10 +107,22 @@
           margin-top: 0;
           .circleProgress {
             width: 47%;
+            @include xl {
+              width: 43%;
+            }
+            @media only screen and (min-width: 1600px) {
+              width: 47%;
+            }
           }
           .points {
             margin-top: 1em;
             width: 47%;
+            @include xl {
+              width: 47%;
+            }
+            @media only screen and (min-width: 1600px) {
+              width: 47%;
+            }
             ul {
               list-style: none;
               li {
