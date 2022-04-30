@@ -111,36 +111,6 @@ export class AppComponent implements OnInit {
  }
 
   ngOnInit() {
-// GOOGLE ANALYTICS
-// this.UserDetails = JSON.parse(localStorage.getItem('UserDetails')) || null
-// timer(500)
-//      .pipe(
-//        filter(() => has.call(window, 'ga')),
-//        take(1),
-//        switchMap(() => {
-//          return this.router.events.pipe(
-//            filter((e) => e instanceof NavigationEnd),
-//            tap((e: NavigationEnd) => {
-//             var user_id = null
-//              if(this.UserDetails.user_id){
-//               user_id = CryptoJS.AES.decrypt(this.UserDetails.user_id, this.secretKey.trim()).toString();
-//               dataLayer = [{'userID': user_id}];
-//               console.log(window['dataLayer'])
-//             }
-//             gtag('config', '${environment.gaTrackingId}');
-//              this.ga_service.logPageView(e.url,user_id);
-//            })
-//          );
-//        }),
-//        takeUntil(this.destroy$)
-//      )
-//      .subscribe();
-
-
-
-   // console.error = function(){}
-   // console.log = function(){}
-  //  console.warn = function(){}
     this.loadersubscription = this.Lservice.getMessage().subscribe(message => {
         if (message.count) {
           this.percentage = message.count + '  ' + message.text.slice(0, message.text.lastIndexOf('.')) + '%';
@@ -151,20 +121,6 @@ export class AppComponent implements OnInit {
           this.percentage = 'Upload in progress';
         }
       });
-    // this.loaderSubscription = this.commonService.loader.subscribe((val) => {
-    //   this.isLoader = val;
-    //   if (this.isLoader) {
-    //     this.ngxService.start();
-    //   } else {
-    //     setTimeout(() => {
-    //     this.ngxService.stop();
-    //     }, 500);
-    //   }
-    // });
-    // console.log("--Browser running on--",navigator.platform)
-    // if(!this.runnablePlatforms.includes(navigator.platform)){
-    //   this.isMobile = true;
-    // }
     this.UserDetails = JSON.parse(localStorage.getItem('UserDetails')) || null;
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
@@ -173,16 +129,6 @@ export class AppComponent implements OnInit {
     } else {
         this.translate.setDefaultLang('en');
       }
-    // adding USERID to datalayer
-    //   var user_id = null
-    //   if(this.UserDetails.user_id){
-    //    user_id = CryptoJS.AES.decrypt(this.UserDetails.user_id, this.secretKey.trim()).toString();
-    //    window.dataLayer = [{'userID': user_id}];
-    //    console.log(window['dataLayer'])
-    //  }else{
-    //    window.dataLayer = [{'userID': null}];
-    //  }
-    //  send pageview
       const titledat = this.getChild(this.activatedRoute);
       titledat.data.subscribe(data => {
         let user_id = null;
@@ -228,7 +174,6 @@ export class AppComponent implements OnInit {
         if (e.url.includes('courseDetail')) {
           this.isFooterVisible = ' ';
         }
-
         // for left padding
         const headerPages = ['courseDetail'];
         if (headerPages.includes(urlIdentifier[2])) {
