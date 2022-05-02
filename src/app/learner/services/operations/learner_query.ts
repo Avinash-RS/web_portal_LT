@@ -1,48 +1,35 @@
 import gql from 'graphql-tag';
 
-export const login = gql`
-  query login(
-    $username: String
-    $password: String
-    $is_admin: Boolean
-    $badgeRequest: String!
-  ) {
-    login(
-      username: $username
-      password: $password
-      is_admin: $is_admin
-      badgeRequest: $badgeRequest
-    ) {
+export const learner_login = gql`
+  query learner_login($username: String!, $password: String!, $badgeRequest: String!) {
+    learner_login(username: $username, password: $password, badgeRequest: $badgeRequest) {
       success
       error_msg
       message {
         _id
-        full_name
-        profile_img
-        email
-        is_active
-        username
-        token
+        is_password_updated
+        is_profile_updated
         user_id
-        is_blocked
+        full_name
+        username
+        created_on
+        token
+        is_active
         is_forum_config
         is_thread_config
-        is_comment_config
-        is_profile_updated
-        is_password_updated
         org_type
+        profile_img
         group_id
-        message
-        bb_forum
-        created_on
         orgId
-        nodebb_response {
-          uid
-        }
+        message
+        status
         TFAsetup {
           main_config_TFA
           dataURL
           user_config_TFA
+        }
+        nodebb_response {
+          uid
         }
       }
     }

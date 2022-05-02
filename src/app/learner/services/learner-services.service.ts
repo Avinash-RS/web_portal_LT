@@ -30,7 +30,7 @@ boarddetail, checkExistingUser, getActivityDetailsByBatchAndCourseID, getAssignm
    getCoursebyUser, getDisciplinedetails, getInstitutedetails, getLanguagedetails,
    getModuletopic, getOrganizationbyId, getPopularCourse, getQualificationdetails,
      getSpecificationdetails, getSubCategory, getTrendingcourse, getUserdetail,
-     getUserdetailUsername, listContent, login, playerModuleAndTopic, singleBatchInfo,
+     getUserdetailUsername, listContent, learner_login, playerModuleAndTopic, singleBatchInfo,
      syllabusofParticularScorm, ViewAllThreadData, ViewAllThreadDataBid, ViewSingleTopicDiscussionData,
      get_batchwise_learner_dashboard_data, get_learner_dashboard_count,
      getCourseGallery, getLearnerNewCourseReport, getCourseReportByUserid, getProgressionActivitydata,
@@ -148,13 +148,12 @@ getMessage(): Observable<any> {
     });
   }
 
-  login(username, password, isAdmin, badgeRequest) {
+  learner_login(username, password, badgeRequest) {
     return this.Apollo.query({
-      query: login,
+      query: learner_login,
       variables: {
         username,
         password,
-        is_admin: isAdmin,
         badgeRequest
       }
     });
