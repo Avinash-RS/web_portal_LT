@@ -9,11 +9,17 @@ import { MaskingPipePipe } from '@core/core/masking-pipe.pipe';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory, CoreModule } from '@core/core.module';
 import { HttpClient } from '@angular/common/http';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 import { NgOtpInputModule } from  'ng-otp-input';
+import { MatDialogModule } from '@angular/material/dialog';
 
 // import { MaterialModule } from '@core/material.module';
-//Materials import 
-import { MatButtonModule, MatInputModule, MatCheckboxModule, MatFormFieldModule, MatSelectModule } from '@angular/material';
+// Materials import
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ResetpasswordComponent } from './pages/resetpassword/resetpassword.component';
@@ -25,13 +31,13 @@ const routes: Routes = [
     path: '',
     component: LoginComponent,
     canActivate: [IsLoggedInAuthGuard],
-    data: { title: 'Learner Login' }
+    data: { title: 'College Connect Login' }
   },
   {
     path: 'Learner/login',
     component: LoginComponent,
     canActivate: [IsLoggedInAuthGuard],
-    data: { title: 'Learner Login' }
+    data: { title: 'College Connect Login' }
   },
   {
     path: 'Learner/authentication',
@@ -48,7 +54,7 @@ const routes: Routes = [
     component: ResetpasswordComponent,
     data: { title: 'Learner Reset password' }
   },
-]
+];
 
 @NgModule({
   declarations: [
@@ -68,6 +74,7 @@ const routes: Routes = [
     MatCheckboxModule,
     MatSelectModule,
     // MatIconModule,
+    CarouselModule,
     MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
@@ -82,6 +89,7 @@ const routes: Routes = [
         deps: [HttpClient]
       }
     }),
+    MatDialogModule
   ],
   exports: [
     // MaterialModule
@@ -89,7 +97,7 @@ const routes: Routes = [
     MatInputModule,
     MatCheckboxModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
     // MatIconModule
   ]
 })

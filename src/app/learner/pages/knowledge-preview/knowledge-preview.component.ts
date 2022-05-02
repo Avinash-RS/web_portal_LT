@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit, Optional } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
 import { environment } from '@env/environment';
 import { TranslateService } from '@ngx-translate/core';
@@ -17,8 +17,8 @@ export class KnowledgePreviewComponent implements OnInit {
               @Optional() @Inject(MAT_DIALOG_DATA) public batchdialogdata,
               private sanitizer: DomSanitizer,
               public translate: TranslateService) {
-                let lang = localStorage.getItem('language')
-                this.translate.use(lang?lang:'en') 
+                const lang = localStorage.getItem('language');
+                this.translate.use(lang ? lang : 'en');
                }
 
   ngOnInit() {
@@ -28,17 +28,15 @@ export class KnowledgePreviewComponent implements OnInit {
     this.fileType = this.batchdialogdata.fileType;
     if (this.fileType === 'pdf') {
       this.batchdialogdata.file = this.batchdialogdata.file;
-      if(this.batchdialogdata?.internal == 'yes' || this.batchdialogdata?.internal == 'Yes') {
-        this.file = this.batchdialogdata.file + this.blobToken
-      }
-      else {
-        this.file = this.batchdialogdata.file
+      if (this.batchdialogdata?.internal === 'yes' || this.batchdialogdata?.internal === 'Yes') {
+        this.file = this.batchdialogdata.file + this.blobToken;
+      } else {
+        this.file = this.batchdialogdata.file;
       }
     } else {
-      if(this.batchdialogdata?.internal == 'yes' || this.batchdialogdata?.internal == 'Yes') {
+      if (this.batchdialogdata?.internal === 'yes' || this.batchdialogdata?.internal === 'Yes') {
         this.file = this.sanitizer.bypassSecurityTrustResourceUrl(this.batchdialogdata.file + this.blobToken);
-      }
-      else {
+      } else {
         this.file = this.sanitizer.bypassSecurityTrustResourceUrl(this.batchdialogdata.file);
       }
    }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
@@ -28,10 +28,11 @@ export class ViewAllnotificationsComponent implements OnInit {
   unreadCount: any;
   emptynotifications = false;
 
-  constructor(private router: Router, public commonservice: CommonServicesService, public Lservice: LearnerServicesService,public translate: TranslateService
-              ) { 
-                let lang = localStorage.getItem('language')
-                this.translate.use(lang ? lang : 'en')
+  constructor(private router: Router, public commonservice: CommonServicesService, public Lservice: LearnerServicesService,
+              public translate: TranslateService
+              ) {
+                const lang = localStorage.getItem('language');
+                this.translate.use(lang ? lang : 'en');
                }
 
   ngOnInit() {
@@ -58,24 +59,23 @@ export class ViewAllnotificationsComponent implements OnInit {
 markAsRead(notification, type) {
   this.notificationMarkRead = [];
   if (type === 'single') {
-    if(!notification.notifiedStatus) {
+    if (!notification.notifiedStatus) {
       this.notificationMarkRead.push(notification._id);
     }
   } else if (type === 'all') {
   this.notifications.forEach(element => {
-    if(!element.notifiedStatus) { 
+    if (!element.notifiedStatus) {
       this.notificationMarkRead.push(element._id);
     }
-    
   });
 }
-if (this.notificationMarkRead.length > 0) {
-  this.Lservice.markAsRead(this.notificationMarkRead, this.userId).subscribe((result: any) => {
-    if (result.data.markAsRead.success === true) {
-      this.viewAllnotifications();
-    }
-  });
-}
+  if (this.notificationMarkRead.length > 0) {
+    this.Lservice.markAsRead(this.notificationMarkRead, this.userId).subscribe((result: any) => {
+      if (result.data.markAsRead.success === true) {
+        this.viewAllnotifications();
+      }
+    });
+  }
 }
 next(e) {
   this.pagenumber = e.pageIndex + 1;

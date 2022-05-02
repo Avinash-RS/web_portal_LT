@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild,ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { knowledgeService } from '@learner/services/knowledge-resource/knowledge-resource.service';
@@ -33,13 +33,12 @@ export class KnowledgeResourceHomeComponent implements OnInit {
               public toast: ToastrService,
               private CommonService: CommonServicesService,
               private router: Router, private gs: GlobalServiceService,
-              public translate: TranslateService) { 
-                let lang = localStorage.getItem('language')
-                this.translate.use(lang?lang:'en')
+              public translate: TranslateService) {
+                const lang = localStorage.getItem('language');
+                this.translate.use(lang ? lang : 'en');
                 this.userDetailes = this.gs.checkLogout();
-                if(!this.userDetailes?.is_password_updated){
+                if (!this.userDetailes?.is_password_updated) {
                   this.router.navigate(['/Learner/profile']);
-                  return
                 }
               }
 
@@ -51,7 +50,8 @@ export class KnowledgeResourceHomeComponent implements OnInit {
     this.showSkeleton = true;
     this.tempDetailsList = [];
     this.apiService.getResourceDetails().subscribe((result: any) => {
-      const resultData = result.data.get_all_resources_details.message && result.data.get_all_resources_details.message.length > 0 ? result.data.get_all_resources_details.message : [];
+      const resultData = result.data.get_all_resources_details.message &&
+      result.data.get_all_resources_details.message.length > 0 ? result.data.get_all_resources_details.message : [];
       let tempDetails = resultData.reduce((r, a) => {
         r[a.domain] = [...r[a.domain] || [], a];
         return r;
@@ -78,17 +78,15 @@ export class KnowledgeResourceHomeComponent implements OnInit {
       });
       this.details = this.tempDetailsList;
       this.showSkeleton = false;
-      console.log(this.details)
+      console.log(this.details);
       this.checkKnowledgeRec();
     });
   }
-  checkKnowledgeRec(){
+  checkKnowledgeRec() {
     setTimeout(() => {
       if (this.searchedData) {
-        
         this.isLoadBalanced = false;
       } else {
-        
         this.isLoadBalanced = true;
       }
     });

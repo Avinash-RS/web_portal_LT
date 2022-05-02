@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { MatAccordion } from '@angular/material/expansion';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonServicesService } from '@core/services/common-services.service';
@@ -79,7 +79,6 @@ export class ActivitiesComponent implements OnInit {
   splitSize: any;
   fileTotalSize: any;
   verfyingCondition: any;
-  // assignmentMessage = false;
   fromCalender = false;
   fromupskill;
   multiArray = [];
@@ -177,55 +176,59 @@ export class ActivitiesComponent implements OnInit {
   pagination = false;
   page = 0;
   noofItems = 0;
-  AssigmnemtPayload :FormData;
-  labpracticeData : any;
+  AssigmnemtPayload: FormData;
+  labpracticeData: any;
   labNoCard = false;
   assignmentLoader = false;
   performLoader = false;
   projectLoader = false;
   praticalsLoader = false;
-  constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService, private commonServices: CommonServicesService,
-    private dialog: MatDialog, private toastr: ToastrService,
-    public route: Router, public datePipe: DatePipe, private ngxLoader: NgxUiLoaderService,public activateroute:ActivatedRoute,public translate: TranslateService,) {
-    // const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
-    //   this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.data);
-    let lang = localStorage.getItem('language')
-      this.translate.use(lang?lang:'en') 
-      console.log(route);
+  constructor(public Lservice: LearnerServicesService,
+              private gs: GlobalServiceService,
+              private commonServices: CommonServicesService,
+              private dialog: MatDialog,
+              private toastr: ToastrService,
+              public route: Router,
+              public datePipe: DatePipe,
+              private ngxLoader: NgxUiLoaderService,
+              public activateroute: ActivatedRoute,
+              public translate: TranslateService) {
+    const lang = localStorage.getItem('language');
+    this.translate.use(lang ? lang : 'en') ;
+    console.log(route);
     if (this.gs.checkLogout()) {
       this.userDetail = this.gs.checkLogout();
     }
-    if(!this.userDetail?.is_password_updated){
+    if (!this.userDetail?.is_password_updated) {
       this.route.navigate(['/Learner/profile']);
-      return
-    } 
-    this.activateroute.queryParams.subscribe((result)=>{
-        const detail ={
+      return;
+    }
+    this.activateroute.queryParams.subscribe((result) => {
+        const detail = {
           courseId: atob(result.courseId),
           courseName : atob(result.courseName),
           batchId : atob(result?.batchId),
-          activityType :result.activityType
-        }
+          activityType : result.activityType
+        };
         this.checkDetails = detail;
-      })  
+      });
     this.courseid = this.checkDetails ? this.checkDetails.courseId : localStorage.getItem('Courseid');
     this.courseName = this.checkDetails ? this.checkDetails.courseName : localStorage.getItem('CourseName');
+    // tslint:disable-next-line: no-var-keyword
     var index;
     if (this.checkDetails?.activityType) {
-      this.fromCalender = true
-      if (this.checkDetails?.activityType == 'Assignment') {
-        index = '0'
-      } else if (this.checkDetails?.activityType == 'Perform') {
-        index = '1'
-      } 
-      else if (this.checkDetails?.activityType == 'Lab Practical') {
-        index = '3'
-      } 
-      else {
-        index = '2'
+      this.fromCalender = true;
+      if (this.checkDetails?.activityType === 'Assignment') {
+        index = '0';
+      } else if (this.checkDetails?.activityType === 'Perform') {
+        index = '1';
+      } else if (this.checkDetails?.activityType === 'Lab Practical') {
+        index = '3';
+      } else {
+        index = '2';
       }
     } else {
-      this.fromCalender = false
+      this.fromCalender = false;
       index = localStorage.getItem('userTabLocation');
     }
 
@@ -233,22 +236,19 @@ export class ActivitiesComponent implements OnInit {
       // tslint:disable-next-line:radix
       this.demo1TabIndex = parseInt(index);
     }
-    if (this.demo1TabIndex.toString() == '0') {
+    if (this.demo1TabIndex.toString() === '0') {
       this.getAssignmentmoduleData();
-    } else if (this.demo1TabIndex.toString() == '1') {
+    } else if (this.demo1TabIndex.toString() === '1') {
       this.getperformActivityData();
-    } 
-    else if (this.demo1TabIndex.toString() == '3') {
+    } else if (this.demo1TabIndex.toString() === '3') {
       this.getLabPracticeData();
-    }
-    else {
+    } else {
       this.getprojectActivityData();
     }
   }
 
   ngOnInit() {
     this.fromupskill = true;
-    // this.projectDetaildata = this.projectDetails;
     this.Lservice.closeMobileResp$.subscribe((data: any) => {
       this.performdetailPageView = data;
     });
@@ -305,21 +305,21 @@ export class ActivitiesComponent implements OnInit {
   rightBoundStat(reachesRightBound: boolean) {
     this.rightNavDisabled = reachesRightBound;
   }
-  //Your Work
+  // Your Work
   leftBoundStatWork(reachesLeftBound: boolean) {
     this.leftNavDisabledWork = reachesLeftBound;
   }
   rightBoundStatWork(reachesRightBound: boolean) {
     this.rightNavDisabledWork = reachesRightBound;
   }
-  //Submissions
+  // Submissions
   leftBoundStatSubmissions(reachesLeftBound: boolean) {
     this.leftNavDisabledSubmissions = reachesLeftBound;
   }
   rightBoundStatSubmissions(reachesRightBound: boolean) {
     this.rightNavDisabledSubmissions = reachesRightBound;
   }
-  //Activity
+  // Activity
   leftBoundStatActivity(reachesLeftBound: boolean) {
     this.leftNavDisabledActivity = reachesLeftBound;
   }
@@ -332,7 +332,7 @@ export class ActivitiesComponent implements OnInit {
   }
 
   resourseAccord(courseResource, index) {
-    this.openedIndex = index
+    this.openedIndex = index;
     if (courseResource) {
       courseResource.forEach((element, i) => {
         if (index === i) {
@@ -349,13 +349,6 @@ export class ActivitiesComponent implements OnInit {
   }
 
   tabChanged(event) {
-    // if (this.demo1TabIndex.toString() == '0') {
-    //   this.getAssignmentmoduleData();
-    // } else if (this.demo1TabIndex.toString() == '1') {
-    //   this.getperformActivityData();
-    // } else {
-    //   this.getprojectActivityData();
-    // }
     this.currentTab = event.tab.textLabel;
     if (event.tab.textLabel === 'Perform') {
       this.getperformActivityData('tab');
@@ -385,20 +378,18 @@ export class ActivitiesComponent implements OnInit {
       } else {
         this.assigmentMobileResponsive = false;
       }
-    }
-    else if(event.tab.textLabel === 'Practice Online'){
+    } else if (event.tab.textLabel === 'Practice Online') {
       this.getLabPracticeData();
     }
   }
 
   goToCourse() {
     if (this.fromCalender) {
-      if(this.userDetail.org_type == 'Corporate'){
+      if (this.userDetail.org_type === 'Corporate') {
         this.route.navigate(['/Learner/upskillcalendar']);
       } else {
         this.route.navigate(['/Learner/calendaractivity']);
       }
-      
     } else {
       this.route.navigateByUrl('/Learner/MyCourse');
     }
@@ -416,21 +407,21 @@ export class ActivitiesComponent implements OnInit {
       }
       return false;
     }
-    if(project?.projectActivity.videodetails.length == 3) {
-      this.toastr.warning("You are allowed only to upload a maximum of 3 files");
+    if (project?.projectActivity.videodetails.length === 3) {
+      this.toastr.warning('You are allowed only to upload a maximum of 3 files');
       if (this.uploadInput) {
         this.uploadInput.nativeElement.value = '';
       }
-       return false;
+      return false;
     }
     let fileSizeval = 0;
-    if(event.target.files.length==1){
+    if (event.target.files.length === 1) {
     for (let i = 0; i < event.target.files.length; i++) {
       fileSizeval += event.target.files[i].size;
       this.selectfile.push(event.target.files[i]);
     }
-       if(fileSizeval/1024/1024 > 150){
-        this.toastr.warning("The file size cannot exceed 150 MB");
+    if (fileSizeval / 1024 / 1024 > 150) {
+        this.toastr.warning('The file size cannot exceed 150 MB');
         this.selectfile = [];
         if (this.uploadInput) {
           this.uploadInput.nativeElement.value = '';
@@ -438,78 +429,76 @@ export class ActivitiesComponent implements OnInit {
         return;
       }
     this.learnerUploadVideo(project, submitAction);
-    }else if(event.target.files.length){
-      this.toastr.warning('You cannot upload more than 1 file at a one slot.')
+    } else if (event.target.files.length) {
+      this.toastr.warning('You cannot upload more than 1 file at a one slot.');
     }
   }
   uploadDocs() {
     this.uploadInput.nativeElement.click();
   }
-  //getLabPracticeData
-  getLabPracticeData(){
+  // getLabPracticeData
+  getLabPracticeData() {
     this.praticalsLoader = true;
-    var labdata ={
+    const labdata = {
       userId: this.userDetail.user_id,
-      courseId:this.courseid,
-      pagination:false,
-      page:0,
-      noofItems:0,
-      username:this.userDetail.username
-    }
-    this.Lservice.getlabactivity(labdata).subscribe((result:any)=>{
+      courseId: this.courseid,
+      pagination: false,
+      page: 0,
+      noofItems: 0,
+      username: this.userDetail.username
+    };
+    this.Lservice.getlabactivity(labdata).subscribe((result: any) => {
       this.praticalsLoader = false;
-      if(result.data.getlabActivityData.success){
+      if (result.data.getlabActivityData.success) {
         this.labpracticeData = result.data.getlabActivityData.data;
         this.labNoCard = false;
-      }
-      else{
+      } else {
         this.labNoCard = true;
         this.toastr.warning(result.data.getlabActivityData.message);
       }
-    })
+    });
   }
 
-  getEboxURL(eAttemptId){
-      var labactivitydetails ={
-        username:this.userDetail.username,
-        attempt_id:eAttemptId
-      }
-      this.Lservice.labactivity(labactivitydetails).subscribe((result:any)=>{
-        console.log(result)
-        if(result.data.labactivity.data.url !== ""){
-          this.redirectLabpractice(result.data.labactivity.data.url)
-        }else{
+  getEboxURL(eAttemptId) {
+      const labactivitydetails = {
+        username: this.userDetail.username,
+        attempt_id: eAttemptId
+      };
+      this.Lservice.labactivity(labactivitydetails).subscribe((result: any) => {
+        console.log(result);
+        if (result.data.labactivity.data.url !== '') {
+          this.redirectLabpractice(result.data.labactivity.data.url);
+        } else {
           this.toastr.warning(result.data.labactivity.data.message);
         }
       });
     }
-  redirectLabpractice(url){
-    window.open(url,"Practice");
+  redirectLabpractice(url) {
+    window.open(url, 'Practice');
   }
 
   getAssignmentmoduleData(value?) {
   // getperformActivityData
   this.assignmentLoader = true;
-    this.Lservice.getAssignmentmoduleData(this.userDetail.user_id,this.courseid,this.pagination,this.page,this.noofItems).subscribe((data: any) => {
+  this.Lservice.getAssignmentmoduleData(this.userDetail.user_id, this.courseid, this.pagination,
+    this.page, this.noofItems).subscribe((data: any) => {
       this.assignmentLoader = false;
       if (data.data.getAssignmentmoduleData.success) {
        this.assignmentContent = data?.data?.getAssignmentmoduleData?.data;
-       this.assignmentpreContent = data?.data?.getAssignmentmoduleData
-        if (this.assignmentContent == null) {
+       this.assignmentpreContent = data?.data?.getAssignmentmoduleData;
+       if (this.assignmentContent == null) {
           this.emptyAssignment = true;
         } else {
-          this.emptyAssignment = false
+          this.emptyAssignment = false;
         }
 
-        if (this.assignmentpreContent.courseStartDate && this.assignmentpreContent.courseEndDate)
-        {
+       if (this.assignmentpreContent.courseStartDate && this.assignmentpreContent.courseEndDate) {
           const batchStartDate = new Date(this.assignmentpreContent.courseStartDate);
           const batchEndDate = new Date(this.assignmentpreContent.courseEndDate);
           this.courseStartDate = moment(batchStartDate);
-          // this.courseEndDate = moment(batchEndDate);
           this.courseEndDate = moment(batchEndDate).endOf('day').toDate();
 
-          this.assignmentContent.forEach((fileData,i) => {
+          this.assignmentContent.forEach((fileData, i) => {
             if (this.openedIndex === i && !value) {
               if (fileData.isOpen) {
                 fileData.isOpen = false;
@@ -519,10 +508,10 @@ export class ActivitiesComponent implements OnInit {
             } else {
               fileData.isOpen = false;
             }
-                if (fileData.files.activitystartdate && fileData.files.activityenddate) {
-                  let date1 = new Date(fileData.files.activitystartdate);
+            if (fileData.files.activitystartdate && fileData.files.activityenddate) {
+                  const date1 = new Date(fileData.files.activitystartdate);
                   fileData.files.assignmentStartDate = moment(date1);
-                  let date2 = new Date(fileData.files.activityenddate);
+                  const date2 = new Date(fileData.files.activityenddate);
                   fileData.files.assignmentEndDate = moment(date2);
                   if (moment() >= fileData.files.assignmentStartDate) {
                     fileData.files.enableView = true;
@@ -540,8 +529,6 @@ export class ActivitiesComponent implements OnInit {
                 }
           });
         }
-      } else {
-
       }
     });
   }
@@ -599,10 +586,9 @@ export class ActivitiesComponent implements OnInit {
   }
   closedialogbox() {
     this.dialog.closeAll();
-    // this.addThreadForm?.reset();
   }
 
-  uploadAssignmentsFile(event,assignemnt) {
+  uploadAssignmentsFile(event, assignemnt) {
     const filePath = event.target.files[0].name;
     const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.pdf)$/i;
     if (!allowedExtensions.exec(filePath)) {
@@ -612,20 +598,20 @@ export class ActivitiesComponent implements OnInit {
       }
       return false;
     }
-      let fileSize = 0;
-        fileSize = event.target.files[0].size;
-      if(fileSize/1024/1024 > 10){
-        this.toastr.warning("The file size cannot exceed 10 MB");
+    let fileSize = 0;
+    fileSize = event.target.files[0].size;
+    if (fileSize / 1024 / 1024 > 10) {
+        this.toastr.warning('The file size cannot exceed 10 MB');
         return;
-      }
-    else{
+      } else {
       this.assignmentFile = event.target.files[0] as File;
       this.fileInput.nativeElement.value = '';
-      this.postAssignmentsFile(assignemnt.file_id,assignemnt.module_id,assignemnt.topic_id,assignemnt.activityname,assignemnt.total_mark,assignemnt.activityenddate);
+      this.postAssignmentsFile(assignemnt.file_id, assignemnt.module_id, assignemnt.topic_id,
+        assignemnt.activityname, assignemnt.total_mark, assignemnt.activityenddate);
     }
   }
 
-  postAssignmentsFile(fileId,modulename,topicname,assignemtname,score,endDate) {
+  postAssignmentsFile(fileId, modulename, topicname, assignemtname, score, endDate) {
     this.ngxLoader.start();
     this.AssigmnemtPayload = null;
     if (!score) {
@@ -641,7 +627,7 @@ export class ActivitiesComponent implements OnInit {
     payload.append('type_name', assignemtname);
     payload.append('submit_status', 'notsubmitted');
     payload.append('total_mark', score);
-    payload.append('assignmentAction','upload');
+    payload.append('assignmentAction', 'upload');
     this.AssigmnemtPayload = payload;
     this.Lservice.uploadAssignments(this.AssigmnemtPayload).subscribe((data: any) => {
       if (data.success === true) {
@@ -655,8 +641,8 @@ export class ActivitiesComponent implements OnInit {
       }
     });
   }
-  submitAssigmnemtData(assignemnt){
-    let submitStatus = 'ontime';
+  submitAssigmnemtData(assignemnt) {
+    let submitStatus ;
     const todayDate = moment().toDate();
     const startDate = moment(assignemnt.activityenddate).toDate();
     if (todayDate > startDate) {
@@ -664,13 +650,13 @@ export class ActivitiesComponent implements OnInit {
     } else {
       submitStatus = 'ontime';
     }
-    const apidata= {
-      'course_id': assignemnt.course_id,
-      'file_id': assignemnt.file_id,
-      'user_id': this.userDetail.user_id,
-      'assignmentAction': "submit",
-      'submit_status' : submitStatus
-  }
+    const apidata = {
+      course_id: assignemnt.course_id,
+      file_id: assignemnt.file_id,
+      user_id: this.userDetail.user_id,
+      assignmentAction: 'submit',
+      submit_status : submitStatus
+  };
     this.Lservice.assignmentAction(apidata).subscribe((data: any) => {
       if (data.success === true) {
         this.toastr.success(data.message, null);
@@ -680,15 +666,15 @@ export class ActivitiesComponent implements OnInit {
       }
     });
   }
-  deleteAssigmnemtData(assignemnt){
-    const apidata= {
-      'course_id': assignemnt.course_id,
-      'file_id': assignemnt.file_id,
-      'user_id': this.userDetail.user_id,
-      'assignmentAction': "delete",
-      'submit_status' : "notsubmitted"
-  }
-   this.Lservice.assignmentAction(apidata).subscribe((data: any) => {
+  deleteAssigmnemtData(assignemnt) {
+    const apidata = {
+      course_id : assignemnt.course_id,
+      file_id : assignemnt.file_id,
+      user_id : this.userDetail.user_id,
+      assignmentAction : 'delete',
+      submit_status : 'notsubmitted'
+  };
+    this.Lservice.assignmentAction(apidata).subscribe((data: any) => {
       if (data.success === true) {
         this.toastr.success(data.message, null);
         this.getAssignmentmoduleData();
@@ -700,7 +686,8 @@ export class ActivitiesComponent implements OnInit {
 
   getprojectActivityData(value?) {
     this.projectLoader = true;
-    this.Lservice.getprojectActivityData(this.userDetail.user_id, this.courseid,this.pagination,this.page,this.noofItems).subscribe((data: any) => {
+    this.Lservice.getprojectActivityData(this.userDetail.user_id, this.courseid, this.pagination,
+      this.page, this.noofItems).subscribe((data: any) => {
       this.projectLoader = false;
       if (data && data.data && data.data.getprojectActivityData && data.data.getprojectActivityData.data) {
         this.projectDetails = data.data.getprojectActivityData.data;
@@ -720,7 +707,7 @@ export class ActivitiesComponent implements OnInit {
           element.batchEndDate = moment(batchEndDate).format('DD-MM-YYYY HH:mm');
 
           element.submitType = moment().isSameOrBefore(batchEndDate);
-          if (moment().format('DD-MM-YYYY') == moment(batchEndDate).format('DD-MM-YYYY')) {
+          if (moment().format('DD-MM-YYYY') === moment(batchEndDate).format('DD-MM-YYYY')) {
             element.submitType = true;
           }
           // Activity Dates
@@ -728,7 +715,7 @@ export class ActivitiesComponent implements OnInit {
           element.startdate = moment(startDate).format('DD-MM-YYYY HH:mm');
           const endDate = new Date(element.projectActivity.activityenddate);
           element.enableSubmit = moment().isSameOrAfter(startDate);
-          element.submittedOn = element.projectActivity.submitted_date
+          element.submittedOn = element.projectActivity.submitted_date;
         });
       }
     });
@@ -762,16 +749,12 @@ export class ActivitiesComponent implements OnInit {
   getperformActivityData(value?) {
     this.performLoader = true;
     this.Lservice.getperformActivityData(
-      this.userDetail.user_id, this.courseid,this.pagination,this.page,this.noofItems
+      this.userDetail.user_id, this.courseid, this.pagination, this.page, this.noofItems
     ).subscribe((data: any) => {
       this.performLoader = false;
       if (data && data.data && data.data.getperformActivityData && data.data.getperformActivityData.data) {
         this.performDetails = data.data.getperformActivityData.data;
         this.performDetails.forEach((element, i) => {
-          // const startDate = this.datePipe.transform(element.performActivity.activitystartdate, 'dd-MM-yyyy HH:MM aa');
-          // const endDate = this.datePipe.transform(element.performActivity.activityenddate, 'dd-MM-yyyy HH:MM aa');
-          // const batchendDate = this.datePipe.transform(element.performActivity.batchenddate, 'dd-MM-yyyy HH:MM aa');
-          // const crrDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy  HH:MM  aa');
           if (this.openedIndex === i && !value) {
             if (element.isOpen) {
               element.isOpen = false;
@@ -786,7 +769,7 @@ export class ActivitiesComponent implements OnInit {
           element.batchEndDate = moment(batchEndDate).format('DD-MM-YYYY HH:mm');
 
           element.performSubmitType = moment().isSameOrBefore(batchEndDate);
-          if (moment().format('DD-MM-YYYY') == moment(batchEndDate).format('DD-MM-YYYY')) {
+          if (moment().format('DD-MM-YYYY') === moment(batchEndDate).format('DD-MM-YYYY')) {
             element.performSubmitType = true;
           }
 
@@ -795,21 +778,6 @@ export class ActivitiesComponent implements OnInit {
           element.startdate = moment(startDate).format('DD-MM-YYYY HH:mm');
           const endDate = new Date(element.performActivity.activityenddate);
           element.itrationStarted = moment().isSameOrAfter(startDate);
-
-          // const crrDate = new Date();
-          // const startDate = new Date(element.performActivity.activitystartdate);
-          // const endDate = new Date(element.performActivity.batchenddate);
-
-          // tslint:disable-next-line:no-string-literal
-          // element['itrationStarted']  = this.dateDiff(startDate,
-          //   endDate , crrDate);
-          // if (startDate <= crrDate && batchendDate >= crrDate) {
-          //   // tslint:disable-next-line:no-string-literal
-          //   element['itrationStarted'] = true;
-          // } else {
-          //   // tslint:disable-next-line:no-string-literal
-          //   element['itrationStarted'] = false;
-          // }
         });
       }
     });
@@ -844,20 +812,20 @@ export class ActivitiesComponent implements OnInit {
       payload.append('uploadvideo', this.selectfile[i]);
       this.currentFile = this.selectfile[i];
       this.fileSize = this.currentFile.size;
-      this.type = this.selectfile[i].type
-      var sizeData = this.currentFile.size / 1024
-      var sizeDatakb = sizeData / 1024
-      var finalSize = sizeDatakb.toFixed(2)
+      this.type = this.selectfile[i].type;
+      // tslint:disable-next-line: prefer-const
+      var sizeData = this.currentFile.size / 1024;
+      var sizeDatakb = sizeData / 1024;
+      var finalSize = sizeDatakb.toFixed(2);
       this.splitSize = finalSize.split('.');
-      if (this.splitSize[0] == 0) {
-        this.fileTotalSize = sizeData.toFixed(2) + ' KB'
-        this.verfyingCondition = sizeDatakb.toFixed(2)
+      if (this.splitSize[0] === 0) {
+        this.fileTotalSize = sizeData.toFixed(2) + ' KB';
+        this.verfyingCondition = sizeDatakb.toFixed(2);
       } else {
-        this.verfyingCondition = sizeDatakb.toFixed(2)
-        this.fileTotalSize = sizeDatakb.toFixed(2) + ' MB'
+        this.verfyingCondition = sizeDatakb.toFixed(2);
+        this.fileTotalSize = sizeDatakb.toFixed(2) + ' MB';
       }
     }
-    // payload.append('uploadvideo', this.selectfile, this.selectfile.name);
     payload.append('course_id', this.courseid);
     payload.append('module_id', project.projectActivity.module_id);
     payload.append('topic_id', project.projectActivity.topic_id);
@@ -886,7 +854,7 @@ export class ActivitiesComponent implements OnInit {
         }
         const client = containerClient.getBlockBlobClient(this.currentFile.name);
         this.isProgress = true;
-        this.uploadedPercentage = 0
+        this.uploadedPercentage = 0;
         const response = await client.uploadBrowserData(this.currentFile, {
           blockSize: 4 * 1024 * 1024, // 4MB block size
           concurrency: 20, // 20 concurrency
@@ -894,24 +862,16 @@ export class ActivitiesComponent implements OnInit {
             const uploaded = ev.loadedBytes;
             const percnt = uploaded * 100 / this.fileSize;
             this.uploadedPercentage = percnt.toFixed(2);
-            this.Lservice.sendMessage('',this.uploadedPercentage.toString());
+            this.Lservice.sendMessage('', this.uploadedPercentage.toString());
           },
           blobHTTPHeaders: { blobContentType: this.currentFile.type }
         });
-
         if (response._response.status === 201) {
-
           this.jsonData = {
-            'course_id': this.courseid,
-            'module_id': project.projectActivity.module_id,
-            'topic_id': project.projectActivity.topic_id,
-            'user_id': this.userDetail.user_id,
-            'submit_status': submitStatus,
-            'total_mark': project.projectActivity.total_mark,
-            'submitType': 'project',
-            'submitAction': submitAction,
-            'iterationid': project.projectActivity.project_id,
-            'object_id': project.projectActivity.project_id,
+            course_id : this.courseid, module_id : project.projectActivity.module_id, topic_id : project.projectActivity.topic_id,
+            user_id : this.userDetail.user_id, submit_status : submitStatus, total_mark : project.projectActivity.total_mark,
+            submitType : 'project', submitAction, iterationid : project.projectActivity.project_id,
+            object_id : project.projectActivity.project_id,
             videodetails: [{
               doc_type: this.type,
               videourl: sas.storageUri + sas.containerName + '/' + this.currentFile.name,
@@ -921,32 +881,25 @@ export class ActivitiesComponent implements OnInit {
               uploaded_date: new Date(),
               is_active: true
             }]
-
-          }
-          let checkRes = await this.insertActivityRecordProject(this.jsonData)
-         // this.getprojectActivityData();
+          };
+          const checkRes = await this.insertActivityRecordProject(this.jsonData);
           this.ngxLoader.stop();
           this.toastr.success(data.message);
-          setTimeout(()=>{
-            this.Lservice.sendMessage('','0.00');
-          },1000)
-
-          this.flag = 1
+          setTimeout(() => {
+            this.Lservice.sendMessage('', '0.00');
+          }, 1000);
+          this.flag = 1;
         }
-
-
         this.selectPerformfile = [];
-
-        //this.toastr.success(data.message);
         this.showSubmittedon = true;
         this.selectfile = [];
       } else {
         this.selectfile = [];
         this.ngxLoader.stop();
         this.toastr.warning(data.message);
-        setTimeout(()=>{
-          this.Lservice.sendMessage('','0.00');
-        },1000)
+        setTimeout(() => {
+          this.Lservice.sendMessage('', '0.00');
+        }, 1000);
       }
     });
   }
@@ -954,21 +907,21 @@ export class ActivitiesComponent implements OnInit {
   // Submit or Delete
   learnerSumbitdeleteVideo(project, deleteItem, submitAction) {
     if (this.ongoingProjectTask) {
-      return false
+      return false;
     }
     this.ongoingProjectTask = true;
     const startDate1 = new Date(project.projectActivity.activitystartdate);
     project.actstartDate = moment(startDate1);
     const endDate1 = new Date(project.projectActivity.activityenddate);
     project.actendDate = moment(endDate1);
-    //--------- date comparison should not do using format string or else it wont compare monthwise dates
+    // --------- date comparison should not do using format string or else it wont compare monthwise dates
     // commented by avinash
     // const startDate1 = new Date(project.projectActivity.activitystartdate);
     // project.actstartDate = moment(startDate1).format('DD-MM-YYYY HH:mm');
     // const endDate1 = new Date(project.projectActivity.activityenddate);
     // project.actendDate = moment(endDate1).format('DD-MM-YYYY HH:mm');
 
-    //--------- date comparison should not do using format string or else it wont compare monthwise dates
+    // --------- date comparison should not do using format string or else it wont compare monthwise dates
     let submitStatus = '';
     if (moment() >= project.actstartDate &&
       moment() <= project.actendDate) {
@@ -998,7 +951,7 @@ export class ActivitiesComponent implements OnInit {
       videodetails: submitAction === 'delete' ? [deleteItem] : []
     };
     this.Lservice.learnerSumbitdeleteVideo(submitData).subscribe((data: any) => {
-      this.ongoingProjectTask = false
+      this.ongoingProjectTask = false;
       if (data.success === true) {
         this.toastr.success(data.message);
         this.showSubmittedon = true;
@@ -1014,7 +967,7 @@ export class ActivitiesComponent implements OnInit {
 
   uploadDocument(event, perform) {
     // this.selectPerformfile.push(event.target.files[0] as File);
-    if(event.target.files.length==1){
+    if (event.target.files.length === 1) {
     const filePath = event.target.files[0].name;
     const allowedExtensions = /(\.mp4|\.mov|\.pdf)$/i;
     if (!allowedExtensions.exec(filePath)) {
@@ -1024,14 +977,14 @@ export class ActivitiesComponent implements OnInit {
       }
       return;
     } else {
-      // tslint:disable-next-line: prefer-for-of
       let fileSize = 0;
+      // tslint:disable-next-line: prefer-for-of
       for (let i = 0; i < event.target.files.length; i++) {
         fileSize += event.target.files[i].size;
         this.selectPerformfile.push(event.target.files[i]);
       }
-      if(fileSize/1024/1024 > 150){
-        this.toastr.warning("The file size cannot exceed 150 MB");
+      if (fileSize / 1024 / 1024 > 150) {
+        this.toastr.warning('The file size cannot exceed 150 MB');
         this.selectPerformfile = [];
         if (this.videoInput) {
           this.videoInput.nativeElement.value = '';
@@ -1040,14 +993,14 @@ export class ActivitiesComponent implements OnInit {
       }
       this.performlearnerUploadVideo();
     }
-  }else if(event.target.files.length){
-    this.toastr.warning('You cannot upload more than 1 file at a one slot.')
+  } else if (event.target.files.length) {
+    this.toastr.warning('You cannot upload more than 1 file at a one slot.');
   }
   }
 
   uploadDocuments(e, perform, performans) {
-    if(perform.videodetails.length == 3) {
-      this.toastr.warning("You are allowed only to upload a maximum of 3 files");
+    if (perform.videodetails.length === 3) {
+      this.toastr.warning('You are allowed only to upload a maximum of 3 files');
       if (this.videoInput) {
         this.videoInput.nativeElement.value = '';
       }
@@ -1060,8 +1013,8 @@ export class ActivitiesComponent implements OnInit {
 
   async performlearnerUploadVideo() {
     this.ngxLoader.start();
-    this.uploadedPercentage = 0
-    this.flag = 0
+    this.uploadedPercentage = 0;
+    this.flag = 0;
     const performVideo = new FormData();
     const startDate1 = new Date(this.performsData.performActivity.activitystartdate);
     const startDate = moment(startDate1);
@@ -1077,22 +1030,21 @@ export class ActivitiesComponent implements OnInit {
     for (let i = 0; i < this.selectPerformfile.length; i++) {
       this.currentFile = this.selectPerformfile[i];
       this.fileSize = this.currentFile.size;
-      this.type = this.selectPerformfile[i].type
-      var sizeData = this.currentFile.size / 1024
-      var sizeDatakb = sizeData / 1024
-      var finalSize = sizeDatakb.toFixed(2)
+      this.type = this.selectPerformfile[i].type;
+      var sizeData = this.currentFile.size / 1024;
+      // tslint:disable-next-line: prefer-const
+      var sizeDatakb = sizeData / 1024;
+      var finalSize = sizeDatakb.toFixed(2);
       this.splitSize = finalSize.split('.');
-      if (this.splitSize[0] == 0) {
-        this.fileTotalSize = sizeData.toFixed(2) + ' KB'
-        this.verfyingCondition = sizeDatakb.toFixed(2)
+      if (this.splitSize[0] === 0) {
+        this.fileTotalSize = sizeData.toFixed(2) + ' KB';
+        this.verfyingCondition = sizeDatakb.toFixed(2);
       } else {
-        this.verfyingCondition = sizeDatakb.toFixed(2)
-        this.fileTotalSize = sizeDatakb.toFixed(2) + ' MB'
+        this.verfyingCondition = sizeDatakb.toFixed(2);
+        this.fileTotalSize = sizeDatakb.toFixed(2) + ' MB';
       }
       performVideo.append('uploadvideo', this.selectPerformfile[i]);
-      //}
       if (this.verfyingCondition <= 150) {
-        // performVideo.append('uploadvideo' , this.selectPerformfile[0]);
         performVideo.append('course_id', this.performsData.performActivity.course_id);
         performVideo.append('module_id', this.performsData.performActivity.module_id);
         performVideo.append('topic_id', this.performsData.performActivity.topic_id);
@@ -1103,32 +1055,29 @@ export class ActivitiesComponent implements OnInit {
         performVideo.append('submitAction', this.submitType);
         performVideo.append('iterationid', this.itrationData.iterationid);
         performVideo.append('object_id', this.performsData.performActivity.perform_id);
-        //    this.commonServices.loader$.next(true);
         this.Lservice.learnerUploadVideo(performVideo).subscribe(async (data: any) => {
           if (data.success === true) {
-            await this.multiFileUpload(data,( i+1))
+            await this.multiFileUpload(data, ( i + 1));
           } else {
             this.selectPerformfile = [];
             this.ngxLoader.stop();
             this.toastr.warning(data.message);
-            setTimeout(()=>{
-              this.Lservice.sendMessage('','0.00');
-            },1000)
+            setTimeout(() => {
+              this.Lservice.sendMessage('', '0.00');
+            }, 1000);
            }
         });
       } else {
         this.ngxLoader.stop();
         this.toastr.warning('File size should not greater than 150 MB');
-        setTimeout(()=>{
-          this.Lservice.sendMessage('','0.00');
-        },1000)
+        setTimeout(() => {
+          this.Lservice.sendMessage('', '0.00');
+        }, 1000);
       }
     }
 
   }
   async multiFileUpload(data,  len) {
-
-    // this.ngxLoader.start();
     const sas = data.data;
     const pipeline = newPipeline(new AnonymousCredential(), {
       retryOptions: { maxTries: 4 }, // Retry options
@@ -1145,7 +1094,7 @@ export class ActivitiesComponent implements OnInit {
     }
     const client = containerClient.getBlockBlobClient(this.currentFile.name);
     this.isProgress = true;
-    this.uploadedPercentage = 0
+    this.uploadedPercentage = 0;
     const response = await client.uploadBrowserData(this.currentFile, {
       blockSize: 4 * 1024 * 1024, // 4MB block size
       concurrency: 20, // 20 concurrency
@@ -1154,9 +1103,9 @@ export class ActivitiesComponent implements OnInit {
         const percnt = uploaded * 100 / this.fileSize;
         this.uploadedPercentage = percnt.toFixed(2);
         if (this.selectPerformfile.length > 1) {
-          this.Lservice.sendMessage(len + '/' + this.selectPerformfile.length,this.uploadedPercentage.toString());
+          this.Lservice.sendMessage(len + '/' + this.selectPerformfile.length, this.uploadedPercentage.toString());
         } else {
-          this.Lservice.sendMessage('',this.uploadedPercentage.toString());
+          this.Lservice.sendMessage('', this.uploadedPercentage.toString());
 
         }
 
@@ -1167,16 +1116,16 @@ export class ActivitiesComponent implements OnInit {
     if (response._response.status === 201) {
 
       this.jsonData = {
-        'course_id': this.performsData.performActivity.course_id,
-        'module_id': this.performsData.performActivity.module_id,
-        'topic_id': this.performsData.performActivity.topic_id,
-        'user_id': this.userDetail.user_id,
-        'submit_status': this.submitStatus,
-        'total_mark': this.itrationData.total_mark,
-        'submitType': 'perform',
-        'submitAction': this.submitType,
-        'iterationid': this.itrationData.iterationid,
-        'object_id': this.performsData.performActivity.perform_id,
+        course_id: this.performsData.performActivity.course_id,
+        module_id : this.performsData.performActivity.module_id,
+        topic_id : this.performsData.performActivity.topic_id,
+        user_id : this.userDetail.user_id,
+        submit_status : this.submitStatus,
+        total_mark : this.itrationData.total_mark,
+        submitType : 'perform',
+        submitAction : this.submitType,
+        iterationid : this.itrationData.iterationid,
+        object_id : this.performsData.performActivity.perform_id,
         videodetails: [{
           doc_type: this.type,
           videourl: sas.storageUri + sas.containerName + '/' + this.currentFile.name,
@@ -1187,17 +1136,17 @@ export class ActivitiesComponent implements OnInit {
           is_active: true
         }]
 
-      }
-      let checkRes = await this.insertActivityRecord(this.jsonData)
-      if (this.selectPerformfile.length == len) {
+      };
+      const checkRes = await this.insertActivityRecord(this.jsonData);
+      if (this.selectPerformfile.length === len) {
         this.toastr.success(data.message);
         this.ngxLoader.stop();
-        setTimeout(()=>{
-          this.Lservice.sendMessage('','0.00');
-        },1000)
+        setTimeout(() => {
+          this.Lservice.sendMessage('', '0.00');
+        }, 1000);
         this.selectPerformfile = [];
       }
-      this.flag = 1
+      this.flag = 1;
     }
 
 
@@ -1207,42 +1156,33 @@ export class ActivitiesComponent implements OnInit {
 
     this.Lservice.insertRecord(performVideo).subscribe(async (data: any) => {
       if (data.success) {
-        this.flag = 1
+        this.flag = 1;
         this.getperformActivityData();
       } else {
-        this.flag = 0
+        this.flag = 0;
       }
 
-    })
+    });
   }
   insertActivityRecordProject = async (performVideo) => {
 
     this.Lservice.insertRecord(performVideo).subscribe(async (data: any) => {
       if (data.success) {
-        this.flag = 1
+        this.flag = 1;
         this.getprojectActivityData();
       } else {
-        this.flag = 0
+        this.flag = 0;
       }
 
-    })
+    });
   }
   submitDeleteVideo(videoName, itrdata, perform) {
     if (this.ongoingPerformTask) {
-      return false
+      return false;
     }
     this.ongoingPerformTask = true;
     let videoFile = [];
     videoFile.push(videoName);
-    // const currentDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy HH:mm a');
-    // const startDate = this.datePipe.transform(perform?.activitystartdate, 'dd-MM-yyyy HH:mm a');
-    // const endDate = this.datePipe.transform(perform?.activityenddate, 'dd-MM-yyyy HH:mm a');
-    // if (currentDate >= startDate && currentDate <= endDate) {
-    //   this.submitStatus = 'ontime';
-    // } else {
-    //   this.submitStatus = 'late';
-    // }
-
     const startDate1 = new Date(perform.activitystartdate);
     const startDate = moment(startDate1);
     const endDate1 = new Date(perform.activityenddate);
@@ -1296,7 +1236,7 @@ export class ActivitiesComponent implements OnInit {
 
   openDocument(templateRef: TemplateRef<any>, path, docType) {
     if (path == null) {
-      this.toastr.warning("No Reports Found")
+      this.toastr.warning('No Reports Found');
       return false;
     }
     path.path = path.imageurl;
@@ -1328,7 +1268,7 @@ export class ActivitiesComponent implements OnInit {
         path.path = path.videourl;
       }
       if (path.path.includes('?sv=')) {
-        path.path = path.path
+        path.path = path.path;
       } else {
         path.path = path.path + this.blobKey;
       }
@@ -1339,9 +1279,8 @@ export class ActivitiesComponent implements OnInit {
       }
       this.videoSource = path.path;
       this.videoPreview(videoDialog, path.path);
-    }
-    else {
-      this.toastr.warning("Invalid format")
+    } else {
+      this.toastr.warning('Invalid format');
     }
   }
 
@@ -1364,10 +1303,10 @@ export class ActivitiesComponent implements OnInit {
   }
   downloadProject(url, fileName) {
 this.isDownloadLoader = true;
-  fetch(url)
+fetch(url)
   .then(res => res.blob()) // Gets the response and returns it as a blob
   .then(blob => {
-    let objectURL = URL.createObjectURL(blob);
+    const objectURL = URL.createObjectURL(blob);
     const link = document.createElement('a');
     if (link.download !== undefined) {
       link.setAttribute('href', objectURL);

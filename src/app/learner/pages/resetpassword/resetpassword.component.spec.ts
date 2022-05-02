@@ -3,7 +3,7 @@ import { ResetpasswordComponent } from './resetpassword.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import {  MatDialogModule } from '@angular/material';
+import { MatDialogModule } from '@angular/material/dialog';
 import { ApolloTestingController, ApolloTestingModule } from 'apollo-angular/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 

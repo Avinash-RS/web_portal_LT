@@ -5,19 +5,14 @@
       <li><em routerLink="/Learner/MyCourse" class="lxp-Go backArrow"></em> {{courseName}}</li>
       <li>{{'Learning Progression' | translate}}</li>
     </ul>
-    <div class="col">
-      <div class="flag-line">
-
-      </div>
-    </div>
-    <div class="col secPie">
-      <div class="col-md-6">
+    <div class="secPie">
+      <div class="col-md-6 selfLearning">
         <div class="learning-label">{{'Self Learning' | translate}}</div>
         <div class="pieChart" [ngStyle]="{'width': '300px',  'height':'300px'}">
           <canvas id="piechart" [plugins]="chartPlugins"></canvas>
         </div>
       </div>
-      <div class="col-md-6 d-flex align-item-center">
+      <div class="col-md-6 activitiesSec d-flex align-item-center">
         <div class="activities-progress w-100">
           <div class="progress-label">{{'Activities' | translate}}</div>
           <div class="d-flex  h-10 ml-4" [ngClass]="pieData.assignment_total==pieData.assignment_completed?'color-green':'color-yellow'">
@@ -80,8 +75,6 @@
           <ng-container  *ngFor="let moduleItem of apidata let i = index">
           <div *ngIf="moduleItem.week !== apidata[i-1]?.week" [ngClass]="moduleItem.overAllPercentage>0?moduleItem.overAllPercentage>99?'bar-complete':'bar-inprogress':'bar-inprogress'">
             <div class="loopClass">
-            <!-- <mat-progress-bar [mode]="mode" [value]="moduleItem.overAllPercentage" [bufferValue]="bufferValue">
-            </mat-progress-bar> -->
               <ng-container *ngFor="let moduleItem of apidata;let number = index">
                 <div class="innerLoop" *ngIf="moduleItem.week === apidata[i]?.week">
             <mat-accordion>
@@ -110,7 +103,6 @@
                         </div>
                         <div>
                           <div class="week-text">{{'Knowledge Check' | translate}}</div>
-                          <!-- <div>{{moduleItem.knowledgeCount.completed+'/'+moduleItem.knowledgeCount.total}}</div> -->
                           <div>-- / --</div>
                         </div>
                         <div>
@@ -250,7 +242,7 @@
               <mat-paginator *ngIf="!emptyAssignment" #firstPaginator [pageSizeOptions]="[6]"></mat-paginator>
               <div class="noCard" *ngIf="emptyAssignment">
                 <figure>
-                  <img src="https://assets.lntedutech.com/application_images/noassignment.svg" alt="assignment">
+                  <img src="https://assets.lntedutech.com/application_images/noassignment.webp" alt="assignment">
                 </figure>
                 <p> {{'You have no Assignment activity at the moment!' | translate}}</p>
               </div>
@@ -316,7 +308,7 @@
               <mat-paginator *ngIf="!emptyProject" #secondPaginator [pageSizeOptions]="[6]"></mat-paginator>
               <div class="noCard" *ngIf="emptyProject">
                 <figure>
-                  <img src="https://assets.lntedutech.com/application_images/noProject.svg" alt="assignment">
+                  <img src="https://assets.lntedutech.com/application_images/noproject.webp" alt="assignment">
                 </figure>
                 <p>{{'You have no Project activity at the moment!' | translate}}</p>
               </div>
@@ -376,7 +368,7 @@
               <mat-paginator *ngIf="!emptyPerform" #thirdPaginator [pageSizeOptions]="[6]"></mat-paginator>
               <div class="noCard" *ngIf="emptyPerform">
                 <figure>
-                  <img src="https://assets.lntedutech.com/application_images/noPerform.svg" alt="assignment">
+                  <img src="https://assets.lntedutech.com/application_images/noperform.webp" alt="assignment">
                 </figure>
                 <p>{{'You have no Perform activity at the moment!' | translate}}</p>
               </div>
@@ -414,38 +406,10 @@
       <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType"></canvas>
     </div>
   </div>
-    <!-- <div class="col d-flex mt-3 justify-content-center">
-      <div class="col-5 content-border">
-        <div class="d-flex left-content">
-          <div class="hours">68</div>
-          <div class="hrs">hrs</div>
-          <div class="week-percentage color-green"><em class="lxp-Up"></em><span class="percentage-text">12%</span>
-          </div>
-        </div>
-        <div class="left-week">This Week</div>
-      </div>
-      <div class="col-6">
-        <div class="d-flex right-content">
-          <div class="hours">43</div>
-          <div class="hrs">hrs</div>
-          <div class="week-percentage color-red"><em class="lxp-Down"></em><span class="percentage-text">8%</span></div>
-        </div>
-        <div class="right-week">Last Week</div>
-      </div>
-    </div> -->
-    <!-- <div class="d-flex growth">
-      <div>You have a </div>
-      <div class="text-green">&nbsp;12% learning growth</div>
-    </div> -->
     <div class="col mt-4">
-      <!-- <div class="col">
-        <div class="statistics">Course Statistics</div>
-      </div> -->
       <div class="col d-flex">
         <div class="numbers">87%</div>
         <div class="mr-2 numbers-text">{{'completion' | translate}} <br /> {{'Rate' | translate}}</div>
-        <!-- <div class="numbers">35</div>
-        <div class="numbers-text">Questions <br />Asked</div> -->
       </div>
       <div class="col d-flex mt-3">
         <div class="font-weight-bold">24&nbsp;</div>
@@ -485,7 +449,7 @@
 <ng-template #noCourseCard>
   <div class="noCard">
       <div>
-        <img src="https://assets.lntedutech.com/application_images/noactivity.svg" alt="assignment">
+        <img src="https://assets.lntedutech.com/application_images/noactivity.webp" alt="assignment">
       </div>
       <p>{{'Please start the course to view your progression report!' | translate}}</p>
   </div>

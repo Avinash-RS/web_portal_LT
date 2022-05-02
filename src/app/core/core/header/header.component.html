@@ -7,7 +7,7 @@
     </span>
   </div>
   <div class="imgContainer">
-     <img class="hearder-logo" alt="" src="https://assets.lntedutech.com/edutech_logo.svg" (click)="navigateMyCourse()">
+     <img class="hearder-logo" alt="" src="https://assets.lntedutech.com/application_images/edutech-logo.webp" (click)="navigateMyCourse()">
   </div>
 
   <!-- Mobile Menu Starts -->
@@ -16,23 +16,23 @@
       <ul class="mobileMenu">
         <li class="d-flex align-items-center" [ngClass]="activeUrl === '/Learner/MyCourse' ? 'redColor' : 'greyColor'"
           md-raised-button routerLink="/Learner/MyCourse">
-          <i class="lxp-SelfPaced headicon"></i>
+          <em class="lxp-SelfPaced headicon"></em>
           <span class="mobContent">{{'My Courses' | translate}}</span>
         </li>
         <li class="d-flex align-items-center" [ngClass]="activeUrl === '/Learner/calendar' ? 'redColor' : 'greyColor'"
           md-raised-button routerLink="/Learner/calendar" routerLinkActive="active">
-          <i class="headicon lxp-calendar"></i>
+          <em class="headicon lxp-calendar"></em>
           <span class="mobContent">{{'Calendar' | translate}}</span>
         </li>
         <li class="d-flex align-items-center"
           [ngClass]="activeUrl === '/Learner/activitycenterhomescreen' ? 'redColor' : 'greyColor'" md-raised-button
           routerLink="/Learner/activitycenterhomescreen">
-          <i class="lxp-ActivityCenter headicon"></i>
+          <em class="lxp-ActivityCenter headicon"></em>
           <span class="mobContent">{{'Activity Center' | translate}}</span>
         </li>
         <li class="d-flex align-items-center" [ngClass]="activeUrl === '/Learner/knowledge' ? 'redColor' : 'greyColor'"
           md-raised-button routerLink="/Learner/knowledge" routerLinkActive="active">
-          <i class="lxp-Knowledge headicon"></i>
+          <em class="lxp-Knowledge headicon"></em>
           <span class="mobContent">{{'Knowledge Resources' | translate}}</span>
         </li>
       </ul>
@@ -40,9 +40,6 @@
   </div>
   <!-- End of Mobile Menu -->
 <div class="toolbarRightContent">
-  <!-- <div class="searchContet">
-    <em class="lxp-Search"></em>
-  </div> -->
   <app-toolbar-notification></app-toolbar-notification>
 
   <div class="txtName"><span title="{{userDetailes?.full_name}}">{{userDetailes?.full_name}}</span></div>
@@ -111,33 +108,7 @@
       {{'Knowledge Resources' | translate}}
     </div>
   </div>
-    <!-- <button  [ngClass]="activeUrl === '/Learner/MyCourse' ? 'colGrey' : 'colWhite'" [ngClass]="expandTxt?'navOpen':'navClose'"
-      md-raised-button routerLink="/Learner/MyCourse">
-      <i class="lxp-SelfPaced headicon"></i>
-      <span class="smNoDisp" *ngIf="expandTxt">My Courses</span>
-    </button>
-    <button  [ngClass]="activeUrl === '/Learner/calendar' ? 'colGrey' : 'colWhite'" [ngClass]="expandTxt?'navOpen':'navClose'"
-      md-raised-button routerLink="/Learner/calendar" routerLinkActive="active">
-      <span class="headicon lxp-calendar"></span>
-      <span class="imgAdj smNoDisp" *ngIf="expandTxt">Scheduled Activity</span>
-    </button> -->
 </div>
-<!-- <mat-drawer-container
-  [class.drawer-opened]="drawer.opened"
-  class="example-container">
-  <mat-drawer #drawer 
-    class="drawer" 
-    mode="side" 
-    opened="true">
-
-    <mat-toolbar class="header">
-      <div>Logo</div>
-      <mat-icon class="close"
-     (click)="drawer.close()">close</mat-icon>
-    </mat-toolbar>
-
-</mat-drawer>
-</mat-drawer-container> -->
 
 <div class="spinner-container" *ngIf="loading">
   <mat-spinner diameter="40" class="mat-spinner-color"></mat-spinner>

@@ -1,18 +1,18 @@
-import { Component, OnInit,ViewChild,ElementRef} from "@angular/core";
-import { MatDialog } from "@angular/material";
-import { AngularEditorConfig } from "@kolkov/angular-editor";
-import { LearnerServicesService } from "@learner/services/learner-services.service";
-import { ToastrService } from "ngx-toastr";
+import { Component, OnInit, ViewChild, ElementRef} from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { LearnerServicesService } from '@learner/services/learner-services.service';
+import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from "@angular/router";
 @Component({
-  selector: "app-questionanswer",
-  templateUrl: "./questionanswer.component.html",
-  styleUrls: ["./questionanswer.component.scss"]
+  selector: 'app-questionanswer',
+  templateUrl: './questionanswer.component.html',
+  styleUrls: ['./questionanswer.component.scss']
 })
 
 export class QuestionanswerComponent implements OnInit {
-  @ViewChild('leftContainer') leftContainer: ElementRef;
+  @ViewChild('leftContainer', { static: true }) leftContainer: ElementRef;
 
   htmlContent = '';
   selectedIndex = 0;
@@ -44,17 +44,17 @@ export class QuestionanswerComponent implements OnInit {
     ],
     customClasses: [
       {
-        name: "quote",
-        class: "quote",
+        name: 'quote',
+        class: 'quote',
       },
       {
         name: 'redText',
         class: 'redText'
       },
       {
-        name: "titleText",
-        class: "titleText",
-        tag: "h1",
+        name: 'titleText',
+        class: 'titleText',
+        tag: 'h1',
       },
     ]
   };
@@ -70,22 +70,23 @@ export class QuestionanswerComponent implements OnInit {
   totalCount: any;
   unAnsCheck: any;
   timeoutval: NodeJS.Timeout;
-  filterBy : any[] =[
-    { value: "un_answered&answered", viewValue: "All" },
-    { value: "answered", viewValue: "Answered" },
-    { value: "un_answered", viewValue: "Unanswered" },
+  filterBy: any[] = [
+    { value: 'un_answered&answered', viewValue: 'All' },
+    { value: 'answered', viewValue: 'Answered' },
+    { value: 'un_answered', viewValue: 'Unanswered' },
   ];
   selectedtype = 'un_answered&answered';
-  tabType ='user';
-  fromSideBtn:boolean = false;
-  batchId ="";
-  constructor(public route: Router, private dialog: MatDialog, private learnerService: LearnerServicesService,private toastr: ToastrService,public translate: TranslateService) {
-    let lang = localStorage.getItem('language')
-    this.translate.use(lang ? lang : 'en') 
-    this.UserDetails = JSON.parse(localStorage.getItem('UserDetails'))
-    this.courseId = localStorage.getItem("Courseid");
-    this.courseName = localStorage.getItem("CourseName");
-    this.batchId = localStorage.getItem("currentBatchId");
+  tabType = 'user';
+  fromSideBtn: boolean = false;
+  batchId = '';
+  constructor(public route: Router, private dialog: MatDialog, private learnerService: LearnerServicesService, private toastr: ToastrService,
+              public translate: TranslateService) {
+    const lang = localStorage.getItem('language');
+    this.translate.use(lang ? lang : 'en');
+    this.UserDetails = JSON.parse(localStorage.getItem('UserDetails'));
+    this.courseId = localStorage.getItem('Courseid');
+    this.courseName = localStorage.getItem('CourseName');
+    this.batchId = localStorage.getItem('currentBatchId');
   }
 
   ngOnInit() {
@@ -102,10 +103,6 @@ export class QuestionanswerComponent implements OnInit {
     event.preventDefault();
   }
 
-  // make sure to destory the editor
-  ngOnDestroy(): void {
-  }
-
   contentChange() {
     this.pageNumber = 0;
     switch (this.selectedIndex) {
@@ -113,15 +110,15 @@ export class QuestionanswerComponent implements OnInit {
         this.tabType = 'user';
         this.requestType = 'un_answered&answered';
         this.selectedtype = 'un_answered&answered';
-        this.getQACount()
+        this.getQACount();
         this.getQAData();
         break;
       case 1:
         this.tabType = 'course';
-        if(!this.fromSideBtn){
-        this.requestType = 'un_answered&answered'
+        if (!this.fromSideBtn) {
+        this.requestType = 'un_answered&answered';
         this.selectedtype = 'un_answered&answered';
-        this.getQACount()
+        this.getQACount();
         this.getQAData();
         }
         this.fromSideBtn = false;
@@ -131,30 +128,29 @@ export class QuestionanswerComponent implements OnInit {
     }
   }
   getQACount() {
-    this.showNumSkeleton = false
+    this.showNumSkeleton = false;
     this.learnerService.getengineersForumQA_Count(this.UserDetails.user_id, this.courseId).subscribe((rdata: any) => {
-      let qcountData = rdata.data.getengineersForumQA_Count.data.questionCount
-      let acountData = rdata.data.getengineersForumQA_Count.data.anweredCount
-      this.animateValue('qCount', 0, qcountData ? qcountData : 0, 1000)
-      this.animateValue('aCount', 0, acountData ? acountData : 0, 1000)
-      this.showNumSkeleton = true
-    })
+      const qcountData = rdata.data.getengineersForumQA_Count.data.questionCount;
+      const acountData = rdata.data.getengineersForumQA_Count.data.anweredCount;
+      this.animateValue('qCount', 0, qcountData ? qcountData : 0, 1000);
+      this.animateValue('aCount', 0, acountData ? acountData : 0, 1000);
+      this.showNumSkeleton = true;
+    });
   }
   animateValue(id, start, end, duration) {
-    var obj = document.getElementById(id);
+    const obj = document.getElementById(id);
     if (start === end) {
       obj.innerHTML = end;
-    }
-    else {
-      var range = end - start;
-      var current = start;
-      var increment = end > start ? 1 : -1;
-      var stepTime = Math.abs(Math.floor(duration / range));
+    } else {
+      const range = end - start;
+      let current = start;
+      const increment = end > start ? 1 : -1;
+      const stepTime = Math.abs(Math.floor(duration / range));
 
-      var timer = setInterval(function () {
+      const timer = setInterval(() => {
         current += increment;
         obj.innerHTML = current;
-        if (current == end) {
+        if (current === end) {
           clearInterval(timer);
         }
       }, stepTime);
@@ -164,7 +160,8 @@ export class QuestionanswerComponent implements OnInit {
   onScrollDown() {
 
     this.pageNumber = this.pageNumber + 1;
-    this.learnerService.getengineersForumData(this.UserDetails.user_id, this.courseId, this.requestType, this.pageNumber, this.searchKey,this.tabType).subscribe((result: any) => {
+    this.learnerService.getengineersForumData(this.UserDetails.user_id, this.courseId,
+      this.requestType, this.pageNumber, this.searchKey, this.tabType).subscribe((result: any) => {
       const resultdata = result.data.getengineersForumData.data;
       this.totalCount = result.data.getengineersForumData.totalcount;
       if (resultdata.length) {
@@ -175,19 +172,22 @@ export class QuestionanswerComponent implements OnInit {
     });
   }
   getQAData() {
-    this.showSkeleton = false
-    this.learnerService.getengineersForumData(this.UserDetails.user_id, this.courseId, this.requestType, this.pageNumber, this.searchKey,this.tabType).subscribe((rdata: any) => {
-      this.qaDataList = rdata.data.getengineersForumData.data
+    this.showSkeleton = false;
+    this.learnerService.getengineersForumData(this.UserDetails.user_id, this.courseId, this.requestType,
+      this.pageNumber, this.searchKey, this.tabType).subscribe((rdata: any) => {
+      this.qaDataList = rdata.data.getengineersForumData.data;
       this.totalCount = rdata.data.getengineersForumData.totalcount;
-      if(this.searchKey===''&&this.selectedIndex==0 && this.requestType=='answered'&& (this.totalCount==0||this.totalCount==null)){
-        this.showSkeleton = false
-        this.learnerService.getengineersForumData(this.UserDetails.user_id, this.courseId, 'un_answered', this.pageNumber,'',this.tabType).subscribe((check: any) => {
-          this.unAnsCheck = check.data.getengineersForumData.totalcount
-          this.showSkeleton = true
+      if (this.searchKey === '' && this.selectedIndex === 0 && this.requestType === 'nswered'
+      && (this.totalCount === 0 || this.totalCount == null)) {
+        this.showSkeleton = false;
+        this.learnerService.getengineersForumData(this.UserDetails.user_id, this.courseId, 'un_answered',
+        this.pageNumber, '', this.tabType).subscribe((check: any) => {
+          this.unAnsCheck = check.data.getengineersForumData.totalcount;
+          this.showSkeleton = true;
         });
       }
-      this.showSkeleton = true
-    })
+      this.showSkeleton = true;
+    });
   }
 
   createQuestion() {
@@ -199,9 +199,10 @@ export class QuestionanswerComponent implements OnInit {
       //   return false
       // }
 
-      this.learnerService.createEngineersForumData(this.UserDetails.user_id, this.UserDetails.full_name, this.courseId, this.htmlContent, this.courseName, this.batchId,this.UserDetails.orgId).subscribe((rdata: any) => {
-        if (rdata?.errors && rdata?.errors[0]?.message === "Request failed with status code 413") {
-          this.toastr.warning("Content limit exceeded!!")
+      this.learnerService.createEngineersForumData(this.UserDetails.user_id, this.UserDetails.full_name,
+        this.courseId, this.htmlContent, this.courseName, this.batchId, this.UserDetails.orgId).subscribe((rdata: any) => {
+        if (rdata?.errors && rdata?.errors[0]?.message === 'Request failed with status code 413') {
+          this.toastr.warning('Content limit exceeded!!');
 
         } else {
           if (rdata.data.createEngineersForumData.success) {
@@ -209,91 +210,91 @@ export class QuestionanswerComponent implements OnInit {
             this.dialogClose('confirm');
             this.toastr.success(rdata.data.createEngineersForumData.message);
           } else {
-            this.toastr.warning(rdata.data.createEngineersForumData.message)
+            this.toastr.warning(rdata.data.createEngineersForumData.message);
           }
         }
-        this.showSkeleton = true
-      })
+        this.showSkeleton = true;
+      });
 
     } else {
-      this.toastr.warning("Question cannot be empty")
+      this.toastr.warning('Question cannot be empty');
     }
   }
 
   openQuestionDialog(templateRef) {
     this.dialog.open(templateRef, {
       panelClass: 'QAContainer',
-      width: "50%",
-      height: "55%",
+      width: '50%',
+      height: '55%',
       closeOnNavigation: true,
       disableClose: true,
     });
     const backdrop = document.getElementsByClassName('cdk-overlay-backdrop')[0];
     const containerarea = document.getElementsByClassName('mat-dialog-container')[0];
-    rclickctrl(backdrop)
-    rclickctrl(containerarea)
-    function rclickctrl(element){
-      element.addEventListener("contextmenu", ( e )=> {
+    rclickctrl(backdrop);
+    rclickctrl(containerarea);
+    function rclickctrl(element) {
+      element.addEventListener('contextmenu', ( e ) => {
         e.preventDefault();
         return false;
       } );
     }
   }
   dialogClose(value?) {
-    if(value){
+    if (value) {
       this.pageNumber = 0;
       this.getQAData();
       this.getQACount();
-      setTimeout(()=>{
-        this.leftContainer.nativeElement.scrollTop = 0
-        this.leftContainer.nativeElement.scrollIntoView({ behavior: 'smooth' }); 
-      },1000)  
+      setTimeout(() => {
+        this.leftContainer.nativeElement.scrollTop = 0;
+        this.leftContainer.nativeElement.scrollIntoView({ behavior: 'smooth' });
+      }, 1000);
      }
     this.dialog.closeAll();
-    this.htmlContent = "";
+    this.htmlContent = '';
   }
 
 
-  //Pagination
+  // Pagination
   onpagination(event) {
     this.pageNumber = event - 1;
     this.getQAData();
     this.getQACount();
   }
 
-  searchcaller(e){
+  searchcaller(e) {
     // this.timeoutval = setTimeout(()=>{
     //   clearTimeout(this.timeoutval)
     //   this.pageNumber = 0;
     //   this.getQAData();
     //   // this.getQACount();
     // },500)
-    if(this.searchKey.length >= 3){
+    if (this.searchKey.length >= 3) {
       this.pageNumber = 0;
       this.getQAData();
     }
-    if(e.keyCode == 8 && this.searchKey.length == 0){
+    if (e.keyCode === 8 && this.searchKey.length === 0) {
       this.resetSearch();
     }
   }
-  getQAtype(){
+  getQAtype() {
     this.pageNumber = 0;
     this.requestType = this.selectedtype;
     this.getQAData();
   }
-  resetSearch(){
-    this.searchKey='';
+  resetSearch() {
+    this.searchKey = '';
     this.pageNumber = 0;
     this.getQAData();
   }
-  navigateAllQA(type){
+  navigateAllQA(type) {
     this.tabType = 'course';
     this.fromSideBtn = true;
     this.selectedtype = type;
     this.requestType = type;
     this.selectedIndex = 1;
     this.pageNumber = 0;
-    this.getQACount()
+    this.getQACount();
     this.getQAData();
   }
 }

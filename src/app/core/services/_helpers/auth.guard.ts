@@ -17,23 +17,20 @@ export class AuthGuard implements CanLoad {
     private alert: AlertServiceService,
     private router: Router,
   ) {
-    
    }
   // Added by Avinasi
- 
     //    else {
     //     this.router.navigate(['/Learner/login']);
     //     return false;
     //   }
     // }
-  
   // Added by Mythreyi
 
     canLoad(route: Route, segments: UrlSegment[]): any {
-      const userDetails =JSON.parse(localStorage.getItem('UserDetails'));
-      const token =  localStorage.getItem('token')||sessionStorage.getItem('token');
-      if(userDetails?.TFAsetup?.main_config_TFA) {
-        if(userDetails?.TFAsetup?.user_config_TFA) {
+      const userDetails = JSON.parse(localStorage.getItem('UserDetails'));
+      const token =  localStorage.getItem('token') || sessionStorage.getItem('token');
+      if (userDetails?.TFAsetup?.main_config_TFA) {
+        if (userDetails?.TFAsetup?.user_config_TFA) {
           if (token && userDetails?.specific_report_value) {
               return true;
             } else {

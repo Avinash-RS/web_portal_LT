@@ -1,16 +1,16 @@
-import { Component, OnInit, HostListener, Injectable, TemplateRef, ViewChild } from "@angular/core";
+import { Component, OnInit, HostListener, Injectable, TemplateRef, ViewChild } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { AUTO_STYLE, animate, state, style, transition, trigger } from '@angular/animations';
-import { Subject } from "rxjs";
+import { Subject } from 'rxjs';
 import * as moment from 'moment';
 import { CalendarEvent, CalendarDateFormatter, DateFormatterParams, } from 'angular-calendar';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
-import { formatDate } from "@angular/common";
-import { MatDialog } from "@angular/material";
-import { environment } from "@env/environment";
-import { Router } from "@angular/router";
+import { formatDate } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { environment } from '@env/environment';
+import { Router } from '@angular/router';
 import { DragScrollComponent } from 'ngx-drag-scroll';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
@@ -34,6 +34,8 @@ export const MY_FORMATS = {
 };
 @Injectable()
 export class CustomDateFormatter extends CalendarDateFormatter {
+  // TODO: add explicit constructor
+
   weekViewColumnSubHeader({ date, locale, }: DateFormatterParams): string {
     return formatDate(date, 'dd', locale);
   }
@@ -43,9 +45,9 @@ export class CustomDateFormatter extends CalendarDateFormatter {
   }
 }
 @Component({
-  selector: "app-learner-new-my-course",
-  templateUrl: "./learner-new-my-course.component.html",
-  styleUrls: ["./learner-new-my-course.component.scss"],
+  selector: 'app-learner-new-my-course',
+  templateUrl: './learner-new-my-course.component.html',
+  styleUrls: ['./learner-new-my-course.component.scss'],
   animations: [
     trigger('collapse', [
       state('false', style({ height: AUTO_STYLE, visibility: AUTO_STYLE })),
@@ -78,6 +80,22 @@ export class CustomDateFormatter extends CalendarDateFormatter {
 })
 
 export class LearnerNewMyCourseComponent implements OnInit {
+
+  constructor(private dialog: MatDialog, private router: Router,
+              public learnerService: LearnerServicesService,
+              private gs: GlobalServiceService, public CommonServices: CommonServicesService,
+              public translate: TranslateService) {
+    const lang = localStorage.getItem('language');
+    this.translate.use(lang ? lang : 'en');
+    this.userDetailes = this.gs.checkLogout();
+    if (!this.userDetailes?.is_password_updated) {
+      this.router.navigate(['/Learner/profile']);
+      return;
+    }
+    if (this.userDetailes) {
+      this.getDashboardMyCourse(this.userDetailes.user_id, this.userDetailes._id);
+    }
+  }
   @ViewChild('completedTopics', { read: DragScrollComponent }) ds: DragScrollComponent;
   @ViewChild('inProgress', { read: DragScrollComponent }) dsInProgress: DragScrollComponent;
   showJobRole = false;
@@ -95,7 +113,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
   rightNavDisabled = false;
   leftNavDisabledInProgress = false;
   rightNavDisabledInProgress = false;
-  //Carousel
+  // Carousel
   missedTopicsKnowledgeCheck: OwlOptions = {
     loop: true,
     mouseDrag: false,
@@ -120,10 +138,10 @@ export class LearnerNewMyCourseComponent implements OnInit {
       }
     },
     nav: false
-  }
+  };
   weekDaysdat: any;
   userDetailes: any;
-  @ViewChild('infoPopup') infoPopWindow: TemplateRef<any>;
+  @ViewChild('infoPopup', { static: true }) infoPopWindow: TemplateRef<any>;
   availableCource: any;
   screenWidth: number;
   keyboardUp: boolean = true;
@@ -156,29 +174,29 @@ export class LearnerNewMyCourseComponent implements OnInit {
   mode = 'determinate';
   bufferValue = 100;
   selectedJobRoleData = {
-    jobroleCategoryName : "All"
+    jobroleCategoryName : 'All'
   };
   dynamicTextChange: string = 'ongoing';
   dateSelected: string;
-  vocationalselectjobRole= [];
+  vocationalselectjobRole = [];
   testvals: any;
-  shotDotSearch:boolean = true;
+  shotDotSearch: boolean = true;
   inProgressModule: any;
   completedTopic: any;
   displaySlides = false;
   tooltipJobRole: any;
-  //Week wise chart
-  weekWiseChartDatalabel:any = [];
-  weekWiseChartData:any = [];
-  totalhoursSpend:string = "0 mins";
+  // Week wise chart
+  weekWiseChartDatalabel: any = [];
+  weekWiseChartData: any = [];
+  totalhoursSpend: string = '0 mins';
   public chartPlugins = [pluginDataLabels];
   public WeekbarChartOptions: ChartOptions = {
-    responsive: true, 
-    tooltips:{
+    responsive: true,
+    tooltips: {
       enabled: true,
       displayColors: false,
       callbacks: {
-        label: function(tooltipItem, data) {
+        label(tooltipItem, data) {
           return  data['datasets'][0]['data'][tooltipItem['index']]['hourString'];
         }
       }
@@ -188,7 +206,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
         display: false
       }
     },
-    layout:{
+    layout: {
       padding: {
         left: 0,
         right: 0,
@@ -196,23 +214,23 @@ export class LearnerNewMyCourseComponent implements OnInit {
         bottom: 0
     }
     },
-    scales:{
-      xAxes:[{
-        gridLines:{
-          display:false
+    scales: {
+      xAxes: [{
+        gridLines: {
+          display: false
         },
       }],
-      yAxes:[{
-        gridLines:{
+      yAxes: [{
+        gridLines: {
           borderDash: [1, 3],
-          color: "#2280C1"
+          color: '#2280C1'
         },
         ticks: {
           min: 0,
           max: 8,
-          stepSize:1,
-          callback: function(value) {
-            return value + '  '
+          stepSize: 1,
+          callback(value) {
+            return value + '  ';
           }
         }
       }],
@@ -232,21 +250,21 @@ export class LearnerNewMyCourseComponent implements OnInit {
   public WeekbarChartType: ChartType = 'bar';
   public WeekbarChartLegend = false;
   public WeekbarChartPlugins = [];
-  public WeekbarChartData: ChartDataSets[] = [ 
+  public WeekbarChartData: ChartDataSets[] = [
     {
       data: [],
       backgroundColor: '#2280C1',
-      hoverBackgroundColor:'#2280C1',
+      hoverBackgroundColor: '#2280C1',
       barThickness: 12,
     }
    ];
-  //Course Wise Chart
-  courseWiseChartDatalabel:any = [];
-  courseChartData:any = [];
-  courseChartBackGround:any =[];
+  // Course Wise Chart
+  courseWiseChartDatalabel: any = [];
+  courseChartData: any = [];
+  courseChartBackGround: any = [];
   public courseChartOptions: ChartOptions = {
-    responsive: true, 
-    tooltips:{
+    responsive: true,
+    tooltips: {
       enabled : true,
       displayColors: false,
       backgroundColor: 'white',
@@ -257,25 +275,29 @@ export class LearnerNewMyCourseComponent implements OnInit {
       borderWidth: 1,
       // xPadding: 15,
       // yPadding: 15,
-      footerFontColor:'#333333',
-      footerMarginTop:8,
-      footerSpacing:8,
+      footerFontColor: '#333333',
+      footerMarginTop: 8,
+      footerSpacing: 8,
       callbacks: {
-        label: function(tooltipItem, data) {
-          var text  = [];
+        label(tooltipItem, data) {
+          const text  = [];
           text.push('Self Learning :    ' + data['datasets'][0]['data'][tooltipItem['index']]['y'] + '%');
           return  text;
         },
-        footer:function(tooltipItem, data) {
-        var subtext =[];
-         subtext.push('Modules                        ' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['module']['completedCount'] + '/' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['module']['totalCount']);
-         subtext.push('Topics                           ' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['topic']['completedCount'] + '/' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['topic']['totalCount']);
+        footer(tooltipItem, data) {
+        const subtext = [];
+        subtext.push('Modules                        ' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['module']['completedCount'] + '/' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['module']['totalCount']);
+        subtext.push('Topics                           ' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['topic']['completedCount'] + '/' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['topic']['totalCount']);
         // subtext.push('Other Activities:   ');
-        //  subtext.push('Live Interactions         ' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['liveclassroom']['completedCount'] + '/' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['liveclassroom']['totalCount']);
-        //  subtext.push('Assignment                 ' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['assignment']['completedCount'] + '/' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['assignment']['totalCount']);
-        //  subtext.push('Perform                        ' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['perform']['completedCount'] + '/' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['perform']['totalCount']);
-        // subtext.push('Project                         ' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['project']['completedCount'] + '/' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['project']['totalCount']);
-          return subtext;
+        //  subtext.push('Live Interactions         ' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['liveclassroom']
+        // ['completedCount'] + '/' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['liveclassroom']['totalCount']);
+        //  subtext.push('Assignment                 ' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['assignment']
+        // ['completedCount'] + '/' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['assignment']['totalCount']);
+        //  subtext.push('Perform                        ' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['perform']
+        // ['completedCount'] + '/' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['perform']['totalCount']);
+        // subtext.push('Project                         ' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['project']
+        // ['completedCount'] + '/' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['project']['totalCount']);
+        return subtext;
         }
       }
     },
@@ -287,12 +309,12 @@ export class LearnerNewMyCourseComponent implements OnInit {
           size: 12,
         },
         formatter: (value, ctx) => {
-          let percentage = value.y + "%";
+          const percentage = value.y + '%';
           return percentage;
       },
       }
     },
-    layout:{
+    layout: {
       padding: {
         left: 0,
         right: 0,
@@ -300,26 +322,26 @@ export class LearnerNewMyCourseComponent implements OnInit {
         bottom: 0
     }
     },
-    scales:{
-      xAxes:[{
+    scales: {
+      xAxes: [{
         ticks: {
           display: false,
       },
-        gridLines:{
-          display:false
+        gridLines: {
+          display: false
         },
       }],
-      yAxes:[{
-        gridLines:{
+      yAxes: [{
+        gridLines: {
           borderDash: [1, 3],
-          color: "#2280C1"
+          color: '#2280C1'
         },
         ticks: {
           min: 0,
           max: 100,
-          stepSize:25,
-          callback: function(value) {
-            return value + '  '
+          stepSize: 25,
+          callback(value) {
+            return value + '  ';
           }
         }
       }],
@@ -343,42 +365,28 @@ export class LearnerNewMyCourseComponent implements OnInit {
     {
       data: [],
       backgroundColor: [],
-      hoverBackgroundColor:'#2280C1',
+      hoverBackgroundColor: '#2280C1',
       barThickness: 12,
     }
   ];
-  showProgressChart:boolean = false;
+  showProgressChart: boolean = false;
   today = new Date();
   weekWiseDate;
   courseStartDate;
   courseEndDate;
   minCourseDate;
-  nochartdata:boolean = true;
+  nochartdata: boolean = true;
   currentYear: number;
   stepUrl;
 
-  constructor(private dialog: MatDialog, private router: Router,
-    public learnerService: LearnerServicesService,
-    private gs: GlobalServiceService, public CommonServices: CommonServicesService,
-    public translate: TranslateService) {
-    let lang = localStorage.getItem('language')
-    this.translate.use(lang ? lang : 'en') 
-    this.userDetailes = this.gs.checkLogout();
-    if(!this.userDetailes?.is_password_updated){
-      this.router.navigate(['/Learner/profile']);
-      return
-    }
-    if (this.userDetailes) {
-      this.getDashboardMyCourse(this.userDetailes.user_id, this.userDetailes._id);
-    }
-  }
+  info = 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like). like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like). like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).';
 
   @HostListener('window:resize', ['$event'])
 
   ngOnInit() {
     // console.log('json', link );
     this.innerWidth = window.innerWidth;
-    let showAppBanner = localStorage.getItem('appBanner');
+    const showAppBanner = localStorage.getItem('appBanner');
     if (!showAppBanner) {
       this.openInfoPopup();
     }
@@ -400,23 +408,23 @@ export class LearnerNewMyCourseComponent implements OnInit {
     //   this.getCountForCategories();
     // }, 500);
     this.getMyJobRole();
-    if(this.userDetailes.org_type != "collegeconnect"){
+    if (this.userDetailes.org_type !== 'collegeconnect') {
       this.shotDotSearch = false;
     }
     this.getModuleStatus();
-    this.currentYear = new Date().getFullYear()
+    this.currentYear = new Date().getFullYear();
     this.getStepUrl();
   }
 
-  getStepUrl(){
-    this.learnerService.getStepDetails(this.userId).subscribe((result:any)=>{
-      if(result?.data?.getStepCourseByLearner?.success){
+  getStepUrl() {
+    this.learnerService.getStepDetails(this.userId).subscribe((result: any) => {
+      if (result?.data?.getStepCourseByLearner?.success) {
       this.stepUrl   = result?.data?.getStepCourseByLearner?.stepRedirectUrl;
       }
     });
   }
 
-  //Recently completed topics
+  // Recently completed topics
   moveLeft() {
     this.ds.moveLeft();
   }
@@ -430,7 +438,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
     this.rightNavDisabled = reachesRightBound;
   }
 
-  //InProgress Module
+  // InProgress Module
   moveLeftInProgress() {
     this.dsInProgress.moveLeft();
   }
@@ -474,8 +482,8 @@ export class LearnerNewMyCourseComponent implements OnInit {
     });
   }
   closeBannerPopup() {
-    this.dialog.closeAll()
-    localStorage.setItem('appBanner', 'false')
+    this.dialog.closeAll();
+    localStorage.setItem('appBanner', 'false');
   }
 
   onResize(event) {
@@ -487,15 +495,13 @@ export class LearnerNewMyCourseComponent implements OnInit {
   }
 
   showText() {
-    this.isReadMore = !this.isReadMore
+    this.isReadMore = !this.isReadMore;
   }
-
-  info = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like). like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like). like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."
 
   // NEW API T0 GET DASHBOARD DATA
 
   getDashboardMyCourse(userId, userObjId) {
-    this.courseSkel = false
+    this.courseSkel = false;
     this.courseDetailsList = [];
     let requestType = 'ongoing';
     if (this.selectedIndex === 0) {
@@ -510,7 +516,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
     }
     let jobRoleId = this.jobroleCategoryId;
     let jobRoleIdSEQ = this.jobroleCategoryId;
-    //condition for vocational & course Sequence
+    // condition for vocational & course Sequence
     if (this.jobroleCategoryId === 'All') {
       jobRoleIdSEQ = 'all';
     } else {
@@ -539,22 +545,22 @@ export class LearnerNewMyCourseComponent implements OnInit {
           }
         });
         this.courseDetailsList.push(...this.enrolledCourses);
-        this.courseDetailsList.forEach((value)=>{
+        this.courseDetailsList.forEach((value) => {
           value.show = true;
-            value.weekPercentage = (value.current_week_count !== null ?
+          value.weekPercentage = (value.current_week_count !== null ?
               value.current_week_count : 0) + '/' + (value.actual_total_week !== null ? value.actual_total_week : 0);
-          if(value.self_paced_learning_progression){
-            value.self_paced_learning_progression = Math.round(value.self_paced_learning_progression)
-            if(value.self_paced_learning_progression <= 40) {
-              value.progressClass="start"
-            } else if(value.self_paced_learning_progression <= 70){
-              value.progressClass="midway"
-            } else {
-              value.progressClass="end"
-            }
-          }
-        })
-        this.courseSkel = true
+          // if(value.self_paced_learning_progression){
+          //   value.self_paced_learning_progression = Math.round(value.self_paced_learning_progression)
+            // if(value.self_paced_learning_progression <= 40) {
+            //   value.progressClass="start"
+            // } else if(value.self_paced_learning_progression <= 70){
+            //   value.progressClass="midway"
+            // } else {
+            //   value.progressClass="end"
+            // }
+          // }
+        });
+        this.courseSkel = true;
 
       });
     });
@@ -577,7 +583,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
     window.open(value);
   }
 
-  //PLAYER PAGE NAVIGATION
+  // PLAYER PAGE NAVIGATION
   gotoDesc(c) {
     c.batch_end_date_Timer = new Date(c.batch_end_date).getTime();
 
@@ -594,15 +600,16 @@ export class LearnerNewMyCourseComponent implements OnInit {
     };
     // if (this.screenWidth < 800) {
     // } else {
-    localStorage.setItem('currentBatchEndDate', c.batch_end_date_Timer)
+    localStorage.setItem('currentBatchEndDate', c.batch_end_date_Timer);
     localStorage.setItem('Courseid', c.course_id);
-    localStorage.setItem('persentage', c && c.coursePlayerStatus && c.coursePlayerStatus.course_percentage ? c.coursePlayerStatus.course_percentage : '');
+    localStorage.setItem('persentage', c && c.coursePlayerStatus && c.coursePlayerStatus.course_percentage
+    ? c.coursePlayerStatus.course_percentage : '');
     localStorage.setItem('currentBatchId', c.batchid);
     this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
 
     // }
   }
-  //INSTRUCTOR LED PAGE NAVIGATION
+  // INSTRUCTOR LED PAGE NAVIGATION
   goInstructorLed(c) {
     localStorage.setItem('Courseid', c.course_id);
     const detail = {
@@ -613,24 +620,24 @@ export class LearnerNewMyCourseComponent implements OnInit {
     // this.router.navigateByUrl('/Learner/instructorLed', { state: { detail } });
     this.router.navigate(['/Learner/instructorLed'], { queryParams: detail }); // ['/booking'],{queryParams: {Id :id}}
   }
-  //ASK A QUESTION
+  // ASK A QUESTION
   gotoAskQuestions(c) {
     c.batch_end_date_Timer = new Date(c.batch_end_date).getTime();
-      const detail = {
+    const detail = {
         course_name: c.course_name,
         course_id: c.course_id,
         batch_id: c.batchid,
         batchEndTime: c.batch_end_date_Timer,
-      }
-      localStorage.setItem('Courseid', c.course_id);
-      localStorage.setItem('currentBatchId', c.batchid);
-      localStorage.setItem('CourseName', c.course_name);
-      localStorage.setItem('currentBatchEndDate', c.batch_end_date_Timer)
-      if(c.course_status!=='start'){
+      };
+    localStorage.setItem('Courseid', c.course_id);
+    localStorage.setItem('currentBatchId', c.batchid);
+    localStorage.setItem('CourseName', c.course_name);
+    localStorage.setItem('currentBatchEndDate', c.batch_end_date_Timer);
+    if (c.course_status !== 'start') {
       this.router.navigateByUrl('/Learner/askQuestions', { state: { detail } });
     }
   }
-// ACTIVITY NAVIGATION 
+// ACTIVITY NAVIGATION
   gotoSubmissionDetails(course) {
     localStorage.removeItem('userTabLocation');
     const data1 = {
@@ -639,10 +646,10 @@ export class LearnerNewMyCourseComponent implements OnInit {
     };
     localStorage.setItem('Courseid', data1.courseId);
     localStorage.setItem('CourseName', data1.courseName);
-    //this.router.navigateByUrl('/Learner/activities', { state: { data: data1 } });
-    this.router.navigate(['/Learner/activities'],{
-      queryParams: 
-      { 
+    // this.router.navigateByUrl('/Learner/activities', { state: { data: data1 } });
+    this.router.navigate(['/Learner/activities'], {
+      queryParams:
+      {
         courseId: btoa(course.course_id),
         courseName: btoa(course.course_name),
         batchId: btoa(course.batchid)
@@ -651,10 +658,11 @@ export class LearnerNewMyCourseComponent implements OnInit {
   }
 
   gotoProgression(course) {
+    // tslint:disable-next-line: prefer-const
     let data = {
       courseId : course.course_id,
       courseName: course.course_name
-    }
+    };
     this.router.navigate(['/Learner/progressionReport'], {
       queryParams:
       {
@@ -665,7 +673,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
   }
 
   gotoquestionanswer(course) {
-    this.router.navigate(['/Learner/questionanswer'])
+    this.router.navigate(['/Learner/questionanswer']);
     localStorage.setItem('Courseid', course.course_id);
     localStorage.setItem('CourseName', course.course_name);
     localStorage.setItem('currentBatchId', course.batchid);
@@ -674,40 +682,45 @@ export class LearnerNewMyCourseComponent implements OnInit {
   getTodaydate() {
       this.dateSelected = moment(this.viewDate).format('YYYY-MM-DD');
       this.getLearnerActivity(this.viewDate);
-      var parentcal = document.getElementsByClassName('cal-day-headers');
-            parentcal[0].childNodes.forEach((element:any) => {
-                  if(element?.style){
-                     var currdate =  moment(this.viewDate).format('DD');
-                     var ele = element.children[2].innerHTML;  
-                     element.classList.remove("cal-today");
+      // tslint:disable-next-line: no-var-keyword
+      const parentcal = document.getElementsByClassName('cal-day-headers');
+      parentcal[0].childNodes.forEach((element: any) => {
+                  if (element?.style) {
+                     // tslint:disable-next-line: no-var-keyword
+                     const currdate =  moment(this.viewDate).format('DD');
+                     // tslint:disable-next-line: no-var-keyword
+                     const ele = element.children[2].innerHTML;
+                     element.classList.remove('cal-today');
 
-                     if(currdate == ele){
-                      element.classList.add("cal-today");
-                     }               
-                  }       
+                     if (currdate === ele) {
+                      element.classList.add('cal-today');
+                     }
+                  }
             });
   }
 
 
-  highlightSelectday(data){
-    var parentcal = document.getElementsByClassName('cal-day-headers');
-          parentcal[0].childNodes.forEach((element:any) => {
-                if(element?.style){                     
-                   element.classList.remove("cal-today");
-                }       
+  highlightSelectday(data) {
+    // tslint:disable-next-line: no-var-keyword
+    // tslint:disable-next-line: prefer-const
+    const parentcal = document.getElementsByClassName('cal-day-headers');
+    parentcal[0].childNodes.forEach((element: any) => {
+                if (element?.style) {
+                   element.classList.remove('cal-today');
+                }
           });
-      data.sourceEvent.currentTarget.classList.add("cal-today");
+    data.sourceEvent.currentTarget.classList.add('cal-today');
   }
 
   getLearnerActivity(selectedDate) {
-    this.viewDate = new Date(selectedDate)    
+    this.viewDate = new Date(selectedDate);
     const dateValue = moment(selectedDate).format('YYYY-MM-DD');
     this.dayMonth = selectedDate;
     const empty = undefined;
     this.learnerActivityList = [];
     this.showSkeleton = true;
-    this.learnerService.getLearnerActivity('','','day',dateValue,'',this.userId).subscribe((result:any)=>{
-      if(result?.data?.getActivityCalendar?.data?.activities?.length > 0){
+    this.learnerService.getLearnerActivity('', '', 'day', dateValue, '', this.userId).subscribe((result: any) => {
+      if (result?.data?.getActivityCalendar?.data?.activities?.length > 0) {
         this.noActivity = false;
         this.showSkeleton = false;
         this.showErrorCard = false;
@@ -720,52 +733,41 @@ export class LearnerNewMyCourseComponent implements OnInit {
         this.learnerActivityList = [];
       }
     },
-    err =>{
-    })
+    err => {
+    });
   }
 
   getMyJobRole() {
     this.learnerService.getCountForJobroleCategories(this.userDetailes._id, this.userDetailes.user_id).subscribe((data: any) => {
-      this.vocationalselectjobRole = data.data.getCountForJobroleCategories.data
-      if(this.vocationalselectjobRole?.length > 0) {
+      this.vocationalselectjobRole = data.data.getCountForJobroleCategories.data;
+      if (this.vocationalselectjobRole?.length > 0) {
         this.showJobRole = true;
-      }
-      else {
+      } else {
         this.showJobRole = false;
       }
     });
   }
 
-  onSelectionChange(event){
-    this.getDashboardMyCourse(this.userDetailes.user_id, this.userDetailes._id)
+  onSelectionChange(event) {
+    this.getDashboardMyCourse(this.userDetailes.user_id, this.userDetailes._id);
     // console.log(event, 'fadsfasdfasdf')
-    if(this.vocationalselectjobRole?.length > 0) {
+    if (this.vocationalselectjobRole?.length > 0) {
       this.vocationalselectjobRole.forEach((jobRole) => {
         // console.log(jobRole, '349258324098520');
-        if(jobRole.jobroleCategoryId == event.value) {
+        if (jobRole.jobroleCategoryId === event.value) {
           this.tooltipJobRole = jobRole.jobroleCategoryName;
         }
-      })
+      });
     }
   }
 
-  jobRoleSelectedFunction(event,value){
-    if(event.source.selected){
-      this.selectedJobRoleData = value
+  jobRoleSelectedFunction(event, value) {
+    if (event.source.selected) {
+      this.selectedJobRoleData = value;
     }
   }
 
-  openGallery(c){
-    this.router.navigate(['/Learner/coursegallery'], {
-      queryParams:
-      {
-        id: btoa(c.course_id),
-        name: c.course_name
-      }
-    });
-  }
-
-  openReport(c){
+  openReport(c) {
     this.router.navigate(['/Learner/coursereport'], {
       queryParams:
       {
@@ -776,7 +778,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
         selflearning_totalweeks : c.selflearning_totalweeks
       }
     });
-  
+
   }
 
   goToForum(c) {
@@ -798,79 +800,79 @@ export class LearnerNewMyCourseComponent implements OnInit {
 
 
   updateColor(progress) {
-    if (parseInt(progress)<21){
+    // tslint:disable-next-line: radix
+    if (parseInt(progress) < 21) {
        return 'primary';
-    } else if (parseInt(progress)>80){
+    // tslint:disable-next-line: radix
+    } else if (parseInt(progress) > 80) {
        return 'accent';
     } else {
       return 'warn';
     }
  }
 
- getModuleStatus(){
+ getModuleStatus() {
   // this.inProgressRecently = true;
-   this.learnerService.recentlycourse(this.userDetailes.user_id).subscribe((data: any)=>{
+   this.learnerService.recentlycourse(this.userDetailes.user_id).subscribe((data: any) => {
      this.inProgressModule = data?.data?.recentlycourse?.data?.inProgressModule;
     //  this.inProgressModule = null
      this.completedTopic = data?.data?.recentlycourse?.data?.completedTopic;
      ///
-     if(this.inProgressModule?.length > 0) {
+     if (this.inProgressModule?.length > 0) {
       this.inProgress = true;
-     }
-     else {
+     } else {
        this.inProgress = false;
      }
     ///
-     if(this.completedTopic?.length > 0) {
+     if (this.completedTopic?.length > 0) {
       this.recentlyCompleted = true;
-     }
-     else {
+     } else {
        this.recentlyCompleted = false;
      }
-    setTimeout(()=>{
+     setTimeout(() => {
       this.displaySlides = true;
-    },1000)
-   })
+    }, 1000);
+   });
  }
 
- getCourseProgress(){
+ getCourseProgress() {
   this.setdateForprogress();
-  this.getoverAllCourseProgressData()
+  this.getoverAllCourseProgressData();
   this.getWeekCourseData();
   this.showProgressChart = true;
 }
 
 getVideoLink(course) {
-    window.open(environment.resourcelinkurl +"?course=" + course, 'blank').focus();
+    window.open(environment.resourcelinkurl + '?course=' + course, 'blank').focus();
 }
 
-//Date initialize
-setdateForprogress(){
-  //week wise date
- var curr = new Date;
- var first = curr.getDate() - curr.getDay();
- var firstday = new Date(curr.setDate(first)).toUTCString();
- this.weekWiseDate = new Date(firstday,);
- //Course Start & End date
+// Date initialize
+setdateForprogress() {
+  // week wise date
+ const curr = new Date();
+ const first = curr.getDate() - curr.getDay();
+ const firstday = new Date(curr.setDate(first)).toUTCString();
+ this.weekWiseDate = new Date(firstday, );
+ // Course Start & End date
  this.courseStartDate  = this.UserDetails.created_on;
  this.minCourseDate = this.courseStartDate;
  this.courseEndDate = new Date();
 }
 
-//Overll course chart data
-getoverAllCourseProgressData(){
+// Overll course chart data
+getoverAllCourseProgressData() {
   this.courseWiseChartDatalabel = [];
   this.courseChartData = [];
   this.courseChartBackGround = [];
-  this.learnerService.getoverAllCourseProgressByUserId(this.userId,moment(this.courseStartDate).startOf('day').toISOString(),moment(this.courseEndDate).endOf('day').toISOString()).subscribe((result:any)=>{
-    if(result.data.overAllCourseProgressByUserId.success){
-      result.data.overAllCourseProgressByUserId.data.forEach((data:any)=>{
+  this.learnerService.getoverAllCourseProgressByUserId(this.userId, moment(this.courseStartDate).startOf('day').toISOString(),
+  moment(this.courseEndDate).endOf('day').toISOString()).subscribe((result: any) => {
+    if (result.data.overAllCourseProgressByUserId.success) {
+      result.data.overAllCourseProgressByUserId.data.forEach((data: any) => {
         this.courseWiseChartDatalabel.push(data.courseName);
-        this.courseChartData.push({"y":data.coursePercentage,"myprop":data})
+        this.courseChartData.push({y: data.coursePercentage, myprop: data});
         this.courseChartBackGround.push(data.colourCode);
       });
-    }
-    else{
+    } else {
       this.courseWiseChartDatalabel = [];
       this.courseChartData = [];
       this.courseChartBackGround = [];
@@ -878,55 +880,55 @@ getoverAllCourseProgressData(){
     this.generateCourseChart();
   });
 }
-generateCourseChart(){
+generateCourseChart() {
   this.coursebarChartLabels = this.courseWiseChartDatalabel;
   this.coursebarChartData = [
     {
       data: this.courseChartData,
       backgroundColor: this.courseChartBackGround,
-      hoverBackgroundColor:this.courseChartBackGround,
+      hoverBackgroundColor: this.courseChartBackGround,
       barThickness: 12,
     }
   ];
 }
 
-changeCourseDate(){
+changeCourseDate() {
   this.minCourseDate = this.courseStartDate;
   this.getoverAllCourseProgressData();
 }
 
-getWeekCourseData(){
+getWeekCourseData() {
   this.weekWiseChartDatalabel = [];
   this.weekWiseChartData = [];
-  var myFormattedDate = moment(this.weekWiseDate).format('yyyy-MM-DD');
-  this.learnerService.getweekWiseCourseChart("",this.userId,myFormattedDate,"allcourse").subscribe((result:any)=>{
+  // tslint:disable-next-line: no-var-keyword
+  const myFormattedDate = moment(this.weekWiseDate).format('yyyy-MM-DD');
+  this.learnerService.getweekWiseCourseChart('', this.userId, myFormattedDate, 'allcourse').subscribe((result: any) => {
 
-    if(result.data.weekWiseCourseChart.success){
+    if (result.data.weekWiseCourseChart.success) {
       this.totalhoursSpend = result.data.weekWiseCourseChart.data.totalhoursSpend;
-      result.data.weekWiseCourseChart.data.chartdata.forEach((data:any)=>{
+      result.data.weekWiseCourseChart.data.chartdata.forEach((data: any) => {
         this.weekWiseChartDatalabel.push(data.day);
-        this.weekWiseChartData.push({y:data.hours,hourString:data.hourString});
+        this.weekWiseChartData.push({y: data.hours, hourString: data.hourString});
       });
-    }
-    else{
-      this.weekWiseChartDatalabel = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-      this.weekWiseChartData = [0,0,0,0,0,0,0,0];
+    } else {
+      this.weekWiseChartDatalabel = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      this.weekWiseChartData = [0, 0, 0, 0, 0, 0, 0, 0];
     }
     this.generateWeekwiseChart();
   });
 }
-generateWeekwiseChart(){
+generateWeekwiseChart() {
   this.WeekbarChartLabels = this.weekWiseChartDatalabel;
   this.WeekbarChartData = [
     {
       data: this.weekWiseChartData,
       backgroundColor: '#2280C1',
-      hoverBackgroundColor:'#2280C1',
+      hoverBackgroundColor: '#2280C1',
       barThickness: 12,
     }
   ];
 }
-changeWeekDate(){
+changeWeekDate() {
   this.getWeekCourseData();
 }
 
@@ -940,28 +942,30 @@ goToCourse(c){
     wishlist_id: c.wishlist_id || null,
     enrollment_status: null,
     course_name: c.course_name,
-    course_status:"incomplete",// c.course_status,
+    course_status: 'incomplete', // c.course_status,
     batch_id: c.batchid,
     batchEndTime: c.batch_end_date_Timer,
-    link:c.link,
-    toc:c.toc,
-    lastLogIndex:c.lastLogIndex,
-    lastModule:c.lastModule,
-    lastTopic:c.lastTopic,
-    checklevel:c.checklevel,
-    module_id:c.module_id,
-    topic_id:c.topic_id
+    link: c.link,
+    toc: c.toc,
+    lastLogIndex: c.lastLogIndex,
+    lastModule: c.lastModule,
+    lastTopic: c.lastTopic,
+    checklevel: c.checklevel,
+    module_id: c.module_id,
+    topic_id: c.topic_id
     // persentage : c.coursePlayerStatus.course_percentage || 0
   };
   // if (this.screenWidth < 800) {
   // } else {
-    console.log(detail)
-  localStorage.setItem('currentBatchEndDate', c.batch_end_date_Timer)
+  console.log(detail);
+  localStorage.setItem('currentBatchEndDate', c.batch_end_date_Timer);
   localStorage.setItem('Courseid', c.course_id);
-  localStorage.setItem('persentage', c && c.coursePlayerStatus && c.coursePlayerStatus.course_percentage ? c.coursePlayerStatus.course_percentage : '');
+  localStorage.setItem('persentage', c && c.coursePlayerStatus && c.coursePlayerStatus.course_percentage
+  ? c.coursePlayerStatus.course_percentage : '');
   localStorage.setItem('currentBatchId', c.batchid);
 
-  localStorage.setItem('resumeData', JSON.stringify({'link':c.link,'lastModule':c.lastModule,'lastTopic':c.lastTopic,'module_id':c.module_id,'topic_id':c.topic_id,'checklevel':c.checklevel,'course_status':c.course_status,'toc':c.toc}));
+  localStorage.setItem('resumeData', JSON.stringify({link: c.link, lastModule: c.lastModule, lastTopic: c.lastTopic,
+    module_id: c.module_id, topic_id: c.topic_id, checklevel: c.checklevel, course_status: c.course_status, toc: c.toc}));
 
   this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
 }

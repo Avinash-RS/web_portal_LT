@@ -17,9 +17,6 @@
             <span class="ml-1">{{project.projectActivity.activityoutcome}}</span>
           </div>
           <div class="keyboardArrow">
-            <!-- <mat-icon class="f_size_16 expansionarr" aria-hidden="false" *ngIf="!isCollapsed || projectId !== i" (click)="isCollapsed = !isCollapsed; projectId = i">keyboard_arrow_down</mat-icon>
-            <mat-icon class="f_size_16 expansionarr" aria-hidden="false" *ngIf="isCollapsed && projectId === i"
-              (click)="isCollapsed = !isCollapsed; projectId = i">keyboard_arrow_up</mat-icon> -->
 
             <mat-icon class="f_size_16 expansionarr" aria-hidden="false" (click)="resourseAccord(projectDetails, i);">{{project.isOpen?'keyboard_arrow_up':'keyboard_arrow_down'}}</mat-icon>
           </div>
@@ -85,10 +82,6 @@
                   <mat-card class="p-0 iterationCard" (click)="projectPreviewDoc(projectPreviewDialog, videoDialog, material, 'material')">
                     <div class="row ml-0 mr-0 carouselRow1">
                       <div class="col-12 m-auto">
-                        <!-- <mat-icon class="iterationicons" *ngIf="material.doc_type =='image/jpeg'  || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'">
-                          photo_size_select_actual</mat-icon>
-                        <mat-icon class="iterationicons" *ngIf="material.doc_type =='video/mp4' || material.doc_type =='video/quicktime'">play_circle_outline</mat-icon>
-                        <i class="fa fa-file-pdf-o iterationicons" *ngIf="material.doc_type =='application/pdf'" aria-hidden="true"></i> -->
                         <em class="lxp-photo iterationicons" *ngIf="material.doc_type =='image/jpeg'  || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'"></em>
                         <em class="lxp-PlayCircle iterationicons" *ngIf="material.doc_type =='video/mp4' || material.doc_type =='video/quicktime'"></em>
                         <em class="lxp-pdf iterationicons" *ngIf="material.doc_type =='application/pdf'"></em>
@@ -105,62 +98,6 @@
               </span>
             </drag-scroll>
 
-            <!-- <owl-carousel-o [options]="trendingCategorires" [ngClass]="project.projectActivity.materialDetails >= 4 ? 'arrow': 'widthClass arrow' " *ngIf="project.projectActivity.materialDetails && project.projectActivity.materialDetails.length > 0">
-              <ng-template class="row ml-0 mr-0" carouselSlide *ngFor="let material of project.projectActivity.materialDetails; let i = index">
-                <div [ngClass]="project.projectActivity.materialDetails.length >= 2 ? 'col-3 w-100 pt-2 pb-2  carouselCol': 'col-3 w-100 pt-2 pb-2  carouselCol1'">
-                  <mat-card class="p-0 iterationCard" (click)="projectPreviewDoc(projectPreviewDialog, videoDialog, material, 'material')">
-                    <div class="row ml-0 mr-0 carouselRow1">
-                      <div class="col-12 m-auto">
-                        <mat-icon class="iterationicons" *ngIf="material.doc_type =='image/jpeg'  || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'">
-                          photo_size_select_actual</mat-icon>
-                        <mat-icon class="iterationicons" *ngIf="material.doc_type =='video/mp4'">play_circle_outline</mat-icon>
-                        <i class="fa fa-file-pdf-o iterationicons" *ngIf="material.doc_type =='application/pdf'" aria-hidden="true"></i>
-                      </div>
-                    </div>
-                    <div class="row ml-0 mr-0 h-40" class="fileSelDet">
-                      <div class="col-12 pr-0 fileNameCol">
-                        <span class="carouselText" *ngIf="material.filename?.length > 30">{{(material.filename| slice:0:20)+'...'}}</span>
-                        <span class="carouselText" *ngIf="material.filename?.length < 30">{{material.filename}}</span>
-                      </div>
-                    </div>
-                  </mat-card>
-                </div>
-              </ng-template>
-            </owl-carousel-o> -->
-
-            <!-- <div id="demo" class="carousel" data-ride="carousel">
-            <div class="carousel-inner">
-            <div class="carousel-item active">
-            <div class="row ml-0 mr-0">
-            <div class="col-4 text-left pr-0" *ngFor="let material of project.projectActivity.materialDetails">
-            <mat-card class="materialCard p-0 mr-2" (click)="playVideo(projectPreviewDialog, videoDialog, material, material.doc_type, preview = true)">
-            <div class="row ml-0 mr-0 matCardIconRow">
-            <div class="col-12 pl-0 pr-0">
-            <i class="fa fa-file-pdf-o icons" *ngIf="material.doc_type == 'file/pdf'" aria-hidden="true"></i>
-            <mat-icon class="icons" *ngIf="material.doc_type =='image/jpeg'
-            || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'">photo_size_select_actual</mat-icon>
-            <mat-icon class="icons" *ngIf="material.doc_type =='video/mp4'">play_circle_outline</mat-icon> 
-            </div>
-            </div>
-            <div class="row ml-0 mr-0 h-40" class="fileSelDet">
-            <div class="col-12 pr-0 fileNameCol">
-            <span class="fileColor">{{(material.filename| slice:0:50)+'...'}}</span><br>
-            </div>
-            </div>
-            </mat-card>
-            </div>
-            </div>
-            </div>
-            </div>
-
-            <a class="carousel-control-prev" href="#demo" data-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
-            </a>
-            <a class="carousel-control-next" href="#demo" data-slide="next">
-            <span class="carousel-control-next-icon"></span>
-            </a>
-
-            </div> -->
           </div>
           <!----------------------------------------------Your work---------------------------------->
           <div class="row ml-0 mr-0 mt-3 work-border" *ngIf="project.projectActivity.submit_status == 'notsubmitted' || project.projectActivity.grade_status !== 'Evaluated'">
@@ -176,10 +113,6 @@
                           <mat-card class="p-0 iterationCard">
                             <div class="row ml-0 mr-0 carouselRow1">
                               <div class="col-12 m-auto">
-                                <!-- <mat-icon class="iterationicons" *ngIf="material.doc_type =='image/jpeg'  || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'">
-                                  photo_size_select_actual</mat-icon>
-                                <mat-icon class="iterationicons" *ngIf="material.doc_type =='video/mp4' || material.doc_type =='video/quicktime'">play_circle_outline</mat-icon>
-                                <i class="fa fa-file-pdf-o iterationicons" *ngIf="material.doc_type == 'application/pdf'" aria-hidden="true"></i> -->
                                 <em class="lxp-photo iterationicons" *ngIf="material.doc_type =='image/jpeg'  || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'"></em>
                                 <em class="lxp-PlayCircle iterationicons" *ngIf="material.doc_type =='video/mp4' || material.doc_type =='video/quicktime'"></em>
                                 <em class="lxp-pdf iterationicons" *ngIf="material.doc_type == 'application/pdf'" aria-hidden="true"></em>
@@ -197,80 +130,11 @@
                       </span>
                     </drag-scroll>
 
-                    <!-- <owl-carousel-o [options]="trendingCategorires" [ngClass]="project.projectActivity.videodetails >= 4 ? 'arrow': 'widthClass arrow' ">
-                      <ng-template class="row ml-0 mr-0" carouselSlide *ngFor="let material of project.projectActivity.videodetails; let i = index">
-                        <div [ngClass]="project.projectActivity.videodetails.length >= 2 ? 'col-3 w-100 pt-2 pb-2  carouselCol': 'col-3 w-100 pt-2 pb-2  carouselCol1'">
-                          <mat-card class="p-0 iterationCard">
-                            <div class="row ml-0 mr-0 carouselRow1">
-                              <div class="col-12 m-auto">
-                                <mat-icon class="iterationicons" *ngIf="material.doc_type =='image/jpeg'  || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'">
-                                  photo_size_select_actual</mat-icon>
-                                <mat-icon class="iterationicons" *ngIf="material.doc_type =='video/mp4'">play_circle_outline</mat-icon>
-                                <i class="fa fa-file-pdf-o iterationicons" *ngIf="material.doc_type == 'application/pdf'" aria-hidden="true"></i>
-                              </div>
-                            </div>
-                            <div class="row ml-0 mr-0 h-40" class="fileSelDet">
-                              <div class="col-12 pr-0 fileNameCol">
-                                <span class="carouselText" *ngIf="material.name?.length > 30">{{(material.name| slice:0:20)+'...'}}</span>
-                                <span class="carouselText" *ngIf="material.name?.length < 30">{{material.name}}</span>
-                              </div>
-                            </div>
-                            <mat-icon class="deleteIcon float-right del-pos" *ngIf="project.projectActivity.submitAction !== 'submit'" (click)="learnerSumbitdeleteVideo(project, material, 'delete')">delete</mat-icon>
-                          </mat-card>
-                        </div>
-                      </ng-template>
-                    </owl-carousel-o> -->
-
-                    <!-- <div id="demo" class="carousel" data-ride="carousel">
-                    <div class="carousel-inner">
-                    <div class="carousel-item active">
-                    <div class="row ml-0 mr-0">
-                    <div class="col-4 text-left pr-0" *ngFor="let videoData of project.projectActivity.videodetails">
-                    <mat-card class="materialCards p-0 mr-2">
-                    <div class="row ml-0 mr-0 matCardIconRow">
-                    <div class="col-12 pl-0 pr-0">
-                    <i class="fa fa-file-pdf-o icons-1" *ngIf="videoData.doc_type == 'application/pdf'" aria-hidden="true"></i>
-                    <mat-icon class="icons-1" *ngIf="videoData.doc_type =='image/jpeg'
-                    || videoData.doc_type == 'image/png' || videoData.doc_type == 'image/jpg'">photo_size_select_actual</mat-icon>
-                    <mat-icon class="icons-1" *ngIf="videoData.doc_type =='video/mp4'">play_circle_outline</mat-icon> 
-                    </div>
-                    </div>
-                    <div class="row ml-0 mr-0 h-40" class="fileSelDet">
-                    <div class="col-12 pr-0 fileNameCol">
-                    <span class="fileColor">{{videoData.name}}</span><br>
-                    </div>
-                    </div>
-
-                    <mat-icon class="deleteIcon float-right del-pos"
-                    *ngIf="project.projectActivity.submitAction !== 'submit'"
-                    (click)="learnerSumbitdeleteVideo(project, item, 'delete')">delete</mat-icon>
-                    </mat-card>
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-
-                    <a class="carousel-control-prev" href="#demo" data-slide="prev">
-                    <span class="carousel-control-prev-icon"></span>
-                    </a>
-                    <a class="carousel-control-next" href="#demo" data-slide="next">
-                    <span class="carousel-control-next-icon"></span>
-                    </a>
-                    </div> -->
                   </div>
                 </div>
 
                 <div class="">
                   <div class="text-center">
-                    <!-- <input type="file" style="display: none"
-                    accept="video/mp4,image/png,image/jpeg,image/jpg,application/pdf" #uploadFile
-                    [(ngModel)]="fileName" (change)="uploadDoc($event, project, 'upload')" />
-                    <button mat-stroked-button class="upload-btn" (click)="uploadDocs()"
-                    [disabled]="project.enableSubmit == false && project.submitType == false"
-                    *ngIf="project.projectActivity.submitAction !== 'submit'">
-                    <mat-icon class="icon-color m-t-m-2">add</mat-icon>
-                    Add your files
-                    </button> -->
                     <input class="input-hide" type="file" accept="video/mp4,video/quicktime,image/png,image/jpeg,image/jpg,application/pdf" #uploadFile [(ngModel)]="fileName" [ngClass]="project.projectActivity.submitAction ? 'class1':'class2'" (change)="uploadDoc($event, project, 'upload')" />
                     <button mat-stroked-button class="uploadBtn w-100"  [disabled]="project.submitType == false || project.enableSubmit == false" (click)="uploadDocs($event)">
                       <mat-icon class="add-icon">add</mat-icon> {{'Add your files' | translate}}
@@ -279,8 +143,6 @@
                     <button mat-stroked-button class="submit-btn" [disabled]="project.submitType == false || project.enableSubmit == false" (click)="learnerSumbitdeleteVideo(project, '' ,'submit')" 
                       *ngIf="project.projectActivity.videodetails.length > 0">{{'Submit' | translate}}</button>
                     <button mat-stroked-button class="submitted-btn mt-2" *ngIf="(project.projectActivity.videodetails.length == 0 || project.enableSubmit == false)"> {{'Submit' | translate}} </button>
-                    <!-- <button mat-stroked-button class="submitted-btn" [disabled]="true" *ngIf="project.projectActivity.submitAction == 'submit'"> Submitted </button>
-                    <p style="margin: 0 !important;" *ngIf="project.projectActivity.submit_status == 'notsubmitted'">Submitted files cannot be edited</p> -->
                     <p style="margin: 0 !important;" *ngIf="project.projectActivity.submitAction == 'submit'">{{'Submitted on:' | translate}} {{project.submittedOn | date:'MMM dd, yyyy'}}</p>
                   </div>
                 </div>
@@ -305,9 +167,6 @@
                     <mat-card class="p-0 iterationCard" (click)="projectPreviewDoc(projectPreviewDialog,videoDialog, material, 'files')">
                       <div class="row ml-0 mr-0 carouselRow1">
                         <div class="col-12 m-auto">
-                          <!-- <mat-icon class="iterationicons" *ngIf="material.doc_type =='image/jpeg'  || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'"> photo_size_select_actual</mat-icon>
-                          <mat-icon class="iterationicons" *ngIf="material.doc_type =='video/mp4' || material.doc_type =='video/quicktime'"> play_circle_outline </mat-icon>
-                          <i class="fa fa-file-pdf-o iterationicons" *ngIf="material.doc_type == 'application/pdf'" aria-hidden="true"></i> -->
                           <em class="lxp-photo iterationicons" *ngIf="material.doc_type =='image/jpeg'  || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'"></em>
                           <em class="lxp-PlayCircle iterationicons" *ngIf="material.doc_type =='video/mp4' || material.doc_type =='video/quicktime'"></em>
                           <em class="lxp-pdf iterationicons" *ngIf="material.doc_type == 'application/pdf'" aria-hidden="true"></em>
@@ -323,61 +182,6 @@
                 </div>
               </drag-scroll>
               
-              <!-- <owl-carousel-o [options]="trendingCategorires" [ngClass]="project.projectActivity.videodetails >= 4 ? 'arrow': 'widthClass arrow' ">
-                <ng-template class="row ml-0 mr-0" carouselSlide *ngFor="let material of project.projectActivity.videodetails; let i = index">
-                  <div [ngClass]="project.projectActivity.videodetails.length >= 2 ? 'col-3 w-100 pt-2 pb-2  carouselCol': 'col-3 w-100 pt-2 pb-2  carouselCol1'">
-                    <mat-card class="p-0 iterationCard" (click)="projectPreviewDoc(projectPreviewDialog,videoDialog, material, 'files')">
-                      <div class="row ml-0 mr-0 carouselRow1">
-                        <div class="col-12 m-auto">
-                          <mat-icon class="iterationicons" *ngIf="material.doc_type =='image/jpeg'  || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'"> photo_size_select_actual</mat-icon>
-                          <mat-icon class="iterationicons" *ngIf="material.doc_type =='video/mp4'"> play_circle_outline </mat-icon>
-                          <i class="fa fa-file-pdf-o iterationicons" *ngIf="material.doc_type == 'application/pdf'" aria-hidden="true"></i>
-                        </div>
-                      </div>
-                      <div class="row ml-0 mr-0 h-40" class="fileSelDet">
-                        <div class="col-12 pr-0 fileNameCol">
-                          <span class="carouselText" *ngIf="material.filename?.length > 30">{{(material.filename| slice:0:20)+'...'}}</span>
-                          <span class="carouselText" *ngIf="material.filename?.length < 30">{{material.filename}}</span>
-                        </div>
-                      </div>
-                    </mat-card>
-                  </div>
-                </ng-template>
-              </owl-carousel-o> -->
-
-              <!-- <div id="demo" class="carousel" data-ride="carousel">
-              <div class="carousel-inner">
-              <div class="carousel-item active">
-              <div class="row ml-0 mr-0">
-              <div class="col-4 text-left pr-0" *ngFor="let video of project.projectActivity.videodetails">
-              <mat-card class="materialCard p-0 mr-2" (click)="playVideo(projectPreviewDialog, videoDialog, video, video.doc_type, preview = true)">
-              <div class="row ml-0 mr-0 matCardIconRow">
-              <div class="col-12 pl-0 pr-0">
-              <i class="fa fa-file-pdf-o icons" *ngIf="video.doc_type == 'file/pdf'" aria-hidden="true"></i>
-              <mat-icon class="icons" *ngIf="video.doc_type =='image/jpeg'
-              || video.doc_type == 'image/png' || video.doc_type == 'image/jpg'">photo_size_select_actual</mat-icon>
-              <mat-icon class="icons" *ngIf="video.doc_type =='video/mp4'">play_circle_outline</mat-icon> 
-              </div>
-              </div>
-              <div class="row ml-0 mr-0 h-40" class="fileSelDet">
-              <div class="col-12 pr-0 fileNameCol">
-              <span class="fileColor">{{(video.filename| slice:0:50)+'...'}}</span><br>
-              </div>
-              </div>
-              </mat-card>
-              </div>
-              </div>
-              </div>
-              </div>
-
-              <a class="carousel-control-prev" href="#demo" data-slide="prev">
-              <span class="carousel-control-prev-icon"></span>
-              </a>
-              <a class="carousel-control-next" href="#demo" data-slide="next">
-              <span class="carousel-control-next-icon"></span>
-              </a>
-
-              </div> -->
             </div>
             <div class="projectCommentMob">
               <div class="text-left">

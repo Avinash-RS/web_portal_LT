@@ -9,7 +9,10 @@ import { CoreModule } from '@core/core.module';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Apollo, ApolloModule } from 'apollo-angular';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { MatMenuModule, MatSidenavModule, MatExpansionModule, MatStepperModule} from '@angular/material';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatStepperModule } from '@angular/material/stepper';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { NgxMaskModule } from 'ngx-mask';
 import { MaterialModule } from '@core/material.module';
@@ -25,15 +28,14 @@ import { NgOtpInputModule } from 'ng-otp-input';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { CalendarModule } from 'angular-calendar';
-import { PopoverModule } from "ngx-smart-popover";
+import { PopoverModule } from 'ngx-smart-popover';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { InstructorLedComponent } from './pages/instructor-led/instructor-led.component';
 import { DiscussionForumComponent } from './pages/discussion-forum/discussion-forum.component';
 import { ActivitiesComponent } from './pages/activities/activities.component';
-import { AssignmentComponent } from './pages/assignment/assignment.component';
 import { ProjectMobileComponent } from './pages/project-mobile/project-mobile.component';
 import { PerformancePageMobileComponent } from './pages/performance-page-mobile/performance-page-mobile.component';
-import { CourseGalleryComponent } from './pages/course-gallery/course-gallery.component'
+import { CourseGalleryComponent } from './pages/course-gallery/course-gallery.component';
 import { AskQuestionsComponent } from './pages/ask-questions/ask-questions.component';
 import { CourseReportComponent } from './pages/course-report/course-report.component';
 import { CalendarActivityComponent } from './pages/calendar-activity/calendar-activity.component';
@@ -49,7 +51,6 @@ import { AgGridModule } from 'ag-grid-angular';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
-  
 }
 
 const routes: Routes = [
@@ -120,14 +121,13 @@ const routes: Routes = [
     component: QuestionanswerComponent,
     data: { animation: 'questionanswer', title: 'Question and Answer'}
   }
-]
+];
 @NgModule({
   declarations: [
     CoursedetailsComponent,
     InstructorLedComponent,
     DiscussionForumComponent,
     ActivitiesComponent,
-    AssignmentComponent,
     ProjectMobileComponent,
     PerformancePageMobileComponent,
     CourseGalleryComponent,
