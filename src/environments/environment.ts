@@ -5,15 +5,15 @@
 export const environment = {
   appVersion: require('../../package.json').version + '-dev',
   production: false,
-  apiUrl: 'https://devfacadept.lntiggnite.com/',
-  scormUrl: 'https://devscormpt.lntiggnite.com/',
-  apiUrlImg: 'https://devfacadept.lntiggnite.com/',
-  createCourseApi: 'https://devcoursespt.lntiggnite.com/',
-  wcaapiurl: 'https://devwcapt.lntiggnite.com/',
+  apiUrl: 'https://devfacade.lntiggnite.com/',
+  scormUrl: 'https://devscorm.lntiggnite.com/',
+  apiUrlImg: 'https://devfacade.lntiggnite.com/',
+  createCourseApi: 'https://devcourses.lntiggnite.com/',
+  wcaapiurl: 'https://devwca.lntiggnite.com/',
   domain : 'LXP',
   analytics: 'G-6N6X7SQTXH',
   systemIp : 'http://api.ipify.org/?format=json',
-  socketio : 'https://devsocketpt.lntiggnite.com/',
+  socketio : 'https://devsocket.lntiggnite.com/',
   // Visible captcha key
   // captachaSiteKey: '6Leia8YbAAAAAB2jaH0YtNRQjQlr8OATGngAIBkk',
   // invisble captcha key
@@ -22,7 +22,7 @@ export const environment = {
   blobKey: '?sv=2018-03-28&ss=b&srt=sco&sp=racwdl&st=2021-04-12T03%3A36%3A39Z&se=2171-04-12T03%3A41%3A39Z&spr=https%2Chttp&sig=jl7SfT41958EUB7YDb48xwU65cZcsnTN8vdttEhBad8%3D',
   teachercommunity: 'https://engineers.lntiggnite.com/teachercommunity/',
   gaTrackingId: 'G-6N6X7SQTXH',
-  botUrl : 'https://devfaqbotpt.lntiggnite.com/',
+  botUrl :'https://devfaqbot.lntiggnite.com/',
   resourcelinkurl : 'https://upskillresourcefiles.lntedutech.com/'
 };
 
