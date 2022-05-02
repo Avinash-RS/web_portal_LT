@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 export const login = gql`
   query login(
@@ -2319,6 +2319,8 @@ export const get_batchwise_learner_dashboard_data = gql`
         week_total_count
         Self_Paced_Learning_CARD
         self_paced_learning_progression
+        progress_class
+        course_week_Percent
         completed_module_count
         total_module_count
         completed_topic_count

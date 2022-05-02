@@ -8,102 +8,104 @@ import {
   HostListener,
   ElementRef,
   ViewContainerRef,
-} from "@angular/core";
+} from '@angular/core';
 import {
   animate,
   state,
   style,
   transition,
   trigger,
-} from "@angular/animations";
-import { ActivatedRoute, Router } from "@angular/router";
-import { CommonServicesService } from "@core/services/common-services.service";
-import { GlobalServiceService } from "@core/services/handlers/global-service.service";
-import { environment } from "../../../../environments/environment";
-import { AlertServiceService } from "@core/services/handlers/alert-service.service";
-import { LearnerServicesService } from "@learner/services/learner-services.service";
-import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
-import { FormBuilder, FormControl, Validators } from "@angular/forms";
-import { MatDialog, MatSidenav, MatTabGroup } from "@angular/material";
-import { ToastrService } from "ngx-toastr";
-import * as moment from "moment";
-import { SocketioService } from "@learner/services/socketio.service";
-import { TranslateService } from "@ngx-translate/core";
-import { NoopScrollStrategy } from "@angular/cdk/overlay";
-import { OwlOptions } from "ngx-owl-carousel-o";
-import { AngularEditorConfig } from "@kolkov/angular-editor";
-import * as _ from "lodash";
-import { filter } from "underscore";
+} from '@angular/animations';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CommonServicesService } from '@core/services/common-services.service';
+import { GlobalServiceService } from '@core/services/handlers/global-service.service';
+import { environment } from '../../../../environments/environment';
+import { AlertServiceService } from '@core/services/handlers/alert-service.service';
+import { LearnerServicesService } from '@learner/services/learner-services.service';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSidenav } from '@angular/material/sidenav';
+import { MatTabGroup } from '@angular/material/tabs';
+import { ToastrService } from 'ngx-toastr';
+import * as moment from 'moment';
+import { SocketioService } from '@learner/services/socketio.service';
+import { TranslateService } from '@ngx-translate/core';
+import { NoopScrollStrategy } from '@angular/cdk/overlay';
+import { OwlOptions } from 'ngx-owl-carousel-o';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
+import * as _ from 'lodash';
+import { filter } from 'underscore';
 // import { debugger } from 'fusioncharts';
-import * as CryptoJS from "crypto-js";
-import { InteropObservable, Observable } from "rxjs";
+import * as CryptoJS from 'crypto-js';
+import { InteropObservable, Observable } from 'rxjs';
 declare var gtag;
 
 @Component({
-  selector: "app-coursedetails",
-  templateUrl: "./coursedetails.component.html",
-  styleUrls: ["./coursedetails.component.scss"],
+  selector: 'app-coursedetails',
+  templateUrl: './coursedetails.component.html',
+  styleUrls: ['./coursedetails.component.scss'],
   animations: [
-    trigger("EnterLeave", [
-      state("flyIn", style({ transform: "translateX(0)" })),
-      transition(":enter", [
-        style({ transform: "translateX(-100%)" }),
-        animate("0.5s 300ms ease-in"),
+    trigger('EnterLeave', [
+      state('flyIn', style({ transform: 'translateX(0)' })),
+      transition(':enter', [
+        style({ transform: 'translateX(-100%)' }),
+        animate('0.5s 300ms ease-in'),
       ]),
-      transition(":leave", [
-        animate("0.3s ease-out", style({ transform: "translateX(100%)" })),
+      transition(':leave', [
+        animate('0.3s ease-out', style({ transform: 'translateX(100%)' })),
       ]),
     ]),
   ],
 })
 export class CoursedetailsComponent implements OnInit {
-  htmlContent = "";
-  showSkeleton: boolean = false;
+  htmlContent = '';
+  showSkeleton = false;
   config: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
-    height: "20rem",
-    minHeight: "5rem",
+    height: '20rem',
+    minHeight: '5rem',
     placeholder:
-      "Please ask your question with concise and add any other details here",
-    translate: "yes",
-    defaultParagraphSeparator: "",
-    defaultFontName: "Arial",
+      'Please ask your question with concise and add any other details here',
+    translate: 'yes',
+    defaultParagraphSeparator: '',
+    defaultFontName: 'Arial',
     toolbarHiddenButtons: [
       [
-        "undo",
-        "redo",
-        "strikeThrough",
-        "subscript",
-        "superscript",
-        "heading",
-        "fontName",
+        'undo',
+        'redo',
+        'strikeThrough',
+        'subscript',
+        'superscript',
+        'heading',
+        'fontName',
       ],
       [
-        "fontSize",
-        "textColor",
-        "backgroundColor",
-        "customClasses",
-        "unlink",
-        "insertVideo",
+        'fontSize',
+        'textColor',
+        'backgroundColor',
+        'customClasses',
+        'unlink',
+        'insertVideo',
         // 'insertHorizontalRule',
-        "removeFormat",
-        "toggleEditorMode",
+        'removeFormat',
+        'toggleEditorMode',
       ],
     ],
     customClasses: [
       {
-        name: "quote",
-        class: "quote",
+        name: 'quote',
+        class: 'quote',
       },
       {
-        name: "redText",
-        class: "redText",
+        name: 'redText',
+        class: 'redText',
       },
       {
-        name: "titleText",
-        class: "titleText",
-        tag: "h1",
+        name: 'titleText',
+        class: 'titleText',
+        tag: 'h1',
       },
     ],
   };
@@ -172,22 +174,22 @@ export class CoursedetailsComponent implements OnInit {
   screenWidth: number;
   performOverLay = false;
   treeCourse = false;
-  filterkey: any = "All";
-  questionText: any = "";
+  filterkey: any = 'All';
+  questionText: any = '';
   // initials: any;
   selectedModuleData: any;
-  titleBar: boolean = false;
+  titleBar = false;
   user_token;
-  qaFilterKey: any = "-1";
+  qaFilterKey: any = '-1';
   batchId: any;
   isShowDiv = false;
   pagination = false;
   page = 0;
   noofItems = 0;
-  @ViewChild("demo3Tab") demo3Tab: MatTabGroup;
-  @ViewChild("rationPopup") rationPopup: TemplateRef<any>;
-  @ViewChild("focuser") inputEl: ElementRef;
-  @ViewChild("scromPlayer") iframe: ElementRef;
+  @ViewChild('demo3Tab') demo3Tab: MatTabGroup;
+  @ViewChild('rationPopup') rationPopup: TemplateRef<any>;
+  @ViewChild('focuser') inputEl: ElementRef;
+  @ViewChild('scromPlayer') iframe: ElementRef;
   getModuleandtopicInfo: any;
   moduleSatusCheck: any;
   tabInd: any;
@@ -222,19 +224,19 @@ export class CoursedetailsComponent implements OnInit {
   dateObj = new Date();
   currentDate = new Date(
     this.dateObj.getFullYear() +
-      "-" +
+      '-' +
       (this.dateObj.getMonth() + 1) +
-      "-" +
+      '-' +
       this.dateObj.getDate()
   ).getTime();
   userType: any;
   weekHolder: number;
   weekLength: any;
   weekHolderUI: number;
-  fromCalendar: boolean = false;
-  eboxUrl: any = "";
-  showlab: boolean = false;
-  lastLogIndex: number = 0;
+  fromCalendar = false;
+  eboxUrl: any = '';
+  showlab = false;
+  lastLogIndex = 0;
   isReadMore: boolean;
   closeTemp = false;
   TopicsOptions: OwlOptions = {
@@ -266,7 +268,7 @@ export class CoursedetailsComponent implements OnInit {
     },
     nav: true,
   };
-  secretKey = "(!@#Passcode!@#)";
+  secretKey = '(!@#Passcode!@#)';
   bookmarkedCount: any;
   longDesc: string;
   subModuleHolder: number = null;
@@ -284,54 +286,41 @@ export class CoursedetailsComponent implements OnInit {
   bkmrk_weekDisp: number;
 
   // FOR DRM(Restriction for right click)
-  @HostListener("document:keydown", ["$event"])
+  @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
     if (
-      (event.key === "67" && event.ctrlKey && event.shiftKey) ||
-      event.key === "123"
+      (event.key === '67' && event.ctrlKey && event.shiftKey) ||
+      event.key === '123'
     ) {
+      // tslint:disable-next-line: deprecation
       event.returnValue = false;
       event.preventDefault();
     }
   }
   // initials: any;
-  constructor(
-    public translate: TranslateService,
-    private router: ActivatedRoute,
-    public socketService: SocketioService,
-    public Lservice: LearnerServicesService,
-    private cdr: ChangeDetectorRef,
-    public service: CommonServicesService,
-    private gs: GlobalServiceService,
-    private dialog: MatDialog,
-    public route: Router,
-    private formBuilder: FormBuilder,
-    public sanitizer: DomSanitizer,
-    private toastr: ToastrService
-  ) {
-    let lang = localStorage.getItem("language");
-    this.translate.use(lang ? lang : "en");
-    const loginDetails = JSON.parse(localStorage.getItem("UserDetails"));
+  constructor(public translate: TranslateService, private router: ActivatedRoute, public socketService: SocketioService,
+              public Lservice: LearnerServicesService, private cdr: ChangeDetectorRef, public service: CommonServicesService,
+              private gs: GlobalServiceService, private dialog: MatDialog, public route: Router, private formBuilder: FormBuilder,
+              public sanitizer: DomSanitizer, private toastr: ToastrService) {
+    const lang = localStorage.getItem('language');
+    this.translate.use(lang ? lang : 'en');
+    const loginDetails = JSON.parse(localStorage.getItem('UserDetails'));
     if (!loginDetails?.is_password_updated) {
-      this.route.navigate(["/Learner/profile"]);
+      this.route.navigate(['/Learner/profile']);
       return;
     }
-    this.getuserid = JSON.parse(localStorage.getItem("UserDetails"));
+    this.getuserid = JSON.parse(localStorage.getItem('UserDetails'));
     this.socketConnector = this.socketService
-      .Connectsocket({ type: "connect" })
+      .Connectsocket({ type: 'connect' })
       .subscribe((quote) => {});
-
-    //::: about blank is to remove 404 error message on player start:::
     // this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl("about:blank");
     this.userType = loginDetails.org_type;
     const token = loginDetails.token;
-
     // const cryptoInfo = CryptoJS.AES.encrypt(JSON.stringify( {token} ), '(!@#graphql%^&facade!@#)').toString();
     this.user_token = CryptoJS.AES.decrypt(
       token,
-      "(!@#graphql%^&facade!@#)"
+      '(!@#graphql%^&facade!@#)'
     ).toString(CryptoJS.enc.Utf8);
-
     const Navdetail: any =
       this.route.getCurrentNavigation() &&
       this.route.getCurrentNavigation().extras &&
@@ -347,12 +336,11 @@ export class CoursedetailsComponent implements OnInit {
       this.drawersOpen = true;
       this.performOverLay = false;
     }
-
     if (this.checkDetails === undefined) {
-      this.batchId = localStorage.getItem("currentBatchId");
-      this.batchEndTime = localStorage.getItem("currentBatchEndDate");
-      this.courseType = localStorage.getItem("CourseType");
-      this.checkDetails = JSON.parse(localStorage.getItem("resumeData")); //it receives only partial data
+      this.batchId = localStorage.getItem('currentBatchId');
+      this.batchEndTime = localStorage.getItem('currentBatchEndDate');
+      this.courseType = localStorage.getItem('CourseType');
+      this.checkDetails = JSON.parse(localStorage.getItem('resumeData')); // it receives only partial data
     } else {
       if (this.checkDetails.fromCalendar) {
         this.fromCalendar = true;
@@ -361,15 +349,14 @@ export class CoursedetailsComponent implements OnInit {
       this.batchEndTime = this.checkDetails.batchEndTime;
       this.courseType = this.checkDetails?.course_type;
     }
-
     if (this.gs.checkLogout()) {
       this.detailData = this.checkDetails;
       // this.courseid = detail && detail.id || this.localStoCourseid;
       this.userDetail = this.gs.checkLogout();
-      this.localStoCourseid = localStorage.getItem("Courseid");
+      this.localStoCourseid = localStorage.getItem('Courseid');
       this.courseid =
         (this.checkDetails && this.checkDetails.id) || this.localStoCourseid;
-      this.lastpersentage = localStorage.getItem("persentage");
+      this.lastpersentage = localStorage.getItem('persentage');
       // this.lastpersentage = detail  && detail.persentage || this.localper ;
       //if no course id redirect back
       if (!this.courseid) {
@@ -495,7 +482,7 @@ export class CoursedetailsComponent implements OnInit {
                     getResumeTopic(e.childData);
                   }
                 } else {
-                  if (e.link && e.expanded == true) {
+                  if (e.link && e.expanded === true) {
                     resultData = e;
                   }
                 }
@@ -665,7 +652,7 @@ export class CoursedetailsComponent implements OnInit {
   //     }
   //   }
   // }
-  //Trigger socket for TOC
+  // Trigger socket for TOC
   // triggerSocket(){
   //     //call socket playerToC
   //     let param:any = {}
@@ -681,10 +668,10 @@ export class CoursedetailsComponent implements OnInit {
   // }
   // get Scrom module and topic
   playerModuleAndTopic() {
-    let param: any = {};
+    const param: any = {};
     param.parent = null;
     param.contentID = this.courseid;
-    let id = CryptoJS.AES.decrypt(
+    const id = CryptoJS.AES.decrypt(
       this.getuserid.user_id,
       this.secretKey.trim()
     ).toString(CryptoJS.enc.Utf8);
@@ -711,9 +698,9 @@ export class CoursedetailsComponent implements OnInit {
       //   this.weekHolder = this.weekHolderUI = this.checkDetails.week - 1;
       // }
 
-      this.getuserid = JSON.parse(localStorage.getItem("UserDetails"));
-      //single
-      //start course
+      this.getuserid = JSON.parse(localStorage.getItem('UserDetails'));
+      // single
+      // start course
       if (
         this.checkDetails.course_status == "start" ||
         this.checkDetails.course_status == "completed" ||
@@ -727,7 +714,7 @@ export class CoursedetailsComponent implements OnInit {
         } else {
           bodyData = this.scromModuleData[0].childData[0];
         }
-        this.gettopicOnModule(0, "start", bodyData.id, bodyData);
+        this.gettopicOnModule(0, 'start', bodyData.id, bodyData);
         this.moduleExpand(0, 0, 0);
         this.weekHolder = this.weekHolderUI = 0;
         this.nextPrevHolder = this.topiccurrentPage = 0;
@@ -749,7 +736,7 @@ export class CoursedetailsComponent implements OnInit {
           this.checkDetails.lastTopic,
           this.checkDetails.module_id,
           this.checkDetails.topic_id,
-          "entry"
+          'entry'
         );
       }
 
@@ -760,12 +747,12 @@ export class CoursedetailsComponent implements OnInit {
             ? "start"
             : this.checkDetails.course_status;
         if (
-          this.checkDetails.course_status !== "start" &&
-          this.userType !== "vocational"
+          this.checkDetails.course_status !== 'start' &&
+          this.userType !== 'vocational'
         ) {
           this.inputEl
-            ? this.inputEl.nativeElement.scrollIntoView({ behavior: "smooth" })
-            : "";
+            // tslint:disable-next-line: no-unused-expression
+            ? this.inputEl.nativeElement.scrollIntoView({ behavior: 'smooth' }) : '';
         }
       }, 4000);
     });
@@ -773,13 +760,13 @@ export class CoursedetailsComponent implements OnInit {
 
   gettopicOnModule(week, modul, parent, body) {
     // this.topicData$ = this.gettopicapi(week,module,parent);
-    if (this.filterkey == "Bookmarked") {
+    if (this.filterkey === 'Bookmarked') {
       return false;
     }
-    let param: any = {};
+    const param: any = {};
     param.parent = parent;
     param.contentID = this.courseid;
-    let id = CryptoJS.AES.decrypt(
+    const id = CryptoJS.AES.decrypt(
       this.getuserid.user_id,
       this.secretKey.trim()
     ).toString(CryptoJS.enc.Utf8);
@@ -787,7 +774,7 @@ export class CoursedetailsComponent implements OnInit {
     param.batchid = this.batchId;
     if (!body.expanded) {
       this.service.getTOC(param).subscribe((data: any) => {
-        let moduletopicApiData = data.message;
+        const moduletopicApiData = data.message;
         body.childData = [...moduletopicApiData];
         if (modul === "start") {
           let upskillurl = this.checkDetails.link;
@@ -802,7 +789,7 @@ export class CoursedetailsComponent implements OnInit {
               this.topicInfo.topic_name,
               this.topicInfo.parent,
               this.topicInfo.id,
-              "entry"
+              'entry'
             );
           }
         }
@@ -822,7 +809,7 @@ export class CoursedetailsComponent implements OnInit {
     this.currentModuleTitle = moduleName;
     const encodedModuleName = encodeURIComponent(moduleName);
     const encodedTopicName = encodeURIComponent(topicName);
-    let id = CryptoJS.AES.decrypt(
+    const id = CryptoJS.AES.decrypt(
       this.getuserid.user_id,
       this.secretKey.trim()
     ).toString(CryptoJS.enc.Utf8);
@@ -950,7 +937,7 @@ export class CoursedetailsComponent implements OnInit {
       this.topicInfo.parent,
       this.topicInfo.id
     );
-    console.log(this.urlSafe, "click link");
+    console.log(this.urlSafe, 'click link');
   }
 
   onResize(event) {
@@ -961,11 +948,11 @@ export class CoursedetailsComponent implements OnInit {
     this.isShowDiv = !this.isShowDiv;
   }
   checkLastFirstIndexReached() {
-    //check 1stweek 1stmodule 1stopic
+    // check 1stweek 1stmodule 1stopic
     if (
-      this.weekHolder == 0 &&
-      this.moduleHolder == 0 &&
-      this.nextPrevHolder == 0
+      this.weekHolder === 0 &&
+      this.moduleHolder === 0 &&
+      this.nextPrevHolder === 0
     ) {
       this.isprevEnable = true;
     } else {
@@ -977,7 +964,7 @@ export class CoursedetailsComponent implements OnInit {
     // let lastweekmoduletopicIndex =
     //   this.scromModuleData[lastweekIndex].childData[lastweekmoduleIndex]
     //     .childData.length - 1;
-    //check last week,module,topic
+    // check last week,module,topic
     // if (
     //   this.weekHolder == lastweekIndex &&
     //   this.moduleHolder == lastweekmoduleIndex &&
@@ -995,7 +982,7 @@ export class CoursedetailsComponent implements OnInit {
   cloneTemplate(topicName, moduleName) {
     this.content.coursedetails.forEach((course) => {
       course.moduledetails.forEach((module) => {
-        if (module.topicname == topicName && course.modulename == moduleName) {
+        if (module.topicname === topicName && course.modulename === moduleName) {
           module.showPreview = true;
         } else {
           module.showPreview = false;
@@ -1014,8 +1001,8 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   filterToc() {
-    //get bookmark count
-    let BK_param = {
+    // get bookmark count
+    const BK_param = {
       batchid: this.batchId,
 
       user_id: this.getuserid.user_id,
@@ -1165,7 +1152,7 @@ export class CoursedetailsComponent implements OnInit {
   // }
 
   makeFullScreen() {
-    const element = document.querySelector("#myPlayer");
+    const element = document.querySelector('#myPlayer');
     element
       .requestFullscreen()
       .then(() => {})
@@ -1174,13 +1161,13 @@ export class CoursedetailsComponent implements OnInit {
 
   scroll(el: HTMLElement) {
     el.scrollTop = 0;
-    el.scrollIntoView({ behavior: "smooth" });
+    el.scrollIntoView({ behavior: 'smooth' });
   }
   downloadResource() {
-    const a = document.createElement("a");
-    a.target = "_blank";
+    const a = document.createElement('a');
+    a.target = '_blank';
     a.href = this.scromApiData.resourceUrl;
-    a.download = this.scromApiData.resourceUrl.split("/").pop();
+    a.download = this.scromApiData.resourceUrl.split('/').pop();
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -1189,35 +1176,35 @@ export class CoursedetailsComponent implements OnInit {
     this.disableRightClick();
     this.resourceName = file.type_name;
     this.fileType = file.doc_type;
-    if (file.doc_type.includes("image")) {
-      this.fileType = "image";
+    if (file.doc_type.includes('image')) {
+      this.fileType = 'image';
     }
-    if (file.doc_type.includes("video")) {
-      this.fileType = "video";
+    if (file.doc_type.includes('video')) {
+      this.fileType = 'video';
     }
     if (
-      file.doc_type.includes("pdf") ||
-      file.doc_type.includes("vnd.openxmlformats") ||
-      file.doc_type.includes("vnd.ms-excel") ||
-      file.doc_type.includes("msword")
+      file.doc_type.includes('pdf') ||
+      file.doc_type.includes('vnd.openxmlformats') ||
+      file.doc_type.includes('vnd.ms-excel') ||
+      file.doc_type.includes('msword')
     ) {
-      this.fileType = "pdf";
+      this.fileType = 'pdf';
     }
-    if (file.doc_type.includes("audio")) {
-      this.fileType = "audio";
+    if (file.doc_type.includes('audio')) {
+      this.fileType = 'audio';
     }
-    if (file.doc_type.includes("link")) {
-      this.fileType = "link";
+    if (file.doc_type.includes('link')) {
+      this.fileType = 'link';
       this.URIData = this.sanitizer.bypassSecurityTrustResourceUrl(
         file.path + this.blobKey
       );
     }
 
-    if (this.fileType === "pdf") {
+    if (this.fileType === 'pdf') {
       // file.gdocs = '';
       // file.gdocs = 'https://docs.google.com/gview?url=' + file.path + this.blobKey + '&embedded=true';
       // this.URIData = file;
-      var url = file.path + this.blobKey;
+      const url = file.path + this.blobKey;
       this.URIData = url;
     } else {
       this.URIData = this.sanitizer.bypassSecurityTrustResourceUrl(
@@ -1252,20 +1239,20 @@ export class CoursedetailsComponent implements OnInit {
 
   openResourse(templateRef) {
     this.dialog.open(templateRef, {
-      panelClass: "resourseContainer",
-      width: "75%",
-      height: "75%",
+      panelClass: 'resourseContainer',
+      width: '75%',
+      height: '75%',
       closeOnNavigation: true,
       disableClose: true,
     });
-    const backdrop = document.getElementsByClassName("cdk-overlay-backdrop")[0];
+    const backdrop = document.getElementsByClassName('cdk-overlay-backdrop')[0];
     const containerarea = document.getElementsByClassName(
-      "mat-dialog-container"
+      'mat-dialog-container'
     )[0];
     rclickctrl(backdrop);
     rclickctrl(containerarea);
     function rclickctrl(element) {
-      element.addEventListener("contextmenu", (e) => {
+      element.addEventListener('contextmenu', (e) => {
         e.preventDefault();
         return false;
       });
@@ -1274,29 +1261,29 @@ export class CoursedetailsComponent implements OnInit {
 
   aboutCourse(templateRef) {
     this.dialog.open(templateRef, {
-      panelClass: "aboutCourseWrapper",
-      width: "99%",
-      height: "90%",
+      panelClass: 'aboutCourseWrapper',
+      width: '99%',
+      height: '90%',
       closeOnNavigation: true,
       disableClose: true,
     });
-    const backdrop = document.getElementsByClassName("cdk-overlay-backdrop")[0];
+    const backdrop = document.getElementsByClassName('cdk-overlay-backdrop')[0];
     const containerarea = document.getElementsByClassName(
-      "mat-dialog-container"
+      'mat-dialog-container'
     )[0];
     setTimeout(() => {
-      this.longDesc = document.getElementById("courseDesc").innerHTML;
+      this.longDesc = document.getElementById('courseDesc').innerHTML;
       if (this.longDesc.length > 250) {
         this.isReadMore = false;
       } else {
         this.isReadMore = true;
       }
-      console.log(this.longDesc.length, "desc");
+      console.log(this.longDesc.length, 'desc');
     }, 500);
     rclickctrl(backdrop);
     rclickctrl(containerarea);
     function rclickctrl(element) {
-      element.addEventListener("contextmenu", (e) => {
+      element.addEventListener('contextmenu', (e) => {
         e.preventDefault();
         return false;
       });
@@ -1359,7 +1346,7 @@ export class CoursedetailsComponent implements OnInit {
       // this.checkDetails.checkLevel
       //   ? this.submoduleTitle
       //   : this.currentModuleTitle,
-      "",
+      '',
       this.topicInfo.topic_name
     ).subscribe((data: any) => {
       if (data?.data?.bookmark?.success) {
@@ -1370,8 +1357,8 @@ export class CoursedetailsComponent implements OnInit {
       }
     });
   }
-  contextmenu() {
-    event.preventDefault();
+  contextmenu(e) {
+    e.preventDefault();
   }
   submitMyQuestion() {
     if (this.topicInfo || this.currentTopicTitle) {
@@ -1384,7 +1371,7 @@ export class CoursedetailsComponent implements OnInit {
           this.questionText
         ).subscribe((data: any) => {
           // console.log(data)
-          this.questionText = "";
+          this.questionText = '';
           if (data?.data?.askaquestion?.success) {
             this.selectedQATabIndex = 1;
             this.toastr.success(data?.data?.askaquestion?.message);
@@ -1393,10 +1380,10 @@ export class CoursedetailsComponent implements OnInit {
           }
         });
       } else {
-        this.toastr.warning("Please enter some text");
+        this.toastr.warning('Please enter some text');
       }
     } else {
-      this.toastr.warning("Please select a topic");
+      this.toastr.warning('Please select a topic');
     }
   }
 
@@ -1453,7 +1440,7 @@ export class CoursedetailsComponent implements OnInit {
       this.bkmrk_subModuleHolder = undefined;
       this.filterToc();
     } else {
-      this.filterkey = "All";
+      this.filterkey = 'All';
       // on all toc list
       let moduleName;
       //   if(this.weekHolder){
@@ -1511,13 +1498,13 @@ export class CoursedetailsComponent implements OnInit {
     this.selectedQATabIndex = 0;
   }
   openAskQuestions(templateRef: TemplateRef<any>) {
-    this.questionText = "";
+    this.questionText = '';
     this.allQuestionList = [];
     if (this.screenWidth > 560) {
       this.dialog.open(templateRef, {
         // scrollStrategy: new NoopScrollStrategy(),
-        width: "60%",
-        height: "80%",
+        width: '60%',
+        height: '80%',
         scrollStrategy: new NoopScrollStrategy(),
         closeOnNavigation: true,
         disableClose: true,
@@ -1525,8 +1512,8 @@ export class CoursedetailsComponent implements OnInit {
     } else {
       this.dialog.open(templateRef, {
         // scrollStrategy: new NoopScrollStrategy(),
-        width: "98%",
-        height: "80%",
+        width: '98%',
+        height: '80%',
         scrollStrategy: new NoopScrollStrategy(),
         closeOnNavigation: true,
         disableClose: true,
@@ -1535,9 +1522,9 @@ export class CoursedetailsComponent implements OnInit {
   }
   disableRightClick() {
     const dialoqContainer = document.getElementsByClassName(
-      "cdk-overlay-container"
+      'cdk-overlay-container'
     );
-    dialoqContainer[0].addEventListener("contextmenu", (e) => {
+    dialoqContainer[0].addEventListener('contextmenu', (e) => {
       e.preventDefault();
     });
   }
@@ -1553,8 +1540,8 @@ export class CoursedetailsComponent implements OnInit {
 
   ratingPopup() {
     this.dialog.open(this.rationPopup, {
-      width: "100%",
-      height: "100%",
+      width: '100%',
+      height: '100%',
       closeOnNavigation: true,
       disableClose: true,
     });
@@ -1582,7 +1569,7 @@ export class CoursedetailsComponent implements OnInit {
       ).subscribe((result: any) => {});
     }
   }
-  //------------------------------------------------------------------//
+  // ------------------------------------------------------------------//
   // getEboxURL(){
   //   var labactivitydetails ={
   //     username:this.userDetail.username,
@@ -1606,25 +1593,25 @@ export class CoursedetailsComponent implements OnInit {
   //   });
   // }
   navigatePractice() {
-    window.open(this.eboxUrl, "Practice");
+    window.open(this.eboxUrl, 'Practice');
   }
 
   openQuestionDialog(templateRef) {
     this.dialog.open(templateRef, {
-      panelClass: "QAContainer",
-      width: "50%",
-      height: "55%",
+      panelClass: 'QAContainer',
+      width: '50%',
+      height: '55%',
       closeOnNavigation: true,
       disableClose: true,
     });
-    const backdrop = document.getElementsByClassName("cdk-overlay-backdrop")[0];
+    const backdrop = document.getElementsByClassName('cdk-overlay-backdrop')[0];
     const containerarea = document.getElementsByClassName(
-      "mat-dialog-container"
+      'mat-dialog-container'
     )[0];
     rclickctrl(backdrop);
     rclickctrl(containerarea);
     function rclickctrl(element) {
-      element.addEventListener("contextmenu", (e) => {
+      element.addEventListener('contextmenu', (e) => {
         e.preventDefault();
         return false;
       });
@@ -1633,7 +1620,7 @@ export class CoursedetailsComponent implements OnInit {
 
   dialogClose(value?) {
     this.dialog.closeAll();
-    this.htmlContent = "";
+    this.htmlContent = '';
   }
 
   createQuestion() {
@@ -1655,13 +1642,13 @@ export class CoursedetailsComponent implements OnInit {
       ).subscribe((rdata: any) => {
         if (
           rdata?.errors &&
-          rdata?.errors[0]?.message === "Request failed with status code 413"
+          rdata?.errors[0]?.message === 'Request failed with status code 413'
         ) {
-          this.toastr.warning("Content limit exceeded!!");
+          this.toastr.warning('Content limit exceeded!!');
         } else {
           if (rdata.data.createEngineersForumData.success) {
             // this.selectedIndex = 1
-            this.dialogClose("confirm");
+            this.dialogClose('confirm');
             this.toastr.success(rdata.data.createEngineersForumData.message);
           } else {
             this.toastr.warning(rdata.data.createEngineersForumData.message);
@@ -1670,15 +1657,16 @@ export class CoursedetailsComponent implements OnInit {
         this.showSkeleton = true;
       });
     } else {
-      this.toastr.warning("Question cannot be empty");
+      this.toastr.warning('Question cannot be empty');
     }
   }
 
+  // tslint:disable-next-line:use-lifecycle-interface
   ngOnDestroy() {
-    const loginDetails = JSON.parse(localStorage.getItem("UserDetails"));
+    const loginDetails = JSON.parse(localStorage.getItem('UserDetails'));
     if (loginDetails) {
       this.socketConnector = this.socketService
-        .Connectsocket({ type: "disconnect" })
+        .Connectsocket({ type: 'disconnect' })
         .subscribe((quote) => {});
     }
     if (this.socketEmitReciver) {
@@ -1693,13 +1681,13 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   goBack() {
-    if (!this.drawersOpen && this.scromApiData?.toc != "0") {
+    if (!this.drawersOpen && this.scromApiData?.toc !== '0') {
       this.drawersOpen = this.drawersOpen ? false : true;
     } else {
       if (this.fromCalendar) {
-        this.route.navigateByUrl("/Learner/calendaractivity");
+        this.route.navigateByUrl('/Learner/calendaractivity');
       } else {
-        this.route.navigateByUrl("/Learner/MyCourse");
+        this.route.navigateByUrl('/Learner/MyCourse');
       }
     }
   }

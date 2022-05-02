@@ -42,12 +42,12 @@
 }
 .pointer {
   &:hover {
-    i,
+    em,
     span {
       color: #c02222;
     }
   }
-  i,
+  em,
   span {
     display: inline-block;
   }

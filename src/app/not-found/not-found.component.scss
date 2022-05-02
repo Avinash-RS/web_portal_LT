@@ -1,7 +1,25 @@
 @import "variable";
 
 .container {
-    padding-top: 83px;
+    padding: 83px 15px 0 15px;
+    margin: 0 198px;
+  .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: -15px;
+    margin-left: -15px;
+    .left {
+      align-self: center!important;
+      width: 65%;
+    }
+    .right {
+      align-self: center!important;
+      p {
+        width: 76%;
+    }
+    }
+  }
 }
    h1{
     font-size:100px;

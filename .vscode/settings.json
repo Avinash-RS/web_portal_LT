@@ -2,5 +2,8 @@
     "search.exclude": {
         "**/documentation": true,
         "**/e2e": true
-    }
+    },
+    "window.autoDetectColorScheme": false,
+    "sonarlint.output.showAnalyzerLogs": true,
+    "sonarlint.output.showVerboseLogs": true
 }

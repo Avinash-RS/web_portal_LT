@@ -228,7 +228,6 @@ export const getForgotpasswordbyResetpassword = gql`
 //           deptName
 //           collegeName
 //         }
-       
 //       }
 //     }
 // }
@@ -512,7 +511,7 @@ mutation view_profile($user_id: String){
         college_name
         city_town{
           id
-          name 
+          name
         }
         state{
           id

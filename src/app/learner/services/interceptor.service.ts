@@ -16,7 +16,7 @@ export class InterceptorService implements HttpInterceptor {
   constructor(
     public toast: ToastrService, public socketService: SocketioService,
     public router: Router, public services: CommonServicesService,
-    private alertBox: AlertServiceService,private dialog: MatDialog
+    private alertBox: AlertServiceService, private dialog: MatDialog
   ) {
     this.loginDetails = JSON.parse(localStorage.getItem('UserDetails'));
   }
@@ -29,13 +29,12 @@ export class InterceptorService implements HttpInterceptor {
       map((event: HttpEvent<any>) => {
         if (event && event['body'] && event['body']['data']) {
           let bodyData = event['body']['data'];
-          const dynKey = Object.keys(bodyData)[0]
+          const dynKey = Object.keys(bodyData)[0];
           if (bodyData[dynKey] && bodyData[dynKey].error_msg && bodyData[dynKey].error_msg === 'TokenExpiredError: jwt expired') {
             this.dialog.closeAll();
-            this.alertBox.openAlert("Session Expired", "Please login again.")
+            this.alertBox.openAlert('Session Expired', 'Please login again.');
             this.logout();
           }
-          
         }
         return event;
       }),
@@ -48,7 +47,6 @@ export class InterceptorService implements HttpInterceptor {
         } else {
           this.toast.warning('Please try again later..');
         }
-        
         return throwError(error);
     })
     );
@@ -56,9 +54,9 @@ export class InterceptorService implements HttpInterceptor {
   logout() {
     this.loginDetails = JSON.parse(localStorage.getItem('UserDetails'));
     // this.loading = true;
-    //SOCKET DISCONNECTION START
+    // SOCKET DISCONNECTION START
     // needs socket disconnection
-    //SOCKET DISCONNECTION COMPLETE
+    // SOCKET DISCONNECTION COMPLETE
     if (this.loginDetails?._id) {
       this.services.logout(this.loginDetails._id, false).subscribe((logout: any) => {
         this.socketService.Connectsocket({ type: 'disconnect' }).subscribe(quote => {
