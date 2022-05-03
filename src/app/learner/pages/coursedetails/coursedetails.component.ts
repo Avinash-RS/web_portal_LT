@@ -361,7 +361,7 @@ export class CoursedetailsComponent implements OnInit {
       //if no course id redirect back
       if (!this.courseid) {
         // this.toastr.warning("Failed to load.. redirecting to dashboard.");
-        this.route.navigateByUrl("/Learner/MyCourse");
+        this.route.navigateByUrl("/Landing/MyCourse");
       } else {
         gtag("event", "coursePlayerCID", { courseID: this.courseid });
         this.playerModuleAndTopic();
@@ -1687,7 +1687,7 @@ export class CoursedetailsComponent implements OnInit {
       if (this.fromCalendar) {
         this.route.navigateByUrl('/Learner/calendaractivity');
       } else {
-        this.route.navigateByUrl('/Learner/MyCourse');
+        this.route.navigateByUrl('/Landing/MyCourse');
       }
     }
   }

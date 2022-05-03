@@ -153,7 +153,7 @@ export class ProjectMobileComponent implements OnInit, OnDestroy {
   }
 }
   goToCourse() {
-    this.route.navigateByUrl('/Learner/MyCourse');
+    this.route.navigateByUrl('/Landing/MyCourse');
   }
 
   uploadDoc(event, project, submitAction) {

@@ -29,9 +29,9 @@ export class MycourseItemComponent implements OnInit {
   finalStatus: any = null;
   role: any;
   courseWeekCircle: any;
-  instDefault: any = '../../../../assets/learner/mycourseicons/Instructor_default.svg';
-  activityDefault: any = '../../../../assets/learner/mycourseicons/Activities_defult.svg';
-  discussDefault: any = '../../../../assets/learner/mycourseicons/Discussion_default.svg';
+  instDefault: any = '../../../../assets/Landing/MyCourseicons/Instructor_default.svg';
+  activityDefault: any = '../../../../assets/Landing/MyCourseicons/Activities_defult.svg';
+  discussDefault: any = '../../../../assets/Landing/MyCourseicons/Discussion_default.svg';
   tabselector: any = 0;
   customOptions: OwlOptions = {
     loop: true,

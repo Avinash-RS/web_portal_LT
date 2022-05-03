@@ -318,7 +318,7 @@ export class CalendarActivityComponent implements OnInit {
           extracted: value.extracted
         };
         if (value.extracted) {
-          this.router.navigateByUrl('/Learner/MyCourse');
+          this.router.navigateByUrl('/Landing/MyCourse');
           return false;
         }
         localStorage.setItem('currentBatchEndDate', value.batch_end_date_Timer);
@@ -330,7 +330,7 @@ export class CalendarActivityComponent implements OnInit {
            checklevel: value.checklevel, course_status: value.status, extracted: value.extracted}));
         this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
 
-        // this.router.navigate(['Learner/MyCourse']);
+        // this.router.navigate(['Landing/MyCourse']);
       } else {
         const data1 = {
           courseId: value.courseid,
