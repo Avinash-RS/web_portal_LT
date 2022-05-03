@@ -25,11 +25,11 @@ secretKey = '(!@#Passcode!@#)';
   }
 
   goToCourse() {
-    this.service.login(this.routeParams.queValue, this.routeParams.rpValue, false, this.routeParams.dpValue)
+    this.service.learner_login(this.routeParams.queValue, this.routeParams.rpValue, this.routeParams.dpValue)
       .subscribe((loginresult: any) => {
-        if (loginresult.data.login) {
-          if (loginresult.data.login.success) {
-            const userId = loginresult.data.login.message.user_id;
+        if (loginresult.data.learner_login) {
+          if (loginresult.data.learner_login.success) {
+            const userId = loginresult.data.learner_login.message.user_id;
             this.loginMovement(loginresult);
           }
         }
@@ -37,15 +37,15 @@ secretKey = '(!@#Passcode!@#)';
   }
 
   loginMovement(loginresult) {
-    localStorage.setItem('Fullname', loginresult.data.login.message.full_name);
-    var id = CryptoJS.AES.encrypt(loginresult.data.login.message.user_id, this.secretKey.trim()).toString();
-    loginresult.data.login.message.user_id = id;
-    loginresult.data.login.message.specific_report_value = '';
-    loginresult.data.login.message.is_password_updated = true;
-    localStorage.setItem('token', loginresult.data.login.message.token);
-    localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message));
+    localStorage.setItem('Fullname', loginresult.data.learner_login.message.full_name);
+    var id = CryptoJS.AES.encrypt(loginresult.data.learner_login.message.user_id, this.secretKey.trim()).toString();
+    loginresult.data.learner_login.message.user_id = id;
+    loginresult.data.learner_login.message.specific_report_value = '';
+    loginresult.data.learner_login.message.is_password_updated = true;
+    localStorage.setItem('token', loginresult.data.learner_login.message.token);
+    localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.learner_login.message));
     localStorage.setItem('remember_me', 'false');
-    localStorage.setItem('user_img', loginresult.data.login.message.profile_img);
+    localStorage.setItem('user_img', loginresult.data.learner_login.message.profile_img);
     localStorage.setItem('role', 'learner');
     this.setAuthentication();
 }

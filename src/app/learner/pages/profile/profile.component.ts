@@ -40,7 +40,7 @@ export class ProfileComponent implements OnInit {
     if (this.gs.checkLogout()) {
       // this.urlImage = localStorage.getItem('user_img')
       this.currentUser = this.gs.checkLogout();
-      this.getAllLevels();
+      // this.getAllLevels();
       this.getprofileDetails(this.currentUser.user_id);
     }
 
