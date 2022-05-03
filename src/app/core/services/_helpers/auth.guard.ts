@@ -66,7 +66,7 @@ export class AuthGuard implements CanLoad {
     //   // url should not start from admin - can be /Larner or anything
     //   // if profile updated and trying to go login/reg
     //   if (localStorage.getItem('role') == 'learner') {
-    //     this.router.navigate(['/Learner/MyCourse']);
+    //     this.router.navigate(['/Landing/MyCourse']);
     //     return false;
     //   } else if (!userDetailes.is_profile_updated) {
     //     // if profile not updated and trying to access other screens, redirect to profile

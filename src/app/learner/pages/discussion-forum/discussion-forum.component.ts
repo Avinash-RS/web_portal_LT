@@ -100,10 +100,10 @@ export class DiscussionForumComponent implements OnInit {
       if (this.isHideAccord) {
         this.isHideAccord = false;
       } else {
-        this.route.navigateByUrl('/Learner/MyCourse');
+        this.route.navigateByUrl('/Landing/MyCourse');
       }
     } else {
-      this.route.navigateByUrl('/Learner/MyCourse');
+      this.route.navigateByUrl('/Landing/MyCourse');
     }
   }
 

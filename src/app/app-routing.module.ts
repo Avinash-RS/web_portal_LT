@@ -20,7 +20,12 @@ const routes: Routes = [
     canLoad: [AuthGuard],
     data : {title: 'My Course'}
   },
-
+  {
+    path: 'Landing',
+    loadChildren: () => import('./learner/landingpage.module').then(m => m.LandingPageModule),
+    canLoad: [AuthGuard],
+    data : {title: 'My Course'}
+  },
   {
     path: 'Player',
     loadChildren: () => import('./core/core.module').then(m => m.CoreModule),

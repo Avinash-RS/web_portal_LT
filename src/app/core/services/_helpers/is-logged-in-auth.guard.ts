@@ -32,7 +32,7 @@ export class IsLoggedInAuthGuard implements CanActivate {
       return true;
     } else {
       console.log('2');
-      this.router.navigate(['/Learner/MyCourse']);
+      this.router.navigate(['/Landing/MyCourse']);
       return false;
     }
   }

@@ -76,7 +76,7 @@ export class AskQuestionsComponent implements OnInit {
     this.getQuestionsAnswerlists();
     } else {
       // this.toastr.warning("Failed to load.. redirecting to dashboard.");
-        this.route.navigateByUrl("/Learner/MyCourse");
+        this.route.navigateByUrl("/Landing/MyCourse");
     }
   }
 
@@ -224,6 +224,6 @@ export class AskQuestionsComponent implements OnInit {
   }
 
   goBack() {
-    this.route.navigateByUrl('/Learner/MyCourse');
+    this.route.navigateByUrl('/Landing/MyCourse');
   }
 }

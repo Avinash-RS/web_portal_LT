@@ -160,8 +160,8 @@ describe('LoginComponent', () => {
           localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message))
           // debugger
           // if (loginresult.data.login.message.is_profile_updated) {
-            // expect(routerStub.navigate).toHaveBeenCalledWith(['/Learner/MyCourse']);
-            // expect(navigateSpy).toHaveBeenCalledWith(['/Learner/MyCourse']);
+            // expect(routerStub.navigate).toHaveBeenCalledWith(['/Landing/MyCourse']);
+            // expect(navigateSpy).toHaveBeenCalledWith(['/Landing/MyCourse']);
           // }
           // else {
             // expect(routerStub.navigate).toHaveBeenCalledWith(['/Learner/profile']);
@@ -176,7 +176,7 @@ describe('LoginComponent', () => {
           const ps = btoa(component.loginForm.value.password);
           localStorage.setItem('ps', ps);
           // if (loginresult.data.login.message.is_profile_updated)
-          //   router.navigate(['/Learner/MyCourse'])
+          //   router.navigate(['/Landing/MyCourse'])
           //   // expect(location.path()).toBe('/home');
           // else {
           //   router.navigate(['/Learner/profile'])

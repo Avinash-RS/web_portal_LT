@@ -293,7 +293,7 @@ export class LoginComponent implements OnInit {
             localStorage.setItem('remember_me', 'true');
             localStorage.setItem('user_img', isValidEmailResult.data.get_login_details.message.profile_img);
             localStorage.setItem('role', 'learner');
-            this.router.navigate(['/Learner/MyCourse']);
+            this.router.navigate(['/Landing/MyCourse']);
           } else {
             this.toastr.error(isValidEmailResult.data.get_login_details.error_msg, null);
             sessionStorage.clear();
@@ -322,7 +322,7 @@ export class LoginComponent implements OnInit {
             sessionStorage.setItem('remember_me', 'true');
             sessionStorage.setItem('user_img', isValidEmailResult.data.get_login_details.message.profile_img);
             sessionStorage.setItem('role', 'learner');
-            this.router.navigate(['/Learner/MyCourse']);
+            this.router.navigate(['/Landing/MyCourse']);
           } else {
             this.toastr.error(isValidEmailResult.data.get_login_details.error_msg, null);
             localStorage.clear();
@@ -423,7 +423,7 @@ export class LoginComponent implements OnInit {
       if (userDetail.org_type === 'Corporate') {
         this.router.navigate(['/Learner/upskillcalendar']);
       } else {
-        this.router.navigate(['/Learner/MyCourse']);
+        this.router.navigate(['/Landing/MyCourse']);
       }
     } else {
       this.router.navigate(['/Learner/profile']);

@@ -3,7 +3,7 @@
     <div class="questionLeftCol" #leftContainer infiniteScroll [infiniteScrollDistance]="2"
     [scrollWindow]="false" [infiniteScrollThrottle]="500" (scrolled)="onScrollDown()">
         <ul class="breadcrumb">
-            <li><em routerLink="/Learner/MyCourse" class="lxp-Go backArrow"></em> <span class="name">{{courseName}}</span> <span class="bar">/</span> <span class="breadCrumbTopic">Q&A</span></li>
+            <li><em routerLink="/Landing/MyCourse" class="lxp-Go backArrow"></em> <span class="name">{{courseName}}</span> <span class="bar">/</span> <span class="breadCrumbTopic">Q&A</span></li>
         </ul>
        
         <div class="qandaSection">
@@ -112,7 +112,7 @@
     </div>
     <div class="addQuestionRightCol">
         <ul class="breadcrumb">
-            <li><em routerLink="/Learner/MyCourse" class="lxp-Go backArrow"></em> <span class="name">{{courseName}}</span> <span class="bar">/</span> <span class="breadCrumbTopic">Q&A</span></li>
+            <li><em routerLink="/Landing/MyCourse" class="lxp-Go backArrow"></em> <span class="name">{{courseName}}</span> <span class="bar">/</span> <span class="breadCrumbTopic">Q&A</span></li>
         </ul>
         <div class="addQuestion">
             <button (click)="openQuestionDialog(questionDialog)"><em class="lxp-add"></em> {{'Ask A Question' | translate}}</button>
