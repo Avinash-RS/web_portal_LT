@@ -267,9 +267,9 @@ export class LoginComponent implements OnInit {
           this.loader = true;
           if (data?.data?.get_forgot_username_mobile_email?.success === 'true') {
             this.toastr.success(data.data.get_forgot_username_mobile_email.message, null);
-            this.loader = false;
             this.signInPage = false;
             this.forgotPage = true;
+            this.loader = false;
             this.username.reset();
           } else {
             this.toastr.error(data?.data?.get_forgot_username_mobile_email?.message, null);
@@ -383,6 +383,7 @@ export class LoginComponent implements OnInit {
       return this.validateAllFields(this.loginForm);
     }
     this.loader = true;
+    // return;
     var encryptedname = CryptoJS.AES.encrypt(this.loginForm.value.username.toLowerCase().trim(), this.secretKey.trim()).toString();
     var encryptedpassword = CryptoJS.AES.encrypt(this.loginForm.value.password, this.secretKey.trim()).toString();
     this.service.learner_login(encryptedname, encryptedpassword, this.recaptchaStr)
@@ -451,7 +452,7 @@ export class LoginComponent implements OnInit {
     }
     setTimeout(() => {
       this.loader = false;
-    }, 5000);
+    }, 1000);
   }
   forgotusername(type) {
     this.router.navigateByUrl('/Learner/recover', { state: { type } });
@@ -528,15 +529,15 @@ export class LoginComponent implements OnInit {
         if (data.data.user_registration.success === 'true') {
           this.registerSuccess = true;
           this.toastr.success(data.data.user_registration.message, null);
-          this.loader = false;
           this.registerForm.setErrors(null);
           this.signUpPage = false;
           this.signInPage = true;
           this.registerForm.reset();
+          this.loader = false;
         } else {
           this.toastr.error(data.data.user_registration.message, null);
-          this.loader = false;
           this.registerSuccess = false;
+          this.loader = false;
         }
        } else {
         this.toastr.warning('Please try after sometime', null);
