@@ -17,13 +17,9 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 // others
 // import { BarRatingModule } from 'ngx-bar-rating';
 import { NgxMaskModule } from 'ngx-mask';
-import { VgBufferingModule } from 'videogular2/compiled/buffering';
-import { VgControlsModule } from 'videogular2/compiled/controls';
 
 import { CarouselModule } from 'ngx-owl-carousel-o';
 // Video and Audio Player
-import { VgCoreModule } from 'videogular2/compiled/core';
-import { VgOverlayPlayModule } from 'videogular2/compiled/overlay-play';
 import { SearchPipe } from '../pipes/search.pipe';
 import { HeaderComponent } from './core/header/header.component';
 import { LandingHeaderComponent } from './core/landing-header/landing-header.component';
@@ -62,11 +58,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     // BarRatingModule,
     NgxMaskModule.forRoot(),
     // RouterModule.forChild(routes),
-    VgCoreModule,
     CarouselModule,
-    VgControlsModule,
-    VgOverlayPlayModule,
-    VgBufferingModule,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,

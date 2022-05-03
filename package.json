@@ -99,7 +99,6 @@
     "ts-node": "7.0.1",
     "tslib": "^2.0.0",
     "underscore": "^1.11.0",
-    "videogular2": "^7.0.1",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
