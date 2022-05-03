@@ -14,8 +14,8 @@
   <div class="tab mobMenu">
     <mat-menu [hasBackdrop]="true" #mobmenu="matMenu">
       <ul class="mobileMenu">
-        <li class="d-flex align-items-center" [ngClass]="activeUrl === '/Learner/MyCourse' ? 'redColor' : 'greyColor'"
-          md-raised-button routerLink="/Learner/MyCourse">
+        <li class="d-flex align-items-center" [ngClass]="activeUrl === '/Landing/MyCourse' ? 'redColor' : 'greyColor'"
+          md-raised-button routerLink="/Landing/MyCourse">
           <em class="lxp-SelfPaced headicon"></em>
           <span class="mobContent">{{'My Courses' | translate}}</span>
         </li>
@@ -66,7 +66,7 @@
       <span>{{'Profile' | translate}}</span>
     </button>
 
-    <button mat-menu-item routerLink="/Learner/MyCourse" routerLinkActive="active" *ngIf="!show">
+    <button mat-menu-item routerLink="/Landing/MyCourse" routerLinkActive="active" *ngIf="!show">
       <mat-icon fontSet="material-icons-outlined">local_library</mat-icon>
       <span>{{'My Courses' | translate}}</span>
     </button>
@@ -84,7 +84,7 @@
 
 </mat-toolbar>
 <div class="sideNavStrip" [ngClass]="expandTxt?'navClose':'navOpen'" *ngIf="!hideHeaderMenu">
-  <div class="stripItem" routerLink="/Learner/MyCourse" [ngClass]="activeUrl === '/Learner/MyCourse' ? 'activeItem' : 'normalItem'" [ngClass]="expandTxt?'navOpen':'navClose'">
+  <div class="stripItem" routerLink="/Landing/MyCourse" [ngClass]="activeUrl === '/Landing/MyCourse' ? 'activeItem' : 'normalItem'" [ngClass]="expandTxt?'navOpen':'navClose'">
     <div class="icoBox">
       <em class="lxp-SelfPaced "></em>
     </div>

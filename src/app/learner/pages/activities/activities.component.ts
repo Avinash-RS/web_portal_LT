@@ -391,7 +391,7 @@ export class ActivitiesComponent implements OnInit {
         this.route.navigate(['/Learner/calendaractivity']);
       }
     } else {
-      this.route.navigateByUrl('/Learner/MyCourse');
+      this.route.navigateByUrl('/Landing/MyCourse');
     }
   }
   getSelectedIndex(i) {

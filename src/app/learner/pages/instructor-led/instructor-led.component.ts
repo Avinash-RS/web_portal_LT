@@ -48,7 +48,7 @@ export class InstructorLedComponent implements OnInit {
   }
 
   getBack() {
-    this.router.navigateByUrl('/Learner/MyCourse');
+    this.router.navigateByUrl('/Landing/MyCourse');
   }
 
   getAttendance() { // Http Call

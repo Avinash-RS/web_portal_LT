@@ -47,7 +47,7 @@ export class CourseGalleryComponent implements OnInit {
   }
 
   getBack() {
-    this.router.navigateByUrl('/Learner/MyCourse');
+    this.router.navigateByUrl('/Landing/MyCourse');
   }
   clearact() {
     if (this.searchContent === '') {

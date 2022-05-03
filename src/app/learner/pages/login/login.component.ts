@@ -267,9 +267,9 @@ export class LoginComponent implements OnInit {
           this.loader = true;
           if (data?.data?.get_forgot_username_mobile_email?.success === 'true') {
             this.toastr.success(data.data.get_forgot_username_mobile_email.message, null);
-            this.loader = false;
             this.signInPage = false;
             this.forgotPage = true;
+            this.loader = false;
             this.username.reset();
           } else {
             this.toastr.error(data?.data?.get_forgot_username_mobile_email?.message, null);
@@ -293,7 +293,7 @@ export class LoginComponent implements OnInit {
             localStorage.setItem('remember_me', 'true');
             localStorage.setItem('user_img', isValidEmailResult.data.get_login_details.message.profile_img);
             localStorage.setItem('role', 'learner');
-            this.router.navigate(['/Learner/MyCourse']);
+            this.router.navigate(['/Landing/MyCourse']);
           } else {
             this.toastr.error(isValidEmailResult.data.get_login_details.error_msg, null);
             sessionStorage.clear();
@@ -322,7 +322,7 @@ export class LoginComponent implements OnInit {
             sessionStorage.setItem('remember_me', 'true');
             sessionStorage.setItem('user_img', isValidEmailResult.data.get_login_details.message.profile_img);
             sessionStorage.setItem('role', 'learner');
-            this.router.navigate(['/Learner/MyCourse']);
+            this.router.navigate(['/Landing/MyCourse']);
           } else {
             this.toastr.error(isValidEmailResult.data.get_login_details.error_msg, null);
             localStorage.clear();
@@ -383,18 +383,19 @@ export class LoginComponent implements OnInit {
       return this.validateAllFields(this.loginForm);
     }
     this.loader = true;
+    // return;
     var encryptedname = CryptoJS.AES.encrypt(this.loginForm.value.username.toLowerCase().trim(), this.secretKey.trim()).toString();
     var encryptedpassword = CryptoJS.AES.encrypt(this.loginForm.value.password, this.secretKey.trim()).toString();
-    this.service.login(encryptedname, encryptedpassword, false,this.recaptchaStr)
+    this.service.learner_login(encryptedname, encryptedpassword, this.recaptchaStr)
       .subscribe((loginresult: any) => {
-        if (loginresult.data.login) {
-          if (loginresult.data.login.success) {
-            const userId = loginresult.data.login.message.user_id;
+        if (loginresult.data.learner_login) {
+          if (loginresult.data.learner_login.success) {
+            const userId = loginresult.data.learner_login.message.user_id;
             gtag('config', environment.gaTrackingId, {' user_id ': userId});
             gtag('set', 'user_properties', { ' crm_id ' : userId });
             this.loginMovement(loginresult);
-            if (loginresult.data.login?.message?.TFAsetup?.main_config_TFA) {
-              if (loginresult.data.login?.message?.TFAsetup?.user_config_TFA) {
+            if (loginresult.data.learner_login?.message?.TFAsetup?.main_config_TFA) {
+              if (loginresult.data.learner_login?.message?.TFAsetup?.user_config_TFA) {
                 this.router.navigate(['/Learner/authentication']);
               } else {
                 this.setAuthentication();
@@ -405,7 +406,7 @@ export class LoginComponent implements OnInit {
           } else {
             this.loader = false;
             this.loginForm.reset();
-            this.toastr.error(loginresult.data.login.error_msg, null);
+            this.toastr.error(loginresult.data.learner_login.error_msg, null);
           }
         } else {
           this.loader = false;
@@ -423,7 +424,7 @@ export class LoginComponent implements OnInit {
       if (userDetail.org_type === 'Corporate') {
         this.router.navigate(['/Learner/upskillcalendar']);
       } else {
-        this.router.navigate(['/Learner/MyCourse']);
+        this.router.navigate(['/Landing/MyCourse']);
       }
     } else {
       this.router.navigate(['/Learner/profile']);
@@ -431,27 +432,27 @@ export class LoginComponent implements OnInit {
   }
   loginMovement(loginresult) {
     if (this.loginForm.value.remember_me === true) {
-      localStorage.setItem('token', loginresult.data.login.message.token);
+      localStorage.setItem('token', loginresult.data.learner_login.message.token);
     } else {
-      localStorage.setItem('token', loginresult.data.login.message.token);
+      localStorage.setItem('token', loginresult.data.learner_login.message.token);
     }
     localStorage.setItem('language', this.loginForm?.value?.language || 'en');
-    localStorage.setItem('Fullname', loginresult.data.login.message.full_name);
-    const id = CryptoJS.AES.encrypt(loginresult.data.login.message.user_id, this.secretKey.trim()).toString();
-    loginresult.data.login.message.user_id = id;
-    loginresult.data.login.message.specific_report_value = '';
-    localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message));
+    localStorage.setItem('Fullname', loginresult.data.learner_login.message.full_name);
+    const id = CryptoJS.AES.encrypt(loginresult.data.learner_login.message.user_id, this.secretKey.trim()).toString();
+    loginresult.data.learner_login.message.user_id = id;
+    loginresult.data.learner_login.message.specific_report_value = '';
+    localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.learner_login.message));
     localStorage.setItem('remember_me', 'false');
-    localStorage.setItem('user_img', loginresult.data.login.message.profile_img);
+    localStorage.setItem('user_img', loginresult.data.learner_login.message.profile_img);
     localStorage.setItem('role', 'learner');
-    if (loginresult.data.login && this.loginForm.value.remember_me === true) {
+    if (loginresult.data.learner_login && this.loginForm.value.remember_me === true) {
       localStorage.setItem('remember_me', 'true');
     } else {
       localStorage.setItem('remember_me', 'false');
     }
     setTimeout(() => {
       this.loader = false;
-    }, 5000);
+    }, 1000);
   }
   forgotusername(type) {
     this.router.navigateByUrl('/Learner/recover', { state: { type } });
@@ -528,15 +529,15 @@ export class LoginComponent implements OnInit {
         if (data.data.user_registration.success === 'true') {
           this.registerSuccess = true;
           this.toastr.success(data.data.user_registration.message, null);
-          this.loader = false;
           this.registerForm.setErrors(null);
           this.signUpPage = false;
           this.signInPage = true;
           this.registerForm.reset();
+          this.loader = false;
         } else {
           this.toastr.error(data.data.user_registration.message, null);
-          this.loader = false;
           this.registerSuccess = false;
+          this.loader = false;
         }
        } else {
         this.toastr.warning('Please try after sometime', null);

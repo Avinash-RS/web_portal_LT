@@ -62,7 +62,7 @@ export class NewHomeComponent implements OnInit {
             if (this.userDetail.org_type === 'Corporate') {
               this.router.navigate(['/Learner/upskillcalendar']);
             } else {
-              this.router.navigate(['/Learner/MyCourse']);
+              this.router.navigate(['/Landing/MyCourse']);
             }
           } else {
             this.router.navigate(['/Learner/profile']);

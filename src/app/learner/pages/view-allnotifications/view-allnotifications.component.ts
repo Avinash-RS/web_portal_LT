@@ -82,6 +82,6 @@ next(e) {
   this.viewAllnotifications();
 }
 goBack() {
-  this.router.navigateByUrl('/Learner/MyCourse');
+  this.router.navigateByUrl('/Landing/MyCourse');
 }
 }

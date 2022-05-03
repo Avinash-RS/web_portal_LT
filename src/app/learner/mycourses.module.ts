@@ -1,7 +1,6 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-import { LearnerNewMyCourseComponent } from './pages/learner-new-my-course/learner-new-my-course.component';
 import { CoursedetailsComponent } from './pages/coursedetails/coursedetails.component';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -28,7 +27,6 @@ import { NgOtpInputModule } from 'ng-otp-input';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { CalendarModule } from 'angular-calendar';
-import { PopoverModule } from 'ngx-smart-popover';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { InstructorLedComponent } from './pages/instructor-led/instructor-led.component';
 import { DiscussionForumComponent } from './pages/discussion-forum/discussion-forum.component';
@@ -54,12 +52,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 }
 
 const routes: Routes = [
-  {
-    path: 'MyCourse',
-    component: LearnerNewMyCourseComponent,
-    // canLoad: [AuthGuard],
-    data: { animation: 'Learner  MyCourse' , title: 'My Courses'}
-  },
   {
     path: 'courseDetail',
     component: CoursedetailsComponent,
@@ -135,7 +127,6 @@ const routes: Routes = [
     CourseGalleryComponent,
     CourseReportComponent,
     CalendarActivityComponent,
-    LearnerNewMyCourseComponent,
     ProgressionReportComponent,
     QuestionanswerComponent,
     UpskillCalendarComponent,
@@ -152,7 +143,6 @@ const routes: Routes = [
     AngularEditorModule,
     ChartsModule,
     DragScrollModule,
-    PopoverModule,
     TooltipModule.forRoot(),
     RouterModule.forChild(routes),
     NgCircleProgressModule.forRoot({

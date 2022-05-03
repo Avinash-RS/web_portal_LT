@@ -115,7 +115,7 @@ export class CourseReportComponent implements OnInit {
     this.getCourseReport();
   }
   getBack() {
-    this.router.navigateByUrl('/Learner/MyCourse');
+    this.router.navigateByUrl('/Landing/MyCourse');
   }
 
   getScoreProgress(c, t) {

@@ -164,7 +164,7 @@ export class HeaderComponent implements OnInit {
 
   }
   navigateMyCourse() {
-    this.router.navigate(['/Learner/MyCourse']);
+    this.router.navigate(['/Landing/MyCourse']);
   }
 
   openCalendar() {

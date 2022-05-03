@@ -57,7 +57,7 @@
     "apollo-cache-inmemory": "^1.6.6",
     "apollo-client": "^2.6.10",
     "apollo-link-http": "^1.5.17",
-    "bn-ng-idle": "0.0.2",    
+    "bn-ng-idle": "0.0.2",
     "chart.js": "^2.9.3",
     "chartjs-plugin-datalabels": "^0.7.0",
     "classlist.js": "^1.1.20150312",
@@ -83,7 +83,6 @@
     "ngx-owl-carousel-o": "^1.2.1",
     "ngx-pagination": "^5.1.1",
     "ngx-skeleton-loader": "^2.6.0",
-    "ngx-smart-popover": "^1.4.0",
     "ngx-socket-io": "^4.2.0",
     "ngx-toastr": "^10.1.0",
     "ngx-ui-loader": "^7.2.2",
@@ -99,7 +98,6 @@
     "ts-node": "7.0.1",
     "tslib": "^2.0.0",
     "underscore": "^1.11.0",
-    "videogular2": "^7.0.1",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {

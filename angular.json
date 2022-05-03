@@ -20,7 +20,6 @@
             "allowedCommonJsDependencies": [
               "crypto-js",
               "zen-observable",
-              "videogular2",
               "socket.io-client",
               "ag-grid-enterprise",
               "public-ip",
@@ -47,7 +46,6 @@
             "styles": [
               "src/styles.scss",
               "node_modules/ngx-toastr/toastr.css",
-              "node_modules/videogular2/fonts/videogular.css",
               "node_modules/animate.css/animate.min.css",
               "src/theme/theme.scss",
               "src/theme/typography.scss",
@@ -146,7 +144,6 @@
             "styles": [
               "src/styles.scss",
               "node_modules/ngx-toastr/toastr.css",
-              "node_modules/videogular2/fonts/videogular.css",
               "node_modules/animate.css/animate.min.css",
               "src/theme/theme.scss",
               "src/theme/typography.scss",
