@@ -737,7 +737,11 @@ div.account {
 
 .popupbtns {
   text-align: center;
-  background-color: $lxp-theme-green;
+  background: #00b0ed; /* Old browsers */
+  background: -moz-linear-gradient(left, #00b0ed 0%, #53aa34 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(left, #00b0ed 0%,#53aa34 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right, #00b0ed 0%,#53aa34 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00b0ed', endColorstr='#53aa34',GradientType=1 );
   color: $color-white;
   width: 30%;
   border-radius: 50px !important;
@@ -747,6 +751,9 @@ div.account {
   border: solid;
   font-size: 18px;
   height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 
