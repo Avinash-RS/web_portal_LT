@@ -1,12 +1,12 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: webportalpt
+  name: webportal
   annotations:
     service.beta.kubernetes.io/azure-load-balancer-internal: "true"
 spec:
   selector:
-    app: webportalpt
+    app: webportal
   type: LoadBalancer
   ports:
   - name: http
