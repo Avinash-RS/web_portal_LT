@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: webportalpt
+  name: webportal
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: webportalpt
+      app: webportal
   template:
     metadata:
       labels:
-        app: webportalpt
+        app: webportal
     spec:
       containers:
         - name: webportal
-          image: lxpdevqa.azurecr.io/webportalpt:$tag
+          image: lxpdevqa.azurecr.io/webportal:$tag
           imagePullPolicy: Always
           ports:
           - containerPort: 80
