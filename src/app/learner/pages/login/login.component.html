@@ -130,10 +130,10 @@
             <div class="gradientBtn">
               <button id="login" mat-raised-button (click)="checkCaptchaLogin(captchaRef)" [disabled]="!loginForm.valid">
                 <span *ngIf="!loader">{{'SIGN IN' | translate}}</span>
-                <div *ngIf="loader" class="snippet" data-title=".dot-falling">
-                  <div class="stage">
+                <div *ngIf="loader" class="loader">
+                  <!-- <div class="stage">
                     <div class="dot-falling"></div>
-                  </div>
+                  </div> -->
                 </div>
               </button>
             </div>
@@ -174,10 +174,11 @@
           <div class="gradientBtn">
             <button id="login" mat-raised-button [disabled]="!username.valid" (click)="checkCaptchaForget(captchaRef)">
               <span *ngIf="!loader">{{'SUBMIT' | translate}}</span>
-              <div *ngIf="loader" class="snippet" data-title=".dot-falling">
-                <div class="stage">
+              <div *ngIf="loader" class="loader">
+              <!-- <div *ngIf="loader" class="snippet" data-title="dot-falling"> -->
+                <!-- <div class="loader">
                   <div class="dot-falling"></div>
-                </div>
+                </div> -->
               </div>
             </button>
           </div>
@@ -258,10 +259,10 @@
               <div class="gradientBtn">
                 <button id="login" mat-raised-button (click)="checkCaptchaSignIn(captchaRef)" [disabled]="!registerForm.valid">
                   <span *ngIf="!loader">{{'SIGN UP' | translate}}</span>
-                  <div *ngIf="loader" class="snippet" data-title=".dot-falling">
-                    <div class="stage">
+                  <div *ngIf="loader" class="loader">
+                    <!-- <div class="stage">
                       <div class="dot-falling"></div>
-                    </div>
+                    </div> -->
                   </div>
                 </button>
               </div>

@@ -29,7 +29,6 @@ import { NgOtpInputModule } from 'ng-otp-input';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { CalendarModule } from 'angular-calendar';
-import { PopoverModule } from 'ngx-smart-popover';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { InstructorLedComponent } from './pages/instructor-led/instructor-led.component';
 import { DiscussionForumComponent } from './pages/discussion-forum/discussion-forum.component';
@@ -154,7 +153,6 @@ const routes: Routes = [
     AngularEditorModule,
     ChartsModule,
     DragScrollModule,
-    PopoverModule,
     TooltipModule.forRoot(),
     RouterModule.forChild(routes),
     NgCircleProgressModule.forRoot({
