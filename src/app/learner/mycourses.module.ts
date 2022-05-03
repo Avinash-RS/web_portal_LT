@@ -2,6 +2,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/cor
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { LearnerNewMyCourseComponent } from './pages/learner-new-my-course/learner-new-my-course.component';
+import { MycourseItemComponent } from './pages/mycourse-item-component/mycourse-item-component';
 import { CoursedetailsComponent } from './pages/coursedetails/coursedetails.component';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -136,6 +137,7 @@ const routes: Routes = [
     CourseReportComponent,
     CalendarActivityComponent,
     LearnerNewMyCourseComponent,
+    MycourseItemComponent,
     ProgressionReportComponent,
     QuestionanswerComponent,
     UpskillCalendarComponent,

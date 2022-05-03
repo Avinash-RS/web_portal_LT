@@ -30,7 +30,6 @@ import { LandingHeaderComponent } from './core/landing-header/landing-header.com
 import { DragDropImageDirective } from './services/directives/drag-drop-image.directive';
 import { PdfreaderComponent } from './shared/pdfreader/pdfreader.component';
 import { ToolbarNotificationComponent } from './shared/toolbar-notification/toolbar-notification.component';
-import { MycourseItemComponent } from './shared/mycourse-item-component/mycourse-item-component';
 import { DeferLoadModule } from '@trademe/ng-defer-load';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -53,7 +52,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     LandingHeaderComponent,
     SearchPipe,
     ToolbarNotificationComponent,
-    MycourseItemComponent
   ],
 
   imports: [
@@ -94,7 +92,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     StickyHeaderDirective,
     VideoPlayerComponent,
     PdfreaderComponent,
-    MycourseItemComponent,
     SearchPipe]
 })
 export class CoreModule { }
