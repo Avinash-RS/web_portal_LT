@@ -340,10 +340,10 @@
   <mat-dialog-actions>
     <button class="popupbtns" [disabled]="passwordForm.invalid" (click)="updatePassword()">
       {{!loader? 'Submit':'' | translate}}
-      <div *ngIf="loader" class="snippet" data-title=".dot-falling">
-        <div class="stage">
+      <div *ngIf="loader" class="spinnerLoader">
+        <!-- <div class="stage">
           <div class="dot-falling"></div>
-        </div>
+        </div> -->
       </div>
     </button><br><br>
   </mat-dialog-actions>

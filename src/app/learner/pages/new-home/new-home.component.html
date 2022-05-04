@@ -54,10 +54,10 @@
                 <div class="gradientBtn">
                   <button id="login" mat-raised-button (click)="verifyAuth()">
                     <span *ngIf="!loader">{{'Verify' | translate}}</span>
-                    <div *ngIf="loader" class="snippet" data-title=".dot-falling">
-                      <div class="stage">
+                    <div *ngIf="loader" class="spinnerLoader">
+                      <!-- <div class="stage">
                         <div class="dot-falling"></div>
-                      </div>
+                      </div> -->
                     </div>
                   </button>
                 </div>
