@@ -22,7 +22,7 @@
             <p>This is a comprehensive assessment which is conducted at the end of the training to evaluate the performance of the candidate. The milestone assessment is the combination of KBA (technical Multiple-choice questions on Java, SQL and Web designing) and SBA (Java Coding based on Real field Scenarios). The abbreviation of KBA is Knowledge Based Assessment and SBA is Skill based Assessment.</p>
             <div class="indicator">
                 <h4>Overall Milestone Assessment Score</h4>
-                <div class="indicatorBG d-flex align-items-center">
+                <div class="indicatorBG d-flex justify-content-between align-items-center">
                     <div class="grade">
                         <div class="poor">
                             <span>Poor</span>
@@ -34,7 +34,13 @@
                             <span>Good</span>
                         </div>
                     </div>
-                    <div class="percentageCircle"></div>
+                    <div class="percentageCircle">
+                        <circle-progress [title]= "62"
+                        [titleFontSize] = "10" [titleFontWeight] = "600" [showUnits]= "true" [percent]="62"
+                        [radius]=25  [space]=-6 [outerStrokeGradient]=true [outerStrokeWidth]=6 [outerStrokeColor]="'rgba(255, 183, 77, 1)'" 
+                        [outerStrokeGradientStopColor]="'rgba(255, 183, 77, 1)'" [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]=6 
+                        [animation]="true" [animationDuration]="300" [responsive]="true" [showSubtitle]="false" ></circle-progress>
+                    </div>
                 </div>
             </div>
             <div class="assessmentDetails">
