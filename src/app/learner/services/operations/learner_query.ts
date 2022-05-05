@@ -2267,7 +2267,56 @@ export const getTopicAttendanceDetailsByUsername = gql`
     }
   }
 `;
-
+export const get_batchwise_learner_dashboard_data_v2 = gql `
+  query get_batchwise_learner_dashboard_data_v2(
+      $user_id:String!,
+      $request_type:String!,
+      $jobroleCategoryId:String
+    ) {
+      get_batchwise_learner_dashboard_data_v2(
+        user_id: $user_id
+        request_type: $request_type
+        jobroleCategoryId: $jobroleCategoryId
+      ){
+        success
+        error_msg
+        message{
+          batchid
+          course_img_url
+          course_name
+          courseBy
+          credits
+          batch_start_date
+          batch_end_date
+          batch_name
+          image_self_paced_learning_time
+          instructor_lead_session_total_count
+          total_mid_course_project_count
+          internal_assesment
+          course_id
+          course_type
+          user_id
+          course_percentage
+          lastModule
+          lastTopic
+          toc
+          course_status
+          checklevel
+          link
+          current_week_count
+          actual_total_week
+          wishlisted
+          wishlist_id
+          progress_class
+          course_week_Percent
+          course_description
+        }
+        ongoing
+        all
+        completed
+      }
+    }
+`
 export const get_batchwise_learner_dashboard_data = gql`
   query get_batchwise_learner_dashboard_data(
     $user_id: String!
