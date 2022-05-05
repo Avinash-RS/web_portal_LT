@@ -332,7 +332,7 @@
                                     {{'Ongoing' | translate}} ({{onGoingCourseCount}})
                                 </ng-template>
                                 <div *ngIf="courseSkel; else courseSkeleton">
-                                <div class="mycoursesContent" *ngIf="courseDetailsList.length; else noCourseCard">
+                                <div class="mycoursesContent" *ngIf="courseDetailsList?.length; else noCourseCard">
                                    
                                    
                                     <ng-container *ngFor="let item of courseDetailsList" (deferLoad)="item.show = true">
@@ -346,7 +346,7 @@
                                     {{'Completed' | translate}} ({{completedCourseCount}})
                                 </ng-template>
                                 <div *ngIf="courseSkel;else courseSkeleton">
-                                <div class="mycoursesContent" *ngIf="courseDetailsList.length;else noCourseCard">
+                                <div class="mycoursesContent" *ngIf="courseDetailsList?.length;else noCourseCard">
                                     <ng-container *ngFor="let item of courseDetailsList" (deferLoad)="item.show = true">
                                         <app-mycourse-item-component *ngIf="item.show" [courseItems]="item"></app-mycourse-item-component>
                                     </ng-container>
@@ -358,7 +358,7 @@
                                     {{'All' | translate}} ({{allCourseCount}})
                                 </ng-template>
                                 <div *ngIf="courseSkel;else courseSkeleton">
-                                <div class="mycoursesContent" *ngIf="courseDetailsList.length;else noCourseCard">
+                                <div class="mycoursesContent" *ngIf="courseDetailsList?.length;else noCourseCard">
                                     <ng-container *ngFor="let item of courseDetailsList" (deferLoad)="item.show = true">
                                         <app-mycourse-item-component *ngIf="item.show" [courseItems]="item"></app-mycourse-item-component>
                                     </ng-container>
