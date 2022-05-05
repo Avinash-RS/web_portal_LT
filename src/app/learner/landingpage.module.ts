@@ -18,7 +18,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { LearnerNewMyCourseComponent } from './pages/learner-new-my-course/learner-new-my-course.component';
 import { MycourseItemComponent } from './pages/mycourse-item-component/mycourse-item-component';
 
@@ -59,6 +59,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
         MatTabsModule,
         MatSidenavModule,
         MatSelectModule,
+        MatProgressBarModule,
         RouterModule.forChild(routes),
         TranslateModule.forRoot({
             loader: {
