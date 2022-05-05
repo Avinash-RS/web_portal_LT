@@ -92,9 +92,12 @@ export class LearnerNewMyCourseComponent implements OnInit {
       this.router.navigate(['/Learner/profile']);
       return;
     }
-    if (this.userDetailes) {
+    this.learnerService.insertSkeleton(this.userDetailes.user_id).subscribe((result:any)=>{
       this.getDashboardMyCourse(this.userDetailes.user_id, this.userDetailes._id);
-    }
+  },
+  err =>{
+    this.getDashboardMyCourse(this.userDetailes.user_id, this.userDetailes._id);
+  })
   }
   @ViewChild('completedTopics', { read: DragScrollComponent }) ds: DragScrollComponent;
   @ViewChild('inProgress', { read: DragScrollComponent }) dsInProgress: DragScrollComponent;
