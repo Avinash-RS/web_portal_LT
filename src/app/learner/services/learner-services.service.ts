@@ -36,7 +36,7 @@ boarddetail, checkExistingUser, getActivityDetailsByBatchAndCourseID, getAssignm
      getCourseGallery, getLearnerNewCourseReport, getCourseReportByUserid, getProgressionActivitydata,
      selfLearningdatabyUserId, getengineersForumQA_Count, recentlycourse,
      getlabactivity, labactivity, weekWiseCourseChart, overAllCourseProgressByUserId,
-     getlabActivityData, getStepCourseByLearner, playerstatus, getlearnerquiz
+     getlabActivityData, getStepCourseByLearner, playerstatus, getlearnerquiz,get_batchwise_learner_dashboard_data_v2
 } from './operations/learner_query';
 
 
@@ -1078,7 +1078,16 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
       }
     });
   }
-
+  get_batchwise_learner_dashboard_data_v2(user_id, request_type, jobroleCategoryId) {
+    return this.Apollo.query({
+      query: get_batchwise_learner_dashboard_data_v2,
+      variables: {
+        user_id,
+        request_type,
+        jobroleCategoryId
+      }
+    });
+  }
   get_batchwise_learner_dashboard_data(user_id, request_type, jobroleCategoryId) {
     return this.Apollo.query({
       query: get_batchwise_learner_dashboard_data,
