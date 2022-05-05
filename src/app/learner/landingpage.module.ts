@@ -17,7 +17,10 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSelectModule } from '@angular/material/select';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+
 
 import { LearnerNewMyCourseComponent } from './pages/learner-new-my-course/learner-new-my-course.component';
 import { MycourseItemComponent } from './pages/mycourse-item-component/mycourse-item-component';
@@ -52,13 +55,14 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
         DragScrollModule,
         ChartsModule,
         NgCircleProgressModule,
-        FormsModule,
-        ReactiveFormsModule,
         CalendarModule,
         MatDatepickerModule,
         MatTabsModule,
         MatSidenavModule,
         MatSelectModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatCardModule,
         RouterModule.forChild(routes),
         TranslateModule.forRoot({
             loader: {
