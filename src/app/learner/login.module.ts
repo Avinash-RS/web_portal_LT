@@ -2,7 +2,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/cor
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
-import { NewHomeComponent} from './pages/new-home/new-home.component';
+import { NewHomeComponent } from './pages/new-home/new-home.component';
 import { IsLoggedInAuthGuard } from '@core/services/_helpers/is-logged-in-auth.guard';
 import { PasswordComponent } from './pages/password/password.component';
 import { MaskingPipePipe } from '@core/core/masking-pipe.pipe';
@@ -10,21 +10,16 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory, CoreModule } from '@core/core.module';
 import { HttpClient } from '@angular/common/http';
 import { CarouselModule } from 'ngx-owl-carousel-o';
-import { NgOtpInputModule } from  'ng-otp-input';
+import { NgOtpInputModule } from 'ng-otp-input';
 import { MatDialogModule } from '@angular/material/dialog';
-
-// import { MaterialModule } from '@core/material.module';
-// Materials import
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ResetpasswordComponent } from './pages/resetpassword/resetpassword.component';
 import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
-import { AuthGuard } from '@core/services/_helpers/auth.guard';
 
 const routes: Routes = [
   {
@@ -68,12 +63,10 @@ const routes: Routes = [
   imports: [
     CommonModule,
     CoreModule,
-    // MaterialModule,
     MatButtonModule,
     MatInputModule,
     MatCheckboxModule,
     MatSelectModule,
-    // MatIconModule,
     CarouselModule,
     MatFormFieldModule,
     FormsModule,
@@ -92,13 +85,11 @@ const routes: Routes = [
     MatDialogModule
   ],
   exports: [
-    // MaterialModule
     MatButtonModule,
     MatInputModule,
     MatCheckboxModule,
     MatFormFieldModule,
     MatSelectModule,
-    // MatIconModule
   ]
 })
 export class LoginModule { }
