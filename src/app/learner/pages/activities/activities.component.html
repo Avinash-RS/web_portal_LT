@@ -123,7 +123,7 @@
 
                         <mat-icon *ngIf="assignment.files.doc_type == 'image/jpeg'|| assignment.files.doc_type == 'image/png' || assignment.files.doc_type =='image/jpg'" class="videoPlay float-left">photo</mat-icon>
                         <mat-icon *ngIf="assignment.files.doc_type == 'application/pdf'" class="videoPlay float-left">picture_as_pdf </mat-icon>                     
-                        <span class="uploadfileName assignementName" style="margin-top: 4px;position: inherit;" matTooltip="{{assignment.files.filename}}" matTooltipClass="custom-mat-tooltip">
+                        <span class="uploadfileName assignementName" style="position: inherit;" matTooltip="{{assignment.files.filename}}" matTooltipClass="custom-mat-tooltip">
                           {{assignment.files.filename}}
                         </span>
                         <mat-icon class="deleteIcon float-right" *ngIf="assignment.files.grade_status !== 'Evaluated'" (click)="deleteAssigmnemtData(assignment.files)">delete</mat-icon>
