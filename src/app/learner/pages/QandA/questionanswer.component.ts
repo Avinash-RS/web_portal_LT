@@ -135,8 +135,8 @@ export class QuestionanswerComponent implements OnInit {
     this.learnerService.getengineersForumQA_Count(this.UserDetails.user_id, this.courseId).subscribe((rdata: any) => {
       let qcountData = rdata.data.getengineersForumQA_Count.data.questionCount
       let acountData = rdata.data.getengineersForumQA_Count.data.anweredCount
-      this.animateValue('qCount', 0, qcountData ? qcountData : 0, 1000)
-      this.animateValue('aCount', 0, acountData ? acountData : 0, 1000)
+      this.animateValue('qCount', 0, qcountData ? qcountData : 0, 200)
+      this.animateValue('aCount', 0, acountData ? acountData : 0, 200)
       this.showNumSkeleton = true
     })
   }
@@ -149,15 +149,22 @@ export class QuestionanswerComponent implements OnInit {
       var range = end - start;
       var current = start;
       var increment = end > start ? 1 : -1;
-      var stepTime = Math.abs(Math.floor(duration / range));
+      var stepTime = Math.abs(Math.floor(range/duration ));
 
       var timer = setInterval(function () {
         current += increment;
         obj.innerHTML = current;
+       
         if (current == end) {
           clearInterval(timer);
         }
-      }, stepTime);
+
+      }, 1);
+
+      setTimeout(() => {
+        obj.innerHTML = end;
+        clearInterval(timer);
+      }, 800);
     }
   }
 
