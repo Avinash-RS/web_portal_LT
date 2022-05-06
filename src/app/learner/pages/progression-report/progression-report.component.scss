@@ -3,7 +3,7 @@
 .progression-report-contianer {
   // margin-bottom: 4em;
   flex-direction: column;
-  @media only screen and (min-width: 992px) {
+  @media only screen and (min-width: 1140px) {
     flex-direction: row;
   }
   @include md {
@@ -112,11 +112,11 @@
             display: block;
           }
         }
-        @media only screen and (min-width: 992px) {
-          order: 1;
-          width: calc(100% - 360px);
-        }
+        // @media only screen and (min-width: 992px) {
+        //   width: calc(100% - 360px);
+        // }
         @media only screen and (min-width: 1140px) {
+          order: 1;
           width: calc(100% - 400px);
         }
         .legend-area{
@@ -145,38 +145,6 @@
             }
           }
         }
-        // .backArrow {
-        //     font-size: 10px;
-        //     color: #231F20;
-        //     font-weight: bold;
-        //     cursor: pointer;
-        //     margin-bottom: 5px;
-        //     transform: rotate(-180deg);
-        // }
-        // .breadcrum {
-        //   font-size:12px;
-        //   font-weight: 500;
-        //   margin-bottom: 1em;
-        //   padding-top: 1.2em;
-        //   @include lg {
-        //     padding: 1em 2.3em;
-        //     padding-bottom: 0;
-        //   }
-        // }
-        // .breadcrum1{
-        //     color : #808080;
-        //     padding-left: 0.5em; 
-        // }
-        // .partition{
-        //     color: #BE2020;
-        //     padding-left: 0.5em;
-        // }
-        // .breadcrum2{
-        //     color: #333333;
-        //     padding-left: 0.5em; 
-        //     font-weight: bold;
-        // }
-
         .flag-line{
           @include lg {
             height: 3em;
@@ -300,10 +268,9 @@
         }
         .self-learning-container {
           margin-top: 2em;
-          padding: 0 5px;
+          padding: 0 15px;
           @include xl {
             margin-top: 3em;
-            padding: 0 15px;
           }
           .expansion-container {
                 margin-top: 1em;
@@ -669,9 +636,6 @@
           }
           .layb .types + div {
             text-align: left;
-            .font-weight-bold {
-              // padding-left: 25%;
-            }
           }
           .types { 
             justify-content: flex-start; 
@@ -739,9 +703,6 @@
         border-bottom: 1px solid #d4d2d2;
         // flex-grow: 3;
       }
-      .rightpan {
-        // flex-grow: 5;
-      }
       .statusarea {
         display: flex;
         align-items: center;
@@ -771,14 +732,24 @@
     .secPie {
       display: flex;
       flex-direction: column;
-      margin-bottom: 3.5em;
+      margin: 1.5em 0;
+      padding: 0 20px;
       @include md {
         flex-direction: row;
         margin-bottom: 1em;
       }
-    }
-    .pieChart {
-     // margin: 0 auto;
+      .selfLearning {
+        width: 100%;
+        @include md {
+          width: 49%;
+        }
+      }
+      .activitiesSec {
+        width: 100%;
+        @include md {
+          width: 49%;
+        }
+      }
     }
   }
   .right-container {
@@ -807,14 +778,14 @@
     @media only screen and (min-width: 720px) {
       padding: 1em 2em 3em 2em;
     }
-    @media only screen and (min-width: 992px) {
-      width: 360px;
-      order: 2;
+    // @media only screen and (min-width: 992px) {
+    //   width: 360px;
+    // }
+    @media only screen and (min-width: 1140px) {
       position: fixed;
       top: 72px;
       padding: 3em 1em;
-    }
-    @media only screen and (min-width: 1140px) {
+      order: 2;
       width: 400px;
     }
 
@@ -989,26 +960,23 @@
 ::ng-deep .self-learning-container {
   .mat-expansion-panel-header {   
     font-size: 13px;
-    padding: 0 15px;
+    padding: 0 15px 0 5px;
     height: auto !important;
-    @include xl {
-      // height: 60px !important;
+    @include md {
+      padding: 0 15px 0 15px;
     }
     .mat-content {
       display: block;
       width: 100%;  
       .mat-expansion-panel-header-title {
         display: flex;
-        // flex-direction: column;
         margin: 0;
-        // padding-left: 50px;
         @include md {
           padding-left: 0;
           flex-direction: row;
           align-items: center;
         }
-        &> div {
-          // flex-grow: 1;
+        & > div {
           text-align: center;
           &.week-block + div {
             text-align: left;
@@ -1022,27 +990,28 @@
             align-items: center;
             justify-content: center;
             padding: 0 9px;
-            width: 50px;
+            width: 80px;
             @media only screen and (min-width: 720px) {
-              width: 60px;
+              width: 90px;
+            }
+            @media only screen and (min-width: 992px) {
+              width: 120px;
             }
           }
-          &.parent-module{
-            width: 120px;
-          }
+          // &.parent-module{
+          //   width: 120px;
+          // }
           .subinfo {
             display: flex;
             justify-content: space-around;
             padding: 10px 0;
             > div {
-              // flex-grow: 1;
-              // min-width: 75px;
               text-align: left;
             }
           }
         }
         .rightSec {
-          width: calc(100% - 50px);
+          width: calc(100% - 80px);
           border-bottom: 1px solid #c5c5c5;
           display: flex;
           justify-content: space-between;
@@ -1051,7 +1020,10 @@
           position: relative;
           @media only screen and (min-width: 720px) {
             flex-wrap: nowrap;
-            width: calc(100% - 60px);
+            width: calc(100% - 90px);
+          }
+          @media only screen and (min-width: 992px) {
+            width: calc(100% - 120px);
           }
           .weekModuleName {
             width: 100%;
@@ -1150,12 +1122,6 @@
   .mat-expansion-panel-header:not([aria-disabled='true']):hover {
     background: inherit !important;
     /* color: black; */
-  }
-  .mat-content{
-    // margin-bottom: 1em !important;
-  }
-  .mat-expansion-panel-header{
-    // border-bottom: 1px solid #c5c5c5 !important;
   }
 }
 // No Card

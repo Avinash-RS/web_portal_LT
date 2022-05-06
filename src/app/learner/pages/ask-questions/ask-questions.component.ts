@@ -1,19 +1,18 @@
-import { Component, OnInit, TemplateRef } from "@angular/core";
-import { MatDialog } from "@angular/material/dialog";
-import { Router } from "@angular/router";
-import { GlobalServiceService } from "@core/services/handlers/global-service.service";
-import { LearnerServicesService } from "@learner/services/learner-services.service";
-import { ToastrService } from "ngx-toastr";
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { GlobalServiceService } from '@core/services/handlers/global-service.service';
+import { LearnerServicesService } from '@learner/services/learner-services.service';
+import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
-import { CommonServicesService } from "@core/services/common-services.service";
+import { CommonServicesService } from '@core/services/common-services.service';
 import * as CryptoJS from 'crypto-js';
 
-// import { NgxUiLoaderService, SPINNER } from "ngx-ui-loader";
 
 @Component({
-  selector: "app-ask-questions",
-  templateUrl: "./ask-questions.component.html",
-  styleUrls: ["./ask-questions.component.scss"]
+  selector: 'app-ask-questions',
+  templateUrl: './ask-questions.component.html',
+  styleUrls: ['./ask-questions.component.scss']
 })
 
 export class AskQuestionsComponent implements OnInit {
@@ -23,48 +22,47 @@ export class AskQuestionsComponent implements OnInit {
   localStoCourseid: string;
   courseid: any;
   userDetail: any;
-  scrollselector:any=".myQuestions"
+  scrollselector: any = '.myQuestions';
   moduleTopicData: any;
-  mainTopic:any = null;
-  mainModule:any = null;
-  qaSortKey:any = -1;
-  mainPagenumber: any=0;
+  mainTopic: any = null;
+  mainModule: any = null;
+  qaSortKey: any = -1;
+  mainPagenumber: any = 0;
   mainModuleName: any = null;
   questionTopicList = null;
   questionTopic = null;
   questionModule: any = null;
   courseName: any;
-  isLoading:boolean=true;
-  loadMessage:any='Loading..';
-  emptyMessage:any='No Questions / Answers to display.';
+  isLoading: boolean = true;
+  loadMessage: any = 'Loading..';
+  emptyMessage: any = 'No Questions / Answers to display.';
   screenWidth: number;
-  secretKey = "(!@#Passcode!@#)";
-
-  dateObj = new Date()
+  secretKey = '(!@#Passcode!@#)';
+  dateObj = new Date();
   currentDate = new Date(this.dateObj.getFullYear() + '-' + (this.dateObj.getMonth() + 1) + '-' + this.dateObj.getDate()).getTime();
   batchEndTime: any;
   checkLevel: boolean = false;
 
   constructor(private dialog: MatDialog,
-    public Lservice: LearnerServicesService,
-    public route: Router,
-    private gs: GlobalServiceService,
-    private toastr: ToastrService,
-    public translate: TranslateService,
-    public commonService: CommonServicesService
+              public Lservice: LearnerServicesService,
+              public route: Router,
+              private gs: GlobalServiceService,
+              private toastr: ToastrService,
+              public translate: TranslateService,
+              public commonService: CommonServicesService
     // private ngxLoader: NgxUiLoaderService
   ) {
-    let lang = localStorage.getItem('language')
-      this.translate.use(lang?lang:'en')
-    this.screenWidth = window.innerWidth
+    const lang = localStorage.getItem('language');
+    this.translate.use(lang ? lang : 'en');
+    this.screenWidth = window.innerWidth;
     const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
-      console.log(detail)
+    console.log(detail);
     if (detail === undefined) {
       this.batchId = localStorage.getItem('currentBatchId');
       this.courseid = localStorage.getItem('Courseid');
       this.courseName = localStorage.getItem('CourseName');
-      this.batchEndTime = localStorage.getItem('currentBatchEndDate')
+      this.batchEndTime = localStorage.getItem('currentBatchEndDate');
     } else {
       this.batchId = detail.batch_id;
       this.batchId = detail.batch_id;
@@ -73,30 +71,30 @@ export class AskQuestionsComponent implements OnInit {
       this.batchEndTime = detail.batchEndTime;
     }
     this.userDetail = this.gs.checkLogout();
-    if(this.courseid){
+    if (this.courseid) {
     this.getPlayerModuleTopic();
-    this.getQuestionsAnswerlists()
-    }else{
+    this.getQuestionsAnswerlists();
+    } else {
       // this.toastr.warning("Failed to load.. redirecting to dashboard.");
-        this.route.navigateByUrl("/Learner/MyCourse");
+        this.route.navigateByUrl("/Landing/MyCourse");
     }
   }
 
   ngOnInit() {
-
+   return true;
   }
 
   openQuestionInput(templateRef: TemplateRef<any>) {
     console.log(this.moduleTopicData);
-    this.questionText = "";
-    if(this.screenWidth>650){
+    this.questionText = '';
+    if (this.screenWidth > 650) {
       this.dialog.open(templateRef, {
         width: '60%',
         height: '80%',
         closeOnNavigation: true,
         disableClose: true,
       });
-    }else{
+    } else {
       this.dialog.open(templateRef, {
         width: '100%',
         height: '80%',
@@ -104,131 +102,128 @@ export class AskQuestionsComponent implements OnInit {
         disableClose: true,
       });
     }
-    
   }
 
   getPlayerModuleTopic() {
-    let param:any = {}
-    param.parent=""
-    param.contentID = this.courseid
-    let id = CryptoJS.AES.decrypt(this.userDetail.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8)
-    param.user_id = id
-    param.batchid = this.batchId
-    console.log(param)
+    // tslint:disable-next-line: prefer-const
+    let param: any = {};
+    param.parent = '';
+    param.contentID = this.courseid;
+    // tslint:disable-next-line: prefer-const
+    let id = CryptoJS.AES.decrypt(this.userDetail.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
+    param.user_id = id;
+    param.batchid = this.batchId;
+    console.log(param);
     this.commonService.getTOC(param).subscribe((data: any) => {
-      if(data.success=== true){
+      if (data.success === true) {
         this.checkLevel = data.checkLevel;
-        let tmpData = data?.message;
-        this.moduleTopicData = []
+        const tmpData = data?.message;
+        this.moduleTopicData = [];
         tmpData.forEach(element => {
-          this.moduleTopicData.push(... element.childData)
+          this.moduleTopicData.push(... element.childData);
         });
 
-        console.log(this.moduleTopicData)
+        console.log(this.moduleTopicData);
       }
-      
     });
   }
 
-  getQuestionsAnswerlists(){
+  getQuestionsAnswerlists() {
     this.isLoading = true;
-    this.Lservice.getQAsortsearch(this.batchId,this.courseid,this.qaSortKey,this.mainPagenumber,this.mainModuleName,this.mainTopic)
-    .subscribe((resdata:any)=>{
+    this.Lservice.getQAsortsearch(this.batchId, this.courseid, this.qaSortKey, this.mainPagenumber, this.mainModuleName, this.mainTopic)
+    .subscribe((resdata: any) => {
       this.isLoading = false;
-      if(resdata.data.sortsearch.message){
-        this.allQuestionList.push.apply(this.allQuestionList,resdata.data.sortsearch.message)
-      }else{
-        this.allQuestionList = []
+      if (resdata.data.sortsearch.message) {
+        this.allQuestionList.push.apply(this.allQuestionList, resdata.data.sortsearch.message);
+      } else {
+        this.allQuestionList = [];
       }
-      
-    })
+    });
   }
-  onScroll(){
-    this.mainPagenumber = this.mainPagenumber+1
-    this.getQuestionsAnswerlists()
+  onScroll() {
+    this.mainPagenumber = this.mainPagenumber + 1;
+    this.getQuestionsAnswerlists();
   }
 
-  mainQAFilter(call){
-    this.mainPagenumber=0;
-    this.allQuestionList = []
-    if(call==='M'){
-      if(this.mainModule?.id){
-        this.getTopicV2(this.mainModule?.id,'filter');
-        this.mainModuleName = this.mainModule?this.mainModule.module_name:null;
-        this.mainTopic=null
-      }
-      else{
+  mainQAFilter(call) {
+    this.mainPagenumber = 0;
+    this.allQuestionList = [];
+    if (call === 'M') {
+      if (this.mainModule?.id) {
+        this.getTopicV2(this.mainModule?.id, 'filter');
+        this.mainModuleName = this.mainModule ? this.mainModule.module_name : null;
+        this.mainTopic = null;
+      } else {
         this.mainModuleName = null;
-        this.mainTopic=null;
+        this.mainTopic = null;
       }
     }
-    this.getQuestionsAnswerlists()
+    this.getQuestionsAnswerlists();
 
   }
-  getTopicV2(parent,call){
-    let param:any = {}
-    param.parent=parent
-    param.contentID = this.courseid
-    let id = CryptoJS.AES.decrypt(this.userDetail.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8)
-    param.user_id = id
-    param.batchid = this.batchId
-    console.log(param)
+  getTopicV2(parent, call) {
+    // tslint:disable-next-line: prefer-const
+    let param: any = {};
+    param.parent = parent;
+    param.contentID = this.courseid;
+    // tslint:disable-next-line: prefer-const
+    let id = CryptoJS.AES.decrypt(this.userDetail.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
+    param.user_id = id;
+    param.batchid = this.batchId;
+    console.log(param);
     this.commonService.getTOC(param).subscribe((data: any) => {
-      if(call==='filter'){
-        this.mainModule.childData = data.message
+      if (call === 'filter') {
+        this.mainModule.childData = data.message;
       }
-      if(call==='selector'){
-        this.questionTopicList.childData = data.message
+      if (call === 'selector') {
+        this.questionTopicList.childData = data.message;
       }
-    })
+    });
   }
 
-  askQAModuleSelect(){
-    this.getTopicV2(this.questionTopicList.id,'selector')
-    this.questionModule = this.questionTopicList?.id
-    this.questionTopic=null
+  askQAModuleSelect() {
+    this.getTopicV2(this.questionTopicList.id, 'selector');
+    this.questionModule = this.questionTopicList?.id;
+    this.questionTopic = null;
   }
 
-  submitMyQuestion(){
-    if(this.questionModule ){
-    if(this.questionTopic){
-    if(this.questionText.trim().length){
-      // this.ngxLoader.start();
-      this.Lservice.askaquestion(this.userDetail.user_id,this.courseid,this.questionModule,this.questionTopic,this.questionText).subscribe((data:any)=>{
+  submitMyQuestion() {
+    if (this.questionModule ) {
+    if (this.questionTopic) {
+    if (this.questionText.trim().length) {
+      this.Lservice.askaquestion(this.userDetail.user_id, this.courseid, this.questionModule,
+         this.questionTopic, this.questionText).subscribe((data: any) => {
         // console.log(data)
-        this.questionText="";
+        this.questionText = '';
         // this.ngxLoader.stop()
-        if(data?.data?.askaquestion?.success){
-          this.closedialogbox()
-          this.toastr.success(data?.data?.askaquestion?.message)
-        }else{
+        if (data?.data?.askaquestion?.success) {
+          this.closedialogbox();
+          this.toastr.success(data?.data?.askaquestion?.message);
+        } else {
          // this.toastr.warning(data?.data?.bookmark?.message)
         }
-      })
-    }else{
-      this.toastr.warning("Please enter some text")
+      });
+    } else {
+      this.toastr.warning('Please enter some text');
     }
-  }else{
-    this.toastr.warning("Please select a topic")
+  } else {
+    this.toastr.warning('Please select a topic');
   }
-    }else{
-      this.toastr.warning("Please select a module")
+    } else {
+      this.toastr.warning('Please select a module');
     }
   }
 
-  closedialogbox(){
+  closedialogbox() {
     this.questionModule = null;
     this.questionTopic = null;
-    this.mainTopic=null
-    this.questionTopicList=null;
-    this.questionTopic=null
+    this.mainTopic = null;
+    this.questionTopicList = null;
+    this.questionTopic = null;
     this.dialog.closeAll();
   }
 
   goBack() {
-    this.route.navigateByUrl('/Learner/MyCourse');
-  }
-  contextmenu() {
-    event.preventDefault();
+    this.route.navigateByUrl('/Landing/MyCourse');
   }
 }

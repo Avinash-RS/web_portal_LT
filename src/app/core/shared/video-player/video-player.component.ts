@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { CommonServicesService } from '@core/services/common-services.service';
-import { VgAPI, VgFullscreenAPI } from 'videogular2/compiled/core';
 // tslint:disable-next-line:class-name
 export interface playback {
   value: string;
@@ -22,8 +21,8 @@ export class VideoPlayerComponent {
   autoplay = false;
   loop = false;
   preload = 'auto';
-  api: VgAPI;
-  fsAPI: VgFullscreenAPI;
+  // api: VgAPI;
+  // fsAPI: VgFullscreenAPI;
   nativeFs = true;
   playback = '1.0';
   playbackRate: playback[] = [
@@ -39,7 +38,7 @@ export class VideoPlayerComponent {
   ngOnInit() {
     this.service.pauseVideo.subscribe((data: any) => {
       if (data === 'off') {
-        this.api.pause();
+        // this.api.pause();
       }
     });
     this.sources = [
@@ -50,36 +49,35 @@ export class VideoPlayerComponent {
     ];
   }
 
-  onPlayerReady(api: VgAPI) {
-    this.api = api;
-    this.fsAPI = this.api.fsAPI;
-    this.nativeFs = this.fsAPI.nativeFullscreen;
+  // onPlayerReady(api: VgAPI) {
+  //   this.api = api;
+  //   this.fsAPI = this.api.fsAPI;
+  //   this.nativeFs = this.fsAPI.nativeFullscreen;
 
-    this.api.getDefaultMedia().subscriptions.ended.subscribe(
-      () => {
-        // Set the video to the beginning
-        this.api.getDefaultMedia().currentTime = 0;
-      }
-    );
-  }
+  //   this.api.getDefaultMedia().subscriptions.ended.subscribe(
+  //     () => {
+  //       this.api.getDefaultMedia().currentTime = 0;
+  //     }
+  //   );
+  // }
   // added time to 10sec
   next(currenttime) {
     const time = currenttime + 10;
-    this.api.currentTime = time;
+    // this.api.currentTime = time;
   }
   // less time to 10sec
   previous(currenttime) {
     const time = currenttime - 10;
-    this.api.currentTime = time;
+    // this.api.currentTime = time;
   }
 
   onChangeNativeFs($event) {
-    this.fsAPI.nativeFullscreen = this.nativeFs;
+    // this.fsAPI.nativeFullscreen = this.nativeFs;
 
   }
   // to speed up and speed down
   playbackValues(playbackValue) {
-    this.api.playbackRate = playbackValue.value;
+    // this.api.playbackRate = playbackValue.value;
   }
 
 }

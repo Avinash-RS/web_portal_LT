@@ -13,11 +13,11 @@ export class knowledgeService {
     httpOptions;
     constructor(private http: HttpClient, private apollo: Apollo) { }
 
-    getToken(){
-        const token = localStorage.getItem('token')||sessionStorage.getItem('token'); 
-        var userDetails = JSON.parse(localStorage.getItem('UserDetails'))
+    getToken() {
+        const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+        var userDetails = JSON.parse(localStorage.getItem('UserDetails'));
         this.httpOptions = {
-          headers: new HttpHeaders({ 
+          headers: new HttpHeaders({
             Authorization: token,
             _id: btoa(userDetails['user_id'])
            })
@@ -41,7 +41,7 @@ export class knowledgeService {
     }
 
     uploadResourceDetail(formData) {
-        return this.http.post(environment.wcaapiurl + 'api/upload/uploadresourcefile', formData,this.httpOptions);
+        return this.http.post(environment.wcaapiurl + 'api/upload/uploadresourcefile', formData, this.httpOptions);
     }
 
     saveResourceData(knowledgeDetails) {

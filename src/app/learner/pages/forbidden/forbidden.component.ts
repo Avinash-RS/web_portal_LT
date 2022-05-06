@@ -8,9 +8,9 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class ForbiddenComponent implements OnInit {
 
-  constructor(public translate: TranslateService) { 
-    let lang = localStorage.getItem('language')
-       this.translate.use(lang?lang:'en') 
+  constructor(public translate: TranslateService) {
+    const lang = localStorage.getItem('language');
+    this.translate.use(lang ? lang : 'en');
    }
 
   ngOnInit() {

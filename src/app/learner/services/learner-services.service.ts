@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { Subject,Observable } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import * as CryptoJS from 'crypto-js';
 
@@ -13,7 +13,11 @@ import { addTopicreference, bulkclaimcourse, claimcourse, createGuidanceRequest,
        playerstatusrealtime, resendOtponprofile, saveAttendies, updateEmailonprofile,
        updateMobileonprofile, updateProfile, updateVerifyotpmobileonProfile,
        userMstrdata, userRegistration, userRegistrationdone, userRegistrationmobileOtpsend,
-         userRegistrationmobileOtpverify, userRegistrationUsernamesuggestion, viewProfile, viewProfile1, set_bookmark, set_askaquestion, getMyQuestion, get_allquestion, getQAsortsearch,getActivityCalendar, getengineersForumData, createEngineersForumData,getuserRecordbasedonSecretKey,verify_tfa_setup, userexperienceQry} from './operations/learner_mutation';
+         userRegistrationmobileOtpverify, userRegistrationUsernamesuggestion, viewProfile, 
+         viewProfile1, set_bookmark, set_askaquestion, getMyQuestion, get_allquestion, 
+         getQAsortsearch, getActivityCalendar, getengineersForumData, createEngineersForumData,
+         getuserRecordbasedonSecretKey, verify_tfa_setup, userexperienceQry
+        ,insertModuleTopicSkeleton} from './operations/learner_mutation';
 import {
 boarddetail, checkExistingUser, getActivityDetailsByBatchAndCourseID, getAssignmentmoduleData,
  getcalenderactivity, getCountForCategories, getCountForJobroleCategories, getCoureBasedOnCatalog,
@@ -26,10 +30,13 @@ boarddetail, checkExistingUser, getActivityDetailsByBatchAndCourseID, getAssignm
    getCoursebyUser, getDisciplinedetails, getInstitutedetails, getLanguagedetails,
    getModuletopic, getOrganizationbyId, getPopularCourse, getQualificationdetails,
      getSpecificationdetails, getSubCategory, getTrendingcourse, getUserdetail,
-     getUserdetailUsername, listContent, login, playerModuleAndTopic, singleBatchInfo,
-     syllabusofParticularScorm, ViewAllThreadData, ViewAllThreadDataBid, ViewSingleTopicDiscussionData, get_batchwise_learner_dashboard_data, get_learner_dashboard_count,
-     getCourseGallery , getLearnerNewCourseReport, getCourseReportByUserid, getProgressionActivitydata,selfLearningdatabyUserId, getengineersForumQA_Count,recentlycourse,
-     getlabactivity,labactivity,weekWiseCourseChart,overAllCourseProgressByUserId,getlabActivityData,getStepCourseByLearner, playerstatus,getlearnerquiz
+     getUserdetailUsername, listContent, learner_login, playerModuleAndTopic, singleBatchInfo,
+     syllabusofParticularScorm, ViewAllThreadData, ViewAllThreadDataBid, ViewSingleTopicDiscussionData,
+     get_batchwise_learner_dashboard_data, get_learner_dashboard_count,
+     getCourseGallery, getLearnerNewCourseReport, getCourseReportByUserid, getProgressionActivitydata,
+     selfLearningdatabyUserId, getengineersForumQA_Count, recentlycourse,
+     getlabactivity, labactivity, weekWiseCourseChart, overAllCourseProgressByUserId,
+     getlabActivityData, getStepCourseByLearner, playerstatus, getlearnerquiz,get_batchwise_learner_dashboard_data_v2
 } from './operations/learner_query';
 
 
@@ -37,7 +44,7 @@ boarddetail, checkExistingUser, getActivityDetailsByBatchAndCourseID, getAssignm
   providedIn: 'root'
 })
 export class LearnerServicesService {
-  secretKey = "(!@#Passcode!@#)";
+  secretKey = '(!@#Passcode!@#)';
   httpOptions;
   envWcaApi: any = environment.wcaapiurl;
   envApi: any = environment.apiUrl;
@@ -45,20 +52,6 @@ export class LearnerServicesService {
   envCourseApi: any = environment.createCourseApi;
   envDomain: any = environment.domain;
 
-  // tslint:disable-next-line:no-shadowed-variable
-  constructor(private Apollo: Apollo, private http: HttpClient) { }
-
-  getToken(){
-    const token = localStorage.getItem('token')||sessionStorage.getItem('token'); 
-    var userDetails = JSON.parse(localStorage.getItem('UserDetails'))
-    this.httpOptions = {
-      headers: new HttpHeaders({ 
-        Authorization: 'Bearer '+token,
-        requestId: userDetails['user_id']
-       })
-    };
-  }
-  
   closeRecoderdData$ = new Subject<any>();
   closeRecoderdData = this.closeRecoderdData$.asObservable();
 
@@ -71,30 +64,43 @@ export class LearnerServicesService {
   closeMobileResp$ = new Subject<any>();
   closeMobileResp = this.closeMobileResp$.asObservable();
   ProgressPercentage = new Subject<any>();
+  // tslint:disable-next-line:no-shadowed-variable
+  constructor(private Apollo: Apollo, private http: HttpClient) { }
+
+  getToken() {
+    const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+    const userDetails = JSON.parse(localStorage.getItem('UserDetails'));
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + token,
+        requestId: userDetails['user_id']
+       })
+    };
+  }
 
   sendMessage(fileCount, message: string) {
     this.ProgressPercentage.next(
-      { 
+      {
         text: message ,
         count: fileCount
       }
       );
   }
-getBookmarkFilter(postParam){
+getBookmarkFilter(postParam) {
   this.getToken();
-  return this.http.post(environment.apiUrl+'getbookmark',postParam,this.httpOptions);
+  return this.http.post(environment.apiUrl + 'getbookmark', postParam, this.httpOptions);
 }
-uploadAssignments(fromdata) { 
+uploadAssignments(fromdata) {
   this.getToken();
-  return this.http.post(this.envApi + 'wca/learnerscorefile', fromdata, this.httpOptions); 
+  return this.http.post(this.envApi + 'wca/learnerscorefile', fromdata, this.httpOptions);
 }
-assignmentAction(data){
+assignmentAction(data) {
   this.getToken();
-  return this.http.post(this.envApi + 'wca/submitDeleteAssignmentData',data,this.httpOptions);
+  return this.http.post(this.envApi + 'wca/submitDeleteAssignmentData', data, this.httpOptions);
 }
 imageupload(fb) {
   this.getToken();
-  return this.http.post<any[]>(this.envApiImg + `upload/image`, fb,this.httpOptions);
+  return this.http.post<any[]>(this.envApiImg + `upload/image`, fb, this.httpOptions);
 }
 
 postcomment(data) {
@@ -110,22 +116,21 @@ likepost(data) {
   this.getToken();
   return this.http.post(this.envApi + 'post_like', data, this.httpOptions);
 }
-getEmail(input) 
-  {
-   return this.http.post(this.envApi + '/getuserRecord/getuserRecordbasedonSecretKey', input,this.httpOptions);
+getEmail(input) {
+   return this.http.post(this.envApi + '/getuserRecord/getuserRecordbasedonSecretKey', input, this.httpOptions);
    }
 
-   learnerUploadVideo(data) { 
+   learnerUploadVideo(data) {
     this.getToken();
-    return this.http.post(environment.apiUrl + 'globalupload', data,this.httpOptions);
+    return this.http.post(environment.apiUrl + 'globalupload', data, this.httpOptions);
    }
-  learnerSumbitdeleteVideo(submitData) { 
+  learnerSumbitdeleteVideo(submitData) {
     this.getToken();
-    return this.http.post(environment.apiUrl + 'wca/learnerSumbitdeleteVideo', submitData,this.httpOptions); 
+    return this.http.post(environment.apiUrl + 'wca/learnerSumbitdeleteVideo', submitData, this.httpOptions);
   }
-  insertRecord(data) { 
+  insertRecord(data) {
     this.getToken();
-    return this.http.post(environment.apiUrl + 'learnerUploadVideo', data,this.httpOptions); }
+    return this.http.post(environment.apiUrl + 'learnerUploadVideo', data, this.httpOptions); }
 
 clearMessage() {
   this.ProgressPercentage.next();
@@ -143,19 +148,18 @@ getMessage(): Observable<any> {
     });
   }
 
-  login(username, password, isAdmin,badgeRequest) {
+  learner_login(username, password, badgeRequest) {
     return this.Apollo.query({
-      query: login,
+      query: learner_login,
       variables: {
         username,
         password,
-        is_admin: isAdmin,
         badgeRequest
       }
     });
   }
 
-  verifyAuth(token,user_id){
+  verifyAuth(token, user_id) {
     return this.Apollo.query({
       query: verify_tfa_setup,
       variables: {
@@ -173,7 +177,7 @@ getMessage(): Observable<any> {
   //   return this.http.post(this.envApi + 'getuserRecordbasedonSecretKey', input, httpOptions);
   // }
 
-  user_registration(email, fullName, mobileNumber, titleId, termsandconditions,badgeRequest) {
+  user_registration(email, fullName, mobileNumber, titleId, termsandconditions, badgeRequest) {
     return this.Apollo.query({
       query: userRegistration,
       variables: {
@@ -284,7 +288,7 @@ getMessage(): Observable<any> {
   }
 
 
-  forgotUsernameandPassword(type, subtype, mobileNumber, email,badgeRequest) {
+  forgotUsernameandPassword(type, subtype, mobileNumber, email, badgeRequest) {
     return this.Apollo.query({
       query: getForgotUsernamemobileEmail,
       variables: {
@@ -305,7 +309,7 @@ getMessage(): Observable<any> {
       }
     });
   }
-  resetPassword(username, password,resetCode,badgeRequest) {
+  resetPassword(username, password, resetCode, badgeRequest) {
     return this.Apollo.query({
       query: getForgotpasswordbyResetpassword,
       variables: {
@@ -316,8 +320,7 @@ getMessage(): Observable<any> {
       }
     });
   }
-  
-  getUser(userSecretkey){
+  getUser(userSecretkey) {
     return this.Apollo.query({
       query: getuserRecordbasedonSecretKey,
       variables: {
@@ -848,7 +851,7 @@ getMessage(): Observable<any> {
     }
   }
 
-  getReadLeanerActivity(userid, date, courseid,status,activity,datetype) {
+  getReadLeanerActivity(userid, date, courseid, status, activity, datetype) {
     return this.Apollo.query({
       query: getReadLeanerActivity,
       variables: {
@@ -872,7 +875,7 @@ getMessage(): Observable<any> {
     });
   }
 
-  getLearnerActivity(courseId,status,dateType,date,activityType,userId){
+  getLearnerActivity(courseId, status, dateType, date, activityType, userId) {
     return this.Apollo.query({
       query: getActivityCalendar,
       variables: {
@@ -973,31 +976,31 @@ getMessage(): Observable<any> {
       }
     });
   }
-  getlabactivity(labdata){
+  getlabactivity(labdata) {
     return this.Apollo.query({
-      query:getlabActivityData,
-      variables:{
-        userId:labdata.userId,
-        courseId:labdata.courseId,
-        pagination:labdata.pagination,
-        page:labdata.page,
-        noofItems:labdata.noofItems,
-        username:labdata.username
-      }
-    })
-  }
-
-  labactivity(labdetails){
-    return this.Apollo.query({
-      query: labactivity,
-      variables:{
-        username:labdetails.username,
-        attempt_id:labdetails.attempt_id
+      query: getlabActivityData,
+      variables: {
+        userId: labdata.userId,
+        courseId: labdata.courseId,
+        pagination: labdata.pagination,
+        page: labdata.page,
+        noofItems: labdata.noofItems,
+        username: labdata.username
       }
     });
   }
 
-  getAssignmentmoduleData(userId,courseid,pagination,page,noofItems) {
+  labactivity(labdetails) {
+    return this.Apollo.query({
+      query: labactivity,
+      variables: {
+        username: labdetails.username,
+        attempt_id: labdetails.attempt_id
+      }
+    });
+  }
+
+  getAssignmentmoduleData(userId, courseid, pagination, page, noofItems) {
     return this.Apollo.query({
       query: getAssignmentmoduleData,
       variables: {
@@ -1009,7 +1012,7 @@ getMessage(): Observable<any> {
       }
     });
   }
-getprojectActivityData(userId, courseId,pagination,page,noofItems) {
+getprojectActivityData(userId, courseId, pagination, page, noofItems) {
   return this.Apollo.query({
     query: getprojectActivityData,
     variables: {
@@ -1022,7 +1025,7 @@ getprojectActivityData(userId, courseId,pagination,page,noofItems) {
   });
 }
 // get perform activity details
-  getperformActivityData(userId, courseId,pagination,page,noofItems) {
+  getperformActivityData(userId, courseId, pagination, page, noofItems) {
     return this.Apollo.query({
       query: getperformActivityData,
       variables: {
@@ -1075,8 +1078,17 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
       }
     });
   }
-
-  get_batchwise_learner_dashboard_data(user_id,request_type,jobroleCategoryId) {
+  get_batchwise_learner_dashboard_data_v2(user_id, request_type, jobroleCategoryId) {
+    return this.Apollo.query({
+      query: get_batchwise_learner_dashboard_data_v2,
+      variables: {
+        user_id,
+        request_type,
+        jobroleCategoryId
+      }
+    });
+  }
+  get_batchwise_learner_dashboard_data(user_id, request_type, jobroleCategoryId) {
     return this.Apollo.query({
       query: get_batchwise_learner_dashboard_data,
       variables: {
@@ -1087,7 +1099,7 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
     });
   }
 
-  get_learner_dashboard_count(user_id,user_obj_id, jobroleCategoryId) {
+  get_learner_dashboard_count(user_id, user_obj_id, jobroleCategoryId) {
     return this.Apollo.query({
       query: get_learner_dashboard_count,
       variables: {
@@ -1098,7 +1110,7 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
     });
   }
 
-  userexperience(user_id,course_id,batchid,parent,user_experience,id,status,module,topic) {
+  userexperience(user_id, course_id, batchid, parent, user_experience, id, status, module, topic) {
     return this.Apollo.query({
       query: userexperienceQry,
       variables: {
@@ -1114,7 +1126,7 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
       }
     });
   }
-  bookmark(user_id,course_id,batchid,parent,bookmark,lastLogIndex,id,module,topic) {
+  bookmark(user_id, course_id, batchid, parent, bookmark, lastLogIndex, id, module, topic) {
     return this.Apollo.query({
       query: set_bookmark,
       variables: {
@@ -1130,8 +1142,8 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
       }
     });
   }
-  
-  askaquestion(user_id,course_id,module,topic,question) {
+
+  askaquestion(user_id, course_id, module, topic, question) {
     return this.Apollo.query({
       query: set_askaquestion,
       variables: {
@@ -1144,7 +1156,7 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
     });
   }
 
-  getMyQuestion(user_id,course_id,module,topic) {
+  getMyQuestion(user_id, course_id, module, topic) {
     return this.Apollo.query({
       query: getMyQuestion,
       variables: {
@@ -1155,7 +1167,7 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
       }
     });
   }
-  getallquestion(user_id,course_id,module,topic,sort,batchid) {
+  getallquestion(user_id, course_id, module, topic, sort, batchid) {
     return this.Apollo.query({
       query: get_allquestion,
       variables: {
@@ -1192,7 +1204,7 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
       }
     });
   }
-  getLearnerNewCourseReport(batchid,courseid,userid,refresh,selflearning_totalweeks,colloboration_totalweeks) {
+  getLearnerNewCourseReport(batchid, courseid, userid, refresh, selflearning_totalweeks, colloboration_totalweeks) {
     return this.Apollo.query({
       query: getLearnerNewCourseReport,
       variables: {
@@ -1206,7 +1218,7 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
     });
   }
 
- getProgressionData(user_id,course_id) {
+ getProgressionData(user_id, course_id) {
     return this.Apollo.query({
       query: getCourseReportByUserid,
       variables: {
@@ -1216,7 +1228,7 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
     });
   }
 
-  getSelfLearningdata(type,userId,courseId) {
+  getSelfLearningdata(type, userId, courseId) {
     return this.Apollo.query({
       query: selfLearningdatabyUserId,
       variables: {
@@ -1227,7 +1239,7 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
     });
   }
 
-  getProgressionActivitydata(userId,courseId) {
+  getProgressionActivitydata(userId, courseId) {
     return this.Apollo.query({
       query: getProgressionActivitydata,
       variables: {
@@ -1236,7 +1248,7 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
       }
     });
   }
-  getengineersForumData(userId,courseId,requestType,pagenumber,searchString,tabType) {
+  getengineersForumData(userId, courseId, requestType, pagenumber, searchString, tabType) {
     return this.Apollo.query({
       query: getengineersForumData,
       variables: {
@@ -1249,7 +1261,7 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
       }
     });
   }
-  getengineersForumQA_Count(userId,courseId) {
+  getengineersForumQA_Count(userId, courseId) {
     return this.Apollo.query({
       query: getengineersForumQA_Count,
       variables: {
@@ -1258,7 +1270,7 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
       }
     });
   }
-  createEngineersForumData(userId,userName,courseId,question,courseName,batchId,orgId) {
+  createEngineersForumData(userId, userName, courseId, question, courseName, batchId, orgId) {
     return this.Apollo.query({
       query: createEngineersForumData,
       variables: {
@@ -1282,24 +1294,24 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
     });
   }
 
-  getweekWiseCourseChart(courseId,userId,startDate,type){
+  getweekWiseCourseChart(courseId, userId, startDate, type) {
     return this.Apollo.query({
-      query:weekWiseCourseChart,
-      variables:{
-        courseId:courseId,
-        userId:userId,
-        startDate:startDate,
-        type:type
+      query: weekWiseCourseChart,
+      variables: {
+        courseId,
+        userId,
+        startDate,
+        type
       }
     });
   }
-  getoverAllCourseProgressByUserId(userId,startDate,endDate){
+  getoverAllCourseProgressByUserId(userId, startDate, endDate) {
     return this.Apollo.query({
-      query:overAllCourseProgressByUserId,
-      variables:{
-        userId:userId,
-        startDate:startDate,
-        endDate:endDate,
+      query: overAllCourseProgressByUserId,
+      variables: {
+        userId,
+        startDate,
+        endDate,
       }
     });
   }
@@ -1310,16 +1322,24 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
         email:email,
         courseid:courseid
       }
-    })
+    });
   }
-  getStepDetails(user_id){
+  getStepDetails(user_id) {
     return this.Apollo.query({
-      query:getStepCourseByLearner,
-      variables:{
-        user_id:user_id
+      query: getStepCourseByLearner,
+      variables: {
+        user_id
       }
     });
   }
 
+  insertSkeleton(user_id){
+    return this.Apollo.query({
+      query:insertModuleTopicSkeleton,
+      variables:{
+        user_id
+      }
+    });
+  }
   
 }

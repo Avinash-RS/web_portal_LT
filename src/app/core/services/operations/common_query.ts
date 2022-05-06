@@ -400,7 +400,7 @@ export const viewcourse = gql`
     }
   }`;
 
-  export const view_course_for_learner = gql`
+export const view_course_for_learner = gql`
   query view_course_for_learner($course_id: String!){
     view_course_for_learner(course_id: $course_id) {
       success
