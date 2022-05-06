@@ -535,8 +535,14 @@ export class LearnerNewMyCourseComponent implements OnInit {
           this.onGoingCourseCount = BcourseData.data.get_batchwise_learner_dashboard_data_v2.ongoing ?BcourseData.data.get_batchwise_learner_dashboard_data_v2.ongoing:0;
           this.completedCourseCount = BcourseData.data.get_batchwise_learner_dashboard_data_v2.completed ? BcourseData.data.get_batchwise_learner_dashboard_data_v2.completed:0;
           this.allCourseCount =BcourseData.data.get_batchwise_learner_dashboard_data_v2.all ? BcourseData.data.get_batchwise_learner_dashboard_data_v2.all:0;
-          this.courseSkel = true;
         }
+        else {
+          this.courseDetailsList = [];
+          this.onGoingCourseCount = 0;
+          this.completedCourseCount = 0;
+          this.allCourseCount = 0;
+        }
+        this.courseSkel = true;
     });
 
   }
