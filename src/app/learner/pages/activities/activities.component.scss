@@ -107,7 +107,6 @@
     cursor: pointer;
     margin-bottom: 15px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
   }
 }
@@ -965,8 +964,9 @@
 
 .uploadfileName {
   position: relative;
-  left: 10px;
-  top: 5px;
+  flex-grow: 1;
+  // left: 10px;
+  // top: 5px;
 }
 .deleteIcon {
   color: #5c6873;
@@ -1054,16 +1054,21 @@
   // border-radius: 2px;
   cursor: default;
   width: 10%;
+  &.lxp-PlayCircle {
+    font-size: 20px;
+  }
 }
 .videoName {
   position: relative;
   width: 80%;
+  text-align: left;
   // top: 7px;
 }
 .deleteBtn {
   width: 10%;
   color: #5c6873;
   font-size: 20px;
+  cursor: pointer;
 }
 .ml-13 {
   margin-left: 13px;
