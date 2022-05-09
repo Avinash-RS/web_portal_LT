@@ -526,56 +526,25 @@ export class LearnerNewMyCourseComponent implements OnInit {
       jobRoleIdSEQ = this.jobroleCategoryId;
     }
     if (this.jobroleCategoryId === 'All') { jobRoleId = null; }
-    this.learnerService.get_batchwise_learner_dashboard_data(userId, requestType, jobRoleIdSEQ).subscribe((BcourseData: any) => {
-      BcourseData?.data?.get_batchwise_learner_dashboard_data?.message?.forEach(elem => {
-        elem.isBatchCourse = true;
-        if (this.isMobile) {
-          elem.progresslistExp = true;
-          elem.courseInfoExp = true;
+    this.learnerService.get_batchwise_learner_dashboard_data_v2(userId, requestType, jobRoleIdSEQ).subscribe((BcourseData: any) => {
+        if(BcourseData?.data?.get_batchwise_learner_dashboard_data_v2?.success){
+          this.courseDetailsList = BcourseData?.data.get_batchwise_learner_dashboard_data_v2?.message.length > 0 ? BcourseData.data.get_batchwise_learner_dashboard_data_v2.message :[];
+          this.courseDetailsList.forEach((value) => {
+            value.show = true;
+          });
+          this.onGoingCourseCount = BcourseData.data.get_batchwise_learner_dashboard_data_v2.ongoing ?BcourseData.data.get_batchwise_learner_dashboard_data_v2.ongoing:0;
+          this.completedCourseCount = BcourseData.data.get_batchwise_learner_dashboard_data_v2.completed ? BcourseData.data.get_batchwise_learner_dashboard_data_v2.completed:0;
+          this.allCourseCount =BcourseData.data.get_batchwise_learner_dashboard_data_v2.all ? BcourseData.data.get_batchwise_learner_dashboard_data_v2.all:0;
         }
-      });
-      const tmpBcourseDetail = BcourseData.data.get_batchwise_learner_dashboard_data.message;
-      this.courseDetailsList = tmpBcourseDetail && tmpBcourseDetail !== null ? tmpBcourseDetail : [];
-      // this.courseDetailsList = [];
-      this.learnerService.getLearnerDashboard(userId, userObjId, 'undefined', requestType, 'enrolment').subscribe((EcourseData: any) => {
-        const EcourseDetail = EcourseData.data.get_learner_dashboard.message.enrolled_course_details;
-        this.enrolledCourses = EcourseDetail && EcourseDetail !== null ? EcourseDetail : [];
-        this.enrolledCourses.forEach(elem => {
-          elem.isBatchCourse = false;
-          if (this.isMobile) {
-            elem.progresslistExp = true;
-            elem.courseInfoExp = true;
-          }
-        });
-        this.courseDetailsList.push(...this.enrolledCourses);
-        this.courseDetailsList.forEach((value) => {
-          value.show = true;
-          value.weekPercentage = (value.current_week_count !== null ?
-              value.current_week_count : 0) + '/' + (value.actual_total_week !== null ? value.actual_total_week : 0);
-          // if(value.self_paced_learning_progression){
-          //   value.self_paced_learning_progression = Math.round(value.self_paced_learning_progression)
-            // if(value.self_paced_learning_progression <= 40) {
-            //   value.progressClass="start"
-            // } else if(value.self_paced_learning_progression <= 70){
-            //   value.progressClass="midway"
-            // } else {
-            //   value.progressClass="end"
-            // }
-          // }
-        });
+        else {
+          this.courseDetailsList = [];
+          this.onGoingCourseCount = 0;
+          this.completedCourseCount = 0;
+          this.allCourseCount = 0;
+        }
         this.courseSkel = true;
+    });
 
-      });
-    });
-    // Course batch count reset
-    // this.onGoingCourseCount = 0;
-    // this.completedCourseCount = 0;
-    // this.allCourseCount = 0;
-    this.learnerService.get_learner_dashboard_count(userId, userObjId, jobRoleId).subscribe((result: any) => {
-      this.onGoingCourseCount = result.data.get_learner_dashboard_count.message.ongoing_count;
-      this.completedCourseCount = result.data.get_learner_dashboard_count.message.completed_count;
-      this.allCourseCount = result.data.get_learner_dashboard_count.message.all_count;
-    });
   }
 
   courseTabChange(event, userId, userObjId) {

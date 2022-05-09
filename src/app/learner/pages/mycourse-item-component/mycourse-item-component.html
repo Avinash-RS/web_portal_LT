@@ -1,6 +1,6 @@
 <div class="courses d-flex justify-content-start">
   <div class="{{course.progress_class}} progBar">
-      <mat-progress-bar [mode]="mode" [value]="course.self_paced_learning_progression" [bufferValue]="bufferValue"></mat-progress-bar>
+      <mat-progress-bar [mode]="mode" [value]="course.course_percentage" [bufferValue]="bufferValue"></mat-progress-bar>
   </div>
   <figure class="d-flex align-items-start justify-content-center leftColImage" (click)="gotoDesc(course)">
       <img loading="lazy" [src]="course.course_img_url + blobKey" alt="" />
@@ -11,9 +11,9 @@
       <div class="progStatus {{course.progress_class}}">
           <div class="d-flex justify-content-between progression">
               <span>{{'Progression' | translate}}</span>
-              <span>{{course.self_paced_learning_progression}} %</span>
+              <span>{{course.course_percentage}} %</span>
           </div>
-          <mat-progress-bar style="height: 4px;" [mode]="mode" [value]="course.self_paced_learning_progression" [bufferValue]="bufferValue"></mat-progress-bar>
+          <mat-progress-bar style="height: 4px;" [mode]="mode" [value]="course.course_percentage" [bufferValue]="bufferValue"></mat-progress-bar>
         </div>
   </figure>
   <div class="rightCol">
@@ -21,7 +21,7 @@
           <h3 class="titleClass" title="{{course.course_name}}">{{course.course_name}}</h3>
           <div class="searchProgression d-flex justify-content-end align-items-center" [ngClass]="userDetail.org_type === 'collegeconnect' ? 'yes':'no'">
               <div class="percentage" *ngIf="userDetail.org_type === 'collegeconnect'">
-                  <circle-progress percent="{{course.course_week_Percent}}" [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2" [outerStrokeColor]="'#56b35a'" [innerStrokeColor]="'#ededed'" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [titleFontSize]="4.5" [subtitleFontSize]="5.5" [animation]="true" [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week" [subtitle]="course.weekPercentage" [showUnits]="false" [showSubtitle]="true" subtitleFontWeight=800> </circle-progress>
+                  <circle-progress percent="{{course.course_week_Percent}}" [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2" [outerStrokeColor]="'#56b35a'" [innerStrokeColor]="'#ededed'" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [titleFontSize]="4.5" [subtitleFontSize]="5.5" [animation]="true" [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week" [subtitle]="course.current_week_count + '/' + course.actual_total_week" [showUnits]="false" [showSubtitle]="true" subtitleFontWeight=800> </circle-progress>
               </div>
           </div>
       </div>
