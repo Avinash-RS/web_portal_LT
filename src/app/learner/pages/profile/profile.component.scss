@@ -6,6 +6,7 @@
 .dept-input{ 
   width: 100% !important ;
   border: white !important;
+  background-color: transparent;
 }
 
 
@@ -145,20 +146,26 @@
   align-self: flex-end;
 }
 .cameraIcon {
-  z-index: 11;
+  z-index: 9;
   position: absolute;
   left: 12px;
   top: 12px;
   background: $color-white;
   width: 25px !important
 }
-
+.editBtn {
+  width: 17px;
+  cursor: pointer;
+}
 .profile-pic {
   margin: 0 auto;
   display: flex;
   justify-content: center;
   figure {
     position: relative;
+    mat-icon {
+      cursor: pointer;
+    }
   }
 }
 
