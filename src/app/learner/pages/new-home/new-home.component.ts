@@ -17,6 +17,11 @@ export class NewHomeComponent implements OnInit {
   userDetail;
   secondStep = false;
   @ViewChild('authInput') authInput;
+  @HostListener('window:beforeunload', ['$event'])
+  clearStorage($event: any) {
+    localStorage.clear();
+    sessionStorage.clear();
+  }
   constructor(public translate: TranslateService, public learnerService: LearnerServicesService,
               private gs: GlobalServiceService, private router: Router, private toastr: ToastrService, location: PlatformLocation) {
     const lang = localStorage.getItem('language');
@@ -84,11 +89,6 @@ export class NewHomeComponent implements OnInit {
 
   save() {
     console.log('enter');
-  }
-
-  ngOnDestroy(){
-    localStorage.clear();
-    sessionStorage.clear();
   }
 }
 
