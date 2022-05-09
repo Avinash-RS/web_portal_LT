@@ -85,5 +85,10 @@ export class NewHomeComponent implements OnInit {
   save() {
     console.log('enter');
   }
+
+  ngOnDestroy(){
+    localStorage.clear();
+    sessionStorage.clear();
+  }
 }
 
