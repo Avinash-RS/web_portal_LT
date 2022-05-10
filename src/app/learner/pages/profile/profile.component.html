@@ -19,9 +19,9 @@
           <span class="f_size_15 f_wt_500 ">{{'Password : ********' | translate}}</span>
         </div>
         <div class="col-md-2 col-sm-2 col-2">
-          <span [tooltip]="'Click here to change Password' | translate" placement="bottom" class="tooltip-350">
-            <mat-icon [ngClass]="cannotEdit ? 'm-n f_size_17 bb' : 'f_size_17 bb'" *ngIf="editpopup"
-            style="width: 17px;"  (click)="editPassword(passwordDialog)"> create</mat-icon>
+          <span>
+            <mat-icon class="editBtn" [matTooltip]="'Click here to change Password' | translate" matTooltipPosition="above" [ngClass]="cannotEdit ? 'm-n f_size_17 bb' : 'f_size_17 bb'" *ngIf="editpopup"
+            (click)="editPassword(passwordDialog)"> create</mat-icon>
           </span>
         </div>
       </div>
@@ -97,7 +97,7 @@
               <input [(ngModel)]="deptname" class="dept-input" placeholder="Enter department name...">
           </div>
         <div class="col-md-2 col-sm-2 col-2">
-          <mat-icon [ngClass]="cannotEdit ? 'm-n f_size_17 bb' : 'f_size_17 bb'" style="width: 17px;" class="tooltip-350" [tooltip]="'Enter your department name'| translate" placement="bottom"> create</mat-icon>
+          <mat-icon [ngClass]="cannotEdit ? 'm-n f_size_17 bb' : 'f_size_17 bb'" style="width: 17px;cursor: pointer;" class="tooltip-350"  [matTooltip]="'Enter your department name' | translate" matTooltipPosition="above" > create</mat-icon>
         </div>
       </div>
     </div> 
@@ -281,7 +281,7 @@
     <form [formGroup]="passwordForm" autocomplete="off">
       <mat-form-field class="w-100" appearance="outline">
         <mat-label class="labe l-color">{{'Enter current password' | translate}}</mat-label>
-        <input onpaste="return false" matInput placeholder="'Enter password' | translate" [type]="hide ? 'password' : 'text'" formControlName="currentpassword" [ngClass]="{ 'is-invalid': c.currentpassword.touched && c.currentpassword.errors }" required>
+        <input onpaste="return false" matInput [placeholder]="'Enter password' | translate" [type]="hide ? 'password' : 'text'" formControlName="currentpassword" [ngClass]="{ 'is-invalid': c.currentpassword.touched && c.currentpassword.errors }" required>
         <span mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
           <em class="icon-color" [ngClass]="hide ? 'lxp-VisibilityOff' : 'lxp-Visibility'"></em>
         </span>
@@ -293,7 +293,7 @@
       <p class=" f_size_14">{{'The password should not be last password' | translate}}</p>
       <mat-form-field class="w-100" appearance="outline">
         <mat-label class="labe l-color">{{'Enter New password' | translate}}</mat-label>
-        <input onpaste="return false" matInput placeholder="'Enter password' | translate" [type]="showNew ? 'password' : 'text'" formControlName="newpassword" 
+        <input onpaste="return false" matInput [placeholder]="'Enter password' | translate" [type]="showNew ? 'password' : 'text'" formControlName="newpassword" 
         onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false"[ngClass]="{ 'is-invalid': c.newpassword.touched && c.newpassword.errors }" (keyup)="change($event)">
         <span mat-icon-button matSuffix (click)="showNew = !showNew" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="showNew">
           <em class="icon-color" [ngClass]="showNew ? 'lxp-VisibilityOff' : 'lxp-Visibility'"></em>
