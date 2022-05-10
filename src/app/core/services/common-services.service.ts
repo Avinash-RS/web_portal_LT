@@ -86,11 +86,13 @@ export class CommonServicesService {
   }
   logout(user_id, is_admin) {
     // this.apollo.getClient().resetStore();
+    var is_step = localStorage.getItem('step') == 'true' ? true : false;
     return this.apollo.query({
       query: logout,
       variables: {
         user_id,
-        is_admin
+        is_admin,
+        is_step
       }
     });
   }
