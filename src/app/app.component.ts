@@ -273,8 +273,7 @@ myUnload() {
     }
       
       this.commonService.getIpAddressByUrl();
-      var step = localStorage.getItem('step') == 'true' ? true : false
-      this.commonService.logout(userDetail.user_id, false,step).subscribe((logout: any) => {
+      this.commonService.logout(userDetail.user_id, false).subscribe((logout: any) => {
         this.UserDetails = null;
         localStorage.clear();
         sessionStorage.clear();
