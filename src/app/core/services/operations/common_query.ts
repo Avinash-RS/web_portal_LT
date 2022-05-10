@@ -11,8 +11,8 @@ export const logout = gql`
 
 
 export const getAllNotifications = gql`
-  query getAllNotifications($userId: String!, $userType: String, $pagenumber:Int!) {
-    getAllNotifications(userId: $userId, userType: $userType, pagenumber: $pagenumber) {
+  query getAllNotifications($userId: String!, $userType: String, $pagenumber:Int!, $is_step: Boolean) {
+    getAllNotifications(userId: $userId, userType: $userType, pagenumber: $pagenumber, is_step: $is_step) {
     message
     unReadCount
     totalCount

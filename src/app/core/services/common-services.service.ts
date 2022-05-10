@@ -84,13 +84,13 @@ export class CommonServicesService {
        })
     };
   }
-  logout(user_id, is_admin) {
+  logout(user_id, is_admin, is_step) {
     // this.apollo.getClient().resetStore();
     return this.apollo.query({
       query: logout,
       variables: {
         user_id,
-        is_admin
+        is_step
       }
     });
   }
