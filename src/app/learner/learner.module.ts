@@ -24,7 +24,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatPaginatorModule } from '@angular/material/paginator';
-
+import {MatRadioModule} from '@angular/material/radio';
 // others
 import { NgxMaskModule } from 'ngx-mask';
 import { ApolloModule, Apollo } from 'apollo-angular';
@@ -112,6 +112,7 @@ const routes: Routes = [
     MatIconModule,
     MatButtonModule,
     MatPaginatorModule,
+    MatRadioModule,
     FormsModule,
     ReactiveFormsModule,
     InfiniteScrollModule,
