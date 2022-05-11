@@ -308,103 +308,44 @@
 
         <!-- name row end -->
         <!-- content start -->
-        <div class="row p-lr-15 m-t-20">
+        <div class="row p-lr-15 editorContent">
           <div class="col-1"></div>
           <div class="col-11 thread_title p-l-0">
-            <p class="f_size_17 color_black f_wt_400 color_grey" style="word-break: break-all">
+            <p class="f_size_17 color_black f_wt_400 color_grey">
               {{ selectedThreadData?.title || "Thread name" }}
             </p>
-            <div *ngIf="
-                topicDiscussionData &&
-                topicDiscussionData?.posts &&
-                topicDiscussionData?.posts[0]
-              " style="word-break: break-all">
-              <p class="no_margin" *ngIf="topicDiscussionData?.posts[0].deleted === false"
-                [innerHTML]="topicDiscussionData?.posts[0].content"></p>
+            <div *ngIf="topicDiscussionData && topicDiscussionData?.posts && topicDiscussionData?.posts[0]">
+              <p class="no_margin" *ngIf="topicDiscussionData?.posts[0].deleted === false" [innerHTML]="topicDiscussionData?.posts[0].content"></p>
             </div>
           </div>
         </div>
         <!--content ends  -->
         <mat-card-actions class="no_margin no_padding">
-          <div class="row p-lr-15 m-t-20 m-b-15" *ngIf="topicDiscussionData?.posts && topicDiscussionData?.posts[0]">
-            <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12"></div>
+          <div class="likeCommnet" *ngIf="topicDiscussionData?.posts && topicDiscussionData?.posts[0]">
             <div class="col-xl-11 col-lg-11 col-md-11 col-sm-12 col-12 no_padding">
-              &nbsp;
-              <button mat-button class="f_size_12 no_padding" [disabled]="topicDiscussionData.posts[0].apiCalled"
-                (click)="
-                  likeandunlikepost(
-                    topicDiscussionData?.posts && topicDiscussionData?.posts[0]
-                  )
-                ">
-                <mat-icon class="action_icon" [ngClass]="{
-                    pointerNone: topicDiscussionData.posts[0].apiCalled
-                  }" *ngIf="
-                    topicDiscussionData?.posts &&
-                    !topicDiscussionData?.posts[0]?.bookmarked
-                  ">
-                  thumb_up_alt</mat-icon>
-                <mat-icon class="action_icon_filled" [ngClass]="{
-                    pointerNone: topicDiscussionData.posts[0].apiCalled
-                  }" *ngIf="
-                    topicDiscussionData?.posts &&
-                    topicDiscussionData?.posts[0]?.bookmarked
-                  ">
-                  thumb_up_alt</mat-icon>{{ "Like" | translate }} ({{
-                  (topicDiscussionData?.posts &&
-                    topicDiscussionData?.posts[0] &&
-                    topicDiscussionData?.posts[0]?.bookmarks) ||
-                    0
-                }})
+              <button mat-button class="f_size_12 no_padding" [disabled]="topicDiscussionData.posts[0].apiCalled" (click)="likeandunlikepost(topicDiscussionData?.posts && topicDiscussionData?.posts[0])">
+                <mat-icon class="action_icon" [ngClass]="{pointerNone: topicDiscussionData.posts[0].apiCalled}" *ngIf="topicDiscussionData?.posts && !topicDiscussionData?.posts[0]?.bookmarked">thumb_up_alt</mat-icon>
+                <mat-icon class="action_icon_filled" [ngClass]="{pointerNone: topicDiscussionData.posts[0].apiCalled}" *ngIf="topicDiscussionData?.posts && topicDiscussionData?.posts[0]?.bookmarked">thumb_up_alt</mat-icon>
+                  {{ "Like" | translate }} ({{(topicDiscussionData?.posts && topicDiscussionData?.posts[0] && topicDiscussionData?.posts[0]?.bookmarks) || 0 }})
               </button>
-              &nbsp;&nbsp;
-              <button mat-button class="f_size_12 no_padding" (click)="clickToComment()" [disabled]="
-                  selectedThreadData?.thread_status === false || disableThreads
-                ">
-                <mat-icon class="action_icon" [disabled]="
-                    selectedThreadData?.thread_status === false ||
-                    disableThreads
-                  ">
-                  comment</mat-icon>{{ "Comment" | translate }}
+              <button mat-button class="f_size_12 no_padding" (click)="clickToComment()" [disabled]="selectedThreadData?.thread_status === false || disableThreads">
+                <mat-icon class="action_icon" [disabled]="selectedThreadData?.thread_status === false || disableThreads">comment</mat-icon>{{ "Comment" | translate }}
               </button>
             </div>
           </div>
-          <div class="row p-lr-30" *ngIf="showThreadComment">
-            <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12"></div>
-            <div class="
-                form-group
-                col-xl-11 col-lg-11 col-md-11 col-sm-12 col-12
-                no_padding
-                m-b-0
-              ">
-              <angular-editor [config]="config" name="addThreadComment"
-                [placeholder]="'Leave your comments here...' | translate" [(ngModel)]="addThreadComment"
-                ngDefaultControl>
-              </angular-editor>
+          <div class="replyCommentThread" *ngIf="showThreadComment">
+
+            <div class="form-group col-xl-11 col-lg-11 col-md-11 col-sm-12 col-12 no_padding m-b-0">
+              <angular-editor [config]="config" name="addThreadComment" [placeholder]="'Leave your comments here...' | translate" [(ngModel)]="addThreadComment" ngDefaultControl></angular-editor>
             </div>
-            <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12"></div>
-            <div class="
-                col-xl-11 col-lg-11 col-md-11 col-sm-12 col-12
-                m-b-15
-                p-5px
-              " style="background: whitesmoke; border: 1px solid #dddddd">
-              <div class="row">
-                <div class="
-                    col-xl-10 col-lg-10 col-md-10 col-sm-8 col-8
-                    float_right
-                    no_padding
-                  ">
-                  <mat-checkbox class="width_100 f_size_15 align-middle" [(ngModel)]="a2iFlag">
-                    &nbsp;&nbsp;{{ "Ask the instructor" | translate }}
-                  </mat-checkbox>
+
+            <div class="askInstructor">
+              <div class="row d-flex justify-content-between align-items-center">
+                <div class="no_padding">
+                  <mat-checkbox class="width_100 f_size_15 align-middle" [(ngModel)]="a2iFlag">{{ "Ask the instructor" | translate }}</mat-checkbox>
                 </div>
-                <div class="
-                    col-xl-2 col-lg-2 col-md-2 col-sm-4 col-4
-                    float_right
-                    no_padding
-                  ">
-                  <button mat-button class="no-radius send-btn" [disabled]="
-                      addThreadComment == null || addThreadComment?.length == 0
-                    " (click)="sendComment('thread', addThreadComment)">
+                <div class="no_padding">
+                  <button mat-button class="no-radius send-btn" [disabled]="addThreadComment == null || addThreadComment?.length == 0" (click)="sendComment('thread', addThreadComment)">
                     {{ "Send" | translate }}
                   </button>
                 </div>
@@ -484,38 +425,20 @@
                 </div>
               </div>
             </div>
-            <div class="row p-lr-30 m-t-20">
-              <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-3 no_padding"></div>
-              <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-9 no_padding" style="word-break: break-all">
+            <div class="replyThread">
+              <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-9 no_padding">
                 <p class="no_margin" *ngIf="post?.deleted === false" [innerHTML]="post?.content"></p>
               </div>
             </div>
             <mat-card-actions class="no_margin no_padding">
-              <div class="row p-lr-30 m-t-20 m-b-15">
-                <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12"></div>
-                <div class="
-                    col-xl-11 col-lg-11 col-md-11 col-sm-12 col-12
-                    no_padding
-                  ">
-                  &nbsp;
-                  <button mat-button class="f_size_12 no_padding" [disabled]="post?.apiCalled"
-                    (click)="likeandunlikepost(post)">
-                    <mat-icon class="action_icon" [ngClass]="{ pointerNone: post.apiCalled }" *ngIf="!post.bookmarked">
-                      thumb_up_alt</mat-icon>
-                    <mat-icon class="action_icon_filled" [ngClass]="{ pointerNone: post.apiCalled }"
-                      *ngIf="post.bookmarked">
-                      thumb_up_alt</mat-icon>{{ "Like" | translate }} ({{ post?.bookmarks || 0 }})
+              <div class="likeCommnet">
+                <div class="col-xl-11 col-lg-11 col-md-11 col-sm-12 col-12 no_padding">
+                  <button mat-button class="f_size_12 no_padding" [disabled]="post?.apiCalled"(click)="likeandunlikepost(post)">
+                    <mat-icon class="action_icon" [ngClass]="{ pointerNone: post.apiCalled }" *ngIf="!post.bookmarked">thumb_up_alt</mat-icon>
+                    <mat-icon class="action_icon_filled" [ngClass]="{ pointerNone: post.apiCalled }" *ngIf="post.bookmarked">thumb_up_alt</mat-icon>{{ "Like" | translate }} ({{ post?.bookmarks || 0 }})
                   </button>
-                  &nbsp;&nbsp;
-                  <button mat-button [disabled]="
-                      selectedThreadData?.thread_status === false ||
-                      disableThreads
-                    " (click)="clickToCommentPost(pin)" class="f_size_12 no_padding">
-                    <mat-icon class="action_icon" [disabled]="
-                        selectedThreadData?.thread_status === false ||
-                        disableThreads
-                      ">
-                      comment</mat-icon>{{ "Comment" | translate }}
+                  <button mat-button [disabled]="selectedThreadData?.thread_status === false || disableThreads" (click)="clickToCommentPost(pin)" class="f_size_12 no_padding">
+                    <mat-icon class="action_icon" [disabled]="selectedThreadData?.thread_status === false || disableThreads">comment</mat-icon>{{ "Comment" | translate }}
                   </button>
                 </div>
               </div>
@@ -527,10 +450,7 @@
                     no_padding
                     m-b-0
                   ">
-                  <angular-editor [config]="config" name="addPostComment[pin]"
-                    [placeholder]="'Leave your comments here...' | translate" [(ngModel)]="addPostComment[pin]"
-                    ngDefaultControl>
-                  </angular-editor>
+                  <angular-editor [config]="config" name="addPostComment[pin]" [placeholder]="'Leave your comments here...' | translate" [(ngModel)]="addPostComment[pin]" ngDefaultControl></angular-editor>
                 </div>
                 <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12"></div>
                 <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12"></div>
@@ -785,24 +705,19 @@
       </div>
 
       <div>
-        <br /><br />
-        <br /><br />
+        <!-- <br /><br />
+        <br /><br /> -->
       </div>
     </div>
 
-    <br /><br />
+    <!-- <br /><br /> -->
     <ng-template #createThreadDialog class="dialogPopup no-radius">
       <mat-dialog-content class="createThreadDialog no-radius">
         <form [formGroup]="addThreadForm">
-          <div class="row m-l-20 m-r-20 m-b-0">
-            <div class="col-10">
-              <p class="m-t-10 m-b-0 f_size_18">
-                {{ "Create a new thread" | translate }}
-              </p>
-            </div>
-            <div class="col-2">
-              <mat-icon (click)="closedialogbox(); addThreadForm?.reset()" class="f_size_25 float_right pointer">close
-              </mat-icon>
+          <div class="d-flex justify-content-between align-items-center heading">
+            <p class="">{{ "Create a new thread" | translate }}</p>
+            <div>
+              <em class="lxp-Close pointer" (click)="closedialogbox(); addThreadForm?.reset()"></em>
             </div>
           </div>
           <div class="row m-l-20 m-r-20 m-t-20 m-b-0" *ngIf="addThreadForm">
@@ -810,9 +725,7 @@
               <mat-label>Title</mat-label><span class="mand"> *</span>
             </div>
             <div class="col-12 m-b-0 form-group">
-              <input type="text" class="width_100 greyBor background_trans" name="thread_name"
-                formControlName="thread_name" onpaste="return false" autocomplete="off"
-                (keypress)="removeChar($event)" />
+              <input type="text" class="width_100 greyBor background_trans" name="thread_name" formControlName="thread_name" onpaste="return false" autocomplete="off" (keypress)="removeChar($event)" />
               <div *ngIf="f.thread_name.touched && f.thread_name.errors" class="mand">
                 <div *ngIf="f.thread_name.errors.minlength">
                   {{ "Title must be minimum of 9 characters" | translate }}
