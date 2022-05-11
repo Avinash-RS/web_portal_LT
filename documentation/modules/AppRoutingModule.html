@@ -77,32 +77,37 @@ import { Routes, RouterModule } from &#x27;@angular/router&#x27;;
 import { NotFoundComponent } from &#x27;./not-found/not-found.component&#x27;;
 import { IsLoggedInAuthGuard } from &#x27;@core/services/_helpers/is-logged-in-auth.guard&#x27;;
 import { AuthGuard } from &#x27;@core/services/_helpers&#x27;;
-import { RedirectionComponent} from &#x27;../app/redirection/redirection.component&#x27;
+import { RedirectionComponent} from &#x27;../app/redirection/redirection.component&#x27;;
 
 const routes: Routes &#x3D; [
 
   {
     path: &#x27;&#x27;,
-    loadChildren: &#x27;./learner/login.module#LoginModule&#x27;,
+    loadChildren: () &#x3D;&gt; &quot;import(&#x27;./learner/login.module&#x27;).then(m &#x3D;&gt; m.LoginModule)&quot;,
     canActivate: [IsLoggedInAuthGuard],
      data : {title: &#x27;Welcome to EduTech&#x27;}
   },
 
   {
     path: &#x27;Learner&#x27;,
-    loadChildren: &#x27;./learner/learner.module#LearnerModule&#x27;,
+    loadChildren: () &#x3D;&gt; &quot;import(&#x27;./learner/learner.module&#x27;).then(m &#x3D;&gt; m.LearnerModule)&quot;,
     canLoad: [AuthGuard],
     data : {title: &#x27;My Course&#x27;}
   },
-
+  {
+    path: &#x27;Landing&#x27;,
+    loadChildren: () &#x3D;&gt; &quot;import(&#x27;./learner/landingpage.module&#x27;).then(m &#x3D;&gt; m.LandingPageModule)&quot;,
+    canLoad: [AuthGuard],
+    data : {title: &#x27;My Course&#x27;}
+  },
   {
     path: &#x27;Player&#x27;,
-    loadChildren: &#x27;./core/core.module#CoreModule&#x27;,
+    loadChildren: () &#x3D;&gt; &quot;import(&#x27;./core/core.module&#x27;).then(m &#x3D;&gt; m.CoreModule)&quot;,
     data : {title: &#x27;Course Player&#x27;}
   },
   {
     path: &#x27;Player&#x27;,
-    loadChildren: &#x27;./core/core.module#CoreModule&#x27;,
+    loadChildren: () &#x3D;&gt; &quot;import(&#x27;./core/core.module&#x27;).then(m &#x3D;&gt; m.CoreModule)&quot;,
     data : {title: &#x27;Course Player&#x27;}
   },
   {
@@ -116,7 +121,6 @@ const routes: Routes &#x3D; [
     data: { animation: &#x27;Redirecting&#x27;, title: &#x27;Redirecting&#x27; }
   },
   {path: &#x27;**&#x27;, component: NotFoundComponent},
-  
 
 ];
 @NgModule({
@@ -130,6 +134,8 @@ export class AppRoutingModule { }
 </code></pre>
     </div>
 </div>
+
+
 
 
 

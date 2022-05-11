@@ -107,7 +107,7 @@ const defaultOptions: DefaultOptions &#x3D; {
 })
 
 export class GraphqlModule {
-  secretKey &#x3D; &quot;(!@#Passcode!@#)&quot;;
+  secretKey &#x3D; &#x27;(!@#Passcode!@#)&#x27;;
   envWcaApi: any &#x3D; environment.wcaapiurl;
   envApi: any &#x3D; environment.apiUrl;
   envApiImg: any &#x3D; environment.apiUrlImg;
@@ -118,26 +118,25 @@ export class GraphqlModule {
     const middleware &#x3D; new ApolloLink((operation, forward) &#x3D;&gt; {
 
       // Check for token
-      const token &#x3D; localStorage.getItem(&#x27;token&#x27;)||sessionStorage.getItem(&#x27;token&#x27;);
-      var userDetails &#x3D; JSON.parse(localStorage.getItem(&#x27;UserDetails&#x27;))
+      const token &#x3D; localStorage.getItem(&#x27;token&#x27;) || sessionStorage.getItem(&#x27;token&#x27;);
+      var userDetails &#x3D; JSON.parse(localStorage.getItem(&#x27;UserDetails&#x27;));
       // tslint:disable-next-line:max-line-length
       // const token &#x3D; &#x27;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoibHhwYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJ1c2VyX2lkIjoiMTIzNGFiIiwic2VjX2tleSI6IjEyM0FhIUAjIiwiaWF0IjoxNTk4NDUwMjk3LCJleHAiOjE1OTg0NzE4OTcsImlzcyI6Imh0dHBzOi8vd3d3LmxhcnNlbnRvdWJyby5jb20vIn0.y9YcBFZc43QtAP2Wep7rSI1wHtIMkTBeseAb-n0qvpc&#x27;
       if (!token) { return forward(operation); }
 
       operation.setContext({
-        headers: new HttpHeaders({ 
-          Authorization: &#x27;Bearer &#x27;+token,
+        headers: new HttpHeaders({
+          Authorization: &#x27;Bearer &#x27; + token,
           requestId: userDetails[&#x27;user_id&#x27;]
          }),
       });
-      
       return forward(operation);
     });
 
     const Errlink &#x3D; onError(({ graphQLErrors, networkError, response, operation }) &#x3D;&gt; {
       if (graphQLErrors) {
         graphQLErrors.forEach(({ message, locations, path }) &#x3D;&gt; {
-          if (message.includes(&#x27;TokenExpiredError&#x27;) || message.includes(&#x27;JsonWebTokenError&#x27;)) {
+          if (message.toString().includes(&#x27;TokenExpiredError&#x27;) || message.toString().includes(&#x27;JsonWebTokenError&#x27;)) {
             localStorage.clear();
             sessionStorage.clear();
             this.services.getIpAddressByUrl();
@@ -164,6 +163,8 @@ export class GraphqlModule {
 </code></pre>
     </div>
 </div>
+
+
 
 
 

@@ -379,8 +379,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="66"
-                            class="link-to-prism">src/app/core/shared/toolbar-notification/toolbar-notification.component.ts:66</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="65"
+                            class="link-to-prism">src/app/core/shared/toolbar-notification/toolbar-notification.component.ts:65</a></div>
                 </td>
             </tr>
 
@@ -416,8 +416,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="84"
-                            class="link-to-prism">src/app/core/shared/toolbar-notification/toolbar-notification.component.ts:84</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="83"
+                            class="link-to-prism">src/app/core/shared/toolbar-notification/toolbar-notification.component.ts:83</a></div>
                 </td>
             </tr>
 
@@ -481,8 +481,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="97"
-                            class="link-to-prism">src/app/core/shared/toolbar-notification/toolbar-notification.component.ts:97</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="98"
+                            class="link-to-prism">src/app/core/shared/toolbar-notification/toolbar-notification.component.ts:98</a></div>
                 </td>
             </tr>
 
@@ -518,8 +518,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="57"
-                            class="link-to-prism">src/app/core/shared/toolbar-notification/toolbar-notification.component.ts:57</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="56"
+                            class="link-to-prism">src/app/core/shared/toolbar-notification/toolbar-notification.component.ts:56</a></div>
                 </td>
             </tr>
 
@@ -555,8 +555,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="79"
-                            class="link-to-prism">src/app/core/shared/toolbar-notification/toolbar-notification.component.ts:79</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="78"
+                            class="link-to-prism">src/app/core/shared/toolbar-notification/toolbar-notification.component.ts:78</a></div>
                 </td>
             </tr>
 
@@ -708,8 +708,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="93"
-                            class="link-to-prism">src/app/core/shared/toolbar-notification/toolbar-notification.component.ts:93</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="92"
+                            class="link-to-prism">src/app/core/shared/toolbar-notification/toolbar-notification.component.ts:92</a></div>
                 </td>
             </tr>
 
@@ -1098,19 +1098,18 @@ export class ToolbarNotificationComponent implements OnInit {
               public router: Router, private elementRef: ElementRef) {
                 const learnerDetail &#x3D; JSON.parse(localStorage.getItem(&#x27;UserDetails&#x27;));
                 this.userId &#x3D; learnerDetail?.user_id;
-                if(!this.userId) {
+                if (!this.userId) {
                   this.router.navigate([&#x27;/Learner/login&#x27;]);
                   return;
                 }
                 this.routedSubs &#x3D; this.router.events.pipe(
                   filter(event &#x3D;&gt; event instanceof NavigationEnd),
                 ).subscribe((e: any) &#x3D;&gt; {
-                  
-                  const urlHeader &#x3D; e.url.split(&quot;/&quot;)
+                  const urlHeader &#x3D; e.url.split(&#x27;/&#x27;);
                   const headerPages &#x3D; &#x27;MyCourse&#x27;;
-                  if (urlHeader[2] &#x3D;&#x3D; headerPages) {
+                  if (urlHeader[2] &#x3D;&#x3D;&#x3D; headerPages) {
                     this.getNotification();
-                  }else{
+                  } else {
                     this.unreadCount &#x3D; JSON.parse(localStorage.getItem(&#x27;NotificationCount&#x27;));
                   }
                 });
@@ -1122,7 +1121,7 @@ export class ToolbarNotificationComponent implements OnInit {
   });
     this.commonservice.notificationStatus.subscribe((status: any) &#x3D;&gt; {
       this.notifications &#x3D; status;
-}); 
+});
   }
 
   getNotification() {
@@ -1132,7 +1131,7 @@ export class ToolbarNotificationComponent implements OnInit {
       this.showSkeleton &#x3D; false;
       this.notifications &#x3D; result.data.getAllNotifications.data;
       this.unreadCount &#x3D; result.data.getAllNotifications.unReadCount;
-      localStorage.setItem(&#x27;NotificationCount&#x27;,this.unreadCount)
+      localStorage.setItem(&#x27;NotificationCount&#x27;, this.unreadCount);
       }
     });
   }
@@ -1145,7 +1144,7 @@ notificationOpen(data) {
 
   markAsRead(notification) {
     this.notificationMarkRead.push(notification._id);
-    this.Lservice.markAsRead(this.notificationMarkRead,this.userId).subscribe((result: any) &#x3D;&gt; {
+    this.Lservice.markAsRead(this.notificationMarkRead, this.userId).subscribe((result: any) &#x3D;&gt; {
       if (result.data.markAsRead.success &#x3D;&#x3D;&#x3D; true) {
         this.getNotification();
       }
@@ -1156,8 +1155,10 @@ notificationOpen(data) {
     this.isOpen &#x3D; false;
     this.router.navigate([&#x27;/Learner/viewAllnotifications&#x27;]);
   }
-  ngOnDestroy(){
-    if(this.routedSubs) {
+
+  // tslint:disable-next-line:use-life-cycle-interface
+  ngOnDestroy() {
+    if (this.routedSubs) {
       this.routedSubs.unsubscribe();
     }
   }
@@ -1179,11 +1180,11 @@ notificationOpen(data) {
     &lt;div class&#x3D;&quot;card &quot;&gt;
       &lt;div class&#x3D;&quot;header&quot; fxLayout&#x3D;&quot;row&quot; fxLayoutAlign&#x3D;&quot;space-between center&quot;&gt;
         &lt;div class&#x3D;&quot;title&quot; style&#x3D;&quot;width: 90%;&quot;&gt;
-          &lt;div class&#x3D;&quot;name&quot;&gt;Notifications&lt;/div&gt;
+          &lt;div class&#x3D;&quot;name&quot;&gt;{{&#x27;Notifications&#x27; | translate}}&lt;/div&gt;
           &lt;div class&#x3D;&quot;extra&quot; *ngIf&#x3D;&quot;unreadCount &gt; 1&quot;&gt;
-            You have {{ unreadCount }} unread notifications&lt;/div&gt;
+            {{&#x27;You have&#x27; | translate}} {{ unreadCount }} {{&#x27;unread notifications&#x27; | translate}}&lt;/div&gt;
           &lt;div class&#x3D;&quot;extra&quot; *ngIf&#x3D;&quot;unreadCount &#x3D;&#x3D; 1&quot;&gt;
-            You have {{ unreadCount }} unread notifications&lt;/div&gt;
+            {{&#x27;You have&#x27; | translate}} {{ unreadCount }} {{&#x27;unread notifications&#x27; | translate}}&lt;/div&gt;
         &lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
@@ -1191,7 +1192,7 @@ notificationOpen(data) {
     &lt;/div&gt;
     &lt;div *ngIf&#x3D;&quot;notifications?.length !&#x3D;&#x3D; 0;&quot; class&#x3D;&quot;footer&quot; fxLayout&#x3D;&quot;row&quot; (click)&#x3D;&quot;viewall()&quot;
       fxLayoutAlign&#x3D;&quot;center center&quot;&gt;
-      &lt;div class&#x3D;&quot;action&quot;&gt;View all&lt;/div&gt;
+      &lt;div class&#x3D;&quot;action&quot;&gt;{{&#x27;View all&#x27; | translate}}&lt;/div&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
@@ -1199,20 +1200,16 @@ notificationOpen(data) {
 &lt;ng-template #thenBlock&gt;
   &lt;div class&#x3D;&quot;content&quot;&gt;
     &lt;div class&#x3D;&quot;notificationWrapper&quot; *ngFor&#x3D;&quot;let notification of notifications | slice:0:5&quot;&gt;
-      &lt;!-- fxLayout&#x3D;&quot;row&quot; fxLayoutAlign&#x3D;&quot;start center&quot;  --&gt;
       &lt;div class&#x3D;&quot;notification d-flex justify-content-between align-items-center&quot; mat-ripple&gt;
         &lt;div class&#x3D;&quot;title&quot; fxLayout&#x3D;&quot;column&quot; (click)&#x3D;&quot;markAsRead(notification)&quot;&gt;
           &lt;a class&#x3D;&quot;message wordWrap&quot; *ngIf&#x3D;&quot;notification.notifiedStatus !&#x3D; true&quot; &gt;{{ notification.notificationMessage }}&lt;/a&gt;
           &lt;a class&#x3D;&quot;readed wordWrap&quot; *ngIf&#x3D;&quot;notification.notifiedStatus &#x3D;&#x3D; true&quot;&gt;{{ notification.notificationMessage }}&lt;/a&gt;
           &lt;div class&#x3D;&quot;time&quot;&gt;{{ notification.created_on | date: &#x27;MMM d, y, h:mm a&#x27; }}&lt;/div&gt;
         &lt;/div&gt;
-        &lt;!-- &lt;span fxFlex&gt;&lt;/span&gt; --&gt;
         &lt;div class&#x3D;&quot;notifiedStatus&quot;&gt;
           &lt;em *ngIf&#x3D;&quot;notification.notifiedStatus &#x3D;&#x3D; true&quot; class&#x3D;&quot;lxp-Mail_Read mailRead&quot;&gt;&lt;/em&gt;
           &lt;em *ngIf&#x3D;&quot;notification.notifiedStatus !&#x3D; true&quot; (click)&#x3D;&quot;markAsRead(notification)&quot; class&#x3D;&quot;lxp-Mail_UnRead mailUnRead&quot;&gt;&lt;/em&gt;
 
-          &lt;!-- &lt;mat-icon *ngIf&#x3D;&quot;notification.notifiedStatus &#x3D;&#x3D; true&quot; class&#x3D;&quot;close closeBtn&quot;&gt;drafts&lt;/mat-icon&gt;
-          &lt;mat-icon *ngIf&#x3D;&quot;notification.notifiedStatus !&#x3D; true&quot; class&#x3D;&quot;close closeBtn&quot; (click)&#x3D;&quot;markAsRead(notification)&quot;&gt;markunread&lt;/mat-icon&gt; --&gt;
         &lt;/div&gt;
         
       &lt;/div&gt;
@@ -1241,12 +1238,11 @@ notificationOpen(data) {
 &lt;/ng-template&gt;
 
 &lt;ng-template #elseBlock&gt;
-  &lt;!-- &lt;div class&#x3D;&quot;no&quot; fxLayout&#x3D;&quot;row&quot; fxLayoutAlign&#x3D;&quot;center center&quot;&gt;No new notifications&lt;/div&gt; --&gt;
   &lt;div class&#x3D;&quot;noCard&quot;&gt;
     &lt;figure&gt;
-      &lt;img alt&#x3D;&quot;assignment&quot; src&#x3D;&quot;https://assets.lntedutech.com/application_images/nocardNotification.svg&quot; /&gt;
+      &lt;img alt&#x3D;&quot;assignment&quot; src&#x3D;&quot;https://assets.lntedutech.com/application_images/nocardnotification.webp&quot; /&gt;
     &lt;/figure&gt;
-    &lt;p&gt; No new notifications&lt;/p&gt;
+    &lt;p&gt; {{&#x27;No new notifications&#x27; | translate}}&lt;/p&gt;
   &lt;/div&gt;
 &lt;/ng-template&gt;</code></pre>
     </div>
@@ -1539,6 +1535,7 @@ $prefix: &#x27;toolbar-notification&#x27;;
 
 .content::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
 }
 
@@ -1611,12 +1608,14 @@ $prefix: &#x27;toolbar-notification&#x27;;
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="toolbar-notification-container">  <button class="notificationBtn" mat-icon-button (click)="notificationOpen(isOpen = !isOpen); getNotification()" [class.open]="isOpen">    <em class="icon lxp-Notification"></em>    <span *ngIf="unreadCount > 0" class="badge">{{ unreadCount>=100?99:unreadCount }}<span *ngIf="unreadCount>=100">+</span></span>    <span *ngIf="unreadCount == 0" class="badge"></span>  </button>  <div class="dropdown mat-elevation-z4 col-md-12 col-sm-12 col-12" [class.open]="isOpen">      <div class="card ">      <div class="header" fxLayout="row" fxLayoutAlign="space-between center">        <div class="title" style="width: 90%;">          <div class="name">Notifications</div>          <div class="extra" *ngIf="unreadCount > 1">            You have {{ unreadCount }} unread notifications</div>          <div class="extra" *ngIf="unreadCount == 1">            You have {{ unreadCount }} unread notifications</div>        </div>      </div>    </div>    <div *ngIf="notifications?.length !== 0; then thenBlock else elseBlock;">    </div>    <div *ngIf="notifications?.length !== 0;" class="footer" fxLayout="row" (click)="viewall()"      fxLayoutAlign="center center">      <div class="action">View all</div>    </div>  </div></div><ng-template #thenBlock>  <div class="content">    <div class="notificationWrapper" *ngFor="let notification of notifications | slice:0:5">      <!-- fxLayout="row" fxLayoutAlign="start center"  -->      <div class="notification d-flex justify-content-between align-items-center" mat-ripple>        <div class="title" fxLayout="column" (click)="markAsRead(notification)">          <a class="message wordWrap" *ngIf="notification.notifiedStatus != true" >{{ notification.notificationMessage }}</a>          <a class="readed wordWrap" *ngIf="notification.notifiedStatus == true">{{ notification.notificationMessage }}</a>          <div class="time">{{ notification.created_on | date: \'MMM d, y, h:mm a\' }}</div>        </div>        <!-- <span fxFlex></span> -->        <div class="notifiedStatus">          <em *ngIf="notification.notifiedStatus == true" class="lxp-Mail_Read mailRead"></em>          <em *ngIf="notification.notifiedStatus != true" (click)="markAsRead(notification)" class="lxp-Mail_UnRead mailUnRead"></em>          <!-- <mat-icon *ngIf="notification.notifiedStatus == true" class="close closeBtn">drafts</mat-icon>          <mat-icon *ngIf="notification.notifiedStatus != true" class="close closeBtn" (click)="markAsRead(notification)">markunread</mat-icon> -->        </div>              </div>      <div class="divider" *ngIf="!isLast"></div>    </div>  </div>  <ng-container *ngIf="showSkeleton">    <div class="skeleton-container d-flex justify-content-between flex-row">      <div class="skeleton-part d-flex justify-content-between flex-column item1">        <ngx-skeleton-loader count="1" class="skeletonStyle"></ngx-skeleton-loader>        <ngx-skeleton-loader count="1" class="skeletonStyle"></ngx-skeleton-loader>        <ngx-skeleton-loader count="1" class="skeletonStyle"></ngx-skeleton-loader>      </div>      <div class="skeleton-part d-flex justify-content-between flex-column item2">        <ngx-skeleton-loader count="1" class="skeletonStyle"></ngx-skeleton-loader>        <ngx-skeleton-loader count="1" class="skeletonStyle"></ngx-skeleton-loader>        <ngx-skeleton-loader count="1" class="skeletonStyle"></ngx-skeleton-loader>      </div>      <div class="skeleton-part d-flex justify-content-between flex-column item3">        <ngx-skeleton-loader count="1" class="skeletonStyle"></ngx-skeleton-loader>        <ngx-skeleton-loader count="1" class="skeletonStyle"></ngx-skeleton-loader>        <ngx-skeleton-loader count="1" class="skeletonStyle"></ngx-skeleton-loader>      </div>    </div>  </ng-container></ng-template><ng-template #elseBlock>  <!-- <div class="no" fxLayout="row" fxLayoutAlign="center center">No new notifications</div> -->  <div class="noCard">    <figure>      <img alt="assignment" src="https://assets.lntedutech.com/application_images/nocardNotification.svg" />    </figure>    <p> No new notifications</p>  </div></ng-template></div>'
-    var COMPONENTS = [{'name': 'ActivitiesComponent', 'selector': 'app-activities'},{'name': 'AlertComponentComponent', 'selector': 'app-alert-component'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AskQuestionsComponent', 'selector': 'app-ask-questions'},{'name': 'AssignmentComponent', 'selector': 'app-assignment'},{'name': 'AudioPlayerComponent', 'selector': 'app-audio-player'},{'name': 'CalendarActivityComponent', 'selector': 'app-calendar-activity'},{'name': 'CoursedetailsComponent', 'selector': 'app-coursedetails'},{'name': 'CourseGalleryComponent', 'selector': 'app-course-gallery'},{'name': 'CourseReportComponent', 'selector': 'app-course-report'},{'name': 'DiscussionForumComponent', 'selector': 'app-discussion-forum'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForbiddenComponent', 'selector': 'app-forbidden'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'InstructorLedComponent', 'selector': 'app-instructor-led'},{'name': 'KnowledgeLandingPageComponent', 'selector': 'app-knowledge-landing-page'},{'name': 'KnowledgePreviewComponent', 'selector': 'app-knowledge-preview'},{'name': 'KnowledgeResourceHomeComponent', 'selector': 'app-knowledge-resource-home'},{'name': 'LandingHeaderComponent', 'selector': 'app-landing-header'},{'name': 'LearnerNewMyCourseComponent', 'selector': 'app-learner-new-my-course'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'NewHomeComponent', 'selector': 'app-new-home'},{'name': 'NotFoundComponent', 'selector': 'not-found'},{'name': 'PasswordComponent', 'selector': 'app-password'},{'name': 'PdfreaderComponent', 'selector': 'app-pdfreader'},{'name': 'PerformancePageMobileComponent', 'selector': 'app-performance-page-mobile'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProgressionReportComponent', 'selector': 'app-progression-report'},{'name': 'ProjectMobileComponent', 'selector': 'app-project-mobile'},{'name': 'QuestionanswerComponent', 'selector': 'app-questionanswer'},{'name': 'RedirectionComponent', 'selector': 'app-redirection'},{'name': 'ResetpasswordComponent', 'selector': 'app-resetpassword'},{'name': 'TermsconditionsComponent', 'selector': 'app-termsconditions'},{'name': 'ToolbarNotificationComponent', 'selector': 'app-toolbar-notification'},{'name': 'VideoPlayerComponent', 'selector': 'app-video-player'},{'name': 'VideoPreviewModalComponent', 'selector': 'app-video-preview-modal'},{'name': 'ViewAllnotificationsComponent', 'selector': 'app-view-allnotifications'}];
+        var COMPONENT_TEMPLATE = '<div><div class="toolbar-notification-container">  <button class="notificationBtn" mat-icon-button (click)="notificationOpen(isOpen = !isOpen); getNotification()" [class.open]="isOpen">    <em class="icon lxp-Notification"></em>    <span *ngIf="unreadCount > 0" class="badge">{{ unreadCount>=100?99:unreadCount }}<span *ngIf="unreadCount>=100">+</span></span>    <span *ngIf="unreadCount == 0" class="badge"></span>  </button>  <div class="dropdown mat-elevation-z4 col-md-12 col-sm-12 col-12" [class.open]="isOpen">      <div class="card ">      <div class="header" fxLayout="row" fxLayoutAlign="space-between center">        <div class="title" style="width: 90%;">          <div class="name">{{\'Notifications\' | translate}}</div>          <div class="extra" *ngIf="unreadCount > 1">            {{\'You have\' | translate}} {{ unreadCount }} {{\'unread notifications\' | translate}}</div>          <div class="extra" *ngIf="unreadCount == 1">            {{\'You have\' | translate}} {{ unreadCount }} {{\'unread notifications\' | translate}}</div>        </div>      </div>    </div>    <div *ngIf="notifications?.length !== 0; then thenBlock else elseBlock;">    </div>    <div *ngIf="notifications?.length !== 0;" class="footer" fxLayout="row" (click)="viewall()"      fxLayoutAlign="center center">      <div class="action">{{\'View all\' | translate}}</div>    </div>  </div></div><ng-template #thenBlock>  <div class="content">    <div class="notificationWrapper" *ngFor="let notification of notifications | slice:0:5">      <div class="notification d-flex justify-content-between align-items-center" mat-ripple>        <div class="title" fxLayout="column" (click)="markAsRead(notification)">          <a class="message wordWrap" *ngIf="notification.notifiedStatus != true" >{{ notification.notificationMessage }}</a>          <a class="readed wordWrap" *ngIf="notification.notifiedStatus == true">{{ notification.notificationMessage }}</a>          <div class="time">{{ notification.created_on | date: \'MMM d, y, h:mm a\' }}</div>        </div>        <div class="notifiedStatus">          <em *ngIf="notification.notifiedStatus == true" class="lxp-Mail_Read mailRead"></em>          <em *ngIf="notification.notifiedStatus != true" (click)="markAsRead(notification)" class="lxp-Mail_UnRead mailUnRead"></em>        </div>              </div>      <div class="divider" *ngIf="!isLast"></div>    </div>  </div>  <ng-container *ngIf="showSkeleton">    <div class="skeleton-container d-flex justify-content-between flex-row">      <div class="skeleton-part d-flex justify-content-between flex-column item1">        <ngx-skeleton-loader count="1" class="skeletonStyle"></ngx-skeleton-loader>        <ngx-skeleton-loader count="1" class="skeletonStyle"></ngx-skeleton-loader>        <ngx-skeleton-loader count="1" class="skeletonStyle"></ngx-skeleton-loader>      </div>      <div class="skeleton-part d-flex justify-content-between flex-column item2">        <ngx-skeleton-loader count="1" class="skeletonStyle"></ngx-skeleton-loader>        <ngx-skeleton-loader count="1" class="skeletonStyle"></ngx-skeleton-loader>        <ngx-skeleton-loader count="1" class="skeletonStyle"></ngx-skeleton-loader>      </div>      <div class="skeleton-part d-flex justify-content-between flex-column item3">        <ngx-skeleton-loader count="1" class="skeletonStyle"></ngx-skeleton-loader>        <ngx-skeleton-loader count="1" class="skeletonStyle"></ngx-skeleton-loader>        <ngx-skeleton-loader count="1" class="skeletonStyle"></ngx-skeleton-loader>      </div>    </div>  </ng-container></ng-template><ng-template #elseBlock>  <div class="noCard">    <figure>      <img alt="assignment" src="https://assets.lntedutech.com/application_images/nocardnotification.webp" />    </figure>    <p> {{\'No new notifications\' | translate}}</p>  </div></ng-template></div>'
+    var COMPONENTS = [{'name': 'ActivitiesComponent', 'selector': 'app-activities'},{'name': 'AlertComponentComponent', 'selector': 'app-alert-component'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AskQuestionsComponent', 'selector': 'app-ask-questions'},{'name': 'AudioPlayerComponent', 'selector': 'app-audio-player'},{'name': 'CalendarActivityComponent', 'selector': 'app-calendar-activity'},{'name': 'CalendarFilterComponent', 'selector': 'app-calendar-filter'},{'name': 'CoursedetailsComponent', 'selector': 'app-coursedetails'},{'name': 'CourseGalleryComponent', 'selector': 'app-course-gallery'},{'name': 'CourseReportComponent', 'selector': 'app-course-report'},{'name': 'DiscussionForumComponent', 'selector': 'app-discussion-forum'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForbiddenComponent', 'selector': 'app-forbidden'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'InstructorLedComponent', 'selector': 'app-instructor-led'},{'name': 'KnowledgeLandingPageComponent', 'selector': 'app-knowledge-landing-page'},{'name': 'KnowledgePreviewComponent', 'selector': 'app-knowledge-preview'},{'name': 'KnowledgeResourceHomeComponent', 'selector': 'app-knowledge-resource-home'},{'name': 'LandingHeaderComponent', 'selector': 'app-landing-header'},{'name': 'LearnerNewMyCourseComponent', 'selector': 'app-learner-new-my-course'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MycourseItemComponent', 'selector': 'app-mycourse-item-component'},{'name': 'NewHomeComponent', 'selector': 'app-new-home'},{'name': 'NotFoundComponent', 'selector': 'not-found'},{'name': 'PasswordComponent', 'selector': 'app-password'},{'name': 'PdfreaderComponent', 'selector': 'app-pdfreader'},{'name': 'PerformancePageMobileComponent', 'selector': 'app-performance-page-mobile'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProgressionReportComponent', 'selector': 'app-progression-report'},{'name': 'ProjectMobileComponent', 'selector': 'app-project-mobile'},{'name': 'QuestionanswerComponent', 'selector': 'app-questionanswer'},{'name': 'QuizReportComponent', 'selector': 'app-quiz-report'},{'name': 'RedirectionComponent', 'selector': 'app-redirection'},{'name': 'ResetpasswordComponent', 'selector': 'app-resetpassword'},{'name': 'ToolbarNotificationComponent', 'selector': 'app-toolbar-notification'},{'name': 'UpskillCalendarComponent', 'selector': 'app-upskill-calendar'},{'name': 'VideoPlayerComponent', 'selector': 'app-video-player'},{'name': 'VideoPreviewModalComponent', 'selector': 'app-video-preview-modal'},{'name': 'ViewAllnotificationsComponent', 'selector': 'app-view-allnotifications'}];
     var DIRECTIVES = [{'name': 'CapslockDirective', 'selector': '[appCapslock]'},{'name': 'DragDropImageDirective', 'selector': '[appDragDropImage]'},{'name': 'StickyHeaderDirective', 'selector': '[stickyHeaderDirective]'}];
     var ACTUAL_COMPONENT = {'name': 'ToolbarNotificationComponent'};
 </script>
 <script src="../js/tree.js"></script>
+
+
 
 
 
