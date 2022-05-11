@@ -42,6 +42,7 @@
 
 
 
+
 <ol class="breadcrumb">
   <li>Interfaces</li>
   <li
@@ -216,11 +217,11 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
-import { MatTableDataSource } from &#x27;@angular/material&#x27;;
+import { MatTableDataSource } from &#x27;@angular/material/table&#x27;;
 import { ActivatedRoute, Router } from &#x27;@angular/router&#x27;;
 import { CommonServicesService } from &#x27;@core/services/common-services.service&#x27;;
 import { LearnerServicesService } from &#x27;@learner/services/learner-services.service&#x27;;
-
+import { TranslateService } from &#x27;@ngx-translate/core&#x27;;
 export interface PeriodicElement {
   notificationName: string;
   date: string;
@@ -246,7 +247,11 @@ export class ViewAllnotificationsComponent implements OnInit {
   emptynotifications &#x3D; false;
 
   constructor(private router: Router, public commonservice: CommonServicesService, public Lservice: LearnerServicesService,
-              ) { }
+              public translate: TranslateService
+              ) {
+                const lang &#x3D; localStorage.getItem(&#x27;language&#x27;);
+                this.translate.use(lang ? lang : &#x27;en&#x27;);
+               }
 
   ngOnInit() {
     const learnerDetail &#x3D; JSON.parse(localStorage.getItem(&#x27;UserDetails&#x27;));
@@ -272,36 +277,36 @@ export class ViewAllnotificationsComponent implements OnInit {
 markAsRead(notification, type) {
   this.notificationMarkRead &#x3D; [];
   if (type &#x3D;&#x3D;&#x3D; &#x27;single&#x27;) {
-    if(!notification.notifiedStatus) {
+    if (!notification.notifiedStatus) {
       this.notificationMarkRead.push(notification._id);
     }
   } else if (type &#x3D;&#x3D;&#x3D; &#x27;all&#x27;) {
   this.notifications.forEach(element &#x3D;&gt; {
-    if(!element.notifiedStatus) { 
+    if (!element.notifiedStatus) {
       this.notificationMarkRead.push(element._id);
     }
-    
   });
 }
-if (this.notificationMarkRead.length &gt; 0) {
-  this.Lservice.markAsRead(this.notificationMarkRead, this.userId).subscribe((result: any) &#x3D;&gt; {
-    if (result.data.markAsRead.success &#x3D;&#x3D;&#x3D; true) {
-      this.viewAllnotifications();
-    }
-  });
-}
+  if (this.notificationMarkRead.length &gt; 0) {
+    this.Lservice.markAsRead(this.notificationMarkRead, this.userId).subscribe((result: any) &#x3D;&gt; {
+      if (result.data.markAsRead.success &#x3D;&#x3D;&#x3D; true) {
+        this.viewAllnotifications();
+      }
+    });
+  }
 }
 next(e) {
   this.pagenumber &#x3D; e.pageIndex + 1;
   this.viewAllnotifications();
 }
 goBack() {
-  this.router.navigateByUrl(&#x27;/Learner/MyCourse&#x27;);
+  this.router.navigateByUrl(&#x27;/Landing/MyCourse&#x27;);
 }
 }
 </code></pre>
     </div>
 </div>
+
 
 
 

@@ -40,6 +40,7 @@
 
 
 
+
 <ol class="breadcrumb">
   <li>Pipes</li>
   <li >MaskingPipePipe</li>
@@ -187,7 +188,7 @@ export class MaskingPipePipe implements PipeTransform {
   transform(value: any, visibleDigits: number &#x3D; 4): any {
     const maskedSection &#x3D; value.slice(0, -visibleDigits);
     const visibleSection &#x3D; value.slice(-visibleDigits);
-    return value.replace(/^(.{2})[^@]+/, &quot;$1XXX&quot;);
+    return value.replace(/^(.{2})[^@]+/, &#x27;$1XXX&#x27;);
   }
 
 }
@@ -195,6 +196,7 @@ export class MaskingPipePipe implements PipeTransform {
     </div>
 
 </div>
+
 
 
 

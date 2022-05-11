@@ -39,6 +39,7 @@
 
 
 
+
 <ol class="breadcrumb">
     <li>Guards</li>
     <li >IsLoggedInAuthGuard</li>
@@ -277,24 +278,23 @@ export class IsLoggedInAuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable&lt;boolean | UrlTree&gt; | Promise&lt;boolean | UrlTree&gt; | boolean | UrlTree {
-      const token &#x3D;  localStorage.getItem(&#x27;token&#x27;)||sessionStorage.getItem(&#x27;token&#x27;);
-      const role &#x3D; localStorage.getItem(&#x27;role&#x27;) || sessionStorage.getItem(&#x27;role&#x27;); 
-      // !role ||
-      if(state.url &#x3D;&#x3D; &#x27;/Learner/authentication&#x27;) {
-        if(token){
-          return true;
-        }
-        else {
-          this.router.navigate([&#x27;/Learner/login&#x27;]);
-          return false;
-        }
-      } 
+    const token &#x3D; localStorage.getItem(&#x27;token&#x27;) || sessionStorage.getItem(&#x27;token&#x27;);
+    const role &#x3D; localStorage.getItem(&#x27;role&#x27;) || sessionStorage.getItem(&#x27;role&#x27;);
+    // !role ||
+    if (state.url &#x3D;&#x3D;&#x3D; &#x27;/Learner/authentication&#x27;) {
+      if (token) {
+        return true;
+      } else {
+        this.router.navigate([&#x27;/Learner/login&#x27;]);
+        return false;
+      }
+    }
     if (!token) {
-      console.log(&#x27;1&#x27;)
+      console.log(&#x27;1&#x27;);
       return true;
     } else {
-      console.log(&#x27;2&#x27;)
-      this.router.navigate([&#x27;/Learner/MyCourse&#x27;]);
+      console.log(&#x27;2&#x27;);
+      this.router.navigate([&#x27;/Landing/MyCourse&#x27;]);
       return false;
     }
   }
@@ -302,6 +302,7 @@ export class IsLoggedInAuthGuard implements CanActivate {
 </code></pre>
         </div>
 </div>
+
 
 
 
