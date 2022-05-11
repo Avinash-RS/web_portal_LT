@@ -423,6 +423,9 @@ export class LearnerNewMyCourseComponent implements OnInit {
     this.learnerService.getStepDetails(this.userId).subscribe((result: any) => {
       if (result?.data?.getStepCourseByLearner?.success) {
       this.stepUrl   = result?.data?.getStepCourseByLearner?.stepRedirectUrl;
+      localStorage.setItem('step', 'true');
+      } else {
+        localStorage.setItem('step', 'false');
       }
     });
   }

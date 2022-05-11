@@ -37,6 +37,7 @@
 
 
 
+
 <ol class="breadcrumb">
   <li>Injectables</li>
   <li >knowledgeService</li>
@@ -509,11 +510,11 @@ export class knowledgeService {
     httpOptions;
     constructor(private http: HttpClient, private apollo: Apollo) { }
 
-    getToken(){
-        const token &#x3D; localStorage.getItem(&#x27;token&#x27;)||sessionStorage.getItem(&#x27;token&#x27;); 
-        var userDetails &#x3D; JSON.parse(localStorage.getItem(&#x27;UserDetails&#x27;))
+    getToken() {
+        const token &#x3D; localStorage.getItem(&#x27;token&#x27;) || sessionStorage.getItem(&#x27;token&#x27;);
+        var userDetails &#x3D; JSON.parse(localStorage.getItem(&#x27;UserDetails&#x27;));
         this.httpOptions &#x3D; {
-          headers: new HttpHeaders({ 
+          headers: new HttpHeaders({
             Authorization: token,
             _id: btoa(userDetails[&#x27;user_id&#x27;])
            })
@@ -537,7 +538,7 @@ export class knowledgeService {
     }
 
     uploadResourceDetail(formData) {
-        return this.http.post(environment.wcaapiurl + &#x27;api/upload/uploadresourcefile&#x27;, formData,this.httpOptions);
+        return this.http.post(environment.wcaapiurl + &#x27;api/upload/uploadresourcefile&#x27;, formData, this.httpOptions);
     }
 
     saveResourceData(knowledgeDetails) {
@@ -556,6 +557,7 @@ export class knowledgeService {
     </div>
 
 </div>
+
 
 
 

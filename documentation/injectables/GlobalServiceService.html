@@ -37,6 +37,7 @@
 
 
 
+
 <ol class="breadcrumb">
   <li>Injectables</li>
   <li >GlobalServiceService</li>
@@ -930,10 +931,10 @@ export class GlobalServiceService {
         //   return adminDetails;
       } else {
         this.alert.openAlert(&#x27;Logged Out!&#x27;, &#x27;You have been logged out. Please login to continue&#x27;);
-        localStorage.clear()
+        localStorage.clear();
         sessionStorage.clear();
         this.route.navigate([&#x27;/Learner/login&#x27;]);
-        return null
+        return null;
       }
     }
   }
@@ -978,6 +979,7 @@ export class GlobalServiceService {
     </div>
 
 </div>
+
 
 
 

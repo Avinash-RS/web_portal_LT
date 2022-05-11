@@ -37,6 +37,7 @@
 
 
 
+
 <ol class="breadcrumb">
   <li>Injectables</li>
   <li >LearnerServicesService</li>
@@ -188,6 +189,9 @@
                                 <a href="#get_batchwise_learner_dashboard_data" >get_batchwise_learner_dashboard_data</a>
                             </li>
                             <li>
+                                <a href="#get_batchwise_learner_dashboard_data_v2" >get_batchwise_learner_dashboard_data_v2</a>
+                            </li>
+                            <li>
                                 <a href="#get_board_university_details" >get_board_university_details</a>
                             </li>
                             <li>
@@ -251,6 +255,9 @@
                                 <a href="#getAttendanceByUsername" >getAttendanceByUsername</a>
                             </li>
                             <li>
+                                <a href="#getBookmarkFilter" >getBookmarkFilter</a>
+                            </li>
+                            <li>
                                 <a href="#getCountForCategories" >getCountForCategories</a>
                             </li>
                             <li>
@@ -307,6 +314,9 @@
                             </li>
                             <li>
                                 <a href="#getLearnerNewCourseReport" >getLearnerNewCourseReport</a>
+                            </li>
+                            <li>
+                                <a href="#getlearnerquiz" >getlearnerquiz</a>
                             </li>
                             <li>
                                 <a href="#getlearnertrack" >getlearnertrack</a>
@@ -369,6 +379,9 @@
                                 <a href="#getSingleBatchInfo" >getSingleBatchInfo</a>
                             </li>
                             <li>
+                                <a href="#getStepDetails" >getStepDetails</a>
+                            </li>
+                            <li>
                                 <a href="#getsupersubcategory" >getsupersubcategory</a>
                             </li>
                             <li>
@@ -396,7 +409,13 @@
                                 <a href="#insertRecord" >insertRecord</a>
                             </li>
                             <li>
+                                <a href="#insertSkeleton" >insertSkeleton</a>
+                            </li>
+                            <li>
                                 <a href="#labactivity" >labactivity</a>
+                            </li>
+                            <li>
+                                <a href="#learner_login" >learner_login</a>
                             </li>
                             <li>
                                 <a href="#learnerSumbitdeleteVideo" >learnerSumbitdeleteVideo</a>
@@ -411,13 +430,13 @@
                                 <a href="#list_content" >list_content</a>
                             </li>
                             <li>
-                                <a href="#login" >login</a>
-                            </li>
-                            <li>
                                 <a href="#markAsRead" >markAsRead</a>
                             </li>
                             <li>
                                 <a href="#playerModuleAndTopic" >playerModuleAndTopic</a>
+                            </li>
+                            <li>
+                                <a href="#playerstatus" >playerstatus</a>
                             </li>
                             <li>
                                 <a href="#playerstatusrealtime" >playerstatusrealtime</a>
@@ -520,7 +539,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/learner/services/learner-services.service.ts:45</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/learner/services/learner-services.service.ts:66</a></div>
                             </td>
                         </tr>
 
@@ -595,8 +614,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="910"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:910</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="931"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:931</a></div>
                 </td>
             </tr>
 
@@ -723,8 +742,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="1114"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1114</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="1146"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1146</a></div>
                 </td>
             </tr>
 
@@ -824,8 +843,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="87"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:87</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="97"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:97</a></div>
                 </td>
             </tr>
 
@@ -889,8 +908,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="1029"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1029</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="1050"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1050</a></div>
                 </td>
             </tr>
 
@@ -956,15 +975,15 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>bookmark(user_id, course_id, module, topic, bookmark, week, lastLogIndex, ModuleIndex, submoduleIndex, topicIndex)</code>
+<code>bookmark(user_id, course_id, batchid, parent, bookmark, lastLogIndex, id, module, topic)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="1096"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1096</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="1129"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1129</a></div>
                 </td>
             </tr>
 
@@ -1002,7 +1021,7 @@
 
                                 </tr>
                                 <tr>
-                                    <td>module</td>
+                                    <td>batchid</td>
 
                                     <td>
                                         No
@@ -1011,7 +1030,7 @@
 
                                 </tr>
                                 <tr>
-                                    <td>topic</td>
+                                    <td>parent</td>
 
                                     <td>
                                         No
@@ -1029,15 +1048,6 @@
 
                                 </tr>
                                 <tr>
-                                    <td>week</td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
                                     <td>lastLogIndex</td>
 
                                     <td>
@@ -1047,7 +1057,7 @@
 
                                 </tr>
                                 <tr>
-                                    <td>ModuleIndex</td>
+                                    <td>id</td>
 
                                     <td>
                                         No
@@ -1056,7 +1066,7 @@
 
                                 </tr>
                                 <tr>
-                                    <td>submoduleIndex</td>
+                                    <td>module</td>
 
                                     <td>
                                         No
@@ -1065,7 +1075,7 @@
 
                                 </tr>
                                 <tr>
-                                    <td>topicIndex</td>
+                                    <td>topic</td>
 
                                     <td>
                                         No
@@ -1109,8 +1119,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="656"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:656</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="663"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:663</a></div>
                 </td>
             </tr>
 
@@ -1201,8 +1211,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="273"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:273</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="281"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:281</a></div>
                 </td>
             </tr>
 
@@ -1266,8 +1276,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="880"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:880</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="901"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:901</a></div>
                 </td>
             </tr>
 
@@ -1367,8 +1377,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="126"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:126</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="135"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:135</a></div>
                 </td>
             </tr>
 
@@ -1397,15 +1407,15 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>createEngineersForumData(userId, userName, courseId, question, courseName, batchId)</code>
+<code>createEngineersForumData(userId, userName, courseId, question, courseName, batchId, orgId)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="1241"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1241</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="1273"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1273</a></div>
                 </td>
             </tr>
 
@@ -1478,6 +1488,15 @@
 
 
                                 </tr>
+                                <tr>
+                                    <td>orgId</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -1514,8 +1533,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="705"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:705</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="712"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:712</a></div>
                 </td>
             </tr>
 
@@ -1606,8 +1625,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="808"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:808</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="829"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:829</a></div>
                 </td>
             </tr>
 
@@ -1725,8 +1744,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="476"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:476</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="483"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:483</a></div>
                 </td>
             </tr>
 
@@ -1790,8 +1809,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="296"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:296</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="304"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:304</a></div>
                 </td>
             </tr>
 
@@ -1855,8 +1874,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="283"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:283</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="291"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:291</a></div>
                 </td>
             </tr>
 
@@ -1956,8 +1975,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="1020"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1020</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="1041"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1041</a></div>
                 </td>
             </tr>
 
@@ -2021,8 +2040,91 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="1061"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1061</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="1091"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1091</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>user_id</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>request_type</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>jobroleCategoryId</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="get_batchwise_learner_dashboard_data_v2"></a>
+                    <span class="name">
+                        <span ><b>get_batchwise_learner_dashboard_data_v2</b></span>
+                        <a href="#get_batchwise_learner_dashboard_data_v2"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>get_batchwise_learner_dashboard_data_v2(user_id, request_type, jobroleCategoryId)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="1081"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1081</a></div>
                 </td>
             </tr>
 
@@ -2104,8 +2206,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="329"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:329</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="336"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:336</a></div>
                 </td>
             </tr>
 
@@ -2169,8 +2271,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="349"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:349</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="356"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:356</a></div>
                 </td>
             </tr>
 
@@ -2252,8 +2354,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="232"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:232</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="240"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:240</a></div>
                 </td>
             </tr>
 
@@ -2289,8 +2391,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="359"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:359</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="366"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:366</a></div>
                 </td>
             </tr>
 
@@ -2354,8 +2456,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="338"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:338</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="345"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:345</a></div>
                 </td>
             </tr>
 
@@ -2428,8 +2530,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="642"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:642</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="649"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:649</a></div>
                 </td>
             </tr>
 
@@ -2538,8 +2640,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="372"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:372</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="379"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:379</a></div>
                 </td>
             </tr>
 
@@ -2575,8 +2677,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="377"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:377</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="384"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:384</a></div>
                 </td>
             </tr>
 
@@ -2612,8 +2714,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="1072"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1072</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="1102"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1102</a></div>
                 </td>
             </tr>
 
@@ -2695,8 +2797,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="541"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:541</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="548"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:548</a></div>
                 </td>
             </tr>
 
@@ -2760,8 +2862,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="871"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:871</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="892"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:892</a></div>
                 </td>
             </tr>
 
@@ -2825,8 +2927,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="324"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:324</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="331"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:331</a></div>
                 </td>
             </tr>
 
@@ -2862,8 +2964,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="367"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:367</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="374"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:374</a></div>
                 </td>
             </tr>
 
@@ -2899,8 +3001,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="238"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:238</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="246"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:246</a></div>
                 </td>
             </tr>
 
@@ -2964,8 +3066,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="404"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:404</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="411"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:411</a></div>
                 </td>
             </tr>
 
@@ -3029,8 +3131,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="421"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:421</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="428"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:428</a></div>
                 </td>
             </tr>
 
@@ -3094,8 +3196,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="1040"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1040</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="1061"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1061</a></div>
                 </td>
             </tr>
 
@@ -3168,8 +3270,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="847"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:847</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="868"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:868</a></div>
                 </td>
             </tr>
 
@@ -3242,8 +3344,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="1138"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1138</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="1170"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1170</a></div>
                 </td>
             </tr>
 
@@ -3352,8 +3454,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="982"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:982</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="1003"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1003</a></div>
                 </td>
             </tr>
 
@@ -3453,8 +3555,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="1050"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1050</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="1071"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1071</a></div>
                 </td>
             </tr>
 
@@ -3520,6 +3622,71 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="getBookmarkFilter"></a>
+                    <span class="name">
+                        <span ><b>getBookmarkFilter</b></span>
+                        <a href="#getBookmarkFilter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getBookmarkFilter(postParam)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="89"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:89</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>postParam</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="getCountForCategories"></a>
                     <span class="name">
                         <span ><b>getCountForCategories</b></span>
@@ -3536,8 +3703,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="668"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:668</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="675"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:675</a></div>
                 </td>
             </tr>
 
@@ -3601,8 +3768,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="926"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:926</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="947"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:947</a></div>
                 </td>
             </tr>
 
@@ -3675,8 +3842,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="677"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:677</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="684"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:684</a></div>
                 </td>
             </tr>
 
@@ -3776,8 +3943,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="519"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:519</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="526"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:526</a></div>
                 </td>
             </tr>
 
@@ -3841,8 +4008,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="944"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:944</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="965"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:965</a></div>
                 </td>
             </tr>
 
@@ -3960,8 +4127,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="493"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:493</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="500"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:500</a></div>
                 </td>
             </tr>
 
@@ -4029,8 +4196,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="1167"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1167</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="1199"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1199</a></div>
                 </td>
             </tr>
 
@@ -4094,8 +4261,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="745"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:745</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="752"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:752</a></div>
                 </td>
             </tr>
 
@@ -4168,8 +4335,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="502"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:502</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="509"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:509</a></div>
                 </td>
             </tr>
 
@@ -4235,8 +4402,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="132"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:132</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="141"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:141</a></div>
                 </td>
             </tr>
 
@@ -4309,8 +4476,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="109"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:109</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="119"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:119</a></div>
                 </td>
             </tr>
 
@@ -4374,8 +4541,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="1219"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1219</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="1251"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1251</a></div>
                 </td>
             </tr>
 
@@ -4484,8 +4651,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="1232"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1232</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="1264"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1264</a></div>
                 </td>
             </tr>
 
@@ -4558,8 +4725,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="733"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:733</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="740"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:740</a></div>
                 </td>
             </tr>
 
@@ -4595,8 +4762,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="578"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:578</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="585"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:585</a></div>
                 </td>
             </tr>
 
@@ -4632,8 +4799,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="958"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:958</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="979"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:979</a></div>
                 </td>
             </tr>
 
@@ -4697,8 +4864,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="857"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:857</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="878"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:878</a></div>
                 </td>
             </tr>
 
@@ -4807,8 +4974,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="692"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:692</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="699"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:699</a></div>
                 </td>
             </tr>
 
@@ -4908,8 +5075,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="1175"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1175</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="1207"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1207</a></div>
                 </td>
             </tr>
 
@@ -5002,6 +5169,80 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="getlearnerquiz"></a>
+                    <span class="name">
+                        <span ><b>getlearnerquiz</b></span>
+                        <a href="#getlearnerquiz"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getlearnerquiz(email, courseid)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="1318"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1318</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>email</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>courseid</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="getlearnertrack"></a>
                     <span class="name">
                         <span ><b>getlearnertrack</b></span>
@@ -5018,8 +5259,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="623"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:623</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="630"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:630</a></div>
                 </td>
             </tr>
 
@@ -5099,8 +5340,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="560"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:560</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="567"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:567</a></div>
                 </td>
             </tr>
 
@@ -5136,8 +5377,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="566"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:566</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="573"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:573</a></div>
                 </td>
             </tr>
 
@@ -5229,8 +5470,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="412"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:412</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="419"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:419</a></div>
                 </td>
             </tr>
 
@@ -5294,8 +5535,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="129"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:129</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="138"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:138</a></div>
                 </td>
             </tr>
 
@@ -5331,8 +5572,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="459"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:459</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="466"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:466</a></div>
                 </td>
             </tr>
 
@@ -5405,8 +5646,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="247"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:247</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="255"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:255</a></div>
                 </td>
             </tr>
 
@@ -5470,8 +5711,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="1127"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1127</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="1159"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1159</a></div>
                 </td>
             </tr>
 
@@ -5562,8 +5803,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="1275"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1275</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="1308"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1308</a></div>
                 </td>
             </tr>
 
@@ -5645,8 +5886,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="1007"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1007</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="1028"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1028</a></div>
                 </td>
             </tr>
 
@@ -5746,8 +5987,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="728"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:728</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="735"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:735</a></div>
                 </td>
             </tr>
 
@@ -5783,8 +6024,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="717"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:717</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="724"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:724</a></div>
                 </td>
             </tr>
 
@@ -5820,8 +6061,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="1210"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1210</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="1242"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1242</a></div>
                 </td>
             </tr>
 
@@ -5894,8 +6135,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="1189"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1189</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="1221"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1221</a></div>
                 </td>
             </tr>
 
@@ -5968,8 +6209,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="994"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:994</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="1015"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1015</a></div>
                 </td>
             </tr>
 
@@ -6069,8 +6310,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="1151"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1151</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="1183"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1183</a></div>
                 </td>
             </tr>
 
@@ -6179,8 +6420,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="833"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:833</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="854"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:854</a></div>
                 </td>
             </tr>
 
@@ -6289,8 +6530,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="903"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:903</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="924"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:924</a></div>
                 </td>
             </tr>
 
@@ -6326,8 +6567,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="1199"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1199</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="1231"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1231</a></div>
                 </td>
             </tr>
 
@@ -6409,8 +6650,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="893"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:893</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="914"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:914</a></div>
                 </td>
             </tr>
 
@@ -6467,6 +6708,71 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="getStepDetails"></a>
+                    <span class="name">
+                        <span ><b>getStepDetails</b></span>
+                        <a href="#getStepDetails"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getStepDetails(user_id)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="1327"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1327</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>user_id</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="getsupersubcategory"></a>
                     <span class="name">
                         <span ><b>getsupersubcategory</b></span>
@@ -6483,8 +6789,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="510"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:510</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="517"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:517</a></div>
                 </td>
             </tr>
 
@@ -6548,8 +6854,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="50"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:50</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="70"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:70</a></div>
                 </td>
             </tr>
 
@@ -6585,8 +6891,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="550"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:550</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="557"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:557</a></div>
                 </td>
             </tr>
 
@@ -6659,8 +6965,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="723"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:723</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="730"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:730</a></div>
                 </td>
             </tr>
 
@@ -6696,8 +7002,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="316"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:316</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="323"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:323</a></div>
                 </td>
             </tr>
 
@@ -6761,8 +7067,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="1264"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1264</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="1297"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1297</a></div>
                 </td>
             </tr>
 
@@ -6853,8 +7159,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="91"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:91</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="101"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:101</a></div>
                 </td>
             </tr>
 
@@ -6918,8 +7224,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="738"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:738</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="745"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:745</a></div>
                 </td>
             </tr>
 
@@ -6983,8 +7289,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="122"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:122</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="131"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:131</a></div>
                 </td>
             </tr>
 
@@ -7032,6 +7338,71 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="insertSkeleton"></a>
+                    <span class="name">
+                        <span ><b>insertSkeleton</b></span>
+                        <a href="#insertSkeleton"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>insertSkeleton(user_id)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="1336"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1336</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>user_id</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="labactivity"></a>
                     <span class="name">
                         <span ><b>labactivity</b></span>
@@ -7048,8 +7419,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="972"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:972</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="993"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:993</a></div>
                 </td>
             </tr>
 
@@ -7097,6 +7468,89 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="learner_login"></a>
+                    <span class="name">
+                        <span ><b>learner_login</b></span>
+                        <a href="#learner_login"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>learner_login(username, password, badgeRequest)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="151"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:151</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>username</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>password</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>badgeRequest</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="learnerSumbitdeleteVideo"></a>
                     <span class="name">
                         <span ><b>learnerSumbitdeleteVideo</b></span>
@@ -7113,8 +7567,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="118"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:118</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="127"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:127</a></div>
                 </td>
             </tr>
 
@@ -7178,8 +7632,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="114"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:114</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="123"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:123</a></div>
                 </td>
             </tr>
 
@@ -7243,8 +7697,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="105"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:105</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="115"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:115</a></div>
                 </td>
             </tr>
 
@@ -7308,8 +7762,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="441"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:441</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="448"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:448</a></div>
                 </td>
             </tr>
 
@@ -7320,98 +7774,6 @@
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="login"></a>
-                    <span class="name">
-                        <span ><b>login</b></span>
-                        <a href="#login"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>login(username, password, isAdmin, badgeRequest)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="142"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:142</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>username</td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>password</td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>isAdmin</td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>badgeRequest</td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        
                     </div>
                 </td>
             </tr>
@@ -7437,8 +7799,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="935"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:935</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="956"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:956</a></div>
                 </td>
             </tr>
 
@@ -7517,8 +7879,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="755"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:755</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="762"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:762</a></div>
                 </td>
             </tr>
 
@@ -7575,6 +7937,116 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="playerstatus"></a>
+                    <span class="name">
+                        <span ><b>playerstatus</b></span>
+                        <a href="#playerstatus"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>playerstatus(course_id, user_id, batchid, week, module, parent)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="772"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:772</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>course_id</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>user_id</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>batchid</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>week</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>module</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>parent</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="playerstatusrealtime"></a>
                     <span class="name">
                         <span ><b>playerstatusrealtime</b></span>
@@ -7591,8 +8063,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="765"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:765</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="786"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:786</a></div>
                 </td>
             </tr>
 
@@ -7693,8 +8165,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="584"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:584</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="591"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:591</a></div>
                 </td>
             </tr>
 
@@ -7758,8 +8230,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="96"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:96</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="106"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:106</a></div>
                 </td>
             </tr>
 
@@ -7823,8 +8295,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="589"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:589</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="596"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:596</a></div>
                 </td>
             </tr>
 
@@ -8019,8 +8491,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="1255"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1255</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="1288"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1288</a></div>
                 </td>
             </tr>
 
@@ -8084,8 +8556,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="484"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:484</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="491"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:491</a></div>
                 </td>
             </tr>
 
@@ -8149,8 +8621,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="304"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:304</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="312"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:312</a></div>
                 </td>
             </tr>
 
@@ -8241,8 +8713,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="74"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:74</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="81"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:81</a></div>
                 </td>
             </tr>
 
@@ -8321,8 +8793,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="187"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:187</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="195"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:195</a></div>
                 </td>
             </tr>
 
@@ -8413,8 +8885,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="448"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:448</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="455"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:455</a></div>
                 </td>
             </tr>
 
@@ -8496,8 +8968,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="101"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:101</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="111"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:111</a></div>
                 </td>
             </tr>
 
@@ -8561,8 +9033,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="431"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:431</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="438"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:438</a></div>
                 </td>
             </tr>
 
@@ -8635,8 +9107,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="383"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:383</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="390"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:390</a></div>
                 </td>
             </tr>
 
@@ -8709,8 +9181,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="469"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:469</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="476"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:476</a></div>
                 </td>
             </tr>
 
@@ -8774,8 +9246,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="394"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:394</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="401"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:401</a></div>
                 </td>
             </tr>
 
@@ -8857,8 +9329,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="83"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:83</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="93"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:93</a></div>
                 </td>
             </tr>
 
@@ -8922,8 +9394,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="172"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:172</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="180"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:180</a></div>
                 </td>
             </tr>
 
@@ -9032,8 +9504,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="211"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:211</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="219"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:219</a></div>
                 </td>
             </tr>
 
@@ -9124,8 +9596,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="200"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:200</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="208"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:208</a></div>
                 </td>
             </tr>
 
@@ -9191,15 +9663,15 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>userexperience(user_id, course_id, module, topic, userexperience, status)</code>
+<code>userexperience(user_id, course_id, batchid, parent, user_experience, id, status, module, topic)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="1083"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1083</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="1113"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:1113</a></div>
                 </td>
             </tr>
 
@@ -9237,6 +9709,51 @@
 
                                 </tr>
                                 <tr>
+                                    <td>batchid</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>parent</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>user_experience</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>id</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>status</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
                                     <td>module</td>
 
                                     <td>
@@ -9247,24 +9764,6 @@
                                 </tr>
                                 <tr>
                                     <td>topic</td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>userexperience</td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>status</td>
 
                                     <td>
                                         No
@@ -9308,8 +9807,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="263"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:263</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="271"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:271</a></div>
                 </td>
             </tr>
 
@@ -9373,8 +9872,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="154"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:154</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="162"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:162</a></div>
                 </td>
             </tr>
 
@@ -9447,8 +9946,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="223"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:223</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="231"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:231</a></div>
                 </td>
             </tr>
 
@@ -9512,8 +10011,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="633"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:633</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="640"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:640</a></div>
                 </td>
             </tr>
 
@@ -9577,8 +10076,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="787"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:787</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="808"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:808</a></div>
                 </td>
             </tr>
 
@@ -9660,8 +10159,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="777"
-                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:777</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="798"
+                            class="link-to-prism">src/app/learner/services/learner-services.service.ts:798</a></div>
                 </td>
             </tr>
 
@@ -9738,7 +10237,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/app/learner/services/learner-services.service.ts:71</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/learner/services/learner-services.service.ts:65</a></div>
                         </td>
                     </tr>
 
@@ -9763,7 +10262,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/learner/services/learner-services.service.ts:70</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/learner/services/learner-services.service.ts:64</a></div>
                         </td>
                     </tr>
 
@@ -9788,7 +10287,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/learner/services/learner-services.service.ts:62</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/learner/services/learner-services.service.ts:56</a></div>
                         </td>
                     </tr>
 
@@ -9813,7 +10312,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/learner/services/learner-services.service.ts:61</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/learner/services/learner-services.service.ts:55</a></div>
                         </td>
                     </tr>
 
@@ -9844,7 +10343,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/learner/services/learner-services.service.ts:42</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/learner/services/learner-services.service.ts:50</a></div>
                         </td>
                     </tr>
 
@@ -9875,7 +10374,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/learner/services/learner-services.service.ts:43</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/learner/services/learner-services.service.ts:51</a></div>
                         </td>
                     </tr>
 
@@ -9906,7 +10405,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/learner/services/learner-services.service.ts:44</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/learner/services/learner-services.service.ts:52</a></div>
                         </td>
                     </tr>
 
@@ -9937,7 +10436,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/learner/services/learner-services.service.ts:45</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/learner/services/learner-services.service.ts:53</a></div>
                         </td>
                     </tr>
 
@@ -9968,7 +10467,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/learner/services/learner-services.service.ts:41</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/learner/services/learner-services.service.ts:49</a></div>
                         </td>
                     </tr>
 
@@ -9988,7 +10487,7 @@
             </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/learner/services/learner-services.service.ts:40</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/learner/services/learner-services.service.ts:48</a></div>
                         </td>
                     </tr>
 
@@ -10013,7 +10512,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/learner/services/learner-services.service.ts:68</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/learner/services/learner-services.service.ts:62</a></div>
                         </td>
                     </tr>
 
@@ -10038,7 +10537,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/learner/services/learner-services.service.ts:67</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/learner/services/learner-services.service.ts:61</a></div>
                         </td>
                     </tr>
 
@@ -10063,7 +10562,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/learner/services/learner-services.service.ts:65</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/learner/services/learner-services.service.ts:59</a></div>
                         </td>
                     </tr>
 
@@ -10088,7 +10587,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/learner/services/learner-services.service.ts:64</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/learner/services/learner-services.service.ts:58</a></div>
                         </td>
                     </tr>
 
@@ -10113,7 +10612,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/app/learner/services/learner-services.service.ts:72</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/learner/services/learner-services.service.ts:66</a></div>
                         </td>
                     </tr>
 
@@ -10139,12 +10638,12 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>&quot;(!@#Passcode!@#)&quot;</code>
+                        <i>Default value : </i><code>&#x27;(!@#Passcode!@#)&#x27;</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/learner/services/learner-services.service.ts:39</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/learner/services/learner-services.service.ts:47</a></div>
                         </td>
                     </tr>
 
@@ -10160,7 +10659,7 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { HttpClient, HttpHeaders } from &#x27;@angular/common/http&#x27;;
 import { Injectable } from &#x27;@angular/core&#x27;;
 import { Apollo } from &#x27;apollo-angular&#x27;;
-import { Subject,Observable } from &#x27;rxjs&#x27;;
+import { Subject, Observable } from &#x27;rxjs&#x27;;
 import { environment } from &#x27;../../../environments/environment&#x27;;
 import * as CryptoJS from &#x27;crypto-js&#x27;;
 
@@ -10172,7 +10671,11 @@ import { addTopicreference, bulkclaimcourse, claimcourse, createGuidanceRequest,
        playerstatusrealtime, resendOtponprofile, saveAttendies, updateEmailonprofile,
        updateMobileonprofile, updateProfile, updateVerifyotpmobileonProfile,
        userMstrdata, userRegistration, userRegistrationdone, userRegistrationmobileOtpsend,
-         userRegistrationmobileOtpverify, userRegistrationUsernamesuggestion, viewProfile, viewProfile1, user_experience, set_bookmark, set_askaquestion, getMyQuestion, get_allquestion, getQAsortsearch,getActivityCalendar, getengineersForumData, createEngineersForumData,getuserRecordbasedonSecretKey,verify_tfa_setup} from &#x27;./operations/learner_mutation&#x27;;
+         userRegistrationmobileOtpverify, userRegistrationUsernamesuggestion, viewProfile, 
+         viewProfile1, set_bookmark, set_askaquestion, getMyQuestion, get_allquestion, 
+         getQAsortsearch, getActivityCalendar, getengineersForumData, createEngineersForumData,
+         getuserRecordbasedonSecretKey, verify_tfa_setup, userexperienceQry
+        ,insertModuleTopicSkeleton} from &#x27;./operations/learner_mutation&#x27;;
 import {
 boarddetail, checkExistingUser, getActivityDetailsByBatchAndCourseID, getAssignmentmoduleData,
  getcalenderactivity, getCountForCategories, getCountForJobroleCategories, getCoureBasedOnCatalog,
@@ -10185,9 +10688,13 @@ boarddetail, checkExistingUser, getActivityDetailsByBatchAndCourseID, getAssignm
    getCoursebyUser, getDisciplinedetails, getInstitutedetails, getLanguagedetails,
    getModuletopic, getOrganizationbyId, getPopularCourse, getQualificationdetails,
      getSpecificationdetails, getSubCategory, getTrendingcourse, getUserdetail,
-     getUserdetailUsername, listContent, login, playerModuleAndTopic, singleBatchInfo,
-     syllabusofParticularScorm, ViewAllThreadData, ViewAllThreadDataBid, ViewSingleTopicDiscussionData, get_batchwise_learner_dashboard_data, get_learner_dashboard_count,
-     getCourseGallery , getLearnerNewCourseReport, getCourseReportByUserid, getProgressionActivitydata,selfLearningdatabyUserId, getengineersForumQA_Count,recentlycourse,getlabactivity,labactivity,weekWiseCourseChart,overAllCourseProgressByUserId,getlabActivityData
+     getUserdetailUsername, listContent, learner_login, playerModuleAndTopic, singleBatchInfo,
+     syllabusofParticularScorm, ViewAllThreadData, ViewAllThreadDataBid, ViewSingleTopicDiscussionData,
+     get_batchwise_learner_dashboard_data, get_learner_dashboard_count,
+     getCourseGallery, getLearnerNewCourseReport, getCourseReportByUserid, getProgressionActivitydata,
+     selfLearningdatabyUserId, getengineersForumQA_Count, recentlycourse,
+     getlabactivity, labactivity, weekWiseCourseChart, overAllCourseProgressByUserId,
+     getlabActivityData, getStepCourseByLearner, playerstatus, getlearnerquiz,get_batchwise_learner_dashboard_data_v2
 } from &#x27;./operations/learner_query&#x27;;
 
 
@@ -10195,7 +10702,7 @@ boarddetail, checkExistingUser, getActivityDetailsByBatchAndCourseID, getAssignm
   providedIn: &#x27;root&#x27;
 })
 export class LearnerServicesService {
-  secretKey &#x3D; &quot;(!@#Passcode!@#)&quot;;
+  secretKey &#x3D; &#x27;(!@#Passcode!@#)&#x27;;
   httpOptions;
   envWcaApi: any &#x3D; environment.wcaapiurl;
   envApi: any &#x3D; environment.apiUrl;
@@ -10203,20 +10710,6 @@ export class LearnerServicesService {
   envCourseApi: any &#x3D; environment.createCourseApi;
   envDomain: any &#x3D; environment.domain;
 
-  // tslint:disable-next-line:no-shadowed-variable
-  constructor(private Apollo: Apollo, private http: HttpClient) { }
-
-  getToken(){
-    const token &#x3D; localStorage.getItem(&#x27;token&#x27;)||sessionStorage.getItem(&#x27;token&#x27;); 
-    var userDetails &#x3D; JSON.parse(localStorage.getItem(&#x27;UserDetails&#x27;))
-    this.httpOptions &#x3D; {
-      headers: new HttpHeaders({ 
-        Authorization: &#x27;Bearer &#x27;+token,
-        requestId: userDetails[&#x27;user_id&#x27;]
-       })
-    };
-  }
-  
   closeRecoderdData$ &#x3D; new Subject&lt;any&gt;();
   closeRecoderdData &#x3D; this.closeRecoderdData$.asObservable();
 
@@ -10229,27 +10722,43 @@ export class LearnerServicesService {
   closeMobileResp$ &#x3D; new Subject&lt;any&gt;();
   closeMobileResp &#x3D; this.closeMobileResp$.asObservable();
   ProgressPercentage &#x3D; new Subject&lt;any&gt;();
+  // tslint:disable-next-line:no-shadowed-variable
+  constructor(private Apollo: Apollo, private http: HttpClient) { }
+
+  getToken() {
+    const token &#x3D; localStorage.getItem(&#x27;token&#x27;) || sessionStorage.getItem(&#x27;token&#x27;);
+    const userDetails &#x3D; JSON.parse(localStorage.getItem(&#x27;UserDetails&#x27;));
+    this.httpOptions &#x3D; {
+      headers: new HttpHeaders({
+        Authorization: &#x27;Bearer &#x27; + token,
+        requestId: userDetails[&#x27;user_id&#x27;]
+       })
+    };
+  }
 
   sendMessage(fileCount, message: string) {
     this.ProgressPercentage.next(
-      { 
+      {
         text: message ,
         count: fileCount
       }
       );
   }
-
-uploadAssignments(fromdata) { 
+getBookmarkFilter(postParam) {
   this.getToken();
-  return this.http.post(this.envApi + &#x27;wca/learnerscorefile&#x27;, fromdata, this.httpOptions); 
+  return this.http.post(environment.apiUrl + &#x27;getbookmark&#x27;, postParam, this.httpOptions);
 }
-assignmentAction(data){
+uploadAssignments(fromdata) {
   this.getToken();
-  return this.http.post(this.envApi + &#x27;wca/submitDeleteAssignmentData&#x27;,data,this.httpOptions);
+  return this.http.post(this.envApi + &#x27;wca/learnerscorefile&#x27;, fromdata, this.httpOptions);
+}
+assignmentAction(data) {
+  this.getToken();
+  return this.http.post(this.envApi + &#x27;wca/submitDeleteAssignmentData&#x27;, data, this.httpOptions);
 }
 imageupload(fb) {
   this.getToken();
-  return this.http.post&lt;any[]&gt;(this.envApiImg + &#x60;upload/image&#x60;, fb,this.httpOptions);
+  return this.http.post&lt;any[]&gt;(this.envApiImg + &#x60;upload/image&#x60;, fb, this.httpOptions);
 }
 
 postcomment(data) {
@@ -10265,22 +10774,21 @@ likepost(data) {
   this.getToken();
   return this.http.post(this.envApi + &#x27;post_like&#x27;, data, this.httpOptions);
 }
-getEmail(input) 
-  {
-   return this.http.post(this.envApi + &#x27;/getuserRecord/getuserRecordbasedonSecretKey&#x27;, input,this.httpOptions);
+getEmail(input) {
+   return this.http.post(this.envApi + &#x27;/getuserRecord/getuserRecordbasedonSecretKey&#x27;, input, this.httpOptions);
    }
 
-   learnerUploadVideo(data) { 
+   learnerUploadVideo(data) {
     this.getToken();
-    return this.http.post(environment.apiUrl + &#x27;globalupload&#x27;, data,this.httpOptions);
+    return this.http.post(environment.apiUrl + &#x27;globalupload&#x27;, data, this.httpOptions);
    }
-  learnerSumbitdeleteVideo(submitData) { 
+  learnerSumbitdeleteVideo(submitData) {
     this.getToken();
-    return this.http.post(environment.apiUrl + &#x27;wca/learnerSumbitdeleteVideo&#x27;, submitData,this.httpOptions); 
+    return this.http.post(environment.apiUrl + &#x27;wca/learnerSumbitdeleteVideo&#x27;, submitData, this.httpOptions);
   }
-  insertRecord(data) { 
+  insertRecord(data) {
     this.getToken();
-    return this.http.post(environment.apiUrl + &#x27;learnerUploadVideo&#x27;, data,this.httpOptions); }
+    return this.http.post(environment.apiUrl + &#x27;learnerUploadVideo&#x27;, data, this.httpOptions); }
 
 clearMessage() {
   this.ProgressPercentage.next();
@@ -10298,19 +10806,18 @@ getMessage(): Observable&lt;any&gt; {
     });
   }
 
-  login(username, password, isAdmin,badgeRequest) {
+  learner_login(username, password, badgeRequest) {
     return this.Apollo.query({
-      query: login,
+      query: learner_login,
       variables: {
         username,
         password,
-        is_admin: isAdmin,
         badgeRequest
       }
     });
   }
 
-  verifyAuth(token,user_id){
+  verifyAuth(token, user_id) {
     return this.Apollo.query({
       query: verify_tfa_setup,
       variables: {
@@ -10328,7 +10835,7 @@ getMessage(): Observable&lt;any&gt; {
   //   return this.http.post(this.envApi + &#x27;getuserRecordbasedonSecretKey&#x27;, input, httpOptions);
   // }
 
-  user_registration(email, fullName, mobileNumber, titleId, termsandconditions,badgeRequest) {
+  user_registration(email, fullName, mobileNumber, titleId, termsandconditions, badgeRequest) {
     return this.Apollo.query({
       query: userRegistration,
       variables: {
@@ -10439,7 +10946,7 @@ getMessage(): Observable&lt;any&gt; {
   }
 
 
-  forgotUsernameandPassword(type, subtype, mobileNumber, email,badgeRequest) {
+  forgotUsernameandPassword(type, subtype, mobileNumber, email, badgeRequest) {
     return this.Apollo.query({
       query: getForgotUsernamemobileEmail,
       variables: {
@@ -10460,7 +10967,7 @@ getMessage(): Observable&lt;any&gt; {
       }
     });
   }
-  resetPassword(username, password,resetCode,badgeRequest) {
+  resetPassword(username, password, resetCode, badgeRequest) {
     return this.Apollo.query({
       query: getForgotpasswordbyResetpassword,
       variables: {
@@ -10471,8 +10978,7 @@ getMessage(): Observable&lt;any&gt; {
       }
     });
   }
-  
-  getUser(userSecretkey){
+  getUser(userSecretkey) {
     return this.Apollo.query({
       query: getuserRecordbasedonSecretKey,
       variables: {
@@ -10921,6 +11427,20 @@ getMessage(): Observable&lt;any&gt; {
     });
   }
 
+  playerstatus(course_id, user_id, batchid, week, module, parent) {
+    return this.Apollo.query({
+      query: playerstatus,
+      variables: {
+        course_id,
+        user_id,
+        batchid,
+        week,
+        module,
+        parent
+      }
+    });
+  }
+
   playerstatusrealtime(userId, contentID, module: any, percentage) {
     return this.Apollo.query({
       query: playerstatusrealtime,
@@ -10989,7 +11509,7 @@ getMessage(): Observable&lt;any&gt; {
     }
   }
 
-  getReadLeanerActivity(userid, date, courseid,status,activity,datetype) {
+  getReadLeanerActivity(userid, date, courseid, status, activity, datetype) {
     return this.Apollo.query({
       query: getReadLeanerActivity,
       variables: {
@@ -11013,7 +11533,7 @@ getMessage(): Observable&lt;any&gt; {
     });
   }
 
-  getLearnerActivity(courseId,status,dateType,date,activityType,userId){
+  getLearnerActivity(courseId, status, dateType, date, activityType, userId) {
     return this.Apollo.query({
       query: getActivityCalendar,
       variables: {
@@ -11114,31 +11634,31 @@ getMessage(): Observable&lt;any&gt; {
       }
     });
   }
-  getlabactivity(labdata){
+  getlabactivity(labdata) {
     return this.Apollo.query({
-      query:getlabActivityData,
-      variables:{
-        userId:labdata.userId,
-        courseId:labdata.courseId,
-        pagination:labdata.pagination,
-        page:labdata.page,
-        noofItems:labdata.noofItems,
-        username:labdata.username
-      }
-    })
-  }
-
-  labactivity(labdetails){
-    return this.Apollo.query({
-      query: labactivity,
-      variables:{
-        username:labdetails.username,
-        attempt_id:labdetails.attempt_id
+      query: getlabActivityData,
+      variables: {
+        userId: labdata.userId,
+        courseId: labdata.courseId,
+        pagination: labdata.pagination,
+        page: labdata.page,
+        noofItems: labdata.noofItems,
+        username: labdata.username
       }
     });
   }
 
-  getAssignmentmoduleData(userId,courseid,pagination,page,noofItems) {
+  labactivity(labdetails) {
+    return this.Apollo.query({
+      query: labactivity,
+      variables: {
+        username: labdetails.username,
+        attempt_id: labdetails.attempt_id
+      }
+    });
+  }
+
+  getAssignmentmoduleData(userId, courseid, pagination, page, noofItems) {
     return this.Apollo.query({
       query: getAssignmentmoduleData,
       variables: {
@@ -11150,7 +11670,7 @@ getMessage(): Observable&lt;any&gt; {
       }
     });
   }
-getprojectActivityData(userId, courseId,pagination,page,noofItems) {
+getprojectActivityData(userId, courseId, pagination, page, noofItems) {
   return this.Apollo.query({
     query: getprojectActivityData,
     variables: {
@@ -11163,7 +11683,7 @@ getprojectActivityData(userId, courseId,pagination,page,noofItems) {
   });
 }
 // get perform activity details
-  getperformActivityData(userId, courseId,pagination,page,noofItems) {
+  getperformActivityData(userId, courseId, pagination, page, noofItems) {
     return this.Apollo.query({
       query: getperformActivityData,
       variables: {
@@ -11216,8 +11736,17 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
       }
     });
   }
-
-  get_batchwise_learner_dashboard_data(user_id,request_type,jobroleCategoryId) {
+  get_batchwise_learner_dashboard_data_v2(user_id, request_type, jobroleCategoryId) {
+    return this.Apollo.query({
+      query: get_batchwise_learner_dashboard_data_v2,
+      variables: {
+        user_id,
+        request_type,
+        jobroleCategoryId
+      }
+    });
+  }
+  get_batchwise_learner_dashboard_data(user_id, request_type, jobroleCategoryId) {
     return this.Apollo.query({
       query: get_batchwise_learner_dashboard_data,
       variables: {
@@ -11228,7 +11757,7 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
     });
   }
 
-  get_learner_dashboard_count(user_id,user_obj_id, jobroleCategoryId) {
+  get_learner_dashboard_count(user_id, user_obj_id, jobroleCategoryId) {
     return this.Apollo.query({
       query: get_learner_dashboard_count,
       variables: {
@@ -11239,38 +11768,40 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
     });
   }
 
-  userexperience(user_id,course_id,module,topic,userexperience,status) {
+  userexperience(user_id, course_id, batchid, parent, user_experience, id, status, module, topic) {
     return this.Apollo.query({
-      query: user_experience,
+      query: userexperienceQry,
       variables: {
         user_id,
         course_id,
+        user_experience,
+        batchid,
+        parent,
+        id,
+        status,
         module,
-        topic,
-        userexperience,
-        status
+        topic
       }
     });
   }
-  bookmark(user_id,course_id,module,topic,bookmark,week,lastLogIndex,ModuleIndex,submoduleIndex,topicIndex) {
+  bookmark(user_id, course_id, batchid, parent, bookmark, lastLogIndex, id, module, topic) {
     return this.Apollo.query({
       query: set_bookmark,
       variables: {
         user_id,
         course_id,
         module,
-        topic,
         bookmark,
-        week,
+        batchid,
         lastLogIndex,
-        ModuleIndex,
-        submoduleIndex,
-        topicIndex
+        parent,
+        id,
+        topic
       }
     });
   }
-  
-  askaquestion(user_id,course_id,module,topic,question) {
+
+  askaquestion(user_id, course_id, module, topic, question) {
     return this.Apollo.query({
       query: set_askaquestion,
       variables: {
@@ -11283,7 +11814,7 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
     });
   }
 
-  getMyQuestion(user_id,course_id,module,topic) {
+  getMyQuestion(user_id, course_id, module, topic) {
     return this.Apollo.query({
       query: getMyQuestion,
       variables: {
@@ -11294,7 +11825,7 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
       }
     });
   }
-  getallquestion(user_id,course_id,module,topic,sort,batchid) {
+  getallquestion(user_id, course_id, module, topic, sort, batchid) {
     return this.Apollo.query({
       query: get_allquestion,
       variables: {
@@ -11331,7 +11862,7 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
       }
     });
   }
-  getLearnerNewCourseReport(batchid,courseid,userid,refresh,selflearning_totalweeks,colloboration_totalweeks) {
+  getLearnerNewCourseReport(batchid, courseid, userid, refresh, selflearning_totalweeks, colloboration_totalweeks) {
     return this.Apollo.query({
       query: getLearnerNewCourseReport,
       variables: {
@@ -11345,7 +11876,7 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
     });
   }
 
- getProgressionData(user_id,course_id) {
+ getProgressionData(user_id, course_id) {
     return this.Apollo.query({
       query: getCourseReportByUserid,
       variables: {
@@ -11355,7 +11886,7 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
     });
   }
 
-  getSelfLearningdata(type,userId,courseId) {
+  getSelfLearningdata(type, userId, courseId) {
     return this.Apollo.query({
       query: selfLearningdatabyUserId,
       variables: {
@@ -11366,7 +11897,7 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
     });
   }
 
-  getProgressionActivitydata(userId,courseId) {
+  getProgressionActivitydata(userId, courseId) {
     return this.Apollo.query({
       query: getProgressionActivitydata,
       variables: {
@@ -11375,7 +11906,7 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
       }
     });
   }
-  getengineersForumData(userId,courseId,requestType,pagenumber,searchString,tabType) {
+  getengineersForumData(userId, courseId, requestType, pagenumber, searchString, tabType) {
     return this.Apollo.query({
       query: getengineersForumData,
       variables: {
@@ -11388,7 +11919,7 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
       }
     });
   }
-  getengineersForumQA_Count(userId,courseId) {
+  getengineersForumQA_Count(userId, courseId) {
     return this.Apollo.query({
       query: getengineersForumQA_Count,
       variables: {
@@ -11397,7 +11928,7 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
       }
     });
   }
-  createEngineersForumData(userId,userName,courseId,question,courseName,batchId) {
+  createEngineersForumData(userId, userName, courseId, question, courseName, batchId, orgId) {
     return this.Apollo.query({
       query: createEngineersForumData,
       variables: {
@@ -11406,7 +11937,8 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
         courseId,
         question,
         courseName,
-        batchId
+        batchId,
+        orgId
       }
     });
   }
@@ -11420,32 +11952,60 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
     });
   }
 
-  getweekWiseCourseChart(courseId,userId,startDate,type){
+  getweekWiseCourseChart(courseId, userId, startDate, type) {
     return this.Apollo.query({
-      query:weekWiseCourseChart,
-      variables:{
-        courseId:courseId,
-        userId:userId,
-        startDate:startDate,
-        type:type
+      query: weekWiseCourseChart,
+      variables: {
+        courseId,
+        userId,
+        startDate,
+        type
       }
     });
   }
-  getoverAllCourseProgressByUserId(userId,startDate,endDate){
+  getoverAllCourseProgressByUserId(userId, startDate, endDate) {
     return this.Apollo.query({
-      query:overAllCourseProgressByUserId,
-      variables:{
-        userId:userId,
-        startDate:startDate,
-        endDate:endDate,
+      query: overAllCourseProgressByUserId,
+      variables: {
+        userId,
+        startDate,
+        endDate,
       }
     });
   }
+  getlearnerquiz(email,courseid){
+    return this.Apollo.query({
+      query:getlearnerquiz,
+      variables:{
+        email:email,
+        courseid:courseid
+      }
+    });
+  }
+  getStepDetails(user_id) {
+    return this.Apollo.query({
+      query: getStepCourseByLearner,
+      variables: {
+        user_id
+      }
+    });
+  }
+
+  insertSkeleton(user_id){
+    return this.Apollo.query({
+      query:insertModuleTopicSkeleton,
+      variables:{
+        user_id
+      }
+    });
+  }
+  
 }
 </code></pre>
     </div>
 
 </div>
+
 
 
 

@@ -235,36 +235,37 @@
 import { CommonModule } from &#x27;@angular/common&#x27;;
 import { Routes, RouterModule } from &#x27;@angular/router&#x27;;
 import { LoginComponent } from &#x27;./pages/login/login.component&#x27;;
-import { NewHomeComponent} from &#x27;./pages/new-home/new-home.component&#x27;;
+import { NewHomeComponent } from &#x27;./pages/new-home/new-home.component&#x27;;
 import { IsLoggedInAuthGuard } from &#x27;@core/services/_helpers/is-logged-in-auth.guard&#x27;;
 import { PasswordComponent } from &#x27;./pages/password/password.component&#x27;;
 import { MaskingPipePipe } from &#x27;@core/core/masking-pipe.pipe&#x27;;
 import { TranslateModule, TranslateLoader } from &#x27;@ngx-translate/core&#x27;;
 import { HttpLoaderFactory, CoreModule } from &#x27;@core/core.module&#x27;;
 import { HttpClient } from &#x27;@angular/common/http&#x27;;
-import { NgOtpInputModule } from  &#x27;ng-otp-input&#x27;;
-
-// import { MaterialModule } from &#x27;@core/material.module&#x27;;
-//Materials import 
-import { MatButtonModule, MatInputModule, MatCheckboxModule, MatFormFieldModule, MatSelectModule } from &#x27;@angular/material&#x27;;
-
+import { CarouselModule } from &#x27;ngx-owl-carousel-o&#x27;;
+import { NgOtpInputModule } from &#x27;ng-otp-input&#x27;;
+import { MatDialogModule } from &#x27;@angular/material/dialog&#x27;;
+import { MatButtonModule } from &#x27;@angular/material/button&#x27;;
+import { MatCheckboxModule } from &#x27;@angular/material/checkbox&#x27;;
+import { MatFormFieldModule } from &#x27;@angular/material/form-field&#x27;;
+import { MatInputModule } from &#x27;@angular/material/input&#x27;;
+import { MatSelectModule } from &#x27;@angular/material/select&#x27;;
 import { FormsModule, ReactiveFormsModule } from &#x27;@angular/forms&#x27;;
 import { ResetpasswordComponent } from &#x27;./pages/resetpassword/resetpassword.component&#x27;;
 import { RecaptchaModule, RecaptchaFormsModule } from &#x27;ng-recaptcha&#x27;;
-import { AuthGuard } from &#x27;@core/services/_helpers/auth.guard&#x27;;
 
 const routes: Routes &#x3D; [
   {
     path: &#x27;&#x27;,
     component: LoginComponent,
     canActivate: [IsLoggedInAuthGuard],
-    data: { title: &#x27;Learner Login&#x27; }
+    data: { title: &#x27;College Connect Login&#x27; }
   },
   {
     path: &#x27;Learner/login&#x27;,
     component: LoginComponent,
     canActivate: [IsLoggedInAuthGuard],
-    data: { title: &#x27;Learner Login&#x27; }
+    data: { title: &#x27;College Connect Login&#x27; }
   },
   {
     path: &#x27;Learner/authentication&#x27;,
@@ -281,7 +282,7 @@ const routes: Routes &#x3D; [
     component: ResetpasswordComponent,
     data: { title: &#x27;Learner Reset password&#x27; }
   },
-]
+];
 
 @NgModule({
   declarations: [
@@ -295,12 +296,11 @@ const routes: Routes &#x3D; [
   imports: [
     CommonModule,
     CoreModule,
-    // MaterialModule,
     MatButtonModule,
     MatInputModule,
     MatCheckboxModule,
     MatSelectModule,
-    // MatIconModule,
+    CarouselModule,
     MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
@@ -315,21 +315,22 @@ const routes: Routes &#x3D; [
         deps: [HttpClient]
       }
     }),
+    MatDialogModule
   ],
   exports: [
-    // MaterialModule
     MatButtonModule,
     MatInputModule,
     MatCheckboxModule,
     MatFormFieldModule,
-    MatSelectModule
-    // MatIconModule
+    MatSelectModule,
   ]
 })
 export class LoginModule { }
 </code></pre>
     </div>
 </div>
+
+
 
 
 

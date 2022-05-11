@@ -162,6 +162,9 @@
                                 <a href="#isProgressBar" >isProgressBar</a>
                             </li>
                             <li>
+                                <a href="#languages" >languages</a>
+                            </li>
+                            <li>
                                 <a href="#loadersubscription" >loadersubscription</a>
                             </li>
                             <li>
@@ -188,7 +191,15 @@
                                 <a href="#secretKey" >secretKey</a>
                             </li>
                             <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#socketService" >socketService</a>
+                            </li>
+                            <li>
                                 <a href="#title" >title</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#translate" >translate</a>
                             </li>
                             <li>
                                 <a href="#urlSafe" >urlSafe</a>
@@ -209,10 +220,16 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#checkIdleState" >checkIdleState</a>
+                            </li>
+                            <li>
                                 <a href="#getChild" >getChild</a>
                             </li>
                             <li>
                                 <a href="#handleKeyboardEvent" >handleKeyboardEvent</a>
+                            </li>
+                            <li>
+                                <a href="#logout" >logout</a>
                             </li>
                             <li>
                                 <a href="#ngOnDestroy" >ngOnDestroy</a>
@@ -261,12 +278,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, gs: <a href="../injectables/GlobalServiceService.html" target="_self">GlobalServiceService</a>, ga_service: <a href="../injectables/GoogleAnalyticsService.html" target="_self">GoogleAnalyticsService</a>, http: <a href="https://angular.io/api/common/http/HttpClient" target="_blank">HttpClient</a>, activatedRoute: <a href="https://angular.io/api/router/ActivatedRoute" target="_blank">ActivatedRoute</a>, titleService: <a href="https://angular.io/api/platform-browser/Title" target="_blank">Title</a>, commonService: <a href="../injectables/CommonServicesService.html" target="_self">CommonServicesService</a>, Lservice: <a href="../injectables/LearnerServicesService.html" target="_self">LearnerServicesService</a>, gtag: Gtag, sanitizer: <a href="https://angular.io/api/platform-browser/DomSanitizer" target="_blank">DomSanitizer</a>)</code>
+<code>constructor(router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, gs: <a href="../injectables/GlobalServiceService.html" target="_self">GlobalServiceService</a>, ga_service: <a href="../injectables/GoogleAnalyticsService.html" target="_self">GoogleAnalyticsService</a>, translate: TranslateService, http: <a href="https://angular.io/api/common/http/HttpClient" target="_blank">HttpClient</a>, activatedRoute: <a href="https://angular.io/api/router/ActivatedRoute" target="_blank">ActivatedRoute</a>, titleService: <a href="https://angular.io/api/platform-browser/Title" target="_blank">Title</a>, commonService: <a href="../injectables/CommonServicesService.html" target="_self">CommonServicesService</a>, Lservice: <a href="../injectables/LearnerServicesService.html" target="_self">LearnerServicesService</a>, gtag: Gtag, sanitizer: <a href="https://angular.io/api/platform-browser/DomSanitizer" target="_blank">DomSanitizer</a>, bnIdle: BnNgIdleService, socketService: <a href="../injectables/SocketioService.html" target="_self">SocketioService</a>, toast: ToastrService)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/app.component.ts:53</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/app.component.ts:32</a></div>
                             </td>
                         </tr>
 
@@ -312,6 +329,18 @@
                                                   
                                                         <td>
                                                                         <code><a href="../injectables/GoogleAnalyticsService.html" target="_self" >GoogleAnalyticsService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>translate</td>
+                                                  
+                                                        <td>
+                                                                    <code>TranslateService</code>
                                                         </td>
                                                   
                                                     <td>
@@ -403,6 +432,42 @@
                                                     </td>
                                                     
                                                 </tr>
+                                                <tr>
+                                                        <td>bnIdle</td>
+                                                  
+                                                        <td>
+                                                                    <code>BnNgIdleService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>socketService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/SocketioService.html" target="_self" >SocketioService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>toast</td>
+                                                  
+                                                        <td>
+                                                                    <code>ToastrService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -441,8 +506,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="232"
-                            class="link-to-prism">src/app/app.component.ts:232</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="193"
+                            class="link-to-prism">src/app/app.component.ts:193</a></div>
                 </td>
             </tr>
 
@@ -474,8 +539,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="46"
-                            class="link-to-prism">src/app/app.component.ts:46</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="110"
+                            class="link-to-prism">src/app/app.component.ts:110</a></div>
                 </td>
             </tr>
 
@@ -488,6 +553,43 @@
     <h3 id="methods">
         Methods
     </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="checkIdleState"></a>
+                    <span class="name">
+                        <span ><b>checkIdleState</b></span>
+                        <a href="#checkIdleState"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>checkIdleState()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="258"
+                            class="link-to-prism">src/app/app.component.ts:258</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -508,8 +610,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="274"
-                            class="link-to-prism">src/app/app.component.ts:274</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="235"
+                            class="link-to-prism">src/app/app.component.ts:235</a></div>
                 </td>
             </tr>
 
@@ -584,8 +686,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="46"
-                            class="link-to-prism">src/app/app.component.ts:46</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="110"
+                            class="link-to-prism">src/app/app.component.ts:110</a></div>
                 </td>
             </tr>
 
@@ -637,6 +739,71 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="logout"></a>
+                    <span class="name">
+                        <span ><b>logout</b></span>
+                        <a href="#logout"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>logout(userDetail)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="268"
+                            class="link-to-prism">src/app/app.component.ts:268</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>userDetail</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="ngOnDestroy"></a>
                     <span class="name">
                         <span ><b>ngOnDestroy</b></span>
@@ -653,8 +820,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="283"
-                            class="link-to-prism">src/app/app.component.ts:283</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="245"
+                            class="link-to-prism">src/app/app.component.ts:245</a></div>
                 </td>
             </tr>
 
@@ -690,8 +857,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="100"
-                            class="link-to-prism">src/app/app.component.ts:100</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="118"
+                            class="link-to-prism">src/app/app.component.ts:118</a></div>
                 </td>
             </tr>
 
@@ -734,8 +901,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="232"
-                            class="link-to-prism">src/app/app.component.ts:232</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="193"
+                            class="link-to-prism">src/app/app.component.ts:193</a></div>
                 </td>
             </tr>
 
@@ -799,8 +966,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="289"
-                            class="link-to-prism">src/app/app.component.ts:289</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="251"
+                            class="link-to-prism">src/app/app.component.ts:251</a></div>
                 </td>
             </tr>
 
@@ -835,7 +1002,7 @@
             </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/app.component.ts:42</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="104" class="link-to-prism">src/app/app.component.ts:104</a></div>
                         </td>
                     </tr>
 
@@ -866,7 +1033,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/app.component.ts:39</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="101" class="link-to-prism">src/app/app.component.ts:101</a></div>
                         </td>
                     </tr>
 
@@ -892,7 +1059,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/app.component.ts:53</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="107" class="link-to-prism">src/app/app.component.ts:107</a></div>
                         </td>
                     </tr>
 
@@ -923,7 +1090,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/app.component.ts:38</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="100" class="link-to-prism">src/app/app.component.ts:100</a></div>
                         </td>
                     </tr>
 
@@ -954,7 +1121,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/app.component.ts:28</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="90" class="link-to-prism">src/app/app.component.ts:90</a></div>
                         </td>
                     </tr>
 
@@ -985,7 +1152,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/app.component.ts:35</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="97" class="link-to-prism">src/app/app.component.ts:97</a></div>
                         </td>
                     </tr>
 
@@ -1010,7 +1177,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/app.component.ts:30</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="92" class="link-to-prism">src/app/app.component.ts:92</a></div>
                         </td>
                     </tr>
 
@@ -1035,7 +1202,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/app.component.ts:32</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="94" class="link-to-prism">src/app/app.component.ts:94</a></div>
                         </td>
                     </tr>
 
@@ -1060,7 +1227,33 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/app.component.ts:34</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="96" class="link-to-prism">src/app/app.component.ts:96</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="languages"></a>
+                    <span class="name">
+                        <span ><b>languages</b></span>
+                        <a href="#languages"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>literal type[]</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="106" class="link-to-prism">src/app/app.component.ts:106</a></div>
                         </td>
                     </tr>
 
@@ -1086,7 +1279,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/app.component.ts:37</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="99" class="link-to-prism">src/app/app.component.ts:99</a></div>
                         </td>
                     </tr>
 
@@ -1112,7 +1305,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/app.component.ts:31</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="93" class="link-to-prism">src/app/app.component.ts:93</a></div>
                         </td>
                     </tr>
 
@@ -1139,7 +1332,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/app.component.ts:61</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/app.component.ts:41</a></div>
                         </td>
                     </tr>
 
@@ -1165,12 +1358,12 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>&quot;Upload in progress&quot;</code>
+                        <i>Default value : </i><code>&#x27;Upload in progress&#x27;</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/app.component.ts:36</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="98" class="link-to-prism">src/app/app.component.ts:98</a></div>
                         </td>
                     </tr>
 
@@ -1195,7 +1388,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/app.component.ts:33</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="95" class="link-to-prism">src/app/app.component.ts:95</a></div>
                         </td>
                     </tr>
 
@@ -1226,7 +1419,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/app.component.ts:27</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="89" class="link-to-prism">src/app/app.component.ts:89</a></div>
                         </td>
                     </tr>
 
@@ -1253,7 +1446,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/app.component.ts:63</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/app.component.ts:43</a></div>
                         </td>
                     </tr>
 
@@ -1279,12 +1472,39 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>&quot;(!@#Passcode!@#)&quot;</code>
+                        <i>Default value : </i><code>&#x27;(!@#Passcode!@#)&#x27;</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/app.component.ts:41</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="103" class="link-to-prism">src/app/app.component.ts:103</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="socketService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>socketService</b></span>
+                        <a href="#socketService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/SocketioService.html" target="_self" >SocketioService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/app.component.ts:45</a></div>
                         </td>
                     </tr>
 
@@ -1315,7 +1535,34 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/app.component.ts:29</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="91" class="link-to-prism">src/app/app.component.ts:91</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="translate"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>translate</b></span>
+                        <a href="#translate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>TranslateService</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/app.component.ts:36</a></div>
                         </td>
                     </tr>
 
@@ -1341,7 +1588,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/app.component.ts:43</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="105" class="link-to-prism">src/app/app.component.ts:105</a></div>
                         </td>
                     </tr>
 
@@ -1367,7 +1614,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/app.component.ts:40</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="102" class="link-to-prism">src/app/app.component.ts:102</a></div>
                         </td>
                     </tr>
 
@@ -1385,7 +1632,7 @@ import { Router, ActivatedRoute, NavigationEnd } from &#x27;@angular/router&#x27
 import { HttpClient } from &#x27;@angular/common/http&#x27;;
 import { GlobalServiceService } from &#x27;././core/services/handlers/global-service.service&#x27;;
 import { Title } from &#x27;@angular/platform-browser&#x27;;
-import { filter, switchMap, take, takeUntil, tap } from &#x27;rxjs/operators&#x27;;
+import { filter, switchMap, take, takeUntil, tap, timeout } from &#x27;rxjs/operators&#x27;;
 import { CommonServicesService } from &#x27;@core/services/common-services.service&#x27;;
 import { Subject, Subscription, timer } from &#x27;rxjs&#x27;;
 import { slideInAnimation } from &#x27;./router.animation&#x27;;
@@ -1396,9 +1643,15 @@ import { has } from &#x27;underscore&#x27;;
 import * as CryptoJS from &#x27;crypto-js&#x27;;
 import { Gtag } from &#x27;angular-gtag&#x27;;
 declare var window;
-declare var dataLayer
+declare var dataLayer;
 declare var gtag;
 import { DomSanitizer, SafeResourceUrl } from &#x27;@angular/platform-browser&#x27;;
+import { TranslateService } from &#x27;@ngx-translate/core&#x27;;
+import { LicenseManager } from &#x27;ag-grid-enterprise&#x27;;
+LicenseManager.setLicenseKey(&#x27;CompanyName&#x3D;LARSEN &amp; TOUBRO LIMITED,LicensedGroup&#x3D;L&amp;T EduTech,LicenseType&#x3D;MultipleApplications,LicensedConcurrentDeveloperCount&#x3D;3,LicensedProductionInstancesCount&#x3D;3,AssetReference&#x3D;AG-017299,ExpiryDate&#x3D;15_July_2022_[v2]_MTY1NzgzOTYwMDAwMA&#x3D;&#x3D;d6a472ece2e8481f35e75c20066f8e49&#x27;);
+import { BnNgIdleService } from &#x27;bn-ng-idle&#x27;;
+import { SocketioService } from &#x27;@learner/services/socketio.service&#x27;;
+import { ToastrService } from &#x27;ngx-toastr&#x27;;
 @Component({
   selector: &#x27;app-root&#x27;,
   templateUrl: &#x27;./app.component.html&#x27;,
@@ -1406,36 +1659,10 @@ import { DomSanitizer, SafeResourceUrl } from &#x27;@angular/platform-browser&#x
   animations: [ slideInAnimation ]
 })
 export class AppComponent implements OnInit {
-  runnablePlatforms &#x3D; [&#x27;MacIntel&#x27;, &#x27;Win32&#x27;, &#x27;Linux x86_64&#x27;];
-  ipAddress &#x3D; &#x27;&#x27;;
-  title &#x3D; &#x27;LXP&#x27;;
-  isLoader &#x3D; false;
-  loaderSubscription: Subscription;
-  isMobile &#x3D; false;
-  platformTxt &#x3D; navigator.platform;
-  isProgressBar &#x3D; false;
-  isFooterVisible: string &#x3D; &#x27;&#x27;;
-  percentage &#x3D; &quot;Upload in progress&quot;
-  loadersubscription: Subscription;  
-  hideLeftMenu: boolean &#x3D; false;
-  chatbotShow: boolean &#x3D; false;
-  UserDetails: any;
-  secretKey &#x3D; &quot;(!@#Passcode!@#)&quot;;
-  botUrl;
-  urlSafe: SafeResourceUrl;
-   // FOR DRM(Restriction for right click)
-   @HostListener(&#x27;document:keydown&#x27;, [&#x27;$event&#x27;])
-   handleKeyboardEvent(event: KeyboardEvent) {
-     if ( (event.which &#x3D;&#x3D;&#x3D; 67 &amp;&amp; event.ctrlKey &amp;&amp; event.shiftKey) || (event.which &#x3D;&#x3D;&#x3D; 123) ||
-      (event.which &#x3D;&#x3D;&#x3D; 73 &amp;&amp; event.ctrlKey &amp;&amp; event.shiftKey) ) {
-       event.returnValue &#x3D; false;
-       event.preventDefault();
-     }
- }
- private destroy$ &#x3D; new Subject&lt;void&gt;();
   constructor(private router: Router,
               private gs: GlobalServiceService,
               private ga_service: GoogleAnalyticsService,
+              public translate: TranslateService,
               private http: HttpClient,
               private activatedRoute: ActivatedRoute,
               private titleService: Title,
@@ -1443,28 +1670,38 @@ export class AppComponent implements OnInit {
               public Lservice: LearnerServicesService,
               private gtag: Gtag,
               public sanitizer: DomSanitizer,
-
+              private bnIdle: BnNgIdleService,
+              public socketService: SocketioService,
+              private toast:ToastrService
   ) {
-    let userDetail &#x3D;JSON.parse(localStorage.getItem(&#x27;UserDetails&#x27;))
-    if(!userDetail?.specific_report_value){
+    this.languages &#x3D; [{lang: &#x27;ta&#x27; , languagename: &#x27;Tamil&#x27; } , { lang: &#x27;en&#x27; , languagename: &#x27;English&#x27;  }] ;
+    translate.addLangs([&#x27;en&#x27;, &#x27;ta&#x27;]);
+    if (localStorage.getItem(&#x27;language&#x27;)) { this.translate.use(localStorage.getItem(&#x27;language&#x27;));
+  } else {
+      this.translate.setDefaultLang(&#x27;en&#x27;);
+    }
+
+    const userDetail &#x3D; JSON.parse(localStorage.getItem(&#x27;UserDetails&#x27;));
+    if (!userDetail?.specific_report_value) {
       localStorage.clear();
       sessionStorage.clear();
     }
+    if (localStorage.getItem(&#x27;language&#x27;)) { this.translate.use(localStorage.getItem(&#x27;language&#x27;)); }
     // console.error &#x3D; function(){}
     // console.warn &#x3D; function(){}
     this.commonService.getIpAddressByUrl();
     // this.getorganizationbyiddetails();
 
-    //GOOGLE ANALYTICS INIT
+    // GOOGLE ANALYTICS INIT
   //    if (environment.gaTrackingId) {
     // register google tag manager
     const gTagManagerScript &#x3D; document.createElement(&#x27;script&#x27;);
     gTagManagerScript.async &#x3D; true;
     gTagManagerScript.src &#x3D; &#x60;https://www.googletagmanager.com/gtag/js?id&#x3D;${environment.gaTrackingId}&#x60;;
     document.head.appendChild(gTagManagerScript);
-    let user_id &#x3D; null
-    if(this.UserDetails){
-       user_id &#x3D; CryptoJS.AES.decrypt(this.UserDetails.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8); 
+    let user_id &#x3D; null;
+    if (this.UserDetails) {
+       user_id &#x3D; CryptoJS.AES.decrypt(this.UserDetails.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
     }
   //   // register google analytics
     const gaScript &#x3D; document.createElement(&#x27;script&#x27;);
@@ -1478,133 +1715,104 @@ export class AppComponent implements OnInit {
     document.head.appendChild(gaScript);
   // }
   }
+  runnablePlatforms &#x3D; [&#x27;MacIntel&#x27;, &#x27;Win32&#x27;, &#x27;Linux x86_64&#x27;];
+  ipAddress &#x3D; &#x27;&#x27;;
+  title &#x3D; &#x27;LXP&#x27;;
+  isLoader &#x3D; false;
+  loaderSubscription: Subscription;
+  isMobile &#x3D; false;
+  platformTxt &#x3D; navigator.platform;
+  isProgressBar &#x3D; false;
+  isFooterVisible: string &#x3D; &#x27;&#x27;;
+  percentage &#x3D; &#x27;Upload in progress&#x27;;
+  loadersubscription: Subscription;
+  hideLeftMenu: boolean &#x3D; false;
+  chatbotShow: boolean &#x3D; false;
+  UserDetails: any;
+  secretKey &#x3D; &#x27;(!@#Passcode!@#)&#x27;;
+  botUrl;
+  urlSafe: SafeResourceUrl;
+  languages: { lang: string; languagename: string; }[];
+ private destroy$ &#x3D; new Subject&lt;void&gt;();
+   // FOR DRM(Restriction for right click)
+   @HostListener(&#x27;document:keydown&#x27;, [&#x27;$event&#x27;])
+   handleKeyboardEvent(event: KeyboardEvent) {
+     if ( (event.which &#x3D;&#x3D;&#x3D; 67 &amp;&amp; event.ctrlKey &amp;&amp; event.shiftKey) || (event.which &#x3D;&#x3D;&#x3D; 123) ||
+      (event.which &#x3D;&#x3D;&#x3D; 73 &amp;&amp; event.ctrlKey &amp;&amp; event.shiftKey) ) {
+       event.returnValue &#x3D; false;
+       event.preventDefault();
+     }
+ }
 
   ngOnInit() {
-//GOOGLE ANALYTICS
-// this.UserDetails &#x3D; JSON.parse(localStorage.getItem(&#x27;UserDetails&#x27;)) || null
-// timer(500)
-//      .pipe(
-//        filter(() &#x3D;&gt; has.call(window, &#x27;ga&#x27;)),
-//        take(1),
-//        switchMap(() &#x3D;&gt; {
-//          return this.router.events.pipe(
-//            filter((e) &#x3D;&gt; e instanceof NavigationEnd),
-//            tap((e: NavigationEnd) &#x3D;&gt; {
-//             var user_id &#x3D; null
-//              if(this.UserDetails.user_id){
-//               user_id &#x3D; CryptoJS.AES.decrypt(this.UserDetails.user_id, this.secretKey.trim()).toString(); 
-//               dataLayer &#x3D; [{&#x27;userID&#x27;: user_id}];
-//               console.log(window[&#x27;dataLayer&#x27;])
-//             }
-//             gtag(&#x27;config&#x27;, &#x27;${environment.gaTrackingId}&#x27;);
-//              this.ga_service.logPageView(e.url,user_id);
-            
-//            })
-//          );
-//        }),
-//        takeUntil(this.destroy$)
-//      )
-//      .subscribe();
-
-
-
-   // console.error &#x3D; function(){}
-   // console.log &#x3D; function(){}
-  //  console.warn &#x3D; function(){}
-    this.loadersubscription &#x3D; this.Lservice.getMessage().subscribe(message &#x3D;&gt; 
-      { 
-        if(message.count){
-          this.percentage &#x3D; message.count + &#x27;  &#x27; + message.text.slice(0,message.text.lastIndexOf(&#x27;.&#x27;)) + &#x27;%&#x27;; 
+    this.loadersubscription &#x3D; this.Lservice.getMessage().subscribe(message &#x3D;&gt; {
+        if (message.count) {
+          this.percentage &#x3D; message.count + &#x27;  &#x27; + message.text.slice(0, message.text.lastIndexOf(&#x27;.&#x27;)) + &#x27;%&#x27;;
         } else {
-          this.percentage &#x3D; message.text.slice(0,message.text.lastIndexOf(&#x27;.&#x27;)) + &#x27;%&#x27;; 
+          this.percentage &#x3D; message.text.slice(0, message.text.lastIndexOf(&#x27;.&#x27;)) + &#x27;%&#x27;;
         }
-        if(this.percentage &#x3D;&#x3D; &#x27;0%&#x27;){
-          this.percentage &#x3D; &#x27;Upload in progress&#x27;
+        if (this.percentage &#x3D;&#x3D;&#x3D; &#x27;0%&#x27;) {
+          this.percentage &#x3D; &#x27;Upload in progress&#x27;;
         }
       });
-   
-    // this.loaderSubscription &#x3D; this.commonService.loader.subscribe((val) &#x3D;&gt; {
-    //   this.isLoader &#x3D; val;
-    //   if (this.isLoader) {
-    //     this.ngxService.start();
-    //   } else {
-    //     setTimeout(() &#x3D;&gt; {
-    //     this.ngxService.stop();
-    //     }, 500);
-    //   }
-    // });
-    // console.log(&quot;--Browser running on--&quot;,navigator.platform)
-    // if(!this.runnablePlatforms.includes(navigator.platform)){
-    //   this.isMobile &#x3D; true;
-    // }
-    this.UserDetails &#x3D; JSON.parse(localStorage.getItem(&#x27;UserDetails&#x27;)) || null
+    this.UserDetails &#x3D; JSON.parse(localStorage.getItem(&#x27;UserDetails&#x27;)) || null;
     this.router.events.pipe(
       filter(event &#x3D;&gt; event instanceof NavigationEnd),
     ).subscribe((e: any) &#x3D;&gt; {
-
-    //adding USERID to datalayer
-    //   var user_id &#x3D; null
-    //   if(this.UserDetails.user_id){
-    //    user_id &#x3D; CryptoJS.AES.decrypt(this.UserDetails.user_id, this.secretKey.trim()).toString(); 
-    //    window.dataLayer &#x3D; [{&#x27;userID&#x27;: user_id}];
-    //    console.log(window[&#x27;dataLayer&#x27;])
-    //  }else{
-    //    window.dataLayer &#x3D; [{&#x27;userID&#x27;: null}];
-    //  }   
-    //  send pageview 
-        const titledat &#x3D; this.getChild(this.activatedRoute);
+      if (localStorage.getItem(&#x27;language&#x27;)) { this.translate.use(localStorage.getItem(&#x27;language&#x27;));
+    } else {
+        this.translate.setDefaultLang(&#x27;en&#x27;);
+      }
+      const titledat &#x3D; this.getChild(this.activatedRoute);
       titledat.data.subscribe(data &#x3D;&gt; {
-        let user_id &#x3D; null
-        if(this.UserDetails){
-           user_id &#x3D; CryptoJS.AES.decrypt(this.UserDetails.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8); 
-          if(dataLayer)
-          {
-            dataLayer[0]&#x3D;{&#x27;userID&#x27;: user_id};
-            
-        }else{
-          dataLayer[0]&#x3D;{&#x27;userID&#x27;: user_id};
+        let user_id &#x3D; null;
+        if (this.UserDetails) {
+          user_id &#x3D; CryptoJS.AES.decrypt(this.UserDetails.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
+          if (dataLayer) {
+            dataLayer[0] &#x3D; { userID: user_id };
+
+          } else {
+            dataLayer[0] &#x3D; { userID: user_id };
+          }
         }
-        }        
         this.gtag.pageview({
-          page_title: data?.title? data.title : &quot;L&amp;T Edutech&quot;,
+          page_title: data?.title ? data.title : &#x27;L&amp;T Edutech&#x27;,
           page_path: this.router.url,
           page_location: window.location.href,
-          userID:user_id
+          userID: user_id
         });
-        this.gtag.set({ &#x27;userID&#x27; : user_id });
-        gtag(&#x27;set&#x27;, &#x27;user_properties&#x27;, { &#x27;userID&#x27; : user_id });
-      })
-        
-       
+        this.gtag.set({ userID : user_id });
+        gtag(&#x27;set&#x27;, &#x27;user_properties&#x27;, { userID : user_id });
+      });
         // this.ga_service.logPageView(e.url,user_id);
         // this.ga_service.logPageView(e.url);
-      const urlIdentifier &#x3D; e.url.split(&quot;/&quot;)
-      const possiblePages &#x3D; [&#x27;register&#x27;, &#x27;login&#x27;, &#x27;recover&#x27;, &#x27;resetpassword&#x27;,&#x27;password&#x27;,&#x27;authentication&#x27;,&#x27;&#x27;]
+      const urlIdentifier &#x3D; e.url.split(&#x27;/&#x27;);
+      const possiblePages &#x3D; [&#x27;register&#x27;, &#x27;login&#x27;, &#x27;recover&#x27;, &#x27;resetpassword&#x27;, &#x27;password&#x27;, &#x27;authentication&#x27;, &#x27;&#x27;];
       const rt &#x3D; this.getChild(this.activatedRoute);
       rt.data.subscribe(data &#x3D;&gt; {
         this.isFooterVisible &#x3D; &#x27;&#x27;;
         this.titleService.setTitle(data?.title);
         if (!possiblePages.includes(urlIdentifier[2])) {
          /// this.isFooterVisible &#x3D; false;
-         const currentYear &#x3D; new Date().getFullYear()
-         this.isFooterVisible &#x3D; &#x27;&lt;div class&#x3D;&quot;footer&quot;&gt;&lt;span class&#x3D;&quot;powered&quot;&gt;&lt;span class&#x3D;&quot;forgot1&quot;&gt;&#x27; + &#x27;© &#x27; + currentYear + &#x27; L&amp;T EduTech. All Rights Reserved.&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&#x27;;
+         const currentYear &#x3D; new Date().getFullYear();
+         this.isFooterVisible &#x3D; &#x27;&lt;div class&#x3D;&quot;footer&quot;&gt;&lt;span class&#x3D;&quot;powered&quot;&gt;&lt;span class&#x3D;&quot;forgot1&quot;&gt;&#x27;
+         + &#x27;© &#x27; + currentYear + this.translate.instant(&#x27; L&amp;T EduTech. All Rights Reserved.&#x27;) + &#x27;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&#x27;;
         }
-        if (e.url.includes(&quot;resetpassword&quot;)|| e.url.includes(&quot;password&quot;) || e.url.includes(&quot;MyCourse&quot;) || e.url.includes(&quot;courseDetail&quot;) || urlIdentifier[2]&#x3D;&#x3D;undefined) {
+        if (e.url.includes(&#x27;resetpassword&#x27;) || e.url.includes(&#x27;password&#x27;) || e.url.includes(&#x27;MyCourse&#x27;)
+        || e.url.includes(&#x27;courseDetail&#x27;) || urlIdentifier[2] &#x3D;&#x3D;&#x3D; undefined) {
           this.isFooterVisible &#x3D; &#x27;&#x27;;
         }
-        if (e.url.includes(&quot;MyCourse&quot;)) {
+        if (e.url.includes(&#x27;MyCourse&#x27;)) {
           this.isFooterVisible &#x3D; &#x27; &#x27;;
         }
-        if (e.url.includes(&quot;courseDetail&quot;)) {
+        if (e.url.includes(&#x27;courseDetail&#x27;)) {
           this.isFooterVisible &#x3D; &#x27; &#x27;;
         }
-
-        //for left padding
-        const headerPages &#x3D; [&#x27;courseDetail&#x27;]
+        // for left padding
+        const headerPages &#x3D; [&#x27;courseDetail&#x27;];
         if (headerPages.includes(urlIdentifier[2])) {
           this.hideLeftMenu &#x3D; true;
-        }
-        else {
+        } else {
           this.hideLeftMenu &#x3D; false;
         }
       });
@@ -1645,7 +1853,7 @@ myUnload() {
             // last unload event was for a tab/window close &#x3D;&gt; do whatever you want (I do nothing here)
         }
     }
-} 
+}
   askServerToDisconnectUserInAFewSeconds() {
     localStorage.setItem(&#x27;disReq&#x27;, &#x27;true&#x27;);
   }
@@ -1662,6 +1870,7 @@ myUnload() {
 
   }
   // tslint:disable-next-line:use-life-cycle-interface
+  // tslint:disable-next-line:use-lifecycle-interface
   ngOnDestroy(): void {
     this.loaderSubscription.unsubscribe();
     this.loadersubscription.unsubscribe();
@@ -1670,11 +1879,37 @@ myUnload() {
 
   openChatbot() {
       this.UserDetails &#x3D; JSON.parse( window.localStorage.getItem(&#x27;UserDetails&#x27;));
-      this.botUrl &#x3D; environment.botUrl + &quot;?userName&#x3D;&quot; + this.UserDetails.full_name + &quot;&amp;userID&#x3D;&quot; + this.UserDetails.user_id + &quot;&amp;token&#x3D;&quot; + this.UserDetails.token;
-      this.urlSafe &#x3D; this.sanitizer.bypassSecurityTrustResourceUrl(this.botUrl)
+      this.botUrl &#x3D; environment.botUrl + &#x27;?userName&#x3D;&#x27; + this.UserDetails.full_name + &#x27;&amp;userID&#x3D;&#x27;
+      + this.UserDetails.user_id + &#x27;&amp;token&#x3D;&#x27; + this.UserDetails.token;
+      this.urlSafe &#x3D; this.sanitizer.bypassSecurityTrustResourceUrl(this.botUrl);
       this.chatbotShow &#x3D; true;
   }
-
+  checkIdleState(){
+    this.bnIdle.startWatching(2700).subscribe((timeout)&#x3D;&gt;{
+      if(timeout) {
+        var userDetail &#x3D;JSON.parse(localStorage.getItem(&#x27;UserDetails&#x27;))
+        if(userDetail){
+          this.logout(userDetail)
+        }
+      }
+    })
+  }
+  logout(userDetail){
+    if (this.socketService?.socket?.connected) {
+      this.socketService.Connectsocket({ type: &#x27;disconnect&#x27; }).subscribe(quote &#x3D;&gt; {
+      });
+      this.socketService.closeSocket();
+    }
+      
+      this.commonService.getIpAddressByUrl();
+      this.commonService.logout(userDetail.user_id, false).subscribe((logout: any) &#x3D;&gt; {
+        this.UserDetails &#x3D; null;
+        localStorage.clear();
+        sessionStorage.clear();
+        this.router.navigate([&#x27;/Learner/login&#x27;]);
+        this.toast.warning(&quot;Session Timed Out!!&quot;)
+      });
+    }
 }
 </code></pre>
     </div>
@@ -1700,19 +1935,19 @@ myUnload() {
 &lt;ngx-ui-loader [hasProgressBar] &#x3D; &#x27;isProgressBar&#x27; [text]&#x3D;&quot;percentage&quot;&gt;&lt;/ngx-ui-loader&gt;
 
 
-&lt;ng-container *ngIf&#x3D;&quot;isFooterVisible &amp;&amp; !hideLeftMenu&quot;&gt;
+&lt;!-- &lt;ng-container *ngIf&#x3D;&quot;isFooterVisible &amp;&amp; !hideLeftMenu&quot;&gt;
 
 &lt;figure class&#x3D;&quot;chatBotIcon&quot; (click)&#x3D;&quot;openChatbot()&quot; *ngIf&#x3D;&quot;!chatbotShow&quot;&gt;
-  &lt;img src&#x3D;&quot;https://assets.lntedutech.com/application_images/chatBot_v.2.svg&quot; alt&#x3D;&quot;&quot; /&gt;
+  &lt;img src&#x3D;&quot;https://assets.lntedutech.com/application_images/chatbot-v2.webp&quot; alt&#x3D;&quot;&quot; /&gt;
 &lt;/figure&gt;
 &lt;figure class&#x3D;&quot;chatBotIcon&quot; (click)&#x3D;&quot;chatbotShow &#x3D; false&quot; *ngIf&#x3D;&quot;chatbotShow&quot;&gt;
-  &lt;img src&#x3D;&quot;https://assets.lntedutech.com/application_images/chatBot_Close.svg&quot; alt&#x3D;&quot;&quot; /&gt;
+  &lt;img src&#x3D;&quot;https://assets.lntedutech.com/application_images/chatbot-close.webp&quot; alt&#x3D;&quot;&quot; /&gt;
 &lt;/figure&gt;
 
   &lt;div class&#x3D;&quot;chatBot&quot; *ngIf&#x3D;&quot;chatbotShow&quot;&gt;
       &lt;iframe allow&#x3D;&quot;microphone;&quot; width&#x3D;&quot;350&quot; height&#x3D;&quot;530&quot; [src]&#x3D;&quot;urlSafe&quot;&gt;&lt;/iframe&gt;    
   &lt;/div&gt;
-&lt;/ng-container&gt;
+&lt;/ng-container&gt; --&gt;
 </code></pre>
     </div>
 
@@ -1852,12 +2087,14 @@ myUnload() {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><!--The content below is only a placeholder and can be replaced.-->  <!-- <div *ngIf="isMobile" style="text-align: center; position: absolute; left: 50%; top: 50%; -webkit-transform: translate(-50%, -50%); transform: translate(-50%, -50%);border: 3px solid #C02222 !important; padding: 10px;">    This version of the application is being constructed for mobile device.<br> We will keep you notified. <br> <strong>Please use from desktop / laptop.</strong><br><br><span style="font-size: 6px;">--Your browser running on {{platformTxt}} --</span>  </div> -->  <!-- [@routeAnimations]="o && o?.activatedRouteData       && o?.activatedRouteData[\'animation\']" -->  <div class="heightClass" [ngClass]="isFooterVisible.length?hideLeftMenu?\'hideSideMenu\':\'contentPad\':\'\'" >    <router-outlet></router-outlet></div><div style="background-color: #ffffff;" [innerHTML]=\'isFooterVisible\'></div><!-- <div fxLayout="row" fxLayoutAlign="space-around center" *ngIf="isLoader" style="height:100%">  <mat-spinner diameter="50" strokeWidth="5"></mat-spinner></div> --><!-- <router-outlet></router-outlet> --><!-- <ng4-loading-spinner> </ng4-loading-spinner> --><ngx-ui-loader [hasProgressBar] = \'isProgressBar\' [text]="percentage"></ngx-ui-loader><ng-container *ngIf="isFooterVisible && !hideLeftMenu"><figure class="chatBotIcon" (click)="openChatbot()" *ngIf="!chatbotShow">  <img src="https://assets.lntedutech.com/application_images/chatBot_v.2.svg" alt="" /></figure><figure class="chatBotIcon" (click)="chatbotShow = false" *ngIf="chatbotShow">  <img src="https://assets.lntedutech.com/application_images/chatBot_Close.svg" alt="" /></figure>  <div class="chatBot" *ngIf="chatbotShow">      <iframe allow="microphone;" width="350" height="530" [src]="urlSafe"></iframe>      </div></ng-container></div>'
-    var COMPONENTS = [{'name': 'ActivitiesComponent', 'selector': 'app-activities'},{'name': 'AlertComponentComponent', 'selector': 'app-alert-component'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AskQuestionsComponent', 'selector': 'app-ask-questions'},{'name': 'AssignmentComponent', 'selector': 'app-assignment'},{'name': 'AudioPlayerComponent', 'selector': 'app-audio-player'},{'name': 'CalendarActivityComponent', 'selector': 'app-calendar-activity'},{'name': 'CoursedetailsComponent', 'selector': 'app-coursedetails'},{'name': 'CourseGalleryComponent', 'selector': 'app-course-gallery'},{'name': 'CourseReportComponent', 'selector': 'app-course-report'},{'name': 'DiscussionForumComponent', 'selector': 'app-discussion-forum'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForbiddenComponent', 'selector': 'app-forbidden'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'InstructorLedComponent', 'selector': 'app-instructor-led'},{'name': 'KnowledgeLandingPageComponent', 'selector': 'app-knowledge-landing-page'},{'name': 'KnowledgePreviewComponent', 'selector': 'app-knowledge-preview'},{'name': 'KnowledgeResourceHomeComponent', 'selector': 'app-knowledge-resource-home'},{'name': 'LandingHeaderComponent', 'selector': 'app-landing-header'},{'name': 'LearnerNewMyCourseComponent', 'selector': 'app-learner-new-my-course'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'NewHomeComponent', 'selector': 'app-new-home'},{'name': 'NotFoundComponent', 'selector': 'not-found'},{'name': 'PasswordComponent', 'selector': 'app-password'},{'name': 'PdfreaderComponent', 'selector': 'app-pdfreader'},{'name': 'PerformancePageMobileComponent', 'selector': 'app-performance-page-mobile'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProgressionReportComponent', 'selector': 'app-progression-report'},{'name': 'ProjectMobileComponent', 'selector': 'app-project-mobile'},{'name': 'QuestionanswerComponent', 'selector': 'app-questionanswer'},{'name': 'RedirectionComponent', 'selector': 'app-redirection'},{'name': 'ResetpasswordComponent', 'selector': 'app-resetpassword'},{'name': 'TermsconditionsComponent', 'selector': 'app-termsconditions'},{'name': 'ToolbarNotificationComponent', 'selector': 'app-toolbar-notification'},{'name': 'VideoPlayerComponent', 'selector': 'app-video-player'},{'name': 'VideoPreviewModalComponent', 'selector': 'app-video-preview-modal'},{'name': 'ViewAllnotificationsComponent', 'selector': 'app-view-allnotifications'}];
+        var COMPONENT_TEMPLATE = '<div><!--The content below is only a placeholder and can be replaced.-->  <!-- <div *ngIf="isMobile" style="text-align: center; position: absolute; left: 50%; top: 50%; -webkit-transform: translate(-50%, -50%); transform: translate(-50%, -50%);border: 3px solid #C02222 !important; padding: 10px;">    This version of the application is being constructed for mobile device.<br> We will keep you notified. <br> <strong>Please use from desktop / laptop.</strong><br><br><span style="font-size: 6px;">--Your browser running on {{platformTxt}} --</span>  </div> -->  <!-- [@routeAnimations]="o && o?.activatedRouteData       && o?.activatedRouteData[\'animation\']" -->  <div class="heightClass" [ngClass]="isFooterVisible.length?hideLeftMenu?\'hideSideMenu\':\'contentPad\':\'\'" >    <router-outlet></router-outlet></div><div style="background-color: #ffffff;" [innerHTML]=\'isFooterVisible\'></div><!-- <div fxLayout="row" fxLayoutAlign="space-around center" *ngIf="isLoader" style="height:100%">  <mat-spinner diameter="50" strokeWidth="5"></mat-spinner></div> --><!-- <router-outlet></router-outlet> --><!-- <ng4-loading-spinner> </ng4-loading-spinner> --><ngx-ui-loader [hasProgressBar] = \'isProgressBar\' [text]="percentage"></ngx-ui-loader><!-- <ng-container *ngIf="isFooterVisible && !hideLeftMenu"><figure class="chatBotIcon" (click)="openChatbot()" *ngIf="!chatbotShow">  <img src="https://assets.lntedutech.com/application_images/chatbot-v2.webp" alt="" /></figure><figure class="chatBotIcon" (click)="chatbotShow = false" *ngIf="chatbotShow">  <img src="https://assets.lntedutech.com/application_images/chatbot-close.webp" alt="" /></figure>  <div class="chatBot" *ngIf="chatbotShow">      <iframe allow="microphone;" width="350" height="530" [src]="urlSafe"></iframe>      </div></ng-container> --></div>'
+    var COMPONENTS = [{'name': 'ActivitiesComponent', 'selector': 'app-activities'},{'name': 'AlertComponentComponent', 'selector': 'app-alert-component'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AskQuestionsComponent', 'selector': 'app-ask-questions'},{'name': 'AudioPlayerComponent', 'selector': 'app-audio-player'},{'name': 'CalendarActivityComponent', 'selector': 'app-calendar-activity'},{'name': 'CalendarFilterComponent', 'selector': 'app-calendar-filter'},{'name': 'CoursedetailsComponent', 'selector': 'app-coursedetails'},{'name': 'CourseGalleryComponent', 'selector': 'app-course-gallery'},{'name': 'CourseReportComponent', 'selector': 'app-course-report'},{'name': 'DiscussionForumComponent', 'selector': 'app-discussion-forum'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForbiddenComponent', 'selector': 'app-forbidden'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'InstructorLedComponent', 'selector': 'app-instructor-led'},{'name': 'KnowledgeLandingPageComponent', 'selector': 'app-knowledge-landing-page'},{'name': 'KnowledgePreviewComponent', 'selector': 'app-knowledge-preview'},{'name': 'KnowledgeResourceHomeComponent', 'selector': 'app-knowledge-resource-home'},{'name': 'LandingHeaderComponent', 'selector': 'app-landing-header'},{'name': 'LearnerNewMyCourseComponent', 'selector': 'app-learner-new-my-course'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MycourseItemComponent', 'selector': 'app-mycourse-item-component'},{'name': 'NewHomeComponent', 'selector': 'app-new-home'},{'name': 'NotFoundComponent', 'selector': 'not-found'},{'name': 'PasswordComponent', 'selector': 'app-password'},{'name': 'PdfreaderComponent', 'selector': 'app-pdfreader'},{'name': 'PerformancePageMobileComponent', 'selector': 'app-performance-page-mobile'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProgressionReportComponent', 'selector': 'app-progression-report'},{'name': 'ProjectMobileComponent', 'selector': 'app-project-mobile'},{'name': 'QuestionanswerComponent', 'selector': 'app-questionanswer'},{'name': 'QuizReportComponent', 'selector': 'app-quiz-report'},{'name': 'RedirectionComponent', 'selector': 'app-redirection'},{'name': 'ResetpasswordComponent', 'selector': 'app-resetpassword'},{'name': 'ToolbarNotificationComponent', 'selector': 'app-toolbar-notification'},{'name': 'UpskillCalendarComponent', 'selector': 'app-upskill-calendar'},{'name': 'VideoPlayerComponent', 'selector': 'app-video-player'},{'name': 'VideoPreviewModalComponent', 'selector': 'app-video-preview-modal'},{'name': 'ViewAllnotificationsComponent', 'selector': 'app-view-allnotifications'}];
     var DIRECTIVES = [{'name': 'CapslockDirective', 'selector': '[appCapslock]'},{'name': 'DragDropImageDirective', 'selector': '[appDragDropImage]'},{'name': 'StickyHeaderDirective', 'selector': '[stickyHeaderDirective]'}];
     var ACTUAL_COMPONENT = {'name': 'AppComponent'};
 </script>
 <script src="../js/tree.js"></script>
+
+
 
 
 

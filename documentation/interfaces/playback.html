@@ -42,6 +42,7 @@
 
 
 
+
 <ol class="breadcrumb">
   <li>Interfaces</li>
   <li
@@ -178,7 +179,6 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input } from &#x27;@angular/core&#x27;;
 import { CommonServicesService } from &#x27;@core/services/common-services.service&#x27;;
-import { VgAPI, VgFullscreenAPI } from &#x27;videogular2/compiled/core&#x27;;
 // tslint:disable-next-line:class-name
 export interface playback {
   value: string;
@@ -200,8 +200,8 @@ export class VideoPlayerComponent {
   autoplay &#x3D; false;
   loop &#x3D; false;
   preload &#x3D; &#x27;auto&#x27;;
-  api: VgAPI;
-  fsAPI: VgFullscreenAPI;
+  // api: VgAPI;
+  // fsAPI: VgFullscreenAPI;
   nativeFs &#x3D; true;
   playback &#x3D; &#x27;1.0&#x27;;
   playbackRate: playback[] &#x3D; [
@@ -217,7 +217,7 @@ export class VideoPlayerComponent {
   ngOnInit() {
     this.service.pauseVideo.subscribe((data: any) &#x3D;&gt; {
       if (data &#x3D;&#x3D;&#x3D; &#x27;off&#x27;) {
-        this.api.pause();
+        // this.api.pause();
       }
     });
     this.sources &#x3D; [
@@ -228,42 +228,42 @@ export class VideoPlayerComponent {
     ];
   }
 
-  onPlayerReady(api: VgAPI) {
-    this.api &#x3D; api;
-    this.fsAPI &#x3D; this.api.fsAPI;
-    this.nativeFs &#x3D; this.fsAPI.nativeFullscreen;
+  // onPlayerReady(api: VgAPI) {
+  //   this.api &#x3D; api;
+  //   this.fsAPI &#x3D; this.api.fsAPI;
+  //   this.nativeFs &#x3D; this.fsAPI.nativeFullscreen;
 
-    this.api.getDefaultMedia().subscriptions.ended.subscribe(
-      () &#x3D;&gt; {
-        // Set the video to the beginning
-        this.api.getDefaultMedia().currentTime &#x3D; 0;
-      }
-    );
-  }
+  //   this.api.getDefaultMedia().subscriptions.ended.subscribe(
+  //     () &#x3D;&gt; {
+  //       this.api.getDefaultMedia().currentTime &#x3D; 0;
+  //     }
+  //   );
+  // }
   // added time to 10sec
   next(currenttime) {
     const time &#x3D; currenttime + 10;
-    this.api.currentTime &#x3D; time;
+    // this.api.currentTime &#x3D; time;
   }
   // less time to 10sec
   previous(currenttime) {
     const time &#x3D; currenttime - 10;
-    this.api.currentTime &#x3D; time;
+    // this.api.currentTime &#x3D; time;
   }
 
   onChangeNativeFs($event) {
-    this.fsAPI.nativeFullscreen &#x3D; this.nativeFs;
+    // this.fsAPI.nativeFullscreen &#x3D; this.nativeFs;
 
   }
   // to speed up and speed down
   playbackValues(playbackValue) {
-    this.api.playbackRate &#x3D; playbackValue.value;
+    // this.api.playbackRate &#x3D; playbackValue.value;
   }
 
 }
 </code></pre>
     </div>
 </div>
+
 
 
 
