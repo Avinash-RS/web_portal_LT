@@ -2310,6 +2310,7 @@ export const get_batchwise_learner_dashboard_data_v2 = gql `
           progress_class
           course_week_Percent
           course_description
+          isTesting
         }
         ongoing
         all
