@@ -67,8 +67,43 @@
         display: inline-block;
         transform: rotate(90deg);
         font-size: 8px;
-        color: #333333;
+        color: $label2;
         margin: 0 7px;
+    }
+}
+.heading {
+    p {
+        font-size: 18px;
+        font-weight: 500;
+        color: $label2;
+        line-height: normal;
+        margin-bottom: 0;
+    }
+}
+.greyBor {
+    padding: 6px 12px;
+}
+.likeCommnet {
+    padding: 10px 20px;
+}
+.editorContent {
+    padding: 20px;
+    p {
+        word-break: break-word;
+    }
+}
+.replyCommentThread {
+    padding: 20px;
+}
+.askInstructor {
+    padding: 10px;
+    background-color: whitesmoke;
+    border: 1px solid #dddddd;
+}
+.replyThread {
+    padding: 20px;
+    p {
+        word-break: break-word;
     }
 }
 .moduleHeadHight, .moduleName {
