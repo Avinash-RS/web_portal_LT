@@ -7,7 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
 import { CommonServicesService } from '@core/services/common-services.service';
 import * as CryptoJS from 'crypto-js';
-
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 @Component({
   selector: 'app-ask-questions',
@@ -42,7 +42,50 @@ export class AskQuestionsComponent implements OnInit {
   currentDate = new Date(this.dateObj.getFullYear() + '-' + (this.dateObj.getMonth() + 1) + '-' + this.dateObj.getDate()).getTime();
   batchEndTime: any;
   checkLevel: boolean = false;
-
+  ///new variables
+  selectedIndex = 0;
+  showSkeleton:boolean = true;
+  qaDataList = [1,2,3];
+  htmlContent = '';
+  config: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '20rem',
+    minHeight: '5rem',
+    placeholder: 'Please ask your question with concise and add any other details here',
+    translate: 'yes',
+    defaultParagraphSeparator: '',
+    defaultFontName: 'Arial',
+    toolbarHiddenButtons: [
+      ['undo', 'redo', 'strikeThrough', 'subscript', 'superscript', 'heading', 'fontName'],
+      [
+        'fontSize',
+        'textColor',
+        'backgroundColor',
+        'customClasses',
+        'unlink',
+        'insertVideo',
+        // 'insertHorizontalRule',
+        'removeFormat',
+        'toggleEditorMode'
+      ]
+    ],
+    customClasses: [
+      {
+        name: 'quote',
+        class: 'quote',
+      },
+      {
+        name: 'redText',
+        class: 'redText'
+      },
+      {
+        name: 'titleText',
+        class: 'titleText',
+        tag: 'h1',
+      },
+    ]
+  };
   constructor(private dialog: MatDialog,
               public Lservice: LearnerServicesService,
               public route: Router,
@@ -85,14 +128,14 @@ export class AskQuestionsComponent implements OnInit {
   }
 
   openQuestionInput(templateRef: TemplateRef<any>) {
-    console.log(this.moduleTopicData);
     this.questionText = '';
     if (this.screenWidth > 650) {
       this.dialog.open(templateRef, {
-        width: '60%',
-        height: '80%',
+        width: '38%',
+        height: '78%',
         closeOnNavigation: true,
         disableClose: true,
+        panelClass:'qadialog'
       });
     } else {
       this.dialog.open(templateRef, {
@@ -100,6 +143,7 @@ export class AskQuestionsComponent implements OnInit {
         height: '80%',
         closeOnNavigation: true,
         disableClose: true,
+        panelClass:'qadialog'
       });
     }
   }
