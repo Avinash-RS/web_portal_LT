@@ -1,6 +1,6 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
@@ -21,6 +21,7 @@ export class DiscussionForumComponent implements OnInit {
 
   scromModuleData = [];
   course: any;
+  threadData;
   userDetail: any;
   showCourseDetails = true;
   disableThreads = false;
@@ -70,27 +71,26 @@ export class DiscussionForumComponent implements OnInit {
   runnablePlatforms = ['MacIntel', 'Win32', 'Linux x86_64'];
   isHideAccord: boolean = false;
   isMobile: boolean = false;
-  secretKey = "(!@#Passcode!@#)";
+  secretKey = '(!@#Passcode!@#)';
   oldIdx: any;
   sortBox = false;
   selected;
   checkLevel: any;
   constructor(public Lservice: LearnerServicesService, public route: Router, private formBuilder: FormBuilder,
               private gs: GlobalServiceService, private toastr: ToastrService, private dialog: MatDialog,
-              public cS: CommonServicesService,public translate: TranslateService) {
-                let lang = localStorage.getItem('language')
-                   this.translate.use(lang?lang:'en')             
-    const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
+              public cS: CommonServicesService, public translate: TranslateService) {
+                const lang = localStorage.getItem('language');
+                this.translate.use(lang ? lang : 'en');
+                const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
-    this.course = detail || JSON.parse(atob(localStorage.getItem('course')));
-    this.userDetail = this.gs.checkLogout();
-    // if (this.course.isBatch) {
-    this.playerModuleAndTopic(this.course.id);
-    // }
+                this.course = detail || JSON.parse(atob(localStorage.getItem('course')));
+                this.userDetail = this.gs.checkLogout();
+                this.playerModuleAndTopic(this.course.id);
   }
 
   ngOnInit() {
-    if(!this.runnablePlatforms.includes(navigator.platform)){
+    // tslint:disable-next-line: deprecation
+    if (!this.runnablePlatforms.includes(navigator.platform)) {
         this.isMobile = true;
       }
   }
@@ -100,10 +100,10 @@ export class DiscussionForumComponent implements OnInit {
       if (this.isHideAccord) {
         this.isHideAccord = false;
       } else {
-        this.route.navigateByUrl('/Learner/MyCourse');
+        this.route.navigateByUrl('/Landing/MyCourse');
       }
     } else {
-      this.route.navigateByUrl('/Learner/MyCourse');
+      this.route.navigateByUrl('/Landing/MyCourse');
     }
   }
 
@@ -112,55 +112,39 @@ export class DiscussionForumComponent implements OnInit {
   }
 
   playerModuleAndTopic(cid) {
-    // this.cS.loader$.next(true);
     this.loading = true;
-    let param:any = {}
-    param.parent=""
-    param.contentID = cid
-    let id = CryptoJS.AES.decrypt(this.userDetail.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8)
-    param.user_id = id
-    param.batchid = this.course.batchdetails?.batchid
-    console.log(param)
+    let param: any = {};
+    param.parent = '';
+    param.contentID = cid;
+    let id = CryptoJS.AES.decrypt(this.userDetail.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
+    param.user_id = id;
+    param.batchid = this.course.batchdetails?.batchid;
+    console.log(param);
     this.cS.getTOC(param).subscribe((data: any) => {
       this.checkLevel = data.message && data.checkLevel;
       this.scromModuleData = data?.message && data?.message || [];
       this.selectedModuleData = this.scromModuleData[0]?.childData[0] || null;
       this.loading = false;
-      console.log(this.scromModuleData)
+      console.log(this.scromModuleData);
       if (this.selectedModuleData) {
         this.loading = true;
         this.selectedModuleData.indexValue = 1;
-        // this.Lservice.getSingleBatchInfo(this.userDetail.user_id, cid).subscribe((resdata: any) => {
-        //   if (resdata?.data?.getbatchdetails?.message?.batchid !== null) {
-        //     this.batchDetails = resdata?.data?.getbatchdetails?.message;
-        //     const batchEndDate = new Date(resdata?.data?.getbatchdetails?.message.batchenddate);
-        //     this.disableThreads = batchEndDate.toISOString().slice(0, 10) < new Date().toISOString().slice(0, 10) ? true : false;
-        //     this.viewAllThreads();
-        //   } else {
-        //     this.batchDetails = null;
-        //     this.viewAllThreads();
-        //   }
-        // });
-
         this.batchDetails = this.course.batchdetails || null;
         if (this.batchDetails?.batchenddate) {
           const batchEndDate = new Date(this.batchDetails.batchenddate);
           const todayDate = moment().startOf('day').toDate();
           const enddateTemp = moment(batchEndDate, 'YYYY-MM-DD').endOf('day').toDate();
-          if(todayDate === enddateTemp || todayDate < enddateTemp){
-            this.disableThreads = false
-          } else{
-            this.disableThreads = true
+          if (todayDate === enddateTemp || todayDate < enddateTemp) {
+            this.disableThreads = false;
+          } else {
+            this.disableThreads = true;
           }
-          //this.disableThreads = batchEndDate.toISOString().slice(0, 10) < new Date().toISOString().slice(0, 10) ? true : false;
         }
         this.viewAllThreads();
       }
     });
   }
-  threadData
   viewAllThreads(c?) {
-    // this.cS.loader$.next(true);
     this.loading = true;
     this.Lservice.ViewAllThreadData(this.selectedModuleData?.module_name, this.course.id, this.batchDetails?.batchid)
       .subscribe((result: any) => {
@@ -172,21 +156,19 @@ export class DiscussionForumComponent implements OnInit {
           this.discussionData1 = Object.assign({}, result.data.ViewAllThreadData.data);
           this.threadData = result.data.ViewAllThreadData?.data?.topics;
           if (c === 'NewThread') {
-            if(this.threadData.length>0){
+            if (this.threadData.length > 0) {
               this.selectedThreadData = this.threadData[0];
-              this.selectedThreadData.thread_id = this.selectedThreadData.tid
-              this.showDetail(this.selectedThreadData, this.threadData.length-1)
+              this.selectedThreadData.thread_id = this.selectedThreadData.tid;
+              this.showDetail(this.selectedThreadData, this.threadData.length - 1);
             }
 
           }
-          // this.cS.loader$.next(false);
           this.loading = false;
           if (this.discussionData?.topics && this.discussionData?.topics?.length > 0) {
             this.discussionData.topics = this.discussionData?.topics?.filter(i => i.deleted === false);
             this.discussionData1.topics1 = this.discussionData.topics;
           }
         } else {
-          // this.cS.loader$.next(false);
           this.loading = false;
           this.discussionData = null;
         }
@@ -212,20 +194,16 @@ export class DiscussionForumComponent implements OnInit {
 
   closedialogbox() {
     this.dialog.closeAll();
-    // this.addThreadForm?.reset();
   }
 
-  showDetail(data,i?) {
+  showDetail(data, i?) {
     this.filterValue = '';
-    this.selected = ''
+    this.selected = '';
     this.searchthreadname = false;
     this.sortBox = false;
     this.showCourseDetails = false;
     this.showCommentThread = true;
     this.selectedThreadData = data;
-    // if(i){
-    //   this.selectedThreadData.indexVal = i;
-    // }
     this.viewsingletopicdiscussion(data.tid);
   }
 
@@ -247,7 +225,6 @@ export class DiscussionForumComponent implements OnInit {
         this.toastr.warning('Comment should be less than 60,000 characters');
         return false;
       } else {
-        // this.cS.loader$.next(true);
         this.loading = true;
         const UserDetails = JSON.parse(localStorage.getItem('UserDetails')) || null;
         const data1 = {
@@ -265,7 +242,6 @@ export class DiscussionForumComponent implements OnInit {
           thread_user_id : this.selectedThreadData.user.userslug
         };
         this.Lservice.postcomment(data1).subscribe((result: any) => {
-          // this.cS.loader$.next(true);
           this.loading = true;
           this.a2iFlag = false;
           if (result.success) {
@@ -276,7 +252,6 @@ export class DiscussionForumComponent implements OnInit {
             this.viewsingletopicdiscussion(this.selectedThreadData.tid);
             this.toastr.success('Comment added successfully');
           } else {
-            // this.cS.loader$.next(false);
             this.loading = false;
             this.toastr.warning(result.message);
           }
@@ -325,7 +300,6 @@ export class DiscussionForumComponent implements OnInit {
         this.discussionData.topics.sort((a, b) => new Date(a.lastposttimeISO).getTime() -
           new Date(b.lastposttimeISO).getTime());
       }
-      // this.viewAllThreads();
     }
   }
 
@@ -347,18 +321,7 @@ export class DiscussionForumComponent implements OnInit {
   }
 
   searchThread(filterValue: string) {
-    // setTimeout(() => {
     if (filterValue.trim().toLowerCase().length > 3) {
-      // const data = {
-      //   moduleid: '1/announcements/',
-      //   threadsearch: filterValue,
-      //   threadsort: 'null'
-      // };
-      // this.Lservice.searchandsortthread(data).subscribe((result: any) => {
-      //   if (result.success) {
-      //     this.discussionData.topics = result.message;
-      //   }
-      // });data.user.username, data?.lastposttimeISO, data?.postcount
       if (this.showCommentThread) {
         this.topicDiscussionData.posts = this.topicDiscussionData1.posts1;
         let arr = JSON.parse(JSON.stringify(this.topicDiscussionData1.posts1.slice(1)));
@@ -367,14 +330,11 @@ export class DiscussionForumComponent implements OnInit {
           return (item.content?.toLowerCase().indexOf(filterValue.toLowerCase()) > -1 ||
             item.user?.timestampISO?.toLowerCase().indexOf(filterValue.toLowerCase()) > -1 ||
             item?.user?.username?.toLowerCase().indexOf(filterValue.toLowerCase()) > -1
-            // || item.postcount?.indexOf(filterValue) > -1
           );
         });
         this.topicDiscussionData.posts = [thread, ...arr];
         if (this.topicDiscussionData.posts.length === 1) {
-          // setTimeout(() => {
           this.toastr.warning('No search results found');
-          // }, 3000);
         }
       } else {
         const arr = JSON.parse(JSON.stringify(this.discussionData.topics1));
@@ -382,7 +342,6 @@ export class DiscussionForumComponent implements OnInit {
           return (item.title?.toLowerCase().indexOf(filterValue.toLowerCase()) > -1 ||
             item.user?.username?.toLowerCase().indexOf(filterValue.toLowerCase()) > -1 ||
             item.lastposttimeISO?.toLowerCase().indexOf(filterValue.toLowerCase()) > -1
-            // || item.postcount?.indexOf(filterValue) > -1
           );
         });
       }
@@ -396,12 +355,9 @@ export class DiscussionForumComponent implements OnInit {
         this.discussionData.topics = this.discussionData1.topics1;
       }
     }
-    // }, 3000);
-
   }
 
   viewsingletopicdiscussion(slug) {
-    // this.cS.loader$.next(true);
     this.loading = true;
     this.topicDiscussionData = [];
     const topicSlug = slug;
@@ -409,17 +365,8 @@ export class DiscussionForumComponent implements OnInit {
       const mask = CryptoJS.AES.encrypt(this.userDetail?.nodebb_response?.uid.toString(), this.secretKey.trim()).toString();
       this.Lservice.viewsingletopicdiscussion(topicSlug.toString(), mask).subscribe((result: any) => {
         this.topicDiscussionData = result?.data?.ViewSingleTopicDiscussionData?.data;
-        // this.topicDiscussionData.posts.forEach(element => {
-        //   var tmp = document.createElement("DIV");
-        //   tmp.innerHTML = element.content;
-        //   tmp.removeAttribute("rel")
-        //   element.content = tmp.textContent || tmp.innerText || "";
-        // });
         this.topicDiscussionData1 = Object.assign({}, result?.data?.ViewSingleTopicDiscussionData?.data);
         this.topicDiscussionData1.posts1 = (this.topicDiscussionData1?.posts);
-        // const data = this.topicDiscussionData?.posts?.map(item => item.content = this.alterstring(item?.content));
-        // const data1 = this.topicDiscussionData1?.posts1?.map(item => item.content = this.alterstring(item?.content));
-        // this.cS.loader$.next(false);
         this.loading = false;
       });
     }
@@ -447,18 +394,16 @@ export class DiscussionForumComponent implements OnInit {
     } else {
       bid = null;
     }
-    // this.addThreadForm.value.thread_name = this.addThreadForm.value.thread_name.trim()
-    //   || this.addThreadForm.value.thread_name?.trimLeft() || this.addThreadForm.value.thread_name?.trimEnd();
     const desc: any = {};
     desc.d = this.addThreadForm.value.thread_description;
     desc.d = desc.d.replace(/&#160;/g, '')?.trim() || desc.d.replace(/&#160;/g, '')?.trimLeft() ||
       desc.d.replace(/&#160;/g, '')?.trimEnd();
-    if ((this.addThreadForm.value.thread_name.replace(/\s/g, '').length) && (this.addThreadForm.value.thread_name.length > 8) && desc.d.length > 8) {
+    if ((this.addThreadForm.value.thread_name.replace(/\s/g, '').length) &&
+    (this.addThreadForm.value.thread_name.length > 8) && desc.d.length > 8) {
       if (desc.d.length > 59950) {
         this.toastr.warning('Your post content is too large. Please reduce content and try again.');
         return false;
       } else {
-        // this.cS.loader$.next(true);
         this.loading = true;
         this.closedialogbox();
         const mask = CryptoJS.AES.encrypt(this.userDetail?.nodebb_response?.uid.toString(), this.secretKey.trim()).toString();
@@ -467,15 +412,12 @@ export class DiscussionForumComponent implements OnInit {
           bid)
           .subscribe((result: any) => {
             this.addThreadForm?.reset();
-            // this.cS.loader$.next(true);
             if (result.data.CreateNewThread?.success === 'true') {
               this.discussionData = this.discussionData1.topics1 = null;
               this.toastr.success('New thread created successfully');
               this.viewAllThreads('NewThread');
             } else {
-              // this.cS.loader$.next(false);
               this.loading = false;
-              
               this.toastr.warning(result.data.CreateNewThread?.message);
             }
           });
@@ -487,7 +429,8 @@ export class DiscussionForumComponent implements OnInit {
 
   likeandunlikepost(d?) {
     if (this.userDetail.nodebb_response != null || d !== undefined) {
-      const data = { uid: CryptoJS.AES.encrypt(this.userDetail?.nodebb_response?.uid.toString(), this.secretKey.trim()).toString(), pid: CryptoJS.AES.encrypt(d?.pid.toString(), this.secretKey.trim()).toString() };
+      const data = { uid: CryptoJS.AES.encrypt(this.userDetail?.nodebb_response?.uid.toString(),
+        this.secretKey.trim()).toString(), pid: CryptoJS.AES.encrypt(d?.pid.toString(), this.secretKey.trim()).toString() };
       if (d.apiCalled) {
         return false;
       } else {
@@ -555,15 +498,15 @@ export class DiscussionForumComponent implements OnInit {
     }
   }
 
-  moduleExpand(res,index){
-    if(index !== this.oldIdx){
+  moduleExpand(res, index) {
+    if (index !== this.oldIdx) {
     for (const element of this.scromModuleData) {
-      element.expanded = false
+      element.expanded = false;
     }
     this.scromModuleData[index].expanded = true;
     } else {
       this.scromModuleData[index].expanded = this.scromModuleData[index].expanded ? false : true;
     }
-  this.oldIdx = index 
+    this.oldIdx = index;
   }
 }

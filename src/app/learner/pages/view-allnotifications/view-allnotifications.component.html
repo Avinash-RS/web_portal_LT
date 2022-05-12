@@ -3,20 +3,8 @@
 
   <ul class="breadcrumb">
     <li><em (click)="goBack()" class="lxp-Go backArrow"></em> {{'All notifications' | translate}} </li>
-    <!-- <li>Activities</li> -->
   </ul>
 
-  <!-- <div class="d-flex align-items-center justify-content-start">
-    <p class="commonBackStyle">
-      <i class="lxp-Arrow backArrow" (click)="goBack()"></i>
-      <span (click)="goBack()">Back</span>
-    </p>
-    <div class="d-flex align-items-center courseNameBreadcrum">
-      <span class="pipeLine"> | </span>
-      <span>All notifications</span>
-    </div>
-  </div> -->
-  <!-- <h2 class="head"><strong>All notifications</strong></h2> -->
   <div class="markAllbtn" *ngIf="notifications?.length > 0">
     <button class="markBtn" (click)="markAsRead(notifications,'all')" [disabled]="unreadCount == 0">
       <u><strong>{{'Mark all as read' | translate}}</strong></u>
@@ -27,7 +15,7 @@
 <!------------------------------------Table------------------------------------->
 <div class="tableContainer">
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 " *ngIf="notifications?.length">
-
+  <caption></caption>
   <ng-container matColumnDef="notificationName">
     <th class="w-60" mat-header-cell *matHeaderCellDef><strong class="font">{{'Notifications' | translate}}</strong></th>
     <td class="pointer" mat-cell *matCellDef="let element">

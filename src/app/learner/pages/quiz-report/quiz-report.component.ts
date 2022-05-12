@@ -1,75 +1,80 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { LearnerServicesService } from "@learner/services/learner-services.service";
-import { ChartDataSets, ChartOptions, ChartType } from "chart.js";
-import { Label } from "ng2-charts";
+import { LearnerServicesService } from '@learner/services/learner-services.service';
+import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
+import { Label } from 'ng2-charts';
 import * as moment from 'moment';
 
 @Component({
-  selector: "app-quiz-report",
-  templateUrl: "./quiz-report.component.html",
-  styleUrls: ["./quiz-report.component.scss"]
+  selector: 'app-quiz-report',
+  templateUrl: './quiz-report.component.html',
+  styleUrls: ['./quiz-report.component.scss']
 })
 
 export class QuizReportComponent implements OnInit {
-
+  gridApi:any;
   UserDetails: any;
   userId: any;
   courseId: any;
   courseName: any;
+  defaultColDef = {
+    resizable: false,
+    floatingFilter: false,
+    enableColResize: false,
+    sortable: false,
+    lockPosition: true,
+    suppressMenu: true,
+    unSortIcon: true,
+  };
   cols = [
-    { headerName: 'Quiz Topics', field: 'quiz_name',width: 200,
+    { headerName: 'Quiz Topics', field: 'quiz_name', width: 230, tooltipField: 'quiz_name',
     cellRenderer: (params) => {
-      if(params?.data) {
+      if (params?.data) {
         return `<div class="countWrapper d-flex align-items-center">
         <div class="icon"><i class="lxp-Quiz_Report"></i></div>
         <span class="count">${params?.data?.quiz_name}</span>
-        </div>`
-      }
-      else {
+        </div>`;
+      } else {
         return '';
       }
     }},
-    { headerName: 'Date', field: 'start_date', minWidth: 150, width: 150,
+    { headerName: 'Date', field: 'start_date', minWidth: 90, width: 90,
     cellRenderer: (params) => {
-      if (params?.data?.start_date) { 
+      if (params?.data?.start_date) {
         // let result = params?.data?.start_date.substring(0, 10);
         // return moment(result).local().format('DD/MM/YY');
         return params?.data?.start_date;
-      }
-      else{
-        return "";
+      } else {
+        return '';
       }
     }
   },
-    { headerName: 'Total Questions', field: 'no_of_question', minWidth: 170, width: 170 },
-    { headerName: 'No. of Correct Answers', field: 'correct_answer', minWidth: 200, width: 200},
-    { headerName: 'Score', field: 'score',width: 100, minWidth: 100,
+    { headerName: 'Total Questions', field: 'no_of_question', minWidth: 85, width: 85},
+    { headerName: 'No. of Correct Answers', field: 'correct_answer', minWidth: 110, width: 110},
+    { headerName: 'Score', field: 'score',width: 65, minWidth: 65,
     cellRenderer: (params) => {
-      if (params?.data?.score) { 
-        return params?.data?.score + "%";
+      if (params?.data?.score) {
+        return params?.data?.score + '%';
       }
     }},
-    { headerName: 'Status', field: 'status', minWidth: 150, width: 150,
+    { headerName: 'Status', field: 'status', minWidth: 60, width: 60, cellClass:'statusClass',
     cellRenderer: (params) => {
-      if(params?.data?.status == 'Good'){
-        return `<div class="d-flex align-items-center justify-content-center statusBtn good">Good</div>`;      
-      }
-      else if(params?.data?.status == 'Average'){
+      if (params?.data?.status === 'Good') {
+        return `<div class="d-flex align-items-center justify-content-center statusBtn good">Good</div>`;
+      } else if (params?.data?.status === 'Average') {
         return `<div class="d-flex align-items-center justify-content-center statusBtn avg">Average</div>`;
-      }
-      else {
+      } else {
         return `<div class="d-flex align-items-center justify-content-center statusBtn poor">Poor</div>`;
       }
-      
+
     } }
-  ]
+  ];
   rows = [];
-  barLabel:any = [];
-  quizData:any = {
+  barLabel: any = [];
+  quizData: any = {
     bar_chart: [],
-    doughnut_chart:{"to_score": 0,"count": 0,"percent": 0},
-    table_chart :[]
+    doughnut_chart: {to_score: 0, count: 0, percent: 0},
+    table_chart : []
   };
   public coursebarChartLabels: Label[] = [];
   public ChartType: ChartType = 'bar';
@@ -79,13 +84,13 @@ export class QuizReportComponent implements OnInit {
     {
       data: [],
       backgroundColor: [],
-      hoverBackgroundColor:'#2280C1',
+      hoverBackgroundColor: '#2280C1',
       barThickness: 15,
     }
   ];
   public courseChartOptions: ChartOptions = {
-    responsive: true, 
-    tooltips:{
+    responsive: true,
+    tooltips: {
       enabled : true,
       displayColors: false,
       backgroundColor: 'white',
@@ -94,9 +99,14 @@ export class QuizReportComponent implements OnInit {
       bodyFontColor: '#49ae31',
       borderColor: '#999',
       borderWidth: 1,
-      footerFontColor:'#333333',
-      footerMarginTop:8,
-      footerSpacing:8,
+      footerFontColor: '#333333',
+      footerMarginTop: 8,
+      footerSpacing: 8,
+      callbacks: { 
+        label:function(tooltipItem, data){
+          return ""
+        }
+      }
     },
     plugins: {
       datalabels: {
@@ -111,7 +121,7 @@ export class QuizReportComponent implements OnInit {
       // },
       }
     },
-    layout:{
+    layout: {
       padding: {
         left: 0,
         right: 0,
@@ -119,26 +129,26 @@ export class QuizReportComponent implements OnInit {
         bottom: 0
     }
     },
-    scales:{
-      xAxes:[{
+    scales: {
+      xAxes: [{
         ticks: {
           display: false,
       },
-        gridLines:{
-          display:false
+        gridLines: {
+          display: false
         },
       }],
-      yAxes:[{
-        gridLines:{
+      yAxes: [{
+        gridLines: {
           borderDash: [1, 3],
-          color: "#b3b3b3"
+          color: '#b3b3b3'
         },
         ticks: {
           min: 0,
           max: 100,
-          stepSize:20,
-          callback: function(value) {
-            return value + '  '
+          stepSize: 20,
+          callback(value) {
+            return value + '  ';
           }
         }
       }],
@@ -155,50 +165,52 @@ export class QuizReportComponent implements OnInit {
     }
   };
   points:any = [
-    {color:'good',label:'71-100% Good'},
-    {color:'avg',label:'31-70% Average'},
-    {color:'poor',label:'0-30% poor'}
-  ]
-  constructor(private activeRoute: ActivatedRoute,public learnerService: LearnerServicesService,) { 
-    this.activeRoute.queryParams.subscribe(res => {
-      if(res){
-        this.courseId = atob(res.CourseId)
-        this.courseName = atob(res.CourseName)        
-      }
-    });
+    {color: 'good', label: '71-100% Good'},
+    {color: 'avg', label: '31-70% Average'},
+    {color:' poor', label: '0-30% poor'}
+  ];
+  noRecords:boolean = false;
+  constructor(private activeRoute: ActivatedRoute, public learnerService: LearnerServicesService,) { 
     this.UserDetails = JSON.parse(localStorage.getItem('UserDetails')) || null;
     this.userId = this.UserDetails?.user_id;
+    this.activeRoute.queryParams.subscribe(res => {
+      if (res){
+        this.courseId = atob(res.CourseId);
+        this.courseName = atob(res.CourseName);
+        this.geTQuizData();        
+      }
+    });
   }
 
   ngOnInit() {
-    this.geTQuizData();
+   
   }
   geTQuizData(){
-    this.learnerService.getlearnerquiz(this.UserDetails?.username ? this.UserDetails?.username : '').subscribe((result:any)=>{
+    this.learnerService.getlearnerquiz(this.UserDetails?.username ? this.UserDetails?.username : '', this.courseId).subscribe((result: any)=>{
       if(result?.data?.getlearnerquiz?.success){
         this.quizData =  {
           bar_chart : result?.data?.getlearnerquiz?.message?.bar_chart,
-          doughnut_chart:result?.data?.getlearnerquiz?.message?.doughnut_chart,
-          table_chart:result?.data?.getlearnerquiz?.message?.table_chart,
-        }
+          doughnut_chart : result?.data?.getlearnerquiz?.message?.doughnut_chart,
+          table_chart : result?.data?.getlearnerquiz?.message?.table_chart,
+        };
         this.rows = this.quizData.table_chart;
+        this.noRecords = this.rows.length > 0 ? false : true;
         this.generateBarChart();
-      }
-      else{
+      } else {
         this.quizData =  {
           bar_chart : [],
-          doughnut_chart:{"to_score": 0,"count": 0,"percent": 0},
-          table_chart:[],
-        }
+          doughnut_chart: {to_score: 0, count: 0, percent: 0},
+          table_chart: [],
+        };
       }
     });
   }
-  generateBarChart(){
+  generateBarChart() {
     var barchartData = [];
-    var barchartColor =[];
+    var barchartColor = [];
     this.barLabel = [];
-    if(this.quizData.bar_chart.length > 0){
-      this.quizData.bar_chart.forEach((element:any)=>{
+    if (this.quizData.bar_chart.length > 0) {
+      this.quizData.bar_chart.forEach((element: any) => {
         barchartData.push(element.score_earned);
         barchartColor.push(element.color);
         this.barLabel.push(element.quiz_name);
@@ -208,10 +220,15 @@ export class QuizReportComponent implements OnInit {
         {
           data: barchartData,
           backgroundColor: barchartColor,
-          hoverBackgroundColor:barchartColor,
+          hoverBackgroundColor: barchartColor,
           barThickness: 12,
         }
       ];
     }
+  }
+  onGridReady(params: any) {
+    this.gridApi = params.api;
+    this.gridApi.sizeColumnsToFit();
+    // this.geTQuizData();
   }
 }

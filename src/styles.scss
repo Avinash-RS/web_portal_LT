@@ -1,12 +1,14 @@
-@import "assets/variable";
+@import "./assets/variable";
 // @import "~bootstrap/scss/bootstrap-reboot";
 @import "../node_modules/angular-calendar/css/angular-calendar.css";
 // @import "assets/iconfonts";
-@import "assets/font";
+@import "./assets/font";
 // @import "~animate.css/animate.min";
 @import "~ngx-owl-carousel-o/lib/styles/scss/owl.carousel";
 @import "~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default";
 
+@import 'ag-grid-community/dist/styles/ag-grid.css';
+@import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 @import "../node_modules/ag-grid-community/src/styles/ag-grid.scss";
 @import "../node_modules/ag-grid-community/src/styles/ag-theme-alpine/sass/ag-theme-alpine-mixin.scss";
 @import "../node_modules/ag-grid-community/src/styles/ag-theme-material/sass/ag-theme-material-mixin.scss";
@@ -103,7 +105,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  height: 100vh;
 }
 
 .app-loading .spinner {
@@ -125,6 +127,12 @@ body {
   animation: dash 1.5s ease-in-out infinite;
   stroke-linecap: round;
   stroke: #ddd;
+}
+
+.contentSetter {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 @keyframes rotate {
@@ -217,6 +225,44 @@ body {
 .width_80 {
   width: 80% !important;
 }
+
+.m-l-13 {
+  margin-left: 13px;
+}
+
+.p-5px {
+  padding: 5px !important;
+}
+
+.lxp-text {
+  color: $lxp-text;
+}
+
+.no_margin {
+  margin: 0 !important;
+}
+
+.no_padding {
+  padding: 0 !important;
+}
+
+.no_border {
+  border: none !important;
+  box-shadow: none;
+}
+
+.color_blue {
+  color: $lxp-theme-green !important; //red color
+}
+
+.color_white {
+  color: $color-white !important;
+}
+
+.color_black {
+  color: $color-blank !important;
+}
+
 
 .mat-spinner-color::ng-deep circle {
   stroke: $lxp-theme-yellow-sec !important;
@@ -383,6 +429,7 @@ mat-header-cell,
           background: #D6D6D6;
           display: block;
           -webkit-backface-visibility: visible;
+          backface-visibility: visible;
           transition: opacity .2s ease;
           border-radius: 0;
         }
@@ -397,7 +444,6 @@ ngx-skeleton-loader {
   }
 }
 
-
 :host p:last-child {
   margin-bottom: none !important;
 }
@@ -407,6 +453,7 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus, 
 input:-webkit-autofill:active  {
     -webkit-box-shadow: 0 0 0 30px white inset !important;
+    box-shadow: 0 0 0 30px white inset !important;
 }
 
 .powered {
@@ -579,13 +626,52 @@ button:disabled:hover {
 }
 
 
+//Login page loading
+.spinnerLoader {
+  border: 3px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 3px solid #3498db;
+  width: 25px;
+  height: 25px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 
 // Bootstrap Classes
-.d-flex {
-  display: flex;
+.pointer {
+  cursor: pointer;
 }
-.justify-content-between {
-  justify-content: space-between;
+.h-100 {
+  height: 100%;
+}
+.w-100 {
+  width: 100%;
+}
+.text-right {
+  text-align: right;
+}
+.text-left {
+  text-align: left;
+}
+.text-center {
+  text-align: center;
+}
+.text-white {
+  color: #ffffff;
+}
+.font-weight-bold {
+  font-weight: 700!important;
+}
+.d-flex {
+  display: flex !important;
 }
 .justify-content-start {
   justify-content: flex-start;
@@ -593,6 +679,39 @@ button:disabled:hover {
 .justify-content-end {
   justify-content: flex-end;
 }
+.justify-content-between {
+  justify-content: space-between;
+}
+.justify-content-around {
+  justify-content: space-around;
+}
+.justify-content-center {
+  justify-content: center;
+}
 .align-items-center {
   align-items: center;
+}
+.align-items-start {
+  align-items: flex-start;
+}
+.align-items-end {
+  align-items: flex-end;
+}
+.flex-column {
+  flex-direction: column;
+}
+.flex-nowrap {
+  flex-wrap: nowrap;
+}
+.flex-wrap {
+  flex-wrap: wrap;
+}
+hr {
+  box-sizing: content-box;
+  height: 0;
+  overflow: visible;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 1px solid rgba(0,0,0,.1);
 }

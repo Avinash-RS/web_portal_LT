@@ -8,12 +8,12 @@ providedIn: 'root'
 
 })
 
-export class GoogleAnalyticsService{
+export class GoogleAnalyticsService {
 
 constructor(private gtag: Gtag,
-    private router: Router) { }
+            private router: Router) { }
 
-setInnerPage(title:string){
+setInnerPage(title: string) {
 this.gtag.pageview({
     page_title: title,
     page_path: this.router.url,

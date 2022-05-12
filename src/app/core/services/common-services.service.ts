@@ -8,26 +8,13 @@ import {
 import { getAllNotifications, getCoursesByName, get_all_course_by_usergroup, list_content, logout, syllabus_of_particular_scorm, viewcourse, view_wishlist, view_course_for_learner } from '@core/services/operations/common_query';
 import { environment } from '@env/environment';
 import { Apollo } from 'apollo-angular';
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs';
 import * as publicIp from 'public-ip';
 @Injectable({
   providedIn: 'root'
 })
 export class CommonServicesService {
   httpOptions;
-  constructor(private apollo: Apollo, private http: HttpClient, ) { }
-
-  getToken(){
-    const token = localStorage.getItem('token')||sessionStorage.getItem('token'); 
-    var userDetails = JSON.parse(localStorage.getItem('UserDetails'))
-    this.httpOptions = {
-      headers: new HttpHeaders({ 
-        Authorization: 'Bearer '+token,
-        requestId: userDetails['user_id']
-       })
-    };
-  }
-  
   // Search Component for search all courses
   globalSearch$ = new Subject<any>();
   globalSearch = this.globalSearch$.asObservable();
@@ -81,18 +68,31 @@ export class CommonServicesService {
   openNotification = this.openNotification$.asObservable();
 
   updateProfilePic = new Subject<any>();
-  
   // While closing video palyer, pause video in course preview page
   pauseVideo$ = new Subject<any>();
   pauseVideo = this.pauseVideo$.asObservable();
 
+  constructor(private apollo: Apollo, private http: HttpClient, ) { }
+
+  getToken() {
+    const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+    var userDetails = JSON.parse(localStorage.getItem('UserDetails'));
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + token,
+        requestId: userDetails['user_id']
+       })
+    };
+  }
   logout(user_id, is_admin) {
     // this.apollo.getClient().resetStore();
+    var is_step = localStorage.getItem('step') == 'true' ? true : false;
     return this.apollo.query({
       query: logout,
       variables: {
         user_id,
-        is_admin
+        is_admin,
+        is_step
       }
     });
   }
@@ -248,19 +248,22 @@ export class CommonServicesService {
   }
   verifyCaptcha(response) {
     let data = {
-      'response': response,
-      //Visible captcha
-      //'secret': '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe'
-      //invisble captcha
-      'secret': '6LfFoOccAAAAADiqVaCeBi5wK9ShZBYE3BwR9Cdq'
-    }
+      ' response ': response,
+      // Visible captcha
+      // 'secret': '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe'
+      // invisble captcha
+      ' secret ': '6LfFoOccAAAAADiqVaCeBi5wK9ShZBYE3BwR9Cdq'
+    };
     // return this.http.get(`https://www.google.com/recaptcha/api/siteverify?email=l7gokul@gmail.com&g-recaptcha-response=${response}`);
     return this.http.post(`https://www.google.com/recaptcha/api/siteverify`, data);
   }
 
-  getTOC(postParam){
-    this.getToken()
-    return this.http.post(environment.apiUrl+'navTreeV2',postParam,this.httpOptions);
+  getTOC(postParam) {
+    this.getToken();
+    return this.http.post(environment.apiUrl + 'navTreeV2', postParam, this.httpOptions);
   }
+  urlStatusCheck(url) {
+    return this.http.get(url,{responseType:'text'})
+}
   
 }

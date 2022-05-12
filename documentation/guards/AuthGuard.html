@@ -39,6 +39,7 @@
 
 
 
+
 <ol class="breadcrumb">
     <li>Guards</li>
     <li >AuthGuard</li>
@@ -193,8 +194,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="32"
-                            class="link-to-prism">src/app/core/services/_helpers/auth.guard.ts:32</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="29"
+                            class="link-to-prism">src/app/core/services/_helpers/auth.guard.ts:29</a></div>
                 </td>
             </tr>
 
@@ -278,23 +279,20 @@ export class AuthGuard implements CanLoad {
     private alert: AlertServiceService,
     private router: Router,
   ) {
-    
    }
   // Added by Avinasi
- 
     //    else {
     //     this.router.navigate([&#x27;/Learner/login&#x27;]);
     //     return false;
     //   }
     // }
-  
   // Added by Mythreyi
 
     canLoad(route: Route, segments: UrlSegment[]): any {
-      const userDetails &#x3D;JSON.parse(localStorage.getItem(&#x27;UserDetails&#x27;));
-      const token &#x3D;  localStorage.getItem(&#x27;token&#x27;)||sessionStorage.getItem(&#x27;token&#x27;);
-      if(userDetails?.TFAsetup?.main_config_TFA) {
-        if(userDetails?.TFAsetup?.user_config_TFA) {
+      const userDetails &#x3D; JSON.parse(localStorage.getItem(&#x27;UserDetails&#x27;));
+      const token &#x3D;  localStorage.getItem(&#x27;token&#x27;) || sessionStorage.getItem(&#x27;token&#x27;);
+      if (userDetails?.TFAsetup?.main_config_TFA) {
+        if (userDetails?.TFAsetup?.user_config_TFA) {
           if (token &amp;&amp; userDetails?.specific_report_value) {
               return true;
             } else {
@@ -330,7 +328,7 @@ export class AuthGuard implements CanLoad {
     //   // url should not start from admin - can be /Larner or anything
     //   // if profile updated and trying to go login/reg
     //   if (localStorage.getItem(&#x27;role&#x27;) &#x3D;&#x3D; &#x27;learner&#x27;) {
-    //     this.router.navigate([&#x27;/Learner/MyCourse&#x27;]);
+    //     this.router.navigate([&#x27;/Landing/MyCourse&#x27;]);
     //     return false;
     //   } else if (!userDetailes.is_profile_updated) {
     //     // if profile not updated and trying to access other screens, redirect to profile
@@ -363,6 +361,7 @@ export class AuthGuard implements CanLoad {
 </code></pre>
         </div>
 </div>
+
 
 
 

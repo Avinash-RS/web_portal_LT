@@ -314,8 +314,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="41"
-                            class="link-to-prism">src/app/redirection/redirection.component.ts:41</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="39"
+                            class="link-to-prism">src/app/redirection/redirection.component.ts:39</a></div>
                 </td>
             </tr>
 
@@ -416,8 +416,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="54"
-                            class="link-to-prism">src/app/redirection/redirection.component.ts:54</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="52"
+                            class="link-to-prism">src/app/redirection/redirection.component.ts:52</a></div>
                 </td>
             </tr>
 
@@ -478,7 +478,7 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>&quot;(!@#Passcode!@#)&quot;</code>
+                        <i>Default value : </i><code>&#x27;(!@#Passcode!@#)&#x27;</code>
                     </td>
                 </tr>
                     <tr>
@@ -498,7 +498,7 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
 import { LearnerServicesService } from &#x27;@learner/services/learner-services.service&#x27;;
-import { ActivatedRoute,Router } from &#x27;@angular/router&#x27;;
+import { ActivatedRoute, Router } from &#x27;@angular/router&#x27;;
 import * as CryptoJS from &#x27;crypto-js&#x27;;
 
 @Component({
@@ -508,53 +508,54 @@ import * as CryptoJS from &#x27;crypto-js&#x27;;
 })
 export class RedirectionComponent implements OnInit {
 routeParams;
-secretKey &#x3D; &quot;(!@#Passcode!@#)&quot;;
+secretKey &#x3D; &#x27;(!@#Passcode!@#)&#x27;;
 
-  constructor( private service: LearnerServicesService,private route: ActivatedRoute,private router: Router) { }
+  constructor( private service: LearnerServicesService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params &#x3D;&gt; {
-      this.routeParams &#x3D; params
-      if(params){
-        this.goToCourse()
+      this.routeParams &#x3D; params;
+      if (params) {
+        this.goToCourse();
       }
-      console.log(params); // Print the parameter to the console. 
+      console.log(params); // Print the parameter to the console.
   });
   }
 
-  goToCourse(){
-    this.service.login(this.routeParams.queValue, this.routeParams.rpValue, false,this.routeParams.dpValue)
+  goToCourse() {
+    this.service.learner_login(this.routeParams.queValue, this.routeParams.rpValue, this.routeParams.dpValue)
       .subscribe((loginresult: any) &#x3D;&gt; {
-        if(loginresult.data.login){
-          if (loginresult.data.login.success) {
-            let userId &#x3D; loginresult.data.login.message.user_id
-            this.loginMovement(loginresult)
+        if (loginresult.data.learner_login) {
+          if (loginresult.data.learner_login.success) {
+            const userId &#x3D; loginresult.data.learner_login.message.user_id;
+            this.loginMovement(loginresult);
           }
         }
-        
-        
       });
   }
 
-  loginMovement(loginresult){
-    localStorage.setItem(&#x27;Fullname&#x27;, loginresult.data.login.message.full_name);
-    var id &#x3D; CryptoJS.AES.encrypt(loginresult.data.login.message.user_id, this.secretKey.trim()).toString(); 
-    loginresult.data.login.message.user_id &#x3D; id
-    loginresult.data.login.message.specific_report_value &#x3D; &#x27;&#x27;;
-    loginresult.data.login.message.is_password_updated &#x3D; true;
-    localStorage.setItem(&#x27;token&#x27;, loginresult.data.login.message.token);
-      localStorage.setItem(&#x27;UserDetails&#x27;, JSON.stringify(loginresult.data.login.message));
-      localStorage.setItem(&#x27;remember_me&#x27;, &#x27;false&#x27;);
-      localStorage.setItem(&#x27;user_img&#x27;, loginresult.data.login.message.profile_img);
-      localStorage.setItem(&#x27;role&#x27;, &#x27;learner&#x27;);
-      this.setAuthentication();
+  loginMovement(loginresult) {
+    localStorage.setItem(&#x27;Fullname&#x27;, loginresult.data.learner_login.message.full_name);
+    var id &#x3D; CryptoJS.AES.encrypt(loginresult.data.learner_login.message.user_id, this.secretKey.trim()).toString();
+    loginresult.data.learner_login.message.user_id &#x3D; id;
+    loginresult.data.learner_login.message.specific_report_value &#x3D; &#x27;&#x27;;
+    loginresult.data.learner_login.message.is_password_updated &#x3D; true;
+    localStorage.setItem(&#x27;token&#x27;, loginresult.data.learner_login.message.token);
+    localStorage.setItem(&#x27;UserDetails&#x27;, JSON.stringify(loginresult.data.learner_login.message));
+    localStorage.setItem(&#x27;remember_me&#x27;, &#x27;false&#x27;);
+    localStorage.setItem(&#x27;user_img&#x27;, loginresult.data.learner_login.message.profile_img);
+    localStorage.setItem(&#x27;role&#x27;, &#x27;learner&#x27;);
+    this.setAuthentication();
 }
-setAuthentication(){
-  let userDetail &#x3D;JSON.parse(localStorage.getItem(&#x27;UserDetails&#x27;))
-  userDetail[&#x27;specific_report_value&#x27;] &#x3D; Math.floor(Math.random() * 1000000000).toString()
+setAuthentication() {
+  let userDetail &#x3D; JSON.parse(localStorage.getItem(&#x27;UserDetails&#x27;));
+  userDetail[&#x27;specific_report_value&#x27;] &#x3D; Math.floor(Math.random() * 1000000000).toString();
   localStorage.setItem(&#x27;UserDetails&#x27;, JSON.stringify(userDetail));
-    this.router.navigate([&#x27;/Learner/MyCourse&#x27;]);
-}
+  if (userDetail.org_type &#x3D;&#x3D;&#x3D; &#x27;Corporate&#x27;) {
+    this.router.navigate([&#x27;/Learner/upskillcalendar&#x27;]);
+  } else {
+    this.router.navigate([&#x27;/Landing/MyCourse&#x27;]);
+  }}
 }
 </code></pre>
     </div>
@@ -598,11 +599,13 @@ setAuthentication(){
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><div class="logo centerlogo">  <img src="https://assets.lntedutech.com/application_images/loader.gif" alt="loader" /></div></div>'
-    var COMPONENTS = [{'name': 'ActivitiesComponent', 'selector': 'app-activities'},{'name': 'AlertComponentComponent', 'selector': 'app-alert-component'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AskQuestionsComponent', 'selector': 'app-ask-questions'},{'name': 'AssignmentComponent', 'selector': 'app-assignment'},{'name': 'AudioPlayerComponent', 'selector': 'app-audio-player'},{'name': 'CalendarActivityComponent', 'selector': 'app-calendar-activity'},{'name': 'CoursedetailsComponent', 'selector': 'app-coursedetails'},{'name': 'CourseGalleryComponent', 'selector': 'app-course-gallery'},{'name': 'CourseReportComponent', 'selector': 'app-course-report'},{'name': 'DiscussionForumComponent', 'selector': 'app-discussion-forum'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForbiddenComponent', 'selector': 'app-forbidden'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'InstructorLedComponent', 'selector': 'app-instructor-led'},{'name': 'KnowledgeLandingPageComponent', 'selector': 'app-knowledge-landing-page'},{'name': 'KnowledgePreviewComponent', 'selector': 'app-knowledge-preview'},{'name': 'KnowledgeResourceHomeComponent', 'selector': 'app-knowledge-resource-home'},{'name': 'LandingHeaderComponent', 'selector': 'app-landing-header'},{'name': 'LearnerNewMyCourseComponent', 'selector': 'app-learner-new-my-course'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'NewHomeComponent', 'selector': 'app-new-home'},{'name': 'NotFoundComponent', 'selector': 'not-found'},{'name': 'PasswordComponent', 'selector': 'app-password'},{'name': 'PdfreaderComponent', 'selector': 'app-pdfreader'},{'name': 'PerformancePageMobileComponent', 'selector': 'app-performance-page-mobile'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProgressionReportComponent', 'selector': 'app-progression-report'},{'name': 'ProjectMobileComponent', 'selector': 'app-project-mobile'},{'name': 'QuestionanswerComponent', 'selector': 'app-questionanswer'},{'name': 'RedirectionComponent', 'selector': 'app-redirection'},{'name': 'ResetpasswordComponent', 'selector': 'app-resetpassword'},{'name': 'TermsconditionsComponent', 'selector': 'app-termsconditions'},{'name': 'ToolbarNotificationComponent', 'selector': 'app-toolbar-notification'},{'name': 'VideoPlayerComponent', 'selector': 'app-video-player'},{'name': 'VideoPreviewModalComponent', 'selector': 'app-video-preview-modal'},{'name': 'ViewAllnotificationsComponent', 'selector': 'app-view-allnotifications'}];
+    var COMPONENTS = [{'name': 'ActivitiesComponent', 'selector': 'app-activities'},{'name': 'AlertComponentComponent', 'selector': 'app-alert-component'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AskQuestionsComponent', 'selector': 'app-ask-questions'},{'name': 'AudioPlayerComponent', 'selector': 'app-audio-player'},{'name': 'CalendarActivityComponent', 'selector': 'app-calendar-activity'},{'name': 'CalendarFilterComponent', 'selector': 'app-calendar-filter'},{'name': 'CoursedetailsComponent', 'selector': 'app-coursedetails'},{'name': 'CourseGalleryComponent', 'selector': 'app-course-gallery'},{'name': 'CourseReportComponent', 'selector': 'app-course-report'},{'name': 'DiscussionForumComponent', 'selector': 'app-discussion-forum'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForbiddenComponent', 'selector': 'app-forbidden'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'InstructorLedComponent', 'selector': 'app-instructor-led'},{'name': 'KnowledgeLandingPageComponent', 'selector': 'app-knowledge-landing-page'},{'name': 'KnowledgePreviewComponent', 'selector': 'app-knowledge-preview'},{'name': 'KnowledgeResourceHomeComponent', 'selector': 'app-knowledge-resource-home'},{'name': 'LandingHeaderComponent', 'selector': 'app-landing-header'},{'name': 'LearnerNewMyCourseComponent', 'selector': 'app-learner-new-my-course'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MycourseItemComponent', 'selector': 'app-mycourse-item-component'},{'name': 'NewHomeComponent', 'selector': 'app-new-home'},{'name': 'NotFoundComponent', 'selector': 'not-found'},{'name': 'PasswordComponent', 'selector': 'app-password'},{'name': 'PdfreaderComponent', 'selector': 'app-pdfreader'},{'name': 'PerformancePageMobileComponent', 'selector': 'app-performance-page-mobile'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProgressionReportComponent', 'selector': 'app-progression-report'},{'name': 'ProjectMobileComponent', 'selector': 'app-project-mobile'},{'name': 'QuestionanswerComponent', 'selector': 'app-questionanswer'},{'name': 'QuizReportComponent', 'selector': 'app-quiz-report'},{'name': 'RedirectionComponent', 'selector': 'app-redirection'},{'name': 'ResetpasswordComponent', 'selector': 'app-resetpassword'},{'name': 'ToolbarNotificationComponent', 'selector': 'app-toolbar-notification'},{'name': 'UpskillCalendarComponent', 'selector': 'app-upskill-calendar'},{'name': 'VideoPlayerComponent', 'selector': 'app-video-player'},{'name': 'VideoPreviewModalComponent', 'selector': 'app-video-preview-modal'},{'name': 'ViewAllnotificationsComponent', 'selector': 'app-view-allnotifications'}];
     var DIRECTIVES = [{'name': 'CapslockDirective', 'selector': '[appCapslock]'},{'name': 'DragDropImageDirective', 'selector': '[appDragDropImage]'},{'name': 'StickyHeaderDirective', 'selector': '[stickyHeaderDirective]'}];
     var ACTUAL_COMPONENT = {'name': 'RedirectionComponent'};
 </script>
 <script src="../js/tree.js"></script>
+
+
 
 
 

@@ -2,12 +2,23 @@
 <div class="quizReport d-flex justify-content-between">
     <div class="leftContainer">
         <ul class="breadcrumb">
-            <li><em routerLink="/Learner/MyCourse" class="lxp-Go backArrow"></em> {{courseName}}</li>
+            <li><em routerLink="/Landing/MyCourse" class="lxp-Go backArrow"></em> {{courseName}}</li>
             <li>{{'Quiz Report' | translate}}</li>
         </ul>
         <div class="col agquiz">
-            <mat-card class="mat-elevation-z8">
-                <ag-grid-angular [columnDefs]="cols" [rowData]="rows" style="width:100%; height:500px" class="ag-theme-alpine"></ag-grid-angular>
+            <mat-card>
+                <div *ngIf="rows.length <= 0 && !noRecords" class="loading">
+                    <ngx-skeleton-loader count="6" [theme]="{ 'border-radius': '0', height: '50px' }"></ngx-skeleton-loader>
+                </div>
+                <div *ngIf="rows.length > 0 && !noRecords">
+                    <ag-grid-angular class="ag-theme-alpine" [columnDefs]="cols" [rowData]="rows" style="width:100%; min-height: 400px;" [ngStyle]="{height:(rows.length * 50)  + 'px' }" (gridReady)="onGridReady($event)" [defaultColDef]="defaultColDef"></ag-grid-angular>
+                </div>
+                <div  *ngIf="rows.length <= 0 && noRecords" class="noCard">
+                    <figure>
+                      <img src="https://assets.lntedutech.com/application_images/noquiz.webp" alt="quiz">
+                    </figure>
+                    <p>{{'No Records Found!!' }}</p>
+                  </div>
             </mat-card>
         </div>
     </div>
@@ -20,14 +31,14 @@
             <h6 class="xlabel">{{'Quiz Topics'}}</h6>
         </div>
         <div class="quizAverage">
-            <span class="chartHeading">{{'Quiz Average Score'}}</span>
+            <span class="chartHeading quizScore">{{'Quiz Average Score'}}</span>
             <div class="wrapper d-flex justify-content-between align-items-center">
                 <div class="circleProgress">
                     <circle-progress [title]= "quizData?.doughnut_chart?.percent ? quizData.doughnut_chart.percent : '0'"
                     [titleFontSize] = "10" [titleFontWeight] = "600" [showUnits]= "true" 
                     [percent]="quizData?.doughnut_chart?.percent ? quizData.doughnut_chart.percent : '0'"
-                    [radius]=25  [space]=-6 [outerStrokeGradient]=true [outerStrokeWidth]=6 [outerStrokeColor]="'#17B15C'" 
-                    [outerStrokeGradientStopColor]="'#17B15C'" [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]=6 
+                    [radius]=25  [space]=-6 [outerStrokeGradient]=true [outerStrokeWidth]=6 [outerStrokeColor]="quizData?.doughnut_chart?.color" 
+                    [outerStrokeGradientStopColor]="quizData?.doughnut_chart?.color" [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]=6 
                     [animation]="true" [animationDuration]="300" [responsive]="true" [showSubtitle]="false" ></circle-progress>
                 </div>
                 <div class="points">

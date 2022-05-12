@@ -1,11 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import {
-  MatButtonModule, MatMenuModule, MatInputModule, MatToolbarModule, MatCheckboxModule,
-  MatFormFieldModule, MatIconModule, MatCardModule, MatGridListModule, MatSelectModule, MatRadioModule,
-  MatDialogModule, MatTooltipModule, MatDialogRef
-} from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { ApolloModule, Apollo } from 'apollo-angular';
 import { HttpLinkModule } from 'apollo-angular-link-http';
 import { LoginComponent } from './login.component';
@@ -152,8 +160,8 @@ describe('LoginComponent', () => {
           localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message))
           // debugger
           // if (loginresult.data.login.message.is_profile_updated) {
-            // expect(routerStub.navigate).toHaveBeenCalledWith(['/Learner/MyCourse']);
-            // expect(navigateSpy).toHaveBeenCalledWith(['/Learner/MyCourse']);
+            // expect(routerStub.navigate).toHaveBeenCalledWith(['/Landing/MyCourse']);
+            // expect(navigateSpy).toHaveBeenCalledWith(['/Landing/MyCourse']);
           // }
           // else {
             // expect(routerStub.navigate).toHaveBeenCalledWith(['/Learner/profile']);
@@ -168,7 +176,7 @@ describe('LoginComponent', () => {
           const ps = btoa(component.loginForm.value.password);
           localStorage.setItem('ps', ps);
           // if (loginresult.data.login.message.is_profile_updated)
-          //   router.navigate(['/Learner/MyCourse'])
+          //   router.navigate(['/Landing/MyCourse'])
           //   // expect(location.path()).toBe('/home');
           // else {
           //   router.navigate(['/Learner/profile'])

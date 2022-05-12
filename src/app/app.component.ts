@@ -3,7 +3,7 @@ import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { GlobalServiceService } from '././core/services/handlers/global-service.service';
 import { Title } from '@angular/platform-browser';
-import { filter, switchMap, take, takeUntil, tap } from 'rxjs/operators';
+import { filter, switchMap, take, takeUntil, tap, timeout } from 'rxjs/operators';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { Subject, Subscription, timer } from 'rxjs';
 import { slideInAnimation } from './router.animation';
@@ -14,12 +14,15 @@ import { has } from 'underscore';
 import * as CryptoJS from 'crypto-js';
 import { Gtag } from 'angular-gtag';
 declare var window;
-declare var dataLayer
+declare var dataLayer;
 declare var gtag;
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { LicenseManager } from 'ag-grid-enterprise';
 LicenseManager.setLicenseKey('CompanyName=LARSEN & TOUBRO LIMITED,LicensedGroup=L&T EduTech,LicenseType=MultipleApplications,LicensedConcurrentDeveloperCount=3,LicensedProductionInstancesCount=3,AssetReference=AG-017299,ExpiryDate=15_July_2022_[v2]_MTY1NzgzOTYwMDAwMA==d6a472ece2e8481f35e75c20066f8e49');
+import { BnNgIdleService } from 'bn-ng-idle';
+import { SocketioService } from '@learner/services/socketio.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -27,34 +30,6 @@ LicenseManager.setLicenseKey('CompanyName=LARSEN & TOUBRO LIMITED,LicensedGroup=
   animations: [ slideInAnimation ]
 })
 export class AppComponent implements OnInit {
-  runnablePlatforms = ['MacIntel', 'Win32', 'Linux x86_64'];
-  ipAddress = '';
-  title = 'LXP';
-  isLoader = false;
-  loaderSubscription: Subscription;
-  isMobile = false;
-  platformTxt = navigator.platform;
-  isProgressBar = false;
-  isFooterVisible: string = '';
-  percentage = "Upload in progress"
-  loadersubscription: Subscription;  
-  hideLeftMenu: boolean = false;
-  chatbotShow: boolean = false;
-  UserDetails: any;
-  secretKey = "(!@#Passcode!@#)";
-  botUrl;
-  urlSafe: SafeResourceUrl;
-  languages: { lang: string; languagename: string; }[];
-   // FOR DRM(Restriction for right click)
-   @HostListener('document:keydown', ['$event'])
-   handleKeyboardEvent(event: KeyboardEvent) {
-     if ( (event.which === 67 && event.ctrlKey && event.shiftKey) || (event.which === 123) ||
-      (event.which === 73 && event.ctrlKey && event.shiftKey) ) {
-       event.returnValue = false;
-       event.preventDefault();
-     }
- }
- private destroy$ = new Subject<void>();
   constructor(private router: Router,
               private gs: GlobalServiceService,
               private ga_service: GoogleAnalyticsService,
@@ -66,38 +41,38 @@ export class AppComponent implements OnInit {
               public Lservice: LearnerServicesService,
               private gtag: Gtag,
               public sanitizer: DomSanitizer,
-
+              private bnIdle: BnNgIdleService,
+              public socketService: SocketioService,
+              private toast:ToastrService
   ) {
     this.languages = [{lang: 'ta' , languagename: 'Tamil' } , { lang: 'en' , languagename: 'English'  }] ;
-      translate.addLangs(['en', 'ta']);
-      if(localStorage.getItem('language'))
-      {this.translate.use(localStorage.getItem('language'));}
-      else{
-        this.translate.setDefaultLang('en');
-      }
+    translate.addLangs(['en', 'ta']);
+    if (localStorage.getItem('language')) { this.translate.use(localStorage.getItem('language'));
+  } else {
+      this.translate.setDefaultLang('en');
+    }
 
-    let userDetail =JSON.parse(localStorage.getItem('UserDetails'))
-    if(!userDetail?.specific_report_value){
+    const userDetail = JSON.parse(localStorage.getItem('UserDetails'));
+    if (!userDetail?.specific_report_value) {
       localStorage.clear();
       sessionStorage.clear();
     }
-    if(localStorage.getItem('language'))
-    {this.translate.use(localStorage.getItem('language'));}
+    if (localStorage.getItem('language')) { this.translate.use(localStorage.getItem('language')); }
     // console.error = function(){}
     // console.warn = function(){}
     this.commonService.getIpAddressByUrl();
     // this.getorganizationbyiddetails();
 
-    //GOOGLE ANALYTICS INIT
+    // GOOGLE ANALYTICS INIT
   //    if (environment.gaTrackingId) {
     // register google tag manager
     const gTagManagerScript = document.createElement('script');
     gTagManagerScript.async = true;
     gTagManagerScript.src = `https://www.googletagmanager.com/gtag/js?id=${environment.gaTrackingId}`;
     document.head.appendChild(gTagManagerScript);
-    let user_id = null
-    if(this.UserDetails){
-       user_id = CryptoJS.AES.decrypt(this.UserDetails.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8); 
+    let user_id = null;
+    if (this.UserDetails) {
+       user_id = CryptoJS.AES.decrypt(this.UserDetails.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
     }
   //   // register google analytics
     const gaScript = document.createElement('script');
@@ -111,137 +86,104 @@ export class AppComponent implements OnInit {
     document.head.appendChild(gaScript);
   // }
   }
+  runnablePlatforms = ['MacIntel', 'Win32', 'Linux x86_64'];
+  ipAddress = '';
+  title = 'LXP';
+  isLoader = false;
+  loaderSubscription: Subscription;
+  isMobile = false;
+  platformTxt = navigator.platform;
+  isProgressBar = false;
+  isFooterVisible: string = '';
+  percentage = 'Upload in progress';
+  loadersubscription: Subscription;
+  hideLeftMenu: boolean = false;
+  chatbotShow: boolean = false;
+  UserDetails: any;
+  secretKey = '(!@#Passcode!@#)';
+  botUrl;
+  urlSafe: SafeResourceUrl;
+  languages: { lang: string; languagename: string; }[];
+ private destroy$ = new Subject<void>();
+   // FOR DRM(Restriction for right click)
+   @HostListener('document:keydown', ['$event'])
+   handleKeyboardEvent(event: KeyboardEvent) {
+     if ( (event.which === 67 && event.ctrlKey && event.shiftKey) || (event.which === 123) ||
+      (event.which === 73 && event.ctrlKey && event.shiftKey) ) {
+       event.returnValue = false;
+       event.preventDefault();
+     }
+ }
 
   ngOnInit() {
-//GOOGLE ANALYTICS
-// this.UserDetails = JSON.parse(localStorage.getItem('UserDetails')) || null
-// timer(500)
-//      .pipe(
-//        filter(() => has.call(window, 'ga')),
-//        take(1),
-//        switchMap(() => {
-//          return this.router.events.pipe(
-//            filter((e) => e instanceof NavigationEnd),
-//            tap((e: NavigationEnd) => {
-//             var user_id = null
-//              if(this.UserDetails.user_id){
-//               user_id = CryptoJS.AES.decrypt(this.UserDetails.user_id, this.secretKey.trim()).toString(); 
-//               dataLayer = [{'userID': user_id}];
-//               console.log(window['dataLayer'])
-//             }
-//             gtag('config', '${environment.gaTrackingId}');
-//              this.ga_service.logPageView(e.url,user_id);
-            
-//            })
-//          );
-//        }),
-//        takeUntil(this.destroy$)
-//      )
-//      .subscribe();
-
-
-
-   // console.error = function(){}
-   // console.log = function(){}
-  //  console.warn = function(){}
-    this.loadersubscription = this.Lservice.getMessage().subscribe(message => 
-      { 
-        if(message.count){
-          this.percentage = message.count + '  ' + message.text.slice(0,message.text.lastIndexOf('.')) + '%'; 
+    this.loadersubscription = this.Lservice.getMessage().subscribe(message => {
+        if (message.count) {
+          this.percentage = message.count + '  ' + message.text.slice(0, message.text.lastIndexOf('.')) + '%';
         } else {
-          this.percentage = message.text.slice(0,message.text.lastIndexOf('.')) + '%'; 
+          this.percentage = message.text.slice(0, message.text.lastIndexOf('.')) + '%';
         }
-        if(this.percentage == '0%'){
-          this.percentage = 'Upload in progress'
+        if (this.percentage === '0%') {
+          this.percentage = 'Upload in progress';
         }
       });
-   
-    // this.loaderSubscription = this.commonService.loader.subscribe((val) => {
-    //   this.isLoader = val;
-    //   if (this.isLoader) {
-    //     this.ngxService.start();
-    //   } else {
-    //     setTimeout(() => {
-    //     this.ngxService.stop();
-    //     }, 500);
-    //   }
-    // });
-    // console.log("--Browser running on--",navigator.platform)
-    // if(!this.runnablePlatforms.includes(navigator.platform)){
-    //   this.isMobile = true;
-    // }
-    this.UserDetails = JSON.parse(localStorage.getItem('UserDetails')) || null
+    this.UserDetails = JSON.parse(localStorage.getItem('UserDetails')) || null;
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
     ).subscribe((e: any) => {
-      if(localStorage.getItem('language'))
-    {this.translate.use(localStorage.getItem('language'));}
-    else{
-      this.translate.setDefaultLang('en');
-    }
-    //adding USERID to datalayer
-    //   var user_id = null
-    //   if(this.UserDetails.user_id){
-    //    user_id = CryptoJS.AES.decrypt(this.UserDetails.user_id, this.secretKey.trim()).toString(); 
-    //    window.dataLayer = [{'userID': user_id}];
-    //    console.log(window['dataLayer'])
-    //  }else{
-    //    window.dataLayer = [{'userID': null}];
-    //  }   
-    //  send pageview 
-        const titledat = this.getChild(this.activatedRoute);
+      if (localStorage.getItem('language')) { this.translate.use(localStorage.getItem('language'));
+    } else {
+        this.translate.setDefaultLang('en');
+      }
+      const titledat = this.getChild(this.activatedRoute);
       titledat.data.subscribe(data => {
-        let user_id = null
-        if(this.UserDetails){
-           user_id = CryptoJS.AES.decrypt(this.UserDetails.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8); 
-          if(dataLayer)
-          {
-            dataLayer[0]={'userID': user_id};
-            
-        }else{
-          dataLayer[0]={'userID': user_id};
+        let user_id = null;
+        if (this.UserDetails) {
+          user_id = CryptoJS.AES.decrypt(this.UserDetails.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
+          if (dataLayer) {
+            dataLayer[0] = { userID: user_id };
+
+          } else {
+            dataLayer[0] = { userID: user_id };
+          }
         }
-        }        
         this.gtag.pageview({
-          page_title: data?.title? data.title : "L&T Edutech",
+          page_title: data?.title ? data.title : 'L&T Edutech',
           page_path: this.router.url,
           page_location: window.location.href,
-          userID:user_id
+          userID: user_id
         });
-        this.gtag.set({ 'userID' : user_id });
-        gtag('set', 'user_properties', { 'userID' : user_id });
-      })
-        
-       
+        this.gtag.set({ userID : user_id });
+        gtag('set', 'user_properties', { userID : user_id });
+      });
         // this.ga_service.logPageView(e.url,user_id);
         // this.ga_service.logPageView(e.url);
-      const urlIdentifier = e.url.split("/")
-      const possiblePages = ['register', 'login', 'recover', 'resetpassword','password','authentication','']
+      const urlIdentifier = e.url.split('/');
+      const possiblePages = ['register', 'login', 'recover', 'resetpassword', 'password', 'authentication', ''];
       const rt = this.getChild(this.activatedRoute);
       rt.data.subscribe(data => {
         this.isFooterVisible = '';
         this.titleService.setTitle(data?.title);
         if (!possiblePages.includes(urlIdentifier[2])) {
          /// this.isFooterVisible = false;
-         const currentYear = new Date().getFullYear()
-         this.isFooterVisible = '<div class="footer"><span class="powered"><span class="forgot1">' + '© ' + currentYear + this.translate.instant(' L&T EduTech. All Rights Reserved.') + '</span></span></div>';
+         const currentYear = new Date().getFullYear();
+         this.isFooterVisible = '<div class="footer"><span class="powered"><span class="forgot1">'
+         + '© ' + currentYear + this.translate.instant(' L&T EduTech. All Rights Reserved.') + '</span></span></div>';
         }
-        if (e.url.includes("resetpassword")|| e.url.includes("password") || e.url.includes("MyCourse") || e.url.includes("courseDetail") || urlIdentifier[2]==undefined) {
+        if (e.url.includes('resetpassword') || e.url.includes('password') || e.url.includes('MyCourse')
+        || e.url.includes('courseDetail') || urlIdentifier[2] === undefined) {
           this.isFooterVisible = '';
         }
-        if (e.url.includes("MyCourse")) {
+        if (e.url.includes('MyCourse')) {
           this.isFooterVisible = ' ';
         }
-        if (e.url.includes("courseDetail")) {
+        if (e.url.includes('courseDetail')) {
           this.isFooterVisible = ' ';
         }
-
-        //for left padding
-        const headerPages = ['courseDetail']
+        // for left padding
+        const headerPages = ['courseDetail'];
         if (headerPages.includes(urlIdentifier[2])) {
           this.hideLeftMenu = true;
-        }
-        else {
+        } else {
           this.hideLeftMenu = false;
         }
       });
@@ -282,7 +224,7 @@ myUnload() {
             // last unload event was for a tab/window close => do whatever you want (I do nothing here)
         }
     }
-} 
+}
   askServerToDisconnectUserInAFewSeconds() {
     localStorage.setItem('disReq', 'true');
   }
@@ -299,6 +241,7 @@ myUnload() {
 
   }
   // tslint:disable-next-line:use-life-cycle-interface
+  // tslint:disable-next-line:use-lifecycle-interface
   ngOnDestroy(): void {
     this.loaderSubscription.unsubscribe();
     this.loadersubscription.unsubscribe();
@@ -307,9 +250,35 @@ myUnload() {
 
   openChatbot() {
       this.UserDetails = JSON.parse( window.localStorage.getItem('UserDetails'));
-      this.botUrl = environment.botUrl + "?userName=" + this.UserDetails.full_name + "&userID=" + this.UserDetails.user_id + "&token=" + this.UserDetails.token;
-      this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.botUrl)
+      this.botUrl = environment.botUrl + '?userName=' + this.UserDetails.full_name + '&userID='
+      + this.UserDetails.user_id + '&token=' + this.UserDetails.token;
+      this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.botUrl);
       this.chatbotShow = true;
   }
-
+  checkIdleState(){
+    this.bnIdle.startWatching(2700).subscribe((timeout)=>{
+      if(timeout) {
+        var userDetail =JSON.parse(localStorage.getItem('UserDetails'))
+        if(userDetail){
+          this.logout(userDetail)
+        }
+      }
+    })
+  }
+  logout(userDetail){
+    if (this.socketService?.socket?.connected) {
+      this.socketService.Connectsocket({ type: 'disconnect' }).subscribe(quote => {
+      });
+      this.socketService.closeSocket();
+    }
+      
+      this.commonService.getIpAddressByUrl();
+      this.commonService.logout(userDetail.user_id, false).subscribe((logout: any) => {
+        this.UserDetails = null;
+        localStorage.clear();
+        sessionStorage.clear();
+        this.router.navigate(['/Learner/login']);
+        this.toast.warning("Session Timed Out!!")
+      });
+    }
 }

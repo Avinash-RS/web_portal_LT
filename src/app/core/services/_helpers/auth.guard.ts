@@ -17,23 +17,20 @@ export class AuthGuard implements CanLoad {
     private alert: AlertServiceService,
     private router: Router,
   ) {
-    
    }
   // Added by Avinasi
- 
     //    else {
     //     this.router.navigate(['/Learner/login']);
     //     return false;
     //   }
     // }
-  
   // Added by Mythreyi
 
     canLoad(route: Route, segments: UrlSegment[]): any {
-      const userDetails =JSON.parse(localStorage.getItem('UserDetails'));
-      const token =  localStorage.getItem('token')||sessionStorage.getItem('token');
-      if(userDetails?.TFAsetup?.main_config_TFA) {
-        if(userDetails?.TFAsetup?.user_config_TFA) {
+      const userDetails = JSON.parse(localStorage.getItem('UserDetails'));
+      const token =  localStorage.getItem('token') || sessionStorage.getItem('token');
+      if (userDetails?.TFAsetup?.main_config_TFA) {
+        if (userDetails?.TFAsetup?.user_config_TFA) {
           if (token && userDetails?.specific_report_value) {
               return true;
             } else {
@@ -69,7 +66,7 @@ export class AuthGuard implements CanLoad {
     //   // url should not start from admin - can be /Larner or anything
     //   // if profile updated and trying to go login/reg
     //   if (localStorage.getItem('role') == 'learner') {
-    //     this.router.navigate(['/Learner/MyCourse']);
+    //     this.router.navigate(['/Landing/MyCourse']);
     //     return false;
     //   } else if (!userDetailes.is_profile_updated) {
     //     // if profile not updated and trying to access other screens, redirect to profile

@@ -1,48 +1,35 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
-export const login = gql`
-  query login(
-    $username: String
-    $password: String
-    $is_admin: Boolean
-    $badgeRequest: String!
-  ) {
-    login(
-      username: $username
-      password: $password
-      is_admin: $is_admin
-      badgeRequest: $badgeRequest
-    ) {
+export const learner_login = gql`
+  query learner_login($username: String!, $password: String!, $badgeRequest: String!) {
+    learner_login(username: $username, password: $password, badgeRequest: $badgeRequest) {
       success
       error_msg
       message {
         _id
-        full_name
-        profile_img
-        email
-        is_active
-        username
-        token
+        is_password_updated
+        is_profile_updated
         user_id
-        is_blocked
+        full_name
+        username
+        created_on
+        token
+        is_active
         is_forum_config
         is_thread_config
-        is_comment_config
-        is_profile_updated
-        is_password_updated
         org_type
+        profile_img
         group_id
-        message
-        bb_forum
-        created_on
         orgId
-        nodebb_response {
-          uid
-        }
+        message
+        status
         TFAsetup {
           main_config_TFA
           dataURL
           user_config_TFA
+        }
+        nodebb_response {
+          uid
         }
       }
     }
@@ -2280,7 +2267,57 @@ export const getTopicAttendanceDetailsByUsername = gql`
     }
   }
 `;
-
+export const get_batchwise_learner_dashboard_data_v2 = gql `
+  query get_batchwise_learner_dashboard_data_v2(
+      $user_id:String!,
+      $request_type:String!,
+      $jobroleCategoryId:String
+    ) {
+      get_batchwise_learner_dashboard_data_v2(
+        user_id: $user_id
+        request_type: $request_type
+        jobroleCategoryId: $jobroleCategoryId
+      ){
+        success
+        error_msg
+        message{
+          batchid
+          course_img_url
+          course_name
+          courseBy
+          credits
+          batch_start_date
+          batch_end_date
+          batch_name
+          image_self_paced_learning_time
+          instructor_lead_session_total_count
+          total_mid_course_project_count
+          internal_assesment
+          course_id
+          course_type
+          user_id
+          course_percentage
+          lastModule
+          lastTopic
+          toc
+          course_status
+          checklevel
+          link
+          current_week_count
+          actual_total_week
+          wishlisted
+          wishlist_id
+          progress_class
+          course_week_Percent
+          course_description
+          isTesting
+        }
+        ongoing
+        all
+        completed
+      }
+    }
+`
 export const get_batchwise_learner_dashboard_data = gql`
   query get_batchwise_learner_dashboard_data(
     $user_id: String!
@@ -2319,6 +2356,8 @@ export const get_batchwise_learner_dashboard_data = gql`
         week_total_count
         Self_Paced_Learning_CARD
         self_paced_learning_progression
+        progress_class
+        course_week_Percent
         completed_module_count
         total_module_count
         completed_topic_count
@@ -2847,9 +2886,17 @@ export const getStepCourseByLearner = gql`
     }
   }
 `;
+export const insertModuleTopicSkeleton = gql`
+  query insertModuleTopicSkeleton($user_id: String!) {
+    insertModuleTopicSkeleton(user_id: $user_id) {
+      success
+      error_msg
+    }
+  }
+`;
 export const getlearnerquiz = gql `
-  query getlearnerquiz($email: String!){
-    getlearnerquiz(email:$email){
+  query getlearnerquiz($email: String!,$courseid:String!){
+    getlearnerquiz(email:$email,courseid:$courseid){
       success
       error_msg
       message{
@@ -2857,6 +2904,7 @@ export const getlearnerquiz = gql `
           to_score
           count
           percent
+          color
         }
         bar_chart{
           user

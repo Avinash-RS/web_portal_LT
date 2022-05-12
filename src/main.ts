@@ -8,7 +8,7 @@ if (environment.production) {
   enableProdMode();
   // To remove Consoles on production environment
   if (window) {
-    window.console.log = function() {};
+    window.console.log = () => {};
   }
 }
 

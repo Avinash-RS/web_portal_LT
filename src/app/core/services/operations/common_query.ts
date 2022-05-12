@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const logout = gql`
-  query logout($user_id: String, $is_admin: Boolean){
-    logout(user_id: $user_id, is_admin: $is_admin) {
+  query logout($user_id: String, $is_admin: Boolean, $is_step: Boolean){
+    logout(user_id: $user_id, is_admin: $is_admin, is_step: $is_step) {
       success
       message
       error_msg
@@ -400,7 +400,7 @@ export const viewcourse = gql`
     }
   }`;
 
-  export const view_course_for_learner = gql`
+export const view_course_for_learner = gql`
   query view_course_for_learner($course_id: String!){
     view_course_for_learner(course_id: $course_id) {
       success

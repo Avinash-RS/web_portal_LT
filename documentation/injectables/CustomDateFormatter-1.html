@@ -37,6 +37,7 @@
 
 
 
+
 <ol class="breadcrumb">
   <li>Injectables</li>
   <li >CustomDateFormatter</li>
@@ -130,8 +131,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="41"
-                            class="link-to-prism">src/app/learner/pages/learner-new-my-course/learner-new-my-course.component.ts:41</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="43"
+                            class="link-to-prism">src/app/learner/pages/learner-new-my-course/learner-new-my-course.component.ts:43</a></div>
                 </td>
             </tr>
 
@@ -198,8 +199,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="37"
-                            class="link-to-prism">src/app/learner/pages/learner-new-my-course/learner-new-my-course.component.ts:37</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="39"
+                            class="link-to-prism">src/app/learner/pages/learner-new-my-course/learner-new-my-course.component.ts:39</a></div>
                 </td>
             </tr>
 
@@ -252,19 +253,19 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, HostListener, Injectable, TemplateRef, ViewChild } from &quot;@angular/core&quot;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, HostListener, Injectable, TemplateRef, ViewChild } from &#x27;@angular/core&#x27;;
 import { OwlOptions } from &#x27;ngx-owl-carousel-o&#x27;;
 import { AUTO_STYLE, animate, state, style, transition, trigger } from &#x27;@angular/animations&#x27;;
-import { Subject } from &quot;rxjs&quot;;
+import { Subject } from &#x27;rxjs&#x27;;
 import * as moment from &#x27;moment&#x27;;
 import { CalendarEvent, CalendarDateFormatter, DateFormatterParams, } from &#x27;angular-calendar&#x27;;
 import { CommonServicesService } from &#x27;@core/services/common-services.service&#x27;;
 import { GlobalServiceService } from &#x27;@core/services/handlers/global-service.service&#x27;;
 import { LearnerServicesService } from &#x27;@learner/services/learner-services.service&#x27;;
-import { formatDate } from &quot;@angular/common&quot;;
-import { MatDialog } from &quot;@angular/material&quot;;
-import { environment } from &quot;@env/environment&quot;;
-import { Router } from &quot;@angular/router&quot;;
+import { formatDate } from &#x27;@angular/common&#x27;;
+import { MatDialog } from &#x27;@angular/material/dialog&#x27;;
+import { environment } from &#x27;@env/environment&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
 import { DragScrollComponent } from &#x27;ngx-drag-scroll&#x27;;
 import { ChartOptions, ChartType, ChartDataSets } from &#x27;chart.js&#x27;;
 import { Label } from &#x27;ng2-charts&#x27;;
@@ -273,7 +274,7 @@ declare const Chart;
 const DEFAULT_DURATION &#x3D; 300;
 import {MomentDateAdapter} from &#x27;@angular/material-moment-adapter&#x27;;
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from &#x27;@angular/material/core&#x27;;
-
+import { TranslateService } from &#x27;@ngx-translate/core&#x27;;
 
 export const MY_FORMATS &#x3D; {
   parse: {
@@ -288,6 +289,8 @@ export const MY_FORMATS &#x3D; {
 };
 @Injectable()
 export class CustomDateFormatter extends CalendarDateFormatter {
+  // TODO: add explicit constructor
+
   weekViewColumnSubHeader({ date, locale, }: DateFormatterParams): string {
     return formatDate(date, &#x27;dd&#x27;, locale);
   }
@@ -297,9 +300,9 @@ export class CustomDateFormatter extends CalendarDateFormatter {
   }
 }
 @Component({
-  selector: &quot;app-learner-new-my-course&quot;,
-  templateUrl: &quot;./learner-new-my-course.component.html&quot;,
-  styleUrls: [&quot;./learner-new-my-course.component.scss&quot;],
+  selector: &#x27;app-learner-new-my-course&#x27;,
+  templateUrl: &#x27;./learner-new-my-course.component.html&#x27;,
+  styleUrls: [&#x27;./learner-new-my-course.component.scss&#x27;],
   animations: [
     trigger(&#x27;collapse&#x27;, [
       state(&#x27;false&#x27;, style({ height: AUTO_STYLE, visibility: AUTO_STYLE })),
@@ -332,6 +335,25 @@ export class CustomDateFormatter extends CalendarDateFormatter {
 })
 
 export class LearnerNewMyCourseComponent implements OnInit {
+
+  constructor(private dialog: MatDialog, private router: Router,
+              public learnerService: LearnerServicesService,
+              private gs: GlobalServiceService, public CommonServices: CommonServicesService,
+              public translate: TranslateService) {
+    const lang &#x3D; localStorage.getItem(&#x27;language&#x27;);
+    this.translate.use(lang ? lang : &#x27;en&#x27;);
+    this.userDetailes &#x3D; this.gs.checkLogout();
+    if (!this.userDetailes?.is_password_updated) {
+      this.router.navigate([&#x27;/Learner/profile&#x27;]);
+      return;
+    }
+    this.learnerService.insertSkeleton(this.userDetailes.user_id).subscribe((result:any)&#x3D;&gt;{
+      this.getDashboardMyCourse(this.userDetailes.user_id, this.userDetailes._id);
+  },
+  err &#x3D;&gt;{
+    this.getDashboardMyCourse(this.userDetailes.user_id, this.userDetailes._id);
+  })
+  }
   @ViewChild(&#x27;completedTopics&#x27;, { read: DragScrollComponent }) ds: DragScrollComponent;
   @ViewChild(&#x27;inProgress&#x27;, { read: DragScrollComponent }) dsInProgress: DragScrollComponent;
   showJobRole &#x3D; false;
@@ -349,7 +371,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
   rightNavDisabled &#x3D; false;
   leftNavDisabledInProgress &#x3D; false;
   rightNavDisabledInProgress &#x3D; false;
-  //Carousel
+  // Carousel
   missedTopicsKnowledgeCheck: OwlOptions &#x3D; {
     loop: true,
     mouseDrag: false,
@@ -374,10 +396,10 @@ export class LearnerNewMyCourseComponent implements OnInit {
       }
     },
     nav: false
-  }
+  };
   weekDaysdat: any;
   userDetailes: any;
-  @ViewChild(&#x27;infoPopup&#x27;) infoPopWindow: TemplateRef&lt;any&gt;;
+  @ViewChild(&#x27;infoPopup&#x27;, { static: true }) infoPopWindow: TemplateRef&lt;any&gt;;
   availableCource: any;
   screenWidth: number;
   keyboardUp: boolean &#x3D; true;
@@ -410,29 +432,29 @@ export class LearnerNewMyCourseComponent implements OnInit {
   mode &#x3D; &#x27;determinate&#x27;;
   bufferValue &#x3D; 100;
   selectedJobRoleData &#x3D; {
-    jobroleCategoryName : &quot;All&quot;
+    jobroleCategoryName : &#x27;All&#x27;
   };
   dynamicTextChange: string &#x3D; &#x27;ongoing&#x27;;
   dateSelected: string;
-  vocationalselectjobRole&#x3D; [];
+  vocationalselectjobRole &#x3D; [];
   testvals: any;
-  shotDotSearch:boolean &#x3D; true;
+  shotDotSearch: boolean &#x3D; true;
   inProgressModule: any;
   completedTopic: any;
   displaySlides &#x3D; false;
   tooltipJobRole: any;
-  //Week wise chart
-  weekWiseChartDatalabel:any &#x3D; [];
-  weekWiseChartData:any &#x3D; [];
-  totalhoursSpend:string &#x3D; &quot;0 mins&quot;;
+  // Week wise chart
+  weekWiseChartDatalabel: any &#x3D; [];
+  weekWiseChartData: any &#x3D; [];
+  totalhoursSpend: string &#x3D; &#x27;0 mins&#x27;;
   public chartPlugins &#x3D; [pluginDataLabels];
   public WeekbarChartOptions: ChartOptions &#x3D; {
-    responsive: true, 
-    tooltips:{
+    responsive: true,
+    tooltips: {
       enabled: true,
       displayColors: false,
       callbacks: {
-        label: function(tooltipItem, data) {
+        label(tooltipItem, data) {
           return  data[&#x27;datasets&#x27;][0][&#x27;data&#x27;][tooltipItem[&#x27;index&#x27;]][&#x27;hourString&#x27;];
         }
       }
@@ -442,7 +464,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
         display: false
       }
     },
-    layout:{
+    layout: {
       padding: {
         left: 0,
         right: 0,
@@ -450,23 +472,23 @@ export class LearnerNewMyCourseComponent implements OnInit {
         bottom: 0
     }
     },
-    scales:{
-      xAxes:[{
-        gridLines:{
-          display:false
+    scales: {
+      xAxes: [{
+        gridLines: {
+          display: false
         },
       }],
-      yAxes:[{
-        gridLines:{
+      yAxes: [{
+        gridLines: {
           borderDash: [1, 3],
-          color: &quot;#2280C1&quot;
+          color: &#x27;#2280C1&#x27;
         },
         ticks: {
           min: 0,
           max: 8,
-          stepSize:1,
-          callback: function(value) {
-            return value + &#x27;  &#x27;
+          stepSize: 1,
+          callback(value) {
+            return value + &#x27;  &#x27;;
           }
         }
       }],
@@ -486,21 +508,21 @@ export class LearnerNewMyCourseComponent implements OnInit {
   public WeekbarChartType: ChartType &#x3D; &#x27;bar&#x27;;
   public WeekbarChartLegend &#x3D; false;
   public WeekbarChartPlugins &#x3D; [];
-  public WeekbarChartData: ChartDataSets[] &#x3D; [ 
+  public WeekbarChartData: ChartDataSets[] &#x3D; [
     {
       data: [],
       backgroundColor: &#x27;#2280C1&#x27;,
-      hoverBackgroundColor:&#x27;#2280C1&#x27;,
+      hoverBackgroundColor: &#x27;#2280C1&#x27;,
       barThickness: 12,
     }
    ];
-  //Course Wise Chart
-  courseWiseChartDatalabel:any &#x3D; [];
-  courseChartData:any &#x3D; [];
-  courseChartBackGround:any &#x3D;[];
+  // Course Wise Chart
+  courseWiseChartDatalabel: any &#x3D; [];
+  courseChartData: any &#x3D; [];
+  courseChartBackGround: any &#x3D; [];
   public courseChartOptions: ChartOptions &#x3D; {
-    responsive: true, 
-    tooltips:{
+    responsive: true,
+    tooltips: {
       enabled : true,
       displayColors: false,
       backgroundColor: &#x27;white&#x27;,
@@ -511,25 +533,29 @@ export class LearnerNewMyCourseComponent implements OnInit {
       borderWidth: 1,
       // xPadding: 15,
       // yPadding: 15,
-      footerFontColor:&#x27;#333333&#x27;,
-      footerMarginTop:8,
-      footerSpacing:8,
+      footerFontColor: &#x27;#333333&#x27;,
+      footerMarginTop: 8,
+      footerSpacing: 8,
       callbacks: {
-        label: function(tooltipItem, data) {
-          var text  &#x3D; [];
+        label(tooltipItem, data) {
+          const text  &#x3D; [];
           text.push(&#x27;Self Learning :    &#x27; + data[&#x27;datasets&#x27;][0][&#x27;data&#x27;][tooltipItem[&#x27;index&#x27;]][&#x27;y&#x27;] + &#x27;%&#x27;);
           return  text;
         },
-        footer:function(tooltipItem, data) {
-        var subtext &#x3D;[];
-         subtext.push(&#x27;Modules                        &#x27; + data[&#x27;datasets&#x27;][0][&#x27;data&#x27;][tooltipItem[0].index][&#x27;myprop&#x27;][&#x27;module&#x27;][&#x27;completedCount&#x27;] + &#x27;/&#x27; + data[&#x27;datasets&#x27;][0][&#x27;data&#x27;][tooltipItem[0].index][&#x27;myprop&#x27;][&#x27;module&#x27;][&#x27;totalCount&#x27;]);
-         subtext.push(&#x27;Topics                           &#x27; + data[&#x27;datasets&#x27;][0][&#x27;data&#x27;][tooltipItem[0].index][&#x27;myprop&#x27;][&#x27;topic&#x27;][&#x27;completedCount&#x27;] + &#x27;/&#x27; + data[&#x27;datasets&#x27;][0][&#x27;data&#x27;][tooltipItem[0].index][&#x27;myprop&#x27;][&#x27;topic&#x27;][&#x27;totalCount&#x27;]);
-         subtext.push(&#x27;Other Activities:   &#x27;);
-        //  subtext.push(&#x27;Live Interactions         &#x27; + data[&#x27;datasets&#x27;][0][&#x27;data&#x27;][tooltipItem[0].index][&#x27;myprop&#x27;][&#x27;liveclassroom&#x27;][&#x27;completedCount&#x27;] + &#x27;/&#x27; + data[&#x27;datasets&#x27;][0][&#x27;data&#x27;][tooltipItem[0].index][&#x27;myprop&#x27;][&#x27;liveclassroom&#x27;][&#x27;totalCount&#x27;]);
-        //  subtext.push(&#x27;Assignment                 &#x27; + data[&#x27;datasets&#x27;][0][&#x27;data&#x27;][tooltipItem[0].index][&#x27;myprop&#x27;][&#x27;assignment&#x27;][&#x27;completedCount&#x27;] + &#x27;/&#x27; + data[&#x27;datasets&#x27;][0][&#x27;data&#x27;][tooltipItem[0].index][&#x27;myprop&#x27;][&#x27;assignment&#x27;][&#x27;totalCount&#x27;]);
-        //  subtext.push(&#x27;Perform                        &#x27; + data[&#x27;datasets&#x27;][0][&#x27;data&#x27;][tooltipItem[0].index][&#x27;myprop&#x27;][&#x27;perform&#x27;][&#x27;completedCount&#x27;] + &#x27;/&#x27; + data[&#x27;datasets&#x27;][0][&#x27;data&#x27;][tooltipItem[0].index][&#x27;myprop&#x27;][&#x27;perform&#x27;][&#x27;totalCount&#x27;]);
-         subtext.push(&#x27;Project                         &#x27; + data[&#x27;datasets&#x27;][0][&#x27;data&#x27;][tooltipItem[0].index][&#x27;myprop&#x27;][&#x27;project&#x27;][&#x27;completedCount&#x27;] + &#x27;/&#x27; + data[&#x27;datasets&#x27;][0][&#x27;data&#x27;][tooltipItem[0].index][&#x27;myprop&#x27;][&#x27;project&#x27;][&#x27;totalCount&#x27;]);
-          return subtext;
+        footer(tooltipItem, data) {
+        const subtext &#x3D; [];
+        subtext.push(&#x27;Modules                        &#x27; + data[&#x27;datasets&#x27;][0][&#x27;data&#x27;][tooltipItem[0].index][&#x27;myprop&#x27;][&#x27;module&#x27;][&#x27;completedCount&#x27;] + &#x27;/&#x27; + data[&#x27;datasets&#x27;][0][&#x27;data&#x27;][tooltipItem[0].index][&#x27;myprop&#x27;][&#x27;module&#x27;][&#x27;totalCount&#x27;]);
+        subtext.push(&#x27;Topics                           &#x27; + data[&#x27;datasets&#x27;][0][&#x27;data&#x27;][tooltipItem[0].index][&#x27;myprop&#x27;][&#x27;topic&#x27;][&#x27;completedCount&#x27;] + &#x27;/&#x27; + data[&#x27;datasets&#x27;][0][&#x27;data&#x27;][tooltipItem[0].index][&#x27;myprop&#x27;][&#x27;topic&#x27;][&#x27;totalCount&#x27;]);
+        // subtext.push(&#x27;Other Activities:   &#x27;);
+        //  subtext.push(&#x27;Live Interactions         &#x27; + data[&#x27;datasets&#x27;][0][&#x27;data&#x27;][tooltipItem[0].index][&#x27;myprop&#x27;][&#x27;liveclassroom&#x27;]
+        // [&#x27;completedCount&#x27;] + &#x27;/&#x27; + data[&#x27;datasets&#x27;][0][&#x27;data&#x27;][tooltipItem[0].index][&#x27;myprop&#x27;][&#x27;liveclassroom&#x27;][&#x27;totalCount&#x27;]);
+        //  subtext.push(&#x27;Assignment                 &#x27; + data[&#x27;datasets&#x27;][0][&#x27;data&#x27;][tooltipItem[0].index][&#x27;myprop&#x27;][&#x27;assignment&#x27;]
+        // [&#x27;completedCount&#x27;] + &#x27;/&#x27; + data[&#x27;datasets&#x27;][0][&#x27;data&#x27;][tooltipItem[0].index][&#x27;myprop&#x27;][&#x27;assignment&#x27;][&#x27;totalCount&#x27;]);
+        //  subtext.push(&#x27;Perform                        &#x27; + data[&#x27;datasets&#x27;][0][&#x27;data&#x27;][tooltipItem[0].index][&#x27;myprop&#x27;][&#x27;perform&#x27;]
+        // [&#x27;completedCount&#x27;] + &#x27;/&#x27; + data[&#x27;datasets&#x27;][0][&#x27;data&#x27;][tooltipItem[0].index][&#x27;myprop&#x27;][&#x27;perform&#x27;][&#x27;totalCount&#x27;]);
+        // subtext.push(&#x27;Project                         &#x27; + data[&#x27;datasets&#x27;][0][&#x27;data&#x27;][tooltipItem[0].index][&#x27;myprop&#x27;][&#x27;project&#x27;]
+        // [&#x27;completedCount&#x27;] + &#x27;/&#x27; + data[&#x27;datasets&#x27;][0][&#x27;data&#x27;][tooltipItem[0].index][&#x27;myprop&#x27;][&#x27;project&#x27;][&#x27;totalCount&#x27;]);
+        return subtext;
         }
       }
     },
@@ -541,12 +567,12 @@ export class LearnerNewMyCourseComponent implements OnInit {
           size: 12,
         },
         formatter: (value, ctx) &#x3D;&gt; {
-          let percentage &#x3D; value.y + &quot;%&quot;;
+          const percentage &#x3D; value.y + &#x27;%&#x27;;
           return percentage;
       },
       }
     },
-    layout:{
+    layout: {
       padding: {
         left: 0,
         right: 0,
@@ -554,26 +580,26 @@ export class LearnerNewMyCourseComponent implements OnInit {
         bottom: 0
     }
     },
-    scales:{
-      xAxes:[{
+    scales: {
+      xAxes: [{
         ticks: {
           display: false,
       },
-        gridLines:{
-          display:false
+        gridLines: {
+          display: false
         },
       }],
-      yAxes:[{
-        gridLines:{
+      yAxes: [{
+        gridLines: {
           borderDash: [1, 3],
-          color: &quot;#2280C1&quot;
+          color: &#x27;#2280C1&#x27;
         },
         ticks: {
           min: 0,
           max: 100,
-          stepSize:25,
-          callback: function(value) {
-            return value + &#x27;  &#x27;
+          stepSize: 25,
+          callback(value) {
+            return value + &#x27;  &#x27;;
           }
         }
       }],
@@ -597,38 +623,28 @@ export class LearnerNewMyCourseComponent implements OnInit {
     {
       data: [],
       backgroundColor: [],
-      hoverBackgroundColor:&#x27;#2280C1&#x27;,
+      hoverBackgroundColor: &#x27;#2280C1&#x27;,
       barThickness: 12,
     }
   ];
-  showProgressChart:boolean &#x3D; false;
+  showProgressChart: boolean &#x3D; false;
   today &#x3D; new Date();
   weekWiseDate;
   courseStartDate;
   courseEndDate;
   minCourseDate;
-  nochartdata:boolean &#x3D; true;
+  nochartdata: boolean &#x3D; true;
   currentYear: number;
+  stepUrl;
 
-
-  constructor(private dialog: MatDialog, private router: Router,
-    public learnerService: LearnerServicesService,
-    private gs: GlobalServiceService, public CommonServices: CommonServicesService) {
-    this.userDetailes &#x3D; this.gs.checkLogout();
-    if(!this.userDetailes?.is_password_updated){
-      this.router.navigate([&#x27;/Learner/profile&#x27;]);
-      return
-    }
-    if (this.userDetailes) {
-      this.getDashboardMyCourse(this.userDetailes.user_id, this.userDetailes._id);
-    }
-  }
+  info &#x3D; &#x27;It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \&#x27;Content here, content here\&#x27;, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \&#x27;lorem ipsum\&#x27; will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like). like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \&#x27;lorem ipsum\&#x27; will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like). like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \&#x27;lorem ipsum\&#x27; will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).&#x27;;
 
   @HostListener(&#x27;window:resize&#x27;, [&#x27;$event&#x27;])
 
   ngOnInit() {
+    // console.log(&#x27;json&#x27;, link );
     this.innerWidth &#x3D; window.innerWidth;
-    let showAppBanner &#x3D; localStorage.getItem(&#x27;appBanner&#x27;);
+    const showAppBanner &#x3D; localStorage.getItem(&#x27;appBanner&#x27;);
     if (!showAppBanner) {
       this.openInfoPopup();
     }
@@ -642,19 +658,34 @@ export class LearnerNewMyCourseComponent implements OnInit {
     this.UserDetails &#x3D; JSON.parse(localStorage.getItem(&#x27;UserDetails&#x27;)) || null;
     this.userId &#x3D; this.UserDetails.user_id;
     this.selectedDate &#x3D; moment().format();
+    this.learnerService.insertSkeleton(this.userId).subscribe((result:any)&#x3D;&gt;{
+      console.log(result)
+    })
     this.getLearnerActivity(this.selectedDate);
     // this.triggerAvailablecourse &#x3D; setInterval(() &#x3D;&gt; {
     //   this.getCountForCategories();
     // }, 500);
     this.getMyJobRole();
-    if(this.userDetailes.org_type !&#x3D; &quot;collegeconnect&quot;){
+    if (this.userDetailes.org_type !&#x3D;&#x3D; &#x27;collegeconnect&#x27;) {
       this.shotDotSearch &#x3D; false;
     }
     this.getModuleStatus();
-    this.currentYear &#x3D; new Date().getFullYear()
+    this.currentYear &#x3D; new Date().getFullYear();
+    this.getStepUrl();
   }
 
-  //Recently completed topics
+  getStepUrl() {
+    this.learnerService.getStepDetails(this.userId).subscribe((result: any) &#x3D;&gt; {
+      if (result?.data?.getStepCourseByLearner?.success) {
+      this.stepUrl   &#x3D; result?.data?.getStepCourseByLearner?.stepRedirectUrl;
+      localStorage.setItem(&#x27;step&#x27;, &#x27;true&#x27;);
+      } else {
+        localStorage.setItem(&#x27;step&#x27;, &#x27;false&#x27;);
+      }
+    });
+  }
+
+  // Recently completed topics
   moveLeft() {
     this.ds.moveLeft();
   }
@@ -668,7 +699,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
     this.rightNavDisabled &#x3D; reachesRightBound;
   }
 
-  //InProgress Module
+  // InProgress Module
   moveLeftInProgress() {
     this.dsInProgress.moveLeft();
   }
@@ -684,7 +715,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
   //
 
   redirect() {
-    window.open(&#x27;https://stepui-lmsdev.lntiggnite.com/sso?site&#x3D;ltlmsedutech&amp;token&#x3D;eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMDY2MCwiZXhwIjoxOTU1MTgzOTIyfQ.G4JRPi5dHYknmWJrv2dWVd5Hf4FW5r635rzZj-_tVEE&amp;new_user&#x3D;False&amp;referer&#x3D;lms&amp;is_subscription&#x3D;0&amp;is_proctor&#x3D;false&amp;callbackurl&#x3D;callbackurl&amp;return_path&#x3D;/mycourse%3fcourse_id%3d488&#x27;, &#x27;stepURL&#x27;);
+    window.open(this.stepUrl , &#x27;stepURL&#x27;);
   }
 
   insidengOnInit() {
@@ -712,8 +743,8 @@ export class LearnerNewMyCourseComponent implements OnInit {
     });
   }
   closeBannerPopup() {
-    this.dialog.closeAll()
-    localStorage.setItem(&#x27;appBanner&#x27;, &#x27;false&#x27;)
+    this.dialog.closeAll();
+    localStorage.setItem(&#x27;appBanner&#x27;, &#x27;false&#x27;);
   }
 
   onResize(event) {
@@ -725,15 +756,13 @@ export class LearnerNewMyCourseComponent implements OnInit {
   }
 
   showText() {
-    this.isReadMore &#x3D; !this.isReadMore
+    this.isReadMore &#x3D; !this.isReadMore;
   }
-
-  info &#x3D; &quot;It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using &#x27;Content here, content here&#x27;, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for &#x27;lorem ipsum&#x27; will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like). like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for &#x27;lorem ipsum&#x27; will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like). like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for &#x27;lorem ipsum&#x27; will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).&quot;
 
   // NEW API T0 GET DASHBOARD DATA
 
   getDashboardMyCourse(userId, userObjId) {
-    this.courseSkel &#x3D; false
+    this.courseSkel &#x3D; false;
     this.courseDetailsList &#x3D; [];
     let requestType &#x3D; &#x27;ongoing&#x27;;
     if (this.selectedIndex &#x3D;&#x3D;&#x3D; 0) {
@@ -748,62 +777,32 @@ export class LearnerNewMyCourseComponent implements OnInit {
     }
     let jobRoleId &#x3D; this.jobroleCategoryId;
     let jobRoleIdSEQ &#x3D; this.jobroleCategoryId;
-    //condition for vocational &amp; course Sequence
+    // condition for vocational &amp; course Sequence
     if (this.jobroleCategoryId &#x3D;&#x3D;&#x3D; &#x27;All&#x27;) {
       jobRoleIdSEQ &#x3D; &#x27;all&#x27;;
     } else {
       jobRoleIdSEQ &#x3D; this.jobroleCategoryId;
     }
     if (this.jobroleCategoryId &#x3D;&#x3D;&#x3D; &#x27;All&#x27;) { jobRoleId &#x3D; null; }
-    this.learnerService.get_batchwise_learner_dashboard_data(userId, requestType, jobRoleIdSEQ).subscribe((BcourseData: any) &#x3D;&gt; {
-      BcourseData?.data?.get_batchwise_learner_dashboard_data?.message?.forEach(elem &#x3D;&gt; {
-        elem.isBatchCourse &#x3D; true;
-        if (this.isMobile) {
-          elem.progresslistExp &#x3D; true;
-          elem.courseInfoExp &#x3D; true;
+    this.learnerService.get_batchwise_learner_dashboard_data_v2(userId, requestType, jobRoleIdSEQ).subscribe((BcourseData: any) &#x3D;&gt; {
+        if(BcourseData?.data?.get_batchwise_learner_dashboard_data_v2?.success){
+          this.courseDetailsList &#x3D; BcourseData?.data.get_batchwise_learner_dashboard_data_v2?.message.length &gt; 0 ? BcourseData.data.get_batchwise_learner_dashboard_data_v2.message :[];
+          this.courseDetailsList.forEach((value) &#x3D;&gt; {
+            value.show &#x3D; true;
+          });
+          this.onGoingCourseCount &#x3D; BcourseData.data.get_batchwise_learner_dashboard_data_v2.ongoing ?BcourseData.data.get_batchwise_learner_dashboard_data_v2.ongoing:0;
+          this.completedCourseCount &#x3D; BcourseData.data.get_batchwise_learner_dashboard_data_v2.completed ? BcourseData.data.get_batchwise_learner_dashboard_data_v2.completed:0;
+          this.allCourseCount &#x3D;BcourseData.data.get_batchwise_learner_dashboard_data_v2.all ? BcourseData.data.get_batchwise_learner_dashboard_data_v2.all:0;
         }
-      });
-      const tmpBcourseDetail &#x3D; BcourseData.data.get_batchwise_learner_dashboard_data.message;
-      this.courseDetailsList &#x3D; tmpBcourseDetail &amp;&amp; tmpBcourseDetail !&#x3D;&#x3D; null ? tmpBcourseDetail : [];
-      // this.courseDetailsList &#x3D; [];
-      this.learnerService.getLearnerDashboard(userId, userObjId, &#x27;undefined&#x27;, requestType, &#x27;enrolment&#x27;).subscribe((EcourseData: any) &#x3D;&gt; {
-        const EcourseDetail &#x3D; EcourseData.data.get_learner_dashboard.message.enrolled_course_details;
-        this.enrolledCourses &#x3D; EcourseDetail &amp;&amp; EcourseDetail !&#x3D;&#x3D; null ? EcourseDetail : [];
-        this.enrolledCourses.forEach(elem &#x3D;&gt; {
-          elem.isBatchCourse &#x3D; false;
-          if (this.isMobile) {
-            elem.progresslistExp &#x3D; true;
-            elem.courseInfoExp &#x3D; true;
-          }
-        });
-        this.courseDetailsList.push(...this.enrolledCourses);
-        this.courseDetailsList.forEach((value)&#x3D;&gt;{
-            value.weekPercentage &#x3D; (value.current_week_count !&#x3D;&#x3D; null ?
-              value.current_week_count : 0) + &#x27;/&#x27; + (value.actual_total_week !&#x3D;&#x3D; null ? value.actual_total_week : 0);
-          if(value.self_paced_learning_progression){
-            value.self_paced_learning_progression &#x3D; Math.round(value.self_paced_learning_progression)
-            if(value.self_paced_learning_progression &lt;&#x3D; 40) {
-              value.progressClass&#x3D;&quot;start&quot;
-            } else if(value.self_paced_learning_progression &lt;&#x3D; 70){
-              value.progressClass&#x3D;&quot;midway&quot;
-            } else {
-              value.progressClass&#x3D;&quot;end&quot;
-            }
-          }
-        })
-        this.courseSkel &#x3D; true
+        else {
+          this.courseDetailsList &#x3D; [];
+          this.onGoingCourseCount &#x3D; 0;
+          this.completedCourseCount &#x3D; 0;
+          this.allCourseCount &#x3D; 0;
+        }
+        this.courseSkel &#x3D; true;
+    });
 
-      });
-    });
-    // Course batch count reset
-    // this.onGoingCourseCount &#x3D; 0;
-    // this.completedCourseCount &#x3D; 0;
-    // this.allCourseCount &#x3D; 0;
-    this.learnerService.get_learner_dashboard_count(userId, userObjId, jobRoleId).subscribe((result: any) &#x3D;&gt; {
-      this.onGoingCourseCount &#x3D; result.data.get_learner_dashboard_count.message.ongoing_count;
-      this.completedCourseCount &#x3D; result.data.get_learner_dashboard_count.message.completed_count;
-      this.allCourseCount &#x3D; result.data.get_learner_dashboard_count.message.all_count;
-    });
   }
 
   courseTabChange(event, userId, userObjId) {
@@ -814,7 +813,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
     window.open(value);
   }
 
-  //PLAYER PAGE NAVIGATION
+  // PLAYER PAGE NAVIGATION
   gotoDesc(c) {
     c.batch_end_date_Timer &#x3D; new Date(c.batch_end_date).getTime();
 
@@ -831,15 +830,16 @@ export class LearnerNewMyCourseComponent implements OnInit {
     };
     // if (this.screenWidth &lt; 800) {
     // } else {
-    localStorage.setItem(&#x27;currentBatchEndDate&#x27;, c.batch_end_date_Timer)
+    localStorage.setItem(&#x27;currentBatchEndDate&#x27;, c.batch_end_date_Timer);
     localStorage.setItem(&#x27;Courseid&#x27;, c.course_id);
-    localStorage.setItem(&#x27;persentage&#x27;, c &amp;&amp; c.coursePlayerStatus &amp;&amp; c.coursePlayerStatus.course_percentage ? c.coursePlayerStatus.course_percentage : &#x27;&#x27;);
+    localStorage.setItem(&#x27;persentage&#x27;, c &amp;&amp; c.coursePlayerStatus &amp;&amp; c.coursePlayerStatus.course_percentage
+    ? c.coursePlayerStatus.course_percentage : &#x27;&#x27;);
     localStorage.setItem(&#x27;currentBatchId&#x27;, c.batchid);
     this.router.navigateByUrl(&#x27;/Learner/courseDetail&#x27;, { state: { detail } });
 
     // }
   }
-  //INSTRUCTOR LED PAGE NAVIGATION
+  // INSTRUCTOR LED PAGE NAVIGATION
   goInstructorLed(c) {
     localStorage.setItem(&#x27;Courseid&#x27;, c.course_id);
     const detail &#x3D; {
@@ -850,24 +850,24 @@ export class LearnerNewMyCourseComponent implements OnInit {
     // this.router.navigateByUrl(&#x27;/Learner/instructorLed&#x27;, { state: { detail } });
     this.router.navigate([&#x27;/Learner/instructorLed&#x27;], { queryParams: detail }); // [&#x27;/booking&#x27;],{queryParams: {Id :id}}
   }
-  //ASK A QUESTION
+  // ASK A QUESTION
   gotoAskQuestions(c) {
     c.batch_end_date_Timer &#x3D; new Date(c.batch_end_date).getTime();
-      const detail &#x3D; {
+    const detail &#x3D; {
         course_name: c.course_name,
         course_id: c.course_id,
         batch_id: c.batchid,
         batchEndTime: c.batch_end_date_Timer,
-      }
-      localStorage.setItem(&#x27;Courseid&#x27;, c.course_id);
-      localStorage.setItem(&#x27;currentBatchId&#x27;, c.batchid);
-      localStorage.setItem(&#x27;CourseName&#x27;, c.course_name);
-      localStorage.setItem(&#x27;currentBatchEndDate&#x27;, c.batch_end_date_Timer)
-      if(c.course_status!&#x3D;&#x3D;&#x27;start&#x27;){
+      };
+    localStorage.setItem(&#x27;Courseid&#x27;, c.course_id);
+    localStorage.setItem(&#x27;currentBatchId&#x27;, c.batchid);
+    localStorage.setItem(&#x27;CourseName&#x27;, c.course_name);
+    localStorage.setItem(&#x27;currentBatchEndDate&#x27;, c.batch_end_date_Timer);
+    if (c.course_status !&#x3D;&#x3D; &#x27;start&#x27;) {
       this.router.navigateByUrl(&#x27;/Learner/askQuestions&#x27;, { state: { detail } });
     }
   }
-// ACTIVITY NAVIGATION 
+// ACTIVITY NAVIGATION
   gotoSubmissionDetails(course) {
     localStorage.removeItem(&#x27;userTabLocation&#x27;);
     const data1 &#x3D; {
@@ -876,10 +876,10 @@ export class LearnerNewMyCourseComponent implements OnInit {
     };
     localStorage.setItem(&#x27;Courseid&#x27;, data1.courseId);
     localStorage.setItem(&#x27;CourseName&#x27;, data1.courseName);
-    //this.router.navigateByUrl(&#x27;/Learner/activities&#x27;, { state: { data: data1 } });
-    this.router.navigate([&#x27;/Learner/activities&#x27;],{
-      queryParams: 
-      { 
+    // this.router.navigateByUrl(&#x27;/Learner/activities&#x27;, { state: { data: data1 } });
+    this.router.navigate([&#x27;/Learner/activities&#x27;], {
+      queryParams:
+      {
         courseId: btoa(course.course_id),
         courseName: btoa(course.course_name),
         batchId: btoa(course.batchid)
@@ -888,10 +888,11 @@ export class LearnerNewMyCourseComponent implements OnInit {
   }
 
   gotoProgression(course) {
+    // tslint:disable-next-line: prefer-const
     let data &#x3D; {
       courseId : course.course_id,
       courseName: course.course_name
-    }
+    };
     this.router.navigate([&#x27;/Learner/progressionReport&#x27;], {
       queryParams:
       {
@@ -902,7 +903,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
   }
 
   gotoquestionanswer(course) {
-    this.router.navigate([&#x27;/Learner/questionanswer&#x27;])
+    this.router.navigate([&#x27;/Learner/questionanswer&#x27;]);
     localStorage.setItem(&#x27;Courseid&#x27;, course.course_id);
     localStorage.setItem(&#x27;CourseName&#x27;, course.course_name);
     localStorage.setItem(&#x27;currentBatchId&#x27;, course.batchid);
@@ -911,40 +912,45 @@ export class LearnerNewMyCourseComponent implements OnInit {
   getTodaydate() {
       this.dateSelected &#x3D; moment(this.viewDate).format(&#x27;YYYY-MM-DD&#x27;);
       this.getLearnerActivity(this.viewDate);
-      var parentcal &#x3D; document.getElementsByClassName(&#x27;cal-day-headers&#x27;);
-            parentcal[0].childNodes.forEach((element:any) &#x3D;&gt; {
-                  if(element?.style){
-                     var currdate &#x3D;  moment(this.viewDate).format(&#x27;DD&#x27;);
-                     var ele &#x3D; element.children[2].innerHTML;  
-                     element.classList.remove(&quot;cal-today&quot;);
+      // tslint:disable-next-line: no-var-keyword
+      const parentcal &#x3D; document.getElementsByClassName(&#x27;cal-day-headers&#x27;);
+      parentcal[0].childNodes.forEach((element: any) &#x3D;&gt; {
+                  if (element?.style) {
+                     // tslint:disable-next-line: no-var-keyword
+                     const currdate &#x3D;  moment(this.viewDate).format(&#x27;DD&#x27;);
+                     // tslint:disable-next-line: no-var-keyword
+                     const ele &#x3D; element.children[2].innerHTML;
+                     element.classList.remove(&#x27;cal-today&#x27;);
 
-                     if(currdate &#x3D;&#x3D; ele){
-                      element.classList.add(&quot;cal-today&quot;);
-                     }               
-                  }       
+                     if (currdate &#x3D;&#x3D;&#x3D; ele) {
+                      element.classList.add(&#x27;cal-today&#x27;);
+                     }
+                  }
             });
   }
 
 
-  highlightSelectday(data){
-    var parentcal &#x3D; document.getElementsByClassName(&#x27;cal-day-headers&#x27;);
-          parentcal[0].childNodes.forEach((element:any) &#x3D;&gt; {
-                if(element?.style){                     
-                   element.classList.remove(&quot;cal-today&quot;);
-                }       
+  highlightSelectday(data) {
+    // tslint:disable-next-line: no-var-keyword
+    // tslint:disable-next-line: prefer-const
+    const parentcal &#x3D; document.getElementsByClassName(&#x27;cal-day-headers&#x27;);
+    parentcal[0].childNodes.forEach((element: any) &#x3D;&gt; {
+                if (element?.style) {
+                   element.classList.remove(&#x27;cal-today&#x27;);
+                }
           });
-      data.sourceEvent.currentTarget.classList.add(&quot;cal-today&quot;);
+    data.sourceEvent.currentTarget.classList.add(&#x27;cal-today&#x27;);
   }
 
   getLearnerActivity(selectedDate) {
-    this.viewDate &#x3D; new Date(selectedDate)    
+    this.viewDate &#x3D; new Date(selectedDate);
     const dateValue &#x3D; moment(selectedDate).format(&#x27;YYYY-MM-DD&#x27;);
     this.dayMonth &#x3D; selectedDate;
     const empty &#x3D; undefined;
     this.learnerActivityList &#x3D; [];
     this.showSkeleton &#x3D; true;
-    this.learnerService.getLearnerActivity(&#x27;&#x27;,&#x27;&#x27;,&#x27;day&#x27;,dateValue,&#x27;&#x27;,this.userId).subscribe((result:any)&#x3D;&gt;{
-      if(result?.data?.getActivityCalendar?.data?.activities?.length &gt; 0){
+    this.learnerService.getLearnerActivity(&#x27;&#x27;, &#x27;&#x27;, &#x27;day&#x27;, dateValue, &#x27;&#x27;, this.userId).subscribe((result: any) &#x3D;&gt; {
+      if (result?.data?.getActivityCalendar?.data?.activities?.length &gt; 0) {
         this.noActivity &#x3D; false;
         this.showSkeleton &#x3D; false;
         this.showErrorCard &#x3D; false;
@@ -957,52 +963,41 @@ export class LearnerNewMyCourseComponent implements OnInit {
         this.learnerActivityList &#x3D; [];
       }
     },
-    err &#x3D;&gt;{
-    })
+    err &#x3D;&gt; {
+    });
   }
 
   getMyJobRole() {
     this.learnerService.getCountForJobroleCategories(this.userDetailes._id, this.userDetailes.user_id).subscribe((data: any) &#x3D;&gt; {
-      this.vocationalselectjobRole &#x3D; data.data.getCountForJobroleCategories.data
-      if(this.vocationalselectjobRole?.length &gt; 0) {
+      this.vocationalselectjobRole &#x3D; data.data.getCountForJobroleCategories.data;
+      if (this.vocationalselectjobRole?.length &gt; 0) {
         this.showJobRole &#x3D; true;
-      }
-      else {
+      } else {
         this.showJobRole &#x3D; false;
       }
     });
   }
 
-  onSelectionChange(event){
-    this.getDashboardMyCourse(this.userDetailes.user_id, this.userDetailes._id)
+  onSelectionChange(event) {
+    this.getDashboardMyCourse(this.userDetailes.user_id, this.userDetailes._id);
     // console.log(event, &#x27;fadsfasdfasdf&#x27;)
-    if(this.vocationalselectjobRole?.length &gt; 0) {
+    if (this.vocationalselectjobRole?.length &gt; 0) {
       this.vocationalselectjobRole.forEach((jobRole) &#x3D;&gt; {
         // console.log(jobRole, &#x27;349258324098520&#x27;);
-        if(jobRole.jobroleCategoryId &#x3D;&#x3D; event.value) {
+        if (jobRole.jobroleCategoryId &#x3D;&#x3D;&#x3D; event.value) {
           this.tooltipJobRole &#x3D; jobRole.jobroleCategoryName;
         }
-      })
+      });
     }
   }
 
-  jobRoleSelectedFunction(event,value){
-    if(event.source.selected){
-      this.selectedJobRoleData &#x3D; value
+  jobRoleSelectedFunction(event, value) {
+    if (event.source.selected) {
+      this.selectedJobRoleData &#x3D; value;
     }
   }
 
-  openGallery(c){
-    this.router.navigate([&#x27;/Learner/coursegallery&#x27;], {
-      queryParams:
-      {
-        id: btoa(c.course_id),
-        name: c.course_name
-      }
-    });
-  }
-
-  openReport(c){
+  openReport(c) {
     this.router.navigate([&#x27;/Learner/coursereport&#x27;], {
       queryParams:
       {
@@ -1013,7 +1008,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
         selflearning_totalweeks : c.selflearning_totalweeks
       }
     });
-  
+
   }
 
   goToForum(c) {
@@ -1035,74 +1030,79 @@ export class LearnerNewMyCourseComponent implements OnInit {
 
 
   updateColor(progress) {
-    if (parseInt(progress)&lt;21){
+    // tslint:disable-next-line: radix
+    if (parseInt(progress) &lt; 21) {
        return &#x27;primary&#x27;;
-    } else if (parseInt(progress)&gt;80){
+    // tslint:disable-next-line: radix
+    } else if (parseInt(progress) &gt; 80) {
        return &#x27;accent&#x27;;
     } else {
       return &#x27;warn&#x27;;
     }
  }
 
- getModuleStatus(){
+ getModuleStatus() {
   // this.inProgressRecently &#x3D; true;
-   this.learnerService.recentlycourse(this.userDetailes.user_id).subscribe((data: any)&#x3D;&gt;{
+   this.learnerService.recentlycourse(this.userDetailes.user_id).subscribe((data: any) &#x3D;&gt; {
      this.inProgressModule &#x3D; data?.data?.recentlycourse?.data?.inProgressModule;
     //  this.inProgressModule &#x3D; null
      this.completedTopic &#x3D; data?.data?.recentlycourse?.data?.completedTopic;
      ///
-     if(this.inProgressModule?.length &gt; 0) {
+     if (this.inProgressModule?.length &gt; 0) {
       this.inProgress &#x3D; true;
-     }
-     else {
+     } else {
        this.inProgress &#x3D; false;
      }
     ///
-     if(this.completedTopic?.length &gt; 0) {
+     if (this.completedTopic?.length &gt; 0) {
       this.recentlyCompleted &#x3D; true;
-     }
-     else {
+     } else {
        this.recentlyCompleted &#x3D; false;
      }
-    setTimeout(()&#x3D;&gt;{
+     setTimeout(() &#x3D;&gt; {
       this.displaySlides &#x3D; true;
-    },1000)
-   })
+    }, 1000);
+   });
  }
 
- getCourseProgress(){
+ getCourseProgress() {
   this.setdateForprogress();
-  this.getoverAllCourseProgressData()
+  this.getoverAllCourseProgressData();
   this.getWeekCourseData();
   this.showProgressChart &#x3D; true;
 }
-//Date initialize
-setdateForprogress(){
-  //week wise date
- var curr &#x3D; new Date;
- var first &#x3D; curr.getDate() - curr.getDay();
- var firstday &#x3D; new Date(curr.setDate(first)).toUTCString();
- this.weekWiseDate &#x3D; new Date(firstday,);
- //Course Start &amp; End date
+
+getVideoLink(course) {
+    window.open(environment.resourcelinkurl + &#x27;?course&#x3D;&#x27; + course, &#x27;blank&#x27;).focus();
+}
+
+// Date initialize
+setdateForprogress() {
+  // week wise date
+ const curr &#x3D; new Date();
+ const first &#x3D; curr.getDate() - curr.getDay();
+ const firstday &#x3D; new Date(curr.setDate(first)).toUTCString();
+ this.weekWiseDate &#x3D; new Date(firstday, );
+ // Course Start &amp; End date
  this.courseStartDate  &#x3D; this.UserDetails.created_on;
  this.minCourseDate &#x3D; this.courseStartDate;
  this.courseEndDate &#x3D; new Date();
 }
 
-//Overll course chart data
-getoverAllCourseProgressData(){
+// Overll course chart data
+getoverAllCourseProgressData() {
   this.courseWiseChartDatalabel &#x3D; [];
   this.courseChartData &#x3D; [];
   this.courseChartBackGround &#x3D; [];
-  this.learnerService.getoverAllCourseProgressByUserId(this.userId,moment(this.courseStartDate).startOf(&#x27;day&#x27;).toISOString(),moment(this.courseEndDate).endOf(&#x27;day&#x27;).toISOString()).subscribe((result:any)&#x3D;&gt;{
-    if(result.data.overAllCourseProgressByUserId.success){
-      result.data.overAllCourseProgressByUserId.data.forEach((data:any)&#x3D;&gt;{
+  this.learnerService.getoverAllCourseProgressByUserId(this.userId, moment(this.courseStartDate).startOf(&#x27;day&#x27;).toISOString(),
+  moment(this.courseEndDate).endOf(&#x27;day&#x27;).toISOString()).subscribe((result: any) &#x3D;&gt; {
+    if (result.data.overAllCourseProgressByUserId.success) {
+      result.data.overAllCourseProgressByUserId.data.forEach((data: any) &#x3D;&gt; {
         this.courseWiseChartDatalabel.push(data.courseName);
-        this.courseChartData.push({&quot;y&quot;:data.coursePercentage,&quot;myprop&quot;:data})
+        this.courseChartData.push({y: data.coursePercentage, myprop: data});
         this.courseChartBackGround.push(data.colourCode);
       });
-    }
-    else{
+    } else {
       this.courseWiseChartDatalabel &#x3D; [];
       this.courseChartData &#x3D; [];
       this.courseChartBackGround &#x3D; [];
@@ -1110,82 +1110,93 @@ getoverAllCourseProgressData(){
     this.generateCourseChart();
   });
 }
-generateCourseChart(){
+generateCourseChart() {
   this.coursebarChartLabels &#x3D; this.courseWiseChartDatalabel;
   this.coursebarChartData &#x3D; [
     {
       data: this.courseChartData,
       backgroundColor: this.courseChartBackGround,
-      hoverBackgroundColor:this.courseChartBackGround,
+      hoverBackgroundColor: this.courseChartBackGround,
       barThickness: 12,
     }
   ];
 }
 
-changeCourseDate(){
+changeCourseDate() {
   this.minCourseDate &#x3D; this.courseStartDate;
   this.getoverAllCourseProgressData();
 }
 
-getWeekCourseData(){
+getWeekCourseData() {
   this.weekWiseChartDatalabel &#x3D; [];
   this.weekWiseChartData &#x3D; [];
-  var myFormattedDate &#x3D; moment(this.weekWiseDate).format(&#x27;yyyy-MM-DD&#x27;);
-  this.learnerService.getweekWiseCourseChart(&quot;&quot;,this.userId,myFormattedDate,&quot;allcourse&quot;).subscribe((result:any)&#x3D;&gt;{
+  // tslint:disable-next-line: no-var-keyword
+  const myFormattedDate &#x3D; moment(this.weekWiseDate).format(&#x27;yyyy-MM-DD&#x27;);
+  this.learnerService.getweekWiseCourseChart(&#x27;&#x27;, this.userId, myFormattedDate, &#x27;allcourse&#x27;).subscribe((result: any) &#x3D;&gt; {
 
-    if(result.data.weekWiseCourseChart.success){
+    if (result.data.weekWiseCourseChart.success) {
       this.totalhoursSpend &#x3D; result.data.weekWiseCourseChart.data.totalhoursSpend;
-      result.data.weekWiseCourseChart.data.chartdata.forEach((data:any)&#x3D;&gt;{
+      result.data.weekWiseCourseChart.data.chartdata.forEach((data: any) &#x3D;&gt; {
         this.weekWiseChartDatalabel.push(data.day);
-        this.weekWiseChartData.push({y:data.hours,hourString:data.hourString});
+        this.weekWiseChartData.push({y: data.hours, hourString: data.hourString});
       });
-    }
-    else{
-      this.weekWiseChartDatalabel &#x3D; [&#x27;Sun&#x27;,&#x27;Mon&#x27;,&#x27;Tue&#x27;,&#x27;Wed&#x27;,&#x27;Thu&#x27;,&#x27;Fri&#x27;,&#x27;Sat&#x27;];
-      this.weekWiseChartData &#x3D; [0,0,0,0,0,0,0,0];
+    } else {
+      this.weekWiseChartDatalabel &#x3D; [&#x27;Sun&#x27;, &#x27;Mon&#x27;, &#x27;Tue&#x27;, &#x27;Wed&#x27;, &#x27;Thu&#x27;, &#x27;Fri&#x27;, &#x27;Sat&#x27;];
+      this.weekWiseChartData &#x3D; [0, 0, 0, 0, 0, 0, 0, 0];
     }
     this.generateWeekwiseChart();
   });
 }
-generateWeekwiseChart(){
+generateWeekwiseChart() {
   this.WeekbarChartLabels &#x3D; this.weekWiseChartDatalabel;
   this.WeekbarChartData &#x3D; [
     {
       data: this.weekWiseChartData,
       backgroundColor: &#x27;#2280C1&#x27;,
-      hoverBackgroundColor:&#x27;#2280C1&#x27;,
+      hoverBackgroundColor: &#x27;#2280C1&#x27;,
       barThickness: 12,
     }
   ];
 }
-changeWeekDate(){
+changeWeekDate() {
   this.getWeekCourseData();
 }
 
-goToCourse(value){
+goToCourse(c){
+  return false;
+  c.batch_end_date_Timer &#x3D; new Date(c.batch_end_date).getTime();
+
   const detail &#x3D; {
-    id: value.course_id,
-    wishlist: false,
-    wishlist_id: null,
+    id: c.course_id,
+    wishlist: c.wishlisted || false,
+    wishlist_id: c.wishlist_id || null,
     enrollment_status: null,
-    course_name: value.course_name,
-    course_status: null,
-    batch_id: value.batchid,
-    batchEndTime: null,
-    fromCalendar : false,
-    fromSuggestion: true,
-    url:value.link,
-    week:value.week,
-    moduleName:value.module,
-    moduleIndex:value.moduleIndex,
-    topicName:value.topic,
-    topicIndex:value.topicIndex
+    course_name: c.course_name,
+    course_status: &#x27;incomplete&#x27;, // c.course_status,
+    batch_id: c.batchid,
+    batchEndTime: c.batch_end_date_Timer,
+    link: c.link,
+    toc: c.toc,
+    lastLogIndex: c.lastLogIndex,
+    lastModule: c.lastModule,
+    lastTopic: c.lastTopic,
+    checklevel: c.checklevel,
+    module_id: c.module_id,
+    topic_id: c.topic_id
+    // persentage : c.coursePlayerStatus.course_percentage || 0
   };
-console.log(detail)
-  localStorage.setItem(&#x27;currentBatchEndDate&#x27;, value.batch_end_date_Timer)
-  localStorage.setItem(&#x27;Courseid&#x27;, value.course_id);
-  localStorage.setItem(&#x27;persentage&#x27;, null);
-  localStorage.setItem(&#x27;currentBatchId&#x27;, value.batch_id);
+  // if (this.screenWidth &lt; 800) {
+  // } else {
+  console.log(detail);
+  localStorage.setItem(&#x27;currentBatchEndDate&#x27;, c.batch_end_date_Timer);
+  localStorage.setItem(&#x27;Courseid&#x27;, c.course_id);
+  localStorage.setItem(&#x27;persentage&#x27;, c &amp;&amp; c.coursePlayerStatus &amp;&amp; c.coursePlayerStatus.course_percentage
+  ? c.coursePlayerStatus.course_percentage : &#x27;&#x27;);
+  localStorage.setItem(&#x27;currentBatchId&#x27;, c.batchid);
+
+  localStorage.setItem(&#x27;resumeData&#x27;, JSON.stringify({link: c.link, lastModule: c.lastModule, lastTopic: c.lastTopic,
+    module_id: c.module_id, topic_id: c.topic_id, checklevel: c.checklevel, course_status: c.course_status, toc: c.toc}));
+
   this.router.navigateByUrl(&#x27;/Learner/courseDetail&#x27;, { state: { detail } });
 }
 }
@@ -1193,6 +1204,7 @@ console.log(detail)
     </div>
 
 </div>
+
 
 
 
