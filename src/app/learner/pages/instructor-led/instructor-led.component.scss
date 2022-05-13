@@ -5,34 +5,96 @@
   background-color: $grey1;
   flex-direction: column;
   @media only screen and (min-width: 992px) {
-    height: 100%;
     flex-direction: row;
-    .leftContainer {
-      width: calc(100% - 400px);
+    overflow: hidden;
+  }
+  .leftContainer {
+    background-color: $grey1;
+    z-index: 1;
+    padding: 10px 0 20px 0;
+    width: 100%;
+    @media screen and (min-width: 992px) {
+      width: calc(100% - 360px);
     }
-    .rightContainer {
+    @media screen and (min-width: 1140px) {
+        width: calc(100% - 400px);
+    }
+    @media screen and (min-width: 1540px) {
+        width: calc(100% - 500px);
+    }
+  }
+  
+  .rightContainer {
+    box-shadow: 0 0 2px 0 $blackshade3;
+    background-color: $color-white;
+    z-index: 2;
+    padding: 20px;
+    width: 100%;
+    @media screen and (min-width: 992px) {
+      padding: 20px 15px;
+      width: 360px;
+      height: calc(100vh - 112px);
+      position: fixed;
+      top: 72px;
+      right: 0;
+    }
+    @media screen and (min-width: 1140px) {
+      padding: 20px;
       width: 400px;
-      padding: 0 20px;
+    }
+    @media screen and (min-width: 1540px) {
+      width: 500px
     }
   }
 }
 
-.leftContainer {
-  background-color: $grey1;
-  // width: 100%;
-  z-index: 1;
-  box-shadow: 0px 0px 9px 0px $icon-color;
-  padding: 10px 0 20px 0;
-  // @media only screen and (max-width: 1023px) {
-  //   padding: 10px 0 20px 0;
-  // }
-}
-
-.rightContainer {
-  background-color: $color-white;
-  // width: 100%;
-  z-index: 0;
-  padding: 15px;
+::ng-deep.industryTalkTabs {
+  .mat-tab-label {
+    justify-content: flex-start;
+    font-size: 16px;
+    font-weight: 400;
+    color: $grey3;
+    padding: 0;
+    opacity: 1;
+    min-width: auto;
+    margin-right: 35px;
+    &:last-child {
+      margin-right: 0;
+    }
+    &.mat-tab-label-active {
+      color: $lightgrey;
+      &::before {
+        content: '';
+        position: absolute;
+        bottom: 6px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 5px;
+        height: 5px;
+        background-color: $lightred;
+        border-radius: 50%;
+      }
+    }
+  }
+  .mat-tab-header {
+    border-bottom: 0;
+    margin-bottom: 5px;
+  }
+  .mat-ink-bar {
+    display: none;
+  }
+  .mat-tab-body {
+    overflow-y: auto;
+    @media only screen and (min-width: 992px) {
+        height: calc(100vh - 210px);
+    }
+    // @media only screen and (min-width: 1200px) {
+    //     height: calc(100vh - 195px);
+    // }
+    @media only screen and (min-width: 1540px) {
+        height: calc(100vh - 230px);
+    }
+  }
 }
 
 .container {
@@ -854,12 +916,12 @@
   text-align: left;
   letter-spacing: 0px;
   color: $blackcolor;
-  // margin: 0 0 15px 0;
-  padding-top: 28px;
+  margin: 0 0 5px 0;
   font-size: 15px;
-  font-weight: bold;
+  font-weight: 500;
+  line-height: normal;
   @media only screen and (max-width: 992px) {
-    margin: 0 0 15px 0;
+    margin: 0 0 5px 0;
   }
   @media only screen and (max-width: 573px) {
     margin: 0;
