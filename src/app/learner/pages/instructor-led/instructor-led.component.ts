@@ -61,9 +61,6 @@ export class InstructorLedComponent implements OnInit {
       this.showSkeleton = false;
       const data = res.data['getTopicAttendanceDetailsByUsername']['data'];
       this.listOfSessions = data.Activity;
-      // this.liveSessions = this.listOfSessions.filter(ele => {
-      //   return ele.activity_details.activitytype !== "Recorded";
-      // });
       if (this.listOfSessions.length > 0) {
         this.showContent = true;
       } else {
