@@ -259,10 +259,23 @@
       }
       .overlayContent {
         position: absolute;
-        bottom: 9vh;
-        left: 20px;
-        @include md {
+        top: 45%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        text-align: center;
+        > div {
+          display: none;
+          @include lg {
+            display: block;
+          }
+        }
+        @include lg {
+          top: auto;
+          left: 3%;
+          transform: initial;
           bottom: 2vh;
+          text-align: left;
         }
         @include xl {
           bottom: 4.5vh;
@@ -335,19 +348,16 @@
   }
 
   .sessionDetails {
-    padding-top: 20px;
+    padding: 20px 0;
     .sessionTitle {
       text-align: left;
       letter-spacing: 0px;
       font-size: 15px;
       color: $blackcolor;
       opacity: 1;
-      margin-bottom: 10px;
-      display: inline-block;
       width: 100%;
       text-overflow: ellipsis;
       display: inline-block;
-      /* margin-left: 2%; */
       @media only screen and (max-width: 600px) {
         color: $blackcolor;
         margin-bottom: 0;
@@ -654,48 +664,40 @@
 
 .iconWrap {
   width: 19%;
-  @media (min-width: 576px) {
+  @include sm {
     width: 30%;
   }
-
-  @media (min-width: 768px) {
+  @include md {
     width: 27%;
   }
-
-  @media (min-width: 992px) {
+  @include lg {
     width: 31%;
   }
-
-  @media (min-width: 1200px) {
+  @include xl {
     width: 37%;
   }
-
   @media (min-width: 1440px) {
-    width: 30%;
+    width: 20%;
   }
 }
 
 .countWrap {
   width: 76%;
   margin-left: 5%;
-  @media (min-width: 576px) {
+  @include sm {
     width: 65%;
   }
-
-  @media (min-width: 768px) {
+  @include md {
     width: 62%;
   }
-
-  @media (min-width: 992px) {
-    width: 64;
+  @include lg {
+    width: 64%;
   }
-
-  @media (min-width: 1200px) {
+  @include xl {
     width: 58%;
   }
-
   @media (min-width: 1440px) {
-    width: 65%;
+    width: 75%;
   }
 }
 

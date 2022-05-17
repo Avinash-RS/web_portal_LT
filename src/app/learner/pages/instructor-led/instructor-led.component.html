@@ -47,14 +47,16 @@
                   <img alt="Overlay" src="/assets/images/abstacles.png" />
                 </figure>
                 <div class="overlayContent">
-                  <h4>{{activityShow?.activity_details.activityname}}</h4>
-                  <div class="overlayDuration commonStyle">
-                    <em class="lxp-Duration"></em>
-                    <span class="dateTitle">{{'Date:' | translate}} {{activityShow?.activity_details.startdate | date: 'dd/MM/yyyy hh:mm a'}}</span>
-                  </div>
-                  <div class="overlayDate commonStyle" *ngIf="activityShow?.activity_details.activitytype != 'Recorded'" >
-                      <em class="lxp-Clock"></em>
-                      <span class="durationTitle">{{'Duration:' | translate}} {{activityShow?.duration}}</span>
+                  <div>
+                    <h4>{{activityShow?.activity_details.activityname}}</h4>
+                    <div class="overlayDuration commonStyle">
+                      <em class="lxp-Duration"></em>
+                      <span class="dateTitle">{{'Date:' | translate}} {{activityShow?.activity_details.startdate | date: 'dd/MM/yyyy hh:mm a'}}</span>
+                    </div>
+                    <div class="overlayDate commonStyle" *ngIf="activityShow?.activity_details.activitytype != 'Recorded'" >
+                        <em class="lxp-Clock"></em>
+                        <span class="durationTitle">{{'Duration:' | translate}} {{activityShow?.duration}}</span>
+                    </div>
                   </div>
                   <div class="playButton" *ngIf="activityShow?.status === 'On going' && activityShow?.activity_details.activitytype != 'Recorded'" >
                     <button (click)="getAction(activityShow.activity_details.link)">
