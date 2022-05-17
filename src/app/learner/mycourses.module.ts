@@ -54,6 +54,7 @@ import { ProgramReportComponent } from './pages/program-report/program-report.co
 import { BenchmarkreportComponent } from './pages/benchmarkreport/benchmarkreport.component';
 import { MillestonereportComponent } from './pages/millestonereport/millestonereport.component';
 import { TrainingreportComponent } from './pages/trainingreport/trainingreport.component';
+import { OverallquizreportComponent } from './pages/overallquizreport/overallquizreport.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -148,7 +149,8 @@ const routes: Routes = [
     ProgramReportComponent,
     BenchmarkreportComponent,
     MillestonereportComponent,
-    TrainingreportComponent
+    TrainingreportComponent,
+    OverallquizreportComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   imports: [
