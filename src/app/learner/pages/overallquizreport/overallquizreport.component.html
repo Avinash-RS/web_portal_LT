@@ -17,16 +17,14 @@
         </div>
         <div class="circleProgress">
             <span class="chartHeading">{{'Overall Quiz Average Score'}}</span>
+                <div style="margin-top: 4em;">       
             <circle-progress
-            [percent]="85"
-            [radius]="60" 
-            [outerStrokeWidth]="16"
-            [innerStrokeWidth]="8"
-            [outerStrokeGradient]=true [outerStrokeWidth]=6 [outerStrokeColor]="'#17B15C'"  [outerStrokeGradientStopColor]="'#17B15C'" 
-            [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]=6 
-            [animation]="true"
-            [animationDuration]="300"
-          ></circle-progress>
+                     [title]= "'90'" [titleFontSize] = "44" [unitsFontSize]="44" [titleFontWeight] = "600" [showUnits]= "true" [percent]="'90'"
+                     [radius]=80  [space]=-6 [outerStrokeGradient]=true [outerStrokeWidth]=15 [innerStrokeWidth]="15" [outerStrokeColor]="'#17B15C'" 
+            [outerStrokeGradientStopColor]="'#17B15C'" [innerStrokeColor]="'#e7e8ea'" 
+            [animation]="true" [animationDuration]="300"[showSubtitle]="false"
+            ></circle-progress>
+                </div>
             <div class="points">
                 <ul>
                     <li class="d-flex align-items-center" *ngFor="let item of points">
@@ -36,4 +34,49 @@
             </div>
         </div>
     </div>
+<h5>Course wise quiz report</h5>
+<mat-accordion class="expansionPanel">
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <div class="title d-flex align-items-center">
+                    <div class="left">
+                        <em class="lxp-TestName"></em>
+                    </div>
+                    <div class="right d-flex">
+                        <span>Course Name</span>
+                        <h6>Learn How to Code Java</h6>
+                    </div>
+                </div>
+            </mat-panel-title>
+            <mat-panel-description>
+                <div class="status d-flex align-items-center">
+                    <div class="score average d-flex align-items-center">
+                        <div class="left">
+                            <em class="lxp-Score"></em>
+                        </div>
+                        <div class="right d-flex">
+                            <span>No. of Quizzes</span>
+                            <h6>9</h6>
+                        </div>
+                    </div>
+                    <div class="score average d-flex align-items-center">
+                        <div class="left">
+                            <em class="lxp-Score"></em>
+                        </div>
+                        <div class="right d-flex">
+                            <span>Average Score</span>
+                            <h6>63%</h6>
+                        </div>
+                    </div>
+                </div>
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="agquiz">
+            <mat-card>
+                <ag-grid-angular class="ag-theme-alpine" [columnDefs]="cols" [rowData]="rows" style="width:100%; min-height: 200px;" [ngStyle]="{height:(rows.length * 50)  + 'px' }" (gridReady)="onGridReady($event)" [defaultColDef]="defaultColDef"></ag-grid-angular>
+            </mat-card>
+        </div>
+    </mat-expansion-panel>
+</mat-accordion>
 </div>
