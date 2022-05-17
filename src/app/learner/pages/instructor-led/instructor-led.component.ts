@@ -29,6 +29,9 @@ export class InstructorLedComponent implements OnInit {
   showContent;
   userDetails;
   @ViewChild('attended') attended: ElementRef;
+  liveSessions: any;
+  recordedSVideoession: any;
+  tabIndex: any;
 
   constructor(private router: Router,
               private learnerService: LearnerServicesService,
@@ -87,7 +90,23 @@ export class InstructorLedComponent implements OnInit {
       }
       this.attendedSessions = _.countBy(this.sessionAttendance, x => x.activity.attendencedetails.Attendence === 'yes');
       this.useSession(this.listOfSessions[0]);
+      this.getliveSessionRecorded({index:0});
     });
+  }
+
+  getliveSessionRecorded(event) {
+    this.tabIndex = event.index;
+    if(event.index == 0) {
+      this.liveSessions = this.listOfSessions.filter(ele => {
+        return ele.activity_details.activitytype !== "Recorded";
+      });
+    }
+    else {
+      this.liveSessions = this.listOfSessions.filter(ele => {
+        return ele.activity_details.activitytype == "Recorded";
+      });
+    }
+    this.useSession(this.liveSessions[0]);
   }
 
   useSession(los) {
@@ -102,6 +121,11 @@ export class InstructorLedComponent implements OnInit {
     if (los.status === 'On going') {
       this.activityShow.button = 'Join Now';
     }
+  }
+  getScrollTop() {
+    document.getElementById('scrollTop').scrollIntoView({
+      behavior: 'smooth'
+    });
   }
 
   onGoingSession() {
