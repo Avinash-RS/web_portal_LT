@@ -2311,6 +2311,9 @@ export const get_batchwise_learner_dashboard_data_v2 = gql `
           course_week_Percent
           course_description
           isTesting
+          resume_topic
+          topic_id
+          module_id
         }
         ongoing
         all
