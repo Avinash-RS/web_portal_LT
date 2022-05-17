@@ -51,6 +51,9 @@ import { QuizReportComponent } from './pages/quiz-report/quiz-report.component';
 import 'ag-grid-enterprise';
 import { AgGridModule } from 'ag-grid-angular';
 import { ProgramReportComponent } from './pages/program-report/program-report.component';
+import { BenchmarkreportComponent } from './pages/benchmarkreport/benchmarkreport.component';
+import { MillestonereportComponent } from './pages/millestonereport/millestonereport.component';
+import { TrainingreportComponent } from './pages/trainingreport/trainingreport.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -142,7 +145,10 @@ const routes: Routes = [
     UpskillCalendarComponent,
     CalendarFilterComponent,
     QuizReportComponent,
-    ProgramReportComponent
+    ProgramReportComponent,
+    BenchmarkreportComponent,
+    MillestonereportComponent,
+    TrainingreportComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   imports: [

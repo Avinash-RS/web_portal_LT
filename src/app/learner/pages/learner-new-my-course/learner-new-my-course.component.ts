@@ -944,4 +944,7 @@ goToCourse(c){
 
   this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
 }
+programReport(){
+  this.router.navigate(['/Learner/programreport']);
+}
 }
