@@ -140,11 +140,11 @@
         line-height: normal;
       }
       button {
-        padding: 2px ​10px 3px 10px;
         border-radius: 4px;
         border: 0;
+        padding: 2px 4px;
       }
-      .answer{
+      .answer {
         background-color: #32ce6a;
         color: #ffffff;
       }
@@ -376,22 +376,37 @@
 ::ng-deep.QAContainer {
   width: 90% !important;
   height: 78% !important;
-  @media only screen and (min-width: 720px) {
+  @include md {
     height: 53% !important;
   }
-  @media only screen and (min-width: 992px) {
+  @include lg {
     height: 70% !important;
   }
-  @media only screen and (min-width: 1140px) {
+  @include xl {
     width: 50% !important;
     height: 86% !important;
   }
   @media only screen and (min-width: 1540px) {
     width: 40% !important;
-    height: 57% !important;
+    height: 64% !important;
   }
   .mat-dialog-container {
     padding: 25px !important;
+  }
+  .instructions {
+    margin-top: 0 !important;
+    margin-bottom: 20px;
+    .heading {
+      display: none !important;
+    }
+    ul {
+      li {
+        margin-bottom: 5px !important;
+        span {
+          font-size: 12px !important;
+        }
+      }
+    }
   }
 }
 //Button overrides
@@ -489,5 +504,38 @@
   }
   .mat-form-field-appearance-outline .mat-form-field-outline {
       top: 0;
+  }
+}
+
+.instructions {
+  margin-top: 30px;
+  .heading {
+    font-size: 16px;
+    font-weight: 500;
+    color: $black1;
+    line-height: normal;
+    display: block;
+    margin-bottom: 20px;
+  }
+  ul {
+    list-style-type: none;
+    li {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 10px;
+      line-height: normal;
+      &:last-child {
+        margin-bottom: 0;
+      }
+      span {
+        font-size: 15px;
+        font-weight: 400;
+        color: $lightgrey;
+        line-height: 18px;
+        &:first-child {
+          margin-right: 5px;
+        }
+      }
+    }
   }
 }
