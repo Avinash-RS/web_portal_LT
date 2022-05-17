@@ -538,4 +538,36 @@
           }
         }
       }
+      .liveclasschart {
+        padding: 2em 6em;
+        .left {
+          width: 50%;
+        }
+        .right {
+          width: 50%;
+          ul {
+            list-style: none;
+            li {
+              .labeltxt {
+                font-size: 14px;
+                color: $color-lightGray;
+                font-weight: 400;
+              }
+              .count {
+                margin-top: 10px;
+                .dot {
+                  height: 15px;
+                  width: 15px;
+                  border-radius: 5px;
+                  margin-right: 5px;
+                }
+                .txt {
+                  font-size: 20px;
+                  font-weight: 600;
+                }
+              }
+            }
+          }
+        }
+      }
 }

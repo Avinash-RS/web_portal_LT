@@ -70,7 +70,26 @@ export class TrainingreportComponent implements OnInit {
     {color:'#BE2020',label:'Angular Crash Course'},
     {color:'#FFCC00',label:'STEP Campus to Corporate'},
     {color:'#AE5FDE',label:'Angular Crash Course'},
-  ]
+  ];
+  //pie
+  public pieChartOptions: ChartOptions = {
+    responsive: true,
+  };
+  public pieChartLabels: Label[] = ['Total Sessions','Attended Sessions','Absent Sessions'];
+  public pieChartType: ChartType = 'pie';
+  public pieChartLegend = false;
+  public pieChartPlugins = [];
+  public pieChartDataSet: ChartDataSets[] = [
+    {
+      data: [23, 18, 5],
+      backgroundColor: ['#607D8B','#49AE31','#FEA800'],
+    }
+  ];
+  liveclassroomLegend = [
+    {label:'Total Sessions',count:23,color:'#607D8B'},
+    {label:'Attended Sessions',count:18,color:'#49AE31'},
+    {label:'Absent Sessions',count:5,color:'#FEA800'}
+  ];
   constructor() { }
 
   ngOnInit(): void {
