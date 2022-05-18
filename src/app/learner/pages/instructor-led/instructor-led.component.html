@@ -1,7 +1,6 @@
 <app-header></app-header>
-
+<div #tops></div>
 <div class="instructorLedWrapper" id="scrollTop">
-
   <ng-container *ngIf="!showContent && !showSkeleton">
     <div class="breadcrumbPading">
       <ul class="breadcrumb">
@@ -15,7 +14,7 @@
         <figure>
           <img alt="assignment" src="https://assets.lntedutech.com/application_images/noassignment.webp">
         </figure>
-        <p> {{'You have no sessions at the moment!' | translate}}</p>
+        <p>{{tabIndex == 0 ? 'You have no Live Session at the moment!' : 'You have no Recorded Session at the moment!'}}</p>
       </div>
     </div>
   </ng-container>
@@ -129,7 +128,7 @@
           </div>
           <div class="attendanceWrapper">
             <div class="row attendance-table" *ngIf="sessionAttendance?.length">
-              <table style="width: 100%;">
+              <table>
                 <tr class="tblheaderFont">
                   <th width="12%">{{'Session #' | translate}}</th>
                   <th width="50%">{{'Topic Name' | translate}}</th>
@@ -138,16 +137,16 @@
                 </tr>
                 <tbody>
                   <tr class="tblrow" *ngFor="let atd of sessionAttendance; let i = index" [attr.data-index]="i">
-                    <td>{{i+1}}</td>
+                    <td class="tableCol">{{i+1}}</td>
                     <td>{{atd.activity.activityname}}</td>
                     <td>{{atd.activity.startdate | date: 'dd/MM/yyyy hh:mm a'}}</td>
-                    <td>
+                    <td class="tableCol">
                       <mat-icon #attended
                         *ngIf="atd.activity.attendencedetails.Attendence == 'yes' || atd.activity.attendencedetails.Attendence == 'Yes'"
-                        style="color: #52AE31;">check_circle_outline</mat-icon>
+                        class="PresentIcon">check_circle_outline</mat-icon>
                       <mat-icon
                         *ngIf="atd.activity.attendencedetails.Attendence =='no' || atd.activity.attendencedetails.Attendence == 'No'"
-                        style="color: #E8542B;">highlight_off</mat-icon>
+                        class="AbsentIcon">highlight_off</mat-icon>
                     </td>
                   </tr>
                 </tbody>
@@ -180,10 +179,10 @@
             <td class="tableCol">
               <mat-icon
                 *ngIf="atd.activity.attendencedetails.Attendence == 'yes' || atd.activity.attendencedetails.Attendence == 'Yes'"
-                style="color: #52AE31;">check_circle_outline</mat-icon>
+                class="PresentIcon">check_circle_outline</mat-icon>
               <mat-icon
                 *ngIf="atd.activity.attendencedetails.Attendence =='no' || atd.activity.attendencedetails.Attendence == 'No'"
-                style="color: #E8542B;">highlight_off</mat-icon>
+                class="AbsentIcon">highlight_off</mat-icon>
             </td>
           </tr>
         </table>
@@ -200,7 +199,7 @@
         (click)="showModal(attendanceDialog)">{{'Attendance' | translate}}</button>
     </div>
     
-    <mat-tab-group (selectedTabChange)="getliveSessionRecorded($event);" mat-align-tabs="start" class="industryTalkTabs">
+    <mat-tab-group (selectedTabChange)="getliveSessionRecorded($event)" mat-align-tabs="start" class="industryTalkTabs">
       <mat-tab>
         <ng-template mat-tab-label>Live Sessions</ng-template>
         <ng-template [ngTemplateOutlet]="tabContent"></ng-template>
@@ -228,27 +227,30 @@
           </div>
           <div [ngClass]="los.isactive?'active':''" class="content-container">
             <h4 class="activity-name" matTooltip="{{los.activity_details.activityname}}">{{los.activity_details.activityname}}</h4>
-            <h5><span class="hover-content">{{'Date:' | translate}}</span>{{los.activity_details.startdate | date: 'dd/MM/yyyy hh:mm a'}}</h5>
-            <h5><span class="hover-content">{{'Duration:' | translate}}</span>{{los.duration}}</h5>
+            <h5 *ngIf="los.activity_details.activitytype != 'Recorded'"><span class="hover-content">{{'Date:' | translate}}</span>{{los.activity_details.startdate | date: 'dd/MM/yyyy hh:mm a'}}</h5>
+            <h5 *ngIf="los.activity_details.activitytype != 'Recorded'"><span class="hover-content">{{'Duration:' | translate}}</span>{{los.duration}}</h5>
             <!-- <h5 *ngIf="los.activity_details.activitytype == 'Recorded'"><span class="hover-content">{{'Module:' | translate}}</span>{{los.activity_details.modulename}} </h5> -->
           </div>
         </div>
       </mat-card>
     </mat-list-item>
   </mat-nav-list>
-  <!-- <div class="noCard" *ngIf="listOfSessions.length == 0">
+  <div class="noCard" *ngIf="liveSessions.length == 0">
     <p>{{tabIndex == 0 ? 'No Live Sessions' : 'No Recorded Videos'}}</p>
-  </div> -->
+    <!-- <figure>
+      <img alt="no-session" src="">
+    </figure> -->
+  </div>
 </ng-template>
 
 <div class="item" *ngIf="showSkeleton">
-  <mat-card class="courseDetailSkeleton" style="box-shadow: none !important;">
+  <mat-card class="courseDetailSkeleton">
     <div class="breadcrumbskeleton">
       <ngx-skeleton-loader count="1" animation="pulse"
         [theme]="{ 'border-radius': '0', height: '35px', 'background-color': '#d2d1d1' }"></ngx-skeleton-loader>
     </div>
     <div class="d-flex justify-content-between">
-      <div class="item" style="width: 58%;">
+      <div class="SubItem">
         <div class="">
           <ngx-skeleton-loader [theme]="{'background-color': '#d2d1d1',height: '200px'}" animation="pulse">
           </ngx-skeleton-loader>
@@ -266,7 +268,7 @@
         </div>
       </div>
 
-      <div class="item" style="width: 38%;">
+      <div class="SubLevelItem">
         <div>
           <ngx-skeleton-loader count="5" animation="pulse"
             [theme]="{ display: 'block', 'background-color': '#d2d1d1', width: '100%' , height: '75px'}">
