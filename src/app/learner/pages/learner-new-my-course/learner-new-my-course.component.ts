@@ -908,7 +908,7 @@ changeWeekDate() {
 }
 
 goToCourse(c){
-  // return false;
+  return false;
   c.batch_end_date_Timer = new Date(c.batch_end_date).getTime();
 
   const detail = {
