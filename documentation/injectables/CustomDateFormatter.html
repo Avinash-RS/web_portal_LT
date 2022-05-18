@@ -37,6 +37,7 @@
 
 
 
+
 <ol class="breadcrumb">
   <li>Injectables</li>
   <li >CustomDateFormatter</li>
@@ -131,8 +132,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="16"
-                            class="link-to-prism">src/app/learner/pages/calendar-activity/calendar-activity.component.ts:16</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="14"
+                            class="link-to-prism">src/app/learner/pages/calendar-activity/calendar-activity.component.ts:14</a></div>
                 </td>
             </tr>
 
@@ -201,8 +202,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="20"
-                            class="link-to-prism">src/app/learner/pages/calendar-activity/calendar-activity.component.ts:20</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="17"
+                            class="link-to-prism">src/app/learner/pages/calendar-activity/calendar-activity.component.ts:17</a></div>
                 </td>
             </tr>
 
@@ -256,28 +257,26 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, Injectable, Input } from &#x27;@angular/core&#x27;;
-import { startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours} from &#x27;date-fns&#x27;;
 import { formatDate } from &#x27;@angular/common&#x27;;
-import { CalendarEvent, CalendarView,CalendarMonthViewDay, DateFormatterParams, CalendarDateFormatter,CalendarEventTitleFormatter } from &#x27;angular-calendar&#x27;; 
-import { getmoduleData } from &#x27;@learner/services/operations/learner_query&#x27;;
+import { CalendarEvent, CalendarView, CalendarMonthViewDay, DateFormatterParams, CalendarDateFormatter, CalendarEventTitleFormatter } from &#x27;angular-calendar&#x27;;
 import { LearnerServicesService } from &#x27;@learner/services/learner-services.service&#x27;;
 import { GlobalServiceService } from &#x27;@core/services/handlers/global-service.service&#x27;;
 import * as moment from &#x27;moment&#x27;;
 import { Subject } from &#x27;rxjs&#x27;;
 import { Router } from &#x27;@angular/router&#x27;;
-import { THIS_EXPR } from &#x27;@angular/compiler/src/output/output_ast&#x27;;
-import { getWeekYearWithOptions } from &#x27;date-fns/fp&#x27;;
 @Injectable()
 export class CustomDateFormatter extends CalendarDateFormatter {
+  // TODO: add explicit constructor
+
 
   public monthViewColumnHeader({ date, locale }: DateFormatterParams): string {
     return formatDate(date, &#x27;EEE&#x27;, locale);
   }
- 
   public weekViewColumnHeader({ date, locale }: DateFormatterParams): string {
     return formatDate(date, &#x27;EEE&#x27;, locale);
-  } 
+  }
 }
+@Injectable()
 export class CustomEventTitleFormatter extends CalendarEventTitleFormatter {
   // you can override any of the methods defined in the parent class
 
@@ -319,99 +318,100 @@ export class CalendarActivityComponent implements OnInit {
   activeDayIsOpen;
   daySelection;
   courseDetailsList &#x3D; [{
-    &#x27;course_name&#x27;: &#x27;All Courses&#x27;,
-    &#x27;course_id&#x27;: &#x27;All&#x27;
-  }]
+    course_name: &#x27;All Courses&#x27;,
+    course_id: &#x27;All&#x27;
+  }];
   enrolledCourses;
-  userDetails;  
+  userDetails;
   filterBy &#x3D; [{
-    &#x27;key&#x27;: &#x27;All Activities&#x27;,
-    &#x27;value&#x27;: &#x27;All&#x27;
+    key: &#x27;All Activities&#x27;,
+    value: &#x27;All&#x27;
   },
   {
-    &#x27;key&#x27;: &#x27;Self Learning&#x27;,
-    &#x27;value&#x27;: &#x27;selfpacedlearning&#x27;
+    key: &#x27;Self Learning&#x27;,
+    value: &#x27;selfpacedlearning&#x27;
   },
   {
-    &#x27;key&#x27;: &#x27;Live Interactions&#x27;,
-    &#x27;value&#x27;: &#x27;liveclassroom&#x27;
+    key: &#x27;Live Interactions&#x27;,
+    value: &#x27;liveclassroom&#x27;
   },
   {
-    &#x27;key&#x27;: &#x27;Assignment&#x27;,
-    &#x27;value&#x27;: &#x27;assignment&#x27;
+    key: &#x27;Assignment&#x27;,
+    value: &#x27;assignment&#x27;
   },
   {
-    &#x27;key&#x27;: &#x27;Perform&#x27;,
-    &#x27;value&#x27;: &#x27;perform&#x27;
+    key: &#x27;Perform&#x27;,
+    value: &#x27;perform&#x27;
   },
   {
-    &#x27;key&#x27;: &#x27;Project&#x27;,
-    &#x27;value&#x27;: &#x27;project&#x27;
+    key: &#x27;Project&#x27;,
+    value: &#x27;project&#x27;
   }
   ];
-  courseValue &#x3D; &#x27;All&#x27;
+  courseValue &#x3D; &#x27;All&#x27;;
   activityValue &#x3D; &#x27;All&#x27;;
   events: CalendarEvent[];
   selectedDate;
   status &#x3D; &#x27;&#x27;;
   activityData;
-  dataAvailable
+  dataAvailable;
   monthView;
   showSkeleton &#x3D; true;
-  skeletonPart &#x3D; [1,2]
-  userDetailes:any;
-  customTooltipCondition &#x3D; false
+  skeletonPart &#x3D; [1, 2];
+  userDetailes: any;
+  customTooltipCondition &#x3D; false;
   CourseName: string;
-  constructor(public learnerService: LearnerServicesService,private gs: GlobalServiceService,private router: Router) {
+  calendarSkele: boolean &#x3D; false;
+  constructor(public learnerService: LearnerServicesService, private gs: GlobalServiceService, private router: Router) {
     this.userDetailes &#x3D; JSON.parse(localStorage.getItem(&#x27;UserDetails&#x27;)) || JSON.parse(localStorage.getItem(&#x27;UserDetails&#x27;)) || null;
-                if(!this.userDetailes?.is_password_updated){
-                  this.router.navigate([&#x27;/Learner/profile&#x27;]);
-                  return
-                }
+    if (!this.userDetailes?.is_password_updated) {
+      this.router.navigate([&#x27;/Learner/profile&#x27;]);
+      return;
+    }
    }
 
   ngOnInit() {
     this.getCourseData();
     const topicStart &#x3D; new Date();
     this.getCalendarCount(topicStart);
-    this.getLearnerActivity(&#x27;month&#x27;,topicStart);
-    if(this.userDetailes.org_type &#x3D;&#x3D; &#x27;collegeconnect&#x27;){
-      this.filterBy[2].key &#x3D; &quot;Industry Talk&quot;;
+    this.getLearnerActivity(&#x27;month&#x27;, topicStart);
+    if (this.userDetailes.org_type &#x3D;&#x3D;&#x3D; &#x27;collegeconnect&#x27;) {
+      this.filterBy[2].key &#x3D; &#x27;Industry Talk&#x27;;
     }
-    if(this.userDetailes.org_type !&#x3D;&#x3D; &#x27;collegeconnect&#x27;){
-      this.filterBy[2].key &#x3D; &quot;Live Interactions&quot;;
+    if (this.userDetailes.org_type !&#x3D;&#x3D; &#x27;collegeconnect&#x27;) {
+      this.filterBy[2].key &#x3D; &#x27;Live Interactions&#x27;;
     }
   }
-  
-  getCourseData(){
+  getCourseData() {
     this.userDetails &#x3D; this.gs.checkLogout();
     this.learnerService.get_batchwise_learner_dashboard_data(this.userDetails.user_id, &#x27;all&#x27;, null).subscribe((BcourseData: any) &#x3D;&gt; {
       const tmpBcourseDetail &#x3D; BcourseData.data.get_batchwise_learner_dashboard_data.message;
       this.courseDetailsList &#x3D; tmpBcourseDetail &amp;&amp; tmpBcourseDetail !&#x3D;&#x3D; null ? tmpBcourseDetail : [];
-      this.learnerService.getLearnerDashboard(this.userDetails.user_id, this.userDetails._id, &#x27;undefined&#x27;, &#x27;all&#x27;, &#x27;enrolment&#x27;).subscribe((EcourseData: any) &#x3D;&gt; {
+      this.learnerService.getLearnerDashboard(this.userDetails.user_id, this.userDetails._id,
+        &#x27;undefined&#x27;, &#x27;all&#x27;, &#x27;enrolment&#x27;).subscribe((EcourseData: any) &#x3D;&gt; {
         const EcourseDetail &#x3D; EcourseData.data.get_learner_dashboard.message.enrolled_course_details;
         this.enrolledCourses &#x3D; EcourseDetail &amp;&amp; EcourseDetail !&#x3D;&#x3D; null ? EcourseDetail : [];
         this.courseDetailsList.push({
-          &#x27;course_name&#x27;: &#x27;All Courses&#x27;,
-          &#x27;course_id&#x27;: &#x27;All&#x27;
-        })
+          course_name: &#x27;All Courses&#x27;,
+          course_id: &#x27;All&#x27;
+        });
         this.courseDetailsList.push(...this.enrolledCourses);
-        this.courseDetailsList.some((item, idx) &#x3D;&gt; 
-        item.course_name &#x3D;&#x3D; &#x27;All Courses&#x27; &amp;&amp; 
-        this.courseDetailsList.unshift( 
-          this.courseDetailsList.splice(idx,1)[0]))
+        this.courseDetailsList.some((item, idx) &#x3D;&gt;
+        item.course_name &#x3D;&#x3D;&#x3D; &#x27;All Courses&#x27; &amp;&amp;
+        this.courseDetailsList.unshift(
+          this.courseDetailsList.splice(idx, 1)[0]));
       });
     });
   }
-  
-  monthChange(value){
+  monthChange(value) {
     const topicStart &#x3D; new Date(value);
     this.monthView &#x3D; topicStart;
-    this.getLearnerActivity(&#x27;month&#x27;,topicStart)
+    this.getLearnerActivity(&#x27;month&#x27;, topicStart);
   }
 
   getCalendarCount(value?) {
     const monthValue &#x3D; moment(value).format(&#x27;YYYY-MM&#x27;);
+    this.calendarSkele &#x3D; true;
     this.learnerService.getAllActivity(this.userDetails.user_id, monthValue).subscribe((result: any) &#x3D;&gt; {
       const activityDetailsList &#x3D; result.data.getcalenderactivity.message;
       activityDetailsList.forEach(element &#x3D;&gt; {
@@ -420,116 +420,121 @@ export class CalendarActivityComponent implements OnInit {
         element.color &#x3D; {primary : element.color};
       //  element.allDay &#x3D; true;
       });
-      this.events &#x3D; activityDetailsList;​
-      setTimeout(()&#x3D;&gt;{
-        var eventsParent &#x3D; document.querySelectorAll(&#x27;.cal-events&#x27;);
-        eventsParent.forEach((element:any) &#x3D;&gt; {
-          var children &#x3D; Array.from(element.children)
-          var duplicateColor &#x3D; []
-            children &#x3D; children.filter((dayEvent,index,self)&#x3D;&gt;{
-            var style &#x3D; window.getComputedStyle(dayEvent as HTMLElement);
-            var color &#x3D; style.getPropertyValue(&#x27;background-color&#x27;);
-            var found &#x3D; duplicateColor.find((element)&#x3D;&gt;{
-              return element &#x3D;&#x3D; color
-            })
-            if(found){
-              dayEvent[&#x27;style&#x27;].display &#x3D; &#x27;none&#x27;
+      this.events &#x3D; activityDetailsList;
+      setTimeout(() &#x3D;&gt; {
+        const eventsParent &#x3D; document.querySelectorAll(&#x27;.cal-events&#x27;);
+        eventsParent.forEach((element: any) &#x3D;&gt; {
+          let children &#x3D; Array.from(element.children);
+          const duplicateColor &#x3D; [];
+          children &#x3D; children.filter((dayEvent, index, self) &#x3D;&gt; {
+            const style &#x3D; window.getComputedStyle(dayEvent as HTMLElement);
+            const color &#x3D; style.getPropertyValue(&#x27;background-color&#x27;);
+            const found &#x3D; duplicateColor.find((element) &#x3D;&gt; {
+              return element &#x3D;&#x3D;&#x3D; color;
+            });
+            if (found) {
+              dayEvent[&#x27;style&#x27;].display &#x3D; &#x27;none&#x27;;
             } else {
               duplicateColor.push(color);
-            }            
-          })
-        })
-      },1000)
+            }
+          });
+        });
+        this.calendarSkele &#x3D; false;
+      }, 100);
     });
   }
-  getLearnerActivity(view,selectedDate, day?: CalendarMonthViewDay){
+  getLearnerActivity(view, selectedDate, day?: CalendarMonthViewDay) {
     this.showSkeleton &#x3D; true;
-    if(this.courseValue &#x3D;&#x3D; &#x27;All&#x27;) {
-      var courseValue &#x3D; &#x27;&#x27;
+    let courseValueDetail;
+    let activityValueDetail;
+    if (this.courseValue &#x3D;&#x3D;&#x3D; &#x27;All&#x27;) {
+      courseValueDetail &#x3D; &#x27;&#x27;;
    } else {
-    courseValue &#x3D; this.courseValue
+    courseValueDetail &#x3D; this.courseValue;
    }
-   if(this.activityValue &#x3D;&#x3D; &#x27;All&#x27;) {
-     var activityValue &#x3D; &#x27;&#x27;
-  } else {
-    activityValue &#x3D; this.activityValue
-  }
-  if(selectedDate.date){
-   this.daySelected &#x3D; true;
-   this.daySelection &#x3D; selectedDate.date
-    selectedDate &#x3D; selectedDate.date
-  }
-   const dateValue &#x3D; moment(selectedDate).format(&#x27;YYYY-MM-DD&#x27;);
-   this.activityData &#x3D; [];
-  this.learnerService.getLearnerActivity(courseValue,this.status,view,dateValue,activityValue,this.userDetails.user_id).subscribe((result:any)&#x3D;&gt;{
-    if(result?.data?.getActivityCalendar?.success){
-      this.activityData &#x3D; result?.data?.getActivityCalendar?.data;
-      this.showSkeleton &#x3D; false;
-      if(this.activityData?.activities.length &gt; 0){
-        this.dataAvailable &#x3D; true;
+    if (this.activityValue &#x3D;&#x3D;&#x3D; &#x27;All&#x27;) {
+      activityValueDetail &#x3D; &#x27;&#x27;;
+    } else {
+      activityValueDetail &#x3D; this.activityValue;
+    }
+    if (selectedDate.date) {
+      this.daySelected &#x3D; true;
+      this.daySelection &#x3D; selectedDate.date;
+      selectedDate &#x3D; selectedDate.date;
+    }
+    const dateValue &#x3D; moment(selectedDate).format(&#x27;YYYY-MM-DD&#x27;);
+    this.activityData &#x3D; [];
+    this.learnerService.getLearnerActivity(courseValueDetail, this.status, view, dateValue, activityValueDetail,
+       this.userDetails.user_id).subscribe((result: any) &#x3D;&gt; {
+      if (result?.data?.getActivityCalendar?.success) {
+        this.activityData &#x3D; result?.data?.getActivityCalendar?.data;
+        this.showSkeleton &#x3D; false;
+        if (this.activityData?.activities.length &gt; 0) {
+          this.dataAvailable &#x3D; true;
+        } else {
+          this.dataAvailable &#x3D; false;
+        }
       } else {
+        this.showSkeleton &#x3D; false;
         this.dataAvailable &#x3D; false;
       }
-    } else {
-      this.showSkeleton &#x3D; false;
-      this.dataAvailable &#x3D; false;
-    }
-  },
-  err &#x3D;&gt;{
-    this.showSkeleton &#x3D; false;
-    this.dataAvailable &#x3D; false;
-  })
-   if (day) {
+    },
+      err &#x3D;&gt; {
+        this.showSkeleton &#x3D; false;
+        this.dataAvailable &#x3D; false;
+      });
+    if (day) {
       this.monthView &#x3D; undefined;
-     this.selectedMonthViewDay &#x3D; day;
-     
-     const selectedDateTime &#x3D; this.selectedMonthViewDay.date.getTime();
-     const dateIndex &#x3D; this.selectedDays.findIndex(
-       (selectedDay) &#x3D;&gt; selectedDay.date.getTime() &#x3D;&#x3D;&#x3D; selectedDateTime
-     );
-     if (this.selectedDays.length &gt; 0) {
-       delete this.selectedDays[this.selectedDays.length - 1].cssClass;
-     }
-     this.selectedDays.push(this.selectedMonthViewDay);
-     day.cssClass &#x3D; &#x27;cal-day-selected&#x27;;
-     this.selectedMonthViewDay &#x3D; day;
-   }
+      this.selectedMonthViewDay &#x3D; day;
+
+      const selectedDateTime &#x3D; this.selectedMonthViewDay.date.getTime();
+      const dateIndex &#x3D; this.selectedDays.findIndex(
+        (selectedDay) &#x3D;&gt; selectedDay.date.getTime() &#x3D;&#x3D;&#x3D; selectedDateTime
+      );
+      if (this.selectedDays.length &gt; 0) {
+        delete this.selectedDays[this.selectedDays.length - 1].cssClass;
+      }
+      this.selectedDays.push(this.selectedMonthViewDay);
+      day.cssClass &#x3D; &#x27;cal-day-selected&#x27;;
+      this.selectedMonthViewDay &#x3D; day;
+    }
   }
-  setStatus(value){
+  setStatus(value) {
     this.status &#x3D; value;
-    this.onSortChange(&#x27;value&#x27;)
+    this.onSortChange(&#x27;value&#x27;);
   }
-  onSortChange(value){
-    if(this.courseDetailsList?.length &gt; 0){
-      this.courseDetailsList.forEach((course)&#x3D;&gt;{
-        if(course.course_id &#x3D;&#x3D; value.value){
+  onSortChange(value) {
+    if (this.courseDetailsList?.length &gt; 0) {
+      this.courseDetailsList.forEach((course) &#x3D;&gt; {
+        if (course.course_id &#x3D;&#x3D;&#x3D; value.value) {
           this.CourseName &#x3D; course.course_name;
         }
-      })
+      });
     }
+    let view;
     if (this.daySelected) {
-      var view &#x3D; &#x27;day&#x27;
+      view &#x3D; &#x27;day&#x27;;
     } else {
-      view &#x3D; &#x27;month&#x27;
+      view &#x3D; &#x27;month&#x27;;
     }
-    if(!value) {
-      this.courseValue &#x3D; &#x27;All&#x27;
-      this.activityValue &#x3D; &#x27;All&#x27;
+    if (!value) {
+      this.courseValue &#x3D; &#x27;All&#x27;;
+      this.activityValue &#x3D; &#x27;All&#x27;;
       this.status &#x3D; &#x27;&#x27;;
       this.daySelected &#x3D; false;
-      view &#x3D; &#x27;month&#x27;
+      view &#x3D; &#x27;month&#x27;;
       if (this.selectedDays.length &gt; 0) {
         delete this.selectedDays[this.selectedDays.length - 1].cssClass;
       }
     }
-    if(!this.daySelection){
+    if (!this.daySelection) {
       const topicStart &#x3D; new Date();
       this.daySelection &#x3D; moment(topicStart).format(&#x27;YYYY-MM-DD&#x27;);
     }
-    if(this.monthView){
-      this.daySelection &#x3D; this.monthView
+    if (this.monthView) {
+      this.daySelection &#x3D; this.monthView;
     }
-    this.getLearnerActivity(view,this.daySelection);
+    this.getLearnerActivity(this.view, this.daySelection);
     }
 
     launchAssignment(value) {
@@ -543,12 +548,12 @@ export class CalendarActivityComponent implements OnInit {
         this.router.navigateByUrl(&#x27;/Learner/courseDetail&#x27;, { state: { detail } });
       }
     }
-    goToActivities(value){  
-      if(value.activitytype &#x3D;&#x3D;&#x3D; &#x27;Live Classroom&#x27;){
+    goToActivities(value) {
+      if (value.activitytype &#x3D;&#x3D;&#x3D; &#x27;Live Classroom&#x27;) {
         return false;
-      } else if (value.activitytype &#x3D;&#x3D; &quot;Self Learning&quot;) {
+      } else if (value.activitytype &#x3D;&#x3D;&#x3D; &#x27;Self Learning&#x27;) {
 
-        value.batch_end_date_Timer &#x3D; new Date(value.batch_end_date).getTime();//need
+        value.batch_end_date_Timer &#x3D; new Date(value.batch_end_date).getTime(); // need
 
         const detail &#x3D; {
           id: value.courseid,
@@ -559,17 +564,32 @@ export class CalendarActivityComponent implements OnInit {
           course_status: value.status,
           batch_id: value.batch_id,
           batchEndTime: value.batch_end_date_Timer,
-          fromCalendar : true
+          fromCalendar : true,
+          link: value.link,
+          toc: value.toc,
+          lastModule: value.modulename,
+          lastTopic: value.topicname,
+          checklevel: value.checklevel,
+          module_id: value.module_id,
+          topic_id: value.topic_id,
+          course_type: value?.course_type,
+          extracted: value.extracted
         };
-
-        localStorage.setItem(&#x27;currentBatchEndDate&#x27;, value.batch_end_date_Timer)
+        if (value.extracted) {
+          this.router.navigateByUrl(&#x27;/Landing/MyCourse&#x27;);
+          return false;
+        }
+        localStorage.setItem(&#x27;currentBatchEndDate&#x27;, value.batch_end_date_Timer);
         localStorage.setItem(&#x27;Courseid&#x27;, value.courseid);
         localStorage.setItem(&#x27;persentage&#x27;, null);
         localStorage.setItem(&#x27;currentBatchId&#x27;, value.batch_id);
+        localStorage.setItem(&#x27;resumeData&#x27;, JSON.stringify({link: value.link, lastModule: value.modulename,
+           lastTopic: value.topicname, module_id: value.module_id, topic_id: value.topic_id,
+           checklevel: value.checklevel, course_status: value.status, extracted: value.extracted}));
         this.router.navigateByUrl(&#x27;/Learner/courseDetail&#x27;, { state: { detail } });
 
-        // this.router.navigate([&#x27;Learner/MyCourse&#x27;]);
-      }else{
+        // this.router.navigate([&#x27;Landing/MyCourse&#x27;]);
+      } else {
         const data1 &#x3D; {
           courseId: value.courseid,
           courseName: value.coursename,
@@ -577,14 +597,14 @@ export class CalendarActivityComponent implements OnInit {
         };
         localStorage.setItem(&#x27;Courseid&#x27;, data1.courseId);
         localStorage.setItem(&#x27;CourseName&#x27;, data1.courseName);
-        //this.router.navigateByUrl(&#x27;/Learner/activities&#x27;, { state: { data: data1 } });
+        // this.router.navigateByUrl(&#x27;/Learner/activities&#x27;, { state: { data: data1 } });
         this.router.navigate([&#x27;/Learner/activities&#x27;], {
           queryParams:
           {
             courseId: btoa(value.courseid),
             courseName: btoa(value.coursename),
             activityType : value.activitytype,
-            batchId :btoa(value.batch_id)
+            batchId : btoa(value.batch_id)
           }
         });
       }
@@ -597,6 +617,7 @@ export class CalendarActivityComponent implements OnInit {
     </div>
 
 </div>
+
 
 
 

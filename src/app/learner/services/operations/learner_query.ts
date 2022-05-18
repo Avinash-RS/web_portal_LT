@@ -2191,6 +2191,7 @@ export const getTopicAttendanceDetailsByUsername = gql`
     ) {
       success
       message
+      error_msg
       data {
         Attendance {
           _id
@@ -2310,6 +2311,10 @@ export const get_batchwise_learner_dashboard_data_v2 = gql `
           progress_class
           course_week_Percent
           course_description
+          isTesting
+          resume_topic
+          topic_id
+          module_id
         }
         ongoing
         all

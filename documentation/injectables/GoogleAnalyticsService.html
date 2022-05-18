@@ -37,6 +37,7 @@
 
 
 
+
 <ol class="breadcrumb">
   <li>Injectables</li>
   <li >GoogleAnalyticsService</li>
@@ -243,22 +244,24 @@ providedIn: &#x27;root&#x27;
 
 })
 
-export class GoogleAnalyticsService{
+export class GoogleAnalyticsService {
 
 constructor(private gtag: Gtag,
-    private router: Router) { }
+            private router: Router) { }
 
-setInnerPage(title:string){
+setInnerPage(title: string) {
 this.gtag.pageview({
     page_title: title,
     page_path: this.router.url,
     page_location: window.location.href
   });
 }
-}</code></pre>
+}
+</code></pre>
     </div>
 
 </div>
+
 
 
 

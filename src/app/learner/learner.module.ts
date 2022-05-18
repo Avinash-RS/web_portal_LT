@@ -7,36 +7,36 @@ import {
 } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
-import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-// others
-import { NgxMaskModule } from 'ngx-mask';
-import { ApolloModule, Apollo } from 'apollo-angular';
-import { CarouselModule } from 'ngx-owl-carousel-o';
-import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import { ChartsModule } from 'ng2-charts';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
-import { CoreModule } from '@core/core.module';
-import { MaterialModule } from '@core/material.module';
-import { AuthGuard } from '@core/services/_helpers/auth.guard';
-import { ProfileComponent } from '@learner/pages/profile/profile.component';
-import { NgOtpInputModule } from 'ng-otp-input';
+// Materials import
+import { MatMenuModule } from '@angular/material/menu';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatStepperModule } from '@angular/material/stepper';
-import { AngularEditorModule } from '@kolkov/angular-editor';
+import { MatTableModule } from '@angular/material/table';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import {MatRadioModule} from '@angular/material/radio';
+// others
+import { NgxMaskModule } from 'ngx-mask';
+import { ApolloModule, Apollo } from 'apollo-angular';
+import { CoreModule } from '@core/core.module';
+import { AuthGuard } from '@core/services/_helpers/auth.guard';
+import { ProfileComponent } from '@learner/pages/profile/profile.component';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { CalendarModule, DateAdapter } from 'angular-calendar';
-import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-import { NgCircleProgressModule } from 'ng-circle-progress';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ForbiddenComponent } from './pages/forbidden/forbidden.component';
 import { ViewAllnotificationsComponent } from './pages/view-allnotifications/view-allnotifications.component';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { VideoPreviewModalComponent } from './pages/video-preview-modal/video-preview-modal.component';
@@ -92,32 +92,30 @@ const routes: Routes = [
 
   imports: [
     CoreModule,
-    MaterialModule,
-    CarouselModule,
     CommonModule,
     NgxMaskModule,
-    MatMenuModule,
-    AngularEditorModule,
-    ChartsModule,
     DragScrollModule,
     TooltipModule.forRoot(),
     RouterModule.forChild(routes),
-    NgCircleProgressModule.forRoot({
-    }),
     NgxMaskModule.forChild(),
-    FormsModule,
-    BsDatepickerModule.forRoot(),
-    ReactiveFormsModule,
-    ReactiveFormsModule,
     HttpClientModule,
     ApolloModule,
-    NgOtpInputModule,
     MatSidenavModule,
     MatExpansionModule,
     MatStepperModule,
     MatTooltipModule,
+    MatTableModule,
+    MatMenuModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    MatIconModule,
+    MatButtonModule,
+    MatPaginatorModule,
+    MatRadioModule,
+    FormsModule,
+    ReactiveFormsModule,
     InfiniteScrollModule,
-    NgCircleProgressModule,
     Ng2SearchPipeModule,
     PdfViewerModule,
     NgxSkeletonLoaderModule,
@@ -127,11 +125,7 @@ const routes: Routes = [
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    }),
-    CalendarModule.forRoot({
-      provide: DateAdapter,
-      useFactory: adapterFactory,
-    }),
+    })
   ],
   exports: [
     // MatMenuModule

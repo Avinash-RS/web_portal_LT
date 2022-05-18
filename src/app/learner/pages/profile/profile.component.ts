@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
 import { environment } from '../../../../environments/environment';
 import { LearnerServicesService } from '../../services/learner-services.service';
 import { ToastrService } from 'ngx-toastr';
+import * as CryptoJS from 'crypto-js';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -158,6 +159,7 @@ showNew = true;
   college_name;
   profileDetails;
   certificationDetails;
+  secretKey = '(!@#Passcode!@#)';
   // tslint:disable-next-line: use-lifecycle-interface
   ngOnDestroy() {
   this.dialog.closeAll();
@@ -630,8 +632,8 @@ showNew = true;
 
   updatePassword() {
     this.loader = true;
-    this.service.get_change_password_updateprofile(this.currentUser.user_id, this.passwordForm.value.currentpassword,
-      this.passwordForm.value.newpassword).subscribe((password: any) => {
+    this.service.get_change_password_updateprofile(this.currentUser.user_id, CryptoJS.AES.encrypt(this.passwordForm.value.currentpassword ,this.secretKey.trim()).toString(),
+    CryptoJS.AES.encrypt(this.passwordForm.value.newpassword,this.secretKey.trim()).toString()).subscribe((password: any) => {
         if (password.data.get_change_password_updateprofile.success === 'true') {
           this.loader = false;
           Swal.fire(password.data.get_change_password_updateprofile.message);

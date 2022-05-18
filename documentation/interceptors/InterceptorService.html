@@ -38,6 +38,7 @@
 
 
 
+
 <ol class="breadcrumb">
   <li>Interceptors</li>
   <li >InterceptorService</li>
@@ -131,7 +132,7 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(toast: ToastrService, socketService: <a href="../classes/SocketioService.html" target="_self">SocketioService</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, services: <a href="../injectables/CommonServicesService.html" target="_self">CommonServicesService</a>, alertBox: <a href="../injectables/AlertServiceService.html" target="_self">AlertServiceService</a>, dialog: MatDialog)</code>
+<code>constructor(toast: ToastrService, socketService: <a href="../injectables/SocketioService.html" target="_self">SocketioService</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, services: <a href="../injectables/CommonServicesService.html" target="_self">CommonServicesService</a>, alertBox: <a href="../injectables/AlertServiceService.html" target="_self">AlertServiceService</a>, dialog: MatDialog)</code>
                     </td>
                 </tr>
                         <tr>
@@ -169,7 +170,7 @@
                                                         <td>socketService</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../classes/SocketioService.html" target="_self" >SocketioService</a></code>
+                                                                        <code><a href="../injectables/SocketioService.html" target="_self" >SocketioService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -340,8 +341,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="56"
-                            class="link-to-prism">src/app/learner/services/interceptor.service.ts:56</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="54"
+                            class="link-to-prism">src/app/learner/services/interceptor.service.ts:54</a></div>
                 </td>
             </tr>
 
@@ -457,7 +458,7 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../classes/SocketioService.html" target="_self" >SocketioService</a></code>
+                        <i>Type : </i>        <code><a href="../injectables/SocketioService.html" target="_self" >SocketioService</a></code>
 
                     </td>
                 </tr>
@@ -521,7 +522,7 @@ export class InterceptorService implements HttpInterceptor {
   constructor(
     public toast: ToastrService, public socketService: SocketioService,
     public router: Router, public services: CommonServicesService,
-    private alertBox: AlertServiceService,private dialog: MatDialog
+    private alertBox: AlertServiceService, private dialog: MatDialog
   ) {
     this.loginDetails &#x3D; JSON.parse(localStorage.getItem(&#x27;UserDetails&#x27;));
   }
@@ -534,13 +535,12 @@ export class InterceptorService implements HttpInterceptor {
       map((event: HttpEvent&lt;any&gt;) &#x3D;&gt; {
         if (event &amp;&amp; event[&#x27;body&#x27;] &amp;&amp; event[&#x27;body&#x27;][&#x27;data&#x27;]) {
           let bodyData &#x3D; event[&#x27;body&#x27;][&#x27;data&#x27;];
-          const dynKey &#x3D; Object.keys(bodyData)[0]
+          const dynKey &#x3D; Object.keys(bodyData)[0];
           if (bodyData[dynKey] &amp;&amp; bodyData[dynKey].error_msg &amp;&amp; bodyData[dynKey].error_msg &#x3D;&#x3D;&#x3D; &#x27;TokenExpiredError: jwt expired&#x27;) {
             this.dialog.closeAll();
-            this.alertBox.openAlert(&quot;Session Expired&quot;, &quot;Please login again.&quot;)
+            this.alertBox.openAlert(&#x27;Session Expired&#x27;, &#x27;Please login again.&#x27;);
             this.logout();
           }
-          
         }
         return event;
       }),
@@ -553,7 +553,6 @@ export class InterceptorService implements HttpInterceptor {
         } else {
           this.toast.warning(&#x27;Please try again later..&#x27;);
         }
-        
         return throwError(error);
     })
     );
@@ -561,9 +560,9 @@ export class InterceptorService implements HttpInterceptor {
   logout() {
     this.loginDetails &#x3D; JSON.parse(localStorage.getItem(&#x27;UserDetails&#x27;));
     // this.loading &#x3D; true;
-    //SOCKET DISCONNECTION START
+    // SOCKET DISCONNECTION START
     // needs socket disconnection
-    //SOCKET DISCONNECTION COMPLETE
+    // SOCKET DISCONNECTION COMPLETE
     if (this.loginDetails?._id) {
       this.services.logout(this.loginDetails._id, false).subscribe((logout: any) &#x3D;&gt; {
         this.socketService.Connectsocket({ type: &#x27;disconnect&#x27; }).subscribe(quote &#x3D;&gt; {
@@ -585,9 +584,11 @@ export class InterceptorService implements HttpInterceptor {
 
   }
 
-}</code></pre>
+}
+</code></pre>
     </div>
 </div>
+
 
 
 

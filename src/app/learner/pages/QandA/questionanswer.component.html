@@ -7,7 +7,6 @@
         </ul>
        
         <div class="qandaSection">
-           
             <mat-tab-group animationDuration="100ms" [(selectedIndex)]="selectedIndex"
                 (selectedTabChange)="contentChange()">
                 <mat-tab>
@@ -61,7 +60,7 @@
                 </mat-tab>
                 <mat-tab>
                     <ng-template mat-tab-label>
-                        {{'All questions answered in this course' | translate}}
+                        {{'All Q&As in this course' | translate}}
                     </ng-template>
                     <div class="allsearchFilter">
                     <div>
@@ -133,6 +132,13 @@
                 </div>
             </div>
         </div>
+        <div class="instructions">
+            <span class="heading">Instructions: </span>
+            <ul>
+                <li><span>&#9733;</span> <span>Ask only questions that are relevant to this course</span></li>
+                <li><span>&#9733;</span> <span>Before asking a question, take a look into “All questions in this course” tab. You may find your answer published already.</span></li>
+            </ul>
+        </div>
     </div>
 </div>
 
@@ -143,8 +149,14 @@
         </div>
         <div><em (click)="dialogClose()" class="lxp-Close pointer"></em></div>
     </div>
+    <div class="instructions">
+        <span class="heading">Instructions: </span>
+        <ul>
+            <li><span>&#9733;</span> <span>Ask only questions that are relevant to this course</span></li>
+            <li><span>&#9733;</span> <span>Before asking a question, take a look into “All questions in this course” tab. You may find your answer published already.</span></li>
+        </ul>
+    </div>
     <div class="dialogContent" (contextmenu)="contextmenu()">
-
         <div>
             <angular-editor [(ngModel)]="htmlContent" [config]="config"></angular-editor>
         </div>

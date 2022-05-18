@@ -153,7 +153,13 @@ export class QuestionanswerComponent implements OnInit {
         if (current === end) {
           clearInterval(timer);
         }
-      }, stepTime);
+
+      }, 1);
+
+      setTimeout(() => {
+        obj.innerHTML = end;
+        clearInterval(timer);
+      }, 800);
     }
   }
 
