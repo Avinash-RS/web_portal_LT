@@ -2191,6 +2191,7 @@ export const getTopicAttendanceDetailsByUsername = gql`
     ) {
       success
       message
+      error_msg
       data {
         Attendance {
           _id
