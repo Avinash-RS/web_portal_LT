@@ -17,20 +17,15 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 // others
 // import { BarRatingModule } from 'ngx-bar-rating';
 import { NgxMaskModule } from 'ngx-mask';
-import { VgBufferingModule } from 'videogular2/compiled/buffering';
-import { VgControlsModule } from 'videogular2/compiled/controls';
 
 import { CarouselModule } from 'ngx-owl-carousel-o';
 // Video and Audio Player
-import { VgCoreModule } from 'videogular2/compiled/core';
-import { VgOverlayPlayModule } from 'videogular2/compiled/overlay-play';
 import { SearchPipe } from '../pipes/search.pipe';
 import { HeaderComponent } from './core/header/header.component';
 import { LandingHeaderComponent } from './core/landing-header/landing-header.component';
 import { DragDropImageDirective } from './services/directives/drag-drop-image.directive';
 import { PdfreaderComponent } from './shared/pdfreader/pdfreader.component';
 import { ToolbarNotificationComponent } from './shared/toolbar-notification/toolbar-notification.component';
-import { MycourseItemComponent } from './shared/mycourse-item-component/mycourse-item-component';
 import { DeferLoadModule } from '@trademe/ng-defer-load';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -53,7 +48,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     LandingHeaderComponent,
     SearchPipe,
     ToolbarNotificationComponent,
-    MycourseItemComponent
   ],
 
   imports: [
@@ -64,11 +58,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     // BarRatingModule,
     NgxMaskModule.forRoot(),
     // RouterModule.forChild(routes),
-    VgCoreModule,
     CarouselModule,
-    VgControlsModule,
-    VgOverlayPlayModule,
-    VgBufferingModule,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
@@ -94,7 +84,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     StickyHeaderDirective,
     VideoPlayerComponent,
     PdfreaderComponent,
-    MycourseItemComponent,
     SearchPipe]
 })
 export class CoreModule { }

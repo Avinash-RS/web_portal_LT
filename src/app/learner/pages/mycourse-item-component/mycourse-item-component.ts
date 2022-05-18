@@ -29,9 +29,9 @@ export class MycourseItemComponent implements OnInit {
   finalStatus: any = null;
   role: any;
   courseWeekCircle: any;
-  instDefault: any = '../../../../assets/learner/mycourseicons/Instructor_default.svg';
-  activityDefault: any = '../../../../assets/learner/mycourseicons/Activities_defult.svg';
-  discussDefault: any = '../../../../assets/learner/mycourseicons/Discussion_default.svg';
+  instDefault: any = '../../../../assets/Landing/MyCourseicons/Instructor_default.svg';
+  activityDefault: any = '../../../../assets/Landing/MyCourseicons/Activities_defult.svg';
+  discussDefault: any = '../../../../assets/Landing/MyCourseicons/Discussion_default.svg';
   tabselector: any = 0;
   customOptions: OwlOptions = {
     loop: true,
@@ -62,7 +62,6 @@ export class MycourseItemComponent implements OnInit {
     },
     nav: true
   };
- 
   // tabTitleVal: string = 'Self-Paced Learning';
   constructor(
     public translate: TranslateService,
@@ -72,8 +71,8 @@ export class MycourseItemComponent implements OnInit {
     private router: Router) {
     this.userDetail = JSON.parse(localStorage.getItem('UserDetails')) || null;
     this.role = localStorage.getItem('role') || sessionStorage.getItem('role') || null;
-    let lang = localStorage.getItem('language')
-      this.translate.use(lang?lang:'en') 
+    const lang = localStorage.getItem('language');
+    this.translate.use(lang ? lang : 'en');
   }
 
 
@@ -83,14 +82,14 @@ export class MycourseItemComponent implements OnInit {
        this.course.week_completed_count : 0) + '/' + (this.course.week_total_count !== null ? this.course.week_total_count : 0);
       // console.log(new Date(this.course.batch_end_date))
       // console.log(this.dateObj.getFullYear() + "-" + (this.dateObj.getMonth() + 1) + "-" + this.dateObj.getDate())
-      this.course.batch_end_date_Timer = new Date(this.course.batch_end_date).getTime();
+    this.course.batch_end_date_Timer = new Date(this.course.batch_end_date).getTime();
   }
-  //progression report
+  // progression report
   gotoProgression(course) {
-    let data = {
+    const data = {
       courseId : course.course_id,
       courseName: course.course_name
-    }
+    };
     this.router.navigate(['/Learner/progressionReport'], {
       queryParams:
       {
@@ -101,10 +100,10 @@ export class MycourseItemComponent implements OnInit {
   }
 
   gotoQuiz(course) {
-    let data = {
+    const data = {
       courseId : course.course_id,
       courseName: course.course_name
-    }
+    };
     this.router.navigate(['/Learner/quizreport'], {
       queryParams:
       {
@@ -113,7 +112,7 @@ export class MycourseItemComponent implements OnInit {
       }
     });
   }
-  //PLAYER PAGE NAVIGATION
+  // PLAYER PAGE NAVIGATION
   gotoDesc(c) {
     c.batch_end_date_Timer = new Date(c.batch_end_date).getTime();
 
@@ -126,28 +125,30 @@ export class MycourseItemComponent implements OnInit {
       course_status: c.course_status,
       batch_id: c.batchid,
       batchEndTime: c.batch_end_date_Timer,
-      link:c.link,
-      toc:c.toc,
-      lastLogIndex:c.lastLogIndex,
-      lastModule:c.lastModule,
-      lastTopic:c.lastTopic,
-      checklevel:c.checklevel,
-      module_id:c.module_id,
-      topic_id:c.topic_id,
-      course_type:c.course_type
+      link: c.link,
+      toc: c.toc,
+      lastLogIndex: c.lastLogIndex,
+      lastModule: c.lastModule,
+      lastTopic: c.lastTopic,
+      checklevel: c.checklevel,
+      module_id: c.module_id,
+      topic_id: c.topic_id,
+      course_type: c.course_type
       // persentage : c.coursePlayerStatus.course_percentage || 0
     };
     // if (this.screenWidth < 800) {
     // } else {
-      console.log(detail)
-    localStorage.setItem('currentBatchEndDate', c.batch_end_date_Timer)
+    console.log(detail);
+    localStorage.setItem('currentBatchEndDate', c.batch_end_date_Timer);
     localStorage.setItem('Courseid', c.course_id);
-    localStorage.setItem('CourseType',c.course_type);
-    localStorage.setItem('persentage', c && c.coursePlayerStatus && c.coursePlayerStatus.course_percentage ? c.coursePlayerStatus.course_percentage : '');
+    localStorage.setItem('CourseType', c.course_type);
+    localStorage.setItem('persentage', c && c.coursePlayerStatus &&
+    c.coursePlayerStatus.course_percentage ? c.coursePlayerStatus.course_percentage : '');
     localStorage.setItem('currentBatchId', c.batchid);
 
-    localStorage.setItem('resumeData', JSON.stringify({'link':c.link,'lastModule':c.lastModule,'lastTopic':c.lastTopic,'module_id':c.module_id,'topic_id':c.topic_id,'checklevel':c.checklevel,course_status: c.course_status,toc: c.toc}));
-    
+    localStorage.setItem('resumeData', JSON.stringify({link: c.link, lastModule: c.lastModule,
+    lastTopic: c.lastTopic, module_id: c.module_id, topic_id: c.topic_id, checklevel: c.checklevel,
+    course_status: c.course_status, toc: c.toc}));
     this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
 
     // }
@@ -171,7 +172,7 @@ export class MycourseItemComponent implements OnInit {
   }
 
 
- // ACTIVITY NAVIGATION 
+ // ACTIVITY NAVIGATION
  gotoSubmissionDetails(course) {
   localStorage.removeItem('userTabLocation');
   const data1 = {
@@ -180,10 +181,10 @@ export class MycourseItemComponent implements OnInit {
   };
   localStorage.setItem('Courseid', data1.courseId);
   localStorage.setItem('CourseName', data1.courseName);
-  //this.router.navigateByUrl('/Learner/activities', { state: { data: data1 } });
-  this.router.navigate(['/Learner/activities'],{
-    queryParams: 
-    { 
+  // this.router.navigateByUrl('/Learner/activities', { state: { data: data1 } });
+  this.router.navigate(['/Learner/activities'], {
+    queryParams:
+    {
       courseId: btoa(course.course_id),
       courseName: btoa(course.course_name),
       batchId: btoa(course.batchid)
@@ -191,7 +192,7 @@ export class MycourseItemComponent implements OnInit {
   });
 }
 
-//INSTRUCTOR LED PAGE NAVIGATION
+// INSTRUCTOR LED PAGE NAVIGATION
 goInstructorLed(c) {
   localStorage.setItem('Courseid', c.course_id);
   const detail = {
@@ -202,32 +203,32 @@ goInstructorLed(c) {
   // this.router.navigateByUrl('/Learner/instructorLed', { state: { detail } });
   this.router.navigate(['/Learner/instructorLed'], { queryParams: detail }); // ['/booking'],{queryParams: {Id :id}}
 }
-//ASK A QUESTION
+// ASK A QUESTION
 gotoAskQuestions(c) {
   c.batch_end_date_Timer = new Date(c.batch_end_date).getTime();
-    const detail = {
-      course_name: c.course_name,
-      course_id: c.course_id,
-      batch_id: c.batchid,
-      batchEndTime: c.batch_end_date_Timer,
-    }
-    localStorage.setItem('Courseid', c.course_id);
-    localStorage.setItem('currentBatchId', c.batchid);
-    localStorage.setItem('CourseName', c.course_name);
-    localStorage.setItem('currentBatchEndDate', c.batch_end_date_Timer)
-    if(c.course_status!=='start'){
+  const detail = {
+    course_name: c.course_name,
+    course_id: c.course_id,
+    batch_id: c.batchid,
+    batchEndTime: c.batch_end_date_Timer,
+  };
+  localStorage.setItem('Courseid', c.course_id);
+  localStorage.setItem('currentBatchId', c.batchid);
+  localStorage.setItem('CourseName', c.course_name);
+  localStorage.setItem('currentBatchEndDate', c.batch_end_date_Timer);
+  if (c.course_status !== 'start') {
     this.router.navigateByUrl('/Learner/askQuestions', { state: { detail } });
   }
 }
 
 gotoquestionanswer(course) {
-  this.router.navigate(['/Learner/questionanswer'])
+  this.router.navigate(['/Learner/questionanswer']);
   localStorage.setItem('Courseid', course.course_id);
   localStorage.setItem('CourseName', course.course_name);
   localStorage.setItem('currentBatchId', course.batchid);
 }
 
-openGallery(c){
+openGallery(c) {
   this.router.navigate(['/Learner/coursegallery'], {
     queryParams:
     {
@@ -237,8 +238,8 @@ openGallery(c){
   });
 }
 
-  //course report
-  openReport(c){
+  // course report
+  openReport(c) {
     this.router.navigate(['/Learner/coursereport'], {
       queryParams:
       {
@@ -249,7 +250,6 @@ openGallery(c){
         selflearning_totalweeks : c.selflearning_totalweeks
       }
     });
-  
   }
   // tabclicker(indexVal){
   //   this.tabTitleVal = ""

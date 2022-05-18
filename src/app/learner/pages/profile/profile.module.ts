@@ -9,7 +9,6 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
   declarations: [],
   imports: [
     CommonModule,
-  
     MatSelectModule,
     MatProgressBarModule,
     // CountdownModule

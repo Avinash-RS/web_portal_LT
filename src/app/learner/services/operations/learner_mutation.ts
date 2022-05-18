@@ -228,7 +228,6 @@ export const getForgotpasswordbyResetpassword = gql`
 //           deptName
 //           collegeName
 //         }
-       
 //       }
 //     }
 // }
@@ -512,7 +511,7 @@ mutation view_profile($user_id: String){
         college_name
         city_town{
           id
-          name 
+          name
         }
         state{
           id
@@ -1235,6 +1234,14 @@ mutation getuserRecordbasedonSecretKey($userSecretkey:String!){
 export const verify_tfa_setup = gql`
 mutation verify_tfa_setup($user_id:String!,$token:String!){
   verify_tfa_setup(user_id:$user_id,token:$token){
+    message
+    success
+}
+}
+`;
+export const insertModuleTopicSkeleton = gql`
+mutation insertModuleTopicSkeleton($user_id:String!){
+  insertModuleTopicSkeleton(user_id:$user_id){
     message
     success
 }

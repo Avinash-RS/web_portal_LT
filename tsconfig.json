@@ -2,9 +2,11 @@
   "compileOnSave": false,
   "angularCompilerOptions": {
     "disableTypeScriptVersionCheck": true,
+    "enableIvy":false
   },
   "compilerOptions": {
     "baseUrl": "./",
+    "downlevelIteration": true,
     "paths": {
       "@admin/*": [
         "src/app/admin/*"
@@ -26,7 +28,7 @@
       ],
       "@env/*": [
         "src/environments/*"
-      ],
+      ]
     },
     "types": [
       "node"
@@ -34,7 +36,7 @@
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
-    "module": "es2015",
+    "module": "es2020",
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,

@@ -17,6 +17,18 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "crypto-js",
+              "zen-observable",
+              "socket.io-client",
+              "ag-grid-enterprise",
+              "public-ip",
+              "ng-defer-load",
+              "pdfjs-dist",
+              "rxjs/Subject",
+              "@trademe/ng-defer-load/dist/defer-load.module"
+           ],
+            "aot": true,
             "outputPath": "dist/lxpfrontend",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -34,8 +46,6 @@
             "styles": [
               "src/styles.scss",
               "node_modules/ngx-toastr/toastr.css",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "node_modules/videogular2/fonts/videogular.css",
               "node_modules/animate.css/animate.min.css",
               "src/theme/theme.scss",
               "src/theme/typography.scss",
@@ -44,12 +54,8 @@
               "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.theme.default.min.css"
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.slim.min.js",
-              "node_modules/jquery/dist/jquery.min.js",
-              "./node_modules/popper.js/dist/umd/popper.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js"
-            ],
-            "es5BrowserSupport": true
+              "./node_modules/popper.js/dist/umd/popper.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -71,8 +77,12 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "5mb",
+                  "maximumWarning": "6mb",
                   "maximumError": "6mb"
+                },
+                {
+                  "type": "initial",
+                  "maximumWarning": "6mb"
                 }
               ]
             },
@@ -86,8 +96,12 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "5mb",
+                  "maximumWarning": "2mb",
                   "maximumError": "6mb"
+                },
+                {
+                  "type": "initial",
+                  "maximumWarning": "6kb"
                 }
               ] 
             }
@@ -130,8 +144,6 @@
             "styles": [
               "src/styles.scss",
               "node_modules/ngx-toastr/toastr.css",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "node_modules/videogular2/fonts/videogular.css",
               "node_modules/animate.css/animate.min.css",
               "src/theme/theme.scss",
               "src/theme/typography.scss",
@@ -140,10 +152,7 @@
               "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.theme.default.min.css"
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.slim.min.js",
-              "node_modules/jquery/dist/jquery.min.js",
-              "./node_modules/popper.js/dist/umd/popper.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+              "./node_modules/popper.js/dist/umd/popper.min.js"
             ]
           }
         },

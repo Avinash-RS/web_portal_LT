@@ -16,16 +16,18 @@
   justify-content: center;
   .container-reg200 {
     padding: 35px 15px;
-    background-color: transparent;
+    background-color: $color-white;
     @media only screen and (min-width:992px) {
       padding: 35px;
     }
-    .dis {
-      background-color: $color-white !important;
-    }
+    // .dis {
+    //   background-color: $color-white !important;
+    // }
   }
 }
-
+.center_align {
+  text-align: center;
+}
 .certificateWrapper {
   display: flex;
   flex-direction: column;
@@ -139,23 +141,25 @@
   text-align: center;
 }
 // responsiveness starts here
-.m-t-9{
-  // margin-top: 9% !important;
-}
 .collDept {
   align-self: flex-end;
 }
 .cameraIcon {
   z-index: 11;
-  margin-top: 12px;
-  margin-left: 12px;
   position: absolute;
+  left: 12px;
+  top: 12px;
   background: $color-white;
   width: 25px !important
 }
 
 .profile-pic {
   margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  figure {
+    position: relative;
+  }
 }
 
 :host ::ng-deep .mat-checkbox-layout {
@@ -206,8 +210,20 @@
   }
 }
 .genderRow {
-  margin-left: -15px !important;
-  margin-right: -15px !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 -15px 24px -15px;
+  flex-wrap: wrap;
+  .genderCol,.languagesKnown {
+    width: 100%;
+    @include md {
+      width: 50%;
+    }
+    .form-group,mat-select {
+      margin-top: 0.75em;
+    }
+  }
 }
 
 @media screen and (min-width:270px) and (max-width:335px) {
@@ -248,7 +264,7 @@
 
 }
 
-@media screen and (min-width:320px) and (max-width:767px) {
+@media screen and (min-width:320px) and (max-width:719px) {
   .profile {
     justify-content: space-between;
   }
@@ -269,22 +285,18 @@
     margin-right: 4% !important;
   }
 
-  // .first {
-  //   order: 1;
-  //   align-items: center;
-
-  // }
-
-  // .second {
-  //   order: 2;
-  //   margin-top: 20px !important;
-
-  // }
-
-  // .third {
-  //   order: 3;
-  //   margin-top: 30px !important;
-  // }
+  .first {
+    order: 1;
+    align-items: center;
+  }
+  .second {
+    order: 3;
+    margin-top: 20px !important;
+  }
+  .third {
+    order: 2;
+    margin-top: 30px !important;
+  }
 
   .profile-progress {
     width: 100%;
@@ -293,18 +305,17 @@
   }
 
   .details-row {
+    position: relative;
+    display: flex;
     margin-top: -15% !important;
     width: 100%;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
     padding: 10px 15px 20px 15px;
+    flex-wrap: wrap;
   }
 
-  .user-info {
-    // margin-left: auto !important;
-
-  }
   .passwordDialog {
     width: 450px !important;
     margin-top: 24px;
@@ -332,14 +343,43 @@
 }
   
 }
-.locationFields .form-group {
-  margin-bottom: 0;
+
+
+.first,.second,.third {
+  width: 100%;
+  @include md {
+    width: 30%;
+  }
+  @include lg {
+    width: 33%;
+  }
+}
+
+// .locationFields .form-group {
+//   margin-bottom: 0;
+// }
+.locationFields {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 0.75em;
+  .rowWrapper {
+    flex: 0 0 100%;
+    max-width: 100%;
+    @include md {
+      flex: 0 0 25%;
+      max-width: 25%;
+    }
+  }
+}
+.width_100 {
+  width: 100%!important;
 }
 .form-group{
   width: 465px;
 }
 
-@media screen and (min-width:768px) and (max-width:991px) {
+@media screen and (min-width:720px) and (max-width:991px) {
 
   .lap_95 {
     width: 95% !important;
@@ -353,21 +393,19 @@
     display: block;
   }
 
-  // .first {
-  //   order: 1;
-  //   align-items: center;
+  .first {
+    order: 2;
+    align-items: center;
 
-  // }
+  }
+  .second {
+    order: 3;
+  }
+  .third {
+    order: 1;
+    margin-top: 20px !important;
 
-  // .second {
-  //   order: 2;
-  // }
-
-  // .third {
-  //   order: 3;
-  //   margin-top: 20px !important;
-
-  // }
+  }
 
   .profile-progress {
     width: 100%;
@@ -377,37 +415,36 @@
   }
 
   .details-row {
+    display: flex !important;
     margin-top: -15% !important;
     width: 100%;
-    margin-left: 10% !important;
+    // margin-left: 10% !important;
     flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 35px 25px 35px;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 10px 25px 25px 25px;
+    flex-wrap: nowrap;
   }
 
-  .user-info {
-    // margin-left: auto !important;
-  }
 }
 
 .throughTPO {
-  /deep/ .mat-checkbox-frame {
+  ::ng-deep .mat-checkbox-frame {
     border-radius: 100px !important;
   }
 
-  /deep/ &.mat-checkbox-checked .mat-checkbox-background {
+  ::ng-deep &.mat-checkbox-checked .mat-checkbox-background {
     background-color: white;
     border: 1px solid $lxp-theme-green ;
     border-radius: 100px !important;
   }
 
-  /deep/ .mat-checkbox-checkmark-path {
+  ::ng-deep .mat-checkbox-checkmark-path {
     stroke: $lxp-theme-green  !important;
     border-radius: 100px !important;
   }
 }
-/deep/ .mat-pseudo-checkbox-checked, .mat-pseudo-checkbox-indeterminate, .mat-accent .mat-pseudo-checkbox-checked, .mat-accent .mat-pseudo-checkbox-indeterminate {
+::ng-deep .mat-pseudo-checkbox-checked, .mat-pseudo-checkbox-indeterminate, .mat-accent .mat-pseudo-checkbox-checked, .mat-accent .mat-pseudo-checkbox-indeterminate {
   background: $lxp-theme-green !important;
 }
 
@@ -557,12 +594,15 @@
   }
 
   .details-row {
+    position: relative;
+    display: flex;
     margin-top: -8% !important;
     width: 100%;
     flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 35px 35px 35px;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 10px 40px 35px 40px;
+    // flex-wrap: wrap;
   }
 
 }
@@ -592,6 +632,7 @@
   }
 
   .details-row {
+    display: flex;
     width: 100%;
     flex-direction: row;
     align-items: center;
@@ -637,10 +678,6 @@ div.account {
   margin-left: 15px;
 }
 
-.mat-select {
-  // width: 90%;
-  // margin-right: 15px;
-}
 
 .p-b-10px {
   padding-bottom: 15px !important;
@@ -680,7 +717,7 @@ div.account {
 }
 
 .avatar {
-  margin: auto;
+  // margin: auto;
   display: block;
   background: $color-white !important;
   border: 8px solid $color-white;
@@ -700,7 +737,11 @@ div.account {
 
 .popupbtns {
   text-align: center;
-  background-color: $lxp-theme-green;
+  background: #00b0ed; /* Old browsers */
+  background: -moz-linear-gradient(left, #00b0ed 0%, #53aa34 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(left, #00b0ed 0%,#53aa34 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right, #00b0ed 0%,#53aa34 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00b0ed', endColorstr='#53aa34',GradientType=1 );
   color: $color-white;
   width: 30%;
   border-radius: 50px !important;
@@ -710,6 +751,9 @@ div.account {
   border: solid;
   font-size: 18px;
   height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 
@@ -751,16 +795,21 @@ div.account {
   margin-bottom: 5px;
 }
 
-.submit {
-  width: 25%;
-  background-color: $lxp-theme-green;
-  margin: auto;
-  height: 45px;
-  letter-spacing: 1px;
-  border-radius: 50px !important;
-  font-size: 16px;
-
+.submitbtnArea {
+  text-align: center;
+  margin-top: 1.5em;
+  .submit {
+    width: 25%;
+    background-color: $lxp-theme-green;
+    margin: auto;
+    height: 45px;
+    letter-spacing: 1px;
+    border-radius: 50px !important;
+    font-size: 16px;
+  
+  }
 }
+
 
 .errspan {
   float: right;
@@ -839,12 +888,6 @@ input:focus {
   margin-top: 49px;
 }
 
-.institute {
-  // width: 90% !important;
-  // margin-right: 10px !important;
-  // border-radius: 10px !important;
-}
-
 .col-md-1.col-sm-4.col-4.ng-star-inserted {
   margin-left: 100% !important;
   margin-top: -3% !important;
@@ -901,7 +944,7 @@ hr {
 }
 
 .bg-img {
-  background-image: url('https://assets.lntedutech.com/application_images/p-bg-5.png');
+  background-image: url('https://assets.lntedutech.com/application_images/p-bg-5.webp');
   // height: 210px;
   width: 100%;
   background-size: cover;
@@ -924,7 +967,6 @@ hr {
   background-repeat: no-repeat;
   display: inline-block;
   cursor: pointer;
-  float: right;
   color: $color-blank;
   background: rgba(255, 255, 255, 0.6);
   font-size: 23px;
@@ -992,7 +1034,12 @@ hr {
 .bb-icon {
   border-bottom: 1px solid $color-border;
 }
-
+.float_right {
+  float: right;
+  &.closebtn {
+    margin-right: 12px;
+  }
+}
 // :host ::ng-deep .mat-progress-bar-buffer {
 //   background-color: $profile-t-grey !important;
 // }
@@ -1057,7 +1104,7 @@ hr {
   padding: 6px;
 }
 
-/deep/ .swal2-styled.swal2-confirm {
+::ng-deep .swal2-styled.swal2-confirm {
   background-color: #1B4E9B !important;
   border-radius: 0 !important;
 }
@@ -1280,5 +1327,12 @@ hr {
   }
   100% {
     box-shadow: 10014px 15px 0 0 rgba(152, 128, 255, 0);
+  }
+}
+.info-row,.dept {
+  display: inline-flex;
+  width: 100%;
+  .bb {
+    width: 100%;
   }
 }

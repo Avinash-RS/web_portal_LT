@@ -18,18 +18,18 @@
 
 
 export const environment = {
+  appVersion: require('../../package.json').version + '-dev',
   production: false,
-  appVersion: require('../../package.json').version + '-prod',
   apiUrl: 'https://devfacade.lntiggnite.com/',
   scormUrl: 'https://devscorm.lntiggnite.com/',
   apiUrlImg: 'https://devfacade.lntiggnite.com/',
   createCourseApi: 'https://devcourses.lntiggnite.com/',
   wcaapiurl: 'https://devwca.lntiggnite.com/',
   domain : 'LXP',
-  analytics: 'UA-171656647-1',
-  systemIp : 'https://api.ipify.org/?format=json',
+  analytics: 'G-6N6X7SQTXH',
+  systemIp : 'http://api.ipify.org/?format=json',
   socketio : 'https://devsocket.lntiggnite.com/',
-    // Visible captcha key
+  // Visible captcha key
   // captachaSiteKey: '6Leia8YbAAAAAB2jaH0YtNRQjQlr8OATGngAIBkk',
   // invisble captcha key
   captachaSiteKey: '6Lf-qfEcAAAAAH2zsrdDz1K6DmUOHjgHzGmH3PN7',
