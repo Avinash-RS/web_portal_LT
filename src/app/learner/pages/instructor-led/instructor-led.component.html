@@ -166,7 +166,7 @@
         <div class="noCard">
           <figure>
             <img  alt="" [src]="tabIndex == 0 ? 'https://assets.lntedutech.com/application_images/No Live Session.webp' : 'https://assets.lntedutech.com/application_images/No Recorded Session.webp' ">
-            <p>{{tabIndex == 0 ? 'You have no live sessions at the moment!' : 'You have no recorded videos at the moment!'}}</p>
+            <p class="noSessionMessage">{{tabIndex == 0 ? 'You have no live sessions at the moment!' : 'You have no recorded videos at the moment!'}}</p>
           </figure>
           <div class="row smallContainers d-flex justify-content-between align-items-center" >
             <div class="smallContainer d-flex flexStart justify-flex-start justify-content-start align-items-center">
@@ -213,7 +213,7 @@
     <div class="headingWrapper">
       <h3 class="headLine" *ngIf="userDetails.org_type !== 'collegeconnect'">{{'Live Interactions' | translate}}</h3>
       <h3 class="headLine" *ngIf="userDetails.org_type == 'collegeconnect'">{{'Industry Talk Videos' | translate}}</h3>
-      <button class="btn btn-light attandanceShow" *ngIf="sessionAttendance?.length"
+      <button class="attandanceShow" *ngIf="sessionAttendance?.length"
         (click)="showModal(attendanceDialog)">{{'Attendance' | translate}}</button>
     </div>
     
