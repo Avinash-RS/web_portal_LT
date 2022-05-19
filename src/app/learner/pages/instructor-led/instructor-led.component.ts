@@ -16,7 +16,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class InstructorLedComponent implements OnInit {
   blobKey = environment.blobKey;
   sessionAttendance: any;
-  listOfSessions: any;
+  listOfSessions: any = [];
   course: any;
   activityShow: any;
   totalSessions: any;
@@ -29,9 +29,9 @@ export class InstructorLedComponent implements OnInit {
   showContent;
   userDetails;
   @ViewChild('attended') attended: ElementRef;
-  liveSessions: any;
+  liveSessions: any = [];
   recordedSVideoession: any;
-  tabIndex: any;
+  tabIndex: any = 0;
 
   constructor(private router: Router,
               private learnerService: LearnerServicesService,
@@ -61,11 +61,11 @@ export class InstructorLedComponent implements OnInit {
       this.showSkeleton = false;
       const data = res.data['getTopicAttendanceDetailsByUsername']['data'];
       this.listOfSessions = data.Activity;
-      if (this.listOfSessions.length > 0) {
-        this.showContent = true;
-      } else {
-        this.showContent = false;
-      }
+      // if (this.listOfSessions.length > 0) {
+      //   this.showContent = true;
+      // } else {
+      //   this.showContent = false;
+      // }
       this.listOfSessions.sort((a, b) => {
         return +new Date(b.activity_details.startdate) - +new Date(a.activity_details.startdate);
       });
@@ -96,7 +96,7 @@ export class InstructorLedComponent implements OnInit {
 
   getliveSessionRecorded(event) {
     this.tabIndex = event.index;
-    if(event.index == 0) {
+    if (event.index == 0) {
       this.liveSessions = this.listOfSessions.filter(ele => {
         return ele.activity_details.activitytype !== "Recorded";
       });
@@ -144,6 +144,11 @@ export class InstructorLedComponent implements OnInit {
       this.activityShow = ongoing;
       this.activityShow.button = 'Join Now';
     }
+  }
+
+  playVideo() {
+    var ctrl = document.getElementById('singleVideo') as HTMLVideoElement;
+    ctrl.play();
   }
 
   getAction(link) {
