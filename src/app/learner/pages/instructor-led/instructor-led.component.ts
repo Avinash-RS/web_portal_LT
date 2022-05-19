@@ -29,7 +29,6 @@ export class InstructorLedComponent implements OnInit {
   showContent;
   userDetails;
   @ViewChild('attended') attended: ElementRef;
-  // @ViewChild('tops') tops: ElementRef;
   liveSessions: any;
   recordedSVideoession: any;
   tabIndex: any;
