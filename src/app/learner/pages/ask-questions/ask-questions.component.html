@@ -10,7 +10,7 @@
         </div>
     </div>
     <div class="d-flex justify-content-between flex-wrap mx-20px"  *ngIf="moduleTopicData?.length">
-        <div class=" align-self-center">
+        <div class="d-flex align-items-center">
             <div class="d-inline-block mt-10px mr-30px">
                 <span>{{'Sort by: ' | translate}}&nbsp;</span>
                 <select class="sel-pad" [(ngModel)]="qaSortKey" (change)="mainQAFilter('Sort')">

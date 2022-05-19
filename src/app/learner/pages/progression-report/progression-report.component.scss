@@ -43,6 +43,13 @@
         width: 100%;
       }
     }
+    .percentagearea {
+      margin-top: 20px;
+      padding:0 25px;
+      .desc {
+        margin-top: 15px;
+      }
+    }
     .progress-date{
       margin-bottom: 1em;
       .progress-hours-container{
@@ -544,7 +551,7 @@
       }
       // .module-block {
       //   width: 20em;
-        
+      chart-container
       //   @media only screen and (max-width: 374px) {
       //     width: 17em;
       //   }

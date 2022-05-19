@@ -48,7 +48,7 @@
               </div>
               <div class="secondStep" *ngIf="secondStep">
                 <h2 class="d-flex justify-content-center">{{'Enter the code generated in your Google Authenticator App' | translate}}</h2>
-                <div class="d-flex justify-content-center mt-5 mb-5">
+                <div class="d-flex justify-content-center mt-5 mb-5 otp">
                     <ng-otp-input #authInput (onInputChange)="onAuthChange($event)" (keydown.enter)="verifyAuth()"  [config]="{length:6,allowNumbersOnly: true}"></ng-otp-input>
                 </div>
                 <div class="gradientBtn">

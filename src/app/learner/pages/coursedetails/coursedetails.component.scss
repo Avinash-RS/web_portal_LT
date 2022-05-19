@@ -1696,6 +1696,9 @@
     border-radius: 2px;
     margin-bottom: 5px;
     padding: 10px;
+    .mr-2 {
+      margin-right: 10px;
+    }
   }
   h4 {
     font-size: 15px;
@@ -2343,7 +2346,9 @@
 }
 .btn {
   line-height: 1 !important;
-  border-radius: 2px;
+  padding: 0.65em 1em;
+  border: none;
+  font-size: 14px;
 }
 .btn-primary {
   color: white;
@@ -2353,7 +2358,7 @@
 .btn-primary-outline {
   color: black !important;
   background-color: white;
-  border-color: #c02222;
+  border: 1px solid #c02222;
 }
 .btn-primary-outline:hover:focus {
   color: black;
