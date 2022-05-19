@@ -353,7 +353,7 @@
       font-size: 18px;
       font-weight: 700;
       color: rgba(0, 0, 0, 1);
-      line-height: normal;
+      line-height: 1.5;
       margin: 0;
     }
     .goBack {
@@ -542,6 +542,7 @@
 }
 
 .secondStep {
+  margin-top: 10px;
   h2 {
     font-weight: 500 !important;
   }

@@ -309,7 +309,7 @@
                         <mat-icon class="deleteBtn" *ngIf="itrdata.submit_status == 'notsubmitted'" (click)="submitDeleteVideo(videoName, itrdata, perform.performActivity , submitType = 'delete')">close</mat-icon>
                       </div>
                       <input type="file" accept="video/mp4,video/quicktime,application/pdf" style="display: none" #videoInput [(ngModel)]="fileName" (change)="uploadDocument($event,itrdata)" />
-                        <button *ngIf="itrdata.submit_status == 'notsubmitted'" mat-stroked-button [disabled]="perform.performSubmitType == false || perform.itrationStarted == false" class="upload-bltn mt-3" (click)="uploadDocuments($event, itrdata, perform, submitType = 'upload')">
+                        <button class=""uploadbtn *ngIf="itrdata.submit_status == 'notsubmitted'" mat-stroked-button [disabled]="perform.performSubmitType == false || perform.itrationStarted == false" class="upload-btn" (click)="uploadDocuments($event, itrdata, perform, submitType = 'upload')">
                         <mat-icon class="icon-color m-t-m-2 addIcon">add</mat-icon> <span>{{'Upload' | translate}}</span> </button>
                         <p class="uploadMessage" *ngIf="itrdata.submit_status == 'notsubmitted'" >{{'Max File Size : 150 MB, Format : MP4, MOV, PDF' | translate}}</p>
                       <button mat-stroked-button class="submit-btn mt-2"
@@ -581,7 +581,7 @@
                             <mat-card class="p-0 carouselCard" (mouseover)="hover = true; mouseover(i)" (mouseleave)="hover = false">
 
                               <div class="row ml-0 mr-0 carouselRow1">
-                                <div class="col-12 m-auto" (click)="projectPreviewDoc(projectPreviewDialog,videoDialog, video, 'files')">
+                                <div class="m-auto yourSubmissionIcon" (click)="projectPreviewDoc(projectPreviewDialog,videoDialog, video, 'files')">
                                  
                                   <em class="lxp-photo imageIcon" *ngIf="video.doc_type =='image/jpeg'  || video.doc_type == 'image/png' || video.doc_type == 'image/jpg'"></em>
                                 

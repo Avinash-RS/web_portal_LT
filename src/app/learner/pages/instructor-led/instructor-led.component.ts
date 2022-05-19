@@ -106,7 +106,9 @@ export class InstructorLedComponent implements OnInit {
         return ele.activity_details.activitytype == "Recorded";
       });
     }
-    this.useSession(this.liveSessions[0]);
+    if(this.liveSessions.length > 0){
+      this.useSession(this.liveSessions[0]);
+    }
   }
 
   useSession(los) {

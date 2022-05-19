@@ -20,7 +20,7 @@
         </div>
         <div class="col-md-2 col-sm-2 col-2">
           <span>
-            <mat-icon class="editBtn" [matTooltip]="'Click here to change Password' | translate" matTooltipPosition="above" [ngClass]="cannotEdit ? 'm-n f_size_17 bb' : 'f_size_17 bb'" *ngIf="editpopup"
+            <mat-icon class="editBtn" [matTooltip]="'Click here to change password' | translate" matTooltipPosition="above" [ngClass]="cannotEdit ? 'm-n f_size_17 bb' : 'f_size_17 bb'" *ngIf="editpopup"
             (click)="editPassword(passwordDialog)"> create</mat-icon>
           </span>
         </div>
@@ -308,15 +308,10 @@
       <div class="box" id="message">
         <div class="row">
           <div class="col">
-            <p *ngIf="uppercase" id="uppercase" class="valid"><em class="lxp-Tick"></em>
-              {{'Uppercase' | translate}}</p>
-            <p *ngIf="lowercase" id="lowercase" class="valid"><em class="lxp-Tick"></em>
-              {{'Lowercase' | translate}}</p>
-          </div>
-          <div class="col">
-            <p *ngIf="spicalcharacter" id="specialcharacter" class="valid"><em class="lxp-Tick"></em>{{'Special character' | translate}}</p>
-            <p *ngIf="number" id="number" class="valid"><em class="lxp-Tick"></em> {{'Number' | translate}}
-            </p>
+            <p *ngIf="uppercase" id="uppercase" class="valid"><em class="lxp-Tick"></em> {{'Uppercase' | translate}}</p>
+            <p *ngIf="lowercase" id="lowercase" class="valid"><em class="lxp-Tick"></em> {{'Lowercase' | translate}}</p>
+            <p *ngIf="spicalcharacter" id="specialcharacter" class="valid"><em class="lxp-Tick"></em> {{'Special character' | translate}}</p>
+            <p *ngIf="number" id="number" class="valid"><em class="lxp-Tick"></em> {{'Number' | translate}}</p>
           </div>
         </div>
       </div>
