@@ -107,8 +107,7 @@
                   <span class="number">{{listOfSessions?.length}} </span> 
                   <p class="smallHeadline">{{listOfSessions?.length > 1 ? translate.instant('Total Sessions') : translate.instant('Total Session')}}</p>
               </div>
-            </div>
-    
+            </div> 
             <div class="smallContainer d-flex flexStart justify-flex-start justify-content-start align-items-center">
               <div class="iconWrap">
                 <div class="YellowGreenCircle">
@@ -169,7 +168,7 @@
             <img  alt="" [src]="tabIndex == 0 ? 'https://assets.lntedutech.com/application_images/No Live Session.webp' : 'https://assets.lntedutech.com/application_images/No Recorded Session.webp' ">
             <p>{{tabIndex == 0 ? 'You have no live sessions at the moment!' : 'You have no recorded videos at the moment!'}}</p>
           </figure>
-          <div class="row smallContainers d-flex justify-content-between align-items-center" *ngIf="liveSessions.length == 0">
+          <div class="row smallContainers d-flex justify-content-between align-items-center" >
             <div class="smallContainer d-flex flexStart justify-flex-start justify-content-start align-items-center">
               <div class="iconWrap">
                 <div class="LightBlueCircle">
@@ -188,7 +187,7 @@
                 </div>
               </div>
               <div class="countWrap">
-                  <span class="number">{{attendedCount.length}}</span>
+                  <span class="number">{{attendedCount?.length}}</span>
                   <p class="smallHeadline">{{attendedCount?.length > 1 ? translate.instant('Attended Sessions') : translate.instant('Attended Session')}}</p>
               </div>
             </div>
@@ -198,9 +197,8 @@
                   <em class="lxp-recorded_videos"></em>
                 </div>
               </div>
-              <div class="countWrap">
-  
-                  <span class="number">{{recordedCount.length}}</span>
+              <div class="countWrap"> 
+                  <span class="number">{{recordedCount?.length}}</span>
                   <p class="smallHeadline">{{recordedCount?.length > 1 ? translate.instant('Recorded Videos') : translate.instant('Recorded Video')}}</p>
               </div>
             </div>

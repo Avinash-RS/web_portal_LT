@@ -22,8 +22,8 @@ export class InstructorLedComponent implements OnInit {
   totalSessions: any;
   recordedSessions: any;
   attendedSessions: any;
-  attendedCount;
-  recordedCount;
+  attendedCount: any;
+  recordedCount: any;
   videoSource;
   showSkeleton;
   showContent;
