@@ -247,7 +247,7 @@
   
   <!-- Certification UI -->
   <div class="container-reg200 certification">
-    <label _ngcontent-xxc-c2="" class="f_size_19">Certifications</label>
+    <label class="f_size_19" *ngIf="certificationDetails.length > 0">Certifications</label>
     <div class="certificateWrapper">
       <div class="certificate" *ngFor="let cDetails of certificationDetails">
         <span class="cBadge">
