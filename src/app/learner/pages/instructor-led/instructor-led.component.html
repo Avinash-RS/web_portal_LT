@@ -1,5 +1,4 @@
 <app-header></app-header>
-<div #tops></div>
 <div class="instructorLedWrapper" id="scrollTop">
   <ng-container *ngIf="!showContent && !showSkeleton">
     <div class="breadcrumbPading">
@@ -14,7 +13,8 @@
         <figure>
           <img alt="assignment" src="https://assets.lntedutech.com/application_images/noassignment.webp">
         </figure>
-        <p>{{tabIndex == 0 ? 'You have no Live Session at the moment!' : 'You have no Recorded Session at the moment!'}}</p>
+        <p> {{'You have no sessions at the moment!' | translate}}</p>
+        <!-- <p>{{tabIndex == 0 ? 'You have no Live Session at the moment!' : 'You have no Recorded Session at the moment!'}}</p> -->
       </div>
     </div>
   </ng-container>
@@ -40,7 +40,7 @@
               <app-video-player  [url]="videoSource"></app-video-player>
             </div>
             <figure *ngIf="!activityShow?.activity_details.livethumbnail && activityShow?.activity_details.activitytype != 'Recorded'">
-              <img class="sessionImage" alt="instructor" src="/assets/images/noCardImg.jpg" />
+              <img class="sessionImage" alt="instructor" src="/assets/images/thumbImg.jpg" />
               <div class="overlayImage">
                 <figure>
                   <img alt="Overlay" src="/assets/images/abstacles.png" />
@@ -68,6 +68,30 @@
             </figure>
             <figure *ngIf="activityShow?.activity_details.livethumbnail && activityShow?.activity_details.activitytype != 'Recorded'">
               <img class="sessionImage" alt="instructor" [src]="activityShow?.activity_details.livethumbnail + blobKey" />
+              <div class="overlayImage">
+                <figure>
+                  <img alt="Overlay" src="/assets/images/abstacles.png" />
+                </figure>
+                <div class="overlayContent">
+                  <div>
+                    <h4>{{activityShow?.activity_details.activityname}}</h4>
+                    <div class="overlayDuration commonStyle">
+                      <em class="lxp-Duration"></em>
+                      <span class="dateTitle">{{'Date:' | translate}} {{activityShow?.activity_details.startdate | date: 'dd/MM/yyyy hh:mm a'}}</span>
+                    </div>
+                    <div class="overlayDate commonStyle" *ngIf="activityShow?.activity_details.activitytype != 'Recorded'" >
+                        <em class="lxp-Clock"></em>
+                        <span class="durationTitle">{{'Duration:' | translate}} {{activityShow?.duration}}</span>
+                    </div>
+                  </div>
+                  <div class="playButton" *ngIf="activityShow?.status === 'On going' && activityShow?.activity_details.activitytype != 'Recorded'" >
+                    <button (click)="getAction(activityShow.activity_details.link)">
+                      <!-- <em _ngcontent-jjc-c10="" class="lxp-Play_Icon"></em> -->
+                      <span>{{activityShow?.button}}</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
             </figure>
           </div>
   
@@ -219,7 +243,7 @@
         <div class="d-flex justify-content-start">
           <div class="image-container">
             <img *ngIf="los.activity_details.livethumbnail" alt="image" [src]="los.activity_details.livethumbnail + blobKey" />
-            <img *ngIf="!los.activity_details.livethumbnail" alt="image" src="/assets/images/thumbImg.jpg" />
+            <img *ngIf="!los.activity_details.livethumbnail" alt="image" src="/assets/images/noCardImg.jpg" />
             <div *ngIf="los.status == 'On going' && los.activity_details.activitytype != 'Recorded'" class="bottom-right orange">{{'Ongoing' | translate}}</div>
             <div *ngIf="los.status == 'Up Coming' && los.activity_details.activitytype != 'Recorded'" class="bottom-right grey">{{'Upcoming' | translate}}</div>
             <div *ngIf="los.status == 'Completed' && los.activity_details.activitytype != 'Recorded'" class="bottom-right greenColor">{{'Completed' | translate}}</div>
