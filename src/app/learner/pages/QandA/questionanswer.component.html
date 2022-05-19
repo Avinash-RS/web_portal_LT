@@ -84,7 +84,8 @@
                     <span *ngIf="showSkeleton;else skeleton">
                         <span *ngIf="qaDataList.length;else noquescard">
                            
-                            <div class="content" *ngFor="let item of qaDataList">
+                            <div *ngFor="let item of qaDataList">
+                                <div class="content" *ngIf="item.answered">
                                 <div class="askedDate d-flex flex-row">
                                     <span><em class="lxp-AccountCircle"></em>{{item.askedBy}}</span>
                                     <span>{{'Asked on ' | translate}} {{item.askedDate|date:'dd MMM yyyy, hh:mm:ss a'}}</span>
@@ -102,6 +103,7 @@
                                             <button class="noAnswer" style="cursor:default;">{{'Unanswered' | translate}}</button>
                                         </div>
                                     </ng-template>
+                                </div>
                             </div>
                         </span>
                     </span>
