@@ -58,6 +58,7 @@
 }
 
 ::ng-deep.industryTalkTabs {
+  position: relative;
   .mat-tab-label {
     justify-content: flex-start;
     font-size: 16px;
@@ -103,6 +104,12 @@
     @media only screen and (min-width: 1540px) {
         height: calc(100vh - 230px);
     }
+  }
+  img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }
 
@@ -235,6 +242,24 @@
     figure {
       display: flex;
       position: relative;
+      .sessionImage {
+        width: 100%;
+        object-fit: cover;
+        object-position: top;
+        height: 275px;
+        @include sm {
+          height: 365px;
+        } 
+        @include md {
+          height: 370px;
+        }
+        @include lg {
+          height: 410px;
+        }
+        @media (min-width: 1440px) {
+          height: 550px;
+        }
+      }
       .overlayImage {
         display: flex;
         position: absolute;
@@ -243,6 +268,7 @@
         z-index: 2;
         img {
           width: 49%;
+          opacity: 0.9;
           @include sm {
             width: 47%;
           }
@@ -253,99 +279,126 @@
             width: 50%;
           }
           @media only screen and (min-width: 1540px) {
-            width: 41%;
+            width: 49%;
           }
         }
-      }
-      .overlayContent {
-        position: absolute;
-        top: 45%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 100%;
-        text-align: center;
-        > div {
-          display: none;
+        .overlayContent {
+          position: absolute;
+          top: 45%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 100%;
+          text-align: center;
+          > div {
+            display: none;
+            @include lg {
+              display: block;
+            }
+          }
           @include lg {
-            display: block;
+            top: auto;
+            left: 3%;
+            transform: initial;
+            bottom: 6vh;
+            text-align: left;
           }
-        }
-        @include lg {
-          top: auto;
-          left: 3%;
-          transform: initial;
-          bottom: 2vh;
-          text-align: left;
-        }
-        @include xl {
-          bottom: 10.5vh;
-        }
-        @media only screen and (min-width: 1540px) {
-          bottom: 10vh;
-        }
-        h4 {
-          font-size: 18px;
-          font-weight: 500;
-          color: $color-white;
-          line-height: normal;
-          margin-bottom: 25px;
-        }
-        .commonStyle {
-          margin-bottom: 10px;
-          display: flex;
-          align-items: center;
-          em {
-            color: $color-white;
-            font-size: 14px;
-            margin-right: 8px;
+          @include xl {
+            bottom: 10.5vh;
           }
-          span {
-            font-size: 14px;
-            font-weight: 300;
-            color: $color-white;
-            line-height: normal;
+          @media only screen and (min-width: 1540px) {
+            bottom: 10vh;
           }
-        }
-        .playButton {
-          margin-top: 10px;
-          display: inline-flex;
-          button {
-            font-size: 16px;
+          h4 {
+            font-size: 18px;
             font-weight: 500;
             color: $color-white;
-            background-color: $lightred;
-            border-radius: 25px;
-            border: 1px solid $color-white;
-            opacity: 1;
-            padding: 8px 24px;
+            line-height: normal;
+            margin-bottom: 25px;
+          }
+          .commonStyle {
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
-            cursor: default;
-            .lxp-Play_Icon {
-              margin-right: 6px;
+            em {
+              color: $color-white;
+              font-size: 14px;
+              margin-right: 8px;
+            }
+            span {
+              font-size: 14px;
+              font-weight: 300;
+              color: $color-white;
+              line-height: normal;
             }
           }
         }
       }
     }
-    .sessionImage {
-      width: 100%;
-      object-fit: cover;
-      object-position: top;
-      height: 275px;
-      @include sm {
-        height: 365px;
-      } 
-      @include md {
-        height: 370px;
-      }
-      @include lg {
-        height: 410px;
-      }
-      @media (min-width: 1440px) {
-        height: 550px;
+    .joinButton {
+      margin-top: 10px;
+      display: inline-flex;
+      button {
+        font-size: 16px;
+        font-weight: 500;
+        color: $color-white;
+        background-color: $lightred;
+        border-radius: 20px;
+        border: 1px solid $color-white;
+        opacity: 1;
+        padding: 0 24px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 99;
+        @include lg {
+          top: 90%;
+          left: 13%;
+          text-align: left;
+        }
+        @include xl {
+          left: 9%;
+          top: 88%;
+        }
+        @media only screen and (min-width: 1540px) {
+          top: 90%;
+          left: 8%;
+        }
+        // @media only screen and (min-width: 720px) {
+        // position: absolute;
+        // top: 90%;
+        // left: 12%;
+        // }
       }
     }
+    // .playButton {
+    //   margin-top: 10px;
+    //   display: inline-flex;
+    //   button {
+    //     font-size: 16px;
+    //     font-weight: 500;
+    //     color: $color-white;
+    //     background-color: $lightred;
+    //     border-radius: 20px;
+    //     border: 1px solid $color-white;
+    //     opacity: 1;
+    //     padding: 0 24px;
+    //     display: flex;
+    //     align-items: center;
+    //     cursor: pointer;
+    //     position: absolute;
+    //     top: 50%;
+    //     left: 50%;
+    //     transform: translate(-50%, -50%);
+    //     z-index: 99;
+    //     .lxp-Play_Icon {
+    //       margin-right: 6px;
+    //     }
+    //   }
+    // }
   }
 
   .sessionDetails {
@@ -461,57 +514,7 @@
 .sessionAttendance {
   margin-top: 25px;
 }
-.image-container {
-  position: relative;
-  text-align: center;
-  width: 36%;
-  object-fit: cover;
-  img {
-    width: 100%;
-    height: 100%;
-    &:hover {
-      transform: rotate(5deg),  scale(1);
-      transition: transform 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53);
-    }
-    @include xl {
-      object-position: left;
-    }
-  }
-}
-.content-container {
-  width: 64%;
-  padding: 15px;
-  cursor: pointer;
-  h4, h5 {
-    margin: 0 0 8px 0;
-    line-height: normal;
-  }
-  h4 {
-    font-size: 13px;
-    font-weight: 700;
-    color: $gerycolor;
-  }
-  h5 {
-    font-size: 12px;
-    font-weight: 400;
-    color: $label2;
-    span {
-      color: $grey3;
-      margin-right: 3px;
-    }
-  }
-  &.active {
-    background-color: $blueshadecolor;
-    h4, h5 {
-      color: $color-white;
-    }
-    h5 {
-      span {
-        color: $color-white;
-      }
-    }
-  }
-}
+
 
 // .content-container:hover {
 //   color: white;
@@ -550,16 +553,7 @@
   width: 100%;
 }
 
-.rec-center {
-  position: absolute !important;
-  color: $color-white !important;
-  font-size: 40px !important;
-  left: 50% !important;
-  top: 50% !important;
-  transform: translate(-50%,-50%);
-  width: 40%;
-  height: 40%;
-}
+
 .bottom-right {
   position: absolute;
   bottom: 0;
@@ -633,25 +627,7 @@
     align-items: center;
   }
 }
-.sessionCard {
-  width: -webkit-fill-available;
-  border-radius: 5px;
-  color: $blackcolor;
-  padding: 0;
-  margin-bottom: 12px;
-  box-shadow: 0px 1px 5px rgba(0,0,0,0.25);
-  overflow: hidden;
-  // transform: perspective(1px) translateZ(0) translateY(0);
-  // transition-property: box-shadow, transform;
-  // transition-duration: 0.3s;
-  &:hover {
-      box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
-      transform: translateY(-3px);
-  }
-  @media only screen and (max-width: 991px) {
-    margin-bottom: 15px;
-  }
-}
+
 
 .smallContainer {
   border-radius: 5px;
@@ -968,11 +944,7 @@
   }
 }
 
-// .listofSessionCards {
-//     @media only screen and (max-width: 768px) {
-//         width: 48%;
-//     }
-// }
+
 .redHover:hover {
   color: $lxp-theme-green !important;
 }
@@ -1070,20 +1042,18 @@
 
 // No Card
 .noCard {
-  text-align: center;
-  // position: absolute;
-  // top: 50%;
-  // left: 50%;
-  // transform: translate(-50%,-50%);
+  margin: 0 auto;
+  width: 90%;
   figure {
-    margin: 45px 0 15px 0;
+    margin: 50px 0;
+    text-align: center;
   }
   p {
-    font-size: 16px;
+    font-size: 15px;
     color: $blackcolor;
     font-weight: 400;
     line-height: normal;
-    margin-bottom: 30px ​ !important;
+    margin-top: 30px !important;
   }
 }
 .mat-card-image {
@@ -1197,6 +1167,93 @@
   width: 100% !important;
   // overflow-x: hidden;
   // overflow-y: auto;
+  .listofSessionCards {
+    .sessionCard {
+      width: -webkit-fill-available;
+      border-radius: 5px;
+      color: $blackcolor;
+      padding: 0;
+      margin-bottom: 12px;
+      box-shadow: 0px 1px 5px rgba(0,0,0,0.25);
+      overflow: hidden;
+      height: 88px;
+      cursor: pointer;
+      @media only screen and (max-width: 991px) {
+        margin-bottom: 15px;
+      }
+      .sessionCont {
+        height: 90px;
+        cursor: pointer;
+        .image-container {
+          position: relative;
+          text-align: center;
+          width: 36%;
+          object-fit: cover;
+          img {
+            width: 100%;
+            height: 100%;
+            @include xl {
+              object-position: left;
+            }
+          }
+          .recCenter {
+            z-index: 99;
+            position: absolute;
+            color: $color-white;
+            background-color: $lightred;
+            border: 1px solid $lightred;
+            border-radius: 50%;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            // em {
+            //   font-size: 16px;
+            // }
+          }
+        }
+        .content-container {
+          width: 64%;
+          padding: 15px;
+          h4, h5 {
+            margin: 0 0 8px 0;
+            line-height: normal;
+          }
+          h4 {
+            font-size: 12px;
+            font-weight: 700;
+            color: $gerycolor;
+          }
+          h5 {
+            font-size: 11px;
+            font-weight: 400;
+            color: $label2;
+            span {
+              color: $grey3;
+              margin-right: 3px;
+            }
+          }
+          &.active {
+            background-color: $blueshadecolor;
+            h4, h5 {
+              color: $color-white;
+            }
+            h5 {
+              span {
+                color: $color-white;
+              }
+            }
+          }
+        }
+      }
+    }
+      // @media only screen and (max-width: 768px) {
+      //     width: 48%;
+      // }
+    
+  }
 }
 .activity-name {
   white-space: nowrap;
