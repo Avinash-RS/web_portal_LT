@@ -224,6 +224,11 @@
               </div>
           </mat-panel-description>
       </mat-expansion-panel-header>
+      <div class="trainingrpt">
+        <mat-card>
+            <ag-grid-angular class="ag-theme-alpine" [columnDefs]="cols" [rowData]="rows" [suppressRowTransform]="true" style="width:100%; min-height: 200px;" [ngStyle]="{height:(rows.length * 70)  + 'px' }" (gridReady)="onGridReady($event)" [defaultColDef]="defaultColDef" rowHeight="50"></ag-grid-angular>
+        </mat-card>
+    </div>
       </mat-expansion-panel>
     </mat-accordion>
 </div>

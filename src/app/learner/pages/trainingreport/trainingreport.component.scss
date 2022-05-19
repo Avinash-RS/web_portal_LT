@@ -571,3 +571,84 @@
         }
       }
 }
+::ng-deep.ag-theme-alpine {
+  .ag-header {
+    color:$label2;
+    background-color: $fadeGrey;
+    font-weight: 700;
+  }
+  // .ag-root-wrapper {
+  //   border: none;
+  // }
+  .ag-cell {
+    font-size: 14px;
+  }
+  .ag-header-cell-text {            
+    text-overflow: clip !important;
+    overflow: visible !important;
+    white-space: normal !important;
+    line-height: 16px!important;
+}
+  .ag-paging-panel {
+    padding-top: 10px;
+    height: 25px;
+  } 
+}
+
+
+::ng-deep.trainingrpt { 
+  mat-card {
+    position: relative;
+    min-height: 200px;
+    padding: 0px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.2)!important;
+    .noCard {
+      text-align: center;
+      margin-top: 5em;
+      figure {
+          margin: 15px 0;
+      }
+      p {
+          font-size: 14px;
+          color: #000000;
+          font-weight: 500;
+          line-height: normal;
+          margin-bottom: 30px ​!important;
+      }
+    }
+  }
+  .countWrapper{
+    .icon {
+      margin-right: 0.75em;
+    }
+    .count {
+      color: $blackcolor;
+      font-weight: 600;
+      font-size: 14px;
+    }
+  }
+  .statusBtn {
+    display: flex;
+    align-items: center;
+    em {
+      margin-right: 10px;
+    }
+    &.absent{
+      color: $lxp-theme-green;
+    }
+    &.present{
+        color: $green1;
+    }
+  }
+  .cell-span {
+    background-color: #fff !important;
+    text-overflow: clip !important;
+    overflow: visible !important;
+    white-space: normal !important;
+    line-height: 16px!important;
+    font-size: 12px!important;
+    display: flex !important;
+    align-items: center !important;
+  }
+}
+

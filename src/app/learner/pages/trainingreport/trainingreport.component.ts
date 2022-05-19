@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { RowSpanParams } from 'ag-grid-community';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
 @Component({
@@ -90,9 +92,61 @@ export class TrainingreportComponent implements OnInit {
     {label:'Attended Sessions',count:18,color:'#49AE31'},
     {label:'Absent Sessions',count:5,color:'#FEA800'}
   ];
-  constructor() { }
+  defaultColDef = {
+    resizable: false,
+    floatingFilter: false,
+    enableColResize: false,
+    sortable: false,
+    lockPosition: true,
+    suppressMenu: true,
+    unSortIcon: true,
+  };
+  rows = [
+    {Day:'1',Topic:'Dotnet Collection Asses…',Date:'02-02-2022',Attendance:'Present',remarks:'Regular, very punctual to classes and silent listener & performer. Response to questions regularly (mostly via IM Messages). She is new to Java Programming but understands the concepts easily. Need to be more interactive by asking questions/doubts'},
+    {Day:'2',Topic:'Dotnet Collection Asses…',Date:'02-02-2022',Attendance:'Absent',remarks:''},
+    {Day:'3',Topic:'Dotnet Collection Asses…',Date:'02-02-2022',Attendance:'Present',remarks:''},
+  ]
+  cols = [
+    { headerName: 'Day', field: 'Day', width: 100, tooltipField: 'quiz_name',},
+    { headerName: 'Topic Name', field: 'Topic', minWidth: 200, width: 200},
+    { headerName: 'Date', field: 'Date', minWidth: 100, width: 100},
+    { headerName: 'Attendance', field: 'Attendance', minWidth: 150, width: 150, cellClass:'statusClass',
+    cellRenderer: (params) => {
+      if (params?.data?.Attendance === 'Present') {
+        return `<div class="statusBtn present">
+                  <em class="lxp-Completion"></em> <div>Present</div>
+        </div>`;
+      } else {
+        return `<div class="statusBtn absent">
+                  <em class="lxp-Completion"></em>  <div>Absent</div>
+                </div>`;
+      } 
+
+    }},
+    { headerName: 'Remarks', minWidth: 200, width: 200,
+    field: 'remarks',
+      rowSpan: this.rowSpan,
+      cellClassRules: {
+        'cell-span': "value=== 'Regular, very punctual to classes and silent listener & performer. Response to questions regularly (mostly via IM Messages). She is new to Java Programming but understands the concepts easily. Need to be more interactive by asking questions/doubts'",
+      },
+  },
+  ];
+  gridApi: any;
+  rowData: any;
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
   }
+  onGridReady(params: any) {
+    this.gridApi = params.api;
+    this.gridApi.sizeColumnsToFit();
+  }
 
+
+  rowSpan(params: RowSpanParams) {
+
+    if (params.data.remarks === 'Regular, very punctual to classes and silent listener & performer. Response to questions regularly (mostly via IM Messages). She is new to Java Programming but understands the concepts easily. Need to be more interactive by asking questions/doubts') {
+      return 3;
+    }
+  }
 }
