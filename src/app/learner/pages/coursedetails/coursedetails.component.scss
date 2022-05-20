@@ -2541,23 +2541,39 @@
 
 // QA
 .cancelSubmit {
-  margin-top: 30px;
+  // margin-top: 30px;
+  margin: 30px 10px 0 10px;
   button {
     margin-top: 0;
     font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 0.28px;
+    width: 50%;
+    padding: 10px;
   }
   //Button overrides
   .btn-outline-dark {
-    color: #343a40 !important;
-    border-color: #343a40 !important;
+    color: $label2;
+    background-color: $color-white;
+    border: 1px solid $greycolorshade;
     margin: 0 10px 0 0 !important;
+    border-radius: 2px;
+    cursor: pointer;
   }
-  .btn-outline-dark:hover {
-    color: #343a40 !important;
-    border-color: #343a40 !important;
-    background-color: #fff !important;
+  // .btn-outline-dark:hover {
+  //   color: #343a40 !important;
+  //   border-color: #343a40 !important;
+  //   background-color: #fff !important;
+  // }
+  .btn-danger {
+    color: $color-white;
+    background-color: $lxp-theme-green;
+    border: 1px solid $lxp-theme-green;
+    // margin: 0 0 0 10px !important;
+    border-radius: 2px;
+    cursor: pointer;
   }
-
 }
 ::ng-deep.QAContainer {
   width: 90% !important;
