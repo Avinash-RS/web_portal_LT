@@ -56,6 +56,8 @@ import { MillestonereportComponent } from './pages/millestonereport/millestonere
 import { TrainingreportComponent } from './pages/trainingreport/trainingreport.component';
 import { OverallquizreportComponent } from './pages/overallquizreport/overallquizreport.component';
 import { ActivityreportComponent } from './pages/activityreport/activityreport.component';
+import { BehavioralAssessmentComponent } from './pages/behavioral-assessment/behavioral-assessment.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -152,7 +154,8 @@ const routes: Routes = [
     MillestonereportComponent,
     TrainingreportComponent,
     OverallquizreportComponent,
-    ActivityreportComponent
+    ActivityreportComponent,
+    BehavioralAssessmentComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   imports: [
@@ -182,6 +185,7 @@ const routes: Routes = [
     MatFormFieldModule,
     MatSelectModule,
     MatTabsModule,
+    MatDialogModule,
     MatButtonModule,
     MatProgressBarModule,
     InfiniteScrollModule,
