@@ -158,7 +158,7 @@ showNew = true;
   duplicateValueCheck = [];
   college_name;
   profileDetails;
-  certificationDetails;
+  certificationDetails = [];
   secretKey = '(!@#Passcode!@#)';
   // tslint:disable-next-line: use-lifecycle-interface
   ngOnDestroy() {
