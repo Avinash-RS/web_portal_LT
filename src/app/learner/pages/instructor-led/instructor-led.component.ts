@@ -60,7 +60,7 @@ export class InstructorLedComponent implements OnInit {
     this.userDetails.user_id).subscribe(async res => {
       this.showSkeleton = false;
       const data = res.data['getTopicAttendanceDetailsByUsername']['data'];
-      this.listOfSessions = data.Activity;
+      this.listOfSessions = data?.Activity;
       // if (this.listOfSessions.length > 0) {
       //   this.showContent = true;
       // } else {
