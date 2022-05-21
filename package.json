@@ -83,7 +83,7 @@
     "ngx-owl-carousel-o": "^1.2.1",
     "ngx-pagination": "^5.1.1",
     "ngx-skeleton-loader": "^2.6.0",
-    "ngx-socket-io": "^4.2.0",
+    "socket.io-client": "^2.2.0",
     "ngx-toastr": "^10.1.0",
     "ngx-ui-loader": "^7.2.2",
     "node-sass": "^4.13.1",

@@ -302,6 +302,11 @@ export class CoursedetailsComponent implements OnInit {
               public Lservice: LearnerServicesService, private cdr: ChangeDetectorRef, public service: CommonServicesService,
               private gs: GlobalServiceService, private dialog: MatDialog, public route: Router, private formBuilder: FormBuilder,
               public sanitizer: DomSanitizer, private toastr: ToastrService) {
+//socket connection test
+// setInterval(() => {
+//   this.socketService.socketStatus();
+// }, 10000);
+
     const lang = localStorage.getItem('language');
     this.translate.use(lang ? lang : 'en');
     const loginDetails = JSON.parse(localStorage.getItem('UserDetails'));
