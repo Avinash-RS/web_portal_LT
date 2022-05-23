@@ -116,8 +116,8 @@ export class QuestionanswerComponent implements OnInit {
       case 1:
         this.tabType = 'course';
         if (!this.fromSideBtn) {
-        this.requestType = 'un_answered&answered';
-        this.selectedtype = 'un_answered&answered';
+        this.requestType = 'answered';
+        this.selectedtype = 'answered';
         this.getQACount();
         this.getQAData();
         }
