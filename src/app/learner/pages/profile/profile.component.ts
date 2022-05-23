@@ -238,8 +238,8 @@ showNew = true;
             profile_img : this.profileDetails?.profile_img ? this.profileDetails?.profile_img : '',
             deptName : this.profileDetails?.department ? this.profileDetails?.department : '',
             country : this.profileDetails?.country?.id ? this.profileDetails.country.id : '',
-            state : this.profileDetails?.state?.id ? this.profileDetails.state?.id : {id: '', name: ''},
-            city_town : this.profileDetails?.city_town?.id ? this.profileDetails.city_town?.id : {id: '', name: ''},
+            state : this.profileDetails?.state?.id ? this.profileDetails.state?.id : '',
+            city_town : this.profileDetails?.city_town?.id ? this.profileDetails.city_town?.id : '',
             gender : this.profileDetails?.gender ? this.profileDetails?.gender : '',
             collegeName : this.profileDetails?.college_name ? this.profileDetails?.college_name : ''
           });
