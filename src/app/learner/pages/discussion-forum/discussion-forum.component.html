@@ -335,7 +335,7 @@
           </div>
           <div class="replyCommentThread" *ngIf="showThreadComment">
 
-            <div class="form-group col-xl-11 col-lg-11 col-md-11 col-sm-12 col-12 no_padding m-b-0">
+            <div class="form-group no_padding m-b-0">
               <angular-editor [config]="config" name="addThreadComment" [placeholder]="'Leave your comments here...' | translate" [(ngModel)]="addThreadComment" ngDefaultControl></angular-editor>
             </div>
 
@@ -442,50 +442,19 @@
                   </button>
                 </div>
               </div>
-              <div class="row p-lr-30" *ngIf="showCommentEditor[pin]">
-                <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12"></div>
-                <div class="
-                    form-group
-                    col-xl-10 col-lg-10 col-md-10 col-sm-12 col-12
-                    no_padding
-                    m-b-0
-                  ">
+              <div class="replyCommentThread" *ngIf="showCommentEditor[pin]">
+
+                <div class="form-group no_padding m-b-0">
                   <angular-editor [config]="config" name="addPostComment[pin]" [placeholder]="'Leave your comments here...' | translate" [(ngModel)]="addPostComment[pin]" ngDefaultControl></angular-editor>
                 </div>
-                <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12"></div>
-                <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12"></div>
-                <div class="
-                    col-xl-10 col-lg-10 col-md-10 col-sm-12 col-12
-                    float_right
-                    p-5px
-                    m-b-15
-                  " style="background: whitesmoke; border: 1px solid #dddddd">
-                  <div class="row">
-                    <div class="
-                        col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8
-                        float_right
-                        no_padding
-                      ">
-                      <mat-checkbox class="width_100 f_size_15 align-middle" [(ngModel)]="a2iFlag">
-                        &nbsp;&nbsp;{{ "Ask the instructor" | translate }}
-                      </mat-checkbox>
+
+                <div class="askInstructor">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="no_padding">
+                      <mat-checkbox class="width_100 f_size_15 align-middle" [(ngModel)]="a2iFlag">{{ "Ask the instructor" | translate }}</mat-checkbox>
                     </div>
-                    <div class="
-                        col-xl-2 col-lg-3 col-md-3 col-sm-4 col-4
-                        float_right
-                        no_padding
-                      ">
-                      <button mat-button class="no-radius send-btn" (click)="
-                          sendComment(
-                            'post',
-                            addPostComment[pin],
-                            addPostComment,
-                            post
-                          )
-                        " [disabled]="
-                          addPostComment && addPostComment[pin] == null
-                        ">
-                        {{ "Send" | translate }}
+                    <div class="no_padding">
+                      <button mat-button class="no-radius send-btn" (click)="sendComment('post', addPostComment[pin], addPostComment, post)" [disabled]="addPostComment && addPostComment[pin] == null">{{ "Send" | translate }}
                       </button>
                     </div>
                   </div>
