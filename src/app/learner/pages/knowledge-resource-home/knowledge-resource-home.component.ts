@@ -78,7 +78,6 @@ export class KnowledgeResourceHomeComponent implements OnInit {
       });
       this.details = this.tempDetailsList;
       this.showSkeleton = false;
-      console.log(this.details);
       this.checkKnowledgeRec();
     });
   }

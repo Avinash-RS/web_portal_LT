@@ -57,7 +57,6 @@ export class AskQuestionsComponent implements OnInit {
     this.screenWidth = window.innerWidth;
     const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
-    console.log(detail);
     if (detail === undefined) {
       this.batchId = localStorage.getItem('currentBatchId');
       this.courseid = localStorage.getItem('Courseid');
@@ -85,7 +84,6 @@ export class AskQuestionsComponent implements OnInit {
   }
 
   openQuestionInput(templateRef: TemplateRef<any>) {
-    console.log(this.moduleTopicData);
     this.questionText = '';
     if (this.screenWidth > 650) {
       this.dialog.open(templateRef, {
@@ -113,7 +111,6 @@ export class AskQuestionsComponent implements OnInit {
     let id = CryptoJS.AES.decrypt(this.userDetail.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
     param.user_id = id;
     param.batchid = this.batchId;
-    console.log(param);
     this.commonService.getTOC(param).subscribe((data: any) => {
       if (data.success === true) {
         this.checkLevel = data.checkLevel;
@@ -122,8 +119,6 @@ export class AskQuestionsComponent implements OnInit {
         tmpData.forEach(element => {
           this.moduleTopicData.push(... element.childData);
         });
-
-        console.log(this.moduleTopicData);
       }
     });
   }
@@ -170,7 +165,6 @@ export class AskQuestionsComponent implements OnInit {
     let id = CryptoJS.AES.decrypt(this.userDetail.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
     param.user_id = id;
     param.batchid = this.batchId;
-    console.log(param);
     this.commonService.getTOC(param).subscribe((data: any) => {
       if (call === 'filter') {
         this.mainModule.childData = data.message;
@@ -193,7 +187,6 @@ export class AskQuestionsComponent implements OnInit {
     if (this.questionText.trim().length) {
       this.Lservice.askaquestion(this.userDetail.user_id, this.courseid, this.questionModule,
          this.questionTopic, this.questionText).subscribe((data: any) => {
-        // console.log(data)
         this.questionText = '';
         // this.ngxLoader.stop()
         if (data?.data?.askaquestion?.success) {

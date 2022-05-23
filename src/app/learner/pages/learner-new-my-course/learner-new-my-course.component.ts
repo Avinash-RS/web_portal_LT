@@ -404,7 +404,6 @@ export class LearnerNewMyCourseComponent implements OnInit {
     this.userId = this.UserDetails.user_id;
     this.selectedDate = moment().format();
     this.learnerService.insertSkeleton(this.userId).subscribe((result:any)=>{
-      console.log(result)
     })
     this.getLearnerActivity(this.selectedDate);
     // this.triggerAvailablecourse = setInterval(() => {
