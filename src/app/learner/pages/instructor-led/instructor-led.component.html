@@ -20,7 +20,7 @@
               <app-video-player [url]="videoSource"></app-video-player>            
             </div>
             <figure *ngIf="!activityShow?.activity_details.livethumbnail && activityShow?.activity_details.activitytype != 'Recorded'">
-              <img class="sessionImage" alt="instructor" src="https://assets.lntedutech.com/application_images/thumbImg.webp" />
+              <img class="sessionImage" alt="instructor" src="https://assets.lntedutech.com/application_images/sessionImg-large.webp" />
               <div class="overlayImage">
                 <figure>
                   <img alt="Overlay" src="https://assets.lntedutech.com/application_images/abstacles.webp" />
@@ -96,7 +96,7 @@
             </div>
           </div>
   
-          <div class="row smallContainers d-flex justify-content-between align-items-center" >
+          <div *ngIf="listOfSessions?.length > 0" class="row smallContainers d-flex justify-content-between align-items-center" >
             <div class="smallContainer d-flex flexStart justify-flex-start justify-content-start align-items-center">
               <div class="iconWrap">
                 <div class="LightBlueCircle">
@@ -168,7 +168,7 @@
             <img  alt="" [src]="tabIndex == 0 ? 'https://assets.lntedutech.com/application_images/No Live Session.webp' : 'https://assets.lntedutech.com/application_images/No Recorded Session.webp' ">
             <p class="noSessionMessage">{{tabIndex == 0 ? 'You have no live sessions at the moment!' : 'You have no recorded videos at the moment!'}}</p>
           </figure>
-          <div class="row smallContainers d-flex justify-content-between align-items-center" >
+          <div *ngIf="listOfSessions?.length > 0" class="row smallContainers d-flex justify-content-between align-items-center" >
             <div class="smallContainer d-flex flexStart justify-flex-start justify-content-start align-items-center">
               <div class="iconWrap">
                 <div class="LightBlueCircle">
@@ -243,7 +243,7 @@
         <div class="sessionCont d-flex justify-content-start">
           <div class="image-container">
             <img *ngIf="los.activity_details.livethumbnail" alt="image" [src]="los.activity_details.livethumbnail + blobKey" />
-            <img *ngIf="!los.activity_details.livethumbnail" alt="image" src="https://assets.lntedutech.com/application_images/noCardImg.webp" />
+            <img *ngIf="!los.activity_details.livethumbnail" alt="image" src="https://assets.lntedutech.com/application_images/sessionImg-small.webp" />
             <button class="recCenter" *ngIf="los.activity_details.activitytype == 'Recorded'">
               <em class="lxp-Play_Icon" >
               </em>

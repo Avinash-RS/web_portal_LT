@@ -358,7 +358,7 @@ getLearnerActivity(view, selectedDate, day?: CalendarMonthViewDay) {
           extracted : value.extracted
         };
         if (value.extracted) {
-          this.router.navigateByUrl('/Learner/MyCourse');
+          this.router.navigateByUrl('/Landing/MyCourse');
           return false;
         }
         localStorage.setItem('currentBatchEndDate', value.batch_end_date_Timer);

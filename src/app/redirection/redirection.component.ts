@@ -20,7 +20,6 @@ secretKey = '(!@#Passcode!@#)';
       if (params) {
         this.goToCourse();
       }
-      console.log(params); // Print the parameter to the console.
   });
   }
 

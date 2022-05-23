@@ -119,13 +119,11 @@ export class DiscussionForumComponent implements OnInit {
     let id = CryptoJS.AES.decrypt(this.userDetail.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
     param.user_id = id;
     param.batchid = this.course.batchdetails?.batchid;
-    console.log(param);
     this.cS.getTOC(param).subscribe((data: any) => {
       this.checkLevel = data.message && data.checkLevel;
       this.scromModuleData = data?.message && data?.message || [];
       this.selectedModuleData = this.scromModuleData[0]?.childData[0] || null;
       this.loading = false;
-      console.log(this.scromModuleData);
       if (this.selectedModuleData) {
         this.loading = true;
         this.selectedModuleData.indexValue = 1;
@@ -182,7 +180,10 @@ export class DiscussionForumComponent implements OnInit {
         thread_name: new FormControl('', [Validators.minLength(9), Validators.required]),
         thread_description: new FormControl('', [Validators.minLength(9), Validators.required]),
       });
-      this.dialog.open(templateRef, { disableClose: true });
+      this.dialog.open(templateRef, { 
+        disableClose: true,
+        panelClass: 'newThreadPopup'}
+      );
     } else {
       this.toastr.warning('You are not a registered user for forum');
     }

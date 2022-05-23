@@ -318,7 +318,7 @@
       <mat-form-field class="w-100" appearance="outline">
         <mat-label class="labe l-color">{{'Confirm New password' | translate}}</mat-label>
       
-        <input  onCopy="return false" onDrag="return false" onDrop="return false" matInput placeholder="Enter password" [type]="hideConfirm ? 'password' : 'text'" formControlName="confirmpassword" [ngClass]="{ 'is-invalid': c.confirmpassword.touched && c.confirmpassword.errors }" required>
+        <input  onpaste="return false" onCopy="return false" onDrag="return false" onDrop="return false" matInput placeholder="Enter password" [type]="hideConfirm ? 'password' : 'text'" formControlName="confirmpassword" [ngClass]="{ 'is-invalid': c.confirmpassword.touched && c.confirmpassword.errors }" required>
         <span mat-icon-button matSuffix (click)="hideConfirm = !hideConfirm" [attr.aria-label]="'hideConfirm password'" [attr.aria-pressed]="hideConfirm">
           <em class="icon-color" [ngClass]="hideConfirm ? 'lxp-VisibilityOff' : 'lxp-Visibility'"></em>
         </span>
