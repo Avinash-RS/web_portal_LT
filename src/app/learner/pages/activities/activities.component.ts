@@ -195,7 +195,6 @@ export class ActivitiesComponent implements OnInit {
               public translate: TranslateService) {
     const lang = localStorage.getItem('language');
     this.translate.use(lang ? lang : 'en') ;
-    console.log(route);
     if (this.gs.checkLogout()) {
       this.userDetail = this.gs.checkLogout();
     }
@@ -465,7 +464,6 @@ export class ActivitiesComponent implements OnInit {
         attempt_id: eAttemptId
       };
       this.Lservice.labactivity(labactivitydetails).subscribe((result: any) => {
-        console.log(result);
         if (result.data.labactivity.data.url !== '') {
           this.redirectLabpractice(result.data.labactivity.data.url);
         } else {

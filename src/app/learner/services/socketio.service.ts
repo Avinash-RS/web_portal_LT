@@ -1,6 +1,7 @@
 import { Output, EventEmitter, Injectable } from '@angular/core';
 // import { Observable } from 'rxjs/internal/Observable';
-import { io }from 'socket.io-client';
+// import { io }from 'socket.io-client';
+import * as io from 'socket.io-client';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 import * as CryptoJS from 'crypto-js';
@@ -78,10 +79,6 @@ export class SocketioService {
     }
 
     socketStatus() {
-        if (this.socket) {
-            return this.socket.disconnected;
-        } else {
-            return undefined;
-        }
+        console.log("Socket Connected = ",this.socket.connected)
     }
 }

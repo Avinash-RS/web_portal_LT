@@ -20,7 +20,7 @@
               <app-video-player [url]="videoSource"></app-video-player>            
             </div>
             <figure *ngIf="!activityShow?.activity_details.livethumbnail && activityShow?.activity_details.activitytype != 'Recorded'">
-              <img class="sessionImage" alt="instructor" src="https://assets.lntedutech.com/application_images/thumbImg.webp" />
+              <img class="sessionImage" alt="instructor" src="https://assets.lntedutech.com/application_images/sessionImg-large.webp" />
               <div class="overlayImage">
                 <figure>
                   <img alt="Overlay" src="https://assets.lntedutech.com/application_images/abstacles.webp" />
@@ -243,7 +243,7 @@
         <div class="sessionCont d-flex justify-content-start">
           <div class="image-container">
             <img *ngIf="los.activity_details.livethumbnail" alt="image" [src]="los.activity_details.livethumbnail + blobKey" />
-            <img *ngIf="!los.activity_details.livethumbnail" alt="image" src="https://assets.lntedutech.com/application_images/noCardImg.webp" />
+            <img *ngIf="!los.activity_details.livethumbnail" alt="image" src="https://assets.lntedutech.com/application_images/sessionImg-small.webp" />
             <button class="recCenter" *ngIf="los.activity_details.activitytype == 'Recorded'">
               <em class="lxp-Play_Icon" >
               </em>
