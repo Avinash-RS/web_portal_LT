@@ -63,7 +63,7 @@
                         {{'All Q&As in this course' | translate}}
                     </ng-template>
                     <div class="allsearchFilter">
-                    <div>
+                    <!-- <div>
                         <span class="filterby">{{'Filter by :' | translate}}</span>
                         <mat-form-field appearance="outline" style="width: 130px;">
                             <mat-select [(ngModel)]='selectedtype' (selectionChange)="getQAtype()">
@@ -72,8 +72,8 @@
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
-                    </div>   
-                    <div>
+                    </div>    -->
+                    <div class="secondarySearch">
                         <mat-form-field appearance="outline">
                             <input matInput [(ngModel)]="searchKey" (keyup)='searchcaller($event)' [placeholder]="'Search...' | translate">
                             <mat-icon matSuffix *ngIf="!searchKey">search</mat-icon>
@@ -138,7 +138,7 @@
             <span class="heading">Instructions: </span>
             <ul>
                 <li><span>&#9733;</span> <span>Ask only questions that are relevant to this course</span></li>
-                <li><span>&#9733;</span> <span>Before asking a question, take a look into “All questions in this course” tab. You may find your answer published already.</span></li>
+                <li><span>&#9733;</span> <span>Before asking a question, take a look into “All Q&A in this course” tab. You may find your answer published already.</span></li>
             </ul>
         </div>
     </div>
@@ -155,7 +155,7 @@
         <span class="heading">Instructions: </span>
         <ul>
             <li><span>&#9733;</span> <span>Ask only questions that are relevant to this course</span></li>
-            <li><span>&#9733;</span> <span>Before asking a question, take a look into “All questions in this course” tab. You may find your answer published already.</span></li>
+            <li><span>&#9733;</span> <span>Before asking a question, take a look into “All Q&A in this course” tab. You may find your answer published already.</span></li>
         </ul>
     </div>
     <div class="dialogContent" (contextmenu)="contextmenu()">

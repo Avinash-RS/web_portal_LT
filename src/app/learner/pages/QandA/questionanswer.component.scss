@@ -439,13 +439,16 @@
   display: flex;
   justify-content: flex-end;
 }
-
 .allsearchFilter {
   margin-top:10px;
   margin-bottom:10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  .secondarySearch {
+    text-align: right;
+    width: 100%;
+  }
   @media only screen and (max-width: 568px) {
     align-items: flex-end;
   }
