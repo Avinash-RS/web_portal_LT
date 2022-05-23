@@ -86,9 +86,5 @@ export class NewHomeComponent implements OnInit {
       this.toastr.warning('Enter the code');
     }
   }
-
-  save() {
-    console.log('enter');
-  }
 }
 
