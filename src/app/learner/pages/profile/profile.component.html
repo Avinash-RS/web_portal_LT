@@ -145,7 +145,7 @@
           </div>
           <div class="rowWrapper">
             <div class="form-group width_100 p-b-10px">
-              <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs lap_s95' : 'inputs lap_s95'" [placeholder]="'State' | translate" formControlName="state" name="state"  (selectionChange)="getDistrict()">
+              <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs lap_s95' : 'inputs lap_s95'" [placeholder]="'State' | translate" formControlName="state" name="state"  (selectionChange)="getDistrict('edit')">
                 <mat-option [value]="state._id" *ngFor="let state of stateValue">
                   {{state.statename}}
                 </mat-option>

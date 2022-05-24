@@ -451,7 +451,11 @@ showNew = true;
     });
   }
 
-  getDistrict() {
+  getDistrict(value?) {
+    if(value){
+      this.profileForm.value.city_town = null;
+      this.profileForm.patchValue({city_town:''});
+    }
     this.service.get_district_details(this.profileForm.value.country, this.profileForm.value.state).subscribe((city: any) => {
       this.cityValue = city.data.get_district_details.data;
     });
