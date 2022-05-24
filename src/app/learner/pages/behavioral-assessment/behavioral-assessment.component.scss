@@ -37,13 +37,16 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    em {
+        width: 100%;
+        text-align: right;
+        padding: 1em 1em 0 0;
+    }
     .heading5 {
         font-size: 15px;
         font-weight: 500;
-        color: $blackshade;
         line-height: normal;
         text-align: center;
-        padding: 25px 0;
         position: relative;
         &::before,
         &::after {

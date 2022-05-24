@@ -26,4 +26,7 @@ export class BehavioralAssessmentComponent implements OnInit {
       panelClass: "filter-modal-box",
     })
   }
+  closeDialog() {
+    this.dialog.closeAll();
+  }
 }
