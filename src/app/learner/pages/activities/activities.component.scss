@@ -64,9 +64,6 @@
       width: calc(100% - 310px);
     }
     @include xl {
-      width: calc(100% - 405px);
-    }
-    @media only screen and (min-width: 1540px) {
       width: calc(100% - 530px);
     }
   }
@@ -78,9 +75,6 @@
       margin: 0 0 0 20px;
     }
     @include xl {
-      width: 405px;
-    }
-    @media only screen and (min-width: 1540px) {
       width: 530px;
     }
   }
@@ -1504,7 +1498,7 @@
 
 .actionBtnmobile, .actionBtn1Mobile {
   font-size: 10px;
-  margin-left: 5px;
+  // margin-left: 5px;
 }
 
 .downloadBtnMobile {
@@ -1514,6 +1508,9 @@
 
 .colActionDownload {
   cursor: pointer;
+  a {
+    display: flex;
+  }
 }
 
 .m-l {
@@ -1804,4 +1801,7 @@
 }
 .upload-btn {
   margin-top: 15px!important;
+}
+.justify-content-around {
+  justify-content: space-around!important;
 }
