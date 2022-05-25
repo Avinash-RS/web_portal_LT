@@ -97,6 +97,39 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+  .lxp-coursewise:before {
+    content: "\e979";
+  }
+  .lxp-sessions:before {
+    content: "\e97a";
+  }
+  .lxp-filethumbs:before {
+    content: "\e97b";
+  }
+  .lxp-ProgramReport:before {
+    content: "\e978";
+  }
+  .lxp-Completion:before {
+    content: "\e977";
+  }
+  .lxp-TestName:before {
+    content: "\e971";
+  }
+  .lxp-ThumpsUp:before {
+    content: "\e972";
+  }
+  .lxp-ThumpsDown:before {
+    content: "\e973";
+  }
+  .lxp-Score:before {
+    content: "\e974";
+  }
+  .lxp-Indicator:before {
+    content: "\e975";
+  }
+  .lxp-Rating:before {
+    content: "\e976";
+  }
   .lxp-Settings:before {
     content: "\e971";
   }

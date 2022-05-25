@@ -1,0 +1,65 @@
+<app-header></app-header>
+
+<div class="programReportWrapper">
+    <div class="leftContainer">
+        <div class="topSection">
+        <div class="heading">Program Report</div>
+            <div class="title">
+                <div>
+                    <span>Program:</span>
+                    <h4>Java Full Stack Developer</h4>
+                </div>
+                <div class="downloadBtn">
+                    <button><em class="lxp-download"></em> Download Report</button>
+                </div>
+            </div>
+         </div>
+         <section>
+            <app-benchmarkreport></app-benchmarkreport>
+         </section>
+        <section>
+            <app-millestonereport></app-millestonereport>
+        </section>
+        <section>
+            <app-trainingreport></app-trainingreport>
+        </section>
+        <section>
+            <app-overallquizreport></app-overallquizreport>
+        </section>
+        <section>
+            <app-activityreport></app-activityreport>
+        </section>
+    </div>
+    <div class="rightContainer">
+        <div *ngIf="isDesktop">
+            <ng-container *ngTemplateOutlet="dropDown"></ng-container>
+        </div>
+        <div class="reportListContainer">
+            <ul>
+                <li *ngFor="let item of reportList">
+                    <div class="reportItem">
+                        <span>{{item}}</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="rightImageContainer">
+            <figure>
+                <img src="https://assets.lntedutech.com/application_images/milestoneright.webp" alt="">
+            </figure>
+        </div>
+    </div>
+</div>
+
+<ng-template #dropDown>
+    <div class="desktopWrapper jobRole">
+        <div class="vocationalJobRole" style="display: inline-block;">
+          <mat-form-field appearance="fill">
+            <mat-label>{{'Courses For :' | translate}}</mat-label>
+            <mat-select [(ngModel)]="courseValue">
+                <mat-option *ngFor="let course of courses" [value]="course.id">{{course.label}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+    </div>
+</ng-template>

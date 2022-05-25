@@ -54,6 +54,14 @@ import 'ag-grid-enterprise';
 import { AgGridModule } from 'ag-grid-angular';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
+import { ProgramReportComponent } from './pages/program-report/program-report.component';
+import { BenchmarkreportComponent } from './pages/benchmarkreport/benchmarkreport.component';
+import { MillestonereportComponent } from './pages/millestonereport/millestonereport.component';
+import { TrainingreportComponent } from './pages/trainingreport/trainingreport.component';
+import { OverallquizreportComponent } from './pages/overallquizreport/overallquizreport.component';
+import { ActivityreportComponent } from './pages/activityreport/activityreport.component';
+import { BehavioralAssessmentComponent } from './pages/behavioral-assessment/behavioral-assessment.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -117,6 +125,11 @@ const routes: Routes = [
     data: { animation: 'quizreport' , title: 'Quiz Report'}
   },
   {
+    path: 'programreport',
+    component: ProgramReportComponent,
+    data: { animation: 'programreport' , title: 'Program Report'}
+  },
+  {
     path: 'questionanswer',
     component: QuestionanswerComponent,
     data: { animation: 'questionanswer', title: 'Question and Answer'}
@@ -139,7 +152,14 @@ const routes: Routes = [
     QuestionanswerComponent,
     UpskillCalendarComponent,
     CalendarFilterComponent,
-    QuizReportComponent
+    QuizReportComponent,
+    ProgramReportComponent,
+    BenchmarkreportComponent,
+    MillestonereportComponent,
+    TrainingreportComponent,
+    OverallquizreportComponent,
+    ActivityreportComponent,
+    BehavioralAssessmentComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   imports: [
@@ -169,6 +189,7 @@ const routes: Routes = [
     MatFormFieldModule,
     MatSelectModule,
     MatTabsModule,
+    MatDialogModule,
     MatButtonModule,
     MatProgressBarModule,
     MatDatepickerModule,

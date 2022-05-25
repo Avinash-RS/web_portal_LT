@@ -1,0 +1,249 @@
+    <div class="chartSection">
+        <div class="mobDevice" *ngIf="!isDesktop">
+            <ng-container *ngTemplateOutlet="dropDown"></ng-container>
+        </div>
+        <div class="heading d-flex align-items-center">
+            <figure>
+                <img src="/assets/images/milestone.svg" alt="Milestone" />
+            </figure>
+            <span>Milestone Assessment</span>
+        </div>
+        <p>This is a comprehensive assessment which is conducted at the end of the training to evaluate the performance of the candidate. The milestone assessment is the combination of KBA (technical Multiple-choice questions on Java, SQL and Web designing) and SBA (Java Coding based on Real field Scenarios). The abbreviation of KBA is Knowledge Based Assessment and SBA is Skill based Assessment.</p>
+        <div class="indicator">
+            <h4>Overall Milestone Assessment Score</h4>
+            <div class="indicatorBG d-flex justify-content-between align-items-center">
+                <div class="grade">
+                    <div class="poor">
+                        <span>Poor</span>
+                    </div>
+                    <div class="average">
+                        <span>Average</span>
+                    </div>
+                    <div class="good">
+                        <span>Good</span>
+                    </div>
+                </div>
+                <div class="percentageCircle">
+                    <circle-progress [title]= "62"
+                    [titleFontSize] = "10" [titleFontWeight] = "600" [showUnits]= "true" [percent]="62"
+                    [radius]=25  [space]=-6 [outerStrokeGradient]=true [outerStrokeWidth]=6 [outerStrokeColor]="'rgba(255, 183, 77, 1)'" 
+                    [outerStrokeGradientStopColor]="'rgba(255, 183, 77, 1)'" [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]=6 
+                    [animation]="true" [animationDuration]="300" [responsive]="true" [showSubtitle]="false" ></circle-progress>
+                </div>
+            </div>
+        </div>
+        <div class="assessmentDetails">
+            <h5>Assessment Details</h5>
+            <mat-accordion class="expansionPanel">
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <div class="title d-flex align-items-center">
+                                <div class="left">
+                                    <em class="lxp-TestName"></em>
+                                </div>
+                                <div class="right d-flex">
+                                    <span>Test Name:</span>
+                                    <h6>Milestone 1</h6>
+                                </div>
+                            </div>
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            <div class="status d-flex align-items-center">
+                                <div class="score average d-flex align-items-center">
+                                    <div class="left">
+                                        <em class="lxp-Score"></em>
+                                    </div>
+                                    <div class="right d-flex">
+                                        <span>Score:</span>
+                                        <h6>43/100</h6>
+                                    </div>
+                                </div>
+                                <div class="rating average d-flex align-items-center">
+                                    <div class="left">
+                                        <em class="lxp-Rating"></em>
+                                    </div>
+                                    <div class="right d-flex">
+                                        <span>Rating:</span>
+                                        <h6>Average</h6>
+                                    </div>
+                                </div>
+                                <div class="completion d-flex align-items-center">
+                                    <div class="left">
+                                        <em class="lxp-Completion"></em>
+                                    </div>
+                                    <div class="right d-flex">
+                                        <span>Completion:</span>
+                                        <h6>Completed</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+            
+                    <div class="bodyContent">
+                        <h6>KBA (Knowledge based Assessment)</h6>
+                        <div class="duration">
+                            <ul class="d-flex align-items-center justify-content-between">
+                                <li>
+                                    <span>Scheduled Duration</span>
+                                    <p><span>50</span>/Min</p>
+                                </li>
+                                <li>
+                                    <span>Time Spent</span>
+                                    <p><span>36</span>/Min 46s sec</p>
+                                </li>
+                                <li>
+                                    <span>Marks Scored</span>
+                                    <p><span>26</span>/ 40</p>
+                                </li>
+                                <li>
+                                    <span>Held on:</span>
+                                    <p><span>June 15, 2021 10:30:00 AM IST</span></p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="subHeading">
+                            Sectional Summary
+                        </div>
+                    
+                        <table class="summaryTable" border="0" cellpadding="0" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Section Name</th>
+                                    <th>Questions Attempted</th>
+                                    <th>Score Obtained</th>
+                                    <th>Percentage</th>
+                                    <th>Time Taken</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Java</td>
+                                    <td>
+                                        <div class="progressbar color-bluebar" [ngStyle]="{
+                                        width: 90 + '%' }"></div>
+                                        <div class="progressdata">
+                                            <span>{{'15'}}</span>
+                                            <!-- <p>/ {{ '15' }}</p> -->
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="progressbar color-pinkbar" [ngStyle]="{
+                                        width:80 +'%'}"></div>
+                                        <div class="progressdata">
+                                            <span>{{ 80 }}</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="progressbar color-greenbar" [ngStyle]="{
+                                        width:70 +'%'}"></div>
+                                        <div class="progressdata">
+                                            <span>{{ 70 }}</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="minutes">17 Mins 47 sec</div>
+                                    </td>
+                                    <td>
+                                        <div class="likeSec">
+                                            <em class="lxp-ThumpsUp"></em>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h6 class="subHeading">SBA (Skill based Assessment)</h6>
+                        <div class="description">
+                            <div class="topicheld">
+                                <ul class="d-flex align-items-center justify-content-between">
+                                    <li>
+                                        <span>Topic</span>
+                                        <p>Likely to hold oneself accountable and accept responsibility.</p>
+                                    </li>
+                                    <li>
+                                        <span>Held on:</span>
+                                        <p>June 15, 2021 10:30:00 AM IST</p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="feedback d-flex align-items-center justify-content-between">
+                                <div class="left">
+                                    <span>Feedback:</span>
+                                    <p>Likely to hold oneself accountable and accept responsibility for one’s actions and decisions.</p>
+                                </div>
+                                <div class="right d-flex align-items-center justify-content-between">
+                                    <div class="circle">
+                                        <span>Score:</span>
+                                        <circle-progress [title]= "90"
+                                        [titleFontSize] = "10" [titleFontWeight] = "600" [showUnits]= "true" 
+                                        [percent]="90"
+                                        [radius]=25  [space]=-6 [outerStrokeGradient]=true [outerStrokeWidth]=6 [outerStrokeColor]="'#17B15C'" 
+                                        [outerStrokeGradientStopColor]="'#17B15C'" [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]=6 
+                                        [animation]="true" [animationDuration]="300" [responsive]="true" [showSubtitle]="false" ></circle-progress>
+                                    </div>
+                                    <div class="circleDesc">
+                                        <ul>
+                                            <li>Total Score : <span>60</span></li>
+                                            <li>Score Obtained : <span>42</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-expansion-panel>
+
+                <mat-expansion-panel hideToggle>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <div class="title d-flex align-items-center">
+                                <div class="left">
+                                    <em class="lxp-TestName"></em>
+                                </div>
+                                <div class="right d-flex">
+                                    <span>Test Name:</span>
+                                    <h6>Milestone 1</h6>
+                                </div>
+                            </div>
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            <div class="status d-flex align-items-center">
+                                <div class="score good d-flex align-items-center">
+                                    <div class="left">
+                                        <em class="lxp-Score"></em>
+                                    </div>
+                                    <div class="right d-flex">
+                                        <span>Score:</span>
+                                        <h6>78/100</h6>
+                                    </div>
+                                </div>
+                                <div class="rating good d-flex align-items-center">
+                                    <div class="left">
+                                        <em class="lxp-Rating"></em>
+                                    </div>
+                                    <div class="right d-flex">
+                                        <span>Rating:</span>
+                                        <h6>Good</h6>
+                                    </div>
+                                </div>
+                                <div class="completion d-flex align-items-center">
+                                    <div class="left">
+                                        <em class="lxp-Completion"></em>
+                                    </div>
+                                    <div class="right d-flex">
+                                        <span>Completion:</span>
+                                        <h6>Completed</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <div class="bodyContent">
+                        Panel 2
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>                  
+        </div>
+    </div>
