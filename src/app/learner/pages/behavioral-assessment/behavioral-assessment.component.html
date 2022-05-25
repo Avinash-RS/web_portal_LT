@@ -1,10 +1,108 @@
 <div class="behaviourContainer">
     <div class="bencmark-info">
         <button (click)="openBenchmarkInfo(benchmarkInfo)">
-        <img src="../../../../assets/images/benchmark.svg" alt="Score Benchmark Info">
+        <img src="https://assets.lntedutech.com/application_images/benchmark.webp" alt="Score Benchmark Info">
         <span >Score Benchmark Info</span>
     </button>
     </div>
+    <mat-card class="snapshot box-shadow"> 
+        <div class="containerWrapper">
+            <div class="innerContainer">
+                <ng-container *ngFor="let item of behavioural;let c = index">
+                    <ng-container *ngIf="(c + 1) % 2 != 0">
+                        <div class="styleOne thoughtFactor d-flex justify-content-between">
+                            <div class="left d-flex justify-content-between">
+                                <div class="flipContainer">
+                                    <div class="front">
+                                        <div class="figure">
+                                            <figure>
+                                                <img [src]="item.img" alt="" />
+                                            </figure>
+                                        </div>
+                                        <div class="figContent">
+                                            <span class="heading4">{{item.label}}</span>
+                                            <p>{{'Constitutes '}}</p>
+                                            <span class="knowmore">Know more...</span>
+                                        </div>
+                                        <div class="back">
+                                            {{'Constitutes a group of behavioural competencies that focuses on Cognitive factors like Detail Orientation, Critical thinking and Creative thinking.'}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="right d-flex justify-content-between">
+                                <div class="d-flex justify-content-start"> 
+                                    <ul *ngFor="let childitem of item.stenscore">
+                                        <ng-container *ngFor="let array of [0,1,2,3,4,5,6,7,8,9]; let stenIndex = index">
+                                            <li [ngStyle]="{'background-color': ((stenIndex + 1) > (10 - ( 8 ))) ? childitem.color : ''}"></li>
+                                        </ng-container>
+                                    </ul>
+                                </div>
+                                <div class="d-flex flex-column justify-content-between">
+                                    <button *ngFor="let childitem of item.stenscore">
+                                        {{childitem.label}}
+                                        <div [ngStyle]="{background: childitem.color}">
+                                            <span>
+                                                {{0}}
+                                            </span>
+                                            <div class="popoverContent">
+                                                <p>{{'Constitutes a group of behavioural competencies that focuses on Cognitive factors like Detail Orientation, Critical thinking and Creative thinking.'}}</p>
+                                            </div>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="(c + 1) % 2 == 0">
+                        <div class="styleTwo corePersonal d-flex justify-content-between">
+                            <div class="left d-flex justify-content-between">
+                                <div class="d-flex justify-content-start"> 
+                                    <ul *ngFor="let childitem of item.stenscore">
+                                        <ng-container *ngFor="let array of [0,1,2,3,4,5,6,7,8,9]; let stenIndex = index">
+                                            <li [ngStyle]="{'background-color': ((stenIndex + 1) > (10 - ( 8 ))) ? childitem.color : ''}"></li>
+                                        </ng-container>
+                                    </ul>
+                                </div>
+                                <div class="d-flex flex-column justify-content-between">
+                                    <button *ngFor="let childitem of item.stenscore">
+                                        {{childitem.label}}
+                                        <div [ngStyle]="{background: childitem.color}">
+                                            <span>
+                                                {{0}}
+                                            </span>
+                                            <div class="popoverContent">
+                                                <p>{{'Constitutes a group of behavioural competencies that focuses on Cognitive factors like Detail Orientation, Critical thinking and Creative thinking.'}}</p>
+                                            </div>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="right d-flex justify-content-between">
+                                <div class="flipContainer">
+                                    <div class="front">
+                                        <div class="figure">
+                                            <figure>
+                                                <img [src]="item.img" alt="" />
+                                            </figure>
+                                        </div>
+                                        <div class="figContent">
+                                            <span class="heading4">{{item.label}}</span>
+                                            <p>{{'Constitutes '}}</p>
+                                            <span class="knowmore">Know more...</span>
+                                        </div>
+                                        <div class="back">
+                                            {{'Constitutes a group of behavioural competencies that focuses on Cognitive factors like Detail Orientation, Critical thinking and Creative thinking.'}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </div>
+    </mat-card>
 </div>
 
 <ng-template #benchmarkInfo>
@@ -12,7 +110,7 @@
         <em (click) ="closeDialog()"  class="lxp-Close"></em>
         <div class="heading5">SCORE BENCHMARK INFO</div>
         <figure class="chart">
-            <img src="../../../../assets/images/behaviourmeter.svg" alt="">
+            <img src="https://assets.lntedutech.com/application_images/behaviourmeter.webp" alt="">
         </figure>
         <div class="score d-flex justify-content-between align-items-center flex-wrap">
             <ng-container *ngFor="let score of benchMarkScore">
@@ -22,8 +120,8 @@
                 </div>
             </ng-container>
         </div>
-        <figure class="growth">
-            <img src="../../../../assets/images/growth.svg" alt="">
-        </figure>
+            <figure class="growth">
+                <img src="https://assets.lntedutech.com/application_images/growth.webp" alt="">
+            </figure>
     </div>
 </ng-template>

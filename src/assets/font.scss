@@ -97,6 +97,15 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+  .lxp-coursewise:before {
+    content: "\e979";
+  }
+  .lxp-sessions:before {
+    content: "\e97a";
+  }
+  .lxp-filethumbs:before {
+    content: "\e97b";
+  }
   .lxp-ProgramReport:before {
     content: "\e978";
   }
