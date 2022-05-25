@@ -1,0 +1,243 @@
+@import "variable";
+
+.programReportWrapper {
+    flex-direction: column;
+    @media only screen and (min-width: 992px) {
+        flex-direction: row;
+    }
+    .leftContainer {
+        width: 100%;
+        background: #F2F2F2;
+        padding: 20px 0;
+        @media only screen and (min-width: 992px) {
+            width: calc(100% - 360px);
+        }
+        @media only screen and (min-width: 1140px) {
+            width: calc(100% - 400px);
+        }
+        .topSection {
+            padding: 0 20px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+            .heading {
+                color: $blackcolor;
+                font-size: 26px;
+                font-weight: 700;
+                line-height: normal;
+            }
+            .title {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: 20px;
+                span {
+                    display: flex;
+                    color: $greycolorshade;
+                    font-size: 12px;
+                    font-weight: 400;
+                    line-height: normal;
+                }
+                h4 {
+                    color: $lightshadeblue;
+                    font-size: 20px;
+                    font-weight: 500;
+                    line-height: normal;
+                    margin-top: 4px;
+                }
+                .downloadBtn {
+                    button {
+                        cursor: pointer;
+                        background-color: $whitecolor1;
+                        border: 1px solid $whitecolor1;
+                        border-radius: 5px;
+                        padding: 1em 1.75em;
+                        font-size: 12px;
+                        font-weight: 600;
+                        box-shadow: 0px 0px 6px #00000033;
+                        em {
+                            margin-right: 0.5em;
+                            font-weight: 700;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .rightContainer {
+            width: 100%;
+            background-color: #fff;
+            padding: 1.5em;
+            box-shadow: 0 0 2px 0 #0000006b;
+            position: relative;
+            height: 100%;
+        @media only screen and (min-width: 720px) {
+            padding: 1em 2em 3em 2em;
+        }
+        @media only screen and (min-width: 992px) {
+            width: 360px;
+            position: fixed;
+            right: 0;
+            top: 0;
+            top: 72px;
+            padding: 3em 2em;
+        }
+        @media only screen and (min-width: 1140px) {
+            width: 400px;
+        }
+        .reportListContainer, .rightImageContainer {
+            margin-top: 2em;
+        }
+        .reportListContainer {
+            ul {
+                list-style: none;
+                li {
+                    cursor: pointer;
+                    .reportItem {
+                            font-size: 0.9375em;
+                            font-weight: 500;
+                            padding: 1em;
+                            border-radius: 5px;
+                            transition: 0.3s ease-in-out;
+                            margin-bottom: 0.75em;
+                            box-shadow: 0px 1px 3px #00000029;
+                            border-left: 5px solid #1B4E9B;
+                            background: linear-gradient(to right, #1B4E9B 50%, #F9F9F9 50%);
+                            background-size: 200% 100%;
+                            background-position: right bottom;
+                            transition: all .5s ease-out;
+                        span {
+                            color: #222222;
+                            transition: all .6s ease-out;
+                        }
+                        &:hover {
+                            border-left: 5px solid #27BBEE;
+                            background-position: left bottom;
+                            span {
+                                color: $color-white;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+//Dropdown
+.mobDevice {
+    margin-bottom: 20px;
+}
+.desktopWrapper {
+    label {
+        font-weight: 500;
+        display: inline-block;
+        margin: 0 10px 0 0;
+        color: $label2;
+    }
+    .vocationalJobRole {
+        width: 100%;
+        text-align: right;
+    }
+}
+
+::ng-deep.vocationalJobRole {
+    .mat-form-field {
+        width: 100%;
+    }
+    .mat-form-field-appearance-fill .mat-form-field-flex {
+        background-color: $color-white;
+        box-shadow: 0px 0px 6px $blackshade;
+    }
+}
+
+::ng-deep.jobRole {
+  .mat-form-field-wrapper {
+    padding-bottom: 0;
+  }
+  .mat-form-field-infix {
+    border-top: 0 solid transparent;
+  }
+  .mat-form-field-label-wrapper {
+    top: -0.99375em;
+  }
+  .mat-select-value {
+    color: $blackcolor;
+    font-weight: 500;
+  }
+  .mat-form-field-appearance-fill .mat-form-field-flex {
+    padding: 1.5em .75em 0 .75em;
+    border-radius: 6px 6px 6px 6px;
+  }
+  .mat-form-field-appearance-fill .mat-select-arrow-wrapper {
+    transform: translateY(0%);
+  }
+  .mat-form-field-ripple, 
+  .mat-form-field.mat-focused .mat-form-field-ripple, 
+  .mat-form-field-appearance-fill .mat-form-field-underline::before {
+    background-color: transparent;
+  }
+  .mat-form-field-underline {
+    height: 100%;
+    bottom: 0;
+  }
+  .mat-form-field.mat-focused .mat-form-field-label, .mat-form-field-label {
+    color: $color-lightGray;
+  }
+  .mat-form-field.mat-focused.mat-primary .mat-select-arrow, 
+  .mat-select-arrow {
+    color: $black2;
+  }
+  .mat-select {
+    text-transform: capitalize;
+  }
+  .noHandIcon {
+    .mat-select-trigger {
+      cursor: not-allowed;
+    }
+    .mat-form-field-type-mat-select:not(.mat-form-field-disabled) .mat-form-field-flex {
+      cursor: not-allowed;
+    }
+  }
+}
+
+::ng-deep.assessmentDetails {
+    .mat-accordion {
+        .mat-expansion-panel {
+            border-radius: 4px !important;
+            margin-bottom: 15px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+    .mat-expansion-panel-spacing {
+        margin: 0;
+    }
+    .mat-expansion-panel-header-title {
+        width: 100%;
+        @include sm {
+            width: 40%;
+        }
+    }
+    .mat-expansion-panel-header-description {
+        width: 100%;
+        margin-top: 10px;
+        justify-content: flex-end;
+        @include sm {
+            margin-top: 0;
+            width: 60%;
+        }
+    }
+    .mat-expansion-panel-header {
+        height: auto !important;
+        padding: 6px 8px;
+        @include lg {
+            padding: 12px 20px;
+        }
+    }
+    .mat-content {
+        flex-wrap: wrap;
+        @include sm {
+            flex-wrap: nowrap;
+        }
+    }
+}
