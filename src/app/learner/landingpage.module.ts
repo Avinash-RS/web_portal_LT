@@ -21,12 +21,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
-
-
-
 import { LearnerNewMyCourseComponent } from './pages/learner-new-my-course/learner-new-my-course.component';
 import { MycourseItemComponent } from './pages/mycourse-item-component/mycourse-item-component';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { DeferLoadModule } from '@trademe/ng-defer-load';
 export function HttpLoaderFactory(httpClient: HttpClient) {
     return new TranslateHttpLoader(httpClient);
   }
@@ -67,6 +65,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
         MatCardModule,
         MatProgressBarModule,
         FormsModule,ReactiveFormsModule,
+        DeferLoadModule,
         RouterModule.forChild(routes),
         TranslateModule.forRoot({
             loader: {
