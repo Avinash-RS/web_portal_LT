@@ -24,8 +24,8 @@ export class AskQuestionsComponent implements OnInit {
   userDetail: any;
   scrollselector: any = '.myQuestions';
   moduleTopicData: any;
-  mainTopic: any = null;
-  mainModule: any = null;
+  mainTopic: any = 'all';
+  mainModule: any = 'all';
   qaSortKey: any = -1;
   mainPagenumber: any = 0;
   mainModuleName: any = null;
@@ -45,7 +45,7 @@ export class AskQuestionsComponent implements OnInit {
   ///new variables
   selectedIndex = 0;
   showSkeleton:boolean = true;
-  qaDataList = [1,2,3];
+  qaDataList:any = [];
   htmlContent = '';
   config: AngularEditorConfig = {
     editable: true,
@@ -86,6 +86,7 @@ export class AskQuestionsComponent implements OnInit {
       },
     ]
   };
+  searchKey = '';
   constructor(private dialog: MatDialog,
               public Lservice: LearnerServicesService,
               public route: Router,
@@ -100,7 +101,6 @@ export class AskQuestionsComponent implements OnInit {
     this.screenWidth = window.innerWidth;
     const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
-    console.log(detail);
     if (detail === undefined) {
       this.batchId = localStorage.getItem('currentBatchId');
       this.courseid = localStorage.getItem('Courseid');
@@ -116,23 +116,37 @@ export class AskQuestionsComponent implements OnInit {
     this.userDetail = this.gs.checkLogout();
     if (this.courseid) {
     this.getPlayerModuleTopic();
-    this.getQuestionsAnswerlists();
+    this.getQuestionAnswer(true);
     } else {
-      // this.toastr.warning("Failed to load.. redirecting to dashboard.");
         this.route.navigateByUrl("/Landing/MyCourse");
     }
   }
-
+  
   ngOnInit() {
    return true;
   }
-
+  getQuestionAnswer(getcount:boolean) {
+    this.showSkeleton = true;
+    this.Lservice.getvocationalqNda(this.batchId, this.courseid, this.qaSortKey, this.mainPagenumber, this.mainModuleName == 'all' ? null :this.mainModuleName, this.mainTopic =='all' ? null: this.mainTopic).subscribe((result:any) => {
+      this.showSkeleton = false;
+      if(result?.data?.vocationalqNda?.success && result?.data?.vocationalqNda?.message.length > 0){
+        // this.qaDataList = result.data.vocationalqNda.message;
+        this.qaDataList.push.apply(this.qaDataList,result.data.vocationalqNda.message)
+        if(getcount){
+          const qcountData = result.data.vocationalqNda.ansCount;
+          const acountData = result.data.vocationalqNda.count;
+          this.selectedIndex == 0  ? this.animateValue('qCount', 0, qcountData ? qcountData : 0, 1000) : '';
+          this.animateValue('aCount', 0, acountData ? acountData : 0, 1000);
+        }
+      }
+    });
+  }
   openQuestionInput(templateRef: TemplateRef<any>) {
     this.questionText = '';
     if (this.screenWidth > 650) {
       this.dialog.open(templateRef, {
         width: '38%',
-        height: '78%',
+        height: '72%',
         closeOnNavigation: true,
         disableClose: true,
         panelClass:'qadialog'
@@ -147,7 +161,6 @@ export class AskQuestionsComponent implements OnInit {
       });
     }
   }
-
   getPlayerModuleTopic() {
     // tslint:disable-next-line: prefer-const
     let param: any = {};
@@ -157,7 +170,6 @@ export class AskQuestionsComponent implements OnInit {
     let id = CryptoJS.AES.decrypt(this.userDetail.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
     param.user_id = id;
     param.batchid = this.batchId;
-    console.log(param);
     this.commonService.getTOC(param).subscribe((data: any) => {
       if (data.success === true) {
         this.checkLevel = data.checkLevel;
@@ -166,44 +178,27 @@ export class AskQuestionsComponent implements OnInit {
         tmpData.forEach(element => {
           this.moduleTopicData.push(... element.childData);
         });
-
-        console.log(this.moduleTopicData);
-      }
-    });
-  }
-
-  getQuestionsAnswerlists() {
-    this.isLoading = true;
-    this.Lservice.getQAsortsearch(this.batchId, this.courseid, this.qaSortKey, this.mainPagenumber, this.mainModuleName, this.mainTopic)
-    .subscribe((resdata: any) => {
-      this.isLoading = false;
-      if (resdata.data.sortsearch.message) {
-        this.allQuestionList.push.apply(this.allQuestionList, resdata.data.sortsearch.message);
-      } else {
-        this.allQuestionList = [];
       }
     });
   }
   onScroll() {
     this.mainPagenumber = this.mainPagenumber + 1;
-    this.getQuestionsAnswerlists();
+    this.getQuestionAnswer(false);
   }
-
   mainQAFilter(call) {
+    this.qaDataList = [];
     this.mainPagenumber = 0;
-    this.allQuestionList = [];
     if (call === 'M') {
       if (this.mainModule?.id) {
         this.getTopicV2(this.mainModule?.id, 'filter');
         this.mainModuleName = this.mainModule ? this.mainModule.module_name : null;
-        this.mainTopic = null;
+        this.mainTopic = 'all';
       } else {
         this.mainModuleName = null;
-        this.mainTopic = null;
+        this.mainTopic = 'all';
       }
     }
-    this.getQuestionsAnswerlists();
-
+    this.getQuestionAnswer(false);
   }
   getTopicV2(parent, call) {
     // tslint:disable-next-line: prefer-const
@@ -214,7 +209,6 @@ export class AskQuestionsComponent implements OnInit {
     let id = CryptoJS.AES.decrypt(this.userDetail.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
     param.user_id = id;
     param.batchid = this.batchId;
-    console.log(param);
     this.commonService.getTOC(param).subscribe((data: any) => {
       if (call === 'filter') {
         this.mainModule.childData = data.message;
@@ -237,9 +231,7 @@ export class AskQuestionsComponent implements OnInit {
     if (this.questionText.trim().length) {
       this.Lservice.askaquestion(this.userDetail.user_id, this.courseid, this.questionModule,
          this.questionTopic, this.questionText).subscribe((data: any) => {
-        // console.log(data)
         this.questionText = '';
-        // this.ngxLoader.stop()
         if (data?.data?.askaquestion?.success) {
           this.closedialogbox();
           this.toastr.success(data?.data?.askaquestion?.message);
@@ -269,5 +261,44 @@ export class AskQuestionsComponent implements OnInit {
 
   goBack() {
     this.route.navigateByUrl('/Landing/MyCourse');
+  }
+  animateValue(id, start, end, duration) {
+    const obj = document.getElementById(id);
+    if (start === end) {
+      obj.innerHTML = end;
+    } else {
+      const range = end - start;
+      let current = start;
+      const increment = end > start ? 1 : -1;
+      const stepTime = Math.abs(Math.floor(duration / range));
+
+      const timer = setInterval(() => {
+        current += increment;
+        obj.innerHTML = current;
+        if (current === end) {
+          clearInterval(timer);
+        }
+
+      }, 1);
+
+      setTimeout(() => {
+        obj.innerHTML = end;
+        clearInterval(timer);
+      }, 800);
+    }
+  }
+  searchcaller(e){
+    if (this.searchKey.length >= 3) {
+      this.mainPagenumber = 0;
+      this.getQuestionAnswer(false);
+    }
+    if (e.keyCode === 8 && this.searchKey.length === 0) {
+      this.getQuestionAnswer(false);
+    }
+  }
+  resetSearch() {
+    this.searchKey = '';
+    this.mainPagenumber = 0;
+    this.getQuestionAnswer(false);
   }
 }
