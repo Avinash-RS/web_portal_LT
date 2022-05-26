@@ -12,7 +12,6 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatStepperModule } from '@angular/material/stepper';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
-// import { MaterialModule } from '@core/material.module';
 import { MatIconModule } from '@angular/material/icon';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { DragScrollModule } from 'ngx-drag-scroll';
@@ -46,7 +45,6 @@ const routes: Routes = [
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   imports: [
     CoreModule,
-    // MaterialModule,
     CarouselModule,
     CommonModule,
     MatMenuModule,
