@@ -1,0 +1,414 @@
+@import "variable";
+.chartSection {
+    padding: 20px;
+    .heading {
+        figure {
+            margin: 0 0.5em 0 0;
+        }
+        span {
+            font-size: 20px;
+            font-weight: 500;
+            color: $colordarkblue;
+            line-height: normal;
+            margin-left: 10px;
+        }
+    }
+    p {
+        font-size: 14px;
+        font-weight: 400;
+        color: $greyish;
+        line-height: 21px;
+        margin: 15px 0;
+    }
+    .indicator {
+        margin-top: 15px;
+        display: inline-flex;
+        flex-direction: column;
+        width: 100%;
+        h4 {
+            font-size: 15px;
+            font-weight: 500;
+            color: $label2;
+            line-height: normal;
+            margin: 0;
+        }
+        .indicatorBG {
+            background-color: $whitecolor1;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+            padding: 20px;
+            max-width: 850px;
+            width: 95%;
+            margin: 15px auto 0 auto;
+            flex-wrap: wrap;
+            @include md {
+                flex-wrap: nowrap;
+            }
+        }
+        .grade {
+            border-radius: 30px;
+            display: flex;
+            width: 100%;
+            height: 15px;
+            @include md {
+                width: 65%;
+            }
+            > div {
+                height: 100%;
+                display: flex;
+                position: relative;
+                &.poor {
+                    width: 23%;
+                    background-color: rgba(255, 87, 34, 1);
+                    border-top-left-radius: 30px;
+                    border-bottom-left-radius: 30px;
+                }
+                &.average {
+                    width: 46%;
+                    background-color: rgba(255, 183, 77, 1);
+                }
+                &.good {
+                    width: 31%;
+                    background-color: rgba(73, 174, 49, 1);
+                    border-top-right-radius: 30px;
+                    border-bottom-right-radius: 30px;
+                }
+                span {
+                    position: absolute;
+                    bottom: -15px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    color: $grey2;
+                    font-size: 10px;
+                    font-weight: 400;
+                    line-height: normal;
+                }
+            }
+        }
+        .percentageCircle {
+            width: 100%;
+            height: 130px;
+            @include md {
+                width: 35%;
+            }
+        }
+    }
+    .assessmentDetails {
+        h5 {
+            font-size: 14px;
+            font-weight: 500;
+            color: $greyish;
+            line-height: normal;
+            margin: 20px 0 15px 0;
+        }
+        .expansionPanel {
+            .title {
+                .left {
+                    margin-right: 8px;
+                    em {
+                        color: $greyshade;
+                        font-size: 20px;
+                    }
+                }
+                .right {
+                    flex-direction: column;
+                    span {
+                        font-size: 10px;
+                        font-weight: 400;
+                        color: $grey4;
+                        line-height: normal;
+                    }
+                    h6 {
+                        margin: 0;
+                        font-size: 12px;
+                        font-weight: 500;
+                        color: $blackcolor;
+                        margin-top: 3px;
+                        line-height: normal;
+                    }
+                }
+            }
+            .status {
+                width: 100%;
+                justify-content: flex-end;
+                > div {
+                    border-left: 1px solid rgba(0, 0, 0, 0.16);
+                    padding-left: 10px;
+                    margin-left: 10px;
+                    width: 94px;
+                    @include sm {
+                        padding-left: 15px;
+                        margin-left: 15px;
+                        width: 100px;
+                    }
+                    @include lg {
+                        padding-left: 10px;
+                        margin-left: 10px;
+                        width: 100px;
+                    }
+                    @include xl {
+                        padding-left: 35px;
+                        margin-left: 35px;
+                        width: 150px;
+                    }
+                    &:first-child {
+                        padding-left: 0;
+                        margin-left: 0;
+                        border-left: 0;
+                        @include md {
+                            padding-left: 15px;
+                            border-left: 1px solid rgba(0, 0, 0, 0.16);
+                        }
+                        @include xl {
+                            padding-left: 35px;
+                        }
+                    }
+                    &.average {
+                        h6 {
+                            color: #FFB74D;
+                        }
+                    }
+                    &.poor {
+                        h6 {
+                            color: #FF5722;
+                        }
+                    }
+                    &.good {
+                        h6 {
+                            color: #49AE31;
+                        }
+                    }
+                }
+                .rating, .completion {
+                    .left {
+                        em {
+                            font-size: 25px;
+                        }
+                    }
+                }
+                .completion {
+                    .right {
+                        h6 {
+                            color: #49AE31;
+                        }
+                    }
+                }
+                .left {
+                    margin-right: 15px;
+                    em {
+                        color: $greyshade;
+                        font-size: 20px;
+                    }
+                }
+                .right {
+                    flex-direction: column;
+                    span {
+                        font-size: 10px;
+                        font-weight: 400;
+                        color: $grey4;
+                        line-height: normal;
+                    }
+                    h6 {
+                        margin: 0;
+                        font-size: 12px;
+                        font-weight: 500;
+                        color: $blackcolor;
+                        margin-top: 3px;
+                        line-height: normal;
+                    }
+                }
+            }
+            .bodyContent {
+                h6 {
+                font-size: 12px;
+                font-weight: 500;
+                color: $blackcolor;
+                line-height: normal;
+                }
+                .duration {
+                margin-top: 1em;
+                ul {
+                    list-style: none;
+                    li {
+                    span,p {
+                        color:$color-lightGray;
+                        font-size: 12px;
+                        font-weight: 400;
+                    }
+                    p {
+                        margin: 0;
+                        span {
+                        color: $blackcolor;
+                        font-weight: 700;
+                        }
+                    }
+                    }
+                }
+                }
+                .summaryTable {
+                    width: 100%;
+                    border: none !important;
+                }
+                .summaryTable tr th {
+                    font-size: 0.85em;
+                    color: $color-lightGray;
+                    text-align: left;
+                    padding: 0.8em 1.2em;
+                    white-space: nowrap;
+                    font-weight: normal;
+                    border: 1px solid #dbdbdb;
+                    border-right-width: 0;
+                    width: 12%;
+                    &:first-child {
+                        width: 30%;
+                    }
+                    &:last-child {
+                        border-right-width: 0.1em;
+                    }
+                }
+                .summaryTable tr td {
+                    color: $color-lightGray;
+                    text-align: left;
+                    padding: 0.8em 1.2em;
+                    font-weight: 500;
+                    border: 1px solid #dbdbdb;
+                    border-right-width: 0;
+                    border-top-width: 0;
+                    width: 13%;
+                    position: relative;
+                    &:first-child {
+                        width: 25%;
+                        color: $color-blue;
+                    }
+                    &:last-child {
+                        border-right-width: 1px;
+                        text-align: center;
+                        font-size: 1em;
+                        min-width: 95px;
+                    }
+                    span {
+                        color: #000000;
+                        font-size: 1em;
+                        font-weight: 700;
+                    }
+                    .icon-Like {
+                        color: $color-green;
+                        font-weight: 700;
+                    }
+                    .average-color {
+                        color: #d68f0c;
+                        font-weight: 700;
+                    }
+                    .icon-Dislike {
+                        color: $color-blue;
+                        font-weight: 700;
+                    }
+                    .progressbar {
+                        display: block;
+                        position: absolute;
+                        z-index: 1;
+                        top: 0;
+                        bottom: 0;
+                        left: 0;
+                        max-width: 100%;
+                    }
+                    .progressdata {
+                        display: flex;
+                        position: relative;
+                        z-index: 2;
+                        font-size: 0.8em;
+                        align-items: center;
+                    }
+                    .minutes{
+                        font-size: 0.75em;
+                    }
+                    .color-bluebar {
+                        background-color: #e1f4ff;
+                        border-right: 0.3em solid #8fc7e2;
+                    }
+                    .color-pinkbar {
+                        background-color: #ffe1eb;
+                        border-right: 0.3em solid #f07f9e;
+                    }
+                    .color-greenbar {
+                        background-color: #dcffed;
+                        border-right: 0.3em solid #7ae4af;
+                    }
+                    .color-yellowbar {
+                        background-color: #fff4dc;
+                        border-right: 0.3em solid #fbe8a9;
+                    }
+                }
+            
+                .subHeading {
+                color: $blackcolor;
+                font-size: 12px;
+                font-weight: 400;
+                margin: 1em 0;
+                }
+                
+                .description {
+                padding: 1em;
+                border:1px solid #D3D3D3;
+                .topicheld {
+                    border-bottom: 1px solid #D3D3D3;
+                    ul {
+                    list-style: none;
+                    li {
+                        span {
+                        color: #D3D3D3;
+                        font-size: 12px;
+                        font-weight: 400;
+                        }
+                        p {
+                        margin: 0.5em 0;
+                        color: $blackcolor;
+                        font-size: 14px;
+                        font-weight: 700;
+                        }
+                    }
+                    }
+                }
+                .feedback {
+                    .left,.right {
+                    span {
+                        color: #D3D3D3;
+                        font-size: 12px;
+                        font-weight: 400;
+                    }
+                    }
+                    .left {   
+                    width: 65%;                       
+                    p {
+                    color: #004684;
+                    font-size: 14px;
+                    font-weight: 400;
+                    }
+                    }
+                }
+                .right {
+                    width: 35%;
+                    .circle {
+                    width: 40%;
+                    }
+                    .circleDesc {
+                    width: 60%;
+                    ul {
+                        list-style: none;
+                        li {
+                        color: $color-lightGray;
+                        font-size: 10px;
+                        font-weight: 400;
+                        span {
+                        color: $blackcolor;
+                        font-weight: 500;
+                        }
+                        }
+                    }
+                    }
+                }
+                }
+            }
+        }
+
+    }
+}
