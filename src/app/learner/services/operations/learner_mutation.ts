@@ -1152,7 +1152,28 @@ message{
 }
 }
 `;
-
+export const vocationalqNda = gql `
+mutation vocationalqNda($batchid:String,$course_id:String,$sort:Int,$pagenumber:Int,$module:String,$topic:String){
+  vocationalqNda(batchid:$batchid,course_id:$course_id,sort:$sort,pagenumber:$pagenumber,module:$module,topic:$topic){
+    success
+    message {
+      username
+      question {
+        que
+        ans
+        askDate
+        ansDate
+        askTime
+        ansTime
+        ansLabel
+        isAnswered
+      }
+    }
+    count
+    ansCount
+  }
+}
+`
 export const getActivityCalendar = gql`
 mutation getActivityCalendar($courseId:String,$status:String,$dateType:String!,$activityType:String,$date:String!,$userId:String!){
   getActivityCalendar(courseId:$courseId,status:$status,dateType:$dateType,activityType:$activityType,date:$date,userId:$userId){
