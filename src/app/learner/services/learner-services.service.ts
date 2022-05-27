@@ -1195,11 +1195,11 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
       }
     });
   }
-  getvocationalqNda(batchid, course_id, sort, pagenumber, module, topic) {
+  getvocationalqNda(user_id,batchid, course_id, sort, pagenumber, module, topic,searchVal) {
     return this.Apollo.query({
       query:vocationalqNda,
       variables : {
-        batchid, course_id, sort, pagenumber, module, topic
+        user_id,batchid, course_id, sort, pagenumber, module, topic,searchVal
       }
     });
   }
