@@ -87,6 +87,7 @@ export class AskQuestionsComponent implements OnInit {
     ]
   };
   searchKey = '';
+  userID = null;
   constructor(private dialog: MatDialog,
               public Lservice: LearnerServicesService,
               public route: Router,
@@ -115,6 +116,7 @@ export class AskQuestionsComponent implements OnInit {
     }
     this.userDetail = this.gs.checkLogout();
     if (this.courseid) {
+      this.userID = this.userDetail.user_id;
     this.getPlayerModuleTopic();
     this.getQuestionAnswer(true);
     } else {
@@ -127,14 +129,13 @@ export class AskQuestionsComponent implements OnInit {
   }
   getQuestionAnswer(getcount:boolean) {
     this.showSkeleton = true;
-    this.Lservice.getvocationalqNda(this.batchId, this.courseid, this.qaSortKey, this.mainPagenumber, this.mainModuleName == 'all' ? null :this.mainModuleName, this.mainTopic =='all' ? null: this.mainTopic).subscribe((result:any) => {
+    this.Lservice.getvocationalqNda(this.userID,this.batchId, this.courseid, this.qaSortKey, this.mainPagenumber, this.mainModuleName == 'all' ? null :this.mainModuleName, this.mainTopic =='all' ? null: this.mainTopic,this.searchKey).subscribe((result:any) => {
       this.showSkeleton = false;
       if(result?.data?.vocationalqNda?.success && result?.data?.vocationalqNda?.message.length > 0){
-        // this.qaDataList = result.data.vocationalqNda.message;
-        this.qaDataList.push.apply(this.qaDataList,result.data.vocationalqNda.message)
+        this.qaDataList.push(...result.data.vocationalqNda.message);
         if(getcount){
-          const qcountData = result.data.vocationalqNda.ansCount;
-          const acountData = result.data.vocationalqNda.count;
+          const qcountData = result.data.vocationalqNda.count;
+          const acountData =  result.data.vocationalqNda.ansCount;
           this.selectedIndex == 0  ? this.animateValue('qCount', 0, qcountData ? qcountData : 0, 1000) : '';
           this.animateValue('aCount', 0, acountData ? acountData : 0, 1000);
         }
@@ -146,7 +147,7 @@ export class AskQuestionsComponent implements OnInit {
     if (this.screenWidth > 650) {
       this.dialog.open(templateRef, {
         width: '38%',
-        height: '72%',
+        height: '80%',
         closeOnNavigation: true,
         disableClose: true,
         panelClass:'qadialog'
@@ -235,6 +236,7 @@ export class AskQuestionsComponent implements OnInit {
         if (data?.data?.askaquestion?.success) {
           this.closedialogbox();
           this.toastr.success(data?.data?.askaquestion?.message);
+          this.tabchange();
         } else {
          // this.toastr.warning(data?.data?.bookmark?.message)
         }
@@ -289,16 +291,28 @@ export class AskQuestionsComponent implements OnInit {
   }
   searchcaller(e){
     if (this.searchKey.length >= 3) {
+      this.qaDataList = [];
       this.mainPagenumber = 0;
       this.getQuestionAnswer(false);
     }
     if (e.keyCode === 8 && this.searchKey.length === 0) {
-      this.getQuestionAnswer(false);
+      this.resetSearch();
     }
   }
   resetSearch() {
+    this.qaDataList = [];
     this.searchKey = '';
     this.mainPagenumber = 0;
     this.getQuestionAnswer(false);
+  }
+  contextmenu(e) {
+    e.preventDefault();
+  }
+  tabchange(){
+    this.qaDataList = [];
+    this.searchKey = '';
+    this.mainPagenumber = 0;
+    this.userID = this.selectedIndex == 0 ?  this.userDetail.user_id : null;
+    this.getQuestionAnswer(true);
   }
 }

@@ -6,7 +6,7 @@
         <li><em routerLink="/Landing/MyCourse" class="lxp-Go backArrow"></em> <span class="name">{{courseName}}</span> <span class="bar">/</span> <span class="breadCrumbTopic">Q&A</span></li>
     </ul>
     <div class="qandaSection">
-        <mat-tab-group animationDuration="100ms" (selectedTabChange)="getQuestionAnswer(true)" [(selectedIndex)]="selectedIndex">
+        <mat-tab-group animationDuration="100ms" (selectedTabChange)="tabchange()" [(selectedIndex)]="selectedIndex">
             <mat-tab>
                 <ng-template mat-tab-label>
                     {{'My Question & Answer'}}
