@@ -686,6 +686,7 @@ export class CoursedetailsComponent implements OnInit {
     this.service.getTOC(param).subscribe((data: any) => {
       this.scromApiData = data;
       this.checkDetails.checklevel = this.scromApiData.checkLevel;
+      this.bookmarkedCount = this.scromApiData.bookmarkCount;
       this.scromModuleData = this.scromApiData?.message;
       this.weekLength = this.scromApiData.message.length;
 
