@@ -1153,8 +1153,8 @@ message{
 }
 `;
 export const vocationalqNda = gql `
-mutation vocationalqNda($batchid:String,$course_id:String,$sort:Int,$pagenumber:Int,$module:String,$topic:String){
-  vocationalqNda(batchid:$batchid,course_id:$course_id,sort:$sort,pagenumber:$pagenumber,module:$module,topic:$topic){
+mutation vocationalqNda($user_id:String,$batchid:String,$course_id:String,$sort:Int,$pagenumber:Int,$module:String,$topic:String,$searchVal:String){
+  vocationalqNda(user_id:$user_id,batchid:$batchid,course_id:$course_id,sort:$sort,pagenumber:$pagenumber,module:$module,topic:$topic,searchVal:$searchVal){
     success
     message {
       username
