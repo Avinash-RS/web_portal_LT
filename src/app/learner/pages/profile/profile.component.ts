@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { LocationStrategy } from '@angular/common';
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, HostListener } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog} from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -25,6 +25,10 @@ import * as CryptoJS from 'crypto-js';
 // AFTER restructure - Mythreyi
 
 export class ProfileComponent implements OnInit {
+  @HostListener('window:beforeunload', ['$event'])
+  closePopup($event: any) {
+    this.dialog.closeAll();
+  }
   @ViewChild('passwordDialog', { static: true }) passwordDialog: TemplateRef<any>;
   @ViewChild('fileInput', { static: true }) fileInput;
   blobKey = environment.blobKey;
