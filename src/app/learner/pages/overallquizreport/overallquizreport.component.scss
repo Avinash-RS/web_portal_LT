@@ -1,0 +1,285 @@
+@import "variable";
+.quizreport {
+    padding: 20px;
+    .heading {
+        figure {
+            margin: 0 0.5em 0 0;
+        }
+        span {
+            font-size: 20px;
+            font-weight: 500;
+            color: $colordarkblue;
+            line-height: normal;
+            margin-left: 10px;
+        }
+    }
+    h5 {
+        font-size: 14px;
+        font-weight: 500;
+        color: $greyish;
+        line-height: normal;
+        margin: 20px 0 15px 0;
+    }
+    p {
+        font-size: 14px;
+        font-weight: 400;
+        color: $greyish;
+        line-height: 21px;
+        margin: 15px 0;
+    }
+    .chartarea {
+        padding: 0px 55px;
+        .chartHeading {
+            font-size: 15px;
+            color: #33363E;
+            font-weight: 500;
+        }
+        .performanceChart {
+            width: 50%;
+            position: relative;
+            .ylabel,.xlabel {
+              font-size: 0.75em;
+              font-weight: 600;
+              color: $blackcolor;
+            }
+            .ylabel {
+              position: absolute;
+              left: -35px;
+              top: 50%;
+              transform: translateY(-50%) rotate(-90deg);
+              color: $blackcolor;
+            }
+            .xlabel{
+              margin: 0.5em auto;
+              text-align: center;
+              }
+        }
+        .circleProgress {
+            width: 30%;
+            .points {
+                margin-top: 2.25em;
+                ul {
+                  list-style: none;
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  li {
+                    div {
+                      height: 10px;
+                      width: 10px;
+                      margin-right: 0.5em;
+                    }
+                    span {
+                      font-size: 0.75em;
+                      font-weight: 400;
+                      color: $label2;
+                    }
+                  }
+                }
+              }
+        }
+    }
+    .expansionPanel {
+      .title {
+          .left {
+              margin-right: 8px;
+              em {
+                  color: $greyshade;
+                  font-size: 20px;
+              }
+          }
+          .right {
+              flex-direction: column;
+              span {
+                  font-size: 10px;
+                  font-weight: 400;
+                  color: $grey4;
+                  line-height: normal;
+              }
+              h6 {
+                  margin: 0;
+                  font-size: 12px;
+                  font-weight: 500;
+                  color: $blackcolor;
+                  margin-top: 3px;
+                  line-height: normal;
+              }
+          }
+      }
+      .status {
+          width: 100%;
+          justify-content: flex-start;
+          > div {
+              border-left: 1px solid rgba(0, 0, 0, 0.16);
+              padding-left: 10px;
+              margin-left: 10px;
+              width: 94px;
+              @include sm {
+                  padding-left: 15px;
+                  margin-left: 15px;
+                  width: 100px;
+              }
+              @include lg {
+                  padding-left: 10px;
+                  margin-left: 10px;
+                  width: 100px;
+              }
+              @include xl {
+                  padding-left: 35px;
+                  margin-left: 35px;
+                  width: 150px;
+              }
+              &:first-child {
+                  padding-left: 0;
+                  margin-left: 0;
+                  border-left: 0;
+                  @include md {
+                      padding-left: 15px;
+                      border-left: 1px solid rgba(0, 0, 0, 0.16);
+                  }
+                  @include xl {
+                      padding-left: 35px;
+                  }
+              }
+              &.average {
+                  h6 {
+                      color: #FFB74D;
+                  }
+              }
+              &.poor {
+                  h6 {
+                      color: #FF5722;
+                  }
+              }
+              &.good {
+                  h6 {
+                      color: #49AE31;
+                  }
+              }
+          }
+          .rating, .completion {
+              .left {
+                  em {
+                      font-size: 25px;
+                  }
+              }
+          }
+          .completion {
+              .right {
+                  h6 {
+                      color: #49AE31;
+                  }
+              }
+          }
+          .left {
+              margin-right: 15px;
+              em {
+                  color: $greyshade;
+                  font-size: 20px;
+              }
+          }
+          .right {
+              flex-direction: column;
+              span {
+                  font-size: 10px;
+                  font-weight: 400;
+                  color: $grey4;
+                  line-height: normal;
+              }
+              h6 {
+                  margin: 0;
+                  font-size: 12px;
+                  font-weight: 500;
+                  color: $blackcolor;
+                  margin-top: 3px;
+                  line-height: normal;
+              }
+          }
+      }
+  }
+}
+::ng-deep.ag-theme-alpine {
+  .ag-header {
+    color:$label2;
+    background-color: $fadeGrey;
+    font-weight: 700;
+  }
+  // .ag-root-wrapper {
+  //   border: none;
+  // }
+  .ag-cell {
+    font-size: 14px;
+  }
+  .ag-header-cell-text {            
+    text-overflow: clip !important;
+    overflow: visible !important;
+    white-space: normal !important;
+    line-height: 16px!important;
+}
+  .ag-paging-panel {
+    padding-top: 10px;
+    height: 25px;
+  } 
+}
+
+
+::ng-deep.agquiz { 
+  mat-card {
+    position: relative;
+    min-height: 200px;
+    padding: 0px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.2)!important;
+    .noCard {
+      text-align: center;
+      margin-top: 5em;
+      figure {
+          margin: 15px 0;
+      }
+      p {
+          font-size: 14px;
+          color: #000000;
+          font-weight: 500;
+          line-height: normal;
+          margin-bottom: 30px ​!important;
+      }
+    }
+  }
+  .countWrapper{
+    .icon {
+      margin-right: 0.75em;
+    }
+    .count {
+      color: $blackcolor;
+      font-weight: 600;
+      font-size: 14px;
+    }
+  }
+
+  .statusBtn {
+    font-size: 10px;
+    width: 55px;
+    padding: 0.15em 0.5em;
+    border-radius: 5px;
+  }
+  .statusClass {
+    line-height: normal;
+    display: inline-flex;
+    align-items: center;
+  }
+  .good {
+    border: 1px solid $green1;
+    color: $green1;
+    // background-color: $green1 ;
+
+  }
+  .avg {
+    border: 1px solid $yellow1;
+    color: $yellow1;
+    // background-color: $yellow1 ;
+  }
+  .poor {
+    border: 1px solid $lxp-theme-green;
+    color: $lxp-theme-green;
+    // background-color:$lxp-theme-green ;
+  }
+}

@@ -17,7 +17,7 @@ import { addTopicreference, bulkclaimcourse, claimcourse, createGuidanceRequest,
          viewProfile1, set_bookmark, set_askaquestion, getMyQuestion, get_allquestion, 
          getQAsortsearch, getActivityCalendar, getengineersForumData, createEngineersForumData,
          getuserRecordbasedonSecretKey, verify_tfa_setup, userexperienceQry
-        ,insertModuleTopicSkeleton} from './operations/learner_mutation';
+        ,insertModuleTopicSkeleton,vocationalqNda} from './operations/learner_mutation';
 import {
 boarddetail, checkExistingUser, getActivityDetailsByBatchAndCourseID, getAssignmentmoduleData,
  getcalenderactivity, getCountForCategories, getCountForJobroleCategories, getCoureBasedOnCatalog,
@@ -1195,7 +1195,14 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
       }
     });
   }
-
+  getvocationalqNda(user_id,batchid, course_id, sort, pagenumber, module, topic,searchVal) {
+    return this.Apollo.query({
+      query:vocationalqNda,
+      variables : {
+        user_id,batchid, course_id, sort, pagenumber, module, topic,searchVal
+      }
+    });
+  }
   getcourseGallery(courseid) {
     return this.Apollo.query({
       query: getCourseGallery,

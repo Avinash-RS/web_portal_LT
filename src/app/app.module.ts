@@ -10,7 +10,11 @@ import { ToastrModule } from 'ngx-toastr';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 // local
-import { MaterialModule } from '@core/material.module';
+// import { MaterialModule } from '@core/material.module';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { GraphqlModule } from './graphql/graphql.modules';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -61,7 +65,11 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
     RedirectionComponent
     ],
   imports: [
-    MaterialModule,
+    // MaterialModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDialogModule,
+    MatExpansionModule,
     GraphqlModule,
     DragDropModule,
     BrowserAnimationsModule,
@@ -100,7 +108,11 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: true } },
     { provide: MAT_TABS_CONFIG, useValue: { animationDuration: '0ms' } },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    {provide: ErrorHandler, useClass: GlobalErrorHandler}
+    {provide: ErrorHandler, useClass: GlobalErrorHandler},
+    {
+      provide: MatDialogRef,
+      useValue: {}
+    },
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],

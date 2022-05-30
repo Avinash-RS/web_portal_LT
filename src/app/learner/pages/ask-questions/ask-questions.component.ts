@@ -7,7 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
 import { CommonServicesService } from '@core/services/common-services.service';
 import * as CryptoJS from 'crypto-js';
-
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 @Component({
   selector: 'app-ask-questions',
@@ -24,8 +24,8 @@ export class AskQuestionsComponent implements OnInit {
   userDetail: any;
   scrollselector: any = '.myQuestions';
   moduleTopicData: any;
-  mainTopic: any = null;
-  mainModule: any = null;
+  mainTopic: any = 'all';
+  mainModule: any = 'all';
   qaSortKey: any = -1;
   mainPagenumber: any = 0;
   mainModuleName: any = null;
@@ -42,7 +42,52 @@ export class AskQuestionsComponent implements OnInit {
   currentDate = new Date(this.dateObj.getFullYear() + '-' + (this.dateObj.getMonth() + 1) + '-' + this.dateObj.getDate()).getTime();
   batchEndTime: any;
   checkLevel: boolean = false;
-
+  ///new variables
+  selectedIndex = 0;
+  showSkeleton:boolean = true;
+  qaDataList:any = [];
+  htmlContent = '';
+  config: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '20rem',
+    minHeight: '5rem',
+    placeholder: 'Please ask your question with concise and add any other details here',
+    translate: 'yes',
+    defaultParagraphSeparator: '',
+    defaultFontName: 'Arial',
+    toolbarHiddenButtons: [
+      ['undo', 'redo', 'strikeThrough', 'subscript', 'superscript', 'heading', 'fontName'],
+      [
+        'fontSize',
+        'textColor',
+        'backgroundColor',
+        'customClasses',
+        'unlink',
+        'insertVideo',
+        // 'insertHorizontalRule',
+        'removeFormat',
+        'toggleEditorMode'
+      ]
+    ],
+    customClasses: [
+      {
+        name: 'quote',
+        class: 'quote',
+      },
+      {
+        name: 'redText',
+        class: 'redText'
+      },
+      {
+        name: 'titleText',
+        class: 'titleText',
+        tag: 'h1',
+      },
+    ]
+  };
+  searchKey = '';
+  userID = null;
   constructor(private dialog: MatDialog,
               public Lservice: LearnerServicesService,
               public route: Router,
@@ -71,26 +116,41 @@ export class AskQuestionsComponent implements OnInit {
     }
     this.userDetail = this.gs.checkLogout();
     if (this.courseid) {
+      this.userID = this.userDetail.user_id;
     this.getPlayerModuleTopic();
-    this.getQuestionsAnswerlists();
+    this.getQuestionAnswer(true);
     } else {
-      // this.toastr.warning("Failed to load.. redirecting to dashboard.");
         this.route.navigateByUrl("/Landing/MyCourse");
     }
   }
-
+  
   ngOnInit() {
    return true;
   }
-
+  getQuestionAnswer(getcount:boolean) {
+    this.showSkeleton = true;
+    this.Lservice.getvocationalqNda(this.userID,this.batchId, this.courseid, this.qaSortKey, this.mainPagenumber, this.mainModuleName == 'all' ? null :this.mainModuleName, this.mainTopic =='all' ? null: this.mainTopic,this.searchKey).subscribe((result:any) => {
+      this.showSkeleton = false;
+      if(result?.data?.vocationalqNda?.success && result?.data?.vocationalqNda?.message.length > 0){
+        this.qaDataList.push(...result.data.vocationalqNda.message);
+        if(getcount){
+          const qcountData = result.data.vocationalqNda.count;
+          const acountData =  result.data.vocationalqNda.ansCount;
+          this.selectedIndex == 0  ? this.animateValue('qCount', 0, qcountData ? qcountData : 0, 1000) : '';
+          this.animateValue('aCount', 0, acountData ? acountData : 0, 1000);
+        }
+      }
+    });
+  }
   openQuestionInput(templateRef: TemplateRef<any>) {
     this.questionText = '';
     if (this.screenWidth > 650) {
       this.dialog.open(templateRef, {
-        width: '60%',
+        width: '38%',
         height: '80%',
         closeOnNavigation: true,
         disableClose: true,
+        panelClass:'qadialog'
       });
     } else {
       this.dialog.open(templateRef, {
@@ -98,10 +158,10 @@ export class AskQuestionsComponent implements OnInit {
         height: '80%',
         closeOnNavigation: true,
         disableClose: true,
+        panelClass:'qadialog'
       });
     }
   }
-
   getPlayerModuleTopic() {
     // tslint:disable-next-line: prefer-const
     let param: any = {};
@@ -122,39 +182,24 @@ export class AskQuestionsComponent implements OnInit {
       }
     });
   }
-
-  getQuestionsAnswerlists() {
-    this.isLoading = true;
-    this.Lservice.getQAsortsearch(this.batchId, this.courseid, this.qaSortKey, this.mainPagenumber, this.mainModuleName, this.mainTopic)
-    .subscribe((resdata: any) => {
-      this.isLoading = false;
-      if (resdata.data.sortsearch.message) {
-        this.allQuestionList.push.apply(this.allQuestionList, resdata.data.sortsearch.message);
-      } else {
-        this.allQuestionList = [];
-      }
-    });
-  }
   onScroll() {
     this.mainPagenumber = this.mainPagenumber + 1;
-    this.getQuestionsAnswerlists();
+    this.getQuestionAnswer(false);
   }
-
   mainQAFilter(call) {
+    this.qaDataList = [];
     this.mainPagenumber = 0;
-    this.allQuestionList = [];
     if (call === 'M') {
       if (this.mainModule?.id) {
         this.getTopicV2(this.mainModule?.id, 'filter');
         this.mainModuleName = this.mainModule ? this.mainModule.module_name : null;
-        this.mainTopic = null;
+        this.mainTopic = 'all';
       } else {
         this.mainModuleName = null;
-        this.mainTopic = null;
+        this.mainTopic = 'all';
       }
     }
-    this.getQuestionsAnswerlists();
-
+    this.getQuestionAnswer(false);
   }
   getTopicV2(parent, call) {
     // tslint:disable-next-line: prefer-const
@@ -188,10 +233,10 @@ export class AskQuestionsComponent implements OnInit {
       this.Lservice.askaquestion(this.userDetail.user_id, this.courseid, this.questionModule,
          this.questionTopic, this.questionText).subscribe((data: any) => {
         this.questionText = '';
-        // this.ngxLoader.stop()
         if (data?.data?.askaquestion?.success) {
           this.closedialogbox();
           this.toastr.success(data?.data?.askaquestion?.message);
+          this.tabchange();
         } else {
          // this.toastr.warning(data?.data?.bookmark?.message)
         }
@@ -218,5 +263,56 @@ export class AskQuestionsComponent implements OnInit {
 
   goBack() {
     this.route.navigateByUrl('/Landing/MyCourse');
+  }
+  animateValue(id, start, end, duration) {
+    const obj = document.getElementById(id);
+    if (start === end) {
+      obj.innerHTML = end;
+    } else {
+      const range = end - start;
+      let current = start;
+      const increment = end > start ? 1 : -1;
+      const stepTime = Math.abs(Math.floor(duration / range));
+
+      const timer = setInterval(() => {
+        current += increment;
+        obj.innerHTML = current;
+        if (current === end) {
+          clearInterval(timer);
+        }
+
+      }, 1);
+
+      setTimeout(() => {
+        obj.innerHTML = end;
+        clearInterval(timer);
+      }, 800);
+    }
+  }
+  searchcaller(e){
+    if (this.searchKey.length >= 3) {
+      this.qaDataList = [];
+      this.mainPagenumber = 0;
+      this.getQuestionAnswer(false);
+    }
+    if (e.keyCode === 8 && this.searchKey.length === 0) {
+      this.resetSearch();
+    }
+  }
+  resetSearch() {
+    this.qaDataList = [];
+    this.searchKey = '';
+    this.mainPagenumber = 0;
+    this.getQuestionAnswer(false);
+  }
+  contextmenu(e) {
+    e.preventDefault();
+  }
+  tabchange(){
+    this.qaDataList = [];
+    this.searchKey = '';
+    this.mainPagenumber = 0;
+    this.userID = this.selectedIndex == 0 ?  this.userDetail.user_id : null;
+    this.getQuestionAnswer(true);
   }
 }

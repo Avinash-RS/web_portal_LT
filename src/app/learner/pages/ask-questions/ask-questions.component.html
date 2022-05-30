@@ -1,127 +1,236 @@
 <app-header></app-header>
-<div class="askQuestionsContainer">
-    <!-- TITLE AND BACK -->
-    <div class="titlebar">
-        <div class="d-flex align-items-center titleBack">
-            <div class="pointer d-flex align-items-center" (click)="goBack()">
-                <em class="lxp-Arrow backArrow"></em><span>{{'Back' | translate}}</span>
+<div class="qandWrapper d-flex">
+    <div class="questionLeftCol" #leftContainer infiniteScroll [infiniteScrollDistance]="2"
+    [scrollWindow]="false" [infiniteScrollThrottle]="500" (scrolled)="onScroll()">
+    <ul class="breadcrumb">
+        <li><em routerLink="/Landing/MyCourse" class="lxp-Go backArrow"></em> <span class="name">{{courseName}}</span> <span class="bar">/</span> <span class="breadCrumbTopic">Q&A</span></li>
+    </ul>
+    <div class="qandaSection">
+        <mat-tab-group animationDuration="100ms" (selectedTabChange)="tabchange()" [(selectedIndex)]="selectedIndex">
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    {{'My Question & Answer'}}
+                </ng-template>
+                <ng-container [ngTemplateOutlet]="filter"></ng-container>
+                <ng-container [ngTemplateOutlet]="tabcontent"></ng-container>
+            </mat-tab>
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    {{'All Question & Answer'}}
+                </ng-template>
+                <ng-container [ngTemplateOutlet]="filter"></ng-container>
+                <ng-container [ngTemplateOutlet]="tabcontent"></ng-container>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+</div>
+<div class="addQuestionRightCol">
+    <ul class="breadcrumb">
+        <li><em routerLink="/Landing/MyCourse" class="lxp-Go backArrow"></em> <span class="name">{{courseName}}</span> <span class="bar">/</span> <span class="breadCrumbTopic">Q&A</span></li>
+    </ul>
+    <div class="addQuestion">
+        <button (click)="openQuestionInput(questionDialog)"><em class="lxp-add"></em> {{'Ask A Question' | translate}}</button>
+    </div>
+    <div class="questionResults d-flex justify-content-between">
+        <div class="questions d-flex justify-content-start align-items-center" *ngIf="selectedIndex == 0">
+            <span><em class="lxp-question"></em></span>
+            <div>
+                <p>{{'No. of questions I asked' | translate}}</p>
+                <h2 id="qCount"></h2>
             </div>
-            <div class="courseTitle text-truncate"> | <span>{{courseName}} > {{'All Questions and Answer' | translate}}</span></div>
+        </div>
+        <div class="answeres d-flex justify-content-start align-items-center" >
+            <span><em class="lxp-answers"></em></span>
+            <div>
+                <p>{{ selectedIndex == 0 ? 'No. of questions answered' : 'Total questions answered' | translate}}</p>
+                <h2 id="aCount"></h2>
+            </div>
         </div>
     </div>
-    <div class="d-flex justify-content-between flex-wrap mx-20px"  *ngIf="moduleTopicData?.length">
-        <div class="d-flex align-items-center">
-            <div class="d-inline-block mt-10px mr-30px">
-                <span>{{'Sort by: ' | translate}}&nbsp;</span>
-                <select class="sel-pad" [(ngModel)]="qaSortKey" (change)="mainQAFilter('Sort')">
-                    <option [value]="-1" selected="true">{{'Newest' | translate}}</option>
-                    <option [value]="1">{{'Oldest' | translate}}</option>
-                </select>
-            </div>
-            <span *ngIf="checkLevel;else normaltopics">
-            <div class=" d-inline-block mt-10px" *ngIf="moduleTopicData?.length">
-                <span>{{'Filter by: ' | translate}}&nbsp;</span>
-                <select class="sel-pad mr-20px" [(ngModel)]="mainModule" (change)="mainQAFilter('M')">
-                    <option [ngValue]="null" [disabled]="false">{{'All Modules' | translate}}</option>
-                    <ng-container *ngFor="let skipper of moduleTopicData">
-                        <option  *ngFor="let item of skipper.childData" [title]="item.module_name" [ngValue]="item">{{item?.module_name?.length<41?item?.module_name:(item?.module_name| slice:0:40)+'...'}}</option>
-                    </ng-container>
-                </select>
-                </div>
-                <div class=" d-inline-block mt-10px">
-                <select *ngIf="mainModule" class="sel-pad " [(ngModel)]="mainTopic" (change)="mainQAFilter('T')">
-                    <option [ngValue]="null" [disabled]="false">{{'All Topics' | translate}}</option>
-                    <option  *ngFor="let item of mainModule.childData" [title]="item.topic_name" [ngValue]="item.topic_name">{{item?.topic_name?.length<41?item?.topic_name:(item?.topic_name| slice:0:40)+'...'}}</option>
-                </select>
-            </div>
-            </span>
-            <ng-template #normaltopics>
-            <div class=" d-inline-block mt-10px" *ngIf="moduleTopicData?.length">
-                <span>{{'Filter by: ' | translate}}&nbsp;</span>
-                <select class="sel-pad mr-20px" [(ngModel)]="mainModule" (change)="mainQAFilter('M')">
-                    <option [ngValue]="null" [disabled]="false">{{'All Modules' | translate}}</option>
-                    <option  *ngFor="let item of moduleTopicData" [ngValue]="item">{{item?.module_name?.length<41?item?.module_name:(item?.module_name| slice:0:40)+'...'}}</option>
-                </select>
-                </div>
-                <div class=" d-inline-block mt-10px">
-                <select *ngIf="mainModule" class="sel-pad " [(ngModel)]="mainTopic" (change)="mainQAFilter('T')">
-                    <option [ngValue]="null" [disabled]="false">{{'All Topics' | translate}}</option>
-                    <option  *ngFor="let item of mainModule.childData" [ngValue]="item.topic_name">{{item?.topic_name?.length<41?item?.topic_name:(item?.topic_name| slice:0:40)+'...'}}</option>
-                </select>
-            </div>
-        </ng-template>
-            
-        </div>
-        <div class="justify-content-end mt-10px" *ngIf="batchEndTime>=currentDate">
-            <button class="btn btn-primary" (click)="openQuestionInput(questionInputModal)">{{'Ask Question' | translate}}</button>
-        </div>
+    <div>
+        <figure>
+            <img src="https://assets.lntedutech.com/application_images/vocaskquestion.webp" alt="">
+        </figure>
     </div>
-    <div >
-        <div infiniteScroll [infiniteScrollDistance]="2" [scrollWindow]="false"
-        [infiniteScrollThrottle]="50" (scrolled)="onScroll()" class="myQuestions" *ngIf="allQuestionList?.length;else noallitems">
-            <div class="qaBox" *ngFor="let item of allQuestionList">
-                <span class="userAccount"><i
-                        class="lxp-AccountCircle align-text-bottom"></i>&nbsp;<span>{{item.user_name}}</span></span>&nbsp;|&nbsp;
-                <span class="QuestionMeta d-inline-flex">
-                    <p>{{'Asked on:' | translate}} &nbsp;{{item.question.askDate}},&nbsp;{{item.question.askTime}}</p>
-                </span>
-                <p class="quesiton">{{item.question.que}}</p>
-                <div class="QuestionMeta">
-                    <div class="badge badge-success">{{'Answered' | translate}}</div>
-                    <p>&nbsp; {{item.question.ansDate}},&nbsp;{{item.question.ansTime}}</p>
-                </div>
-                <p class="answer" *ngIf="item.question.ansDate">{{item.question.ans}}</p>
-    
-            </div>
-    
-        </div>
-    </div>
-    <ng-template #noallitems>
-        <div class="myQuestions d-flex align-items-center justify-content-center">
-            {{isLoading?loadMessage:emptyMessage}}
-        </div>
-    </ng-template>
+</div>
 </div>
 
-<ng-template #questionInputModal>
-    <div class="askQuestionsTitle" style=" position: relative !important;" (contextmenu)="contextmenu()">
-        <span style="font-weight: 400;">{{'Ask a Question' | translate}}</span> <span class="qaClose cursor-pointer"><i
-                (click)="closedialogbox()" class="lxp-Close"></i></span>
-    </div>
-    <div class="askQuestionsContainer mx-20px"(contextmenu)="contextmenu()">
-        <span *ngIf="checkLevel;else qinputlist">
-        <div class="mt-10px  d-inline-block" >
-            <select class="sel-pad-modal" [(ngModel)]="questionTopicList" (change)="askQAModuleSelect()">
-                <option [ngValue]="null" [disabled]="true">{{'Please select a module' | translate}}</option>
-                <ng-container *ngFor="let skipper of moduleTopicData">
-                <option  *ngFor="let item of skipper.childData" [title]="item.module_name" [ngValue]="item">{{item?.module_name?.length<41?item?.module_name:(item?.module_name| slice:0:40)+'...'}}</option>
+<ng-template #filter>   
+    <div class="allsearchFilter" *ngIf="moduleTopicData?.length">
+        <div class="drop d-flex align-items-center">
+                <span class="filterby">{{'Filter by :' | translate}}</span>
+                <ng-container  *ngIf="checkLevel;else normaltopics">
+                    <div class="modulefilter">
+                         <mat-form-field appearance="outline">
+                            <mat-select [(ngModel)] ="mainModule" (selectionChange)="mainQAFilter('M')">
+                                <mat-option [value]="'all'">All Modules</mat-option>
+                                <ng-container *ngFor="let skipper of moduleTopicData">
+                                    <mat-option  *ngFor="let item of skipper.childData" [value]="item">
+                                        {{item?.module_name}}
+                                    </mat-option>
+                                </ng-container>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                            <div *ngIf="mainModule !== 'all'">
+                            <mat-form-field appearance="outline">
+                                <mat-select [(ngModel)] ="mainTopic" (selectionChange)="mainQAFilter('T')">
+                                    <mat-option [value]="'all'">All Topics</mat-option>
+                                    <mat-option *ngFor="let item of mainModule.childData" [value]="item.topic_name">
+                                        {{item.topic_name}}
+                                    </mat-option>
+                                </mat-select>
+                                </mat-form-field>
+                            </div>
                 </ng-container>
-            </select>
-            <select *ngIf="questionTopicList" class="sel-pad-modal ml-20px" [(ngModel)]="questionTopic" >
-                <option [ngValue]="null" [disabled]="true">{{'Please select a topic' | translate}}</option>
-                <option  *ngFor="let item of questionTopicList.childData"  [title]="item.topic_name" [ngValue]="item.topic_name">{{item?.topic_name?.length<41?item?.topic_name:(item?.topic_name| slice:0:40)+'...'}}</option>
-            </select>
+                <ng-template #normaltopics>
+                    <div class="modulefilter">
+                        <mat-form-field appearance="outline">
+                            <mat-select [(ngModel)] = "mainModule" (selectionChange)="mainQAFilter('M')">
+                                <mat-option  [value]="'all'">All Modules</mat-option>
+                                <mat-option *ngFor="let item of moduleTopicData" [value]="item">
+                                    {{item.module_name}}
+                                </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                     </div>
+                    <div *ngIf="mainModule !== 'all'">
+                        <mat-form-field appearance="outline">
+                            <mat-select [(ngModel)] ="mainTopic" (selectionChange)="mainQAFilter('T')">
+                                <mat-option [value]="'all'">All Topics</mat-option>
+                                <mat-option *ngFor="let item of mainModule.childData" [value]="item.topic_name">
+                                    {{item.topic_name}}
+                                </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                    </div>
+                </ng-template>
+        </div>
+        <div class="searchbar">
+            <mat-form-field appearance="outline">
+                <input matInput [(ngModel)]="searchKey" (keyup)='searchcaller($event)' [placeholder]="'Search...' | translate">
+                <mat-icon matSuffix *ngIf="!searchKey">search</mat-icon>
+                <mat-icon matSuffix *ngIf="searchKey"(click)="resetSearch()" style="cursor: pointer;">close</mat-icon>
+             </mat-form-field>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #tabcontent>
+    <span *ngIf="!showSkeleton;else skeleton">
+        <span *ngIf="qaDataList.length;else noquescard">
+            <div class="content" *ngFor="let item of qaDataList;let i = index">
+                <div class="askedDate d-flex flex-row">
+                    <span *ngIf="selectedIndex == 0">{{'Question :' | translate}} {{i+ 1}}</span>
+                    <span *ngIf="selectedIndex == 1"><em class="lxp-AccountCircle"></em> {{item?.username}}</span>
+                    <span>{{'Asked on ' | translate}} {{item?.question?.askDate + item?.question?.askTime}}</span>
+                </div>
+                <div [innerHTML]="item?.question?.que"></div>
+                    <div *ngIf=" item?.question?.isAnswered ;else unans">
+                    <div class="answeredDate">
+                        <button class="answer" style="cursor:default;">{{'Answered' | translate}}</button>
+                        <span>{{item?.question?.ansDate + item?.question?.ansTime}}</span>
+                    </div>
+                        <p [innerHTML]="item?.question?.ans"></p>
+                    </div>
+                    <ng-template #unans>
+                        <div class="answeredDate">
+                            <button class="noAnswer" style="cursor:default;">{{'Unanswered' | translate}}</button>
+                        </div>
+                    </ng-template>
+            </div>
+        </span>
+    </span>
+</ng-template>
+
+<ng-template #skeleton>
+    <div class="content">
+        <ngx-skeleton-loader count="5"></ngx-skeleton-loader>
+    </div>
+    <div class="content">
+        <ngx-skeleton-loader count="5"></ngx-skeleton-loader>
+    </div>
+    <div class="content">
+        <ngx-skeleton-loader count="5"></ngx-skeleton-loader>
+    </div>
+</ng-template>
+
+<ng-template #noquescard>
+    <div class="d-flex align-items-center justify-content-center flex-column">
+        <figure>
+            <img src="https://assets.lntedutech.com/application_images/qanda.webp" alt="QandA">
+        </figure>
+        <div *ngIf="!searchKey">
+        <p *ngIf="selectedIndex == 0">
+            <!-- <span *ngIf="selectedtype=='un_answered&answered' || selectedtype=='un_answered'">
+                {{'You have not asked any questions' | translate}}
+            </span>
+            <span *ngIf="selectedtype=='answered'">
+                {{unAnsCheck?('Your question will be answered soon' | translate):'You have not asked any questions'}}
+            </span> -->
+            <span>
+                {{'You have not asked any questions' | translate}}
+            </span>
+        </p>
+        <p *ngIf="selectedIndex == 1">{{'No Q&A\'s to display at the moment' | translate}}</p>
+        </div>
+        <p *ngIf="searchKey">{{'No results found' | translate}}</p>
+    </div>
+</ng-template>
+
+<ng-template #questionDialog>
+    <div class="d-flex justify-content-between titleMargin" (contextmenu)="contextmenu()">
+        <div class="font-weight-bold">
+            <h2>{{'Ask A Question' | translate}}</h2>
+        </div>
+        <div><em (click)="closedialogbox()" class="lxp-Close pointer"></em></div>
+    </div>
+    <span *ngIf="checkLevel;else qinputlist">
+        <div class="d-inline-block allsearchFilter m0">
+            <mat-form-field appearance="outline">
+                <mat-select [(ngModel)] = "questionTopicList" placeholder="Please select a module" (selectionChange)="askQAModuleSelect()">
+                    <ng-container *ngFor="let skipper of moduleTopicData">
+                        <mat-option *ngFor="let item of skipper.childData" [value]="item">
+                            {{item?.module_name}}
+                        </mat-option>
+                    </ng-container>
+                </mat-select>
+              </mat-form-field>
+
+            <mat-form-field appearance="outline" *ngIf="questionTopicList">
+                <mat-select [(ngModel)] = "questionTopic" placeholder="Please select a topic">
+                    <mat-option *ngFor="let item of questionTopicList.childData" [value]="item.topic_name">
+                        {{item.topic_name}}
+                    </mat-option>
+                </mat-select>
+              </mat-form-field>
         </div>
         </span>
         <ng-template #qinputlist>
-            <div class="mt-10px  d-inline-block" >
-                <select class="sel-pad-modal" [(ngModel)]="questionTopicList" (change)="askQAModuleSelect()">
-                    <option [ngValue]="null" [disabled]="true">{{'Please select a module' | translate}}</option>
-                    <option  *ngFor="let item of moduleTopicData"  [title]="item.module_name" [ngValue]="item">{{item?.module_name?.length<41?item?.module_name:(item?.module_name| slice:0:40)+'...'}}</option>
-                </select>
-                <select *ngIf="questionTopicList" class="sel-pad-modal ml-20px" [(ngModel)]="questionTopic" >
-                    <option [ngValue]="null" [disabled]="true">{{'Please select a topic' | translate}}</option>
-                    <option  *ngFor="let item of questionTopicList.childData"  [title]="item.topic_name" [ngValue]="item.topic_name">{{item?.topic_name?.length<41?item?.topic_name:(item?.topic_name| slice:0:40)+'...'}}</option>
-                </select>
+            <div class="d-inline-block allsearchFilter m0">
+                <mat-form-field appearance="outline">
+                    <mat-select [(ngModel)] = "questionTopicList" placeholder="Please select a module" (selectionChange)="askQAModuleSelect()">
+                        <mat-option *ngFor="let item of moduleTopicData" [value]="item">
+                            {{item.module_name}}
+                        </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                <mat-form-field appearance="outline" *ngIf="questionTopicList">
+                    <mat-select [(ngModel)] = "questionTopic" placeholder="Please select a topic">
+                        <mat-option *ngFor="let item of questionTopicList.childData" [value]="item.topic_name">
+                            {{item.topic_name}}
+                        </mat-option>
+                    </mat-select>
+                  </mat-form-field>
             </div>
         </ng-template>
-        <div class="questionInput align-content-center">
-                    <textarea [(ngModel)]="questionText"></textarea>
-                    
-                </div>
-                <div class="d-flex justify-content-center mt-10px">
-                    <button class="btn btn-primary-outline mr-10px" (click)="closedialogbox()">{{'Cancel' | translate}}</button>
-                    <button class="btn btn-primary" (click)="submitMyQuestion()">{{'Submit Question' | translate}}</button>
-                </div>
+    <div class="dialogContent" (contextmenu)="contextmenu()">
+        <div>
+            <angular-editor [(ngModel)]="questionText" [config]="config"></angular-editor>
+        </div>
+        <div class="d-flex justify-content-between cancelSubmit">
+            <button class="cancelButton"(click)="closedialogbox()">{{'Cancel' | translate}}</button>
+            <button class="submitButton" (click)="submitMyQuestion()">{{'Submit Question' | translate}}</button>
+        </div>
     </div>
 </ng-template>
