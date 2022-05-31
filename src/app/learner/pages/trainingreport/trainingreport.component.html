@@ -23,8 +23,8 @@
         </div>
         <div class="legend">
             <ul>
-                <li *ngFor="let item of selfLearningData?.progressionChart">
-                    <div class="dot" [style.background-color]="'#49AE31'"></div> <div class="txt">{{item?.course_name}}</div>
+                <li *ngFor="let item of selfLearnLegends">
+                    <div class="dot" [style.background-color]="item?.color"></div> <div class="txt">{{item?.label}}</div>
                 </li>
             </ul>
         </div>
@@ -69,10 +69,13 @@
                 </mat-panel-description>
             </mat-expansion-panel-header>
             <div class="bodyContent">
-                <div class="self-learning-container">
-                  <ng-container *ngFor="let childitem of item?.moduleList;let i = index">
+              <div *ngIf="!showProgReport">
+                <ngx-skeleton-loader count="5" [theme]="{ 'border-radius': '0', height: '50px' }"></ngx-skeleton-loader>
+              </div>
+                <div class="self-learning-container"  *ngIf="showProgReport && item?.moduleList.length > 0;else noCourseCard">
+                  <ng-container *ngFor="let moduleItem of item?.moduleList;let i = index">
                     <mat-accordion>
-                        <mat-expansion-panel>
+                        <mat-expansion-panel (opened)="handleOpened(moduleItem)" (closed)="handleClosed(moduleItem)">
                             <mat-expansion-panel-header>
                                 <mat-panel-title>
                                     <div class="week-block parent-module">
@@ -84,12 +87,12 @@
                                     <div class="rightSec">
                                         <div class="weekModuleName">
                                             <div class="week-text">{{'Module' | translate}}</div>
-                                            <div class="module-block">{{childitem?.moduleName}</div>
+                                            <div class="module-block">{{moduleItem?.name}}</div>
                                           </div>
                                           <div class="subinfo infos">
                                             <div>
                                               <div class="week-text">{{'Topics' | translate}}</div>
-                                              <div>{{0 +'/'+ 0}}</div>
+                                              <div>{{moduleItem.topicCount.completed+'/'+moduleItem.topicCount.total}}</div>
                                             </div>
                                             <div>
                                               <div class="week-text">{{'Knowledge Check' | translate}}</div>
@@ -97,25 +100,25 @@
                                             </div>
                                             <div>
                                               <div class="week-text">{{'Time Spent' | translate}}</div>
-                                              <div>{{'-'}}
+                                              <div>{{moduleItem.totalDuration?(secondsTimeConverter(moduleItem.totalDuration)):'-- : -- : --'}}
                                               </div>
                                             </div>
                                           </div>
                                           <div class="statusring statusProgression">
-                                            <circle-progress [percent]='90' [radius]=17 [space]=-3
-                                              [outerStrokeGradient]=false [outerStrokeWidth]=3
-                                              [outerStrokeColor]="'#32CE6A'"
-                                              [innerStrokeColor]="'#bfbdbd'" [innerStrokeWidth]=3 [animation]="true" [animationDuration]="300"
-                                              [showSubtitle]="false" [titleFontSize]=13>
-                                            </circle-progress>
+                                            <circle-progress [percent]='moduleItem.overAllPercentage' [radius]=17 [space]=-3
+                                            [outerStrokeGradient]=false [outerStrokeWidth]=3
+                                            [outerStrokeColor]='moduleItem.overAllPercentage>99?"#32CE6A":"#FFA800"'
+                                            [innerStrokeColor]="'#bfbdbd'" [innerStrokeWidth]=3 [animation]="false" 
+                                            [showSubtitle]="false" [titleFontSize]=13>
+                                          </circle-progress>
                                           </div>
                                     </div>
                                 </mat-panel-title>
                             </mat-expansion-panel-header>
-                            <div class="topic-container">
+                            <div class="topic-container" *ngFor="let topicItem of moduleItem.topicDetails; let topicIndex = index">
                             <div class="leftPan"> 
-                                <div class="week-text">{{'Topic:' | translate}} {{1}}</div>
-                                <div class="font-weight-bold module-block">{{'topicItem.name'}}</div> 
+                                <div class="week-text">{{'Topic:' | translate}} {{topicIndex+1}}</div>
+                                <div class="font-weight-bold module-block">{{topicItem.name}}</div> 
                             </div>
                             <div class="rightpan">
                               <div class="laya">
@@ -123,11 +126,11 @@
                                 <div>
                                   <div class="week-text">{{'Time Spent' | translate}}</div>
                                   <div class="font-weight-bold">
-                                    {{'-- : -- : --'}}</div>
+                                    {{topicItem.activityDetails.totalDuration?secondsTimeConverter(topicItem.activityDetails.totalDuration):'-- : -- : --'}}</div>
                                 </div>
                                 <div>
                                   <div class="week-text">{{'Completion Level' | translate}}</div>
-                                  <div class="font-weight-bold">{{90}}%
+                                  <div class="font-weight-bold">{{topicItem.activityDetails.completedPercentage}}%
                                   </div>
                                 </div>
                                 <div></div>
@@ -137,23 +140,25 @@
                                 <div>
                                   <div class="week-text">{{'Attempted' | translate}}</div>
                                   <div class="font-weight-bold">
-                                    {{'--'}}
+                                    {{topicItem.knowledgeDetails.totalQuestion?topicItem.knowledgeDetails.totalQuestion :'--'}}
                                   </div>
                                 </div>
                                 <div>
                                   <div class="week-text">{{'Correct' | translate}}</div>
                                   <div class="font-weight-bold color-green">
-                                    {{'--'}}</div>
+                                    {{topicItem.knowledgeDetails.correctAns?topicItem.knowledgeDetails.correctAns:'--'}}</div>
                                 </div>
                                 <div>
                                   <div class="week-text">{{'Incorrect' | translate}}</div>
                                   <div class="font-weight-bold color-red">
-                                    {{'--'}}</div>
+                                    {{topicItem.knowledgeDetails.incorrect?topicItem.knowledgeDetails.incorrect:'--'}}</div>
                                 </div>
                               </div>
                             </div>
                             <div class="statusarea">
-                              <span  class="icon lxp-Tick green"></span>
+                              <span *ngIf="topicItem.status.value == 'completed'" class="icon lxp-Tick green"></span>
+                              <span *ngIf="topicItem.status.value == 'inprogress'" class="icon lxp-Timer_Outlined orange"></span>
+                              <span *ngIf="topicItem.status.value == 'yetToStart'" class="icon lxp-Play grey"></span>
                             </div>
                           </div>
                             
@@ -167,7 +172,7 @@
     </ng-container>
 
     <h5>Live Classroom Participation</h5>
-    <p>The Live classroom will be an Instructor-led session with many live scenarios and Case studies explained by the Trainers. The Doubts regarding Assignments, Practice lab, and Case studies will be discussed.</p>
+    <p>{{liveClassroomData?.description}}</p>
     <div class="liveclasschart d-flex align-items-center justify-content-between">
       <div class="left">
         <canvas baseChart 
@@ -192,48 +197,59 @@
       </div>
     </div>
     <div class="subheading">Course wise Live Classroom Attendance</div>
-    <mat-accordion class="expansionPanel">
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-              <div class="title d-flex align-items-center">
-                  <div class="left">
-                      <em class="lxp-coursewise"></em>
-                  </div>
-                  <div class="right d-flex">
-                      <span>Course Name</span>
-                      <h6>Learn How to Code Java</h6>
-                  </div>
-              </div>
-          </mat-panel-title>
-          <mat-panel-description>
-              <div class="status d-flex align-items-center">
-                  <div class="score average d-flex align-items-center">
-                      <div class="left">
-                          <em class="lxp-video-tutorial-1"></em>
-                      </div>
-                      <div class="right d-flex">
-                          <span>No. of Sessions:</span>
-                          <h6>8</h6>
-                      </div>
-                  </div>
-                  <div class="score average d-flex align-items-center">
-                      <div class="left">
-                          <em class="lxp-students"></em>
-                      </div>
-                      <div class="right d-flex">
-                          <span>Classes Attended:</span>
-                          <h6>6</h6>
-                      </div>
-                  </div>
-              </div>
-          </mat-panel-description>
-      </mat-expansion-panel-header>
-      <div class="trainingrpt">
-        <mat-card>
-            <ag-grid-angular class="ag-theme-alpine" [columnDefs]="cols" [rowData]="rows" [suppressRowTransform]="true" style="width:100%; min-height: 200px;" [ngStyle]="{height:(rows.length * 70)  + 'px' }" (gridReady)="onGridReady($event)" [defaultColDef]="defaultColDef" rowHeight="50"></ag-grid-angular>
-        </mat-card>
-    </div>
-      </mat-expansion-panel>
-    </mat-accordion>
+    <ng-container *ngFor="let item of liveClassroomData?.attendanceReport?.courselist">
+      <mat-accordion class="expansionPanel">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+                <div class="title d-flex align-items-center">
+                    <div class="left">
+                        <em class="lxp-coursewise"></em>
+                    </div>
+                    <div class="right d-flex">
+                        <span>Course Name</span>
+                        <h6>{{item?.coursename}}</h6>
+                    </div>
+                </div>
+            </mat-panel-title>
+            <mat-panel-description>
+                <div class="status d-flex align-items-center">
+                    <div class="score average d-flex align-items-center">
+                        <div class="left">
+                            <em class="lxp-video-tutorial-1"></em>
+                        </div>
+                        <div class="right d-flex">
+                            <span>No. of Sessions:</span>
+                            <h6>{{item?.sessionCount}}</h6>
+                        </div>
+                    </div>
+                    <div class="score average d-flex align-items-center">
+                        <div class="left">
+                            <em class="lxp-students"></em>
+                        </div>
+                        <div class="right d-flex">
+                            <span>Classes Attended:</span>
+                            <h6>{{item?.presentCount}}</h6>
+                        </div>
+                    </div>
+                </div>
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="trainingrpt">
+          <mat-card>
+              <ag-grid-angular class="ag-theme-alpine" [columnDefs]="cols" [rowData]="item?.activity" [suppressRowTransform]="true" style="width:100%; min-height: 200px;" [ngStyle]="{height:(item?.activity.length * 70)  + 'px' }" (gridReady)="onGridReady($event)" [defaultColDef]="defaultColDef" rowHeight="50"></ag-grid-angular>
+          </mat-card>
+      </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+  </ng-container>
 </div>
+
+<ng-template #noCourseCard>
+  <div class="noCard">
+      <div>
+        <img src="https://assets.lntedutech.com/application_images/noactivity.webp" alt="assignment">
+      </div>
+      <p>{{'Please start the course to view your progression report!' | translate}}</p>
+  </div>
+</ng-template>

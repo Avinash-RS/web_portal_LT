@@ -2990,3 +2990,32 @@ query selflearning_report($batchId:String!,$userId:String!){
   }
 }
 `;
+export const overallActivityAttendance = gql`
+ query overallActivityAttendance($batchId:String!,$userId:String!){
+    overallActivityAttendance(batchId:$batchId,userId:$userId){
+      success
+      message
+      data{
+        attendanceReport{
+          courselist{
+            sessionCount
+            presentCount
+            coursename
+            activity{
+              topicname
+              startdate
+              attendencedetails{
+                Attendence
+              }
+            }
+          }
+        }
+        attendanceGraph{
+          allSessionCount
+          allPresentCount
+        }
+        description
+      }
+    }
+  }
+`
