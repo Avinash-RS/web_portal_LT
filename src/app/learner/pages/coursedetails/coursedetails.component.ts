@@ -274,6 +274,7 @@ export class CoursedetailsComponent implements OnInit {
   subModuleHolder: number = null;
   submoduleTitle: any;
   subModuleHolderUI: number;
+  isTesting :boolean = false;
   subModuleData: Observable<any>;
   topicData$: Observable<any>;
   courseType: string;
@@ -341,6 +342,7 @@ export class CoursedetailsComponent implements OnInit {
       this.drawersOpen = true;
       this.performOverLay = false;
     }
+    this.isTesting = localStorage.getItem('isTesting') && localStorage.getItem('isTesting') == 'true' ? true :false;
     if (this.checkDetails === undefined) {
       this.batchId = localStorage.getItem('currentBatchId');
       this.batchEndTime = localStorage.getItem('currentBatchEndDate');

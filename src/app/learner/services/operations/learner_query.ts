@@ -2387,6 +2387,7 @@ export const get_batchwise_learner_dashboard_data = gql`
         enableCredits
         selflearning_totalweeks
         QA_totalweeks
+        isTesting
         link
         toc
         lastLogIndex
