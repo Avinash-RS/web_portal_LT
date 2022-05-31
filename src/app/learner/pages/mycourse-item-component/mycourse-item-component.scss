@@ -73,6 +73,7 @@
       transition-property: color;
       transition-duration: 0.2s;
       z-index: 99;
+      cursor: pointer;
       &::before {
         content: "";
         position: absolute;
