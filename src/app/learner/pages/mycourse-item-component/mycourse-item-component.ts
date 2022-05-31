@@ -115,7 +115,6 @@ export class MycourseItemComponent implements OnInit {
   // PLAYER PAGE NAVIGATION
   gotoDesc(c) {
     c.batch_end_date_Timer = new Date(c.batch_end_date).getTime();
-
     const detail = {
       id: c.course_id,
       wishlist: c.wishlisted || false,
@@ -125,6 +124,7 @@ export class MycourseItemComponent implements OnInit {
       course_status: c.course_status,
       batch_id: c.batchid,
       batchEndTime: c.batch_end_date_Timer,
+      isTesting: c?.isTesting ? true :false,
       link: c.link,
       toc: c.toc,
       lastLogIndex: c.lastLogIndex,
@@ -144,7 +144,7 @@ export class MycourseItemComponent implements OnInit {
     localStorage.setItem('persentage', c && c.coursePlayerStatus &&
     c.coursePlayerStatus.course_percentage ? c.coursePlayerStatus.course_percentage : '');
     localStorage.setItem('currentBatchId', c.batchid);
-
+    localStorage.setItem('isTesting',c?.isTesting ? 'true' :'false')
     localStorage.setItem('resumeData', JSON.stringify({link: c.link, lastModule: c.lastModule,
     lastTopic: c.lastTopic, module_id: c.module_id, topic_id: c.topic_id, checklevel: c.checklevel,
     course_status: c.course_status, toc: c.toc}));
