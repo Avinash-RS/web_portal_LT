@@ -6,7 +6,7 @@
         <span>Training Report</span>
  </div>
     <h5>Self Learning</h5>
-    <p>The Self-Learning consists of enriched Videos on various Topics relevant to the stack. The concept is explained with instructions, context clues, and examples to figure out the answer on their own. The videos explain concepts with examples, Case Studies, demonstrations, and exercises through which the learner can practice the same.</p>
+    <p>{{selfLearningData?.description}}</p>
     <div class="subheading">Course Completion Progress</div>
     <mat-card>
         <div class="chart">
@@ -23,15 +23,16 @@
         </div>
         <div class="legend">
             <ul>
-                <li *ngFor="let item of legends">
-                    <div class="dot" [style.background-color]="item.color"></div> <div class="txt">{{item.label}}</div>
+                <li *ngFor="let item of selfLearningData?.progressionChart">
+                    <div class="dot" [style.background-color]="'#49AE31'"></div> <div class="txt">{{item?.course_name}}</div>
                 </li>
             </ul>
         </div>
     </mat-card>
     <div class="subheading">Self Learning Progression Report</div>
-    <mat-accordion class="expansionPanel">
-        <mat-expansion-panel>
+    <ng-container *ngFor="let item of selfLearningData?.progressionReport">
+      <mat-accordion class="expansionPanel">
+          <mat-expansion-panel>
             <mat-expansion-panel-header>
                 <mat-panel-title>
                     <div class="title d-flex align-items-center">
@@ -40,7 +41,7 @@
                         </div>
                         <div class="right d-flex">
                             <span>Course Name</span>
-                            <h6>Learn How to Code Java</h6>
+                            <h6>{{item?.name}}</h6>
                         </div>
                     </div>
                 </mat-panel-title>
@@ -52,7 +53,7 @@
                             </div>
                             <div class="right d-flex">
                                 <span>No. of Modules:</span>
-                                <h6>8</h6>
+                                <h6>{{item?.moduleCount}}</h6>
                             </div>
                         </div>
                         <div class="score average d-flex align-items-center">
@@ -61,7 +62,7 @@
                             </div>
                             <div class="right d-flex">
                                 <span>No. of Topics:</span>
-                                <h6>22</h6>
+                                <h6>{{item?.TopicCount}}</h6>
                             </div>
                         </div>
                     </div>
@@ -69,6 +70,7 @@
             </mat-expansion-panel-header>
             <div class="bodyContent">
                 <div class="self-learning-container">
+                  <ng-container *ngFor="let childitem of item?.moduleList;let i = index">
                     <mat-accordion>
                         <mat-expansion-panel>
                             <mat-expansion-panel-header>
@@ -76,13 +78,13 @@
                                     <div class="week-block parent-module">
                                         <span>
                                             <div class="week-text">Week</div> 
-                                            <div  class="week-number">01</div> 
+                                            <div  class="week-number">{{i+1}}</div> 
                                         </span>
                                     </div>
                                     <div class="rightSec">
                                         <div class="weekModuleName">
                                             <div class="week-text">{{'Module' | translate}}</div>
-                                            <div class="module-block">{{'name'}}</div>
+                                            <div class="module-block">{{childitem?.moduleName}</div>
                                           </div>
                                           <div class="subinfo infos">
                                             <div>
@@ -157,10 +159,13 @@
                             
                         </mat-expansion-panel>
                     </mat-accordion>
+                  </ng-container>
                 </div>
             </div>
-        </mat-expansion-panel>
-    </mat-accordion>
+         </mat-expansion-panel>
+      </mat-accordion>
+    </ng-container>
+
     <h5>Live Classroom Participation</h5>
     <p>The Live classroom will be an Instructor-led session with many live scenarios and Case studies explained by the Trainers. The Doubts regarding Assignments, Practice lab, and Case studies will be discussed.</p>
     <div class="liveclasschart d-flex align-items-center justify-content-between">

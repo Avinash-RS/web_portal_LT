@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { RowSpanParams } from 'ag-grid-community';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
@@ -9,6 +10,7 @@ import { Label } from 'ng2-charts';
   styleUrls: ['./trainingreport.component.scss']
 })
 export class TrainingreportComponent implements OnInit {
+  selfLearningData;
   public barChartOptions: ChartOptions = {
     responsive: true,
     legend:{
@@ -133,16 +135,41 @@ export class TrainingreportComponent implements OnInit {
   ];
   gridApi: any;
   rowData: any;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private service:LearnerServicesService) { }
 
   ngOnInit(): void {
+    console.log(this.selfLearningData);
+    this.getSelflearningData();
   }
   onGridReady(params: any) {
     this.gridApi = params.api;
     this.gridApi.sizeColumnsToFit();
   }
 
-
+  getSelflearningData(){
+    this.service.selflearning_report('191654248878434','mls2eg').subscribe((result:any)=>{
+      if(result?.data?.selflearning_report?.success) {
+        this.selfLearningData = result?.data?.selflearning_report?.data;
+        if(this.selfLearningData.progressionChart.length > 0) {
+          var bardata = [];
+          var barlabel = []
+          this.selfLearningData.progressionChart.forEach(element => {
+            bardata.push(element.course_percentage);
+            barlabel.push(element.course_name);
+          });
+        }
+        this.barChartLabels = barlabel;
+        this.barChartDataSet = [
+          {
+            data: bardata,
+            // backgroundColor: ['#49AE31','#1B4E9B','#27BBEE','#BE2020','#FFCC00','#AE5FDE'],
+            // hoverBackgroundColor: ['#49AE31','#1B4E9B','#27BBEE','#BE2020','#FFCC00','#AE5FDE'],
+            barThickness: 35,
+          }
+        ];
+      }
+    });
+  }
   rowSpan(params: RowSpanParams) {
 
     if (params.data.remarks === 'Regular, very punctual to classes and silent listener & performer. Response to questions regularly (mostly via IM Messages). She is new to Java Programming but understands the concepts easily. Need to be more interactive by asking questions/doubts') {

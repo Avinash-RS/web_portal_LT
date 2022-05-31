@@ -80,7 +80,10 @@
             }
         }
     }
-    .expansionPanel { 
+    .expansionPanel {
+      .mat-expansion-panel {
+        margin-bottom: 1em;
+      }
         .title { 
             .left {
                 margin-right: 8px;
@@ -594,7 +597,6 @@
     height: 25px;
   } 
 }
-
 
 ::ng-deep.trainingrpt { 
   mat-card {

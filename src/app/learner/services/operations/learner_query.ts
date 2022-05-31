@@ -2930,3 +2930,63 @@ export const getlearnerquiz = gql `
     }
   }
 `;
+export const selflearning_report = gql `
+query selflearning_report($batchId:String!,$userId:String!){
+  selflearning_report(batchId:$batchId,userId:$userId){
+    success
+    message
+    data{
+      description
+      progressionReport{
+        name
+        moduleCount
+        TopicCount
+        moduleList{
+          name
+          week
+          moduleName
+          totalDuration
+          overAllPercentage
+          topicDetails{
+            id
+            name
+            status{
+              value
+              enums
+            }
+            knowledgeDetails{
+              name
+              totalQuestion
+              correctAns
+              incorrect
+            }
+            activityDetails{
+              name
+              totalDuration
+              completedPercentage
+            }
+          }
+          colourCode{
+            value
+            enums
+          }
+          knowledgeCount{
+            total
+            completed
+          }
+          topicCount{
+            total
+            completed
+          }
+        }
+      }
+      progressionChart{
+        _id
+        course_percentage
+        course_id
+        course_name
+      }
+    }
+  }
+}
+`;
