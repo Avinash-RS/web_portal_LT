@@ -781,57 +781,10 @@ export const getlearnerdashboard = gql`
           course_description
           course_long_description
           course_img_url
-          preview_video
-          certificate_name
-          course_mode
           course_type
-          course_language
           course_status
-          feed_back
-          drm
-          user_role
           user_id
           user_name
-          version
-          location
-          course_start_datetime
-          course_end_datetime
-          advertised_start
-          course_video_url
-          social_sharing_url
-          certificate_display_behaviour
-          certificates_show_before_end
-          certificate_html_view_enabled
-          has_any_active_web_certificate
-          lowest_passing_grade
-          mobile_available
-          visible_to_staff_only
-          enrollment_start
-          enrollment_end
-          invitation_only
-          max_student_enrollments_allowed
-          announcement
-          catalog_visibility
-          short_description
-          self_paced
-          marketing_url
-          certificate_available_date
-          article_count
-          downloadable_resource_count
-          course_level
-          step_towards
-          rating
-          price
-          course_category
-          created_by
-          updated_by
-          admin_id
-          is_published
-          learner_count
-          is_active
-          published_by
-          publisher_id
-          updated_by_id
           course_id
           created_at
           updated_at
@@ -1046,72 +999,7 @@ export const getlearnerdashboard = gql`
           updated_by_id
           user_role
           user_id
-          user_name
-          published_on
-          updated_at
-          created_at
-          feed_back
-          course_long_description
-          published_on_date
-          completed_module_count
-          completed_topic_count
-          self_paced_learning_progression
-          image_self_paced_learning_time
-          total_module_count
-          total_topic_count
-          total_duration
-          catalogue_id
-          super_sub_category_id
-          pre_requisite {
-            name
-            image
-          }
-          takeway_details {
-            text
-            description
-            what_will_you_learn
-            media
-          }
-
-          coursepartner_details {
-            name
-            image
-          }
-          category_id
-          parent_sub_category_id
-          course_content_details {
-            name
-            type
-            is_active
-            parent_id
-            description
-            sub_section_id
-            file_content {
-              video_url
-              image_url
-              audio_url
-              file_url
-            }
-            unit {
-              name
-              type
-              is_active
-              parent_id
-              description
-              sub_section_id
-              file_content {
-                video_url
-                image_url
-                audio_url
-                file_url
-              }
-            }
-          }
-          author_details {
-            image
-            author_name
-            description
-          }
+          user_name          
         }
       }
     }
