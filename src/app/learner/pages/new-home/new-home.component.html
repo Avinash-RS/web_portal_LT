@@ -51,6 +51,9 @@
                 <div class="d-flex justify-content-center OTPInput mt-5 mb-5 otp">
                     <ng-otp-input #authInput (onInputChange)="onAuthChange($event)" (keydown.enter)="verifyAuth()"  [config]="{length:6,allowNumbersOnly: true}"></ng-otp-input>
                 </div>
+                <div class="d-flex justify-content-center mt-1">
+                  <re-captcha  #captchaRef="reCaptcha" (resolved)="resolvedReset2FA($event)" (error)="onError($event)" errorMode="handled" [siteKey]="siteKey" size='invisible'></re-captcha>
+                </div>
                 <div class="gradientBtn">
                   <button id="login" mat-raised-button (click)="verifyAuth()">
                     <span *ngIf="!loader">{{'Verify' | translate}}</span>
@@ -60,7 +63,9 @@
                       </div> -->
                     </div>
                   </button>
-                  <span class="resetAuthenticator" (click)="resetAuth()">Reset Goggle Authenticator?</span>
+                  <span>
+                    <a class="resetAuthenticator" (click)="checkCaptchaReset2FA(captchaRef)">{{'Reset Google Authenticator?' | translate}}</a>
+                  </span>
                 </div>
               </div>
             <div class="dontHaveAccount">
