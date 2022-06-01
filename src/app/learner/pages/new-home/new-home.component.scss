@@ -234,11 +234,12 @@
         .resetAuthenticator {
           display: flex;
           justify-content: flex-end;
-          margin-top: 10px;
+          margin-top: 20px;
           color: #C02222;
           font-size: 12px;
           font-weight: 400;
           line-height: normal;
+          cursor: pointer;
         }
     }
     a {

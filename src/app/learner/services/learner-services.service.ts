@@ -16,7 +16,7 @@ import { addTopicreference, bulkclaimcourse, claimcourse, createGuidanceRequest,
          userRegistrationmobileOtpverify, userRegistrationUsernamesuggestion, viewProfile, 
          viewProfile1, set_bookmark, set_askaquestion, getMyQuestion, get_allquestion, 
          getQAsortsearch, getActivityCalendar, getengineersForumData, createEngineersForumData,
-         getuserRecordbasedonSecretKey, verify_tfa_setup, userexperienceQry
+         getuserRecordbasedonSecretKey, verify_tfa_setup, resetTFA, userexperienceQry
         ,insertModuleTopicSkeleton,vocationalqNda} from './operations/learner_mutation';
 import {
 boarddetail, checkExistingUser, getActivityDetailsByBatchAndCourseID, getAssignmentmoduleData,
@@ -165,6 +165,15 @@ getMessage(): Observable<any> {
       variables: {
         user_id,
         token
+      }
+    });
+  }
+
+  resetAuthCode(code) {
+    return this.Apollo.query({
+      query: resetTFA,
+      variables: {
+        resetCode: code
       }
     });
   }
