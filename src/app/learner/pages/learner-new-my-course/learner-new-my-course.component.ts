@@ -92,12 +92,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
       this.router.navigate(['/Learner/profile']);
       return;
     }
-    this.learnerService.insertSkeleton(this.userDetailes.user_id).subscribe((result:any)=>{
-      this.getDashboardMyCourse(this.userDetailes.user_id, this.userDetailes._id);
-  },
-  err =>{
     this.getDashboardMyCourse(this.userDetailes.user_id, this.userDetailes._id);
-  })
   }
   @ViewChild('completedTopics', { read: DragScrollComponent }) ds: DragScrollComponent;
   @ViewChild('inProgress', { read: DragScrollComponent }) dsInProgress: DragScrollComponent;
@@ -403,8 +398,6 @@ export class LearnerNewMyCourseComponent implements OnInit {
     this.UserDetails = JSON.parse(localStorage.getItem('UserDetails')) || null;
     this.userId = this.UserDetails.user_id;
     this.selectedDate = moment().format();
-    this.learnerService.insertSkeleton(this.userId).subscribe((result:any)=>{
-    })
     this.getLearnerActivity(this.selectedDate);
     // this.triggerAvailablecourse = setInterval(() => {
     //   this.getCountForCategories();
@@ -531,12 +524,17 @@ export class LearnerNewMyCourseComponent implements OnInit {
     this.learnerService.get_batchwise_learner_dashboard_data_v2(userId, requestType, jobRoleIdSEQ).subscribe((BcourseData: any) => {
         if(BcourseData?.data?.get_batchwise_learner_dashboard_data_v2?.success){
           this.courseDetailsList = BcourseData?.data.get_batchwise_learner_dashboard_data_v2?.message.length > 0 ? BcourseData.data.get_batchwise_learner_dashboard_data_v2.message :[];
-          this.courseDetailsList.forEach((value) => {
-            value.show = true;
+          this.learnerService.getLearnerDashboard(userId, userObjId, 'undefined', requestType, 'enrolment').subscribe((EcourseData: any) => {
+            const EcourseDetail = EcourseData.data.get_learner_dashboard.message.enrolled_course_details;
+            this.enrolledCourses = EcourseDetail && EcourseDetail !== null ? EcourseDetail : [];
+            this.courseDetailsList.push(...this.enrolledCourses);
+            this.courseDetailsList.forEach((value) => {
+              value.show = true;
+            });
+            this.onGoingCourseCount = (BcourseData.data.get_batchwise_learner_dashboard_data_v2.ongoing ?BcourseData.data.get_batchwise_learner_dashboard_data_v2.ongoing:0) + EcourseData.data.get_learner_dashboard.message.ongoing_count;
+            this.completedCourseCount = (BcourseData.data.get_batchwise_learner_dashboard_data_v2.completed ? BcourseData.data.get_batchwise_learner_dashboard_data_v2.completed:0 )+ EcourseData.data.get_learner_dashboard.message.completed_count;
+            this.allCourseCount = (BcourseData.data.get_batchwise_learner_dashboard_data_v2.all ? BcourseData.data.get_batchwise_learner_dashboard_data_v2.all:0) + EcourseData.data.get_learner_dashboard.message.all_count;
           });
-          this.onGoingCourseCount = BcourseData.data.get_batchwise_learner_dashboard_data_v2.ongoing ?BcourseData.data.get_batchwise_learner_dashboard_data_v2.ongoing:0;
-          this.completedCourseCount = BcourseData.data.get_batchwise_learner_dashboard_data_v2.completed ? BcourseData.data.get_batchwise_learner_dashboard_data_v2.completed:0;
-          this.allCourseCount =BcourseData.data.get_batchwise_learner_dashboard_data_v2.all ? BcourseData.data.get_batchwise_learner_dashboard_data_v2.all:0;
         }
         else {
           this.courseDetailsList = [];
@@ -546,6 +544,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
         }
         this.courseSkel = true;
     });
+
 
   }
 
