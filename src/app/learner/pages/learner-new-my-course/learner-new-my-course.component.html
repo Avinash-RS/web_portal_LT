@@ -8,7 +8,7 @@
                     <!-- Over Side Push -->
                     <div class="navBackBtn">
                         <span type="button" (click)="drawer.toggle();show=!show">
-                            <em class="lxp-TOC_Expand"></em>
+                            <em class="lxp-TOC_Expand pointer"></em>
                         </span>
                     </div>
                     <div class="prevNext">
@@ -409,10 +409,10 @@
                                 </drag-scroll>
                                 <div class="draggable-button-container">
                                     <div class="leftArrow">
-                                        <button [disabled]="leftNavDisabledInProgress" [ngClass]="leftNavDisabledInProgress ? 'disableArrow' : 'showArrow'" (click)="moveLeftInProgress()" class="draggable-button float-left"> <em class="lxp-Right_Direction_Arrow"></em> </button>
+                                        <button [disabled]="leftNavDisabledInProgress" [ngClass]="leftNavDisabledInProgress ? 'disableArrow' : 'showArrow'" (click)="moveLeftInProgress()" class="draggable-button float-left pointer"> <em class="lxp-Right_Direction_Arrow"></em> </button>
                                     </div>
                                     <div class="rightArrow">
-                                        <button [disabled]="rightNavDisabledInProgress" [ngClass]="rightNavDisabledInProgress ? 'disableArrow' : 'showArrow'" (click)="moveRightInProgress()" class="draggable-button float-right"> <em class="lxp-Right_Direction_Arrow"></em> </button>
+                                        <button [disabled]="rightNavDisabledInProgress" [ngClass]="rightNavDisabledInProgress ? 'disableArrow' : 'showArrow'" (click)="moveRightInProgress()" class="draggable-button float-right pointer"> <em class="lxp-Right_Direction_Arrow"></em> </button>
                                     </div>
                                 </div>
                             </div>
@@ -476,10 +476,10 @@
                                 </drag-scroll>
                                 <div class="draggable-button-container">
                                     <div class="leftArrow">
-                                        <button [disabled]="leftNavDisabled" [ngClass]="leftNavDisabled ? 'disableArrow' : 'showArrow'" (click)="moveLeft()" class="draggable-button float-left"> <em class="lxp-Right_Direction_Arrow"></em> </button>
+                                        <button [disabled]="leftNavDisabled" [ngClass]="leftNavDisabled ? 'disableArrow' : 'showArrow'" (click)="moveLeft()" class="draggable-button float-left pointer"> <em class="lxp-Right_Direction_Arrow"></em> </button>
                                     </div>
                                     <div class="rightArrow">
-                                        <button [disabled]="rightNavDisabled" [ngClass]="rightNavDisabled ? 'disableArrow' : 'showArrow'" (click)="moveRight()" class="draggable-button float-right"> <em class="lxp-Right_Direction_Arrow"></em> </button>
+                                        <button [disabled]="rightNavDisabled" [ngClass]="rightNavDisabled ? 'disableArrow' : 'showArrow'" (click)="moveRight()" class="draggable-button float-right pointer"> <em class="lxp-Right_Direction_Arrow"></em> </button>
                                     </div>
                                 </div>
                             </div>
@@ -493,7 +493,7 @@
     </div>
     <div class="taskToDo">
         <span type="button" (click)="drawer.toggle();show=!show">
-            <em class="lxp-Calendar_Todo"></em>
+            <em class="lxp-Calendar_Todo pointer"></em>
         </span>
         <div class="arrow"></div>
     </div>

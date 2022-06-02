@@ -29,7 +29,7 @@
           <div [ngClass]="!course.isReadMore ? '' : 'showText'">
               <div class="arrowWrapper d-flex align-items-start">
                   <p [ngClass]="!course.isReadMore ? 'addEllipsis': ''">{{course.course_description}}</p>
-                  <button class="readMoreLess" type="button" (click)="course.isReadMore = !course.isReadMore">
+                  <button class="readMoreLess pointer" type="button" (click)="course.isReadMore = !course.isReadMore">
                       <em [class]="course.isReadMore?'lxp-Arrow':'lxp-DownArrow'"></em>
                   </button>
               </div>
