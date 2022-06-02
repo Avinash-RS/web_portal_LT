@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup,Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import * as myGlobals from '@core/globals';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
+import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 // import { SocketioService } from '@learner/services/socketio.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
@@ -214,7 +215,8 @@ export class LoginComponent implements OnInit {
             '';
   }
   constructor(public translate: TranslateService, private router: Router, private formBuilder: FormBuilder, public learnerService: LearnerServicesService,public gaService:GoogleAnalyticsService,
-             // public socketService: SocketioService,
+             // public socketService: SocketioService, 
+             public alert: AlertServiceService,
               private service: LearnerServicesService, private toastr: ToastrService, private activatedRoute: ActivatedRoute,private titleService: Title, private dialog: MatDialog, 
               @Optional() public dialogRef: MatDialogRef<LoginComponent>) {
       this.languages = [{lang: 'ta' , languagename: 'Tamil' } , { lang: 'en' , languagename: 'English'  }] ;
@@ -226,6 +228,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.lmsPortal2FA();
     this.portalToIggnite();
     this.loginForm = this.formBuilder.group({
       // username: new FormControl('', myGlobals.req),
@@ -309,6 +312,21 @@ export class LoginComponent implements OnInit {
       }
     });
   }
+
+  lmsPortal2FA() {
+    this.activatedRoute.queryParams.subscribe(params => {
+      if (params && params['code']) {
+        this.learnerService.resetAuthCode(params['code']).subscribe((response: any) => {
+          this.alert.openAlert(response.data.resetTFA.message, '');
+        },
+        err => {
+          this.alert.openAlert('Something went wrong', '');
+        }
+        );
+      }
+    });
+  }
+
 /*
   portalToIggnite() {
     this.activatedRoute.queryParams.subscribe(params => {
