@@ -22,7 +22,7 @@ import {
 boarddetail, checkExistingUser, getActivityDetailsByBatchAndCourseID, getAssignmentmoduleData,
  getcalenderactivity, getCountForCategories, getCountForJobroleCategories, getCoureBasedOnCatalog,
   getCourseActivities, getCoursePlayerStatusForCourse, getDetailsCount, getFeedbackQuestion,
-   getlearnerdashboard, getLearnerenrolledCourses, getlearnertrack, getLevelCategoryData,
+  get_learner_dashboard, getLearnerenrolledCourses, getlearnertrack, getLevelCategoryData,
     getLoginUserDetail, getmoduleData, getperformActivityData, getPopularcourse, getprojectActivityData,
   // getReadLearnerActivity,
   getReadLeanerActivity, getsupersubcategory, getTopicAttendanceDetailsByUsername, getActivecourseCount,
@@ -704,20 +704,6 @@ getMessage(): Observable<any> {
   }
 
 
-
-  getLearnerDashboard(userId, userObjId, pagenumber, requesType, courseType) {
-    return this.Apollo.query({
-      query: getlearnerdashboard,
-      variables: {
-        user_id: userId,
-        user_obj_id: userObjId,
-        pagenumber,
-        request_type: requesType,
-        course_type: courseType
-      }
-    });
-  }
-
   createGuidanceRequestLanding(name, emailid, courseid, createdbyip) {
     return this.Apollo.query({
       query: createGuidanceRequest,
@@ -1087,6 +1073,7 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
       }
     });
   }
+
   get_batchwise_learner_dashboard_data_v2(user_id, request_type, jobroleCategoryId) {
     return this.Apollo.query({
       query: get_batchwise_learner_dashboard_data_v2,
@@ -1097,6 +1084,20 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
       }
     });
   }
+
+  getLearnerDashboard(user_id, user_obj_id, pagenumber, request_type, course_type) {
+    return this.Apollo.query({
+      query: get_learner_dashboard,
+      variables: {
+        user_id,
+        user_obj_id,
+        pagenumber,
+        request_type,
+        course_type
+      }
+    });
+  }
+
   get_batchwise_learner_dashboard_data(user_id, request_type, jobroleCategoryId) {
     return this.Apollo.query({
       query: get_batchwise_learner_dashboard_data,
