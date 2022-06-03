@@ -342,7 +342,8 @@
                                    
                                    
                                     <ng-container *ngFor="let item of courseDetailsList" (deferLoad)="item.show = true">
-                                        <app-mycourse-item-component *ngIf="item.show" [courseItems]="item"></app-mycourse-item-component>
+                                        <app-mycourse-item-component *ngIf="item.show && !freeCourses" [courseItems]="item"></app-mycourse-item-component>
+                                        <app-microcourse *ngIf = "item.show && freeCourses"></app-microcourse>
                                     </ng-container>
                                 </div>
                                 </div>

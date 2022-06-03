@@ -10,7 +10,7 @@ import { LearnerServicesService } from '@learner/services/learner-services.servi
 import { formatDate } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { environment } from '@env/environment';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DragScrollComponent } from 'ngx-drag-scroll';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
@@ -84,7 +84,14 @@ export class LearnerNewMyCourseComponent implements OnInit {
   constructor(private dialog: MatDialog, private router: Router,
               public learnerService: LearnerServicesService,
               private gs: GlobalServiceService, public CommonServices: CommonServicesService,
-              public translate: TranslateService) {
+              public translate: TranslateService, public urlRoute: ActivatedRoute) {
+              var urlLink = this.urlRoute.routeConfig.path;
+              console.log(this.urlRoute.url);
+              if (urlLink == 'Microcourses'){
+                this.freeCourses = true;
+              } else {
+                this.freeCourses = false;
+              }
     const lang = localStorage.getItem('language');
     this.translate.use(lang ? lang : 'en');
     this.userDetailes = this.gs.checkLogout();
@@ -105,6 +112,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
   showJobRole = false;
   isReadMore = true;
   show = true;
+  freeCourses;
   innerWidth: number;
   expandcollapse = true;
   viewDate: Date = new Date();

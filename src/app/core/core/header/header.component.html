@@ -84,6 +84,14 @@
 
 </mat-toolbar>
 <div class="sideNavStrip" [ngClass]="expandTxt?'navClose':'navOpen'" *ngIf="!hideHeaderMenu">
+  <div class="stripItem" routerLink="/Landing/Microcourses" [ngClass]="activeUrl === '/Landing/Microcourses' ? 'activeItem' : 'normalItem'" [ngClass]="expandTxt?'navOpen':'navClose'">
+    <div class="icoBox">
+      <em class="lxp-SelfPaced "></em>
+    </div>
+    <div *ngIf="expandTxt" class="navTitle">
+      {{'Micro Courses' | translate}}
+    </div>
+  </div>
   <div class="stripItem" routerLink="/Landing/MyCourse" [ngClass]="activeUrl === '/Landing/MyCourse' ? 'activeItem' : 'normalItem'" [ngClass]="expandTxt?'navOpen':'navClose'">
     <div class="icoBox">
       <em class="lxp-SelfPaced "></em>

@@ -38,6 +38,11 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
         // canLoad: [AuthGuard],
         data: { animation: 'Learner  MyCourse' , title: 'My Courses'}
       },
+      {
+        path: 'Microcourses',
+        component: LearnerNewMyCourseComponent,
+        data: { animation: 'Learner  MicroCourses' , title: 'Micro Courses'}
+      },
   ];
 
 
