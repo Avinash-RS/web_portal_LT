@@ -6,7 +6,7 @@
   </ul>
 
   <div class="markAllbtn" *ngIf="notifications?.length > 0">
-    <button class="markBtn" (click)="markAsRead(notifications,'all')" [disabled]="unreadCount == 0">
+    <button class="markBtn pointer" (click)="markAsRead(notifications,'all')" [disabled]="unreadCount == 0">
       <u><strong>{{'Mark all as read' | translate}}</strong></u>
     </button>
   </div>
