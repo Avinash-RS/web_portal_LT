@@ -89,6 +89,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
     this.translate.use(lang ? lang : 'en');
     this.userDetailes = this.gs.checkLogout();
     if (!this.userDetailes?.is_password_updated) {
+      this.dialog.closeAll();
       this.router.navigate(['/Learner/profile']);
       return;
     }
