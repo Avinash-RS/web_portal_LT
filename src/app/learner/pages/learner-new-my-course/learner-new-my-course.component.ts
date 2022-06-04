@@ -10,7 +10,7 @@ import { LearnerServicesService } from '@learner/services/learner-services.servi
 import { formatDate } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { environment } from '@env/environment';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DragScrollComponent } from 'ngx-drag-scroll';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
@@ -84,11 +84,19 @@ export class LearnerNewMyCourseComponent implements OnInit {
   constructor(private dialog: MatDialog, private router: Router,
               public learnerService: LearnerServicesService,
               private gs: GlobalServiceService, public CommonServices: CommonServicesService,
-              public translate: TranslateService) {
+              public translate: TranslateService, public urlRoute: ActivatedRoute) {
+              var urlLink = this.urlRoute.routeConfig.path;
+              // console.log(this.urlRoute.url);
+              if (urlLink == 'Microcourses'){
+                this.freeCourses = true;
+              } else {
+                this.freeCourses = false;
+              }
     const lang = localStorage.getItem('language');
     this.translate.use(lang ? lang : 'en');
     this.userDetailes = this.gs.checkLogout();
     if (!this.userDetailes?.is_password_updated) {
+      this.dialog.closeAll();
       this.router.navigate(['/Learner/profile']);
       return;
     }
@@ -105,6 +113,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
   showJobRole = false;
   isReadMore = true;
   show = true;
+  freeCourses;
   innerWidth: number;
   expandcollapse = true;
   viewDate: Date = new Date();
@@ -382,6 +391,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
   nochartdata: boolean = true;
   currentYear: number;
   stepUrl;
+  portalParams;
 
   info = 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like). like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like). like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).';
 
@@ -389,6 +399,8 @@ export class LearnerNewMyCourseComponent implements OnInit {
 
   ngOnInit() {
     // console.log('json', link );
+    var verifyportal = JSON.parse(localStorage.getItem('UserDetails'));
+    this.portalParams = verifyportal.portal_params;
     this.innerWidth = window.innerWidth;
     const showAppBanner = localStorage.getItem('appBanner');
     if (!showAppBanner) {

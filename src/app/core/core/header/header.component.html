@@ -9,6 +9,9 @@
   <div class="imgContainer">
      <img class="hearder-logo" alt="" src="https://assets.lntedutech.com/application_images/edutech-logo.webp" (click)="navigateMyCourse()">
   </div>
+  <div class="btnContainer" *ngIf="portalParams">
+    <button class="catalogBtn" (click)="redirectToPortal()">Catalog</button>
+  </div>
 
   <!-- Mobile Menu Starts -->
   <div class="tab mobMenu">
@@ -39,7 +42,7 @@
     </mat-menu>
   </div>
   <!-- End of Mobile Menu -->
-<div class="toolbarRightContent">
+<div class="toolbarRightContent" *ngIf="!portalParams">
   <app-toolbar-notification></app-toolbar-notification>
 
   <div class="txtName"><span title="{{userDetailes?.full_name}}">{{userDetailes?.full_name}}</span></div>
@@ -84,7 +87,15 @@
 
 </mat-toolbar>
 <div class="sideNavStrip" [ngClass]="expandTxt?'navClose':'navOpen'" *ngIf="!hideHeaderMenu">
-  <div class="stripItem" routerLink="/Landing/MyCourse" [ngClass]="activeUrl === '/Landing/MyCourse' ? 'activeItem' : 'normalItem'" [ngClass]="expandTxt?'navOpen':'navClose'">
+  <div class="stripItem" *ngIf="portalParams" routerLink="/Landing/Microcourses" [ngClass]="activeUrl === '/Landing/Microcourses' ? 'activeItem' : 'normalItem'" [ngClass]="expandTxt?'navOpen':'navClose'">
+    <div class="icoBox">
+      <em class="lxp-SelfPaced "></em>
+    </div>
+    <div *ngIf="expandTxt" class="navTitle">
+      {{'Micro Courses' | translate}}
+    </div>
+  </div>
+  <div class="stripItem" *ngIf="!portalParams" routerLink="/Landing/MyCourse" [ngClass]="activeUrl === '/Landing/MyCourse' ? 'activeItem' : 'normalItem'" [ngClass]="expandTxt?'navOpen':'navClose'">
     <div class="icoBox">
       <em class="lxp-SelfPaced "></em>
     </div>
@@ -92,7 +103,7 @@
       {{'My Courses' | translate}}
     </div>
   </div>
-  <div class="stripItem" (click)="openCalendar()" [ngClass]="calendarActive ? 'activeItem' : 'normalItem'" [ngClass]="expandTxt?'navOpen':'navClose'">
+  <div class="stripItem" *ngIf="!portalParams" (click)="openCalendar()" [ngClass]="calendarActive ? 'activeItem' : 'normalItem'" [ngClass]="expandTxt?'navOpen':'navClose'">
     <div class="icoBox">
       <em class="lxp-Calendar_Outlined"></em>
     </div>

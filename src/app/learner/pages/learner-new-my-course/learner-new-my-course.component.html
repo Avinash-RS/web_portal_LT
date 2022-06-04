@@ -8,7 +8,7 @@
                     <!-- Over Side Push -->
                     <div class="navBackBtn">
                         <span type="button" (click)="drawer.toggle();show=!show">
-                            <em class="lxp-TOC_Expand"></em>
+                            <em class="lxp-TOC_Expand pointer"></em>
                         </span>
                     </div>
                     <div class="prevNext">
@@ -136,7 +136,8 @@
             <div class="sideNavContent">
                 <!-- Top 3 Things -->
                 <div class="somethingNew">
-                    <h3>{{'Welcome!' | translate}}</h3>
+                    <h3 *ngIf="!portalParams">{{'Welcome!' | translate}}</h3>
+                    <h3 *ngIf="portalParams">{{'Micro learning courses!' | translate}}</h3>
                     <h4>{{'Let\'s learn something new today!' | translate}}</h4>
                     <!-- Don't Delete below commented-->
                     <!-- <div class="thingsContent">
@@ -318,7 +319,7 @@
                                     <span>{{'Course Completion Progress' | translate}}</span> 
                                 </h4>
                             </div>
-                            <div class="videolinks-btn" (click)="getVideoLink('Java')">
+                            <div class="videolinks-btn" *ngIf="!portalParams" (click)="getVideoLink('Java')">
                                 <h4>
                                     <em class="lxp-video_links"></em>
                                     <span>{{'Reference video links' | translate}}</span> 
@@ -337,39 +338,70 @@
                                 <ng-template mat-tab-label>
                                     {{'Ongoing' | translate}} ({{onGoingCourseCount}})
                                 </ng-template>
-                                <div *ngIf="courseSkel; else courseSkeleton">
-                                <div class="mycoursesContent" *ngIf="courseDetailsList?.length; else noCourseCard">
-                                   
-                                   
-                                    <ng-container *ngFor="let item of courseDetailsList" (deferLoad)="item.show = true">
-                                        <app-mycourse-item-component *ngIf="item.show" [courseItems]="item"></app-mycourse-item-component>
-                                    </ng-container>
-                                </div>
-                                </div>
+                                <ng-container *ngIf="!freeCourses">
+                                    <div *ngIf="courseSkel;else courseSkeleton">
+                                        <div class="mycoursesContent" *ngIf="courseDetailsList?.length;else noCourseCard">
+                                            <ng-container *ngFor="let item of courseDetailsList" (deferLoad)="item.show = true">
+                                                <app-mycourse-item-component *ngIf="item.show" [courseItems]="item"></app-mycourse-item-component>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+                                   </ng-container>
+                                   <ng-container *ngIf="freeCourses">
+                                        <div *ngIf="courseSkel;else courseSkeleton">
+                                            <div class="microContent" *ngIf="courseDetailsList?.length;else noCourseCard">
+                                                <ng-container *ngFor="let item of courseDetailsList">
+                                                    <div class="cards"><app-microcourse [courseItems]="item"></app-microcourse></div>
+                                                </ng-container>
+                                            </div>
+                                        </div>
+                                   </ng-container>
                             </mat-tab>
                             <mat-tab>
                                 <ng-template mat-tab-label>
                                     {{'Completed' | translate}} ({{completedCourseCount}})
                                 </ng-template>
+                               <ng-container *ngIf="!freeCourses">
                                 <div *ngIf="courseSkel;else courseSkeleton">
-                                <div class="mycoursesContent" *ngIf="courseDetailsList?.length;else noCourseCard">
-                                    <ng-container *ngFor="let item of courseDetailsList" (deferLoad)="item.show = true">
-                                        <app-mycourse-item-component *ngIf="item.show" [courseItems]="item"></app-mycourse-item-component>
-                                    </ng-container>
+                                    <div class="mycoursesContent" *ngIf="courseDetailsList?.length;else noCourseCard">
+                                        <ng-container *ngFor="let item of courseDetailsList" (deferLoad)="item.show = true">
+                                            <app-mycourse-item-component *ngIf="item.show" [courseItems]="item"></app-mycourse-item-component>
+                                        </ng-container>
+                                    </div>
                                 </div>
-                                </div>
+                               </ng-container>
+                               <ng-container *ngIf="freeCourses">
+                                    <div *ngIf="courseSkel;else courseSkeleton">
+                                        <div class="microContent" *ngIf="courseDetailsList?.length;else noCourseCard">
+                                            <ng-container *ngFor="let item of courseDetailsList">
+                                                <div class="cards"><app-microcourse  [courseItems]="item"></app-microcourse></div>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+                               </ng-container>
                             </mat-tab>
                             <mat-tab>
                                 <ng-template mat-tab-label>
                                     {{'All' | translate}} ({{allCourseCount}})
                                 </ng-template>
-                                <div *ngIf="courseSkel;else courseSkeleton">
-                                <div class="mycoursesContent" *ngIf="courseDetailsList?.length;else noCourseCard">
-                                    <ng-container *ngFor="let item of courseDetailsList" (deferLoad)="item.show = true">
-                                        <app-mycourse-item-component *ngIf="item.show" [courseItems]="item"></app-mycourse-item-component>
-                                    </ng-container>
-                                </div>
-                                </div>
+                                <ng-container *ngIf="!freeCourses">
+                                    <div *ngIf="courseSkel;else courseSkeleton">
+                                        <div class="mycoursesContent" *ngIf="courseDetailsList?.length;else noCourseCard">
+                                            <ng-container *ngFor="let item of courseDetailsList" (deferLoad)="item.show = true">
+                                                <app-mycourse-item-component *ngIf="item.show" [courseItems]="item"></app-mycourse-item-component>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+                                   </ng-container>
+                                   <ng-container *ngIf="freeCourses">
+                                        <div *ngIf="courseSkel;else courseSkeleton">
+                                            <div class="microContent" *ngIf="courseDetailsList?.length;else noCourseCard">
+                                                <ng-container *ngFor="let item of courseDetailsList">
+                                                    <div class="cards"><app-microcourse [courseItems]="item"></app-microcourse></div>
+                                                </ng-container>
+                                            </div>
+                                        </div>
+                                   </ng-container>
                             </mat-tab>
                         </mat-tab-group>
                     </div>
@@ -409,10 +441,10 @@
                                 </drag-scroll>
                                 <div class="draggable-button-container">
                                     <div class="leftArrow">
-                                        <button [disabled]="leftNavDisabledInProgress" [ngClass]="leftNavDisabledInProgress ? 'disableArrow' : 'showArrow'" (click)="moveLeftInProgress()" class="draggable-button float-left"> <em class="lxp-Right_Direction_Arrow"></em> </button>
+                                        <button [disabled]="leftNavDisabledInProgress" [ngClass]="leftNavDisabledInProgress ? 'disableArrow' : 'showArrow'" (click)="moveLeftInProgress()" class="draggable-button float-left pointer"> <em class="lxp-Right_Direction_Arrow"></em> </button>
                                     </div>
                                     <div class="rightArrow">
-                                        <button [disabled]="rightNavDisabledInProgress" [ngClass]="rightNavDisabledInProgress ? 'disableArrow' : 'showArrow'" (click)="moveRightInProgress()" class="draggable-button float-right"> <em class="lxp-Right_Direction_Arrow"></em> </button>
+                                        <button [disabled]="rightNavDisabledInProgress" [ngClass]="rightNavDisabledInProgress ? 'disableArrow' : 'showArrow'" (click)="moveRightInProgress()" class="draggable-button float-right pointer"> <em class="lxp-Right_Direction_Arrow"></em> </button>
                                     </div>
                                 </div>
                             </div>
@@ -476,10 +508,10 @@
                                 </drag-scroll>
                                 <div class="draggable-button-container">
                                     <div class="leftArrow">
-                                        <button [disabled]="leftNavDisabled" [ngClass]="leftNavDisabled ? 'disableArrow' : 'showArrow'" (click)="moveLeft()" class="draggable-button float-left"> <em class="lxp-Right_Direction_Arrow"></em> </button>
+                                        <button [disabled]="leftNavDisabled" [ngClass]="leftNavDisabled ? 'disableArrow' : 'showArrow'" (click)="moveLeft()" class="draggable-button float-left pointer"> <em class="lxp-Right_Direction_Arrow"></em> </button>
                                     </div>
                                     <div class="rightArrow">
-                                        <button [disabled]="rightNavDisabled" [ngClass]="rightNavDisabled ? 'disableArrow' : 'showArrow'" (click)="moveRight()" class="draggable-button float-right"> <em class="lxp-Right_Direction_Arrow"></em> </button>
+                                        <button [disabled]="rightNavDisabled" [ngClass]="rightNavDisabled ? 'disableArrow' : 'showArrow'" (click)="moveRight()" class="draggable-button float-right pointer"> <em class="lxp-Right_Direction_Arrow"></em> </button>
                                     </div>
                                 </div>
                             </div>
@@ -493,7 +525,7 @@
     </div>
     <div class="taskToDo">
         <span type="button" (click)="drawer.toggle();show=!show">
-            <em class="lxp-Calendar_Todo"></em>
+            <em class="lxp-Calendar_Todo pointer"></em>
         </span>
         <div class="arrow"></div>
     </div>

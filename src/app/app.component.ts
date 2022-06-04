@@ -176,6 +176,9 @@ export class AppComponent implements OnInit {
         if (e.url.includes('MyCourse')) {
           this.isFooterVisible = ' ';
         }
+        if (e.url.includes('Microcourses')) {
+          this.isFooterVisible = ' ';
+        }
         if (e.url.includes('courseDetail')) {
           this.isFooterVisible = ' ';
         }
