@@ -1,0 +1,37 @@
+<div class="courses">
+    <div class="card">
+        <figure class="leftColImage" (click)="gotoDesc(course)">
+            <img loading="lazy" [src]="course.course_img_url + blobKey" alt="" />
+            <button class="d-flex align-items-center"><em
+                    [class]="course.course_status === 'completed'?'lxp-PlayCircle':'lxp-Play_Icon'"></em>
+                {{course?.course_status === "incomplete" ? ("Resume"| translate) : course?.course_status === "suspend" ?
+                ("Resume"| translate) : course.course_status=== 'completed'?("Replay"| translate):("Start" | translate)
+                }}
+            </button>
+            <div class="progStatus {{course.progress_class}} ">
+                <div class="d-flex justify-content-between progression">
+                    <span>{{'Progression' | translate}}</span>
+                    <span>{{course.course_percentage}} %</span>
+                </div>
+                <mat-progress-bar style="height: 4px;" [mode]="mode" [value]="course.course_percentage"
+                    [bufferValue]="bufferValue"></mat-progress-bar>
+            </div>
+        </figure>
+        <div class="container">
+            <h4 class="titleClass" title="{{course.course_name}}">{{course.course_name}}</h4>
+            <p [ngClass]="!course.isReadMore ? 'addEllipsis': ''">{{course.course_description}}</p>
+            <div class="icons">
+                <div class="duration">
+                    <span>
+                        <p> Duration</p>
+                        <em class="lxp-Duration"></em>
+                    </span>
+                </div>
+                <div class="learnicon" (click)="gotoProgression(course)">
+                    <span><em class="lxp-Analytics"></em></span>
+                    <p>Learning Progression</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

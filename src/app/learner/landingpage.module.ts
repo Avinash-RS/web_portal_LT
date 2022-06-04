@@ -25,6 +25,7 @@ import { LearnerNewMyCourseComponent } from './pages/learner-new-my-course/learn
 import { MycourseItemComponent } from './pages/mycourse-item-component/mycourse-item-component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { DeferLoadModule } from '@trademe/ng-defer-load';
+import { MicrocourseComponent } from './pages/microcourse/microcourse.component';
 export function HttpLoaderFactory(httpClient: HttpClient) {
     return new TranslateHttpLoader(httpClient);
   }
@@ -37,13 +38,19 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
         // canLoad: [AuthGuard],
         data: { animation: 'Learner  MyCourse' , title: 'My Courses'}
       },
+      {
+        path: 'Microcourses',
+        component: LearnerNewMyCourseComponent,
+        data: { animation: 'Learner  MicroCourses' , title: 'Micro Courses'}
+      },
   ];
 
 
   @NgModule({
     declarations: [
         LearnerNewMyCourseComponent,
-        MycourseItemComponent
+        MycourseItemComponent,
+        MicrocourseComponent
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     imports: [
