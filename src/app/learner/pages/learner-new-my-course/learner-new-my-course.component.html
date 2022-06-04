@@ -3,7 +3,7 @@
 <div class="sideNavWrapper">
     <div>
         <mat-drawer-container class="sideNavContainer" autosize>
-            <mat-drawer #drawer class="sideNav" [opened]="innerWidth>1140 ? 'true':'false'" [mode]="innerWidth>1140?'side':'over'" position='end'>
+            <mat-drawer #drawer class="sideNav" *ngIf="!portalParams" [opened]="innerWidth>1140 ? 'true':'false'" [mode]="innerWidth>1140?'side':'over'" position='end'>
                 <div class="drawerWrapper">
                     <!-- Over Side Push -->
                     <div class="navBackBtn">
@@ -136,7 +136,8 @@
             <div class="sideNavContent">
                 <!-- Top 3 Things -->
                 <div class="somethingNew">
-                    <h3>{{'Welcome!' | translate}}</h3>
+                    <h3 *ngIf="!portalParams">{{'Welcome!' | translate}}</h3>
+                    <h3 *ngIf="portalParams">{{'Micro learning courses!' | translate}}</h3>
                     <h4>{{'Let\'s learn something new today!' | translate}}</h4>
                     <!-- Don't Delete below commented-->
                     <!-- <div class="thingsContent">
@@ -318,7 +319,7 @@
                                     <span>{{'Course Completion Progress' | translate}}</span> 
                                 </h4>
                             </div>
-                            <div class="videolinks-btn" (click)="getVideoLink('Java')">
+                            <div class="videolinks-btn" *ngIf="!portalParams" (click)="getVideoLink('Java')">
                                 <h4>
                                     <em class="lxp-video_links"></em>
                                     <span>{{'Reference video links' | translate}}</span> 
@@ -492,7 +493,7 @@
             </div>
         </mat-drawer-container>
     </div>
-    <div class="taskToDo">
+    <div class="taskToDo" *ngIf="!portalParams">
         <span type="button" (click)="drawer.toggle();show=!show">
             <em class="lxp-Calendar_Todo"></em>
         </span>
