@@ -17,5 +17,6 @@ export const environment = {
   blobKey: '?sv=2018-03-28&ss=b&srt=sco&sp=racwdl&st=2021-04-16T11%3A32%3A54Z&se=2171-04-16T11%3A37%3A54Z&spr=https%2Chttp&sig=9m73poSUv3%2FE%2BsrRJEOjA8dmL50w4073u%2B3VgsN%2FaDI%3D',
   teachercommunity: 'https://engineers.lntiggnite.com/teachercommunity/',
   gaTrackingId: 'G-6N6X7SQTXH',
-  resourcelinkurl : 'https://upskillresourcefiles.lntedutech.com/'
+  resourcelinkurl : 'https://upskillresourcefiles.lntedutech.com/',
+  portalUrl : 'https://portaldev.lntiggnite.com/Home'
 };
