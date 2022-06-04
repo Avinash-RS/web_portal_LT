@@ -116,7 +116,7 @@
             <li><em routerLink="/Landing/MyCourse" class="lxp-Go backArrow"></em> <span class="name">{{courseName}}</span> <span class="bar">/</span> <span class="breadCrumbTopic">Q&A</span></li>
         </ul>
         <div class="addQuestion">
-            <button (click)="openQuestionDialog(questionDialog)"><em class="lxp-add"></em> {{'Ask A Question' | translate}}</button>
+            <button class="pointer" (click)="openQuestionDialog(questionDialog)"><em class="lxp-add"></em> {{'Ask A Question' | translate}}</button>
         </div>
         <div class="questionResults d-flex justify-content-between">
             <div class="questions d-flex justify-content-start align-items-center" (click)="navigateAllQA('un_answered&answered')">
