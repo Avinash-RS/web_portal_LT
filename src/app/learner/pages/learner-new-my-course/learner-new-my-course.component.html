@@ -337,40 +337,70 @@
                                 <ng-template mat-tab-label>
                                     {{'Ongoing' | translate}} ({{onGoingCourseCount}})
                                 </ng-template>
-                                <div *ngIf="courseSkel; else courseSkeleton">
-                                <div class="mycoursesContent" *ngIf="courseDetailsList?.length; else noCourseCard">
-                                   
-                                   
-                                    <ng-container *ngFor="let item of courseDetailsList" (deferLoad)="item.show = true">
-                                        <app-mycourse-item-component *ngIf="item.show && !freeCourses" [courseItems]="item"></app-mycourse-item-component>
-                                        <app-microcourse *ngIf = "item.show && freeCourses"></app-microcourse>
-                                    </ng-container>
-                                </div>
-                                </div>
+                                <ng-container *ngIf="!freeCourses">
+                                    <div *ngIf="courseSkel;else courseSkeleton">
+                                        <div class="mycoursesContent" *ngIf="courseDetailsList?.length;else noCourseCard">
+                                            <ng-container *ngFor="let item of courseDetailsList" (deferLoad)="item.show = true">
+                                                <app-mycourse-item-component *ngIf="item.show" [courseItems]="item"></app-mycourse-item-component>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+                                   </ng-container>
+                                   <ng-container *ngIf="freeCourses">
+                                        <div *ngIf="courseSkel;else courseSkeleton">
+                                            <div class="microContent" *ngIf="courseDetailsList?.length;else noCourseCard">
+                                                <ng-container *ngFor="let item of courseDetailsList">
+                                                    <div class="cards"><app-microcourse [courseItems]="item"></app-microcourse></div>
+                                                </ng-container>
+                                            </div>
+                                        </div>
+                                   </ng-container>
                             </mat-tab>
                             <mat-tab>
                                 <ng-template mat-tab-label>
                                     {{'Completed' | translate}} ({{completedCourseCount}})
                                 </ng-template>
+                               <ng-container *ngIf="!freeCourses">
                                 <div *ngIf="courseSkel;else courseSkeleton">
-                                <div class="mycoursesContent" *ngIf="courseDetailsList?.length;else noCourseCard">
-                                    <ng-container *ngFor="let item of courseDetailsList" (deferLoad)="item.show = true">
-                                        <app-mycourse-item-component *ngIf="item.show" [courseItems]="item"></app-mycourse-item-component>
-                                    </ng-container>
+                                    <div class="mycoursesContent" *ngIf="courseDetailsList?.length;else noCourseCard">
+                                        <ng-container *ngFor="let item of courseDetailsList" (deferLoad)="item.show = true">
+                                            <app-mycourse-item-component *ngIf="item.show" [courseItems]="item"></app-mycourse-item-component>
+                                        </ng-container>
+                                    </div>
                                 </div>
-                                </div>
+                               </ng-container>
+                               <ng-container *ngIf="freeCourses">
+                                    <div *ngIf="courseSkel;else courseSkeleton">
+                                        <div class="microContent" *ngIf="courseDetailsList?.length;else noCourseCard">
+                                            <ng-container *ngFor="let item of courseDetailsList">
+                                                <div class="cards"><app-microcourse  [courseItems]="item"></app-microcourse></div>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+                               </ng-container>
                             </mat-tab>
                             <mat-tab>
                                 <ng-template mat-tab-label>
                                     {{'All' | translate}} ({{allCourseCount}})
                                 </ng-template>
-                                <div *ngIf="courseSkel;else courseSkeleton">
-                                <div class="mycoursesContent" *ngIf="courseDetailsList?.length;else noCourseCard">
-                                    <ng-container *ngFor="let item of courseDetailsList" (deferLoad)="item.show = true">
-                                        <app-mycourse-item-component *ngIf="item.show" [courseItems]="item"></app-mycourse-item-component>
-                                    </ng-container>
-                                </div>
-                                </div>
+                                <ng-container *ngIf="!freeCourses">
+                                    <div *ngIf="courseSkel;else courseSkeleton">
+                                        <div class="mycoursesContent" *ngIf="courseDetailsList?.length;else noCourseCard">
+                                            <ng-container *ngFor="let item of courseDetailsList" (deferLoad)="item.show = true">
+                                                <app-mycourse-item-component *ngIf="item.show" [courseItems]="item"></app-mycourse-item-component>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+                                   </ng-container>
+                                   <ng-container *ngIf="freeCourses">
+                                        <div *ngIf="courseSkel;else courseSkeleton">
+                                            <div class="microContent" *ngIf="courseDetailsList?.length;else noCourseCard">
+                                                <ng-container *ngFor="let item of courseDetailsList">
+                                                    <div class="cards"><app-microcourse [courseItems]="item"></app-microcourse></div>
+                                                </ng-container>
+                                            </div>
+                                        </div>
+                                   </ng-container>
                             </mat-tab>
                         </mat-tab-group>
                     </div>

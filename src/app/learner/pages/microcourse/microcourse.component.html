@@ -1,23 +1,22 @@
 <div class="courses">
     <div class="card">
-        <figure class="leftColImage">
-            <img src="../../../../assets/images/free.jpg" alt="Avatar" style="width:100%">
-            <button class="d-flex align-items-center"><em class="lxp-Play_Icon"></em>
-                Start
+        <figure class="leftColImage" (click)="gotoDesc(course)">
+            <img loading="lazy" [src]="course.course_img_url + blobKey" alt="" />
+            <button class="d-flex align-items-center"><em [class]="course.course_status === 'completed'?'lxp-PlayCircle':'lxp-Play_Icon'"></em>
+                {{course?.course_status === "incomplete" ? ("Resume"| translate) : course?.course_status === "suspend" ? ("Resume"| translate) : course.course_status=== 'completed'?("Replay"| translate):("Start" | translate) }}
             </button>
-            <div class="progStatus">
+            <div class="progStatus {{course.progress_class}} ">
                 <div class="d-flex justify-content-between progression">
-                    <span>Progression</span>
-                    <span> %</span>
+                    <span>{{'Progression' | translate}}</span>
+                    <span>{{course.course_percentage}} %</span>
                 </div>
-                <mat-progress-bar style="height: 4px;" [mode]="mode" [value]="course.course_percentage"
-                    [bufferValue]="bufferValue"></mat-progress-bar>
+                <mat-progress-bar style="height: 4px;" [mode]="mode" [value]="course.course_percentage" [bufferValue]="bufferValue"></mat-progress-bar>
             </div>
         </figure>
         <div class="container">
-            <h4><b>Micro Learner Courses</b></h4>
-            <p>Udemy is an online learning and teaching marketplace with over 185000 courses and 49 million students.
-                Learn programming, marketing, data science and more.</p>
+            <h4 class="titleClass" title="{{course.course_name}}">{{course.course_name}}</h4>
+            
+            <p [ngClass]="!course.isReadMore ? 'addEllipsis': ''">{{course.course_description}}</p>
             <div class="icons">
                 <div class="duration">
                     <span>
@@ -25,73 +24,7 @@
                         <em class="lxp-Duration"></em>
                     </span>
                 </div>
-                <div class="learnicon">
-                    <span><em class="lxp-Analytics"></em></span>
-                    <p>Learning Progression</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="card">
-        <figure class="leftColImage">
-            <img src="../../../../assets/images/free.jpg" alt="Avatar" style="width:100%">
-            <button class="d-flex align-items-center"><em class="lxp-Play_Icon"></em>
-                Start
-            </button>
-            <div class="progStatus">
-                <div class="d-flex justify-content-between progression">
-                    <span>Progression</span>
-                    <span> %</span>
-                </div>
-                <mat-progress-bar style="height: 4px;" [mode]="mode" [value]="course.course_percentage"
-                    [bufferValue]="bufferValue"></mat-progress-bar>
-            </div>
-        </figure>
-        <div class="container">
-            <h4><b>Micro Learner Courses</b></h4>
-            <p>Udemy is an online learning and teaching marketplace with over 185000 courses and 49 million students.
-                Learn programming, marketing, data science and more.</p>
-            <div class="icons">
-                <div class="duration">
-                    <span>
-                        <p> Duration</p>
-                        <em class="lxp-Duration"></em>
-                    </span>
-                </div>
-                <div class="learnicon">
-                    <span><em class="lxp-Analytics"></em></span>
-                    <p>Learning Progression</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="card">
-        <figure class="leftColImage">
-            <img src="../../../../assets/images/free.jpg" alt="Avatar" style="width:100%">
-            <button class="d-flex align-items-center"><em class="lxp-Play_Icon"></em>
-                Start
-            </button>
-            <div class="progStatus">
-                <div class="d-flex justify-content-between progression">
-                    <span>Progression</span>
-                    <span> %</span>
-                </div>
-                <mat-progress-bar style="height: 4px;" [mode]="mode" [value]="course.course_percentage"
-                    [bufferValue]="bufferValue"></mat-progress-bar>
-            </div>
-        </figure>
-        <div class="container">
-            <h4><b>Micro Learner Courses</b></h4>
-            <p>Udemy is an online learning and teaching marketplace with over 185000 courses and 49 million students.
-                Learn programming, marketing, data science and more.</p>
-            <div class="icons">
-                <div class="duration">
-                    <span>
-                        <p> Duration</p>
-                        <em class="lxp-Duration"></em>
-                    </span>
-                </div>
-                <div class="learnicon">
+                <div class="learnicon" (click)="gotoProgression(course)">
                     <span><em class="lxp-Analytics"></em></span>
                     <p>Learning Progression</p>
                 </div>

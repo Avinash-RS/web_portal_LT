@@ -147,6 +147,7 @@ export class ProgressionReportComponent implements OnInit {
   weekWiseDate;
   today = new Date();
   pipe = new DatePipe('en-US');
+  fromPage: any;
   constructor(
     public learnerService: LearnerServicesService,
     private gs: GlobalServiceService,
@@ -161,6 +162,7 @@ export class ProgressionReportComponent implements OnInit {
       if (res) {
         this.courseId = atob(res.CourseId);
         this.courseName = atob(res.CourseName);
+        this.fromPage = res.fromPage;
       }
     });
     this.UserDetails = JSON.parse(localStorage.getItem('UserDetails')) || null;
@@ -180,6 +182,13 @@ export class ProgressionReportComponent implements OnInit {
     const first = curr.getDate() - curr.getDay();
     const firstday = new Date(curr.setDate(first)).toUTCString();
     this.weekWiseDate = new Date(firstday);
+  }
+  backbutton() {
+    if (this.fromPage === 'mycourse') {
+      this.route.navigate(['/Landing/MyCourse']);
+    } else {
+      this.route.navigate(['/Landing/Microcourses']);
+    }
   }
   getWeekCourseData() {
     this.weekWiseChartDatalabel = [];

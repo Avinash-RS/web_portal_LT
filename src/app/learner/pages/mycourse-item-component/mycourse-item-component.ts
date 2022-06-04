@@ -88,13 +88,14 @@ export class MycourseItemComponent implements OnInit {
   gotoProgression(course) {
     const data = {
       courseId : course.course_id,
-      courseName: course.course_name
+      courseName: course.course_name,
     };
     this.router.navigate(['/Learner/progressionReport'], {
       queryParams:
       {
         CourseId: btoa(course.course_id),
-        CourseName: btoa(course.course_name)
+        CourseName: btoa(course.course_name),
+        fromPage: 'mycourse',
       }
     });
   }

@@ -1921,7 +1921,13 @@
   height: 4px;
 }
 }
-::ng-deep .mycoursesContent {
+.microContent {
+  display: flex;
+  .cards {
+    width: 30%;
+  }
+}
+::ng-deep .mycoursesContent,.microContent {
   margin-top: 20px;
   .mat-progress-bar{
     height: 2px;
