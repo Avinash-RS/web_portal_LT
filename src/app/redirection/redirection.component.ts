@@ -56,7 +56,7 @@ setAuthentication() {
   if (userDetail.org_type === 'Corporate') {
     this.router.navigate(['/Learner/upskillcalendar']);
   } else {
-    this.router.navigate(['/Landing/Microcourses']);
+    this.router.navigate(['/Landing/MyCourse']);
   }
 }
 }

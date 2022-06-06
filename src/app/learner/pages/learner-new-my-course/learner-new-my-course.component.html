@@ -136,8 +136,8 @@
             <div class="sideNavContent">
                 <!-- Top 3 Things -->
                 <div class="somethingNew">
-                    <h3 *ngIf="!portalParams">{{'Welcome!' | translate}}</h3>
-                    <h3 *ngIf="portalParams">{{'Micro learning courses!' | translate}}</h3>
+                    <h3>{{'Welcome!' | translate}}</h3>
+                    <!-- <h3 *ngIf="portalParams">{{'Micro learning courses!' | translate}}</h3> -->
                     <h4>{{'Let\'s learn something new today!' | translate}}</h4>
                     <!-- Don't Delete below commented-->
                     <!-- <div class="thingsContent">
@@ -319,7 +319,7 @@
                                     <span>{{'Course Completion Progress' | translate}}</span> 
                                 </h4>
                             </div>
-                            <div class="videolinks-btn" *ngIf="!portalParams" (click)="getVideoLink('Java')">
+                            <div class="videolinks-btn" (click)="getVideoLink('Java')">
                                 <h4>
                                     <em class="lxp-video_links"></em>
                                     <span>{{'Reference video links' | translate}}</span> 
@@ -338,7 +338,7 @@
                                 <ng-template mat-tab-label>
                                     {{'Ongoing' | translate}} ({{onGoingCourseCount}})
                                 </ng-template>
-                                <ng-container *ngIf="!freeCourses">
+                                <ng-container>
                                     <div *ngIf="courseSkel;else courseSkeleton">
                                         <div class="mycoursesContent" *ngIf="courseDetailsList?.length;else noCourseCard">
                                             <ng-container *ngFor="let item of courseDetailsList" (deferLoad)="item.show = true">
@@ -347,7 +347,7 @@
                                         </div>
                                     </div>
                                    </ng-container>
-                                   <ng-container *ngIf="freeCourses">
+                                   <!-- <ng-container *ngIf="freeCourses">
                                         <div *ngIf="courseSkel;else courseSkeleton">
                                             <div class="microContent" *ngIf="courseDetailsList?.length;else noCourseCard">
                                                 <ng-container *ngFor="let item of courseDetailsList">
@@ -355,13 +355,13 @@
                                                 </ng-container>
                                             </div>
                                         </div>
-                                   </ng-container>
+                                   </ng-container> -->
                             </mat-tab>
                             <mat-tab>
                                 <ng-template mat-tab-label>
                                     {{'Completed' | translate}} ({{completedCourseCount}})
                                 </ng-template>
-                               <ng-container *ngIf="!freeCourses">
+                               <ng-container>
                                 <div *ngIf="courseSkel;else courseSkeleton">
                                     <div class="mycoursesContent" *ngIf="courseDetailsList?.length;else noCourseCard">
                                         <ng-container *ngFor="let item of courseDetailsList" (deferLoad)="item.show = true">
@@ -370,7 +370,7 @@
                                     </div>
                                 </div>
                                </ng-container>
-                               <ng-container *ngIf="freeCourses">
+                               <!-- <ng-container *ngIf="freeCourses">
                                     <div *ngIf="courseSkel;else courseSkeleton">
                                         <div class="microContent" *ngIf="courseDetailsList?.length;else noCourseCard">
                                             <ng-container *ngFor="let item of courseDetailsList">
@@ -378,13 +378,13 @@
                                             </ng-container>
                                         </div>
                                     </div>
-                               </ng-container>
+                               </ng-container> -->
                             </mat-tab>
                             <mat-tab>
                                 <ng-template mat-tab-label>
                                     {{'All' | translate}} ({{allCourseCount}})
                                 </ng-template>
-                                <ng-container *ngIf="!freeCourses">
+                                <ng-container>
                                     <div *ngIf="courseSkel;else courseSkeleton">
                                         <div class="mycoursesContent" *ngIf="courseDetailsList?.length;else noCourseCard">
                                             <ng-container *ngFor="let item of courseDetailsList" (deferLoad)="item.show = true">
@@ -393,7 +393,7 @@
                                         </div>
                                     </div>
                                    </ng-container>
-                                   <ng-container *ngIf="freeCourses">
+                                   <!-- <ng-container *ngIf="freeCourses">
                                         <div *ngIf="courseSkel;else courseSkeleton">
                                             <div class="microContent" *ngIf="courseDetailsList?.length;else noCourseCard">
                                                 <ng-container *ngFor="let item of courseDetailsList">
@@ -401,7 +401,7 @@
                                                 </ng-container>
                                             </div>
                                         </div>
-                                   </ng-container>
+                                   </ng-container> -->
                             </mat-tab>
                         </mat-tab-group>
                     </div>
