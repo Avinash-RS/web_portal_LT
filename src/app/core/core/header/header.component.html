@@ -42,7 +42,7 @@
     </mat-menu>
   </div>
   <!-- End of Mobile Menu -->
-<div class="toolbarRightContent" *ngIf="!portalParams">
+<div class="toolbarRightContent" [ngClass]="portalParams == true ? 'hideToolbar' : ''">
   <app-toolbar-notification></app-toolbar-notification>
 
   <div class="txtName"><span title="{{userDetailes?.full_name}}">{{userDetailes?.full_name}}</span></div>
