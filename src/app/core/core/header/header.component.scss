@@ -143,6 +143,9 @@
   align-items: center;
   width: calc(100% - 175px);
 }
+.hideToolbar {
+  display: none;
+}
 .hearder-logo {
   height: 38px;
   cursor: pointer;
