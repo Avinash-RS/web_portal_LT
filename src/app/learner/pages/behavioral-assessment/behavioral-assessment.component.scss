@@ -3,7 +3,7 @@
     .bencmark-info {
         margin-bottom: 1em;
         display: flex;
-        justify-content: end;
+        justify-content: flex-end;
         button {
             display: flex;
             align-items: center;
@@ -383,7 +383,8 @@
                 }
                 .figure {
                     width: 27%;
-                    justify-content: end;
+                    // justify-content: end;
+                    justify-content: flex-end;
                     figure {
                         background-color: $whiteColor;
                         display: flex;
