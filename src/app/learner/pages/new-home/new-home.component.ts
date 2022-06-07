@@ -32,10 +32,10 @@ export class NewHomeComponent implements OnInit {
               private gs: GlobalServiceService, private router: Router, private toastr: ToastrService, location: PlatformLocation) {
     const lang = localStorage.getItem('language');
     this.translate.use(lang ? lang : 'en');
-    location.onPopState(() => {
-      localStorage.clear();
-      sessionStorage.clear();
-    });
+    // location.onPopState(() => {
+    //   localStorage.clear();
+    //   sessionStorage.clear();
+    // });
     this.userDetail = JSON.parse(localStorage.getItem('UserDetails'));
     const token = localStorage.getItem('token') || sessionStorage.getItem('token');
     if (!token) {
