@@ -1984,7 +1984,6 @@ export const get_learner_dashboard = gql `
           enrolled_course_details {
             feedback_status
             course_percentage
-            image_self_paced_learning_time
             isTesting
             user_id
             course_id
