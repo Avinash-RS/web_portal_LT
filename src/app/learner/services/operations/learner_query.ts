@@ -2006,6 +2006,7 @@ export const get_learner_dashboard = gql `
             course_type
             progress_class
             course_status
+            image_self_paced_learning_time
           }
         }
       }
