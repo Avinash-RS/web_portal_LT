@@ -181,6 +181,6 @@ export class HeaderComponent implements OnInit {
     this.services.openAvailCourcePopup$.next(isAvailOpen);
   }
   redirectToPortal() {
-    window.open(environment.portalUrl, 'blank');
+    window.open(environment.portalUrl, '_self');
   }
 }
