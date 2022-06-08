@@ -27,7 +27,7 @@
             <ul class="items">
                 <li>
                     <span>Course by</span>
-                    <div>{{course.courseBy !== "" ? course.courseBy : 'L&T EduTech'}}</div>
+                    <div>L&T EduTech</div>
                 </li>
                 <li>
                     <span>Type</span>
@@ -35,7 +35,7 @@
                 </li>
                 <li>
                     <span>Duration</span>
-                    <div><em class="lxp-Clock"></em> {{course.image_self_paced_learning_time}}</div>
+                    <div><em class="lxp-Clock"></em> {{course.image_self_paced_learning_time !== "" ? course.image_self_paced_learning_time : '--/--'}}</div>
                 </li>
                 <li (click)="gotoProgression(course)">
                     <figure><em class="lxp-Analytics"></em></figure>
