@@ -134,10 +134,10 @@ export class AskQuestionsComponent implements OnInit {
       if(result?.data?.vocationalqNda?.success && result?.data?.vocationalqNda?.message.length > 0){
         this.qaDataList.push(...result.data.vocationalqNda.message);
         if(getcount){
-          const qcountData = result.data.vocationalqNda.count;
-          const acountData =  result.data.vocationalqNda.ansCount;
-          this.selectedIndex == 0  ? this.animateValue('qCount', 0, qcountData ? qcountData : 0, 1000) : '';
-          this.animateValue('aCount', 0, acountData ? acountData : 0, 1000);
+          const qcountData = result?.data?.vocationalqNda?.count ? parseInt(result.data.vocationalqNda.count) : 0;
+          const acountData =  result?.data.vocationalqNda?.ansCount ? parseInt(result?.data.vocationalqNda?.ansCount) : 0;
+              this.selectedIndex == 0 ?  this.animateValue('qCount', 0, qcountData, 1000):'';
+               this.animateValue('aCount', 0, acountData, 1000);
         }
       }
     });
