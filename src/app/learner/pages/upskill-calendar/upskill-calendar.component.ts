@@ -2,16 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours} from 'date-fns';
 import { formatDate } from '@angular/common';
 import { CalendarEvent, CalendarView, CalendarMonthViewDay, DateFormatterParams, CalendarDateFormatter, CalendarEventTitleFormatter } from 'angular-calendar';
-import { getmoduleData } from '@learner/services/operations/learner_query';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import * as moment from 'moment';
 import { Subject } from 'rxjs';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { getWeekYearWithOptions } from 'date-fns/fp';
-import { TranslateService } from '@ngx-translate/core';
+import { CommonServicesService } from '@core/services/common-services.service';
 import {CalendarFilterComponent} from '../calendar-filter/calendar-filter.component';
 @Component({
   selector: 'app-upskill-calendar',
@@ -79,7 +76,7 @@ export class UpskillCalendarComponent implements OnInit {
     courseValue : 'All'
   };
   constructor(public learnerService: LearnerServicesService, private gs: GlobalServiceService, private router: Router,
-              public dialog: MatDialog) {
+              public dialog: MatDialog, public CommonServices: CommonServicesService,) {
     this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(localStorage.getItem('UserDetails')) || null;
     if (!this.userDetailes?.is_password_updated) {
                   this.router.navigate(['/Learner/profile']);
