@@ -2,7 +2,7 @@
     <div class="{{course.progress_class}} progBar">
         <mat-progress-bar [mode]="mode" [value]="course.course_percentage" [bufferValue]="bufferValue"></mat-progress-bar>
     </div>
-    <figure class="aicteLeftImage">
+    <figure class="aicteLeftImage" (click)="gotoDesc(course)">
         <img loading="lazy" [src]="course.course_img_url + blobKey" alt="" />
         <button class="d-flex align-items-center">
             <em class="lxp-Play_Icon"></em> Start
