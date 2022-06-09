@@ -27,6 +27,7 @@ export class ProgramReportComponent implements OnInit {
   ];
   courseValue ="all";
   selfLearningData:any;
+  getuserid: any;
   constructor(public breakpointObserver: BreakpointObserver,private service:LearnerServicesService) { 
 
   }
@@ -34,11 +35,11 @@ export class ProgramReportComponent implements OnInit {
   ngOnInit() {
     this.UserDetails = JSON.parse(localStorage.getItem('UserDetails')) || null;
     this.breakPoints();
-   
+    this.getuserid = JSON.parse(localStorage.getItem('UserDetails'));
   }
 
   getSelflearningData(){
-    this.service.selflearning_report('191654248878434','mls2eg').subscribe((result:any)=>{
+    this.service.selflearning_report(this.getuserid.user_id).subscribe((result:any)=>{
       if(result?.data?.selflearning_report?.success) {
         this.selfLearningData = result?.data?.selflearning_report?.data;
       }

@@ -2931,8 +2931,8 @@ export const getlearnerquiz = gql `
   }
 `;
 export const selflearning_report = gql `
-query selflearning_report($batchId:String!,$userId:String!){
-  selflearning_report(batchId:$batchId,userId:$userId){
+query selflearning_report($userId:String!){
+  selflearning_report(userId:$userId){
     success
     message
     data{
@@ -2991,8 +2991,8 @@ query selflearning_report($batchId:String!,$userId:String!){
 }
 `;
 export const overallActivityAttendance = gql`
- query overallActivityAttendance($batchId:String!,$userId:String!){
-    overallActivityAttendance(batchId:$batchId,userId:$userId){
+ query overallActivityAttendance($userId:String!){
+    overallActivityAttendance(userId:$userId){
       success
       message
       data{
@@ -3018,4 +3018,100 @@ export const overallActivityAttendance = gql`
       }
     }
   }
-`
+`;
+
+export const overallQuizReport = gql`
+  query overallQuizReport($email: String!, $course_id: String) {
+    overallQuizReport(email: $email, course_id: $course_id) {
+      doughnut_chart {
+        _id
+        color
+        percent
+      }
+      bar_chart {
+        batchid
+        points_earned
+        quiz_name
+        score_earned
+        start_date
+        user
+        color
+      }
+      table_chart {
+        _id
+        courseName
+        quizCount
+        scoreAvg
+        quizDetails {
+          quiz_name
+          start_date
+          end_date
+          no_of_question
+          correct_answer
+          score
+          status
+          color
+        }
+      }
+    }
+  }
+`;
+
+export const overallActivitySubmits = gql`
+query overallActivitySubmits($userId:String!) {
+    overallActivitySubmits(userId:$userId) {
+      success
+      totalCount
+      data {
+        _id
+        user_id
+        activityType
+        course_name
+        learnerName
+        files_id
+        activityId
+        doc_status
+        course_id
+        module_id
+        topic_id
+        batchid
+        batch_obj_id
+        flag
+        file_id
+        submit_status
+        grade_status
+        resubmit
+        resubmit_count
+        activityname
+        total_mark
+        # videodetails
+        performtype
+        iterationTotal
+        submittedTotal
+        perform_id
+        materialDetails {
+          assignment
+          checked
+          doc_type
+          filename
+          fileType
+          path
+          size
+          type_name
+          _id
+          }
+          iterationDetails {
+            iterationid
+            iterationcount
+            total_mark
+            submit_status
+            grade_status
+            instructor_status
+            comments
+            assessmentreport
+            videodetails
+            }
+            }
+          }
+          }
+          `;

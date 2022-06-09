@@ -119,11 +119,14 @@ export class TrainingreportComponent implements OnInit {
   showProgReport:boolean = false;
   liveClassroomData:any;
   selfLearnLegends:any = [];
+  getuserid: any;
   constructor(private http: HttpClient,private service:LearnerServicesService) { }
 
   ngOnInit(): void {
     this.getSelflearningData();
     this.getLiveClassroomData();
+    this.getuserid = JSON.parse(localStorage.getItem('UserDetails'));
+
   }
   onGridReady(params: any) {
     this.gridApi = params.api;
@@ -131,7 +134,7 @@ export class TrainingreportComponent implements OnInit {
   }
 
   getSelflearningData(){
-    this.service.selflearning_report('191654248878434','mls2eg').subscribe((result:any)=>{
+    this.service.selflearning_report(this.getuserid.user_id).subscribe((result:any)=>{
       this.showProgReport = true;
       if(result?.data?.selflearning_report?.success) {
         this.selfLearningData = result?.data?.selflearning_report?.data;
@@ -161,7 +164,7 @@ export class TrainingreportComponent implements OnInit {
     });
   }
   getLiveClassroomData(){
-    this.service.overallActivityAttendance('191654248878434','mls2eg').subscribe((result:any)=>{ 
+    this.service.overallActivityAttendance(this.getuserid.user_id).subscribe((result:any)=>{ 
       if(result?.data?.overallActivityAttendance?.success) {
         this.liveClassroomData = result?.data?.overallActivityAttendance?.data[0];
         this.pieChartDataSet = [

@@ -7,7 +7,7 @@
  </div>
  <h5>Course wise activity report</h5>
  <mat-accordion class="expansionPanel">
-    <mat-expansion-panel>
+    <mat-expansion-panel *ngFor="let item of grupdata">
         <mat-expansion-panel-header>
             <mat-panel-title>
                 <div class="title d-flex align-items-center">
@@ -16,7 +16,7 @@
                     </div>
                     <div class="right d-flex">
                         <span>Course Name</span>
-                        <h6>Learn How to Code Java</h6>
+                        <h6>{{item.courseName}}</h6>
                     </div>
                 </div>
             </mat-panel-title>
@@ -28,7 +28,7 @@
                         </div>
                         <div class="right d-flex">
                             <span>No. of Activities</span>
-                            <h6>9</h6>
+                            <h6>{{item.courseDetails.length}}</h6>
                         </div>
                     </div>
                 </div>
@@ -36,7 +36,7 @@
         </mat-expansion-panel-header>
         <div class="activityrpt">
             <mat-card>
-                <ag-grid-angular class="ag-theme-alpine" [columnDefs]="cols" [rowData]="rows" style="width:100%; min-height: 200px;" [ngStyle]="{height:(rows.length * 50)  + 'px' }" (gridReady)="onGridReady($event)" [defaultColDef]="defaultColDef"></ag-grid-angular>
+                <ag-grid-angular class="ag-theme-alpine" [columnDefs]="cols" [rowData]="item.courseDetails" style="width:100%; min-height: 200px;" [ngStyle]="{height:(item.courseDetails.length * 50)  + 'px' }" (gridReady)="onGridReady($event)" [defaultColDef]="defaultColDef"></ag-grid-angular>
             </mat-card>
         </div>
     </mat-expansion-panel>
