@@ -585,16 +585,16 @@
 .reportRightCol {
   .refresh {
     text-align: right;
-    margin-bottom: 30px;
+    margin-bottom: 18px;
     button {
       background-color: #ffffff;
       border-radius: 5px;
       border: 1px solid #004684;
-      padding: 10px 15px;
+      padding: 8px 8px;
       color: #004684;
       font-size: 12px;
       font-weight: 600;
-      line-height: normal;
+      line-height: 1;
       transition: all 0.3s ease-in-out;
       &:hover{
         background: #004684;
@@ -679,7 +679,7 @@
     }
   }
   .finalScoreCard {
-    margin-top: 40px;
+    margin-top: 20px;
     .progressFinal {
       width: 100%;
       @media only screen and (min-width: 1140px) {
@@ -762,7 +762,7 @@
 // New UI Ends
 
 .assessmentScoreCard {
-  margin-top: 25px;
+  margin-top: 22px;
   .assessment-hd-txt{
     color: #004684;
   }
@@ -888,7 +888,7 @@
 }
 
 .mt-20 {
-  margin-top: 20px;
+  margin-top: 16px;
 }
 
 .popover-info {
