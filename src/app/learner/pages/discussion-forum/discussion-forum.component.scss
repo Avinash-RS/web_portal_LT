@@ -156,9 +156,9 @@
     border: 1px solid #dddddd;
 }
 
-.createThreadDialog {
-    width: 900px;
-}
+// .createThreadDialog {
+    // width: 900px;
+// }
 
 ::ng-deep .mat-dialog-container {
     padding: 30px !important;
@@ -184,9 +184,9 @@
         display: block;
     }
 
-    .createThreadDialog {
-        width: 320px;
-    }
+    // .createThreadDialog {
+        // width: 320px;
+    // }
 
     .forum-width {
         width: 100% !important;
@@ -214,19 +214,19 @@
 
 }
 
-@media(min-width: 768px) and(max-width: 991.98px) {
-    .createThreadDialog {
-        width: 600px;
-        position: relative;
-    }
-}
+// @media(min-width: 768px) and(max-width: 991.98px) {
+//     .createThreadDialog {
+//         width: 600px;
+//         position: relative;
+//     }
+// }
 
-@media(min-width: 992px) and(max-width:1024px) {
-    .createThreadDialog {
-        width: 600px;
-        position: relative;
-    }
-}
+// @media(min-width: 992px) and(max-width:1024px) {
+//     .createThreadDialog {
+//         width: 600px;
+//         position: relative;
+//     }
+// }
 
 .inputs {
     border: 1px solid grey;
@@ -333,9 +333,10 @@
     opacity: 0.5;
 }
 .tocSubTitle {
-    padding-left: 0 !important;
+    padding: 5px 10px 5px 5px !important;
     span {
         margin-left: 0 !important;
+        font-size: 17px !important;
     }
 }
 

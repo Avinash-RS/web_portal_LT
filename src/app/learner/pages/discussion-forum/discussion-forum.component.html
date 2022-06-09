@@ -109,12 +109,12 @@
             <mat-card-title (click)="moduleExpand(res, i)"
               class="d-flex justify-content-between align-items-center pointer">
               <div class="tocSubTitle">
-                <span *ngIf="res?.module_name?.length >= 67" class="moduleName" tooltip="{{ res?.module_name }}"
-                  placement="right">
-                  {{ res?.module_name | slice: 0:71 }}...</span>
-                <span *ngIf="res?.module_name?.length < 67" class="moduleName">
+                <!-- <span *ngIf="res?.module_name?.length >= 67" class="moduleName">
+                  {{ res?.module_name | slice: 0:71 }}...</span> -->
+                <span class="moduleName">{{ res?.module_name}}</span>
+                <!-- <span *ngIf="res?.module_name?.length < 67" class="moduleName">
                   {{ res?.module_name }}
-                </span>
+                </span> -->
               </div>
               <div>
                 <em class="expandCollapse" [ngClass]="res.expanded ? 'lxp-Collapse' : 'lxp-Expand'"></em>

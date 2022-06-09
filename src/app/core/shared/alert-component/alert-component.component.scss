@@ -37,27 +37,8 @@ p {
 }
 
 .background-darkGrey {
-    margin-bottom: 5%;
     background-color: $lxp-theme-green !important;// 
     color: $color-white !important;
-}
-
-@media screen and (max-width: 600px) {
-
-    p {
-        font-size: 8px;
-    }
-
-    h2 {
-        font-size: 12px;
-        font-weight: bolder;
-
-    }
-
-    .mat-dialog-container {
-        width: auto;
-    }
-
 }
 
 .msg {
@@ -67,6 +48,19 @@ p {
     text-transform: capitalize !important;
 }
 
-::ng-deep .custom-modalbox .mat-dialog-container{
-    overflow: hidden !important;
+::ng-deep .custom-modalbox {
+    max-width: 576px !important;
+    width: 92% !important;
+    .mat-dialog-container {
+        overflow: hidden !important;
+    }
+    .mat-dialog-actions {
+        margin-bottom: 0;
+        min-height: auto;
+        padding: 0;
+    }
+    .mat-stroked-button {
+        min-width: auto;
+        margin: auto;
+    }
   }
