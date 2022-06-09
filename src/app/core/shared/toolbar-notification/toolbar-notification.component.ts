@@ -45,7 +45,7 @@ export class ToolbarNotificationComponent implements OnInit {
                 ).subscribe((e: any) => {
                   const urlHeader = e.url.split('/');
                   const headerPages = 'MyCourse';
-                  if (urlHeader[2] === headerPages) {
+                  if (urlHeader[2] === 'MyCourse' || urlHeader[2] === 'upskillcalendar') {
                     this.getNotification();
                   } else {
                     this.unreadCount = JSON.parse(localStorage.getItem('NotificationCount'));

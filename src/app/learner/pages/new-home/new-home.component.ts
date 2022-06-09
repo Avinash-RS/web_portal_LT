@@ -41,6 +41,9 @@ export class NewHomeComponent implements OnInit {
     if (!token) {
       this.router.navigateByUrl('/Learner/login');
     }
+    if(token && this.userDetail.specific_report_value){
+      this.router.navigateByUrl('/Landing/MyCourse');
+    }
   }
   ngOnInit() {
     if (this.userDetail?.TFAsetup?.dataURL) {
