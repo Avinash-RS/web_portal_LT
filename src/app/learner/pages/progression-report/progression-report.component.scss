@@ -43,6 +43,13 @@
         width: 100%;
       }
     }
+    .percentagearea {
+      margin-top: 20px;
+      padding:0 25px;
+      .desc {
+        margin-top: 15px;
+      }
+    }
     .progress-date{
       margin-bottom: 1em;
       .progress-hours-container{
@@ -169,7 +176,7 @@
         .activity-container{
             margin-top: 40px;
             .header-label {
-              padding-left: 5px;
+              padding-left: 20px;
             }
         }
         .card-content{
@@ -544,7 +551,6 @@
       }
       // .module-block {
       //   width: 20em;
-        
       //   @media only screen and (max-width: 374px) {
       //     width: 17em;
       //   }

@@ -169,11 +169,14 @@ export class AppComponent implements OnInit {
          this.isFooterVisible = '<div class="footer"><span class="powered"><span class="forgot1">'
          + '© ' + currentYear + this.translate.instant(' L&T EduTech. All Rights Reserved.') + '</span></span></div>';
         }
-        if (e.url.includes('resetpassword') || e.url.includes('password') || e.url.includes('MyCourse')
+        if (e.url.includes('resetpassword') || e.url.includes('login') || e.url.includes('password') || e.url.includes('MyCourse')
         || e.url.includes('courseDetail') || urlIdentifier[2] === undefined) {
           this.isFooterVisible = '';
         }
         if (e.url.includes('MyCourse')) {
+          this.isFooterVisible = ' ';
+        }
+        if (e.url.includes('Microcourses')) {
           this.isFooterVisible = ' ';
         }
         if (e.url.includes('courseDetail')) {

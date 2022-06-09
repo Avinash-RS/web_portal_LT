@@ -7,7 +7,6 @@
         </ul>
        
         <div class="qandaSection">
-           
             <mat-tab-group animationDuration="100ms" [(selectedIndex)]="selectedIndex"
                 (selectedTabChange)="contentChange()">
                 <mat-tab>
@@ -64,7 +63,7 @@
                         {{'All Q&As in this course' | translate}}
                     </ng-template>
                     <div class="allsearchFilter">
-                    <div>
+                    <!-- <div>
                         <span class="filterby">{{'Filter by :' | translate}}</span>
                         <mat-form-field appearance="outline" style="width: 130px;">
                             <mat-select [(ngModel)]='selectedtype' (selectionChange)="getQAtype()">
@@ -73,8 +72,8 @@
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
-                    </div>   
-                    <div>
+                    </div>    -->
+                    <div class="secondarySearch">
                         <mat-form-field appearance="outline">
                             <input matInput [(ngModel)]="searchKey" (keyup)='searchcaller($event)' [placeholder]="'Search...' | translate">
                             <mat-icon matSuffix *ngIf="!searchKey">search</mat-icon>
@@ -85,7 +84,8 @@
                     <span *ngIf="showSkeleton;else skeleton">
                         <span *ngIf="qaDataList.length;else noquescard">
                            
-                            <div class="content" *ngFor="let item of qaDataList">
+                            <div *ngFor="let item of qaDataList">
+                                <div class="content" *ngIf="item.answered">
                                 <div class="askedDate d-flex flex-row">
                                     <span><em class="lxp-AccountCircle"></em>{{item.askedBy}}</span>
                                     <span>{{'Asked on ' | translate}} {{item.askedDate|date:'dd MMM yyyy, hh:mm:ss a'}}</span>
@@ -103,6 +103,7 @@
                                             <button class="noAnswer" style="cursor:default;">{{'Unanswered' | translate}}</button>
                                         </div>
                                     </ng-template>
+                                </div>
                             </div>
                         </span>
                     </span>
@@ -115,7 +116,7 @@
             <li><em routerLink="/Landing/MyCourse" class="lxp-Go backArrow"></em> <span class="name">{{courseName}}</span> <span class="bar">/</span> <span class="breadCrumbTopic">Q&A</span></li>
         </ul>
         <div class="addQuestion">
-            <button (click)="openQuestionDialog(questionDialog)"><em class="lxp-add"></em> {{'Ask A Question' | translate}}</button>
+            <button class="pointer" (click)="openQuestionDialog(questionDialog)"><em class="lxp-add"></em> {{'Ask A Question' | translate}}</button>
         </div>
         <div class="questionResults d-flex justify-content-between">
             <div class="questions d-flex justify-content-start align-items-center" (click)="navigateAllQA('un_answered&answered')">
@@ -133,6 +134,13 @@
                 </div>
             </div>
         </div>
+        <div class="instructions">
+            <span class="heading">Instructions: </span>
+            <ul>
+                <li><span>&#9733;</span> <span>Ask only questions that are relevant to this course</span></li>
+                <li><span>&#9733;</span> <span>Before asking a question, take a look into “All Q&A in this course” tab. You may find your answer published already.</span></li>
+            </ul>
+        </div>
     </div>
 </div>
 
@@ -143,8 +151,14 @@
         </div>
         <div><em (click)="dialogClose()" class="lxp-Close pointer"></em></div>
     </div>
+    <div class="instructions">
+        <span class="heading">Instructions: </span>
+        <ul>
+            <li><span>&#9733;</span> <span>Ask only questions that are relevant to this course</span></li>
+            <li><span>&#9733;</span> <span>Before asking a question, take a look into “All Q&A in this course” tab. You may find your answer published already.</span></li>
+        </ul>
+    </div>
     <div class="dialogContent" (contextmenu)="contextmenu()">
-
         <div>
             <angular-editor [(ngModel)]="htmlContent" [config]="config"></angular-editor>
         </div>

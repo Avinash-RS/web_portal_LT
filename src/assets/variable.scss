@@ -2,6 +2,8 @@
 
 $color-red: #FF0000;
 $color-green: #00FF00;
+$secondary-color-green: #52AE31;
+$secondary-color-red: #E8542B;
 $color-blue: #024d87;
 $color-yellow: #eec720;
 $color-light-yellow : yellow;
@@ -13,6 +15,7 @@ $color-white : #ffffff;
 $color-light-blue : #B8D0FF;
 $color-light-pink : #ec8185;
 $color-light-green: #00d2b9;
+$cyan-blue-shade: #25B1E2;
 $color-blank:#1F1A17;
 $color-small-blue: #94b5f1;
 $color-border : #ccc;
@@ -92,6 +95,7 @@ $lightshadeblue:#27bbee;
 $lightgreyblue:#A5A7B8;
 $darkorange:#373331;
 $darkgreyshade:#303134;
+$dark-shde-gray: #262626;
 $lightgreen:#75D883;
 $blue:#1B4E9B;
 $whiteshade:#EDF1FB;
@@ -124,10 +128,13 @@ $whiteshade1:#FFF6F3;
 $lightBorder :#EDEDED;
 $fadeGrey:#F8F9FA;
 $whiteColor:#ffffff;
+$lightgreycolor: #848484;
+$whitegreycolor4: #E0E0E0;
+$backgroundwhite: #ffffff00;
 //Screen Size definitions
 $screen-sm-min: 576px;
 $screen-md-min: 720px; // Small tablets (portrait view)
-$screen-lg-min: 1024px; // Tablets and small desktops
+$screen-lg-min: 992px; // Tablets and small desktops
 $screen-xl-min: 1200px; // Large tablets and desktops
 
 // Small devices

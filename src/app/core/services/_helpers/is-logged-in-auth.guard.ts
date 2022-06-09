@@ -28,10 +28,8 @@ export class IsLoggedInAuthGuard implements CanActivate {
       }
     }
     if (!token) {
-      console.log('1');
       return true;
     } else {
-      console.log('2');
       this.router.navigate(['/Landing/MyCourse']);
       return false;
     }

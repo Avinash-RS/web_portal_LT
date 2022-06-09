@@ -20,7 +20,6 @@ secretKey = '(!@#Passcode!@#)';
       if (params) {
         this.goToCourse();
       }
-      console.log(params); // Print the parameter to the console.
   });
   }
 
@@ -36,13 +35,14 @@ secretKey = '(!@#Passcode!@#)';
       });
   }
 
-  loginMovement(loginresult) {
+  loginMovement(loginresult) {            
     localStorage.setItem('Fullname', loginresult.data.learner_login.message.full_name);
     var id = CryptoJS.AES.encrypt(loginresult.data.learner_login.message.user_id, this.secretKey.trim()).toString();
     loginresult.data.learner_login.message.user_id = id;
     loginresult.data.learner_login.message.specific_report_value = '';
     loginresult.data.learner_login.message.is_password_updated = true;
     localStorage.setItem('token', loginresult.data.learner_login.message.token);
+    loginresult.data.learner_login.message['portal_params'] = true;
     localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.learner_login.message));
     localStorage.setItem('remember_me', 'false');
     localStorage.setItem('user_img', loginresult.data.learner_login.message.profile_img);
@@ -57,5 +57,6 @@ setAuthentication() {
     this.router.navigate(['/Learner/upskillcalendar']);
   } else {
     this.router.navigate(['/Landing/MyCourse']);
-  }}
+  }
+}
 }

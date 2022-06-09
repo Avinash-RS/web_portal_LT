@@ -37,6 +37,7 @@ export class HeaderComponent implements OnInit {
   innerWidth: number;
   profilepic: any;
   blobKey = environment.blobKey;
+  portalParams;
   constructor(public services: CommonServicesService, private alert: AlertServiceService,
               private http: HttpClient, public overlayContainer: OverlayContainer, public socketService: SocketioService,
               public router: Router, private gs: GlobalServiceService, public translate: TranslateService) {
@@ -56,6 +57,8 @@ export class HeaderComponent implements OnInit {
   }
   @HostListener('window:resize', ['$event'])
   ngOnInit() {
+    var verifyportal = JSON.parse(localStorage.getItem('UserDetails'));
+    this.portalParams = verifyportal.portal_params;
     this.innerWidth = window.innerWidth;
     if (this.innerWidth <= 767) {
       this.expandTxt = true;
@@ -176,5 +179,8 @@ export class HeaderComponent implements OnInit {
   }
   openAvailableCources(isAvailOpen) {
     this.services.openAvailCourcePopup$.next(isAvailOpen);
+  }
+  redirectToPortal() {
+    window.open(environment.portalUrl, '_self');
   }
 }

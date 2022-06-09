@@ -309,7 +309,7 @@
                         <mat-icon class="deleteBtn" *ngIf="itrdata.submit_status == 'notsubmitted'" (click)="submitDeleteVideo(videoName, itrdata, perform.performActivity , submitType = 'delete')">close</mat-icon>
                       </div>
                       <input type="file" accept="video/mp4,video/quicktime,application/pdf" style="display: none" #videoInput [(ngModel)]="fileName" (change)="uploadDocument($event,itrdata)" />
-                        <button *ngIf="itrdata.submit_status == 'notsubmitted'" mat-stroked-button [disabled]="perform.performSubmitType == false || perform.itrationStarted == false" class="upload-bltn mt-3" (click)="uploadDocuments($event, itrdata, perform, submitType = 'upload')">
+                        <button class=""uploadbtn *ngIf="itrdata.submit_status == 'notsubmitted'" mat-stroked-button [disabled]="perform.performSubmitType == false || perform.itrationStarted == false" class="upload-btn" (click)="uploadDocuments($event, itrdata, perform, submitType = 'upload')">
                         <mat-icon class="icon-color m-t-m-2 addIcon">add</mat-icon> <span>{{'Upload' | translate}}</span> </button>
                         <p class="uploadMessage" *ngIf="itrdata.submit_status == 'notsubmitted'" >{{'Max File Size : 150 MB, Format : MP4, MOV, PDF' | translate}}</p>
                       <button mat-stroked-button class="submit-btn mt-2"
@@ -552,16 +552,16 @@
                         <span class="uploadfileName" *ngIf="item.name?.length > 19" matTooltip="{{item.name}}" matTooltipClass="custom-mat-tooltip">
                           {{(item.name| slice:0:20)+'...'}}
                         </span>
-                        <mat-icon class="deleteIcon float-right" *ngIf="project.submitType == true" (click)="learnerSumbitdeleteVideo(project, item, 'delete')">delete</mat-icon>
+                        <mat-icon class="deleteIcon float-right" *ngIf="project.projectActivity.submitAction !== 'submit'" (click)="learnerSumbitdeleteVideo(project, item, 'delete')">delete</mat-icon>
                       </div>
                       <div class="align-center">
                         <input type="file" style="display: none" accept="video/mp4,video/quicktime,image/png,image/jpeg,image/jpg,application/pdf" #uploadInput [(ngModel)]="fileName" (change)="uploadDoc($event, project, 'upload')" />
-                        <button mat-stroked-button class="upload-btn" (click)="uploadDocs()" [disabled]="project.submitType == false || project.enableSubmit == false"> 
+                        <button mat-stroked-button class="upload-btn" *ngIf="project.projectActivity.submitAction !== 'submit'" (click)="uploadDocs()" [disabled]="project.submitType == false || project.enableSubmit == false"> 
                           <mat-icon class="icon-color m-t-m-2">add</mat-icon> {{'Add your files' | translate}} 
                         </button>
-                        <p class="uploadMessage" >{{'Max File Size : 150 MB, Format : JPEG,PNG,PDF,MP4,MOV' | translate}}</p>
+                        <p class="uploadMessage" *ngIf="project.projectActivity.submitAction !== 'submit'" >{{'Max File Size : 150 MB, Format : JPEG,PNG,PDF,MP4,MOV' | translate}}</p>
                         <button mat-stroked-button class="submit-btn" [disabled]="project.submitType == false || project.enableSubmit == false" (click)="learnerSumbitdeleteVideo(project, '' ,'submit')" 
-                        *ngIf="project.projectActivity.videodetails.length > 0">{{'Submit' | translate}}</button>
+                        *ngIf="(project.projectActivity.submit_status == 'notsubmitted' || project.projectActivity.submit_status == 'late') && project.projectActivity.videodetails.length > 0 && project.submitType == true && project.projectActivity.submitAction !== 'submit'">{{'Submit' | translate}}</button>
                       
                         <p *ngIf="project.projectActivity.submitAction == 'submit'">{{'Submitted on:' | translate}} {{project.submittedOn | date:'MMM dd, yyyy'}}</p>
                       </div>
@@ -581,7 +581,7 @@
                             <mat-card class="p-0 carouselCard" (mouseover)="hover = true; mouseover(i)" (mouseleave)="hover = false">
 
                               <div class="row ml-0 mr-0 carouselRow1">
-                                <div class="col-12 m-auto" (click)="projectPreviewDoc(projectPreviewDialog,videoDialog, video, 'files')">
+                                <div class="m-auto yourSubmissionIcon" (click)="projectPreviewDoc(projectPreviewDialog,videoDialog, video, 'files')">
                                  
                                   <em class="lxp-photo imageIcon" *ngIf="video.doc_type =='image/jpeg'  || video.doc_type == 'image/png' || video.doc_type == 'image/jpg'"></em>
                                 

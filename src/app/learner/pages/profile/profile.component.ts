@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { LocationStrategy } from '@angular/common';
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, HostListener } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog} from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -25,6 +25,10 @@ import * as CryptoJS from 'crypto-js';
 // AFTER restructure - Mythreyi
 
 export class ProfileComponent implements OnInit {
+  @HostListener('window:beforeunload', ['$event'])
+  closePopup($event: any) {
+    this.dialog.closeAll();
+  }
   @ViewChild('passwordDialog', { static: true }) passwordDialog: TemplateRef<any>;
   @ViewChild('fileInput', { static: true }) fileInput;
   blobKey = environment.blobKey;
@@ -158,7 +162,7 @@ showNew = true;
   duplicateValueCheck = [];
   college_name;
   profileDetails;
-  certificationDetails;
+  certificationDetails = [];
   secretKey = '(!@#Passcode!@#)';
   // tslint:disable-next-line: use-lifecycle-interface
   ngOnDestroy() {
@@ -238,8 +242,8 @@ showNew = true;
             profile_img : this.profileDetails?.profile_img ? this.profileDetails?.profile_img : '',
             deptName : this.profileDetails?.department ? this.profileDetails?.department : '',
             country : this.profileDetails?.country?.id ? this.profileDetails.country.id : '',
-            state : this.profileDetails?.state?.id ? this.profileDetails.state?.id : {id: '', name: ''},
-            city_town : this.profileDetails?.city_town?.id ? this.profileDetails.city_town?.id : {id: '', name: ''},
+            state : this.profileDetails?.state?.id ? this.profileDetails.state?.id : '',
+            city_town : this.profileDetails?.city_town?.id ? this.profileDetails.city_town?.id : '',
             gender : this.profileDetails?.gender ? this.profileDetails?.gender : '',
             collegeName : this.profileDetails?.college_name ? this.profileDetails?.college_name : ''
           });
@@ -451,7 +455,11 @@ showNew = true;
     });
   }
 
-  getDistrict() {
+  getDistrict(value?) {
+    if(value){
+      this.profileForm.value.city_town = null;
+      this.profileForm.patchValue({city_town:''});
+    }
     this.service.get_district_details(this.profileForm.value.country, this.profileForm.value.state).subscribe((city: any) => {
       this.cityValue = city.data.get_district_details.data;
     });

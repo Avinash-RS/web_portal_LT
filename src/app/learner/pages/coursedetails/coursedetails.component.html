@@ -73,14 +73,19 @@
                                     <span *ngIf="res?.status == null" class="greyColor"></span>
                                 </div>
                                 <div class="topicName">
-                                    <h4 *ngIf="res?.module_name?.length >= 67" class="moduleName">
-                                        <span class="titleName">{{res?.module_name | slice:0:71}}...</span>
-                                        <span class="toolTip">{{res?.module_name}}</span>
-                                    </h4>
-                                    <h4 *ngIf="res?.module_name?.length < 67" class="moduleName">
-                                        <span class="titleName">{{res?.module_name}}</span>
-                                        <span class="toolTip">{{res?.module_name}}</span>
-                                    </h4>
+                                    <ng-container *ngIf="isTesting">
+                                        <h4  class="moduleName" [innerHTML]="sanitizer.bypassSecurityTrustHtml(res?.module_name)"></h4>
+                                    </ng-container>
+                                    <ng-container *ngIf="!isTesting">
+                                        <h4 *ngIf="res?.module_name?.length >= 67" class="moduleName">
+                                            <span class="titleName">{{res?.module_name | slice:0:71}}...</span>
+                                            <span class="toolTip">{{res?.module_name}}</span>
+                                        </h4>
+                                        <h4 *ngIf="res?.module_name?.length < 67" class="moduleName">
+                                            <span class="titleName">{{res?.module_name}}</span>
+                                            <span class="toolTip">{{res?.module_name}}</span>
+                                        </h4>
+                                    </ng-container>
                                 </div>
                                 <div class="arrowExpandCollapse">
                                     <div>
@@ -97,6 +102,10 @@
                                             <span *ngIf="subData?.status == null" class="greyColor"></span>
                                         </div>
                                         <div class="topicName">
+                                            <ng-container *ngIf="isTesting">
+                                                <h4  class="moduleName"  [innerHTML]="sanitizer.bypassSecurityTrustHtml(subData?.module_name)"></h4>
+                                            </ng-container>
+                                            <ng-container *ngIf="!isTesting">
                                             <h4 *ngIf="subData?.module_name?.length >= 67" class="moduleName">
                                                 <span class="titleName">{{subData?.module_name | slice:0:71}}...</span>
                                                 <span class="toolTip">{{subData?.module_name}}</span>
@@ -105,6 +114,7 @@
                                                 <span class="titleName">{{subData?.module_name}}</span>
                                                 <span class="toolTip">{{subData?.module_name}}</span>
                                             </h4>
+                                        </ng-container>
                                         </div>
                                         <div class="subModuleExpandCollapse">
                                             <div>
@@ -120,7 +130,8 @@
                                                     <div *ngIf="(wi==weekHolderUI&&ti==nextPrevHolder && smi==subModuleHolder && mi==moduleHolder)||(this.weekHolder==undefined&& mod.expanded)" #focuser ></div>
                                                     <div class="icov" [ngClass]="filterkey == 'Bookmarked'?(wi==bkmrk_week&&ti==bkmrk_topic && smi==bkmrk_subModuleHolder && mi==bkmrk_module)?'topicTitleSelected' : '':(wi==weekHolderUI&&ti==nextPrevHolder && smi==subModuleHolder && mi==moduleHolder)||(this.weekHolder==undefined&& mod.expanded) ? 'topicTitleSelected' : ''" (click)="playTopic(mod.link,mod?.topic_name,mod.status,subData?.module_name,res?.status,mod,(filterkey == 'Bookmarked'?{'wn':resDat.week,'wi':wi}:wi),ti,mi,smi);drawersOpen=performOverLay?(drawersOpen?false:true):true">
                                                         <div class="modTitle">
-                                                            <h3>{{mod?.topic_name}}</h3>
+                                                            <h3 *ngIf="isTesting" [innerHTML]="sanitizer.bypassSecurityTrustHtml(mod?.topic_name)"></h3>
+                                                            <h3 *ngIf="!isTesting">{{mod?.topic_name}}</h3>
                                                         </div>
                                                         <span *ngIf="mod?.status === 'Passed'" [ngClass]="mod?.status === 'Passed' ? 'bgGreen' : ''">
                                                             <em *ngIf="mod?.status === 'Passed'" class="lxp-Right"></em>
@@ -146,7 +157,8 @@
                                             <div *ngIf="(wi==weekHolderUI&&ti==nextPrevHolder && mi==moduleHolder)||(this.weekHolder==undefined&& mod.expanded)" #focuser ></div>
                                             <div class="icov" [ngClass]="filterkey == 'Bookmarked'?(wi==bkmrk_week&&ti==bkmrk_topic && mi==bkmrk_module)?'topicTitleSelected' : '':(wi==weekHolderUI&&ti==nextPrevHolder && mi==moduleHolder)||(this.weekHolder==undefined&& mod.expanded) ? 'topicTitleSelected' : ''" (click)="playTopic(mod.link,mod.topic_name,mod.status,res?.module_name,res?.status,mod,(filterkey == 'Bookmarked'?{'wn':resDat.week,'wi':wi}:wi),ti,mi);drawersOpen=performOverLay?(drawersOpen?false:true):true">
                                                 <div class="modTitle">
-                                                    <h3>{{mod?.topic_name}}</h3>
+                                                    <h3 *ngIf="!isTesting">{{mod?.topic_name}}</h3>
+                                                    <h3  *ngIf="isTesting"  [innerHTML]="sanitizer.bypassSecurityTrustHtml(mod?.topic_name)"></h3>
                                                 </div>
                                                 <span *ngIf="mod?.status === 'Passed'" [ngClass]="mod?.status === 'Passed' ? 'bgGreen' : ''">
                                                     <em *ngIf="mod?.status === 'Passed'" class="lxp-Right"></em>
@@ -225,10 +237,10 @@
                     <div *ngIf="userType=='vocational'"   (click)="understoodClick('dislike')" data-title="Not Understood" class="sad" [ngClass]="topicInfo?.status==='Passed' && topicInfo?.user_experience === 'dislike'?'fillcol':'nofill'">
                         <em class="lxp-sad"></em> <span>{{'Not Understood' | translate}}</span>
                     </div>
-                    <button data-title="Ask A Question" class="askAQuestion" *ngIf="userType!=='collegeconnect'" type="button" (click)="openAskQuestions(askQuestions)">
+                    <button data-title="Ask A Question" class="askAQuestion pointer" *ngIf="userType!=='collegeconnect'" type="button" (click)="openAskQuestions(askQuestions)">
                         <em class="lxp-question"></em> <span>{{'Ask A Question' | translate}}</span>
                     </button>
-                    <button data-title="Ask A Question" class="askAQuestion" *ngIf="userType=='collegeconnect'" type="button" (click)="openQuestionDialog(questionDialog)">
+                    <button data-title="Ask A Question" class="askAQuestion pointer" *ngIf="userType=='collegeconnect'" type="button" (click)="openQuestionDialog(questionDialog)">
                         <em class="lxp-question"></em> <span>{{'Ask A Question' | translate}}</span>
                     </button>
                      <button class="bookmarkBtn" *ngIf="userType!=='Corporate' && userType!=='vocational'" data-title="Bookmark" type="button" [disabled]="filterkey==='Bookmarked'" ngClass="btn btn-outline-light" (click)="bookmarkClick(topicInfo?.bookmark?false:true)">
@@ -542,8 +554,8 @@
         <div>
         </div>
         <div class="d-flex justify-content-between cancelSubmit">
-            <button class="btn btn-outline-dark btn-block" (click)="dialogClose()">{{'Cancel' | translate}}</button>
-            <button class="btn btn-danger btn-block" (click)="createQuestion()">{{'Submit Question' | translate}}</button>
+            <button class="btn-outline-dark" (click)="dialogClose()">{{'Cancel' | translate}}</button>
+            <button class="btn-danger" (click)="createQuestion()">{{'Submit Question' | translate}}</button>
         </div>
     </div>
 </ng-template>

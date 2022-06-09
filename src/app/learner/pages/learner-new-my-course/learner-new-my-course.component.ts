@@ -10,7 +10,7 @@ import { LearnerServicesService } from '@learner/services/learner-services.servi
 import { formatDate } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { environment } from '@env/environment';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DragScrollComponent } from 'ngx-drag-scroll';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
@@ -84,26 +84,31 @@ export class LearnerNewMyCourseComponent implements OnInit {
   constructor(private dialog: MatDialog, private router: Router,
               public learnerService: LearnerServicesService,
               private gs: GlobalServiceService, public CommonServices: CommonServicesService,
-              public translate: TranslateService) {
+              public translate: TranslateService, public urlRoute: ActivatedRoute) {
+              var urlLink = this.urlRoute.routeConfig.path;
+              // console.log(this.urlRoute.url);
+              if (urlLink == 'Microcourses'){
+                this.freeCourses = true;
+              } else {
+                this.freeCourses = false;
+              }
     const lang = localStorage.getItem('language');
     this.translate.use(lang ? lang : 'en');
     this.userDetailes = this.gs.checkLogout();
     if (!this.userDetailes?.is_password_updated) {
+      this.dialog.closeAll();
       this.router.navigate(['/Learner/profile']);
       return;
     }
-    this.learnerService.insertSkeleton(this.userDetailes.user_id).subscribe((result:any)=>{
-      this.getDashboardMyCourse(this.userDetailes.user_id, this.userDetailes._id);
-  },
-  err =>{
     this.getDashboardMyCourse(this.userDetailes.user_id, this.userDetailes._id);
-  })
+   // this.getDashboardMyCourse(this.userDetailes.user_id, this.userDetailes._id);
   }
   @ViewChild('completedTopics', { read: DragScrollComponent }) ds: DragScrollComponent;
   @ViewChild('inProgress', { read: DragScrollComponent }) dsInProgress: DragScrollComponent;
   showJobRole = false;
   isReadMore = true;
   show = true;
+  freeCourses;
   innerWidth: number;
   expandcollapse = true;
   viewDate: Date = new Date();
@@ -381,6 +386,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
   nochartdata: boolean = true;
   currentYear: number;
   stepUrl;
+  portalParams;
 
   info = 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like). like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like). like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).';
 
@@ -388,6 +394,8 @@ export class LearnerNewMyCourseComponent implements OnInit {
 
   ngOnInit() {
     // console.log('json', link );
+    var verifyportal = JSON.parse(localStorage.getItem('UserDetails'));
+    this.portalParams = verifyportal.portal_params;
     this.innerWidth = window.innerWidth;
     const showAppBanner = localStorage.getItem('appBanner');
     if (!showAppBanner) {
@@ -403,9 +411,6 @@ export class LearnerNewMyCourseComponent implements OnInit {
     this.UserDetails = JSON.parse(localStorage.getItem('UserDetails')) || null;
     this.userId = this.UserDetails.user_id;
     this.selectedDate = moment().format();
-    this.learnerService.insertSkeleton(this.userId).subscribe((result:any)=>{
-      console.log(result)
-    })
     this.getLearnerActivity(this.selectedDate);
     // this.triggerAvailablecourse = setInterval(() => {
     //   this.getCountForCategories();
@@ -530,14 +535,19 @@ export class LearnerNewMyCourseComponent implements OnInit {
     }
     if (this.jobroleCategoryId === 'All') { jobRoleId = null; }
     this.learnerService.get_batchwise_learner_dashboard_data_v2(userId, requestType, jobRoleIdSEQ).subscribe((BcourseData: any) => {
-        if(BcourseData?.data?.get_batchwise_learner_dashboard_data_v2?.success){
+        if(BcourseData?.data?.get_batchwise_learner_dashboard_data_v2){
           this.courseDetailsList = BcourseData?.data.get_batchwise_learner_dashboard_data_v2?.message.length > 0 ? BcourseData.data.get_batchwise_learner_dashboard_data_v2.message :[];
-          this.courseDetailsList.forEach((value) => {
-            value.show = true;
+          this.learnerService.getLearnerDashboard(userId, userObjId, 'undefined', requestType, 'enrolment').subscribe((EcourseData: any) => {
+            const EcourseDetail = EcourseData.data.get_learner_dashboard.message.enrolled_course_details;
+            this.enrolledCourses = EcourseDetail && EcourseDetail !== null ? EcourseDetail : [];
+            this.courseDetailsList.push(...this.enrolledCourses);
+            this.courseDetailsList.forEach((value) => {
+              value.show = true;
+            });
+            this.onGoingCourseCount = (BcourseData.data.get_batchwise_learner_dashboard_data_v2.ongoing ?BcourseData.data.get_batchwise_learner_dashboard_data_v2.ongoing:0) + EcourseData.data.get_learner_dashboard.message.ongoing_count;
+            this.completedCourseCount = (BcourseData.data.get_batchwise_learner_dashboard_data_v2.completed ? BcourseData.data.get_batchwise_learner_dashboard_data_v2.completed:0 )+ EcourseData.data.get_learner_dashboard.message.completed_count;
+            this.allCourseCount = (BcourseData.data.get_batchwise_learner_dashboard_data_v2.all ? BcourseData.data.get_batchwise_learner_dashboard_data_v2.all:0) + EcourseData.data.get_learner_dashboard.message.all_count;
           });
-          this.onGoingCourseCount = BcourseData.data.get_batchwise_learner_dashboard_data_v2.ongoing ?BcourseData.data.get_batchwise_learner_dashboard_data_v2.ongoing:0;
-          this.completedCourseCount = BcourseData.data.get_batchwise_learner_dashboard_data_v2.completed ? BcourseData.data.get_batchwise_learner_dashboard_data_v2.completed:0;
-          this.allCourseCount =BcourseData.data.get_batchwise_learner_dashboard_data_v2.all ? BcourseData.data.get_batchwise_learner_dashboard_data_v2.all:0;
         }
         else {
           this.courseDetailsList = [];
@@ -547,6 +557,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
         }
         this.courseSkel = true;
     });
+
 
   }
 
@@ -908,7 +919,6 @@ changeWeekDate() {
 }
 
 goToCourse(c){
-  // return false;
   c.batch_end_date_Timer = new Date(c.batch_end_date).getTime();
 
   const detail = {

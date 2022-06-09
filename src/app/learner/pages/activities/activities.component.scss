@@ -64,9 +64,6 @@
       width: calc(100% - 310px);
     }
     @include xl {
-      width: calc(100% - 405px);
-    }
-    @media only screen and (min-width: 1540px) {
       width: calc(100% - 530px);
     }
   }
@@ -78,9 +75,6 @@
       margin: 0 0 0 20px;
     }
     @include xl {
-      width: 405px;
-    }
-    @media only screen and (min-width: 1540px) {
       width: 530px;
     }
   }
@@ -311,9 +305,6 @@
 .assignmentNameFile {
   width: 25%;
 }
-.imageIcon {
-  margin-left: 0;
-}
 .assignmentQuestion {
   width: 8%;
 }
@@ -364,6 +355,7 @@
   display: inline-block;
 }
 .arr {
+  cursor: pointer;
   position: absolute;
   top: 10px;
   right: 10px;
@@ -1093,29 +1085,35 @@
   cursor: pointer;
   height: 100%;
   position: relative;
-  padding: 16px 0 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  .carouselRow1 {
+    position: relative;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .carouselRow {
+    background-color: #5c6873;
+    position: relative;
+    width: 100%;
+  }
+  .imageIcon, .pdfIcon {
+    font-size: 40px;
+    color: #898989;
+  }
+}
+.yourSubmissionIcon {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
 }
 // .carouselCard :hover  {
 //   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 // }
-
-.carouselRow1 {
-  height: 100%;
-  position: relative;
-  // height: 7rem;
-}
-// .carouselRow2 {
-//   height: 50%;
-// }
-
-.carouselRow {
-  // height: 3rem;
-  background-color: #5c6873;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-}
 
 .carouselRowHover {
   // height: 4rem;
@@ -1159,11 +1157,6 @@
   cursor: pointer;
   display: flex;
   align-items: center;
-}
-.imageIcon {
-  font-size: 50px;
-  margin-left: 3.2rem;
-  color: #898989;
 }
 .feedBackTxt {
   color: $label2;
@@ -1367,12 +1360,6 @@
   color: #5c6873;
 }
 
-.pdfIcon {
-  font-size: 50px;
-  margin-left: 3rem;
-  color: #898989;
-}
-
 :host ::ng-deep .widthClass .owl-carousel.owl-drag .owl-item {
   width: 13.5rem !important;
 }
@@ -1511,7 +1498,7 @@
 
 .actionBtnmobile, .actionBtn1Mobile {
   font-size: 10px;
-  margin-left: 5px;
+  // margin-left: 5px;
 }
 
 .downloadBtnMobile {
@@ -1521,6 +1508,9 @@
 
 .colActionDownload {
   cursor: pointer;
+  a {
+    display: flex;
+  }
 }
 
 .m-l {
@@ -1800,7 +1790,7 @@
   align-items: center;
   justify-content: space-between;
   em {
-    margin-right: 0.5em;
+    margin-right: 5px;
   }
 }
 .carouselRowHoverChild {
@@ -1808,4 +1798,10 @@
 }
 .materialTxt {
   padding: 0.75em;
+}
+.upload-btn {
+  margin-top: 15px!important;
+}
+.justify-content-around {
+  justify-content: space-around!important;
 }

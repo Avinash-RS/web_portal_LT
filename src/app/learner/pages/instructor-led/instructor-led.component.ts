@@ -16,19 +16,24 @@ import { TranslateService } from '@ngx-translate/core';
 export class InstructorLedComponent implements OnInit {
   blobKey = environment.blobKey;
   sessionAttendance: any;
-  listOfSessions: any;
+  listOfSessions: any = [];
   course: any;
   activityShow: any;
   totalSessions: any;
-  recordedSessions: any;
+  recordedSessions = [];
   attendedSessions: any;
-  attendedCount;
-  recordedCount;
+  attendedCount: any;
+  recordedCount: any;
   videoSource;
   showSkeleton;
   showContent;
   userDetails;
   @ViewChild('attended') attended: ElementRef;
+  liveSessions: any = [];
+  recordedSVideoession: any;
+  tabIndex: any = 0;
+  sessionActivity = [];
+  
 
   constructor(private router: Router,
               private learnerService: LearnerServicesService,
@@ -57,12 +62,12 @@ export class InstructorLedComponent implements OnInit {
     this.userDetails.user_id).subscribe(async res => {
       this.showSkeleton = false;
       const data = res.data['getTopicAttendanceDetailsByUsername']['data'];
-      this.listOfSessions = data.Activity;
-      if (this.listOfSessions.length > 0) {
-        this.showContent = true;
-      } else {
-        this.showContent = false;
-      }
+      this.listOfSessions = data?.Activity;
+      // if (this.listOfSessions.length > 0) {
+      //   this.showContent = true;
+      // } else {
+      //   this.showContent = false;
+      // }
       this.listOfSessions.sort((a, b) => {
         return +new Date(b.activity_details.startdate) - +new Date(a.activity_details.startdate);
       });
@@ -87,7 +92,37 @@ export class InstructorLedComponent implements OnInit {
       }
       this.attendedSessions = _.countBy(this.sessionAttendance, x => x.activity.attendencedetails.Attendence === 'yes');
       this.useSession(this.listOfSessions[0]);
+      this.listOfSessions.forEach((val) => {
+        if (val.activity_details.activitytype == 'Recorded') {
+          this.recordedSessions.push(val);
+        } else {
+          this.sessionActivity.push(val);
+        }
+      });
+      this.getliveSessionRecorded({index:0});
     });
+  }
+
+  getliveSessionRecorded(event) {
+    this.tabIndex = event.index;
+    if (event.index == 0){
+      this.liveSessions = this.sessionActivity;
+    } else {
+      this.liveSessions = this.recordedSessions;
+    }
+    // if (event.index == 0) {
+    //   this.liveSessions = this.listOfSessions.filter(ele => {
+    //     return ele.activity_details.activitytype !== "Recorded";
+    //   });
+    // }
+    // else {
+    //   this.liveSessions = this.listOfSessions.filter(ele => {
+    //     return ele.activity_details.activitytype == "Recorded";
+    //   });
+    // }
+    if(this.liveSessions.length > 0){
+      this.useSession(this.liveSessions[0]);
+    }
   }
 
   useSession(los) {
@@ -102,6 +137,11 @@ export class InstructorLedComponent implements OnInit {
     if (los.status === 'On going') {
       this.activityShow.button = 'Join Now';
     }
+  }
+  getScrollTop() {
+    document.getElementById('scrollTop').scrollIntoView({
+      behavior: 'smooth'
+    });
   }
 
   onGoingSession() {
@@ -118,6 +158,11 @@ export class InstructorLedComponent implements OnInit {
       this.activityShow = ongoing;
       this.activityShow.button = 'Join Now';
     }
+  }
+
+  playVideo() {
+    var ctrl = document.getElementById('singleVideo') as HTMLVideoElement;
+    ctrl.play();
   }
 
   getAction(link) {

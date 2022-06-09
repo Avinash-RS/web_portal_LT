@@ -754,369 +754,7 @@ export const getlearnertrack = gql`
     }
   }
 `;
-export const getlearnerdashboard = gql`
-  query get_learner_dashboard(
-    $user_id: String!
-    $user_obj_id: String!
-    $pagenumber: String!
-    $request_type: String!
-    $course_type: String!
-  ) {
-    get_learner_dashboard(
-      user_id: $user_id
-      user_obj_id: $user_obj_id
-      pagenumber: $pagenumber
-      request_type: $request_type
-      course_type: $course_type
-    ) {
-      success
-      error_msg
-      message {
-        ongoing_count
-        completed_count
-        all_count
-        batch_course_details {
-          _id
-          course_name
-          course_description
-          course_long_description
-          course_img_url
-          preview_video
-          certificate_name
-          course_mode
-          course_type
-          course_language
-          course_status
-          feed_back
-          drm
-          user_role
-          user_id
-          user_name
-          version
-          location
-          course_start_datetime
-          course_end_datetime
-          advertised_start
-          course_video_url
-          social_sharing_url
-          certificate_display_behaviour
-          certificates_show_before_end
-          certificate_html_view_enabled
-          has_any_active_web_certificate
-          lowest_passing_grade
-          mobile_available
-          visible_to_staff_only
-          enrollment_start
-          enrollment_end
-          invitation_only
-          max_student_enrollments_allowed
-          announcement
-          catalog_visibility
-          short_description
-          self_paced
-          marketing_url
-          certificate_available_date
-          article_count
-          downloadable_resource_count
-          course_level
-          step_towards
-          rating
-          price
-          course_category
-          created_by
-          updated_by
-          admin_id
-          is_published
-          learner_count
-          is_active
-          published_by
-          publisher_id
-          updated_by_id
-          course_id
-          created_at
-          updated_at
-          published_on
-          published_on_date
-          assignment_submitted_count
-          assignment_total_count
-          completed_mid_course_project_count
-          total_mid_course_project_count
-          total_module_count
-          total_topic_count
-          week_total_count
-          week_completed_count
-          image_self_paced_learning_time
-          total_duration
-          instructor_lead_session_completed_count
-          instructor_lead_session_total_count
-          self_paced_learning_progression
-          completed_module_count
-          completed_topic_count
-          batch_start_date
-          batch_end_date
-          batch_name
-          batch_description
-          thread_count
-          comment_count
-          reply_count
-          image_instructor_lead_session_time
-          image_internal_assesment
-          image_mid_course_project
-          image_final_assesment
-          internal_assesment
-          final_assesment
-          credits
-          current_week_count
-          actual_total_week
-          batch_instructor_details {
-            id
-            name
-            image
-            description
-            role
-            roleid
-            userid
-            role_type_id
-            role_type_name
-          }
-          activity_info {
-            _id
-            batchid
-            courseid
-            coursename
-            modulecount
-            thread_count
-            comment_count
-            reply_count
-            moduledetails {
-              modulename
-              topicdetails {
-                topicname
-                status
-                activityid
-                courseid
-                coursename
-                modulename
-                startdate
-                enddate
-                activitytype
-                activityname
-                score
-                link
-                created_on
-                createdby_name
-                createdby_role
-                createdby_id
-                trainers {
-                  name
-                  role
-                  role_type_id
-                  role_type_name
-                  userid
-                  roleid
-                  role_type
-                }
-                learners {
-                  email
-                  id
-                  image
-                  is_active
-                  name
-                  username
-                }
-                evaluationmode
-                resourcefile {
-                  assignment
-                  checked
-                  doc_type
-                  filename
-                  path
-                  size
-                  type_name
-                  _id
-                }
-              }
-            }
-          }
-          takeway_details {
-            text
-            description
-            what_will_you_learn
-            media
-          }
-          coursepartner_details {
-            name
-            image
-          }
-          author_details {
-            image
-            author_name
-            description
-          }
-          pre_requisite {
-            name
-            image
-          }
-          catalogue_id
-          super_sub_category_id
-          category_id
-          parent_sub_category_id
-          course_content_details {
-            name
-            type
-            is_active
-            parent_id
-            description
-            sub_section_id
-            file_content {
-              video_url
-              image_url
-              audio_url
-              file_url
-            }
-            unit {
-              name
-              type
-              is_active
-              parent_id
-              description
-              sub_section_id
-              file_content {
-                video_url
-                image_url
-                audio_url
-                file_url
-              }
-            }
-          }
-        }
-        enrolled_course_details {
-          _id
-          course_id
-          course_description
-          course_name
-          course_status
-          version
-          location
-          course_start_datetime
-          course_end_datetime
-          advertised_start
-          course_img_url
-          social_sharing_url
-          certificate_display_behaviour
-          certificates_show_before_end
-          certificate_html_view_enabled
-          has_any_active_web_certificate
-          certificate_name
-          lowest_passing_grade
-          mobile_available
-          visible_to_staff_only
-          enrollment_start
-          enrollment_end
-          invitation_only
-          max_student_enrollments_allowed
-          announcement
-          catalog_visibility
-          course_video_url
-          short_description
-          self_paced
-          marketing_url
-          course_language
-          certificate_available_date
-          article_count
-          downloadable_resource_count
-          course_level
-          step_towards
-          rating
-          price
-          what_will_you_learn
-          course_category
-          course_type
-          groupid
-          created_by
-          updated_by
-          admin_id
-          is_published
-          course_mode
-          preview_video
-          learner_count
-          is_active
-          published_by
-          publisher_id
-          updated_by_id
-          user_role
-          user_id
-          user_name
-          published_on
-          updated_at
-          created_at
-          feed_back
-          course_long_description
-          published_on_date
-          completed_module_count
-          completed_topic_count
-          self_paced_learning_progression
-          image_self_paced_learning_time
-          total_module_count
-          total_topic_count
-          total_duration
-          catalogue_id
-          super_sub_category_id
-          pre_requisite {
-            name
-            image
-          }
-          takeway_details {
-            text
-            description
-            what_will_you_learn
-            media
-          }
 
-          coursepartner_details {
-            name
-            image
-          }
-          category_id
-          parent_sub_category_id
-          course_content_details {
-            name
-            type
-            is_active
-            parent_id
-            description
-            sub_section_id
-            file_content {
-              video_url
-              image_url
-              audio_url
-              file_url
-            }
-            unit {
-              name
-              type
-              is_active
-              parent_id
-              description
-              sub_section_id
-              file_content {
-                video_url
-                image_url
-                audio_url
-                file_url
-              }
-            }
-          }
-          author_details {
-            image
-            author_name
-            description
-          }
-        }
-      }
-    }
-  }
-`;
 
 export const getLearnerenrolledCourses = gql`
   query getLearnerenrolledCourses(
@@ -2191,6 +1829,7 @@ export const getTopicAttendanceDetailsByUsername = gql`
     ) {
       success
       message
+      error_msg
       data {
         Attendance {
           _id
@@ -2311,10 +1950,65 @@ export const get_batchwise_learner_dashboard_data_v2 = gql `
           course_week_Percent
           course_description
           isTesting
+          resume_topic
+          topic_id
+          module_id
         }
         ongoing
         all
         completed
+      }
+    }
+`
+export const get_learner_dashboard = gql `
+  query get_learner_dashboard(
+      $user_id:String!,
+      $user_obj_id: String!,
+      $pagenumber: String!,
+      $request_type:String!,
+      $course_type:String!,
+    ) {
+      get_learner_dashboard(
+        user_id: $user_id
+        user_obj_id: $user_obj_id
+        pagenumber: $pagenumber
+        request_type: $request_type
+        course_type: $course_type
+      ){
+        success
+        error_msg
+        message{
+          ongoing_count
+          completed_count
+          all_count
+          enrolled_course_details {
+            feedback_status
+            course_percentage
+            isTesting
+            user_id
+            course_id
+            status
+            location
+            toc
+            course_name
+            lastModule
+            lastTopic
+            noOfTopic
+            module_id
+            topic_id
+            resume_topic
+            checkLevel
+            updated_on
+            link
+            checklevel
+            course_img_url
+            course_description
+            course_type
+            progress_class
+            course_status
+            image_self_paced_learning_time
+          }
+        }
       }
     }
 `
@@ -2383,6 +2077,7 @@ export const get_batchwise_learner_dashboard_data = gql`
         enableCredits
         selflearning_totalweeks
         QA_totalweeks
+        isTesting
         link
         toc
         lastLogIndex

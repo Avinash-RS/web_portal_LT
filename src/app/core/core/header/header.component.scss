@@ -22,6 +22,27 @@
   width: 175px !important;
   height: 38px;
 }
+.btnContainer {
+  position: absolute;
+  right: 35px;
+  .catalogBtn {
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+    color: $dark-shde-gray;
+    background-color: $color-white;
+    border: 1px solid $cyan-blue-shade;
+    border-radius: 5px;
+    box-shadow: $blackshade1;
+    padding: 8px 20px;
+    cursor: pointer;
+    transition: .3s all ease-in;
+    &:hover {
+      color: $color-white;
+      background-color: $cyan-blue-shade;
+    }
+  }
+}
 .mat-icon-button {
   margin-right: 10px;
 }
@@ -121,6 +142,9 @@
   justify-content: flex-end;
   align-items: center;
   width: calc(100% - 175px);
+}
+.hideToolbar {
+  display: none;
 }
 .hearder-logo {
   height: 38px;

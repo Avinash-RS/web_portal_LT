@@ -21,6 +21,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { ChartsModule } from 'ng2-charts';
 import { DragScrollModule } from 'ngx-drag-scroll';
@@ -50,6 +52,8 @@ import { CalendarFilterComponent } from './pages/calendar-filter/calendar-filter
 import { QuizReportComponent } from './pages/quiz-report/quiz-report.component';
 import 'ag-grid-enterprise';
 import { AgGridModule } from 'ag-grid-angular';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+
 import { ProgramReportComponent } from './pages/program-report/program-report.component';
 import { BenchmarkreportComponent } from './pages/benchmarkreport/benchmarkreport.component';
 import { MillestonereportComponent } from './pages/millestonereport/millestonereport.component';
@@ -188,6 +192,9 @@ const routes: Routes = [
     MatDialogModule,
     MatButtonModule,
     MatProgressBarModule,
+    MatDatepickerModule,
+    MatTooltipModule,
+    MatCheckboxModule,
     InfiniteScrollModule,
     NgCircleProgressModule,
     Ng2SearchPipeModule,

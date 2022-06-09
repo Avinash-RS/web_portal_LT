@@ -20,7 +20,7 @@
         </div>
         <div class="col-md-2 col-sm-2 col-2">
           <span>
-            <mat-icon class="editBtn" [matTooltip]="'Click here to change Password' | translate" matTooltipPosition="above" [ngClass]="cannotEdit ? 'm-n f_size_17 bb' : 'f_size_17 bb'" *ngIf="editpopup"
+            <mat-icon class="editBtn" [matTooltip]="'Click here to change password' | translate" matTooltipPosition="above" [ngClass]="cannotEdit ? 'm-n f_size_17 bb' : 'f_size_17 bb'" *ngIf="editpopup"
             (click)="editPassword(passwordDialog)"> create</mat-icon>
           </span>
         </div>
@@ -145,7 +145,7 @@
           </div>
           <div class="rowWrapper">
             <div class="form-group width_100 p-b-10px">
-              <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs lap_s95' : 'inputs lap_s95'" [placeholder]="'State' | translate" formControlName="state" name="state"  (selectionChange)="getDistrict()">
+              <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs lap_s95' : 'inputs lap_s95'" [placeholder]="'State' | translate" formControlName="state" name="state"  (selectionChange)="getDistrict('edit')">
                 <mat-option [value]="state._id" *ngFor="let state of stateValue">
                   {{state.statename}}
                 </mat-option>
@@ -247,7 +247,7 @@
   
   <!-- Certification UI -->
   <div class="container-reg200 certification">
-    <label _ngcontent-xxc-c2="" class="f_size_19">Certifications</label>
+    <label class="f_size_19" *ngIf="certificationDetails.length > 0">Certifications</label>
     <div class="certificateWrapper">
       <div class="certificate" *ngFor="let cDetails of certificationDetails">
         <span class="cBadge">
@@ -308,22 +308,17 @@
       <div class="box" id="message">
         <div class="row">
           <div class="col">
-            <p *ngIf="uppercase" id="uppercase" class="valid"><em class="lxp-Tick"></em>
-              {{'Uppercase' | translate}}</p>
-            <p *ngIf="lowercase" id="lowercase" class="valid"><em class="lxp-Tick"></em>
-              {{'Lowercase' | translate}}</p>
-          </div>
-          <div class="col">
-            <p *ngIf="spicalcharacter" id="specialcharacter" class="valid"><em class="lxp-Tick"></em>{{'Special character' | translate}}</p>
-            <p *ngIf="number" id="number" class="valid"><em class="lxp-Tick"></em> {{'Number' | translate}}
-            </p>
+            <p *ngIf="uppercase" id="uppercase" class="valid"><em class="lxp-Tick"></em> {{'Uppercase' | translate}}</p>
+            <p *ngIf="lowercase" id="lowercase" class="valid"><em class="lxp-Tick"></em> {{'Lowercase' | translate}}</p>
+            <p *ngIf="spicalcharacter" id="specialcharacter" class="valid"><em class="lxp-Tick"></em> {{'Special character' | translate}}</p>
+            <p *ngIf="number" id="number" class="valid"><em class="lxp-Tick"></em> {{'Number' | translate}}</p>
           </div>
         </div>
       </div>
       <mat-form-field class="w-100" appearance="outline">
         <mat-label class="labe l-color">{{'Confirm New password' | translate}}</mat-label>
       
-        <input  onCopy="return false" onDrag="return false" onDrop="return false" matInput placeholder="Enter password" [type]="hideConfirm ? 'password' : 'text'" formControlName="confirmpassword" [ngClass]="{ 'is-invalid': c.confirmpassword.touched && c.confirmpassword.errors }" required>
+        <input  onpaste="return false" onCopy="return false" onDrag="return false" onDrop="return false" matInput placeholder="Enter password" [type]="hideConfirm ? 'password' : 'text'" formControlName="confirmpassword" [ngClass]="{ 'is-invalid': c.confirmpassword.touched && c.confirmpassword.errors }" required>
         <span mat-icon-button matSuffix (click)="hideConfirm = !hideConfirm" [attr.aria-label]="'hideConfirm password'" [attr.aria-pressed]="hideConfirm">
           <em class="icon-color" [ngClass]="hideConfirm ? 'lxp-VisibilityOff' : 'lxp-Visibility'"></em>
         </span>
@@ -338,7 +333,7 @@
     </form>
   </mat-dialog-content><br>
   <mat-dialog-actions>
-    <button class="popupbtns" [disabled]="passwordForm.invalid" (click)="updatePassword()">
+    <button class="popupbtns" #submitBtn [disabled]="passwordForm.invalid" (click)="updatePassword();submitBtn.disabled = true">
       {{!loader? 'Submit':'' | translate}}
       <div *ngIf="loader" class="spinnerLoader">
         <!-- <div class="stage">

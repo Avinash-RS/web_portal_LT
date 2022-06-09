@@ -3,9 +3,19 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { FooterComponent } from '@core/core/footer/footer.component';
+// import { FooterComponent } from '@core/core/footer/footer.component';
 // local
-import { MaterialModule } from '@core/material.module';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatRippleModule } from '@angular/material/core';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatCardModule } from '@angular/material/card';
+// import { MatBadgeModule } from '@angular/material/badge';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+// import { MaterialModule } from '@core/material.module';
 import { CapslockDirective } from '@core/services/directives/capslock.directive';
 import { StickyHeaderDirective } from '@core/services/directives/sticky-header.directive';
 import { AudioPlayerComponent } from '@core/shared/audio-player/audio-player.component';
@@ -26,7 +36,7 @@ import { LandingHeaderComponent } from './core/landing-header/landing-header.com
 import { DragDropImageDirective } from './services/directives/drag-drop-image.directive';
 import { PdfreaderComponent } from './shared/pdfreader/pdfreader.component';
 import { ToolbarNotificationComponent } from './shared/toolbar-notification/toolbar-notification.component';
-import { DeferLoadModule } from '@trademe/ng-defer-load';
+// import { DeferLoadModule } from '@trademe/ng-defer-load';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -40,7 +50,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     CapslockDirective,
     StickyHeaderDirective,
     HeaderComponent,
-    FooterComponent,
+    // FooterComponent,
     VideoPlayerComponent,
     AudioPlayerComponent,
     DragDropImageDirective,
@@ -51,7 +61,18 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
   ],
 
   imports: [
-    MaterialModule,
+    MatTabsModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatIconModule,
+    MatRippleModule,
+    // MatNativeDateModule,
+    MatToolbarModule,
+    MatCardModule,
+    MatExpansionModule,
+    // MatBadgeModule,
+    MatProgressSpinnerModule,
+    // MaterialModule,
     RouterModule,
     CommonModule,
     PdfViewerModule,
@@ -62,7 +83,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    DeferLoadModule,
+    // DeferLoadModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -79,7 +100,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
   exports: [
     HeaderComponent,
     LandingHeaderComponent,
-    FooterComponent,
+    // FooterComponent,
     CapslockDirective,
     StickyHeaderDirective,
     VideoPlayerComponent,

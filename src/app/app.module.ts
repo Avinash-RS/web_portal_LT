@@ -3,12 +3,18 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { APP_BASE_HREF, PlatformLocation } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ErrorHandler } from '@angular/core';
+
 // others
 import { ToastrModule } from 'ngx-toastr';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 // local
-import { MaterialModule } from '@core/material.module';
+// import { MaterialModule } from '@core/material.module';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { GraphqlModule } from './graphql/graphql.modules';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,6 +25,7 @@ import { MAT_TABS_CONFIG } from '@angular/material/tabs';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { HTTP_INTERCEPTORS, HttpInterceptor, HttpClient } from '@angular/common/http';
 import { ErrorInterceptor } from '@core/services/_helpers';
+import { GlobalErrorHandler } from '@core/services/_helpers/global-error-handler'
 import { ConfigsLoaderService } from '@core/services/configs-loader.service';
 import { NotFoundComponent } from './not-found/not-found.component';
 // import {IvyCarouselModule} from 'angular-responsive-carousel';
@@ -58,7 +65,11 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
     RedirectionComponent
     ],
   imports: [
-    MaterialModule,
+    // MaterialModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDialogModule,
+    MatExpansionModule,
     GraphqlModule,
     DragDropModule,
     BrowserAnimationsModule,
@@ -96,7 +107,12 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
     },
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: true } },
     { provide: MAT_TABS_CONFIG, useValue: { animationDuration: '0ms' } },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    {provide: ErrorHandler, useClass: GlobalErrorHandler},
+    {
+      provide: MatDialogRef,
+      useValue: {}
+    },
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],

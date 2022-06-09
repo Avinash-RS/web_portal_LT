@@ -16,13 +16,13 @@ import { addTopicreference, bulkclaimcourse, claimcourse, createGuidanceRequest,
          userRegistrationmobileOtpverify, userRegistrationUsernamesuggestion, viewProfile, 
          viewProfile1, set_bookmark, set_askaquestion, getMyQuestion, get_allquestion, 
          getQAsortsearch, getActivityCalendar, getengineersForumData, createEngineersForumData,
-         getuserRecordbasedonSecretKey, verify_tfa_setup, userexperienceQry
-        ,insertModuleTopicSkeleton} from './operations/learner_mutation';
+         getuserRecordbasedonSecretKey, verify_tfa_setup, resetTFA, userexperienceQry
+        ,insertModuleTopicSkeleton,vocationalqNda} from './operations/learner_mutation';
 import {
 boarddetail, checkExistingUser, getActivityDetailsByBatchAndCourseID, getAssignmentmoduleData,
  getcalenderactivity, getCountForCategories, getCountForJobroleCategories, getCoureBasedOnCatalog,
   getCourseActivities, getCoursePlayerStatusForCourse, getDetailsCount, getFeedbackQuestion,
-   getlearnerdashboard, getLearnerenrolledCourses, getlearnertrack, getLevelCategoryData,
+  get_learner_dashboard, getLearnerenrolledCourses, getlearnertrack, getLevelCategoryData,
     getLoginUserDetail, getmoduleData, getperformActivityData, getPopularcourse, getprojectActivityData,
   // getReadLearnerActivity,
   getReadLeanerActivity, getsupersubcategory, getTopicAttendanceDetailsByUsername, getActivecourseCount,
@@ -165,6 +165,15 @@ getMessage(): Observable<any> {
       variables: {
         user_id,
         token
+      }
+    });
+  }
+
+  resetAuthCode(code) {
+    return this.Apollo.query({
+      query: resetTFA,
+      variables: {
+        resetCode: code
       }
     });
   }
@@ -695,20 +704,6 @@ getMessage(): Observable<any> {
   }
 
 
-
-  getLearnerDashboard(userId, userObjId, pagenumber, requesType, courseType) {
-    return this.Apollo.query({
-      query: getlearnerdashboard,
-      variables: {
-        user_id: userId,
-        user_obj_id: userObjId,
-        pagenumber,
-        request_type: requesType,
-        course_type: courseType
-      }
-    });
-  }
-
   createGuidanceRequestLanding(name, emailid, courseid, createdbyip) {
     return this.Apollo.query({
       query: createGuidanceRequest,
@@ -1078,6 +1073,7 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
       }
     });
   }
+
   get_batchwise_learner_dashboard_data_v2(user_id, request_type, jobroleCategoryId) {
     return this.Apollo.query({
       query: get_batchwise_learner_dashboard_data_v2,
@@ -1088,6 +1084,20 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
       }
     });
   }
+
+  getLearnerDashboard(user_id, user_obj_id, pagenumber, request_type, course_type) {
+    return this.Apollo.query({
+      query: get_learner_dashboard,
+      variables: {
+        user_id,
+        user_obj_id,
+        pagenumber,
+        request_type,
+        course_type
+      }
+    });
+  }
+
   get_batchwise_learner_dashboard_data(user_id, request_type, jobroleCategoryId) {
     return this.Apollo.query({
       query: get_batchwise_learner_dashboard_data,
@@ -1195,7 +1205,14 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
       }
     });
   }
-
+  getvocationalqNda(user_id,batchid, course_id, sort, pagenumber, module, topic,searchVal) {
+    return this.Apollo.query({
+      query:vocationalqNda,
+      variables : {
+        user_id,batchid, course_id, sort, pagenumber, module, topic,searchVal
+      }
+    });
+  }
   getcourseGallery(courseid) {
     return this.Apollo.query({
       query: getCourseGallery,

@@ -2,7 +2,7 @@
 <div class="progression-report-contianer d-flex justify-content-between">
   <div class="left-container">
     <ul class="breadcrumb">
-      <li><em routerLink="/Landing/MyCourse" class="lxp-Go backArrow"></em> {{courseName}}</li>
+      <li><em (click)="backbutton()" class="lxp-Go backArrow"></em> {{courseName}}</li>
       <li>{{'Learning Progression' | translate}}</li>
     </ul>
     <div class="secPie">
@@ -406,12 +406,12 @@
       <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType"></canvas>
     </div>
   </div>
-    <div class="col mt-4">
+    <div class="col mt-4 percentagearea">
       <div class="col d-flex">
         <div class="numbers">87%</div>
         <div class="mr-2 numbers-text">{{'completion' | translate}} <br /> {{'Rate' | translate}}</div>
       </div>
-      <div class="col d-flex mt-3">
+      <div class="col d-flex mt-3 desc">
         <div class="font-weight-bold">24&nbsp;</div>
         <div>{{'Students have already completed the course' | translate}}</div>
       </div>

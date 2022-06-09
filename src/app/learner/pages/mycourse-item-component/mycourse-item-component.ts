@@ -88,13 +88,14 @@ export class MycourseItemComponent implements OnInit {
   gotoProgression(course) {
     const data = {
       courseId : course.course_id,
-      courseName: course.course_name
+      courseName: course.course_name,
     };
     this.router.navigate(['/Learner/progressionReport'], {
       queryParams:
       {
         CourseId: btoa(course.course_id),
-        CourseName: btoa(course.course_name)
+        CourseName: btoa(course.course_name),
+        fromPage: 'mycourse',
       }
     });
   }
@@ -115,7 +116,6 @@ export class MycourseItemComponent implements OnInit {
   // PLAYER PAGE NAVIGATION
   gotoDesc(c) {
     c.batch_end_date_Timer = new Date(c.batch_end_date).getTime();
-
     const detail = {
       id: c.course_id,
       wishlist: c.wishlisted || false,
@@ -125,6 +125,7 @@ export class MycourseItemComponent implements OnInit {
       course_status: c.course_status,
       batch_id: c.batchid,
       batchEndTime: c.batch_end_date_Timer,
+      isTesting: c?.isTesting ? true :false,
       link: c.link,
       toc: c.toc,
       lastLogIndex: c.lastLogIndex,
@@ -138,14 +139,13 @@ export class MycourseItemComponent implements OnInit {
     };
     // if (this.screenWidth < 800) {
     // } else {
-    console.log(detail);
     localStorage.setItem('currentBatchEndDate', c.batch_end_date_Timer);
     localStorage.setItem('Courseid', c.course_id);
     localStorage.setItem('CourseType', c.course_type);
     localStorage.setItem('persentage', c && c.coursePlayerStatus &&
     c.coursePlayerStatus.course_percentage ? c.coursePlayerStatus.course_percentage : '');
     localStorage.setItem('currentBatchId', c.batchid);
-
+    localStorage.setItem('isTesting',c?.isTesting ? 'true' :'false')
     localStorage.setItem('resumeData', JSON.stringify({link: c.link, lastModule: c.lastModule,
     lastTopic: c.lastTopic, module_id: c.module_id, topic_id: c.topic_id, checklevel: c.checklevel,
     course_status: c.course_status, toc: c.toc}));

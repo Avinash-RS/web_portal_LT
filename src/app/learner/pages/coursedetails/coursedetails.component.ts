@@ -274,6 +274,7 @@ export class CoursedetailsComponent implements OnInit {
   subModuleHolder: number = null;
   submoduleTitle: any;
   subModuleHolderUI: number;
+  isTesting :boolean = false;
   subModuleData: Observable<any>;
   topicData$: Observable<any>;
   courseType: string;
@@ -302,6 +303,11 @@ export class CoursedetailsComponent implements OnInit {
               public Lservice: LearnerServicesService, private cdr: ChangeDetectorRef, public service: CommonServicesService,
               private gs: GlobalServiceService, private dialog: MatDialog, public route: Router, private formBuilder: FormBuilder,
               public sanitizer: DomSanitizer, private toastr: ToastrService) {
+//socket connection test
+// setInterval(() => {
+//   this.socketService.socketStatus();
+// }, 10000);
+
     const lang = localStorage.getItem('language');
     this.translate.use(lang ? lang : 'en');
     const loginDetails = JSON.parse(localStorage.getItem('UserDetails'));
@@ -336,6 +342,7 @@ export class CoursedetailsComponent implements OnInit {
       this.drawersOpen = true;
       this.performOverLay = false;
     }
+    this.isTesting = localStorage.getItem('isTesting') && localStorage.getItem('isTesting') == 'true' ? true :false;
     if (this.checkDetails === undefined) {
       this.batchId = localStorage.getItem('currentBatchId');
       this.batchEndTime = localStorage.getItem('currentBatchEndDate');
@@ -681,6 +688,7 @@ export class CoursedetailsComponent implements OnInit {
     this.service.getTOC(param).subscribe((data: any) => {
       this.scromApiData = data;
       this.checkDetails.checklevel = this.scromApiData.checkLevel;
+      this.bookmarkedCount = this.scromApiData.bookmarkCount;
       this.scromModuleData = this.scromApiData?.message;
       this.weekLength = this.scromApiData.message.length;
 

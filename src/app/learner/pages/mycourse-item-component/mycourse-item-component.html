@@ -1,4 +1,52 @@
-<div class="courses d-flex justify-content-start">
+<div class="aicteCourses d-flex justify-content-start" *ngIf="course.course_type == 'MLF001'">
+    <div class="{{course.progress_class}} progBar">
+        <mat-progress-bar [mode]="mode" [value]="course.course_percentage" [bufferValue]="bufferValue"></mat-progress-bar>
+    </div>
+    <figure class="aicteLeftImage" (click)="gotoDesc(course)">
+        <img loading="lazy" [src]="course.course_img_url + blobKey" alt="" />
+        <button class="d-flex align-items-center">
+            <em class="lxp-Play_Icon"></em> Start
+        </button>
+        <div class="progStatus {{course.progress_class}}">
+            <div class="d-flex justify-content-between progression">
+                <span>{{'Progression' | translate}}</span>
+                <span>{{course.course_percentage}} %</span>
+            </div>
+            <mat-progress-bar style="height: 4px;" [mode]="mode" [value]="course.course_percentage" [bufferValue]="bufferValue"></mat-progress-bar>
+        </div>
+        <div *ngIf="course.course_type == 'MLF001'" class="freeLabel">
+            <p>Free</p>
+        </div>
+    </figure>
+    <div class="aicteRightCol">
+        <div class="content">
+            <h3 class="titleClass" title="{{course.course_name}}">{{course.course_name}}</h3>
+            <p [ngClass]="!course.isReadMore ? 'addEllipsis': ''">{{course.course_description}}</p>
+        </div>
+        <div class="learningProgression d-flex justify-content-between align-items-end">
+            <ul class="items">
+                <li>
+                    <span>Course by</span>
+                    <div>L&T EduTech</div>
+                </li>
+                <li>
+                    <span>Type</span>
+                    <div><em class="lxp-CourseType"></em> {{course.course_type == 'MLF001' ? 'Free' : 'Paid'}}</div>
+                </li>
+                <li>
+                    <span>Duration</span>
+                    <div><em class="lxp-Clock"></em> {{course.image_self_paced_learning_time !== "" ? course.image_self_paced_learning_time : '--/--'}}</div>
+                </li>
+                <li (click)="gotoProgression(course)">
+                    <figure><em class="lxp-Analytics"></em></figure>
+                    <p>{{'Learning Progression' | translate}}</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="courses d-flex justify-content-start" *ngIf="course.course_type !== 'MLF001'">
   <div class="{{course.progress_class}} progBar">
       <mat-progress-bar [mode]="mode" [value]="course.course_percentage" [bufferValue]="bufferValue"></mat-progress-bar>
   </div>
@@ -19,7 +67,7 @@
   <div class="rightCol">
       <div class="d-flex justify-content-between align-items-center">
           <h3 class="titleClass" title="{{course.course_name}}">{{course.course_name}}</h3>
-          <div class="searchProgression d-flex justify-content-end align-items-center" [ngClass]="userDetail.org_type === 'collegeconnect' ? 'yes':'no'">
+          <div *ngIf="course?.batchid" class="searchProgression d-flex justify-content-end align-items-center" [ngClass]="userDetail.org_type === 'collegeconnect' ? 'yes':'no'">
               <div class="percentage" *ngIf="userDetail.org_type === 'collegeconnect'">
                   <circle-progress percent="{{course.course_week_Percent}}" [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2" [outerStrokeColor]="'#56b35a'" [innerStrokeColor]="'#ededed'" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [titleFontSize]="4.5" [subtitleFontSize]="5.5" [animation]="true" [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week" [subtitle]="course.current_week_count + '/' + course.actual_total_week" [showUnits]="false" [showSubtitle]="true" subtitleFontWeight=800> </circle-progress>
               </div>
@@ -29,7 +77,7 @@
           <div [ngClass]="!course.isReadMore ? '' : 'showText'">
               <div class="arrowWrapper d-flex align-items-start">
                   <p [ngClass]="!course.isReadMore ? 'addEllipsis': ''">{{course.course_description}}</p>
-                  <button class="readMoreLess" type="button" (click)="course.isReadMore = !course.isReadMore">
+                  <button class="readMoreLess pointer" type="button" (click)="course.isReadMore = !course.isReadMore">
                       <em [class]="course.isReadMore?'lxp-Arrow':'lxp-DownArrow'"></em>
                   </button>
               </div>
@@ -81,10 +129,10 @@
                     <span><em class="lxp-Quiz_Report"></em></span>
                     <p>{{'Quiz Report' | translate}}</p>
                 </div>
-                  <div class="icons" (click)="gotoProgression(course)">
-                      <span><em class="lxp-Analytics"></em></span>
-                      <p>{{'Learning Progression' | translate}}</p>
-                  </div>
+                <div class="icons" (click)="gotoProgression(course)">
+                    <span><em class="lxp-Analytics"></em></span>
+                    <p>{{'Learning Progression' | translate}}</p>
+                </div>
               </div>
           </div>
       </div>

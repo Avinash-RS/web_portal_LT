@@ -103,10 +103,12 @@
   "Module: ":"தொகுதி:",
   "Module:":"தொகுதி:",
   "Topic: ":"தலைப்பு:",
+  "Topic:":"தலைப்பு:",
   "View all":"அனைத்தையும் காட்டு",
   "You have no activity scheduled for the day!":"உங்களுக்கு அன்றைய தினம் எந்தச் செயல்பாடும் திட்டமிடப்படவில்லை!",
 
   "Welcome!":"வரவேற்பு!",
+  "Micro learning courses!":"மைக்ரோ கற்றல் படிப்புகள்!",
   "Let's learn something new today!":"இன்று புதிதாக ஒன்றைக் கற்றுக்கொள்வோம்!",
 
   "Learn from where your left":"நீங்கள் விட்டுச்சென்ற இடத்திலிருந்து கற்றுக்கொள்ளுங்கள்",
@@ -154,6 +156,7 @@
   "App in your mobile to scan this code":"இந்தக் குறியீட்டை ஸ்கேன் செய்ய உங்கள் மொபைலில் உள்ள ஆப்",
   "Next":"அடுத்தது",
   "Enter the code generated in your Google Authenticator App":"உங்கள் Google அங்கீகரிப்பு பயன்பாட்டில் உருவாக்கப்பட்ட குறியீட்டை உள்ளிடவும்",
+  "Reset Google Authenticator?":"Google அங்கீகரிப்பை மீட்டமைக்கவா?",
   "Go back to ":"திரும்பிச் செல்லவும் ",
 
   "Set Password":"கடவுச்சொல்லை அமைக்கவும்",
