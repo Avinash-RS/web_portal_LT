@@ -140,6 +140,12 @@ export class AskQuestionsComponent implements OnInit {
                this.animateValue('aCount', 0, acountData, 1000);
         }
       }
+      else{
+        if(getcount){ 
+          this.selectedIndex == 0 ?  this.animateValue('qCount', 0, 0, 1000):'';
+          this.animateValue('aCount', 0, 0, 1000);
+        }
+      }
     });
   }
   openQuestionInput(templateRef: TemplateRef<any>) {
@@ -192,7 +198,7 @@ export class AskQuestionsComponent implements OnInit {
     if (call === 'M') {
       if (this.mainModule?.id) {
         this.getTopicV2(this.mainModule?.id, 'filter');
-        this.mainModuleName = this.mainModule ? this.mainModule.module_name : null;
+        this.mainModuleName = this.mainModule ? this.mainModule?.id : null;
         this.mainTopic = 'all';
       } else {
         this.mainModuleName = null;
@@ -313,6 +319,9 @@ export class AskQuestionsComponent implements OnInit {
     this.searchKey = '';
     this.mainPagenumber = 0;
     this.userID = this.selectedIndex == 0 ?  this.userDetail.user_id : null;
+    this.mainModule = 'all';
+    this.mainTopic = 'all';
+    this.mainModuleName = null;
     this.getQuestionAnswer(true);
   }
 }

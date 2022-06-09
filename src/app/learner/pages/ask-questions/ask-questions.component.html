@@ -29,7 +29,7 @@
         <li><em routerLink="/Landing/MyCourse" class="lxp-Go backArrow"></em> <span class="name">{{courseName}}</span> <span class="bar">/</span> <span class="breadCrumbTopic">Q&A</span></li>
     </ul>
     <div class="addQuestion">
-        <button class="pointer" (click)="openQuestionInput(questionDialog)"><em class="lxp-add"></em> {{'Ask A Question' | translate}}</button>
+        <button (click)="openQuestionInput(questionDialog)"><em class="lxp-add"></em> {{'Ask A Question' | translate}}</button>
     </div>
     <div class="questionResults d-flex justify-content-between">
         <div class="questions d-flex justify-content-start align-items-center" *ngIf="selectedIndex == 0">
@@ -123,7 +123,7 @@
                 <div class="askedDate d-flex flex-row">
                     <span *ngIf="selectedIndex == 0">{{'Question :' | translate}} {{i+ 1}}</span>
                     <span *ngIf="selectedIndex == 1"><em class="lxp-AccountCircle"></em> {{item?.username}}</span>
-                    <span>{{'Asked on ' | translate}} {{item?.question?.askDate + item?.question?.askTime}}</span>
+                    <span>{{'Asked on ' | translate}} {{item?.question?.askDate + ' ' + item?.question?.askTime}}</span>
                 </div>
                 <div [innerHTML]="item?.question?.que"></div>
                     <div *ngIf=" item?.question?.isAnswered ;else unans">
