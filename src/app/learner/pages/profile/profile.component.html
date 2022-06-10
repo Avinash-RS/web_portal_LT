@@ -333,7 +333,7 @@
     </form>
   </mat-dialog-content><br>
   <mat-dialog-actions>
-    <button class="popupbtns" [disabled]="passwordForm.invalid" (click)="updatePassword()">
+    <button class="popupbtns" #submitBtn [disabled]="passwordForm.invalid" (click)="updatePassword();submitBtn.disabled = true">
       {{!loader? 'Submit':'' | translate}}
       <div *ngIf="loader" class="spinnerLoader">
         <!-- <div class="stage">
