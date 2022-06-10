@@ -4,8 +4,8 @@
     </div>
     <figure class="aicteLeftImage" (click)="gotoDesc(course)">
         <img loading="lazy" [src]="course.course_img_url + blobKey" alt="" />
-        <button class="d-flex align-items-center">
-            <em class="lxp-Play_Icon"></em> Start
+        <button class="d-flex align-items-center"><em [class]="course.course_status === 'completed'?'lxp-PlayCircle':'lxp-Play_Icon'"></em>
+            {{course?.course_status === "incomplete" ? ("Resume"| translate) : course?.course_status === "suspend" ? ("Resume"| translate) : course.course_status=== 'completed'?("Replay"| translate):("Start" | translate) }}
         </button>
         <div class="progStatus {{course.progress_class}}">
             <div class="d-flex justify-content-between progression">
