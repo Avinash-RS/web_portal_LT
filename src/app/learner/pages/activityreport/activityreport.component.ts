@@ -25,7 +25,7 @@ export class ActivityreportComponent implements OnInit {
     { headerName: 'Module', field: 'module_id', minWidth: 200,width: 200, tooltipField: 'module_id'},
     { headerName: 'Topic', field: 'topic_id', minWidth: 200, width: 200, tooltipField: 'topic_id'},
     { headerName: 'Activity', field: 'activityType', minWidth: 80, width: 80},
-    { headerName: 'Iteration', field: 'Iteration', minWidth: 90, width: 90},
+    { headerName: 'Iteration', field: 'iterationTotal', minWidth: 90, width: 90},
     { headerName: 'Status', field: 'submit_status', minWidth: 150, width: 150, cellClass:'statusClass',flex:1,
     cellRenderer: (params) => {
       console.log(params)

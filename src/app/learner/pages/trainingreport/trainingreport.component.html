@@ -24,7 +24,7 @@
         <div class="legend">
             <ul>
                 <li *ngFor="let item of selfLearnLegends">
-                    <div class="dot" [style.background-color]="item?.color"></div> <div class="txt">{{item?.label}}</div>
+                    <div class="dot" [style.background-color]="item?.color"></div> <div class="txt" [title]="item?.label">{{item?.label}}</div>
                 </li>
             </ul>
         </div>
