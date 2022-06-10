@@ -63,9 +63,10 @@
                 list-style: none;
                 margin-left: 2em;
                 li {
-                    line-height: 3;
+                    line-height: 1.5;
                     display: flex;
                     align-items: center;
+                    margin-bottom: 10px;
                     .dot{
                         height: 10px;
                         width: 10px;
@@ -80,7 +81,10 @@
             }
         }
     }
-    .expansionPanel { 
+    .expansionPanel {
+      .mat-expansion-panel {
+        margin-bottom: 1em;
+      }
         .title { 
             .left {
                 margin-right: 8px;
@@ -595,7 +599,6 @@
   } 
 }
 
-
 ::ng-deep.trainingrpt { 
   mat-card {
     position: relative;
@@ -651,4 +654,6 @@
     align-items: center !important;
   }
 }
-
+.noCard {
+  text-align: center;
+}
