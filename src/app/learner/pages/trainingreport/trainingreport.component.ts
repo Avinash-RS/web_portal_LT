@@ -123,9 +123,9 @@ export class TrainingreportComponent implements OnInit {
   constructor(private http: HttpClient,private service:LearnerServicesService) { }
 
   ngOnInit(): void {
+    this.getuserid = JSON.parse(localStorage.getItem('UserDetails'));
     this.getSelflearningData();
     this.getLiveClassroomData();
-    this.getuserid = JSON.parse(localStorage.getItem('UserDetails'));
 
   }
   onGridReady(params: any) {
@@ -183,6 +183,19 @@ export class TrainingreportComponent implements OnInit {
           {label:'Absent Sessions',count:this.liveClassroomData?.attendanceGraph?.allSessionCount - this.liveClassroomData?.attendanceGraph?.allPresentCount,color:'#FEA800'}
         ];
         
+      }
+      else {
+        this.pieChartDataSet = [
+          {
+            data:[],
+            backgroundColor: ['#607D8B','#49AE31','#FEA800'],
+          }
+        ];
+        this.liveclassroomLegend = [
+          {label:'Total Sessions',count:0,color:'#607D8B'},
+          {label:'Attended Sessions',count:0,color:'#49AE31'},
+          {label:'Absent Sessions',count:0,color:'#FEA800'}
+        ];
       }
     });
   }

@@ -33,9 +33,8 @@ export class ProgramReportComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.UserDetails = JSON.parse(localStorage.getItem('UserDetails')) || null;
+    this.getuserid= this.UserDetails = JSON.parse(localStorage.getItem('UserDetails')) || null;
     this.breakPoints();
-    this.getuserid = JSON.parse(localStorage.getItem('UserDetails'));
   }
 
   getSelflearningData(){
