@@ -347,7 +347,8 @@ export class CoursedetailsComponent implements OnInit {
       this.batchId = localStorage.getItem('currentBatchId');
       this.batchEndTime = localStorage.getItem('currentBatchEndDate');
       this.courseType = localStorage.getItem('CourseType');
-      this.checkDetails = JSON.parse(localStorage.getItem('resumeData')); // it receives only partial data
+      this.checkDetails = JSON.parse(localStorage.getItem('resumeData'));// it receives only partial data
+      this.checkDetails.payType = localStorage.getItem('payType'); 
     } else {
       if (this.checkDetails.fromCalendar) {
         this.fromCalendar = true;
@@ -847,7 +848,9 @@ export class CoursedetailsComponent implements OnInit {
       "&lastLogIndex=" +
       this.lastLogIndex +
       "&courseType=" +
-      this.courseType;
+      this.courseType + 
+      "&payType=" +
+      this.checkDetails.payType
     // );
 
     this.service.urlStatusCheck(this.urlSafe).subscribe(
