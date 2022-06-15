@@ -23,6 +23,7 @@ export const learner_login = gql`
         orgId
         message
         status
+        userOrigin
         TFAsetup {
           main_config_TFA
           dataURL

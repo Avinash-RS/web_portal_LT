@@ -39,5 +39,6 @@ export const environment = {
   gaTrackingId: 'G-6N6X7SQTXH',
   botUrl :'https://devfaqbot.lntiggnite.com/',
   resourcelinkurl : 'https://upskillresourcefiles.lntedutech.com/',
-  portalUrl : 'https://portaldev.lntiggnite.com/Home'
+  aictePortalUrl : 'https://microlearndev.lntedutech.com/',
+  guportalUrl : 'https://portaldev.lntiggnite.com/',
 };
