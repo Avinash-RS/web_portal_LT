@@ -20,5 +20,6 @@ export const environment = {
     teachercommunity: 'https://engineers.lntiggnite.com/teachercommunity/',
     gaTrackingId: 'G-6N6X7SQTXH',
     resourcelinkurl : 'https://upskillresourcefiles.lntedutech.com/',
-    portalUrl : 'https://microlearndev.lntedutech.com/'
+    aictePortalUrl : 'https://microlearndev.lntedutech.com/',
+    guportalUrl : 'https://portaldev.lntiggnite.com/',
 };
