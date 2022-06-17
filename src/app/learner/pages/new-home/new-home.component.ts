@@ -124,7 +124,7 @@ export class NewHomeComponent implements OnInit {
       .subscribe((data: any) => {
         this.loader = true;
         if (data?.data?.get_forgot_username_mobile_email?.success === 'true') {
-          this.toastr.success('Reset Link has been sent to your register mail account.');
+          this.toastr.success('Reset link has been sent to your registered mail account.');
           this.loader = false;
           this.backToIn();
         } else {
