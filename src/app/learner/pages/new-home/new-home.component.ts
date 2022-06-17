@@ -28,6 +28,11 @@ export class NewHomeComponent implements OnInit {
     localStorage.clear();
     sessionStorage.clear();
   }
+  @HostListener('window:popstate', ['$event'])
+  clearStorage1($event: any) {
+    localStorage.clear();
+    sessionStorage.clear();
+  }
   constructor(public translate: TranslateService, public learnerService: LearnerServicesService, private activatedRoute: ActivatedRoute,
               private gs: GlobalServiceService, private router: Router, private toastr: ToastrService, location: PlatformLocation) {
     const lang = localStorage.getItem('language');
