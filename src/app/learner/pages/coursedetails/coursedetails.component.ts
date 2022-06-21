@@ -285,6 +285,7 @@ export class CoursedetailsComponent implements OnInit {
   bkup_topicInfo: any;
   bkup_moduleName: any;
   bkmrk_weekDisp: number;
+  portalParams;
 
   // FOR DRM(Restriction for right click)
   @HostListener('document:keydown', ['$event'])
@@ -468,6 +469,8 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    var verifyportal = JSON.parse(localStorage.getItem('UserDetails'));
+    this.portalParams = verifyportal.portal_params;
     this.translate.use(localStorage.getItem("language"));
     // let resumeInit = true
     // if (!resumeInit) {
