@@ -17,7 +17,7 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  userDetailes: any;
+  userDetails: any;
   userimage: any;
   role: string;
   fullName: string;
@@ -75,15 +75,15 @@ export class HeaderComponent implements OnInit {
       this.calendarActive = false;
     }
     this.orgDetails = JSON.parse(localStorage.getItem('organizationDetails')) || null;
-    this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(localStorage.getItem('UserDetails')) || null;
-    // this.profilepic = this.userDetailes.profile_img;
+    this.userDetails = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(localStorage.getItem('UserDetails')) || null;
+    // this.profilepic = this.userDetails.profile_img;
     this.role = localStorage.getItem('role') || sessionStorage.getItem('role');
     this.userimage = localStorage.getItem('user_img') || sessionStorage.getItem('user_img');
     this.fullName = localStorage.getItem('Fullname');
     this.getShortName(this.fullName);
     setTimeout(() => {
-      this.userDetailes = this.gs.checkLogout();
-      this.profilepic = this.userDetailes.profile_img;
+      this.userDetails = this.gs.checkLogout();
+      this.profilepic = this.userDetails.profile_img;
     }, 1000);
     if (this.profilepic === '' || this.profilepic == null) {
       this.profilepic = this.userimage;
@@ -144,7 +144,7 @@ export class HeaderComponent implements OnInit {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes'
     }).then((result) => {
-      // console.log('inside logout result', result, 'login -', this.loginDetails, 'user - ', this.userDetailes);
+      // console.log('inside logout result', result, 'login -', this.loginDetails, 'user - ', this.userDetails);
       if (result.value) {
         // this.loading = true;
 
@@ -156,8 +156,8 @@ export class HeaderComponent implements OnInit {
           this.socketService.closeSocket();
         }
         this.services.getIpAddressByUrl();
-        this.services.logout(this.userDetailes.user_id, false).subscribe((logout: any) => {
-          this.userDetailes = null;
+        this.services.logout(this.userDetails.user_id, false).subscribe((logout: any) => {
+          this.userDetails = null;
           localStorage.clear();
           sessionStorage.clear();
           this.router.navigate(['/Learner/login']);
@@ -171,7 +171,7 @@ export class HeaderComponent implements OnInit {
   }
 
   openCalendar() {
-    if (this.userDetailes.org_type === 'Corporate') {
+    if (this.userDetails.org_type === 'Corporate') {
       this.router.navigate(['/Learner/upskillcalendar']);
     } else {
       this.router.navigate(['/Learner/calendaractivity']);
@@ -181,6 +181,11 @@ export class HeaderComponent implements OnInit {
     this.services.openAvailCourcePopup$.next(isAvailOpen);
   }
   redirectToPortal() {
-    window.open(environment.portalUrl, '_self');
+    if (this.userDetails.userOrigin == 'microLearn') {
+      window.open(environment.aictePortalUrl, '_self');
+    } else {
+      window.open(environment.guportalUrl, '_self');
+    }
+    
   }
 }

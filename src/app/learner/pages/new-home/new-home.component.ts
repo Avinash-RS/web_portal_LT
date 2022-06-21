@@ -28,18 +28,26 @@ export class NewHomeComponent implements OnInit {
     localStorage.clear();
     sessionStorage.clear();
   }
+  @HostListener('window:popstate', ['$event'])
+  clearStorage1($event: any) {
+    localStorage.clear();
+    sessionStorage.clear();
+  }
   constructor(public translate: TranslateService, public learnerService: LearnerServicesService, private activatedRoute: ActivatedRoute,
               private gs: GlobalServiceService, private router: Router, private toastr: ToastrService, location: PlatformLocation) {
     const lang = localStorage.getItem('language');
     this.translate.use(lang ? lang : 'en');
-    location.onPopState(() => {
-      localStorage.clear();
-      sessionStorage.clear();
-    });
+    // location.onPopState(() => {
+    //   localStorage.clear();
+    //   sessionStorage.clear();
+    // });
     this.userDetail = JSON.parse(localStorage.getItem('UserDetails'));
     const token = localStorage.getItem('token') || sessionStorage.getItem('token');
     if (!token) {
       this.router.navigateByUrl('/Learner/login');
+    }
+    if(token && this.userDetail.specific_report_value){
+      this.router.navigateByUrl('/Landing/MyCourse');
     }
   }
   ngOnInit() {
@@ -116,7 +124,7 @@ export class NewHomeComponent implements OnInit {
       .subscribe((data: any) => {
         this.loader = true;
         if (data?.data?.get_forgot_username_mobile_email?.success === 'true') {
-          this.toastr.success('Reset Link has been sent to your register mail account.');
+          this.toastr.success('Reset link has been sent to your registered mail account.');
           this.loader = false;
           this.backToIn();
         } else {

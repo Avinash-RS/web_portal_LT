@@ -23,6 +23,7 @@ export const learner_login = gql`
         orgId
         message
         status
+        userOrigin
         TFAsetup {
           main_config_TFA
           dataURL
@@ -1984,7 +1985,6 @@ export const get_learner_dashboard = gql `
           enrolled_course_details {
             feedback_status
             course_percentage
-            image_self_paced_learning_time
             isTesting
             user_id
             course_id
@@ -2007,6 +2007,7 @@ export const get_learner_dashboard = gql `
             course_type
             progress_class
             course_status
+            image_self_paced_learning_time
           }
         }
       }

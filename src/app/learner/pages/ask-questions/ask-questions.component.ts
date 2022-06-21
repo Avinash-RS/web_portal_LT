@@ -134,10 +134,16 @@ export class AskQuestionsComponent implements OnInit {
       if(result?.data?.vocationalqNda?.success && result?.data?.vocationalqNda?.message.length > 0){
         this.qaDataList.push(...result.data.vocationalqNda.message);
         if(getcount){
-          const qcountData = result.data.vocationalqNda.count;
-          const acountData =  result.data.vocationalqNda.ansCount;
-          this.selectedIndex == 0  ? this.animateValue('qCount', 0, qcountData ? qcountData : 0, 1000) : '';
-          this.animateValue('aCount', 0, acountData ? acountData : 0, 1000);
+          const qcountData = result?.data?.vocationalqNda?.count ? parseInt(result.data.vocationalqNda.count) : 0;
+          const acountData =  result?.data.vocationalqNda?.ansCount ? parseInt(result?.data.vocationalqNda?.ansCount) : 0;
+              this.selectedIndex == 0 ?  this.animateValue('qCount', 0, qcountData, 1000):'';
+               this.animateValue('aCount', 0, acountData, 1000);
+        }
+      }
+      else{
+        if(getcount){ 
+          this.selectedIndex == 0 ?  this.animateValue('qCount', 0, 0, 1000):'';
+          this.animateValue('aCount', 0, 0, 1000);
         }
       }
     });
@@ -192,7 +198,7 @@ export class AskQuestionsComponent implements OnInit {
     if (call === 'M') {
       if (this.mainModule?.id) {
         this.getTopicV2(this.mainModule?.id, 'filter');
-        this.mainModuleName = this.mainModule ? this.mainModule.module_name : null;
+        this.mainModuleName = this.mainModule ? this.mainModule?.id : null;
         this.mainTopic = 'all';
       } else {
         this.mainModuleName = null;
@@ -313,6 +319,9 @@ export class AskQuestionsComponent implements OnInit {
     this.searchKey = '';
     this.mainPagenumber = 0;
     this.userID = this.selectedIndex == 0 ?  this.userDetail.user_id : null;
+    this.mainModule = 'all';
+    this.mainTopic = 'all';
+    this.mainModuleName = null;
     this.getQuestionAnswer(true);
   }
 }
