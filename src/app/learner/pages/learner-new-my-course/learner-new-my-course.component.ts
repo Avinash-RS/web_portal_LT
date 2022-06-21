@@ -398,7 +398,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
     this.portalParams = verifyportal.portal_params;
     this.innerWidth = window.innerWidth;
     const showAppBanner = localStorage.getItem('appBanner');
-    if (!showAppBanner) {
+    if (!showAppBanner && !this.portalParams) {
       this.openInfoPopup();
     }
     if (this.userDetailes) {
