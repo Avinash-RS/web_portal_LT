@@ -341,8 +341,8 @@
                                 <ng-container>
                                     <div *ngIf="courseSkel;else courseSkeleton">
                                         <div class="mycoursesContent" *ngIf="courseDetailsList?.length;else noCourseCard">
-                                            <ng-container *ngFor="let item of courseDetailsList" (deferLoad)="item.show = true">
-                                                <app-mycourse-item-component *ngIf="item.show" [courseItems]="item"></app-mycourse-item-component>
+                                            <ng-container *ngFor="let item of courseDetailsList">
+                                                <app-mycourse-item-component [courseItems]="item"></app-mycourse-item-component>
                                             </ng-container>
                                         </div>
                                     </div>
