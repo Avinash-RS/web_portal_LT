@@ -56,7 +56,7 @@
             </ng-template>
 
             <ng-template #tocContent>
-                <div class="leftTocContent" *ngIf="filterkey=='Bookmarked'?(filterData.length>0?true:false):(scromModuleData.length>0?true:true);else emptyTOC">
+                <div class="leftTocContent" #tocbox *ngIf="filterkey=='Bookmarked'?(filterData.length>0?true:false):(scromModuleData.length>0?true:true);else emptyTOC">
                     <mat-card *ngFor="let resDat of filterkey=='Bookmarked'?filterData:scromModuleData; let wi = index" [ngClass]="resDat.expanded ? 'expandClass':'collapseClass'" multi displayMode=""
                         class="topicCardLevel" >
                         <mat-card-title  class="d-flex justify-content-between align-items-center pointer">
