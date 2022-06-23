@@ -60,7 +60,7 @@
                     <mat-card *ngFor="let resDat of filterkey=='Bookmarked'?filterData:scromModuleData; let wi = index" [ngClass]="resDat.expanded ? 'expandClass':'collapseClass'" multi displayMode=""
                         class="topicCardLevel" >
                         <mat-card-title  class="d-flex justify-content-between align-items-center pointer">
-                            <div class="tocTitle" *ngIf="userType!=='vocational'&&userType!=='Corporate'" >{{'Week -' | translate}} {{resDat.week?resDat.week:wi+1}}</div>
+                            <div class="tocTitle" *ngIf="userType!=='vocational'&&userType!=='Corporate' && !contentHide" >{{'Week -' | translate}} {{resDat.week?resDat.week:wi+1}}</div>
                             <div>
                             </div>
                         </mat-card-title>
