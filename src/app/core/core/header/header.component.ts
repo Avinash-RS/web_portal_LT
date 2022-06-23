@@ -37,7 +37,8 @@ export class HeaderComponent implements OnInit {
   innerWidth: number;
   profilepic: any;
   blobKey = environment.blobKey;
-  portalParams;
+  portalUser: any;
+  contentHide;
   constructor(public services: CommonServicesService, private alert: AlertServiceService,
               private http: HttpClient, public overlayContainer: OverlayContainer, public socketService: SocketioService,
               public router: Router, private gs: GlobalServiceService, public translate: TranslateService) {
@@ -58,7 +59,12 @@ export class HeaderComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   ngOnInit() {
     var verifyportal = JSON.parse(localStorage.getItem('UserDetails'));
-    this.portalParams = verifyportal.portal_params;
+    this.portalUser = verifyportal.userOrigin;
+    if (this.portalUser == 'microLearn' || this.portalUser == 'learner') {
+      this.contentHide = true;
+    } else {
+      this.contentHide = false;
+    }
     this.innerWidth = window.innerWidth;
     if (this.innerWidth <= 767) {
       this.expandTxt = true;

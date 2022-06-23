@@ -42,7 +42,7 @@ secretKey = '(!@#Passcode!@#)';
     loginresult.data.learner_login.message.specific_report_value = '';
     loginresult.data.learner_login.message.is_password_updated = true;
     localStorage.setItem('token', loginresult.data.learner_login.message.token);
-    loginresult.data.learner_login.message['portal_params'] = true;
+    // loginresult.data.learner_login.message['userOrigin'] = true;
     localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.learner_login.message));
     localStorage.setItem('remember_me', 'false');
     localStorage.setItem('user_img', loginresult.data.learner_login.message.profile_img);
