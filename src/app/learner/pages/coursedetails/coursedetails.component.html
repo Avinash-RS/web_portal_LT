@@ -36,7 +36,7 @@
                        <ng-template [ngTemplateOutlet]="tocContent"></ng-template>
                     </mat-tab>
                   
-                    <mat-tab *ngIf="userType!=='vocational'&&userType!=='Corporate' && !portalUser" [ngClass]="filterkey == 'Bookmarked' ? 'yes':'no'">
+                    <mat-tab *ngIf="userType!=='vocational'&&userType!=='Corporate' && !contentHide" [ngClass]="filterkey == 'Bookmarked' ? 'yes':'no'">
                         <ng-template mat-tab-label>
                             <span class="tabLabel">{{'Bookmarks' | translate}}</span> <span class="labelcount">{{bookmarkedCount}}</span>
                         </ng-template>
