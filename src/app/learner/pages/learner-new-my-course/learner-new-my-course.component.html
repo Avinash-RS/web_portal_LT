@@ -137,7 +137,7 @@
                 <!-- Top 3 Things -->
                 <div class="somethingNew">
                     <h3>{{'Welcome!' | translate}}</h3>
-                    <!-- <h3 *ngIf="portalParams">{{'Micro learning courses!' | translate}}</h3> -->
+                    <!-- <h3 *ngIf="!contentHide">{{'Micro learning courses!' | translate}}</h3> -->
                     <h4>{{'Let\'s learn something new today!' | translate}}</h4>
                     <!-- Don't Delete below commented-->
                     <!-- <div class="thingsContent">
@@ -312,7 +312,7 @@
                     </div>
 
                     <div class="tabsWrapper" [ngClass]="showJobRole ? 'Yes' : 'No'">
-                        <div class="linksWrapper">
+                        <div class="linksWrapper"  *ngIf="!contentHide">
                             <div class="courseCompletion-btn" (click)="getCourseProgress()" *ngIf="!showProgressChart">
                                 <h4>
                                     <em class="lxp-Analytics"></em>
