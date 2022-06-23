@@ -264,7 +264,7 @@ export class LoginComponent implements OnInit {
     }, 1000);
   }
   forgotPassword() {
-      const encryptedmail = CryptoJS.AES.encrypt(this.username.value, this.secretKey.trim()).toString();
+      const encryptedmail = CryptoJS.AES.encrypt(this.username.value.toLowerCase().trim(), this.secretKey.trim()).toString();
       this.service.forgotUsernameandPassword('password', 'email', '', encryptedmail, this.recaptchaForgetStr)
         .subscribe((data: any) => {
           this.loader = true;

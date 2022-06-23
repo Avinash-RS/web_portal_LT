@@ -100,8 +100,12 @@ export class LearnerNewMyCourseComponent implements OnInit {
       this.router.navigate(['/Learner/profile']);
       return;
     }
+    this.learnerService.insertSkeleton(this.userDetailes.user_id).subscribe((result:any)=>{
+      this.getDashboardMyCourse(this.userDetailes.user_id, this.userDetailes._id);
+  },
+  err =>{
     this.getDashboardMyCourse(this.userDetailes.user_id, this.userDetailes._id);
-   // this.getDashboardMyCourse(this.userDetailes.user_id, this.userDetailes._id);
+  })
   }
   @ViewChild('completedTopics', { read: DragScrollComponent }) ds: DragScrollComponent;
   @ViewChild('inProgress', { read: DragScrollComponent }) dsInProgress: DragScrollComponent;
@@ -398,7 +402,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
     this.portalParams = verifyportal.portal_params;
     this.innerWidth = window.innerWidth;
     const showAppBanner = localStorage.getItem('appBanner');
-    if (!showAppBanner) {
+    if (!showAppBanner && !this.portalParams) {
       this.openInfoPopup();
     }
     if (this.userDetailes) {
