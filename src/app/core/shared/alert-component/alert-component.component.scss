@@ -41,12 +41,12 @@ p {
     color: $color-white !important;
 }
 
-.msg {
-    text-transform: lowercase !important;
-}
-.msg:first-letter {
-    text-transform: capitalize !important;
-}
+// .msg {
+//     text-transform: lowercase !important;
+// }
+// .msg:first-letter {
+//     text-transform: capitalize !important;
+// }
 
 ::ng-deep .custom-modalbox {
     max-width: 576px !important;
