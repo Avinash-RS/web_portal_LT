@@ -374,11 +374,15 @@
           color: $darkblue1;
         }
         span {
+          display: none;
           &:hover {
             text-decoration: underline;
           }
           @media only screen and (min-width: 576px) {
             font-size: 13px;
+          }
+          @include md {
+            display: inline-flex;
           }
         }
         em {
@@ -969,9 +973,10 @@
     font-size: 14px;
     opacity: 1;
     justify-content: flex-start;
-    padding: 0 10px;
+    padding: 0 6px;
     min-width: auto;
     @media only screen and (min-width: 576px) {
+      padding: 0 10px;
       font-size: 16px;
       // padding: 0 20px 0 0;
     }

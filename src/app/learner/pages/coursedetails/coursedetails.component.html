@@ -36,7 +36,7 @@
                        <ng-template [ngTemplateOutlet]="tocContent"></ng-template>
                     </mat-tab>
                   
-                    <mat-tab *ngIf="userType!=='vocational'&&userType!=='Corporate' && !portalParams" [ngClass]="filterkey == 'Bookmarked' ? 'yes':'no'">
+                    <mat-tab *ngIf="userType!=='vocational'&&userType!=='Corporate' && !contentHide" [ngClass]="filterkey == 'Bookmarked' ? 'yes':'no'">
                         <ng-template mat-tab-label>
                             <span class="tabLabel">{{'Bookmarks' | translate}}</span> <span class="labelcount">{{bookmarkedCount}}</span>
                         </ng-template>
@@ -60,7 +60,7 @@
                     <mat-card *ngFor="let resDat of filterkey=='Bookmarked'?filterData:scromModuleData; let wi = index" [ngClass]="resDat.expanded ? 'expandClass':'collapseClass'" multi displayMode=""
                         class="topicCardLevel" >
                         <mat-card-title  class="d-flex justify-content-between align-items-center pointer">
-                            <div class="tocTitle" *ngIf="userType!=='vocational'&&userType!=='Corporate'" >{{'Week -' | translate}} {{resDat.week?resDat.week:wi+1}}</div>
+                            <div class="tocTitle" *ngIf="userType!=='vocational'&&userType!=='Corporate' && !contentHide" >{{'Week -' | translate}} {{resDat.week?resDat.week:wi+1}}</div>
                             <div>
                             </div>
                         </mat-card-title>
@@ -194,7 +194,7 @@
             </div>
         </div>
         
-        <div class="d-flex justify-content-between understoodBookmark" [ngClass]="!drawersOpen ? 'Yes':'No'">
+        <div class="d-flex justify-content-between understoodBookmark" [ngClass]="!drawersOpen ? 'Yes':'No'"  *ngIf="!contentHide">
             <div class="popupContent d-flex align-items-center">
                 <div class="wrapper d-flex align-items-center" *ngIf="drawersOpen || checkDetails?.toc == '0'">
                     <span class="abtCourse" (click)="aboutCourse(aboutCourseWindow)"><em class="lxp-Info"></em> <span>{{'About the Course' | translate}}</span></span>
@@ -237,13 +237,13 @@
                     <div *ngIf="userType=='vocational'"   (click)="understoodClick('dislike')" data-title="Not Understood" class="sad" [ngClass]="topicInfo?.status==='Passed' && topicInfo?.user_experience === 'dislike'?'fillcol':'nofill'">
                         <em class="lxp-sad"></em> <span>{{'Not Understood' | translate}}</span>
                     </div>
-                    <button data-title="Ask A Question" class="askAQuestion pointer" *ngIf="userType!=='collegeconnect' && !portalParams" type="button" (click)="openAskQuestions(askQuestions)">
+                    <button data-title="Ask A Question" class="askAQuestion pointer" *ngIf="userType!=='collegeconnect'" type="button" (click)="openAskQuestions(askQuestions)">
                         <em class="lxp-question"></em> <span>{{'Ask A Question' | translate}}</span>
                     </button>
-                    <button data-title="Ask A Question" class="askAQuestion pointer" *ngIf="userType=='collegeconnect' && !portalParams" type="button" (click)="openQuestionDialog(questionDialog)">
+                    <button data-title="Ask A Question" class="askAQuestion pointer" *ngIf="userType=='collegeconnect'" type="button" (click)="openQuestionDialog(questionDialog)">
                         <em class="lxp-question"></em> <span>{{'Ask A Question' | translate}}</span>
                     </button>
-                     <button class="bookmarkBtn" *ngIf="userType!=='Corporate' && userType!=='vocational' && !portalParams" data-title="Bookmark" type="button" [disabled]="filterkey==='Bookmarked'" ngClass="btn btn-outline-light" (click)="bookmarkClick(topicInfo?.bookmark?false:true)">
+                     <button class="bookmarkBtn" *ngIf="userType!=='Corporate' && userType!=='vocational'" data-title="Bookmark" type="button" [disabled]="filterkey==='Bookmarked'" ngClass="btn btn-outline-light" (click)="bookmarkClick(topicInfo?.bookmark?false:true)">
                          <em [ngClass]="topicInfo?.bookmark?'lxp-bookmark':filterkey==='Bookmarked'? 'lxp-bookmark':'lxp-bookmark-o'"></em> <span [ngClass]="topicInfo?.bookmark?'bold':'normal'">{{topicInfo?.bookmark?'Bookmarked': filterkey==='Bookmarked'? translate.instant('Bookmarked'): translate.instant('Bookmark')}}</span>
                      </button>
                 </div>

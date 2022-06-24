@@ -390,7 +390,8 @@ export class LearnerNewMyCourseComponent implements OnInit {
   nochartdata: boolean = true;
   currentYear: number;
   stepUrl;
-  portalParams;
+  portalUser: any;
+  contentHide;
 
   info = 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like). like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like). like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).';
 
@@ -399,10 +400,15 @@ export class LearnerNewMyCourseComponent implements OnInit {
   ngOnInit() {
     // console.log('json', link );
     var verifyportal = JSON.parse(localStorage.getItem('UserDetails'));
-    this.portalParams = verifyportal.portal_params;
+    this.portalUser = verifyportal.userOrigin;
+    if (this.portalUser == 'microLearn' || this.portalUser == 'learner') {
+      this.contentHide = true;
+    } else {
+      this.contentHide = false;
+    }
     this.innerWidth = window.innerWidth;
     const showAppBanner = localStorage.getItem('appBanner');
-    if (!showAppBanner && !this.portalParams) {
+    if (!showAppBanner && !this.contentHide) {
       this.openInfoPopup();
     }
     if (this.userDetailes) {

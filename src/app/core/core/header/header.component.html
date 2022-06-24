@@ -9,7 +9,7 @@
   <div class="imgContainer">
      <img class="hearder-logo" alt="" src="https://assets.lntedutech.com/application_images/edutech-logo.webp" (click)="navigateMyCourse()">
   </div>
-  <div class="btnContainer" *ngIf="portalParams">
+  <div class="btnContainer" *ngIf="this.portalUser == 'microLearn' || this.portalUser == 'learner'">
     <button class="catalogBtn" (click)="redirectToPortal()">Catalog</button>
   </div>
 
@@ -42,7 +42,7 @@
     </mat-menu>
   </div>
   <!-- End of Mobile Menu -->
-<div class="toolbarRightContent" [ngClass]="portalParams == true ? 'hideToolbar' : ''">
+<div class="toolbarRightContent" [ngClass]="this.portalUser == 'microLearn' || this.portalUser == 'learner' ? 'hideToolbar' : ''">
   <app-toolbar-notification></app-toolbar-notification>
 
   <div class="txtName"><span title="{{userDetails?.full_name}}">{{userDetails?.full_name}}</span></div>
@@ -87,7 +87,7 @@
 
 </mat-toolbar>
 <div class="sideNavStrip" [ngClass]="expandTxt?'navClose':'navOpen'" *ngIf="!hideHeaderMenu">
-  <!-- <div class="stripItem" *ngIf="portalParams" routerLink="/Landing/Microcourses" [ngClass]="activeUrl === '/Landing/Microcourses' ? 'activeItem' : 'normalItem'" [ngClass]="expandTxt?'navOpen':'navClose'">
+  <!-- <div class="stripItem" *ngIf="portalUser !== 'learner' && portalUser !== 'microLearn'" routerLink="/Landing/Microcourses" [ngClass]="activeUrl === '/Landing/Microcourses' ? 'activeItem' : 'normalItem'" [ngClass]="expandTxt?'navOpen':'navClose'">
     <div class="icoBox">
       <em class="lxp-SelfPaced "></em>
     </div>
