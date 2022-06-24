@@ -408,7 +408,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
     }
     this.innerWidth = window.innerWidth;
     const showAppBanner = localStorage.getItem('appBanner');
-    if (!showAppBanner && this.portalUser) {
+    if (!showAppBanner && !this.contentHide) {
       this.openInfoPopup();
     }
     if (this.userDetailes) {
