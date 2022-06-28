@@ -19,5 +19,5 @@ export const environment = {
   gaTrackingId: 'G-6N6X7SQTXH',
   resourcelinkurl : 'https://upskillresourcefiles.lntedutech.com/',
   aictePortalUrl : 'https://microlearndev.lntedutech.com/',
-  guportalUrl : 'https://portaldev.lntiggnite.com/',
+  guportalUrl : 'https://portaldev.lntedutech.com/',
 };
