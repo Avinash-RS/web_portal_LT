@@ -40,5 +40,5 @@ export const environment = {
   botUrl :'https://devfaqbot.lntedutech.com/',
   resourcelinkurl : 'https://upskillresourcefiles.lntedutech.com/',
   aictePortalUrl : 'https://microlearndev.lntedutech.com/',
-  guportalUrl : 'https://portaldev.lntiggnite.com/',
+  guportalUrl : 'https://portaldev.lntedutech.com/',
 };
