@@ -148,6 +148,7 @@ export class ProgressionReportComponent implements OnInit {
   today = new Date();
   pipe = new DatePipe('en-US');
   fromPage: any;
+  contentHide = false;
   constructor(
     public learnerService: LearnerServicesService,
     private gs: GlobalServiceService,
@@ -166,6 +167,11 @@ export class ProgressionReportComponent implements OnInit {
       }
     });
     this.UserDetails = JSON.parse(localStorage.getItem('UserDetails')) || null;
+    if (this.UserDetails.userOrigin == 'microLearn' || this.UserDetails.userOrigin == 'learner') {
+      this.contentHide = true;
+    } else {
+      this.contentHide = false;
+    }
     this.userId = this.UserDetails.user_id;
   }
 

@@ -384,7 +384,7 @@
       <li><em routerLink="/Landing/MyCourse" class="lxp-Go backArrow"></em> {{courseName}}</li>
       <li>{{'Learning Progression' | translate}}</li>
     </ul>
-    <div>
+    <div *ngIf="!contentHide">
    <div class="progress-label">{{'Week wise time spent' | translate}}</div>
    <div class="progress-date d-flex">
      <div class="progress-hours-container">

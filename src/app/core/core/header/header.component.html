@@ -111,7 +111,7 @@
       {{'Schedule' | translate}}
     </div>
   </div>
-  <div class="stripItem" routerLink="/Learner/knowledge" [ngClass]="activeUrl === '/Learner/knowledge' ? 'activeItem' : 'normalItem'" [ngClass]="expandTxt?'navOpen':'navClose'">
+  <div class="stripItem" *ngIf="!contentHide" routerLink="/Learner/knowledge" [ngClass]="activeUrl === '/Learner/knowledge' ? 'activeItem' : 'normalItem'" [ngClass]="expandTxt?'navOpen':'navClose'">
     <div class="icoBox" >
       <em class="lxp-Knowledge "></em>
     </div>
