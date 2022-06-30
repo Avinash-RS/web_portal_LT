@@ -427,46 +427,6 @@ export class CoursedetailsComponent implements OnInit {
         }
       }
     }
-    if (this.courseid) {
-      this.Lservice.getModuleData(
-        (this.checkDetails && this.checkDetails.id) || this.localStoCourseid,
-        this.userDetail.user_id
-      ).subscribe((data: any) => {
-        if (data.data.getmoduleData.success) {
-          this.content = data.data.getmoduleData.data[0];
-          this.assignmentVal = false;
-          let noresource = false;
-          //this.getModuleandtopicInfo = this.content.coursedetails[0];
-          this.content.coursedetails.forEach((element) => {
-            let resourceFile = false;
-            element.moduledetails.forEach((value) => {
-              element.moduledetails.showPreview = false;
-              if (
-                value.resourse &&
-                value.resourse.files &&
-                value.resourse.files.length
-              ) {
-                this.fileRef = value.resourse.files.filter(
-                  (type) => type.fileType === "Reference"
-                );
-                if (this.fileRef && this.fileRef.length) {
-                  resourceFile = true;
-                  noresource = true;
-                }
-              }
-            });
-            element.resValue = resourceFile;
-          });
-          // this.nextPrevHolder = this.topiccurrentPage = this.content.topicIndex == null ? 0 : this.content.topicIndex;
-          // this.moduleHolder = this.currentPage = this.content.moduleIndex == null ? 0 : this.content.moduleIndex;
-
-          this.content.noresource = noresource;
-
-          this.modulength = this.content.coursedetails.length;
-          this.courseTime = this.content.coursetime;
-        }
-      });
-    }
     // this.getAssignmentmoduleData();
   }
 
@@ -1260,13 +1220,53 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   openResourse(templateRef) {
-    this.dialog.open(templateRef, {
-      panelClass: 'resourseContainer',
-      width: '75%',
-      height: '75%',
-      closeOnNavigation: true,
-      disableClose: true,
-    });
+    if (this.courseid) {
+      this.Lservice.getModuleData(
+        (this.checkDetails && this.checkDetails.id) || this.localStoCourseid,
+        this.userDetail.user_id
+      ).subscribe((data: any) => {
+        if (data.data.getmoduleData.success) {
+          this.content = data.data.getmoduleData.data[0];
+          this.assignmentVal = false;
+          let noresource = false;
+          //this.getModuleandtopicInfo = this.content.coursedetails[0];
+          this.content.coursedetails.forEach((element) => {
+            let resourceFile = false;
+            element.moduledetails.forEach((value) => {
+              element.moduledetails.showPreview = false;
+              if (
+                value.resourse &&
+                value.resourse.files &&
+                value.resourse.files.length
+              ) {
+                this.fileRef = value.resourse.files.filter(
+                  (type) => type.fileType === "Reference"
+                );
+                if (this.fileRef && this.fileRef.length) {
+                  resourceFile = true;
+                  noresource = true;
+                }
+              }
+            });
+            element.resValue = resourceFile;
+          });
+          // this.nextPrevHolder = this.topiccurrentPage = this.content.topicIndex == null ? 0 : this.content.topicIndex;
+          // this.moduleHolder = this.currentPage = this.content.moduleIndex == null ? 0 : this.content.moduleIndex;
+
+          this.content.noresource = noresource;
+
+          this.modulength = this.content.coursedetails.length;
+          this.courseTime = this.content.coursetime;
+        }
+        this.dialog.open(templateRef, {
+          panelClass: 'resourseContainer',
+          width: '75%',
+          height: '75%',
+          closeOnNavigation: true,
+          disableClose: true,
+        });
+      });
+    }
     const backdrop = document.getElementsByClassName('cdk-overlay-backdrop')[0];
     const containerarea = document.getElementsByClassName(
       'mat-dialog-container'

@@ -126,8 +126,8 @@ export class CalendarActivityComponent implements OnInit {
   }
   getCourseData() {
     this.userDetails = this.gs.checkLogout();
-    this.learnerService.get_batchwise_learner_dashboard_data(this.userDetails.user_id, 'all', null).subscribe((BcourseData: any) => {
-      const tmpBcourseDetail = BcourseData.data.get_batchwise_learner_dashboard_data.message;
+    this.learnerService.get_batchwise_learner_dashboard_data_v2(this.userDetails.user_id, 'all', null).subscribe((BcourseData: any) => {
+      const tmpBcourseDetail = BcourseData.data.get_batchwise_learner_dashboard_data_v2.message;
       this.courseDetailsList = tmpBcourseDetail && tmpBcourseDetail !== null ? tmpBcourseDetail : [];
       this.learnerService.getLearnerDashboard(this.userDetails.user_id, this.userDetails._id,
         'undefined', 'all', 'enrolment').subscribe((EcourseData: any) => {

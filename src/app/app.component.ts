@@ -53,6 +53,11 @@ export class AppComponent implements OnInit {
     }
 
     const userDetail = JSON.parse(localStorage.getItem('UserDetails'));
+    if (userDetail?.userOrigin == 'microLearn' || userDetail?.userOrigin == 'learner') {
+      this.contentHide = true;
+    } else {
+      this.contentHide = false;
+    }
     if (!userDetail?.specific_report_value) {
       localStorage.clear();
       sessionStorage.clear();
@@ -104,6 +109,7 @@ export class AppComponent implements OnInit {
   botUrl;
   urlSafe: SafeResourceUrl;
   languages: { lang: string; languagename: string; }[];
+  contentHide = false;
  private destroy$ = new Subject<void>();
    // FOR DRM(Restriction for right click)
    @HostListener('document:keydown', ['$event'])

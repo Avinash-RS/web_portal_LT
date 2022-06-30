@@ -38,7 +38,7 @@ export class HeaderComponent implements OnInit {
   profilepic: any;
   blobKey = environment.blobKey;
   portalUser: any;
-  contentHide;
+  contentHide = false;
   constructor(public services: CommonServicesService, private alert: AlertServiceService,
               private http: HttpClient, public overlayContainer: OverlayContainer, public socketService: SocketioService,
               public router: Router, private gs: GlobalServiceService, public translate: TranslateService) {
