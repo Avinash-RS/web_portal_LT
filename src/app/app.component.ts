@@ -53,7 +53,7 @@ export class AppComponent implements OnInit {
     }
 
     const userDetail = JSON.parse(localStorage.getItem('UserDetails'));
-    if (userDetail.userOrigin == 'microLearn' || userDetail.userOrigin == 'learner') {
+    if (userDetail?.userOrigin == 'microLearn' || userDetail?.userOrigin == 'learner') {
       this.contentHide = true;
     } else {
       this.contentHide = false;
