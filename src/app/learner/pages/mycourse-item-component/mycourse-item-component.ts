@@ -127,7 +127,6 @@ export class MycourseItemComponent implements OnInit {
   gotoDesc(c,value) {
     const isValid = this.batchRestriction(c)
     if (isValid) { 
-    c.batch_end_date_Timer = new Date(c.batch_end_date).getTime();
     const detail = {
       id: c.course_id,
       wishlist: c.wishlisted || false,
@@ -136,7 +135,7 @@ export class MycourseItemComponent implements OnInit {
       course_name: c.course_name,
       course_status: c.course_status,
       batch_id: c.batchid,
-      batchEndTime: c.batch_end_date_Timer,
+      batchEndTime: c.batch_end_date,
       isTesting: c?.isTesting ? true :false,
       link: c.link,
       toc: c.toc,
@@ -152,7 +151,7 @@ export class MycourseItemComponent implements OnInit {
     };
     // if (this.screenWidth < 800) {
     // } else {
-    localStorage.setItem('currentBatchEndDate', c.batch_end_date_Timer);
+    localStorage.setItem('currentBatchEndDate', c.batch_end_date);
     localStorage.setItem('Courseid', c.course_id);
     localStorage.setItem('CourseType', c.course_type);
     localStorage.setItem('payType', value ? 'paid' : undefined);
