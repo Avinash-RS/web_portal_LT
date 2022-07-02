@@ -189,6 +189,7 @@ export class CoursedetailsComponent implements OnInit {
   @ViewChild('demo3Tab') demo3Tab: MatTabGroup;
   @ViewChild('rationPopup') rationPopup: TemplateRef<any>;
   @ViewChild('focuser') inputEl: ElementRef;
+  @ViewChild('tocbox') tocBox: ElementRef;
   @ViewChild('scromPlayer') iframe: ElementRef;
   getModuleandtopicInfo: any;
   moduleSatusCheck: any;
@@ -658,6 +659,7 @@ export class CoursedetailsComponent implements OnInit {
     this.service.getTOC(param).subscribe((data: any) => {
       this.scromApiData = data;
       this.checkDetails.checklevel = this.scromApiData.checkLevel;
+      this.bookmarkedCount = this.scromApiData.bookmarkCount;
       this.scromModuleData = this.scromApiData?.message;
       this.weekLength = this.scromApiData.message.length;
 
@@ -724,8 +726,9 @@ export class CoursedetailsComponent implements OnInit {
             ? "start"
             : this.checkDetails.course_status;
         if (
-          this.checkDetails.course_status !== 'start' &&
-          this.userType !== 'vocational'
+          // this.checkDetails.course_status !== 'start' &&
+          // this.userType !== 'vocational'
+          this.tocBox.nativeElement.offsetHeight!==this.tocBox.nativeElement.scrollHeight
         ) {
           this.inputEl
             // tslint:disable-next-line: no-unused-expression
@@ -1486,11 +1489,14 @@ export class CoursedetailsComponent implements OnInit {
         this.topicInfo.parent,
         this.topicInfo.id
       );
-      setTimeout(() => {
-        this.inputEl
-          ? this.inputEl.nativeElement.scrollIntoView({ behavior: "smooth" })
-          : "";
-      }, 2000);
+      if(this.tocBox.nativeElement.offsetHeight!==this.tocBox.nativeElement.scrollHeight)
+      {
+        setTimeout(() => {
+          this.inputEl
+            ? this.inputEl.nativeElement.scrollIntoView({ behavior: "smooth" })
+            : "";
+        }, 2000);
+      }
     }
   }
 
@@ -1710,4 +1716,5 @@ export class CoursedetailsComponent implements OnInit {
       }
     }
   }
+
 }

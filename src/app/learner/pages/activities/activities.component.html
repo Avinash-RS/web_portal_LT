@@ -552,16 +552,16 @@
                         <span class="uploadfileName" *ngIf="item.name?.length > 19" matTooltip="{{item.name}}" matTooltipClass="custom-mat-tooltip">
                           {{(item.name| slice:0:20)+'...'}}
                         </span>
-                        <mat-icon class="deleteIcon float-right" *ngIf="project.submitType == true" (click)="learnerSumbitdeleteVideo(project, item, 'delete')">delete</mat-icon>
+                        <mat-icon class="deleteIcon float-right" *ngIf="project.projectActivity.submitAction !== 'submit'" (click)="learnerSumbitdeleteVideo(project, item, 'delete')">delete</mat-icon>
                       </div>
                       <div class="align-center">
                         <input type="file" style="display: none" accept="video/mp4,video/quicktime,image/png,image/jpeg,image/jpg,application/pdf" #uploadInput [(ngModel)]="fileName" (change)="uploadDoc($event, project, 'upload')" />
-                        <button mat-stroked-button class="upload-btn" (click)="uploadDocs()" [disabled]="project.submitType == false || project.enableSubmit == false"> 
+                        <button mat-stroked-button class="upload-btn" *ngIf="project.projectActivity.submitAction !== 'submit'" (click)="uploadDocs()" [disabled]="project.submitType == false || project.enableSubmit == false"> 
                           <mat-icon class="icon-color m-t-m-2">add</mat-icon> {{'Add your files' | translate}} 
                         </button>
-                        <p class="uploadMessage" >{{'Max File Size : 150 MB, Format : JPEG,PNG,PDF,MP4,MOV' | translate}}</p>
+                        <p class="uploadMessage" *ngIf="project.projectActivity.submitAction !== 'submit'" >{{'Max File Size : 150 MB, Format : JPEG,PNG,PDF,MP4,MOV' | translate}}</p>
                         <button mat-stroked-button class="submit-btn" [disabled]="project.submitType == false || project.enableSubmit == false" (click)="learnerSumbitdeleteVideo(project, '' ,'submit')" 
-                        *ngIf="project.projectActivity.videodetails.length > 0">{{'Submit' | translate}}</button>
+                        *ngIf="(project.projectActivity.submit_status == 'notsubmitted' || project.projectActivity.submit_status == 'late') && project.projectActivity.videodetails.length > 0 && project.submitType == true && project.projectActivity.submitAction !== 'submit'">{{'Submit' | translate}}</button>
                       
                         <p *ngIf="project.projectActivity.submitAction == 'submit'">{{'Submitted on:' | translate}} {{project.submittedOn | date:'MMM dd, yyyy'}}</p>
                       </div>

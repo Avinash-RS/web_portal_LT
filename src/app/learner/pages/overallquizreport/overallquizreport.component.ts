@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Label } from 'ng2-charts';
+import { LearnerServicesService } from "@learner/services/learner-services.service";
+import * as CryptoJS from 'crypto-js';
+
 @Component({
   selector: 'app-overallquizreport',
   templateUrl: './overallquizreport.component.html',
@@ -13,8 +16,8 @@ export class OverallquizreportComponent implements OnInit {
   public ChartPlugins = [];
   public barChartDataSet: ChartDataSets[] = [
     {
-      data: [50,30,40,60,10,40,60,10],
-      backgroundColor: ['#FFA800','#17B15C','#C02222','#FFA800','#17B15C','#C02222','#FFA800','#17B15C'],
+      data: [],
+      backgroundColor: [],
       barThickness: 15,
     }
   ];
@@ -94,7 +97,6 @@ export class OverallquizreportComponent implements OnInit {
       }
     }
   };
-  barLabel:Label = ['a','b','c','d','e','f','g','h'];
   points:any = [
     {color: 'good', label: '71-100% Good'},
     {color: 'avg', label: '31-70% Average'},
@@ -158,10 +160,87 @@ export class OverallquizreportComponent implements OnInit {
     } }
   ];
   gridApi: any;
-  constructor() { }
+  getuserid: any;
+  secretKey = '(!@#Passcode!@#)';
+  sourceData: any;
+  barLabel: any;
+  pageSize:number = 10;
+  pageNumber:number = 1;
+  startIndex:number = 0;
+  endIndex:number = this.pageSize;
+  totalItem:number = 0;
+  toalPages:number;
+  barchartData: any;
+  barchartColor: any[];
+  barLabelTMP: any;
+  constructor(private service:LearnerServicesService) { 
+    
+  }
 
   ngOnInit(): void {
+    this.getuserid = JSON.parse(localStorage.getItem('UserDetails'));
+    console.log(this.getuserid)
+    const id = CryptoJS.AES.decrypt(
+      this.getuserid.user_id,
+      this.secretKey.trim()
+    ).toString(CryptoJS.enc.Utf8);
+    this.service.overallQuizReport(this.getuserid.username,"").subscribe((arg:any) =>{ 
+      this.sourceData = arg.data.overallQuizReport
+      this.generateQuizBarChart()
+    });
+    
   }
+
+  generateQuizBarChart() {
+     this.barchartData = [];
+    this.barchartColor = [];
+    this.barLabel = [];
+    this.barLabelTMP = [];
+    this.toalPages = Math.ceil(this.sourceData.bar_chart.length/this.pageSize);
+    this.totalItem = this.sourceData.bar_chart.length
+    if (this.sourceData.bar_chart.length > 0) {
+      this.sourceData.bar_chart.forEach((element: any) => {
+        this.barchartData.push(element.score_earned);
+        this.barchartColor.push(element.color);
+        this.barLabelTMP.push(element.quiz_name);
+
+      });
+      this.barChartDataSet = [
+        {
+          data: this.barchartData.slice(this.startIndex,this.endIndex),
+          backgroundColor: this.barchartColor.slice(this.startIndex,this.endIndex),
+          hoverBackgroundColor: this.barchartColor.slice(this.startIndex,this.endIndex),
+          barThickness: 15,
+        }
+      ];
+      this.barLabel = this.barLabelTMP.slice(this.startIndex,this.endIndex)
+    }
+  }
+
+  paginate(e){
+    if(e == 'prev') {
+      this.pageNumber--;
+    }
+    else {
+      this.pageNumber++;
+    }
+    this.startIndex = (this.pageNumber -1) * this.pageSize;
+    this.endIndex = Math.min((this.startIndex + 10 ),this.totalItem);
+    this.barChartDataSet = [
+
+      {
+        data: this.barchartData.slice(this.startIndex,this.endIndex),
+        backgroundColor: this.barchartColor.slice(this.startIndex,this.endIndex),
+        hoverBackgroundColor: this.barchartColor.slice(this.startIndex,this.endIndex),
+        barThickness: 15,
+      }
+  
+    ];
+  
+    this.barLabel = this.barLabelTMP.slice(this.startIndex,this.endIndex);
+  
+   }
+
   onGridReady(params: any) {
     this.gridApi = params.api;
     this.gridApi.sizeColumnsToFit();

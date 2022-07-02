@@ -2626,3 +2626,188 @@ export const getlearnerquiz = gql `
     }
   }
 `;
+export const selflearning_report = gql `
+query selflearning_report($userId:String!){
+  selflearning_report(userId:$userId){
+    success
+    message
+    data{
+      description
+      progressionReport{
+        name
+        moduleCount
+        TopicCount
+        moduleList{
+          name
+          week
+          moduleName
+          totalDuration
+          overAllPercentage
+          topicDetails{
+            id
+            name
+            status{
+              value
+              enums
+            }
+            knowledgeDetails{
+              name
+              totalQuestion
+              correctAns
+              incorrect
+            }
+            activityDetails{
+              name
+              totalDuration
+              completedPercentage
+            }
+          }
+          colourCode{
+            value
+            enums
+          }
+          knowledgeCount{
+            total
+            completed
+          }
+          topicCount{
+            total
+            completed
+          }
+        }
+      }
+      progressionChart{
+        _id
+        course_percentage
+        course_id
+        course_name
+      }
+    }
+  }
+}
+`;
+export const overallActivityAttendance = gql`
+ query overallActivityAttendance($userId:String!){
+    overallActivityAttendance(userId:$userId){
+      success
+      message
+      data{
+        attendanceReport{
+          courselist{
+            sessionCount
+            presentCount
+            coursename
+            activity{
+              topicname
+              startdate
+              attendencedetails{
+                Attendence
+              }
+            }
+          }
+        }
+        attendanceGraph{
+          allSessionCount
+          allPresentCount
+        }
+        description
+      }
+    }
+  }
+`;
+
+export const overallQuizReport = gql`
+  query overallQuizReport($email: String!, $course_id: String) {
+    overallQuizReport(email: $email, course_id: $course_id) {
+      doughnut_chart {
+        _id
+        color
+        percent
+      }
+      bar_chart {
+        batchid
+        points_earned
+        quiz_name
+        score_earned
+        start_date
+        user
+        color
+      }
+      table_chart {
+        _id
+        courseName
+        quizCount
+        scoreAvg
+        quizDetails {
+          quiz_name
+          start_date
+          end_date
+          no_of_question
+          correct_answer
+          score
+          status
+          color
+        }
+      }
+    }
+  }
+`;
+
+export const overallActivitySubmits = gql`
+query overallActivitySubmits($userId:String!) {
+    overallActivitySubmits(userId:$userId) {
+      success
+      totalCount
+      data {
+        _id
+        user_id
+        activityType
+        course_name
+        learnerName
+        files_id
+        activityId
+        doc_status
+        course_id
+        module_id
+        topic_id
+        batchid
+        batch_obj_id
+        flag
+        file_id
+        submit_status
+        grade_status
+        resubmit
+        resubmit_count
+        activityname
+        total_mark
+        # videodetails
+        performtype
+        iterationTotal
+        submittedTotal
+        perform_id
+        materialDetails {
+          assignment
+          checked
+          doc_type
+          filename
+          fileType
+          path
+          size
+          type_name
+          _id
+          }
+          iterationDetails {
+            iterationid
+            iterationcount
+            total_mark
+            submit_status
+            grade_status
+            instructor_status
+            comments
+            assessmentreport
+            videodetails
+            }
+            }
+          }
+          }
+          `;

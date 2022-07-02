@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { RowSpanParams } from 'ag-grid-community';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
@@ -9,6 +10,7 @@ import { Label } from 'ng2-charts';
   styleUrls: ['./trainingreport.component.scss']
 })
 export class TrainingreportComponent implements OnInit {
+  selfLearningData;
   public barChartOptions: ChartOptions = {
     responsive: true,
     legend:{
@@ -52,7 +54,7 @@ export class TrainingreportComponent implements OnInit {
       }],
     }
   };
-  public barChartLabels: Label[] = ['SQL Database for Beginners', 'Learn How to Code', 'Modern Web Design ', 'Angular Crash Course', 'STEP Campus to Corporate', 'Angular Crash Course'];
+  public barChartLabels: Label[];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
   public barChartPlugins = [];
@@ -65,14 +67,7 @@ export class TrainingreportComponent implements OnInit {
       barThickness: 35,
     }
   ];
-  legends = [
-    {color:'#49AE31',label:'SQL Database for Beginners'},
-    {color:'#1B4E9B',label:'Learn How to Code'},
-    {color:'#27BBEE',label:'Modern Web Design'},
-    {color:'#BE2020',label:'Angular Crash Course'},
-    {color:'#FFCC00',label:'STEP Campus to Corporate'},
-    {color:'#AE5FDE',label:'Angular Crash Course'},
-  ];
+  legends = [];
   //pie
   public pieChartOptions: ChartOptions = {
     responsive: true,
@@ -87,11 +82,7 @@ export class TrainingreportComponent implements OnInit {
       backgroundColor: ['#607D8B','#49AE31','#FEA800'],
     }
   ];
-  liveclassroomLegend = [
-    {label:'Total Sessions',count:23,color:'#607D8B'},
-    {label:'Attended Sessions',count:18,color:'#49AE31'},
-    {label:'Absent Sessions',count:5,color:'#FEA800'}
-  ];
+  liveclassroomLegend:any = [];
   defaultColDef = {
     resizable: false,
     floatingFilter: false,
@@ -101,18 +92,18 @@ export class TrainingreportComponent implements OnInit {
     suppressMenu: true,
     unSortIcon: true,
   };
-  rows = [
-    {Day:'1',Topic:'Dotnet Collection Asses…',Date:'02-02-2022',Attendance:'Present',remarks:'Regular, very punctual to classes and silent listener & performer. Response to questions regularly (mostly via IM Messages). She is new to Java Programming but understands the concepts easily. Need to be more interactive by asking questions/doubts'},
-    {Day:'2',Topic:'Dotnet Collection Asses…',Date:'02-02-2022',Attendance:'Absent',remarks:''},
-    {Day:'3',Topic:'Dotnet Collection Asses…',Date:'02-02-2022',Attendance:'Present',remarks:''},
-  ]
   cols = [
-    { headerName: 'Day', field: 'Day', width: 100, tooltipField: 'quiz_name',},
-    { headerName: 'Topic Name', field: 'Topic', minWidth: 200, width: 200},
-    { headerName: 'Date', field: 'Date', minWidth: 100, width: 100},
+    { headerName: 'Day', field: 'Day', width: 100, 
+    cellRenderer: (params) => { 
+        return params.rowIndex + 1;
+    }
+  },
+    { headerName: 'Topic Name', field: 'topicname', minWidth: 200, width: 200},
+    { headerName: 'Date', field: 'startdate', minWidth: 100, width: 100},
     { headerName: 'Attendance', field: 'Attendance', minWidth: 150, width: 150, cellClass:'statusClass',
     cellRenderer: (params) => {
-      if (params?.data?.Attendance === 'Present') {
+      console.log(params?.data);
+      if (params?.data?.attendencedetails?.Attendence === 'Yes') {
         return `<div class="statusBtn present">
                   <em class="lxp-Completion"></em> <div>Present</div>
         </div>`;
@@ -121,32 +112,109 @@ export class TrainingreportComponent implements OnInit {
                   <em class="lxp-Completion"></em>  <div>Absent</div>
                 </div>`;
       } 
-
     }},
-    { headerName: 'Remarks', minWidth: 200, width: 200,
-    field: 'remarks',
-      rowSpan: this.rowSpan,
-      cellClassRules: {
-        'cell-span': "value=== 'Regular, very punctual to classes and silent listener & performer. Response to questions regularly (mostly via IM Messages). She is new to Java Programming but understands the concepts easily. Need to be more interactive by asking questions/doubts'",
-      },
-  },
   ];
   gridApi: any;
   rowData: any;
-  constructor(private http: HttpClient) { }
+  showProgReport:boolean = false;
+  liveClassroomData:any;
+  selfLearnLegends:any = [];
+  getuserid: any;
+  constructor(private http: HttpClient,private service:LearnerServicesService) { }
 
   ngOnInit(): void {
+    this.getuserid = JSON.parse(localStorage.getItem('UserDetails'));
+    this.getSelflearningData();
+    this.getLiveClassroomData();
+
   }
   onGridReady(params: any) {
     this.gridApi = params.api;
     this.gridApi.sizeColumnsToFit();
   }
 
-
+  getSelflearningData(){
+    this.service.selflearning_report(this.getuserid.user_id).subscribe((result:any)=>{
+      this.showProgReport = true;
+      if(result?.data?.selflearning_report?.success) {
+        this.selfLearningData = result?.data?.selflearning_report?.data;
+        if(this.selfLearningData.progressionChart.length > 0) {
+          var bardata = [];
+          var barlabel = []
+          var randomColor = [];
+          this.selfLearnLegends = [];
+          this.selfLearningData.progressionChart.forEach(element => {
+            const color = '#' + Math.floor(Math.random()*16777215).toString(16);
+            bardata.push(element.course_percentage);
+            barlabel.push(element.course_name);
+            randomColor.push(color);
+            this.selfLearnLegends.push({label:element?.course_name,color: color})
+          });
+        }
+        this.barChartLabels = barlabel;
+        this.barChartDataSet = [
+          {
+            data: bardata,
+            backgroundColor: randomColor,
+            hoverBackgroundColor: randomColor,
+            barThickness: 35,
+          }
+        ];
+      }
+    });
+  }
+  getLiveClassroomData(){
+    this.service.overallActivityAttendance(this.getuserid.user_id).subscribe((result:any)=>{ 
+      if(result?.data?.overallActivityAttendance?.success) {
+        this.liveClassroomData = result?.data?.overallActivityAttendance?.data[0];
+        this.pieChartDataSet = [
+          {
+            data: [
+              this.liveClassroomData?.attendanceGraph?.allSessionCount,
+              this.liveClassroomData?.attendanceGraph?.allPresentCount,
+              this.liveClassroomData?.attendanceGraph?.allSessionCount - this.liveClassroomData?.attendanceGraph?.allPresentCount
+            ],
+            backgroundColor: ['#607D8B','#49AE31','#FEA800'],
+          }
+        ];
+        this.liveclassroomLegend = [
+          {label:'Total Sessions',count:this.liveClassroomData?.attendanceGraph?.allSessionCount,color:'#607D8B'},
+          {label:'Attended Sessions',count:this.liveClassroomData?.attendanceGraph?.allPresentCount,color:'#49AE31'},
+          {label:'Absent Sessions',count:this.liveClassroomData?.attendanceGraph?.allSessionCount - this.liveClassroomData?.attendanceGraph?.allPresentCount,color:'#FEA800'}
+        ];
+        
+      }
+      else {
+        this.pieChartDataSet = [
+          {
+            data:[],
+            backgroundColor: ['#607D8B','#49AE31','#FEA800'],
+          }
+        ];
+        this.liveclassroomLegend = [
+          {label:'Total Sessions',count:0,color:'#607D8B'},
+          {label:'Attended Sessions',count:0,color:'#49AE31'},
+          {label:'Absent Sessions',count:0,color:'#FEA800'}
+        ];
+      }
+    });
+  }
   rowSpan(params: RowSpanParams) {
-
     if (params.data.remarks === 'Regular, very punctual to classes and silent listener & performer. Response to questions regularly (mostly via IM Messages). She is new to Java Programming but understands the concepts easily. Need to be more interactive by asking questions/doubts') {
       return 3;
     }
+  }
+  secondsTimeConverter(secs) {
+    if (isNaN(secs)) {
+      return '-- : -- : --';
+    } else {
+      return new Date(secs * 1000).toISOString().substr(11, 8);
+    }
+  }
+  handleOpened(moduleItem) {
+    moduleItem.isOpened = true;
+  }
+  handleClosed(moduleItem) {
+    moduleItem.isOpened = false;
   }
 }
