@@ -310,7 +310,12 @@ export class CoursedetailsComponent implements OnInit {
 // setInterval(() => {
 //   this.socketService.socketStatus();
 // }, 10000);
-
+      this.batchEndTime = localStorage.getItem('currentBatchEndDate');
+      if(moment() > moment(this.batchEndTime)){
+        this.toastr.warning('Your subscription for this course has expired');
+        this.route.navigateByUrl("/Landing/MyCourse");
+        return;
+      } 
     const lang = localStorage.getItem('language');
     this.translate.use(lang ? lang : 'en');
     const loginDetails = JSON.parse(localStorage.getItem('UserDetails'));
@@ -348,7 +353,6 @@ export class CoursedetailsComponent implements OnInit {
     this.isTesting = localStorage.getItem('isTesting') && localStorage.getItem('isTesting') == 'true' ? true :false;
     if (this.checkDetails === undefined) {
       this.batchId = localStorage.getItem('currentBatchId');
-      this.batchEndTime = localStorage.getItem('currentBatchEndDate');
       this.courseType = localStorage.getItem('CourseType');
       this.checkDetails = JSON.parse(localStorage.getItem('resumeData'));// it receives only partial data
       this.checkDetails.payType = localStorage.getItem('payType'); 
