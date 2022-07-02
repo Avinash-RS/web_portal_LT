@@ -551,9 +551,20 @@ export class LearnerNewMyCourseComponent implements OnInit {
             const EcourseDetail = EcourseData.data.get_learner_dashboard.message.enrolled_course_details;
             this.enrolledCourses = EcourseDetail && EcourseDetail !== null ? EcourseDetail : [];
             this.courseDetailsList.push(...this.enrolledCourses);
-            this.courseDetailsList.forEach((value) => {
-              value.show = true;
-            });
+              this.courseDetailsList.forEach((value) => {
+                var startDate = moment(value.batch_start_date);
+                var endDate = moment(value.batch_end_date)
+                if(moment() > startDate){
+                  value['batchStarted'] = true;
+                } else {
+                  value['batchStarted'] = false;
+                }
+                if( moment() > endDate){
+                  value['batchClosed'] = true;
+                } else {
+                  value['batchClosed'] = false;
+                }
+              });            
             this.onGoingCourseCount = (BcourseData.data.get_batchwise_learner_dashboard_data_v2.ongoing ?BcourseData.data.get_batchwise_learner_dashboard_data_v2.ongoing:0) + EcourseData.data.get_learner_dashboard.message.ongoing_count;
             this.completedCourseCount = (BcourseData.data.get_batchwise_learner_dashboard_data_v2.completed ? BcourseData.data.get_batchwise_learner_dashboard_data_v2.completed:0 )+ EcourseData.data.get_learner_dashboard.message.completed_count;
             this.allCourseCount = (BcourseData.data.get_batchwise_learner_dashboard_data_v2.all ? BcourseData.data.get_batchwise_learner_dashboard_data_v2.all:0) + EcourseData.data.get_learner_dashboard.message.all_count;

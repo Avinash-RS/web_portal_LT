@@ -6,11 +6,13 @@ import { GlobalServiceService } from '@core/services/handlers/global-service.ser
 import { environment } from '@env/environment';
 import { TranslateService } from '@ngx-translate/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
-
+import { ToastrService } from 'ngx-toastr';
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-mycourse-item-component',
   templateUrl: './mycourse-item-component.html',
-  styleUrls: ['./mycourse-item-component.scss']
+  styleUrls: ['./mycourse-item-component.scss'],
+  providers: [DatePipe]
 })
 
 export class MycourseItemComponent implements OnInit {
@@ -68,7 +70,9 @@ export class MycourseItemComponent implements OnInit {
     public service: CommonServicesService,
     private alert: AlertServiceService,
     private gs: GlobalServiceService,
-    private router: Router) {
+    private router: Router,
+    private toastr: ToastrService,
+    private datePipe: DatePipe) {
     this.userDetail = JSON.parse(localStorage.getItem('UserDetails')) || null;
     this.role = localStorage.getItem('role') || sessionStorage.getItem('role') || null;
     const lang = localStorage.getItem('language');
@@ -86,6 +90,8 @@ export class MycourseItemComponent implements OnInit {
   }
   // progression report
   gotoProgression(course) {
+    const isValid = this.batchRestriction(course)
+    if (isValid) { 
     const data = {
       courseId : course.course_id,
       courseName: course.course_name,
@@ -99,8 +105,11 @@ export class MycourseItemComponent implements OnInit {
       }
     });
   }
+  }
 
   gotoQuiz(course) {
+    const isValid = this.batchRestriction(course)
+    if (isValid) { 
     const data = {
       courseId : course.course_id,
       courseName: course.course_name
@@ -113,8 +122,11 @@ export class MycourseItemComponent implements OnInit {
       }
     });
   }
+  }
   // PLAYER PAGE NAVIGATION
   gotoDesc(c,value) {
+    const isValid = this.batchRestriction(c)
+    if (isValid) { 
     c.batch_end_date_Timer = new Date(c.batch_end_date).getTime();
     const detail = {
       id: c.course_id,
@@ -152,11 +164,13 @@ export class MycourseItemComponent implements OnInit {
     lastTopic: c.lastTopic, module_id: c.module_id, topic_id: c.topic_id, checklevel: c.checklevel,
     course_status: c.course_status, toc: c.toc}));
     this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
-
+    }
     // }
   }
 // qafourm
   goToForum(c) {
+    const isValid = this.batchRestriction(c)
+    if (isValid) { 
     localStorage.setItem('Courseid', c.course_id);
     const bt = c.batchid ? {
       batchid: c.batchid,
@@ -172,10 +186,13 @@ export class MycourseItemComponent implements OnInit {
     localStorage.setItem('course', btoa(JSON.stringify(detail)));
     this.router.navigateByUrl('/Learner/discussionForum', { state: { detail } });
   }
+  }
 
 
  // ACTIVITY NAVIGATION
  gotoSubmissionDetails(course) {
+  const isValid = this.batchRestriction(course)
+  if (isValid) { 
   localStorage.removeItem('userTabLocation');
   const data1 = {
     courseId: course.course_id,
@@ -193,9 +210,12 @@ export class MycourseItemComponent implements OnInit {
     }
   });
 }
+}
 
 // INSTRUCTOR LED PAGE NAVIGATION
 goInstructorLed(c) {
+  const isValid = this.batchRestriction(c)
+  if (isValid) { 
   localStorage.setItem('Courseid', c.course_id);
   const detail = {
     id: btoa(c.course_id),
@@ -205,8 +225,11 @@ goInstructorLed(c) {
   // this.router.navigateByUrl('/Learner/instructorLed', { state: { detail } });
   this.router.navigate(['/Learner/instructorLed'], { queryParams: detail }); // ['/booking'],{queryParams: {Id :id}}
 }
+}
 // ASK A QUESTION
 gotoAskQuestions(c) {
+  const isValid = this.batchRestriction(c)
+  if (isValid) { 
   c.batch_end_date_Timer = new Date(c.batch_end_date).getTime();
   const detail = {
     course_name: c.course_name,
@@ -222,15 +245,21 @@ gotoAskQuestions(c) {
     this.router.navigateByUrl('/Learner/askQuestions', { state: { detail } });
   }
 }
+}
 
 gotoquestionanswer(course) {
+  const isValid = this.batchRestriction(course)
+  if (isValid) { 
   this.router.navigate(['/Learner/questionanswer']);
   localStorage.setItem('Courseid', course.course_id);
   localStorage.setItem('CourseName', course.course_name);
   localStorage.setItem('currentBatchId', course.batchid);
+  }
 }
 
 openGallery(c) {
+  const isValid = this.batchRestriction(c)
+  if (isValid) { 
   this.router.navigate(['/Learner/coursegallery'], {
     queryParams:
     {
@@ -239,9 +268,12 @@ openGallery(c) {
     }
   });
 }
+}
 
   // course report
   openReport(c) {
+    const isValid = this.batchRestriction(c)
+    if (isValid) { 
     this.router.navigate(['/Learner/coursereport'], {
       queryParams:
       {
@@ -253,6 +285,22 @@ openGallery(c) {
       }
     });
   }
+  }
+
+  batchRestriction(course){
+    if(!course?.batchStarted && !course?.batchClosed){
+      this.toastr.warning('Your batch starts on '+ this.datePipe.transform(course?.batch_start_date, 'dd/MM/yyyy'));
+      return false;
+    } 
+    else if(course?.batchClosed){
+      this.toastr.warning('Your subscription for this course has expired');
+      return false;
+    } 
+    else {
+      return true;
+    }
+  }
+
   // tabclicker(indexVal){
   //   this.tabTitleVal = ""
   //   let titlevalues = ['Self-Paced Learning', 'Instructor Led', 'Discussion Forum', 'Activities']
