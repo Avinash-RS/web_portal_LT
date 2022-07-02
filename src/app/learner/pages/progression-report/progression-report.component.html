@@ -81,7 +81,7 @@
               <mat-expansion-panel (opened)="handleOpened(moduleItem)" (closed)="handleClosed(moduleItem)">
                 <mat-expansion-panel-header>
                   <mat-panel-title>
-                    <div class="week-block parent-module" [ngStyle]="UserDetails?.org_type == 'Corporate' ? {'display':'none'}:{'display':'block'}">
+                    <div class="week-block parent-module" [ngStyle]="UserDetails?.org_type == 'Corporate' || contentHide ? {'display':'none'}:{'display':'block'}">
                       <span *ngIf="!showWeek">
                         <div  matTooltip="{{moduleItem.moduleName}}" matTooltipClass="custom-mat-tooltip" [ngStyle]="(moduleItem.week!==apidata[number-1]?.week || moduleItem.isOpened) ? {'color': 'inherit'} : {'color': 'white'}" class="week-text module-name">{{moduleItem.moduleName}}</div>
                       </span>
