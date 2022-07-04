@@ -288,7 +288,7 @@ openGallery(c) {
 
   batchRestriction(course){
     if(!course?.batchStarted && !course?.batchClosed){
-      this.toastr.warning('Your batch starts on '+ this.datePipe.transform(course?.batch_start_date, 'dd/MM/yyyy'));
+      this.toastr.warning('We understand your interest. Please come back on '+ this.datePipe.transform(course?.batch_start_date, 'dd/MM/yyyy') + ' to start the course.');
       return false;
     } 
     else if(course?.batchClosed){
