@@ -89,8 +89,12 @@ export class MycourseItemComponent implements OnInit {
     this.course.batch_end_date_Timer = new Date(this.course.batch_end_date).getTime();
   }
   // progression report
-  gotoProgression(course) {
-    const isValid = this.batchRestriction(course)
+  gotoProgression(course,from) {
+    if(!from){
+      var isValid = this.batchRestriction(course)
+    } else {
+      isValid = true
+    }
     if (isValid) { 
     const data = {
       courseId : course.course_id,
@@ -124,8 +128,12 @@ export class MycourseItemComponent implements OnInit {
   }
   }
   // PLAYER PAGE NAVIGATION
-  gotoDesc(c,value) {
-    const isValid = this.batchRestriction(c)
+  gotoDesc(c,value,from?) {
+    if(!from){
+      var isValid = this.batchRestriction(c)
+    } else {
+      isValid = true
+    }
     if (isValid) { 
     const detail = {
       id: c.course_id,
