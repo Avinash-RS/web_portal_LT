@@ -37,7 +37,7 @@
                     <span>Duration</span>
                     <div><em class="lxp-Clock"></em> {{course.image_self_paced_learning_time !== "" ? course.image_self_paced_learning_time : '--/--'}}</div>
                 </li>
-                <li (click)="gotoProgression(course,free)">
+                <li (click)="gotoProgression(course,'free')">
                     <figure><em class="lxp-Analytics"></em></figure>
                     <p>{{'Learning Progression' | translate}}</p>
                 </li>
