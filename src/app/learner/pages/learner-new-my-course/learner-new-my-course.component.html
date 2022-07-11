@@ -97,7 +97,7 @@
                             </div>
                         </ng-container>
                         <div class="viewAll" *ngIf="learnerActivityList?.length > 3">
-                            <a routerLink="/Learner/calendaractivity">{{'View all' | translate}} <em class="lxp-Right_Direction_Arrow"></em></a>
+                            <a (click)="goToCalendar()">{{'View all' | translate}} <em class="lxp-Right_Direction_Arrow"></em></a>
                         </div>
                         <div class="item" *ngIf="showSkeleton">
                             <div class="d-flex justify-content-between">

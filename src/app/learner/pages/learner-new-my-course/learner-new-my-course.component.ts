@@ -976,4 +976,12 @@ goToCourse(c){
 programReport(){
   this.router.navigate(['/Learner/programreport']);
 }
+
+goToCalendar() {
+  if (this.userDetailes.org_type === 'Corporate') {
+    this.router.navigate(['/Learner/upskillcalendar']);
+  } else {
+    this.router.navigate(['/Learner/calendaractivity']);
+  }
+}
 }
