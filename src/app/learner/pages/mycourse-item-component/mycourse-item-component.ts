@@ -154,7 +154,7 @@ export class MycourseItemComponent implements OnInit {
       module_id: c.module_id,
       topic_id: c.topic_id,
       course_type: c.course_type,
-      payType : value ? 'paid' : undefined,
+      payType : value.batch_id ? undefined : 'paid',
       // persentage : c.coursePlayerStatus.course_percentage || 0
     };
     // if (this.screenWidth < 800) {

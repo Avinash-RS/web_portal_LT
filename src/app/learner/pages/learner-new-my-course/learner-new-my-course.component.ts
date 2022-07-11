@@ -940,8 +940,6 @@ changeWeekDate() {
 }
 
 goToCourse(c){
-  c.batch_end_date_Timer = new Date(c.batch_end_date).getTime();
-
   const detail = {
     id: c.course_id,
     wishlist: c.wishlisted || false,
@@ -950,7 +948,7 @@ goToCourse(c){
     course_name: c.course_name,
     course_status: 'incomplete', // c.course_status,
     batch_id: c.batchid,
-    batchEndTime: c.batch_end_date_Timer,
+    batchEndTime: c.batch_end_date,
     link: c.link,
     toc: c.toc,
     lastLogIndex: c.lastLogIndex,
@@ -964,7 +962,7 @@ goToCourse(c){
   // if (this.screenWidth < 800) {
   // } else {
   console.log(detail);
-  localStorage.setItem('currentBatchEndDate', c.batch_end_date_Timer);
+  localStorage.setItem('currentBatchEndDate', c.batch_end_date);
   localStorage.setItem('Courseid', c.course_id);
   localStorage.setItem('persentage', c && c.coursePlayerStatus && c.coursePlayerStatus.course_percentage
   ? c.coursePlayerStatus.course_percentage : '');
