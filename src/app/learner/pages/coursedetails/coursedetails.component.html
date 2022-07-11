@@ -78,12 +78,12 @@
                                     </ng-container>
                                     <ng-container *ngIf="!isTesting">
                                         <h4 *ngIf="res?.module_name?.length >= 67" class="moduleName">
-                                            <span class="titleName">{{res?.module_name | slice:0:71}}...</span>
-                                            <span class="toolTip">{{res?.module_name}}</span>
+                                            <span class="titleName" [title]="res?.module_name">{{res?.module_name | slice:0:71}}...</span>
+                                            <!-- <span class="toolTip">{{res?.module_name}}</span> -->
                                         </h4>
                                         <h4 *ngIf="res?.module_name?.length < 67" class="moduleName">
-                                            <span class="titleName">{{res?.module_name}}</span>
-                                            <span class="toolTip">{{res?.module_name}}</span>
+                                            <span class="titleName" [title]="res?.module_name">{{res?.module_name}}</span>
+                                            <!-- <span class="toolTip">{{res?.module_name}}</span> -->
                                         </h4>
                                     </ng-container>
                                 </div>
@@ -107,12 +107,12 @@
                                             </ng-container>
                                             <ng-container *ngIf="!isTesting">
                                             <h4 *ngIf="subData?.module_name?.length >= 67" class="moduleName">
-                                                <span class="titleName">{{subData?.module_name | slice:0:71}}...</span>
-                                                <span class="toolTip">{{subData?.module_name}}</span>
+                                                <span class="titleName" [title]="subData?.module_name">{{subData?.module_name | slice:0:71}}...</span>
+                                                <!-- <span class="toolTip">{{subData?.module_name}}</span> -->
                                             </h4>
                                             <h4 *ngIf="subData?.module_name?.length < 67" class="moduleName">
-                                                <span class="titleName">{{subData?.module_name}}</span>
-                                                <span class="toolTip">{{subData?.module_name}}</span>
+                                                <span class="titleName" [title]="subData?.module_name">{{subData?.module_name}}</span>
+                                                <!-- <span class="toolTip">{{subData?.module_name}}</span> -->
                                             </h4>
                                         </ng-container>
                                         </div>
