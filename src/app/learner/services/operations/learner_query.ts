@@ -2400,6 +2400,8 @@ export const recentlycourse = gql`
           topic_id
           checklevel
           course_status
+          batchstartdate
+          batchenddate
         }
         completedTopic {
           course_name
@@ -2421,6 +2423,8 @@ export const recentlycourse = gql`
           course_status
           lastTopic
           lastModule
+          batchstartdate
+          batchenddate
         }
       }
     }
