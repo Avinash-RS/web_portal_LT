@@ -1204,6 +1204,7 @@ data{
     liveclassroom
     batch_id
     batch_end_date
+    batch_start_date
   }
 }
 }

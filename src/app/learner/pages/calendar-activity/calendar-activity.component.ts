@@ -6,6 +6,8 @@ import { GlobalServiceService } from '@core/services/handlers/global-service.ser
 import * as moment from 'moment';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { DatePipe } from '@angular/common';
 @Injectable()
 export class CustomDateFormatter extends CalendarDateFormatter {
   // TODO: add explicit constructor
@@ -39,6 +41,7 @@ export class CustomEventTitleFormatter extends CalendarEventTitleFormatter {
   templateUrl: './calendar-activity.component.html',
   styleUrls: ['./calendar-activity.component.scss'],
   providers: [
+    DatePipe,
     {
       provide: CalendarDateFormatter,
       useClass: CustomDateFormatter,
@@ -104,7 +107,8 @@ export class CalendarActivityComponent implements OnInit {
   customTooltipCondition = false;
   CourseName: string;
   calendarSkele: boolean = false;
-  constructor(public learnerService: LearnerServicesService, private gs: GlobalServiceService, private router: Router) {
+  constructor(public learnerService: LearnerServicesService, private gs: GlobalServiceService, private router: Router,
+    private toastr: ToastrService,private datePipe: DatePipe) {
     this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(localStorage.getItem('UserDetails')) || null;
     if (!this.userDetailes?.is_password_updated) {
       this.router.navigate(['/Learner/profile']);
@@ -294,9 +298,8 @@ export class CalendarActivityComponent implements OnInit {
       if (value.activitytype === 'Live Classroom') {
         return false;
       } else if (value.activitytype === 'Self Learning') {
-
-        value.batch_end_date_Timer = new Date(value.batch_end_date).getTime(); // need
-
+        var isValid = this.batchRestriction(value)
+        if(isValid){
         const detail = {
           id: value.courseid,
           wishlist: false,
@@ -329,7 +332,7 @@ export class CalendarActivityComponent implements OnInit {
            lastTopic: value.topicname, module_id: value.module_id, topic_id: value.topic_id,
            checklevel: value.checklevel, course_status: value.status, extracted: value.extracted}));
         this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
-
+        }
         // this.router.navigate(['Landing/MyCourse']);
       } else {
         const data1 = {
@@ -353,5 +356,18 @@ export class CalendarActivityComponent implements OnInit {
     }
     openClassroom(value) {
       window.open(value);
+    }
+    batchRestriction(course){
+      if(moment() < moment(course.batch_start_date)){
+        this.toastr.warning('We understand your interest. Please come back on '+ this.datePipe.transform(course?.batch_start_date, 'dd/MM/yyyy') + ' to start the course.');
+        return false;
+      } 
+      else if(moment() > moment(course.batch_end_date)){
+        this.toastr.warning('Your subscription for this course has expired');
+        return false;
+      } 
+      else {
+        return true;
+      }
     }
 }

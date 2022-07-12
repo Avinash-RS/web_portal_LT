@@ -133,7 +133,7 @@ export class MycourseItemComponent implements OnInit {
       var isValid = this.batchRestriction(c)
     } else {
       isValid = true
-    }
+    } 
     if (isValid) { 
     const detail = {
       id: c.course_id,
