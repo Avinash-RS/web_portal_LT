@@ -20,7 +20,7 @@ const DEFAULT_DURATION = 300;
 import {MomentDateAdapter} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import { TranslateService } from '@ngx-translate/core';
-
+import { ToastrService } from 'ngx-toastr';
 export const MY_FORMATS = {
   parse: {
     dateInput: 'DD/MM/YYYY',
@@ -84,7 +84,8 @@ export class LearnerNewMyCourseComponent implements OnInit {
   constructor(private dialog: MatDialog, private router: Router,
               public learnerService: LearnerServicesService,
               private gs: GlobalServiceService, public CommonServices: CommonServicesService,
-              public translate: TranslateService, public urlRoute: ActivatedRoute) {
+              public translate: TranslateService, public urlRoute: ActivatedRoute,
+              private toast: ToastrService) {
               var urlLink = this.urlRoute.routeConfig.path;
               // console.log(this.urlRoute.url);
               if (urlLink == 'Microcourses'){
@@ -940,8 +941,10 @@ changeWeekDate() {
 }
 
 goToCourse(c){
-  c.batch_end_date_Timer = new Date(c.batch_end_date).getTime();
-
+  if( moment() > moment(c.batchenddate)){
+    this.toast.warning('Your subscription for this course has expired');
+    return false;
+  }
   const detail = {
     id: c.course_id,
     wishlist: c.wishlisted || false,
@@ -950,7 +953,7 @@ goToCourse(c){
     course_name: c.course_name,
     course_status: 'incomplete', // c.course_status,
     batch_id: c.batchid,
-    batchEndTime: c.batch_end_date_Timer,
+    batchEndTime: c.batch_end_date,
     link: c.link,
     toc: c.toc,
     lastLogIndex: c.lastLogIndex,
@@ -963,8 +966,7 @@ goToCourse(c){
   };
   // if (this.screenWidth < 800) {
   // } else {
-  console.log(detail);
-  localStorage.setItem('currentBatchEndDate', c.batch_end_date_Timer);
+  localStorage.setItem('currentBatchEndDate', c.batch_end_date);
   localStorage.setItem('Courseid', c.course_id);
   localStorage.setItem('persentage', c && c.coursePlayerStatus && c.coursePlayerStatus.course_percentage
   ? c.coursePlayerStatus.course_percentage : '');
@@ -977,5 +979,13 @@ goToCourse(c){
 }
 programReport(){
   this.router.navigate(['/Learner/programreport']);
+}
+
+goToCalendar() {
+  if (this.userDetailes.org_type === 'Corporate') {
+    this.router.navigate(['/Learner/upskillcalendar']);
+  } else {
+    this.router.navigate(['/Learner/calendaractivity']);
+  }
 }
 }
