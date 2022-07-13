@@ -44,6 +44,7 @@ export class ActivitiesComponent implements OnInit {
   courseStartDate: any;
   courseEndDate: any;
   courseid: any;
+  groupDetailsName: any;
   userDetail: any;
   docpath: any = null;
   assignmentFile: File;
@@ -789,6 +790,18 @@ export class ActivitiesComponent implements OnInit {
     } else {
       return false;
     }
+  }
+
+  groupDetailsPopup(event, templateRef: TemplateRef<any>) {
+    this.dialog.open(templateRef, {
+      width: '720px',
+      height: '500px',
+      closeOnNavigation: true,
+      disableClose: true,
+      panelClass: 'groupDetails'
+    });
+    this.groupDetailsName = event;
+    console.log(this.groupDetailsName, 'popup');
   }
 
   async learnerUploadVideo(project, submitAction) {

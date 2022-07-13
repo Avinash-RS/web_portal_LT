@@ -453,14 +453,14 @@
                       {{project.projectActivity.groupname}} ({{project.projectActivity.groupDetails.length}})
                     </span>
                     <div class="popoverInfoFinal">
-                      <button mat-mini-fab class="arrBtn">
+                      <button (click)="groupDetailsPopup(project.projectActivity.groupDetails, groupDetailsPop)" mat-mini-fab class="arrBtn">
                         <mat-icon class="arrBack">arrow_back</mat-icon>
                       </button>
-                      <div class="popoverContainer">
+                      <!-- <div class="popoverContainer">
                         <ul class="list-group" *ngFor="let learner of project.projectActivity.groupDetails">
                           <li class="list-group-item">{{learner.name}}</li>
                         </ul>
-                      </div>
+                      </div> -->
                     </div>
                   </div>
                   <div class="statusScore d-flex">
@@ -762,6 +762,24 @@
     </div>
   </div>
 </ng-template>
+
+<!-- Group Details Popup -->
+<ng-template #groupDetailsPop>
+  <div class="membersListWrapper">
+    <header>
+      <h3>Group Members List</h3>
+      <span class="btnClose">
+        <em class="lxp-Close" (click)="closedialogbox()"></em>
+      </span>
+    </header>
+    <ul>
+      <li *ngFor="let membersList of groupDetailsName">
+        {{membersList.name}}
+      </li>
+    </ul>
+  </div>
+</ng-template>
+
 <!-- dialogue box for assignment tab view assignment-->
 <ng-template #previewDialog>
   <div class="row">
