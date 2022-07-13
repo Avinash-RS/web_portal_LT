@@ -134,7 +134,7 @@
 
 .popoverInfoFinal {
   position: relative;
-  .popoverContainer {
+  .popoverContainer3453 {
     position: absolute;
     width: 230px;
     right: 0;
@@ -174,13 +174,13 @@
     //   position: absolute;
     // }
   }
-  &:hover {
-    .popoverContainer {
-      display: block;
-      -webkit-animation: fadeIn .3s linear 1, moveUp .3s linear 1;
-      animation: fadeIn .3s linear 1, moveUp .3s linear 1;
-    }
-  }
+  // &:hover {
+  //   .popoverContainer {
+  //     display: block;
+  //     -webkit-animation: fadeIn .3s linear 1, moveUp .3s linear 1;
+  //     animation: fadeIn .3s linear 1, moveUp .3s linear 1;
+  //   }
+  // }
 }
 
 @keyframes fadeIn {
@@ -1767,6 +1767,54 @@
   padding-top: 7px;
   color: black;
   font-size: 16px;
+}
+
+::ng-deep.groupDetails {
+  position: absolute !important;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 90% !important;
+  height: 75% !important;
+  @include lg {
+    width: 720px !important;
+    height: 500px !important;
+  }
+}
+.membersListWrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    h3 {
+      font-size: 22px;
+      font-weight: 700;
+      color: $label2;
+      line-height: normal;
+      margin: 0;
+    }
+    .btnClose {
+      cursor: pointer;
+    }
+  }
+  ul {
+    flex-grow: 1;
+    height: 99%;
+    overflow: auto;
+    li {
+      background-color: $shadedgrey;
+      padding: 6px 12px;
+      display: inline-block;
+      line-height: normal;
+      margin-right: 10px;
+      margin-bottom: 10px;
+      border-radius: 6px;
+    }
+  }
 }
 
 .assignmentdownload {
