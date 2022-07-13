@@ -85,12 +85,12 @@
                 <span *ngIf="activityShow?.activity_details.activitytype != 'Recorded'" class="sessionDuration">
                   <em class="lxp-Clock"></em><span class="durationTitle">{{'Duration:' | translate}}</span>
                   {{activityShow?.duration}}</span>
-                <span *ngIf="activityShow?.activity_details.activitytype == 'Recorded'" class="sessionModule">
+                <!-- <span *ngIf="activityShow?.activity_details.activitytype == 'Recorded'" class="sessionModule">
                   <em class="lxp-Todo_task"></em><span class="moduleTitle">{{'Module:' | translate}}</span>
-                  {{activityShow?.activity_details.modulename}}</span>
+                  {{activityShow?.activity_details.modulename}}</span> -->
               </div>
               <div class="timingDetails">
-                <span class="sessionDate"><em class="lxp-Duration"></em><span class="dateTitle">{{'Date:' | translate}}</span> {{
+                <span *ngIf="activityShow?.activity_details.activitytype != 'Recorded'" class="sessionDate"><em class="lxp-Duration"></em><span class="dateTitle">{{'Date:' | translate}}</span> {{
                   activityShow?.activity_details.startdate | date: 'dd/MM/yyyy hh:mm a'}}</span>
               </div>
             </div>
