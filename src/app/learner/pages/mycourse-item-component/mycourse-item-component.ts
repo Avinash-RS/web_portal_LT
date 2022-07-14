@@ -236,7 +236,7 @@ goInstructorLed(c) {
 // ASK A QUESTION
 gotoAskQuestions(c) {
   const isValid = this.batchRestriction(c)
-  if (isValid) { 
+  if (isValid) {
   c.batch_end_date_Timer = new Date(c.batch_end_date).getTime();
   const detail = {
     course_name: c.course_name,
@@ -250,6 +250,9 @@ gotoAskQuestions(c) {
   localStorage.setItem('currentBatchEndDate', c.batch_end_date_Timer);
   if (c.course_status !== 'start') {
     this.router.navigateByUrl('/Learner/askQuestions', { state: { detail } });
+  }
+  else if (c.course_status == 'start') {
+    this.toastr.warning('Please start the course to access the Q&A');
   }
 }
 }
