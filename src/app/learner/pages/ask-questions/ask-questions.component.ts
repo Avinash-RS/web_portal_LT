@@ -132,7 +132,7 @@ export class AskQuestionsComponent implements OnInit {
     this.Lservice.getvocationalqNda(this.userID,this.batchId, this.courseid, this.qaSortKey, this.mainPagenumber, this.mainModuleName == 'all' ? null :this.mainModuleName, this.mainTopic =='all' ? null: this.mainTopic,this.searchKey).subscribe((result:any) => {
       this.showSkeleton = false;
       if(result?.data?.vocationalqNda?.success && result?.data?.vocationalqNda?.message.length > 0){
-        this.qaDataList.push(...result.data.vocationalqNda.message);
+       this.searchKey ? this.qaDataList = result?.data?.vocationalqNda?.message : this.qaDataList.push(...result.data.vocationalqNda.message);
         if(getcount){
           const qcountData = result?.data?.vocationalqNda?.count ? parseInt(result.data.vocationalqNda.count) : 0;
           const acountData =  result?.data.vocationalqNda?.ansCount ? parseInt(result?.data.vocationalqNda?.ansCount) : 0;
