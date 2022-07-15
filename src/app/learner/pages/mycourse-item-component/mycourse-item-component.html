@@ -111,7 +111,7 @@
                       <p>{{'Activities' | translate}}</p>
                   </div>
                   <!--  -->
-                  <div class="icons" [ngClass]="course.course_status=='start' && userDetail.org_type !== 'collegeconnect'?'disabledcursor':''" [disabled]="course.course_status=='start'" (click)="userDetail.org_type !== 'collegeconnect'?gotoAskQuestions(course):gotoquestionanswer(course)">
+                  <div class="icons" [ngClass]="course.course_status=='start' && userDetail.org_type !== 'collegeconnect'?'disabledcursor':''" (click)="userDetail.org_type !== 'collegeconnect'?gotoAskQuestions(course):gotoquestionanswer(course)">
                       <span><em class="lxp-book-question"></em></span>
                       <p>{{'Q&A' | translate}}</p>
                   </div>
