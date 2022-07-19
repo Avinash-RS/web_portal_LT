@@ -53,11 +53,6 @@ export class AppComponent implements OnInit {
     }
 
     const userDetail = JSON.parse(localStorage.getItem('UserDetails'));
-    if (userDetail?.userOrigin == 'microLearn' || userDetail?.userOrigin == 'learner') {
-      this.contentHide = true;
-    } else {
-      this.contentHide = false;
-    }
     if (!userDetail?.specific_report_value) {
       localStorage.clear();
       sessionStorage.clear();
@@ -194,6 +189,11 @@ export class AppComponent implements OnInit {
           this.hideLeftMenu = true;
         } else {
           this.hideLeftMenu = false;
+        }
+        if (this.UserDetails?.userOrigin == 'microLearn' || this.UserDetails?.userOrigin == 'learner') {
+          this.contentHide = true;
+        } else {
+          this.contentHide = false;
         }
       });
     });
