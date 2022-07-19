@@ -10,10 +10,13 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { CommonServicesService } from '@core/services/common-services.service';
 import {CalendarFilterComponent} from '../calendar-filter/calendar-filter.component';
+import { ToastrService } from 'ngx-toastr';
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-upskill-calendar',
   templateUrl: './upskill-calendar.component.html',
-  styleUrls: ['./upskill-calendar.component.scss']
+  styleUrls: ['./upskill-calendar.component.scss'],
+  providers: [DatePipe]
   })
 
 export class UpskillCalendarComponent implements OnInit {
@@ -76,7 +79,7 @@ export class UpskillCalendarComponent implements OnInit {
     courseValue : 'All'
   };
   constructor(public learnerService: LearnerServicesService, private gs: GlobalServiceService, private router: Router,
-              public dialog: MatDialog, public CommonServices: CommonServicesService,) {
+              public dialog: MatDialog, public CommonServices: CommonServicesService,private datePipe: DatePipe,private toastr: ToastrService) {
     this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(localStorage.getItem('UserDetails')) || null;
     if (!this.userDetailes?.is_password_updated) {
                   this.router.navigate(['/Learner/profile']);
@@ -331,9 +334,8 @@ getLearnerActivity(view, selectedDate, day?: CalendarMonthViewDay) {
       if (value.activitytype === 'Live Classroom') {
         return false;
       } else if (value.activitytype == 'Self Learning') {
-
-        value.batch_end_date_Timer = new Date(value.batch_end_date).getTime();
-
+        var isValid = this.batchRestriction(value)
+        if(isValid){
         var detail: any = {
           id: value.courseid,
           wishlist: false,
@@ -343,6 +345,7 @@ getLearnerActivity(view, selectedDate, day?: CalendarMonthViewDay) {
           course_status: value.status,
           batch_id: value.batch_id,
           batchEndTime: value.batch_end_date_Timer,
+          isTesting: value?.isTesting ? true :false,
           fromCalendar : true,
           link: value.link,
           toc: value.toc,
@@ -352,7 +355,8 @@ getLearnerActivity(view, selectedDate, day?: CalendarMonthViewDay) {
           module_id: value.module_id,
           topic_id: value.topic_id,
           course_type: value?.course_type,
-          extracted : value.extracted
+          extracted : value.extracted,
+          payType : value.batchid ? undefined : 'paid',
         };
         if (value.extracted) {
           this.router.navigateByUrl('/Landing/MyCourse');
@@ -366,6 +370,7 @@ getLearnerActivity(view, selectedDate, day?: CalendarMonthViewDay) {
           lastTopic: value.topicname, module_id: value.module_id, topic_id: value.topic_id, checklevel: value.checklevel,
           course_status: value.status, toc: value.toc, extracted: value.extracted}));
         this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
+        }
       } else {
         const data1 = {
           courseId: value.courseid,
@@ -406,5 +411,19 @@ getLearnerActivity(view, selectedDate, day?: CalendarMonthViewDay) {
     }
   closedialogbox() {
       this.dialog.closeAll();
+    }
+
+    batchRestriction(course){
+      if(moment() < moment(course.batch_start_date)){
+        this.toastr.warning('We understand your interest. Please come back on '+ this.datePipe.transform(course?.batch_start_date, 'dd/MM/yyyy') + ' to start the course.');
+        return false;
+      } 
+      else if(moment() > moment(course.batch_end_date)){
+        this.toastr.warning('Your subscription for this course has expired');
+        return false;
+      } 
+      else {
+        return true;
+      }
     }
 }

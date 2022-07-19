@@ -309,6 +309,7 @@ export class CalendarActivityComponent implements OnInit {
           course_status: value.status,
           batch_id: value.batch_id,
           batchEndTime: value.batch_end_date_Timer,
+          isTesting: value?.isTesting ? true :false,
           fromCalendar : true,
           link: value.link,
           toc: value.toc,
@@ -318,7 +319,8 @@ export class CalendarActivityComponent implements OnInit {
           module_id: value.module_id,
           topic_id: value.topic_id,
           course_type: value?.course_type,
-          extracted: value.extracted
+          extracted: value.extracted,
+          payType : value.batchid ? undefined : 'paid',
         };
         if (value.extracted) {
           this.router.navigateByUrl('/Landing/MyCourse');
