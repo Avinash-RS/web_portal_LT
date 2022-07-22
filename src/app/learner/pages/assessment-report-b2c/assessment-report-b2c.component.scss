@@ -1,6 +1,8 @@
 @import "variable";
 
 .assessmentContainer {
+    width: 100%;
+    height: 100%;
     background-color: $grey1;
     padding: 20px;
 
@@ -42,12 +44,11 @@
     }
 
     .progressionContainer {
+        width: 100%;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         height: calc(100vh - 120px);
-        overflow: hidden;
-
         @media screen and (max-width: 992px) {
             flex-direction: column;
         }
@@ -58,9 +59,8 @@
             height: 100%;
             background-color: $color-white;
             border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 0 2px 0 $blackshade3;
-
+            box-shadow: 1px 3px 7px $blackshade1;
+            padding: 20px;
             @media screen and (min-width: 992px) {
                 width: calc(100% - 360px);
             }
@@ -175,14 +175,134 @@
                 }
             }
             .selfProgressionScore {
-
+                h1 {
+                    font-size: 18px;
+                    font-weight: 400;
+                    color: $blackcolor;
+                }
+                .scoreContainer {
+                    width: 100%;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    height: calc(100vh - 120px);
+                    @media screen and (max-width: 992px) {
+                        flex-direction: column;
+                    }
+                    .progressTable {
+                        width: 100%;
+                        height: 100%;
+                        // padding: 20px;
+                        background-color: $grey1;
+                        border-radius: 10px;
+                        box-shadow: 0 0 2px 0 $blackshade3;
+                        @media screen and (min-width: 992px) {
+                            width: calc(100% - 360px);
+                        }
+                        @media screen and (min-width: 1140px) {
+                            width: calc(100% - 400px);
+                        }
+                        @media screen and (min-width: 1540px) {
+                            width: calc(100% - 500px);
+                        }
+                        .headerTable {
+                            padding: 10px;
+                            font-weight: 600;
+                            font-size: 18px;
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: space-between;
+                        }
+                        ul {
+                            list-style-type: none;
+                            // border-bottom-left-radius: 10px;
+                            // border-bottom-right-radius: 10px;
+                            li {
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                font-weight: 600;
+                                font-size: 18px;
+                                padding: 10px;
+                                cursor: pointer;
+                                .progressStatus {
+                                    width: 20%;
+                                    margin: 0 20px;
+                                }
+                                &:hover {
+                                    background-color: $color-white;
+                                    border-left: 5px solid $lightshadeblue;
+                                }
+                            }
+                        }
+                        .active {
+                            background-color: $color-white;
+                            border-left: 5px solid $lightshadeblue;
+                        }
+                    }
+                    .activeScoreDetails {
+                        width: 100%;
+                        height: 100%;
+                        background-color: $color-white;
+                        box-shadow: 0 0 7px $blackshade3;
+                        border-radius: 10px;
+                        @media screen and (min-width: 992px) {
+                            padding: 10px;
+                        }
+                        @media screen and (min-width: 1140px) {
+                            width: 370px
+                        }
+                        @media screen and (min-width: 1540px) {
+                            width: 400px
+                        }
+                        h1 {
+                            font-size: 18px;
+                            font-weight: 400;
+                            color: $blackcolor;   
+                        }
+                        .durationCard {
+                            border-radius: 10px;
+                            border: 0.5px solid $color-lightGray;
+                            border-bottom-left-radius: 0;
+                            border-bottom-right-radius: 0;
+                            .durationRow {
+                                display: flex;
+                                justify-content: space-between;
+                                .clock {
+                                    em {
+                                        font-size: 50px;
+                                        color: $blue;
+                                    }
+                                }
+                                .durHeader {
+                                    font-size: 10px;
+                                    font-weight: 500;
+                                }
+                                .estimateTime {
+                                    font-size: 14px;
+                                    font-weight: 400;
+                                }
+                                .headerBlue {
+                                    color: $blue;
+                                    font-size: 18px;
+                                    font-weight: 500;
+                                }
+                                .headerGreen {
+                                    color: $green1;
+                                    font-size: 10px;
+                                    font-weight: 500;
+                                }
+                            }     
+                        }
+                    }
+                }
             }
         }
         .rightScore {
             width: 100%;
-            order: 2;
-            box-shadow: 0 0 2px 0 $blackshade3;
             height: 100%;
+            order: 2;
+            box-shadow: 1px 3px 7px $blackshade1;
             padding: 15px;
             position: relative;
             padding: 2em 0.85em 1.5 0.85em;

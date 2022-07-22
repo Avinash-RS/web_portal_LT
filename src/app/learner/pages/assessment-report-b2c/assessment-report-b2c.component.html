@@ -64,7 +64,62 @@
 
             </div>
             <div class="selfProgressionScore">
-                
+                <h1>Self Learning Progression - Weekly Score</h1>
+                <div class="scoreContainer">
+                    <div class="progressTable">
+                        <div class="headerTable">
+                            <h1>Week</h1>
+                            <h1>Completed Percentage</h1>
+                            <h1>Weekly Score</h1>
+                        </div>
+                        <ul>
+                            <li *ngFor="let item of SelfDuration"[class.active]="item.isActive" (click)="viewTopicDetails(item,SelfDuration)">
+                                <div>{{item.Week}}</div>
+                                <div class="progressStatus">
+                                <circle-progress [title]= "item.Percentage"
+                                [titleFontSize] = "10" [titleFontWeight] = "600" [showUnits]= "false" [percent]="61"
+                                [radius]=25  [space]=-6 [outerStrokeGradient]=true [outerStrokeWidth]=6 [outerStrokeColor]="'#00A99D'" 
+                                [outerStrokeGradientStopColor]="'#00A99D'" [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]=6 
+                                [animation]="true" [animationDuration]="300" [responsive]="true" [showSubtitle]="false" ></circle-progress>
+                                </div>
+                                <div>{{item.WeeklyScore}}
+
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="activeScoreDetails">
+                        <h1>Duration & Topics Information</h1>
+                        <mat-card class="durationCard">
+                            <div class="durationRow">
+                                <div class="clock">
+                                    <em class="lxp-Clock"></em>
+                                </div>
+                                <h1 class="durHeader">Estimated Duration</h1>
+                                <span class="estimateTime">{{topicinfo.duration.estimated}}</span>
+                            </div>
+                            <div class="durationRow">
+                                <h1 class="headerBlue">Durations</h1>
+                                <h1 class="headerGreen">Duration Spent</h1>
+                                <span class="headerGreen">{{topicinfo.duration.spent}}</span>
+                            </div>
+                        </mat-card>
+                        <mat-card class="durationCard">
+                            <div class="durationRow">
+                                <div class="clock">
+                                    <em class="lxp-TestName"></em>
+                                </div>
+                                <h1 class="durHeader">Total No. of topics</h1>
+                                <span class="estimateTime">{{topicinfo.topics.total}}</span>
+                            </div>
+                            <div class="durationRow">
+                                <h1 class="headerBlue">Topics</h1>
+                                <h1 class="headerGreen">No. of Topics Completed</h1>
+                                <span class="headerGreen">{{topicinfo.topics.completed}}</span>
+                            </div>
+                        </mat-card>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="rightScore">
