@@ -315,11 +315,14 @@
         ul {
           list-style: none;
           padding-left: 0;
-          line-height: 30px;
           margin-bottom: 0px; 
+          li {
+            line-height: 30px;
+          }
           label {
             font-size: 15px;
             width:80%;
+
           }
           span{
             color:#00A99D;
