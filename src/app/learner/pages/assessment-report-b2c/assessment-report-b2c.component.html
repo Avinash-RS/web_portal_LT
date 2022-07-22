@@ -8,18 +8,94 @@
         <div class="leftSelf">
             <div class="selfPieChart">
                 <div class="leftChart">
-    
+                    <h1>Self Learning Progression</h1>
+                    <div class="selfContent">
+                        <div class="percentageCircle">
+                            <circle-progress [title]="selfscore" [titleFontSize]="10" [titleFontWeight]="600" [showUnits]="true"
+                                [percent]="62" [radius]=25 [space]=-6 [outerStrokeGradient]=true [outerStrokeWidth]=6
+                                [outerStrokeColor]="'rgba(255, 183, 77, 1)'"
+                                [outerStrokeGradientStopColor]="'rgba(255, 183, 77, 1)'" [innerStrokeColor]="'#e7e8ea'"
+                                [innerStrokeWidth]=6 [animation]="true" [animationDuration]="300" [responsive]="true"
+                                [showSubtitle]="false"></circle-progress>
+                        </div>
+                        <div class="textContent">
+                            <ul>
+                                <li>
+                                    <label>No. of weeks elapsed</label>
+                                    <span>05/08</span>
+                                </li>
+                                <li> 
+                                    <label> No. of topics completed </label>
+                                    <span>06</span>
+                                </li>
+                                <li> 
+                                    <label>{{'Total duration spent' | translate}} </label>
+                                    <span>00:46:36</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
                 <div class="rightChart">
-    
+                    <h1>Final Assessment</h1>
+                    <div class="finalContent">
+                        <div class="percentageCircle">
+                            <circle-progress [title]="selfscore" [titleFontSize]="10" [titleFontWeight]="600" [showUnits]="true"
+                                [percent]="62" [radius]=25 [space]=-6 [outerStrokeGradient]=true [outerStrokeWidth]=6
+                                [outerStrokeColor]="'rgba(255, 183, 77, 1)'"
+                                [outerStrokeGradientStopColor]="'rgba(255, 183, 77, 1)'" [innerStrokeColor]="'#e7e8ea'"
+                                [innerStrokeWidth]=6 [animation]="true" [animationDuration]="300" [responsive]="true"
+                                [showSubtitle]="false"></circle-progress>
+                        </div>
+                        <div class="textfinal">
+                            <ul>
+                                <li>
+                                    <label>Total Marks</label>
+                                    <span>75</span>
+                                </li>
+                                <li> 
+                                    <label> Marks Obtained</label>
+                                    <span>52</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
+
             </div>
             <div class="selfProgressionScore">
                 
             </div>
         </div>
         <div class="rightScore">
-    
+            <div class="gradePoints">
+                <div  class="grade">
+                    <figure>
+                        <img src="https://assets.lntedutech.com/application_images/grade.webp" alt=""/>
+                    </figure>
+                    <h6>Grade<span></span></h6>
+                </div>
+                <div class="points">
+                    <figure>
+                        <img src="https://assets.lntedutech.com/application_images/points.webp" alt=""/>
+                    </figure>
+                    <h6>Points<span></span></h6>
+                </div>
+            </div>
+            <!-- <div class="gradePoints d-flex justify-content-between align-items-center" >
+                <div>
+                  <figure>
+                    <img src="https://assets.lntedutech.com/application_images/grade.webp" alt="" />
+                  </figure>
+                  <h6>{{'Grade' | translate}} <span>{{courseReportData.finalscore.grade}}</span></h6>
+                </div>
+                <div>
+                  <figure>
+                    <img src="https://assets.lntedutech.com/application_images/points.webp" alt="" />
+                  </figure>
+                  <h6>{{'Points' | translate}} <span>{{courseReportData.finalscore.gradepoint}}</span></h6>
+                </div>
+              </div> -->
         </div>
     </div>
 </div>

@@ -3,70 +3,175 @@
 .assessmentContainer {
     background-color: $grey1;
     padding: 20px;
+
     .breadcrumb {
         margin: 0;
         padding: 0 0 20px 0 !important;
         background-color: transparent !important;
+
         li {
-          color: #333333;
-          font-size: 14px;
-          font-weight: 400;
-          line-height: normal;
-          position: relative;
-          margin-right: 15px;
-          display: inline-block;
-          em {
+            color: #333333;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: normal;
+            position: relative;
+            margin-right: 15px;
             display: inline-block;
-            transform: scale(-1);
-            color: #666666;
-            margin-right: 8px;
-            cursor: pointer;
-          }
-          &:first-child {
-            color: #999999;
-            &::after {
-              content: "/";
-              position: absolute;
-              right: -10px;
-              top: auto;
-              bottom: auto;
-              color: #c02222;
+
+            em {
+                display: inline-block;
+                transform: scale(-1);
+                color: #666666;
+                margin-right: 8px;
+                cursor: pointer;
             }
-          }
+
+            &:first-child {
+                color: #999999;
+
+                &::after {
+                    content: "/";
+                    position: absolute;
+                    right: -10px;
+                    top: auto;
+                    bottom: auto;
+                    color: #c02222;
+                }
+            }
         }
     }
+
     .progressionContainer {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         height: calc(100vh - 120px);
         overflow: hidden;
+
         @media screen and (max-width: 992px) {
             flex-direction: column;
         }
+
         .leftSelf {
             width: 100%;
             order: 1;
             height: 100%;
             background-color: $color-white;
             border-radius: 10px;
+            padding: 30px;
             box-shadow: 0 0 2px 0 $blackshade3;
+
             @media screen and (min-width: 992px) {
                 width: calc(100% - 360px);
             }
+
             @media screen and (min-width: 1140px) {
                 width: calc(100% - 400px);
             }
+
             @media screen and (min-width: 1540px) {
                 width: calc(100% - 500px);
             }
+            h1 {
+                color: #000000;
+                font-size: 14px;
+                margin: 0;
+            }
 
             .selfPieChart {
-                .leftChart {
-                    
-                }
-                .rightChart {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
 
+                .leftChart {
+                    width: 57%;
+                    border: 0.5px solid #70707080;
+                    border-radius: 10px;
+                    padding: 10px;
+                    opacity: 1;
+
+                    .selfContent {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: space-between;
+
+                        .percentageCircle {
+                            width: 40%;
+                            height: 130px;
+                            // @include md {
+                            //     width: 35%;
+                            // }
+                        }
+
+                        .textContent {
+                            width: 60%;
+
+                            ul {
+                                list-style: none;
+
+                                li {
+                                    font-size: 14px;
+                                    line-height: 2; 
+                                    label {
+                                       color: #000000;
+                                        font-size: 15px;
+                                        width:80%;
+                                        font-weight: 400;
+                                      }
+                                      span{
+                                        color:#000000;
+                                        font-weight:500;
+                                        width:20%;
+                                      }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .rightChart {
+                    width: 40%;
+                    border: 0.5px solid #70707080;
+                    border-radius: 10px;
+                    padding: 10px;
+                    opacity: 1;
+
+                    .finalContent {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: space-between;
+                        .percentageCircle {
+                            width: 40%;
+                            height: 130px;
+    
+                            // @include md {
+                            //     width: 35%;
+                            // }
+                        }
+                        .textfinal {
+                            ul {
+                                list-style: none;
+
+                                li {
+                                    font-size: 14px;
+                                    line-height: 2; 
+                                    label {
+                                       color: #000000;
+                                        font-size: 15px;
+                                        width:80%;
+                                        font-weight: 400;
+                                      }
+                                      span{
+                                        color:#000000;
+                                        font-weight:500;
+                                        width:20%;
+                                      }
+                                }
+                            }
+                        }
+                    }
                 }
             }
             .selfProgressionScore {
@@ -96,6 +201,65 @@
             @media screen and (min-width: 1540px) {
                 width: 400px
             }
+
+            .gradePoints {
+                width: 100%;
+                padding: 7px;
+                background-color: #F5F5F5;
+                box-shadow: 0 3px 4px rgba(0, 0, 0, 0.3);
+                margin-top: 10px;
+                // @media only screen and (min-width: 1140px) {
+                //   width: 60%;
+                //   margin-top: 0;
+                // }
+            
+                //   border-right: 1px solid #cdcdcd;
+                //   padding-right: 8px;
+                //   margin-right: 8px;
+                //   width: 48%;
+                //   text-align: center;
+                //   &:last-child {
+                //     border-right: 0;
+                //     margin-right: 0;
+                //     padding-right: 0;
+                //   }
+                .grade {
+                    display:flex ;
+                    flex-direction: column;
+                    flex-wrap: wrap;
+                    border-right: 1px solid #cdcdcd;
+                    padding-right: 8px;
+                    margin-right: 8px;
+                    width: 48%;
+                    text-align: center;
+                }
+
+                  figure {
+                    margin: 0 0 7px 0;
+                    height: 36px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    img {
+                      max-width: 50%;
+                    }
+                  }
+                
+                h6 {
+                  font-size: 14px;
+                  font-weight: 400;
+                  color: #666666;
+                  line-height: normal;
+                  margin: 0;
+                  span {
+                    display: inline-block;
+                    color: #333333;
+                    margin-left: 10px;
+                    font-size: 25px;
+                    font-weight: 700;
+                  }
+                }
+              }
         }
     }
 }
