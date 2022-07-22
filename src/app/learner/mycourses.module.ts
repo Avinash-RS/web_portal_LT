@@ -50,6 +50,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { UpskillCalendarComponent } from './pages/upskill-calendar/upskill-calendar.component';
 import { CalendarFilterComponent } from './pages/calendar-filter/calendar-filter.component';
 import { QuizReportComponent } from './pages/quiz-report/quiz-report.component';
+import {AssessmentReportB2cComponent} from './pages/assessment-report-b2c/assessment-report-b2c.component';
 import 'ag-grid-enterprise';
 import { AgGridModule } from 'ag-grid-angular';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -102,6 +103,11 @@ const routes: Routes = [
   {
     path: 'coursereport',
     component: CourseReportComponent,
+    data: { animation: 'coursereport' , title: 'Assessment Report'}
+  },
+  {
+    path: 'assessmentreport',
+    component: AssessmentReportB2cComponent,
     data: { animation: 'coursereport' , title: 'Assessment Report'}
   },
   {
