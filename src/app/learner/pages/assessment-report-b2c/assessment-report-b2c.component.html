@@ -1,9 +1,26 @@
 <app-header></app-header>
 <div class="assessmentContainer">
-    <div class="leftSelf">
+    <ul class="breadcrumb">
+        <li><em (click)="backButton()" class="lxp-Go backArrow"></em> Node.Js, Express And MongoDB Dev To Deployment </li>
+        <li>{{'Assessment Report' | translate}}</li>
+    </ul>
+    <div class="progressionContainer">
 
-    </div>
-    <div class="rightScore">
-
+        <div class="leftSelf">
+            <div class="selfPieChart">
+                <div class="leftChart">
+    
+                </div>
+                <div class="rightChart">
+    
+                </div>
+            </div>
+            <div class="selfProgressionScore">
+    
+            </div>
+        </div>
+        <div class="rightScore">
+    
+        </div>
     </div>
 </div>

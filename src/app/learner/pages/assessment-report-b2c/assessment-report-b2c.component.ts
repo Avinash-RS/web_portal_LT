@@ -7,10 +7,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./assessment-report-b2c.component.scss']
 })
 export class AssessmentReportB2cComponent implements OnInit {
-
-  constructor() { }
+  fromPage: any;
+  constructor(public route: Router) { }
 
   ngOnInit(): void {
+  }
+
+  backButton() {
+    if (this.fromPage === 'mycourse') {
+      this.route.navigate(['/Landing/MyCourse']);
+    } 
   }
 
 }
