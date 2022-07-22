@@ -2,25 +2,19 @@
 
 .assessmentContainer {
     background-color: $grey1;
+    padding: 20px;
     .breadcrumb {
         margin: 0;
-        padding: 0 20px 0 10px !important;
+        padding: 0 0 20px 0 !important;
         background-color: transparent !important;
-        @media only screen and (max-width: 568px) {
-          padding: 0 !important;
-        }
         li {
           color: #333333;
           font-size: 14px;
           font-weight: 400;
           line-height: normal;
           position: relative;
-          margin-right: 0;
-          .bar {
-            color: #c02222 !important;
-            display: inline-block;
-            margin: 0 10px;
-          }
+          margin-right: 15px;
+          display: inline-block;
           em {
             display: inline-block;
             transform: scale(-1);
@@ -28,21 +22,24 @@
             margin-right: 8px;
             cursor: pointer;
           }
-          .name {
+          &:first-child {
             color: #999999;
-          }
-          &:last-child {
             &::after {
-              content: "";
+              content: "/";
+              position: absolute;
+              right: -10px;
+              top: auto;
+              bottom: auto;
+              color: #c02222;
             }
           }
         }
-      }
+    }
     .progressionContainer {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        // height: calc(100vh - 120px);
+        height: calc(100vh - 120px);
         overflow: hidden;
         @media screen and (max-width: 992px) {
             flex-direction: column;
@@ -53,7 +50,7 @@
             height: 100%;
             background-color: $color-white;
             border-radius: 10px;
-           
+            box-shadow: 0 0 2px 0 $blackshade3;
             @media screen and (min-width: 992px) {
                 width: calc(100% - 360px);
             }
@@ -79,7 +76,7 @@
         .rightScore {
             width: 100%;
             order: 2;
-            // box-shadow: 0 0 2px 0 $blackshade3;
+            box-shadow: 0 0 2px 0 $blackshade3;
             height: 100%;
             padding: 15px;
             position: relative;
@@ -88,16 +85,16 @@
             border-radius: 10px;
             @media screen and (min-width: 992px) {
                 padding: 10px;
-                position: fixed;
-                right: 0;
-                top: 70px;
-                width: 360px
+                // position: fixed;
+                // right: 0;
+                // top: 70px;
+                // width: 360px
             }
             @media screen and (min-width: 1140px) {
-                width: 400px
+                width: 370px
             }
             @media screen and (min-width: 1540px) {
-                width: 500px
+                width: 400px
             }
         }
     }
