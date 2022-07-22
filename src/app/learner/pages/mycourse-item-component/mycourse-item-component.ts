@@ -284,7 +284,7 @@ openGallery(c) {
   openReport(c) {
     const isValid = this.batchRestriction(c)
     if (isValid) { 
-      if(this.userDetails.userOrigin == 'learner') {
+      if(this.userDetail.userOrigin == 'learner') {
        this.router.navigate(['/Learner/assessmentreport'])
       } else {
         this.router.navigate(['/Learner/coursereport'], {

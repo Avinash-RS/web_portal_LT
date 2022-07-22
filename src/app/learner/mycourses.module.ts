@@ -108,7 +108,7 @@ const routes: Routes = [
   {
     path: 'assessmentreport',
     component: AssessmentReportB2cComponent,
-    data: { animation: 'coursereport' , title: 'Assessment Report'}
+    data: { animation: 'assessmentreport' , title: 'Assessment Report'}
   },
   {
     path: 'calendaractivity',
@@ -165,7 +165,8 @@ const routes: Routes = [
     TrainingreportComponent,
     OverallquizreportComponent,
     ActivityreportComponent,
-    BehavioralAssessmentComponent
+    BehavioralAssessmentComponent,
+    AssessmentReportB2cComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   imports: [

@@ -1,0 +1,47 @@
+@import "variable";
+
+.assessmentContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    // height: calc(100vh - 120px);
+    overflow: hidden;
+    @media screen and (max-width: 992px) {
+        flex-direction: column;
+    }
+    .leftSelf {
+        width: 100%;
+        order: 1;
+        @media screen and (min-width: 992px) {
+            width: calc(100% - 360px);
+        }
+        @media screen and (min-width: 1140px) {
+            width: calc(100% - 400px);
+        }
+        @media screen and (min-width: 1540px) {
+            width: calc(100% - 500px);
+        }
+    }
+    .rightScore {
+        width: 100%;
+        order: 2;
+        box-shadow: 0 0 2px 0 $blackshade3;
+        height: 100%;
+        padding: 15px;
+        position: relative;
+        padding: 2em 0.85em 1.5 0.85em;
+        @media screen and (min-width: 992px) {
+            padding: 10px;
+            position: fixed;
+            right: 0;
+            top: 70px;
+            width: 360px
+        }
+        @media screen and (min-width: 1140px) {
+            width: 400px
+        }
+        @media screen and (min-width: 1540px) {
+            width: 500px
+        }
+    }
+}
