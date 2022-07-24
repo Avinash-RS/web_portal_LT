@@ -2,17 +2,15 @@
 
 .assessmentContainer {
     width: 100%;
-    height: 100%;
     background-color: $grey1;
     padding: 20px;
-
+    // overflow: hidden;
     .breadcrumb {
         margin: 0;
         padding: 0 0 20px 0 !important;
         background-color: transparent !important;
-
         li {
-            color: #333333;
+            color: $label2;
             font-size: 14px;
             font-weight: 400;
             line-height: normal;
@@ -23,36 +21,31 @@
             em {
                 display: inline-block;
                 transform: scale(-1);
-                color: #666666;
+                color: $color-lightGray;
                 margin-right: 8px;
                 cursor: pointer;
             }
-
             &:first-child {
-                color: #999999;
-
+                color: $grey3;
                 &::after {
                     content: "/";
                     position: absolute;
                     right: -10px;
                     top: auto;
                     bottom: auto;
-                    color: #c02222;
+                    color: $lxp-theme-green;
                 }
             }
         }
     }
-
     .progressionContainer {
         width: 100%;
+        flex-direction: column;
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        height: calc(100vh - 120px);
-        @media screen and (max-width: 992px) {
-            flex-direction: column;
+        @media screen and (min-width: 992px) {
+            justify-content: space-between;
+            flex-direction: row;
         }
-
         .leftSelf {
             width: 100%;
             order: 1;
@@ -61,10 +54,12 @@
             border-radius: 10px;
             box-shadow: 1px 3px 7px $blackshade1;
             padding: 20px;
+            margin: 0 0 20px 0;
             @media screen and (min-width: 992px) {
                 width: calc(100% - 360px);
+                overflow: auto;
+                height: calc(100vh - 120px);
             }
-
             @media screen and (min-width: 1140px) {
                 width: calc(100% - 400px);
             }
@@ -175,19 +170,21 @@
                 }
             }
             .selfProgressionScore {
-                h1 {
+                margin: 40px 0 20px 0;
+                .tableHeading {
                     font-size: 18px;
                     font-weight: 400;
                     color: $blackcolor;
+                    margin-bottom: 20px;
                 }
                 .scoreContainer {
                     width: 100%;
                     display: flex;
-                    flex-direction: row;
-                    justify-content: space-between;
+                    flex-direction: column;
                     height: calc(100vh - 120px);
-                    @media screen and (max-width: 992px) {
-                        flex-direction: column;
+                    @media screen and (min-width: 992px) {
+                        justify-content: space-between;
+                        flex-direction: row;
                     }
                     .progressTable {
                         width: 100%;
@@ -196,48 +193,131 @@
                         background-color: $grey1;
                         border-radius: 10px;
                         box-shadow: 0 0 2px 0 $blackshade3;
+                        margin: 0 0 20px 0;
                         @media screen and (min-width: 992px) {
-                            width: calc(100% - 360px);
+                            width: calc(100% - 353px);
                         }
-                        @media screen and (min-width: 1140px) {
-                            width: calc(100% - 400px);
-                        }
-                        @media screen and (min-width: 1540px) {
-                            width: calc(100% - 500px);
-                        }
+                        // @media screen and (min-width: 1140px) {
+                        //     width: calc(100% - 400px);
+                        // }
+                        // @media screen and (min-width: 1540px) {
+                        //     width: calc(100% - 500px);
+                        // }
                         .headerTable {
-                            padding: 10px;
-                            font-weight: 600;
-                            font-size: 18px;
+                            padding: 20px;
                             display: flex;
                             flex-direction: row;
                             justify-content: space-between;
+                            label {
+                                font-weight: 500;
+                                font-size: 16px;
+                            }
                         }
                         ul {
                             list-style-type: none;
-                            // border-bottom-left-radius: 10px;
-                            // border-bottom-right-radius: 10px;
                             li {
                                 display: flex;
                                 justify-content: space-between;
                                 align-items: center;
                                 font-weight: 600;
                                 font-size: 18px;
-                                padding: 10px;
+                                transition: 0.5s all ease;
                                 cursor: pointer;
+                                p {
+                                    margin-left: 10px;
+                                }
                                 .progressStatus {
                                     width: 20%;
-                                    margin: 0 20px;
+                                    margin: 0 auto;
                                 }
-                                &:hover {
-                                    background-color: $color-white;
-                                    border-left: 5px solid $lightshadeblue;
+                                .scoreCount {
+                                    display: flex;
+                                    justify-content: space-between;
+                                    margin-right: 40px;
+                                    .popoverInfoFinal {
+                                        position: relative;
+                                        .popover-info {
+                                            display: flex;
+                                            justify-content: center;
+                                            align-items: center;
+                                            border: none;
+                                            background-color: $color-lightest-grey;
+                                            border-radius: 20px;
+                                            width: 20px;
+                                            height: 20px;
+                                            margin-left: 10px;
+                                            box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+                                        } 
+                                        .popoverContainer {
+                                          position: absolute;
+                                          width: 230px;
+                                          left: -10px;
+                                          bottom: 25px;
+                                          z-index: 9;
+                                          background-color: $color-white;
+                                          box-shadow: 0 3px 6px $blackshade1;
+                                          border-radius: 10px;
+                                          display: none;
+                                          padding: 12px;
+                                          font-size: 13px;
+                                          @include lg {
+                                            font-size: 14px;
+                                            width: 250px;
+                                          }
+                                          @include xl {
+                                            font-size: 16px;
+                                          }
+                                          &::before {
+                                            content: '';
+                                            border-top: 10px solid $color-white;
+                                            border-right: 10px solid transparent;
+                                            border-left: 10px solid transparent;
+                                            box-shadow: 0 3px 36px $blackshade1;
+                                            bottom: -7px;
+                                            display: block;
+                                            left: 20px;
+                                            margin-left: -7px;
+                                            position: absolute;
+                                          }
+                                          .items, .calculation, .calFormula, .calcPercentage {
+                                            font-weight: 400;
+                                            line-height: 20px;
+                                          }
+                                          .items {
+                                            color: $color-lightGray;
+                                            font-size: 14px;
+                                            span {
+                                              color: $label2;
+                                            }
+                                          }
+                                          .calculation {
+                                            color: $lxp-theme-green;
+                                            font-size: 14px;
+                                            font-weight: 500;
+                                            margin-top: 6px;
+                                          }
+                                          .calcFormula, .calcPercentage {
+                                            color: $lightblue11;
+                                            font-size: 12px;
+                                          }
+                                        }
+                                        &:hover {
+                                          .popoverContainer {
+                                            display: block;
+                                            -webkit-animation: fadeIn .3s linear 1, moveUp .3s linear 1;
+                                            animation: fadeIn .3s linear 1, moveUp .3s linear 1;
+                                          }
+                                        }
+                                    }
                                 }
                             }
                         }
                         .active {
                             background-color: $color-white;
                             border-left: 5px solid $lightshadeblue;
+                        }
+                        .borderList {
+                            border: 0.5px solid $greyblack;
                         }
                     }
                     .activeScoreDetails {
@@ -246,15 +326,16 @@
                         background-color: $color-white;
                         box-shadow: 0 0 7px $blackshade3;
                         border-radius: 10px;
+                        padding: 20px;
                         @media screen and (min-width: 992px) {
-                            padding: 10px;
+                            width: 323px;
                         }
-                        @media screen and (min-width: 1140px) {
-                            width: 370px
-                        }
-                        @media screen and (min-width: 1540px) {
-                            width: 400px
-                        }
+                        // @media screen and (min-width: 1140px) {
+                        //     width: 370px
+                        // }
+                        // @media screen and (min-width: 1540px) {
+                        //     width: 400px
+                        // }
                         h1 {
                             font-size: 18px;
                             font-weight: 400;
@@ -262,25 +343,52 @@
                         }
                         .durationCard {
                             border-radius: 10px;
-                            border: 0.5px solid $color-lightGray;
-                            border-bottom-left-radius: 0;
-                            border-bottom-right-radius: 0;
+                            // border: 0.5px solid $blackshade3;
+                            margin: 0 0 10px 0;
+                            transition: 0.3s all ease;
+                            &:hover {
+                                box-shadow: 0 0 7px #0000006b;
+                            }
                             .durationRow {
                                 display: flex;
                                 justify-content: space-between;
+                                align-items: center;
                                 .clock {
+                                    width: 36%;
                                     em {
-                                        font-size: 50px;
+                                        font-size: 30px;
                                         color: $blue;
                                     }
                                 }
-                                .durHeader {
-                                    font-size: 10px;
+                                .durationDetails {
+                                    width: 64%;
+                                    display: flex;
+                                    justify-content: space-between;
+                                    align-items: center;
+                                    line-height: 1.2;          
+                                }
+                                .topic {
+                                    width: 26%;
+                                    em {
+                                        font-size: 30px;
+                                        color: $blue;
+                                    }
+                                }
+                                .topicDetails {
+                                    width: 74%;
+                                    display: flex;
+                                    justify-content: space-between;
+                                    align-items: center;
+                                    line-height: 1.2;   
+                                }
+                                .commonHeader {
+                                    font-size: 14px;
                                     font-weight: 500;
                                 }
-                                .estimateTime {
+                                .commonValue {
                                     font-size: 14px;
-                                    font-weight: 400;
+                                    font-weight: 500;
+                                    margin-left: 10px;
                                 }
                                 .headerBlue {
                                     color: $blue;
@@ -289,10 +397,8 @@
                                 }
                                 .headerGreen {
                                     color: $green1;
-                                    font-size: 10px;
-                                    font-weight: 500;
                                 }
-                            }     
+                            }
                         }
                     }
                 }
@@ -303,13 +409,15 @@
             height: 100%;
             order: 2;
             box-shadow: 1px 3px 7px $blackshade1;
-            padding: 15px;
+            padding: 20px;
             position: relative;
             padding: 2em 0.85em 1.5 0.85em;
             background-color: $color-white;
             border-radius: 10px;
             @media screen and (min-width: 992px) {
-                padding: 10px;
+                width: 323px;
+                height: calc(100vh - 120px);
+                overflow-y: auto;
                 // position: fixed;
                 // right: 0;
                 // top: 70px;
@@ -321,65 +429,153 @@
             @media screen and (min-width: 1540px) {
                 width: 400px
             }
-
+            .finalScoreLabel {
+                display: flex;
+                justify-content: flex-start;
+                .ScoreHeading {
+                    font-size: 18px;
+                    font-weight: 400;
+                    color: $blackcolor;
+                    margin: 0 0 20px 0;
+                }
+                .popoverScore {
+                    position: relative;
+                    .popover-info {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        border: none;
+                        background-color: $color-lightest-grey;
+                        border-radius: 20px;
+                        width: 20px;
+                        height: 20px;
+                        margin-left: 10px;
+                        box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+                    } 
+                    .popoverContainer {
+                      position: absolute;
+                      width: 230px;
+                      left: -6px;
+                      top: 35px;
+                      z-index: 9;
+                      background-color: $color-white;
+                      box-shadow: 0 -3px 6px $blackshade1;
+                      border-radius: 10px;
+                      display: none;
+                      padding: 12px;
+                      font-size: 13px;
+                      @include lg {
+                        font-size: 14px;
+                        width: 250px;
+                      }
+                      @include xl {
+                        font-size: 16px;
+                      }
+                      &::before {
+                        content: '';
+                        border-top: 10px solid $color-white;
+                        border-right: 10px solid transparent;
+                        border-left: 10px solid transparent;
+                        box-shadow: 0 3px 36px $blackshade1;
+                        top: -10px;
+                        display: block;
+                        left: 20px;
+                        margin-left: -7px;
+                        transform: rotate(180deg);
+                        position: absolute;
+                      }
+                      .items, .calFormula {
+                        font-weight: 400;
+                        line-height: 20px;
+                      }
+                      .items {
+                        color: $color-lightGray;
+                        font-size: 14px;
+                      }
+                      .calcFormula {
+                        color: $lightblue11;
+                        font-size: 12px;
+                      }
+                    }
+                    &:hover {
+                      .popoverContainer {
+                        display: block;
+                        -webkit-animation: fadeIn .3s linear 1, moveUp .3s linear 1;
+                        animation: fadeIn .3s linear 1, moveUp .3s linear 1;
+                      }
+                    }
+                }
+            }
             .gradePoints {
                 width: 100%;
-                padding: 7px;
-                background-color: #F5F5F5;
-                box-shadow: 0 3px 4px rgba(0, 0, 0, 0.3);
-                margin-top: 10px;
-                // @media only screen and (min-width: 1140px) {
-                //   width: 60%;
-                //   margin-top: 0;
-                // }
-            
-                //   border-right: 1px solid #cdcdcd;
-                //   padding-right: 8px;
-                //   margin-right: 8px;
-                //   width: 48%;
-                //   text-align: center;
-                //   &:last-child {
-                //     border-right: 0;
-                //     margin-right: 0;
-                //     padding-right: 0;
-                //   }
-                .grade {
-                    display:flex ;
-                    flex-direction: column;
-                    flex-wrap: wrap;
-                    border-right: 1px solid #cdcdcd;
-                    padding-right: 8px;
-                    margin-right: 8px;
-                    width: 48%;
-                    text-align: center;
+                padding: 10px 20px;
+                background-color: $color-white;
+                border: 0.5px solid $greycolorshade;
+                border-radius: 10px;
+                .gradeHeading {
+                    font-size: 14px;
+                    font-weight: 300;
+                    color: $blackcolor;
+                    margin-bottom: 20px;
                 }
-
-                  figure {
-                    margin: 0 0 7px 0;
-                    height: 36px;
+                .gadeContainer {
                     display: flex;
-                    justify-content: center;
+                    justify-content: space-between;
                     align-items: center;
-                    img {
-                      max-width: 50%;
+                    text-align: center;
+                    .grade {
+                        width: 48%;
+                        border-right: 1px solid #cdcdcd;
                     }
-                  }
-                
-                h6 {
-                  font-size: 14px;
-                  font-weight: 400;
-                  color: #666666;
-                  line-height: normal;
-                  margin: 0;
-                  span {
-                    display: inline-block;
-                    color: #333333;
-                    margin-left: 10px;
-                    font-size: 25px;
-                    font-weight: 700;
-                  }
+                    .points {
+                        width: 48%;
+                    } 
+                    figure {
+                      margin: 0 0 7px 0;
+                      height: 36px;
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      img {
+                        max-width: 50%;
+                      }
+                    }
+                    .scoreGrades {
+                      font-size: 14px;
+                      font-weight: 400;
+                      color: $color-lightGray;
+                      line-height: normal;
+                      span {
+                        width: 20px;
+                        height: 20px;
+                        background-color: $blueshadecolor;
+                        margin-left: 10px;
+                        display: inline-block;
+                        color: $color-white;
+                        font-size: 12px;
+                        font-weight: 700;
+                        border-radius: 20px;
+                      }
+                    }
+                    .scorePoints {
+                      font-size: 14px;
+                      font-weight: 400;
+                      color: $color-lightGray;
+                      line-height: normal;
+                      span {
+                        display: inline-block;
+                        color: $color-white;
+                        background-color: $color-text-success;
+                        margin-left: 10px;
+                        font-size: 12px;
+                        width: 20px;
+                        height: 20px;
+                        font-weight: 700;
+                        border-radius: 20px;
+                      }
+                    }
                 }
-              }
+            }
         }
     }
 }

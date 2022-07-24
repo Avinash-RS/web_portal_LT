@@ -11,7 +11,7 @@
                     <h1>Self Learning Progression</h1>
                     <div class="selfContent">
                         <div class="percentageCircle">
-                            <circle-progress [title]="selfscore" [titleFontSize]="10" [titleFontWeight]="600" [showUnits]="true"
+                            <circle-progress [title]="" [titleFontSize]="10" [titleFontWeight]="600" [showUnits]="true"
                                 [percent]="62" [radius]=25 [space]=-6 [outerStrokeGradient]=true [outerStrokeWidth]=6
                                 [outerStrokeColor]="'rgba(255, 183, 77, 1)'"
                                 [outerStrokeGradientStopColor]="'rgba(255, 183, 77, 1)'" [innerStrokeColor]="'#e7e8ea'"
@@ -40,7 +40,7 @@
                     <h1>Final Assessment</h1>
                     <div class="finalContent">
                         <div class="percentageCircle">
-                            <circle-progress [title]="selfscore" [titleFontSize]="10" [titleFontWeight]="600" [showUnits]="true"
+                            <circle-progress [title]="" [titleFontSize]="10" [titleFontWeight]="600" [showUnits]="true"
                                 [percent]="62" [radius]=25 [space]=-6 [outerStrokeGradient]=true [outerStrokeWidth]=6
                                 [outerStrokeColor]="'rgba(255, 183, 77, 1)'"
                                 [outerStrokeGradientStopColor]="'rgba(255, 183, 77, 1)'" [innerStrokeColor]="'#e7e8ea'"
@@ -64,58 +64,76 @@
 
             </div>
             <div class="selfProgressionScore">
-                <h1>Self Learning Progression - Weekly Score</h1>
+                <h1 class="tableHeading">Self Learning Progression - Weekly Score</h1>
                 <div class="scoreContainer">
                     <div class="progressTable">
                         <div class="headerTable">
-                            <h1>Week</h1>
-                            <h1>Completed Percentage</h1>
-                            <h1>Weekly Score</h1>
+                            <label>Week</label>
+                            <label>Completed Percentage</label>
+                            <label>Weekly Score</label>
                         </div>
                         <ul>
-                            <li *ngFor="let item of SelfDuration"[class.active]="item.isActive" (click)="viewTopicDetails(item,SelfDuration)">
-                                <div>{{item.Week}}</div>
+                            <li *ngFor="let item of SelfDuration" [ngClass]="item.isActive ? 'active' : 'borderList'" (click)="viewTopicDetails(item,SelfDuration)">
+                                <p>{{item.Week}}</p>
                                 <div class="progressStatus">
-                                <circle-progress [title]= "item.Percentage"
-                                [titleFontSize] = "10" [titleFontWeight] = "600" [showUnits]= "false" [percent]="61"
-                                [radius]=25  [space]=-6 [outerStrokeGradient]=true [outerStrokeWidth]=6 [outerStrokeColor]="'#00A99D'" 
-                                [outerStrokeGradientStopColor]="'#00A99D'" [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]=6 
-                                [animation]="true" [animationDuration]="300" [responsive]="true" [showSubtitle]="false" ></circle-progress>
+                                    <circle-progress [title]= "item.Percentage"
+                                    [titleFontSize] = "10" [titleFontWeight] = "600" [showUnits]= "false" [percent]="61"
+                                    [radius]=25  [space]=-6 [outerStrokeGradient]=true [outerStrokeWidth]=6 [outerStrokeColor]="'#00A99D'" 
+                                    [outerStrokeGradientStopColor]="'#00A99D'" [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]=6 
+                                    [animation]="true" [animationDuration]="300" [responsive]="true" [showSubtitle]="false" >
+                                    </circle-progress>
                                 </div>
-                                <div>{{item.WeeklyScore}}
-
+                                <div class="scoreCount">
+                                    <label>{{item.WeeklyScore}}</label>
+                                    <div class="popoverInfoFinal">
+                                        <button class="popover-info">
+                                          <img alt="" src="https://assets.lntedutech.com/application_images/Group 14025.svg" />
+                                        </button>
+                                        <div class="popoverContainer">
+                                          <div class="items">{{'(A) Topics Completed - ' | translate}}<span>5/5</span></div>
+                                          <div class="items">{{'(B) Estimated Duration - ' | translate}}<span>62 Mins</span></div>
+                                          <div class="items">{{'(C) Actual Duration - ' | translate}}<span>128 Mins</span></div>
+                                          <div class="calculation">{{'Calculation' | translate}}</div>
+                                          <div class="calcFormula">= (C/B) x 0.5 x 100</div>
+                                          <div class="calcPercentage">= 103.2</div>
+                                        </div>
+                                    </div>
                                 </div>
                             </li>
                         </ul>
                     </div>
                     <div class="activeScoreDetails">
-                        <h1>Duration & Topics Information</h1>
+                        <h1 class="tableHeading">Duration & Topics Information</h1>
                         <mat-card class="durationCard">
                             <div class="durationRow">
                                 <div class="clock">
                                     <em class="lxp-Clock"></em>
                                 </div>
-                                <h1 class="durHeader">Estimated Duration</h1>
-                                <span class="estimateTime">{{topicinfo.duration.estimated}}</span>
+                                <div class="durationDetails">
+                                    <label class="commonHeader">Estimated Duration</label>
+                                    <span class="commonValue">{{topicinfo.duration.estimated}}</span>
+                                </div>
                             </div>
                             <div class="durationRow">
                                 <h1 class="headerBlue">Durations</h1>
-                                <h1 class="headerGreen">Duration Spent</h1>
-                                <span class="headerGreen">{{topicinfo.duration.spent}}</span>
+                                <label class="commonHeader headerGreen">Duration Spent</label>
+                                <span class="commonValue headerGreen">{{topicinfo.duration.spent}}</span>
                             </div>
                         </mat-card>
                         <mat-card class="durationCard">
                             <div class="durationRow">
-                                <div class="clock">
+                                <div class="topic">
                                     <em class="lxp-TestName"></em>
                                 </div>
-                                <h1 class="durHeader">Total No. of topics</h1>
-                                <span class="estimateTime">{{topicinfo.topics.total}}</span>
+                                <div class="topicDetails">
+                                    <label class="commonHeader">Total No. of topics</label>
+                                    <span class="commonValue">{{topicinfo.topics.total}}</span>
+                                </div>
                             </div>
                             <div class="durationRow">
                                 <h1 class="headerBlue">Topics</h1>
-                                <h1 class="headerGreen">No. of Topics Completed</h1>
-                                <span class="headerGreen">{{topicinfo.topics.completed}}</span>
+                                <label class="commonHeader headerGreen">No. of Topics Completed</label>
+                                <span class="commonValue headerGreen">{{topicinfo.topics.completed}}</span>
                             </div>
                         </mat-card>
                     </div>
@@ -123,34 +141,36 @@
             </div>
         </div>
         <div class="rightScore">
-            <div class="gradePoints">
-                <div  class="grade">
-                    <figure>
-                        <img src="https://assets.lntedutech.com/application_images/grade.webp" alt=""/>
-                    </figure>
-                    <h6>Grade<span></span></h6>
-                </div>
-                <div class="points">
-                    <figure>
-                        <img src="https://assets.lntedutech.com/application_images/points.webp" alt=""/>
-                    </figure>
-                    <h6>Points<span></span></h6>
+            <div class="finalScoreLabel">
+                <h1 class="ScoreHeading">Final Score</h1>
+                <div class="popoverScore">
+                    <button class="popover-info">
+                      <img alt="" src="https://assets.lntedutech.com/application_images/Group 14025.svg" />
+                    </button>
+                    <div class="popoverContainer">
+                      <div class="items">Self Learning + Final Assessment</div>
+                      <div class="calcFormula">= Final Score</div>
+                    </div>
                 </div>
             </div>
-            <!-- <div class="gradePoints d-flex justify-content-between align-items-center" >
-                <div>
-                  <figure>
-                    <img src="https://assets.lntedutech.com/application_images/grade.webp" alt="" />
-                  </figure>
-                  <h6>{{'Grade' | translate}} <span>{{courseReportData.finalscore.grade}}</span></h6>
+            <div class="gradePoints">
+                <h1 class="gradeHeading">Grade & Points</h1>
+                <div class="gadeContainer">
+                    <div  class="grade">
+                        <figure>
+                            <img src="https://assets.lntedutech.com/application_images/grade.webp" alt=""/>
+                        </figure>
+                        <label class="scoreGrades">Grade<span>C</span></label>
+                    </div>
+                    <div class="points">
+                        <figure>
+                            <img src="https://assets.lntedutech.com/application_images/points.webp" alt=""/>
+                        </figure>
+                        <label class="scorePoints">Points<span>07</span>
+                        </label>
+                    </div>
                 </div>
-                <div>
-                  <figure>
-                    <img src="https://assets.lntedutech.com/application_images/points.webp" alt="" />
-                  </figure>
-                  <h6>{{'Points' | translate}} <span>{{courseReportData.finalscore.gradepoint}}</span></h6>
-                </div>
-              </div> -->
+            </div>
         </div>
     </div>
 </div>
