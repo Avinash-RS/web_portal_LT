@@ -11,7 +11,7 @@ export class AssessmentReportB2cComponent implements OnInit {
   SelfDuration = [
     {
       Week : '1',
-      Percentage : '64%',
+      Percentage : '64',
       WeeklyScore: '15',
       isActive:true,
       duration : {
@@ -25,7 +25,7 @@ export class AssessmentReportB2cComponent implements OnInit {
     },
     {
       Week : '2',
-      Percentage : '51%',
+      Percentage : '51',
       WeeklyScore: '09',
       isActive:false,
       duration : {
@@ -39,7 +39,7 @@ export class AssessmentReportB2cComponent implements OnInit {
     },
     {
       Week : '3',
-      Percentage : '61%',
+      Percentage : '61',
       WeeklyScore: '16',
       isActive:false,
       duration : {
@@ -53,7 +53,7 @@ export class AssessmentReportB2cComponent implements OnInit {
     },
     {
       Week : '4',
-      Percentage : '48%',
+      Percentage : '48',
       WeeklyScore: '12',
       isActive:false,
       duration : {
