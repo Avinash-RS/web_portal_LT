@@ -237,7 +237,7 @@
                     <div *ngIf="userType=='vocational'"   (click)="understoodClick('dislike')" data-title="Not Understood" class="sad" [ngClass]="topicInfo?.status==='Passed' && topicInfo?.user_experience === 'dislike'?'fillcol':'nofill'">
                         <em class="lxp-sad"></em> <span>{{'Not Understood' | translate}}</span>
                     </div>
-                    <button data-title="Ask A Question" class="askAQuestion pointer" *ngIf="userType =='vocational'" type="button" (click)="openAskQuestions(askQuestions)">
+                    <button data-title="Ask A Question" class="askAQuestion pointer" *ngIf="userType !=='collegeconnect'" type="button" (click)="openAskQuestions(askQuestions)">
                         <em class="lxp-question"></em> <span>{{'Ask A Question' | translate}}</span>
                     </button>
                     <button data-title="Ask A Question" class="askAQuestion pointer" *ngIf="userType=='collegeconnect'" type="button" (click)="openQuestionDialog(questionDialog)">
