@@ -592,9 +592,8 @@ export class LoginComponent implements OnInit {
     },1000)
   }
 
-  openPlayStore(type) {
-    var url = type == 'playStore' ? 'https://play.google.com/store/apps/details?id=com.lntedutech.collegeconnect' : 'https://apps.apple.com/in/app/l-t-edutech-collegeconnect/id1625255324';
-    window.open(url, type);
+  openPlayStore() {
+    window.open('https://play.google.com/store/apps/details?id=com.lntedutech.collegeconnect', 'playStore');
   }
 
   onClose() {
