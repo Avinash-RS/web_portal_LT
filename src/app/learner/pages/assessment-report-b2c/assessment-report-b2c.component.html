@@ -11,18 +11,18 @@
                     <h1>Self Learning Progression</h1>
                     <div class="selfContent">
                         <div class="percentageCircle">
-                            <circle-progress [title]="" [titleFontSize]="10" [titleFontWeight]="600" [showUnits]="true"
-                                [percent]="62" [radius]=25 [space]=-6 [outerStrokeGradient]=true [outerStrokeWidth]=6
-                                [outerStrokeColor]="'rgba(255, 183, 77, 1)'"
-                                [outerStrokeGradientStopColor]="'rgba(255, 183, 77, 1)'" [innerStrokeColor]="'#e7e8ea'"
-                                [innerStrokeWidth]=6 [animation]="true" [animationDuration]="300" [responsive]="true"
-                                [showSubtitle]="false"></circle-progress>
+                            <circle-progress [title]="" [suubtitle]="" [titleFontSize]="10" [titleFontWeight]="600" [showUnits]="false" [clockwise]="false"
+                                [percent]="62" [radius]=26 [space]=-10 [outerStrokeGradient]=true [outerStrokeWidth]=10
+                                [outerStrokeColor]="'#5AB64C'" [outerStrokeGradientStopColor]="'#5AB64C'" [innerStrokeColor]="'#e7e8ea'"
+                                [innerStrokeWidth]=10 [animation]="true" [animationDuration]="300" [responsive]="true" [showSubtitle]="false">
+                            </circle-progress>
                         </div>
                         <div class="textContent">
                             <ul>
                                 <li>
                                     <label>No. of weeks elapsed</label>
                                     <span>05/08</span>
+                                    <!-- <label class="contentlist">No. of weeks elapsed<span>05/08</span></label> -->
                                 </li>
                                 <li> 
                                     <label> No. of topics completed </label>
@@ -40,12 +40,11 @@
                     <h1>Final Assessment</h1>
                     <div class="finalContent">
                         <div class="percentageCircle">
-                            <circle-progress [title]="" [titleFontSize]="10" [titleFontWeight]="600" [showUnits]="true"
-                                [percent]="62" [radius]=25 [space]=-6 [outerStrokeGradient]=true [outerStrokeWidth]=6
-                                [outerStrokeColor]="'rgba(255, 183, 77, 1)'"
-                                [outerStrokeGradientStopColor]="'rgba(255, 183, 77, 1)'" [innerStrokeColor]="'#e7e8ea'"
-                                [innerStrokeWidth]=6 [animation]="true" [animationDuration]="300" [responsive]="true"
-                                [showSubtitle]="false"></circle-progress>
+                            <circle-progress [title]="" [Subtitle]="" [titleFontSize]="10" [titleFontWeight]="600" [showUnits]="false"
+                                [clockwise]="false" [radius]=26 [space]=-10 [outerStrokeGradient]=true [outerStrokeWidth]=10
+                                [outerStrokeColor]="'#4FC5EE'" [percent]="60" [outerStrokeGradientStopColor]="'#4FC5EE'"
+                                [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]=10 [animation]="true" [animationDuration]="300"
+                                [responsive]="true" [showSubtitle]="false"></circle-progress>
                         </div>
                         <div class="textfinal">
                             <ul>
@@ -159,6 +158,17 @@
                       <div class="items">Self Learning + Final Assessment</div>
                       <div class="calcFormula">= Final Score</div>
                     </div>
+                </div>
+            </div>
+            <div class="semiCircle">
+                <canvas baseChart 
+                [options]="ChartOptions" 
+                [datasets]="chartData" 
+                [labels]="doughnutChartLabels"
+                [chartType]="doughnutChartType">
+            </canvas>
+                <div class="Percentage">
+                    <label>89<span>%</span></label>
                 </div>
             </div>
             <div class="gradePoints">
