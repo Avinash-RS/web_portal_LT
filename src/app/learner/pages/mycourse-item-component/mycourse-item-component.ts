@@ -24,7 +24,7 @@ export class MycourseItemComponent implements OnInit {
   // NOT USING ANY WHERE
   // @Input() completedCourse: number;
   // @Input() globalData: any = {};
-
+  userDetails: any;
   userDetail: any;
   recordedData: any;
   finalFullData: any;
@@ -284,16 +284,20 @@ openGallery(c) {
   openReport(c) {
     const isValid = this.batchRestriction(c)
     if (isValid) { 
-    this.router.navigate(['/Learner/coursereport'], {
-      queryParams:
-      {
-        id: btoa(c.course_id),
-        name: c.course_name,
-        batchId: btoa(c.batchid),
-        QA_totalweeks : c.QA_totalweeks,
-        selflearning_totalweeks : c.selflearning_totalweeks
+      if(this.userDetail.userOrigin == 'learner') {
+       this.router.navigate(['/Learner/assessmentreport'])
+      } else {
+        this.router.navigate(['/Learner/coursereport'], {
+          queryParams:
+          {
+            id: btoa(c.course_id),
+            name: c.course_name,
+            batchId: btoa(c.batchid),
+            QA_totalweeks : c.QA_totalweeks,
+            selflearning_totalweeks : c.selflearning_totalweeks
+          }
+        });
       }
-    });
   }
   }
 

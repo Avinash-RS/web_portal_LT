@@ -76,7 +76,7 @@
       width: 360px;
       height: 100%;
       position: fixed;
-      top: 72px;
+      top: 60px;
       right: 0;
     }
     @media only screen and (min-width: 1140px) {
@@ -315,11 +315,14 @@
         ul {
           list-style: none;
           padding-left: 0;
-          line-height: 16px;
           margin-bottom: 0px; 
+          li {
+            line-height: 30px;
+          }
           label {
             font-size: 15px;
             width:80%;
+
           }
           span{
             color:#00A99D;
