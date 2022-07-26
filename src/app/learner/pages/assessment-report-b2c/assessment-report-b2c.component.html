@@ -1,1 +1,194 @@
-<p>assessment-report-b2c works!</p>
+<app-header></app-header>
+<div class="assessmentContainer">
+    <ul class="breadcrumb">
+        <li><em (click)="backButton()" class="lxp-Go backArrow"></em> Node.Js, Express And MongoDB Dev To Deployment </li>
+        <li>{{'Assessment Report' | translate}}</li>
+    </ul>
+    <div class="progressionContainer">
+        <div class="leftSelf">
+            <div class="selfPieChart">
+                <div class="leftChart">
+                    <h1>Self Learning Progression</h1>
+                    <div class="selfContent">
+                        <div class="percentageCircle">
+                            <circle-progress [title]="" [suubtitle]="" [titleFontSize]="10" [titleFontWeight]="600" [showUnits]="false" [clockwise]="false"
+                                [percent]="62" [radius]=26 [space]=-10 [outerStrokeGradient]=true [outerStrokeWidth]=10
+                                [outerStrokeColor]="'#5AB64C'" [outerStrokeGradientStopColor]="'#5AB64C'" [innerStrokeColor]="'#e7e8ea'"
+                                [innerStrokeWidth]=10 [animation]="true" [animationDuration]="300" [responsive]="true" [showSubtitle]="false">
+                            </circle-progress>
+                        </div>
+                        <div class="textContent">
+                            <ul>
+                                <li>
+                                    <label>No. of weeks elapsed</label>
+                                    <span>05/08</span>
+                                    <!-- <label class="contentlist">No. of weeks elapsed<span>05/08</span></label> -->
+                                </li>
+                                <li> 
+                                    <label> No. of topics completed </label>
+                                    <span>06</span>
+                                </li>
+                                <li> 
+                                    <label>{{'Total duration spent' | translate}} </label>
+                                    <span>00:46:36</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="rightChart">
+                    <h1>Final Assessment</h1>
+                    <div class="finalContent">
+                        <div class="percentageCircle">
+                            <circle-progress [title]="" [Subtitle]="" [titleFontSize]="10" [titleFontWeight]="600" [showUnits]="false"
+                                [clockwise]="false" [radius]=26 [space]=-10 [outerStrokeGradient]=true [outerStrokeWidth]=10
+                                [outerStrokeColor]="'#4FC5EE'" [percent]="60" [outerStrokeGradientStopColor]="'#4FC5EE'"
+                                [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]=10 [animation]="true" [animationDuration]="300"
+                                [responsive]="true" [showSubtitle]="false"></circle-progress>
+                        </div>
+                        <div class="textfinal">
+                            <ul>
+                                <li>
+                                    <label>Total Marks</label>
+                                    <span>75</span>
+                                </li>
+                                <li> 
+                                    <label> Marks Obtained</label>
+                                    <span>52</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="selfProgressionScore">
+                <h1 class="tableHeading">Self Learning Progression - Weekly Score</h1>
+                <div class="scoreContainer">
+                    <div class="progressTable">
+                        <div class="headerTable">
+                            <label>Week</label>
+                            <label>Completed Percentage</label>
+                            <label>Weekly Score</label>
+                        </div>
+                        <ul class="weeklyScoreList">
+                            <li *ngFor="let item of SelfDuration" [class.active]="item.isActive" (click)="viewTopicDetails(item,SelfDuration)">
+                                <label>{{item.Week}}</label>
+                                <div class="progressStatus">
+                                    <circle-progress 
+                                    [titleFontSize] = "14" [titleFontWeight] = "600" [showUnits]= "true" [percent]="item.Percentage"
+                                    [radius]=25  [space]=-6 [outerStrokeGradient]=true [outerStrokeWidth]=6 [outerStrokeColor]='item.Percentage?"#00A99D":"#FF5F25"'
+                                    [outerStrokeGradientStopColor]="'#5AB64C'" [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]=6 [clockwise]="false" [startFromZero]="false" [lazy]="true"
+                                    [animation]="true" [animationDuration]="300" [responsive]="true" [showSubtitle]="false" >
+                                    </circle-progress>
+                                </div>
+                                <div class="scoreCount">
+                                    <label>{{item.WeeklyScore}}</label>
+                                    <div class="popoverInfoFinal">
+                                        <button class="popover-info">
+                                          <img alt="" src="https://assets.lntedutech.com/application_images/Group 14025.svg" />
+                                        </button>
+                                        <div class="popoverContainer">
+                                          <div class="items">{{'(A) Topics Completed - ' | translate}}<span>5/5</span></div>
+                                          <div class="items">{{'(B) Estimated Duration - ' | translate}}<span>62 Mins</span></div>
+                                          <div class="items">{{'(C) Actual Duration - ' | translate}}<span>128 Mins</span></div>
+                                          <div class="calculation">{{'Calculation' | translate}}</div>
+                                          <div class="calcFormula">= (C/B) x 0.5 x 100</div>
+                                          <div class="calcPercentage">= 103.2</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="activeScoreDetails">
+                        <h1 class="tableHeading">Duration & Topics Information</h1>
+                        <mat-card class="durationCard">
+                            <div class="durInfo">                               
+                                <div class="durationLeft">
+                                    <div class="clock">
+                                        <em class="lxp-Clock"></em>
+                                    </div>
+                                    <h1 class="headerBlue">Durations</h1>
+                                </div>
+                                <div class="durationRight">
+                                    <div class="durationDetails">
+                                        <h1 class="commonHeader">Estimated Duration</h1>
+                                        <h1 class="commonValue">{{topicinfo.duration.estimated}}</h1>
+                                    </div>
+                                    <div class="durationDetails">
+                                        <h1 class="commonHeader headerGreen">Duration Spent</h1>
+                                        <h1 class="commonValue headerGreen">{{topicinfo.duration.spent}}</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-card>
+                        <mat-card class="durationCard">
+                            <div class="durInfo">
+                                <div class="durationLeft">
+                                    <div class="clock">
+                                        <em class="lxp-TestName"></em>
+                                    </div>
+                                    <h1 class="headerBlue">Topics</h1>
+                                </div>
+                                <div class="durationRight">
+                                    <div class="durationDetails">
+                                        <h1 class="commonHeader">Total No. of topics</h1>
+                                        <h1 class="commonValue">{{topicinfo.topics.total}}</h1>
+                                    </div>
+                                    <div class="durationDetails">
+                                        <h1 class="commonHeader headerGreen">No. of Topics Completed</h1>
+                                        <h1 class="commonValue headerGreen">{{topicinfo.topics.completed}}</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-card>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="rightScore">
+            <div class="finalScoreLabel">
+                <h1 class="ScoreHeading">Final Score</h1>
+                <div class="popoverScore">
+                    <button class="popover-info">
+                      <img alt="" src="https://assets.lntedutech.com/application_images/Group 14025.svg" />
+                    </button>
+                    <div class="popoverContainer">
+                      <div class="items">Self Learning + Final Assessment</div>
+                      <div class="calcFormula">= Final Score</div>
+                    </div>
+                </div>
+            </div>
+            <div class="semiCircle">
+                <canvas baseChart 
+                [options]="ChartOptions" 
+                [datasets]="chartData" 
+                [labels]="doughnutChartLabels"
+                [chartType]="doughnutChartType">
+            </canvas>
+                <div class="Percentage">
+                    <label>89<span>%</span></label>
+                </div>
+            </div>
+            <div class="gradePoints">
+                <h1 class="gradeHeading">Grade & Points</h1>
+                <div class="gadeContainer">
+                    <div  class="grade">
+                        <figure>
+                            <img src="https://assets.lntedutech.com/application_images/grade.webp" alt=""/>
+                        </figure>
+                        <label class="scoreGrades">Grade<span>C</span></label>
+                    </div>
+                    <div class="points">
+                        <figure>
+                            <img src="https://assets.lntedutech.com/application_images/points.webp" alt=""/>
+                        </figure>
+                        <label class="scorePoints">Points<span>07</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

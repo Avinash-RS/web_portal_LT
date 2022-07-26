@@ -1,0 +1,663 @@
+@import "variable";
+
+.assessmentContainer {
+    width: 100%;
+    background-color: $grey1;
+    padding: 20px;
+    .breadcrumb {
+        margin: 0;
+        padding: 0 0 20px 0 !important;
+        background-color: transparent !important;
+        li {
+            color: $label2;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: normal;
+            position: relative;
+            margin-right: 15px;
+            display: inline-block;
+
+            em {
+                display: inline-block;
+                transform: scale(-1);
+                color: $color-lightGray;
+                margin-right: 8px;
+                cursor: pointer;
+            }
+            &:first-child {
+                color: $grey3;
+                &::after {
+                    content: "/";
+                    position: absolute;
+                    right: -10px;
+                    top: auto;
+                    bottom: auto;
+                    color: $lxp-theme-green;
+                }
+            }
+        }
+    }
+    .progressionContainer {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        @include md {
+            justify-content: space-between;
+            flex-wrap: nowrap;
+        }
+        .leftSelf {
+            width: 100%;
+            order: 1;
+            height: 100%;
+            background-color: $color-white;
+            border-radius: 10px;
+            box-shadow: 1px 3px 7px $blackshade1;
+            padding: 20px;
+            margin: 0 0 20px 0;
+            @include md {
+                width: calc(100% - 230px);
+                overflow: auto;
+                height: calc(100vh - 120px);
+            }
+            @include lg {
+                width: calc(100% - 300px);
+            }
+            @include xl {
+                width: calc(100% - 350px);
+            }
+            h1 {
+                color: $blackcolor;
+                font-size: 14px;
+                margin: 0;
+                font-family:Roboto ;
+                font-weight:400 ;
+                opacity: 1;
+            }
+
+            .selfPieChart {
+                width: 100%;
+                @include md {
+                    display: flex;
+                    justify-content: space-between;
+                    flex-wrap: nowrap;
+                }
+                .leftChart {
+                    width: 100%;
+                    border: 0.5px solid #70707080;
+                    border-radius: 10px;
+                    padding: 10px;
+                    opacity: 1;
+                    margin: 0 0 20px 0;
+                    @include md {
+                        width: 57%;
+                        margin: 0px;
+                    }
+                    .selfContent {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: space-between;
+                        .percentageCircle {
+                            width: 40%;
+                            height: 130px;
+                            // @include md {
+                            //     width: 35%;
+                            // }
+                        }
+
+                        .textContent {
+                            width: 50%;
+
+                            ul {
+                                list-style: none;
+
+                                li {
+                                    
+                                    line-height: 2; 
+                                    label {
+                                       color: $blackcolor;
+                                        font-size: 12px;
+                                        width:70%;
+                                        font-family: Roboto;
+                                        font-weight: 300;
+                                        margin-right: 10px;
+                                      }
+                                      span{
+                                        color:$blackcolor;
+                                        font-weight:500;
+                                        width:30%;
+                                        font-size: 12px;
+                                        font-family: Roboto;
+                                      }
+                                }
+                            }
+                        }
+                    }
+                }
+                .rightChart {
+                    width: 100%;
+                    border: 0.5px solid #70707080;
+                    border-radius: 10px;
+                    padding: 10px;
+                    opacity: 1;
+                    @include md {
+                        width: 40%;
+                    }
+                    .finalContent {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: space-between;
+                        .percentageCircle {
+                            width: 40%;
+                            height: 130px;
+                        }
+                        .textfinal {
+                            width: 50%;
+                            ul {
+                                list-style: none;
+
+                                li {
+                                    line-height: 2; 
+                                    label {
+                                       color: $blackcolor;
+                                        font-size: 12px;
+                                        width:80%;
+                                        font-family: Roboto;
+                                        font-weight: 300;
+                                        margin-right: 10px;
+                                      }
+                                      span{
+                                        font-family: Roboto;
+                                        color:$blackcolor;
+                                        font-weight:500;
+                                        width:20%;
+                                        font-size: 14px;
+                                      }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .selfProgressionScore {
+                margin: 40px 0 20px 0;
+                .tableHeading {
+                    font-size: 18px;
+                    font-weight: 400;
+                    color: $blackcolor;
+                    margin-bottom: 20px;
+                }
+                .scoreContainer {
+                    width: 100%;
+                    display: flex;
+                    flex-wrap: wrap;
+                    // height: calc(100vh - 120px);
+                    @include md {
+                        justify-content: space-between;
+                        flex-wrap: nowrap;;
+                    }
+                    .progressTable { 
+                        width: 100%;
+                        background-color: $grey1;
+                        border-radius: 10px;
+                        // box-shadow: 0 0 2px 0 $blackshade3;
+                        margin: 0 0 20px 0;
+                        @include md {
+                            width: calc(100% - 172px);
+                            margin: 0;
+                        }
+                        @include lg {
+                            width: calc(100% - 235px);
+                        }
+                        @include xl {
+                            width: calc(100% - 375px);
+                        }
+                        .headerTable {
+                            padding: 20px;
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: space-between;
+                            label {
+                                font-weight: 500;
+                                font-size: 16px;
+                            }
+                        }
+                        .weeklyScoreList {
+                            li {
+                                position: relative;
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                font-weight: 600;
+                                font-size: 18px;
+                                transition: all .3s ease;
+                                // border: 0.5px solid $greyblack;
+                                cursor: pointer;
+                                label {
+                                    margin-left: 10px;
+                                }
+                                .progressStatus {
+                                    width: 15%;
+                                    margin: 0 auto;
+                                }
+                                .scoreCount {
+                                    display: flex;
+                                    justify-content: space-between;
+                                    margin-right: 40px;
+                                    .popoverInfoFinal {
+                                        position: relative;
+                                        cursor: pointer;
+                                        .popover-info {
+                                            display: flex;
+                                            justify-content: center;
+                                            align-items: center;
+                                            border: none;
+                                            background-color: $color-lightest-grey;
+                                            border-radius: 20px;
+                                            width: 20px;
+                                            height: 20px;
+                                            margin-left: 10px;
+                                            box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+                                        } 
+                                        .popoverContainer {
+                                          position: absolute;
+                                          width: 230px;
+                                          left: -10px;
+                                          bottom: 25px;
+                                          z-index: 9;
+                                          background-color: $color-white;
+                                          box-shadow: 0 3px 6px $blackshade1;
+                                          border-radius: 10px;
+                                          display: none;
+                                          padding: 12px;
+                                          font-size: 13px;
+                                          @include lg {
+                                            font-size: 14px;
+                                            width: 250px;
+                                          }
+                                          @include xl {
+                                            font-size: 16px;
+                                          }
+                                          &::before {
+                                            content: '';
+                                            border-top: 10px solid $color-white;
+                                            border-right: 10px solid transparent;
+                                            border-left: 10px solid transparent;
+                                            box-shadow: 0 3px 36px $blackshade1;
+                                            bottom: -7px;
+                                            display: block;
+                                            left: 20px;
+                                            margin-left: -7px;
+                                            position: absolute;
+                                          }
+                                          .items, .calculation, .calFormula, .calcPercentage {
+                                            font-weight: 400;
+                                            line-height: 20px;
+                                          }
+                                          .items {
+                                            color: $color-lightGray;
+                                            font-size: 14px;
+                                            span {
+                                              color: $label2;
+                                            }
+                                          }
+                                          .calculation {
+                                            color: $lxp-theme-green;
+                                            font-size: 14px;
+                                            font-weight: 500;
+                                            margin-top: 6px;
+                                          }
+                                          .calcFormula, .calcPercentage {
+                                            color: $lightblue11;
+                                            font-size: 12px;
+                                          }
+                                        }
+                                        &:hover {
+                                          .popoverContainer {
+                                            display: block;
+                                            -webkit-animation: fadeIn .3s linear 1, moveUp .3s linear 1;
+                                            animation: fadeIn .3s linear 1, moveUp .3s linear 1;
+                                          }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .active {
+                            background-color: $color-white;
+                            border-left: 5px solid $lightshadeblue !important;
+                        }
+                        // .borderList {
+                        //     border: 0.5px solid $greyblack;
+                        // }
+                    }
+                    .activeScoreDetails {
+                        width: 100%;
+                        // height: 100%;
+                        background-color: $color-white;
+                        box-shadow: 0 0 7px $blackshade3;
+                        border-radius: 10px;
+                        padding: 20px;
+                        @include md {
+                            width: 155px;
+                        }
+                        @include lg {
+                            width: 215px;
+                        }
+                        @include xl {
+                            width: 345px;
+                        }
+                        h1 {
+                            font-size: 18px;
+                            font-weight: 400;
+                            color: $blackcolor;   
+                        }
+                        .durationCard {
+                            border-radius: 10px;
+                            margin: 0 0 20px 0;
+                            transition: .5s ease-out;
+                            &:hover {
+                                box-shadow: 0 0 7px $blackshade3;
+                            }
+                            .durInfo {
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                @include md {
+                                    display: block;
+                                    // justify-content: center;
+                                }
+                                @include lg {
+                                    display: flex;
+                                    justify-content: space-between;
+                                }
+                                .durationLeft {
+                                    width: 30%;
+                                    @include md {
+                                        width: 100%;
+                                        display: flex;
+                                        justify-content: space-between;
+                                        padding-bottom: 10px;
+                                    }
+                                    @include lg {
+                                        width: 30%;
+                                        display: block;
+                                        padding-bottom: 0;
+                                    }
+                                    .clock {
+                                        // width: 36%;
+                                        em {
+                                            font-size: 30px;
+                                            color: $blue;
+                                        }
+                                    }
+                                    .headerBlue {
+                                        color: $blue;
+                                        font-size: 18px;
+                                        font-weight: 500;
+                                    }
+                                }
+                                .durationRight {
+                                    width: 65%;
+                                    line-height: 2.8;
+                                    @include md {
+                                        width: 100%;
+                                        line-height: normal;
+                                    }
+                                    @include lg {
+                                        width: 65%;
+                                        line-height: 1.8;
+                                    }
+                                    .durationDetails {
+                                        display: flex;
+                                        justify-content: space-between;
+                                        line-height: 1.2;          
+                                    }
+                                    .commonHeader {
+                                        font-size: 12px;
+                                        font-weight: 500;
+                                    }
+                                    .commonValue {
+                                        font-size: 14px;
+                                        font-weight: 500;
+                                        margin-left: 10px;
+                                    }
+                                    .headerGreen {
+                                        color: $green1;
+                                    }
+                                }                                                       
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .rightScore {
+            width: 100%;
+            height: 100%;
+            order: 2;
+            box-shadow: 1px 3px 7px $blackshade1;
+            padding: 20px;
+            // position: relative;
+            padding: 2em 0.85em 1.5 0.85em;
+            background-color: $color-white;
+            border-radius: 10px;
+            @include md {
+                width: 215px;
+                height: calc(100vh - 120px);
+                overflow-y: auto;
+            }
+            @include lg {
+                width: 280px;
+            }
+            @include xl {
+                width: 330px;
+            }
+            .finalScoreLabel {
+                display: flex;
+                justify-content: flex-start;
+                .ScoreHeading {
+                    font-size: 18px;
+                    font-weight: 400;
+                    color: $blackcolor;
+                    margin: 0 0 20px 0;
+                }
+                .popoverScore {
+                    position: relative;
+                    .popover-info {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        border: none;
+                        background-color: $color-lightest-grey;
+                        border-radius: 20px;
+                        width: 20px;
+                        height: 20px;
+                        margin-left: 10px;
+                        box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+                    } 
+                    .popoverContainer {
+                      position: absolute;
+                      width: 230px;
+                      left: -6px;
+                      top: 35px;
+                      z-index: 9;
+                      background-color: $color-white;
+                      box-shadow: 0 -3px 6px $blackshade1;
+                      border-radius: 10px;
+                      display: none;
+                      padding: 12px;
+                      font-size: 13px;
+                      @include lg {
+                        font-size: 14px;
+                        width: 250px;
+                      }
+                      @include xl {
+                        font-size: 16px;
+                      }
+                      &::before {
+                        content: '';
+                        border-top: 10px solid $color-white;
+                        border-right: 10px solid transparent;
+                        border-left: 10px solid transparent;
+                        box-shadow: 0 3px 36px $blackshade1;
+                        top: -10px;
+                        display: block;
+                        left: 20px;
+                        margin-left: -7px;
+                        transform: rotate(180deg);
+                        position: absolute;
+                      }
+                      .items, .calFormula {
+                        font-weight: 400;
+                        line-height: 20px;
+                      }
+                      .items {
+                        color: $color-lightGray;
+                        font-size: 14px;
+                      }
+                      .calcFormula {
+                        color: $lightblue11;
+                        font-size: 12px;
+                      }
+                    }
+                    &:hover {
+                      .popoverContainer {
+                        display: block;
+                        -webkit-animation: fadeIn .3s linear 1, moveUp .3s linear 1;
+                        animation: fadeIn .3s linear 1, moveUp .3s linear 1;
+                      }
+                    }
+                }
+            }
+            .gradePoints {
+                width: 100%;
+                padding: 10px 20px;
+                background-color: $color-white;
+                border: 0.5px solid $greycolorshade;
+                border-radius: 10px;
+                .gradeHeading {
+                    font-size: 14px;
+                    font-weight: 300;
+                    color: $blackcolor;
+                    margin-bottom: 20px;
+                }
+                .gadeContainer {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    text-align: center;
+                    .grade {
+                        width: 50%;
+                        border-right: 1px solid #cdcdcd;
+                    }
+                    .points {
+                        width: 50%;
+                    } 
+                    figure {
+                      margin: 0 0 20px 0;
+                      height: 40px;
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      img {
+                        max-width: 50%;
+                      }
+                    }
+                    .scoreGrades {
+                      font-size: 14px;
+                      font-weight: 400;
+                      color: $color-lightGray;
+                      line-height: normal;
+                      span {
+                        color: $color-white;
+                        background-color: $blueshadecolor;
+                        margin-left: 10px;
+                        font-size: 12px;
+                        width: 20px;
+                        padding: 2px 5px;
+                        height: 20px;
+                        font-weight: 700;
+                        border-radius: 20px;
+                      }
+                    }
+                    .scorePoints {
+                      font-size: 12px;
+                      font-weight: 400;
+                      color: $color-lightGray;
+                      line-height: normal;
+                      span {
+                        // display: inline-block;
+                        color: $color-white;
+                        background-color: $color-text-success;
+                        margin-left: 10px;
+                        font-size: 12px;
+                        width: 20px;
+                        padding: 3px;
+                        height: 20px;
+                        font-weight: 700;
+                        border-radius: 20px;
+                      }
+                    }
+                }
+            }
+            .semiCircle {
+                position: relative;
+                margin-bottom: 6em;
+              }
+            //   canvas {
+            //     border-radius: 60px !important;
+            //   }
+              .Percentage {
+                label{
+                    position:absolute;
+                    font-size:55px;
+                    font-family: 'Roboto';
+                    font-weight:700 ;
+                    top:65%;
+                    left:37%;
+                    text-align:center;
+                    color: $blackcolor;
+                }
+                span {
+                    font-size:22px;
+                    font-family: 'Roboto';
+                    font-weight:400 ;
+                    top:70%;
+                    left:37%;
+                    text-align:center;
+                    color: $blackcolor;
+                }
+              }
+        }
+    }
+}
+
+// Active weekly score
+
+// .weeklyScoreList .active:after,   .weeklyScoreList .active:before  {
+//   content: "";
+// }
+// .weeklyScoreList .active:before, .weeklyScoreList .active:after {
+//   background: $color-white; 
+//   z-index: 5;
+// }
+
+// .weeklyScoreList li:before, .weeklyScoreList li:after {
+//   background: $grey1;
+//   width: 15px;
+//   height: 15px;
+// }
+// .weeklyScoreList li:before {
+//   position: absolute;
+//   top: 0;
+//   right: 0;
+// //   transform: rotate(90deg);      
+// }
+// .weeklyScoreList li:after { 
+//   position: absolute;
+//   right: 0;
+//   bottom: 0;
+// //   transform: rotate(90deg);
+// }
