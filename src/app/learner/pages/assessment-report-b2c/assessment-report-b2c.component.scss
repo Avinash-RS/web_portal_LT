@@ -75,23 +75,28 @@
             }
 
             .selfPieChart {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: space-between;
+                width: 100%;
+                @include md {
+                    display: flex;
+                    justify-content: space-between;
+                    flex-wrap: nowrap;
+                }
                 .leftChart {
-                    // width: 57%;
-                    width: 50%;
+                    width: 100%;
                     border: 0.5px solid #70707080;
                     border-radius: 10px;
                     padding: 10px;
                     opacity: 1;
-
+                    margin: 0 0 20px 0;
+                    @include md {
+                        width: 57%;
+                        margin: 0px;
+                    }
                     .selfContent {
                         display: flex;
                         flex-direction: row;
                         align-items: center;
                         justify-content: space-between;
-                    
                         .percentageCircle {
                             width: 40%;
                             height: 130px;
@@ -129,14 +134,15 @@
                         }
                     }
                 }
-
                 .rightChart {
-                    width: 45%;
+                    width: 100%;
                     border: 0.5px solid #70707080;
                     border-radius: 10px;
                     padding: 10px;
                     opacity: 1;
-
+                    @include md {
+                        width: 40%;
+                    }
                     .finalContent {
                         display: flex;
                         flex-direction: row;
@@ -145,10 +151,6 @@
                         .percentageCircle {
                             width: 40%;
                             height: 130px;
-    
-                            // @include md {
-                            //     width: 35%;
-                            // }
                         }
                         .textfinal {
                             ul {
