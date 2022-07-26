@@ -198,10 +198,11 @@
                         width: 100%;
                         background-color: $grey1;
                         border-radius: 10px;
-                        box-shadow: 0 0 2px 0 $blackshade3;
+                        // box-shadow: 0 0 2px 0 $blackshade3;
                         margin: 0 0 20px 0;
                         @include md {
                             width: calc(100% - 172px);
+                            margin: 0;
                         }
                         @include lg {
                             width: calc(100% - 235px);
@@ -227,10 +228,10 @@
                                 align-items: center;
                                 font-weight: 600;
                                 font-size: 18px;
-                                transition: .3s ease-in-out;
-                                border: 0.5px solid $greyblack;
+                                transition: all .3s ease;
+                                // border: 0.5px solid $greyblack;
                                 cursor: pointer;
-                                p {
+                                label {
                                     margin-left: 10px;
                                 }
                                 .progressStatus {

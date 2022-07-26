@@ -73,7 +73,7 @@
                         </div>
                         <ul class="weeklyScoreList">
                             <li *ngFor="let item of SelfDuration" [class.active]="item.isActive" (click)="viewTopicDetails(item,SelfDuration)">
-                                <p>{{item.Week}}</p>
+                                <label>{{item.Week}}</label>
                                 <div class="progressStatus">
                                     <circle-progress 
                                     [titleFontSize] = "14" [titleFontWeight] = "600" [showUnits]= "true" [percent]="item.Percentage"
