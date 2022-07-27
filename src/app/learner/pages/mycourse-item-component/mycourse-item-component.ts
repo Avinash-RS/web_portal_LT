@@ -285,7 +285,16 @@ openGallery(c) {
     const isValid = this.batchRestriction(c)
     if (isValid) { 
       if(this.userDetail.userOrigin == 'learner') {
-       this.router.navigate(['/Learner/assessmentreport'])
+       this.router.navigate(['/Learner/assessmentreport'],{
+        queryParams:
+        {
+          id: btoa(c.course_id),
+          name: c.course_name,
+          batchId: btoa(c.batchid),
+          batchStartDate: c.batch_start_date,
+          batchEndDate:c.batch_end_date 
+        }
+      })
       } else {
         this.router.navigate(['/Learner/coursereport'], {
           queryParams:

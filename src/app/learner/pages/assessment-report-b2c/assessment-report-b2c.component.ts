@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Label } from 'ng2-charts';
+import { LearnerServicesService } from '../../services/learner-services.service';
 declare const Chart;
 @Component({
   selector: 'app-assessment-report-b2c',
@@ -11,6 +12,8 @@ declare const Chart;
 })
 export class AssessmentReportB2cComponent implements OnInit {
   topicinfo: any;
+  routerDetails: any;
+  userDetail: any;
   doughnutChartData;
   public chartPlugins = [pluginDataLabels];
   public doughnutChartType: ChartType = 'doughnut';
@@ -112,12 +115,35 @@ export class AssessmentReportB2cComponent implements OnInit {
       }
     }
   ]  
-  constructor(public route: Router) { }
+  constructor(public route: Router, private activeRoute: ActivatedRoute, private learnerService  : LearnerServicesService) { }
 
   ngOnInit(): void {
+    this.userDetail = JSON.parse(localStorage.getItem('UserDetails'));
+    console.log("$$$$$$$$$$$$$$$$$$$$",this.userDetail);
+    
     this.topicinfo = this.SelfDuration[0];
+    this.activeRoute.queryParams.subscribe(res => {
+      this.routerDetails = res
+    });
+    this.getCourseReport(this.routerDetails);
+  };
+
+  getCourseReport(data){
+    let queryParams = {
+      user_id : this.userDetail.user_id,
+      course_id : atob(data.id),
+      batchid : atob(data.batchId),
+      batch_start_date : data.batchStartDate,
+      batch_end_date : data.batchEndDate
+    }
+    this.learnerService.getGTULearnerCourseReport(this.userDetail.user_id,atob(data.id),atob(data.batchId),data.batchStartDate,data.batchEndDate).subscribe(response => {
+      console.log("response!!!!!!!!!!!!!!!!!!", response);
+      
+    })
+    
   }
-  
+
+
   viewTopicDetails(item, selfDur) {
     this.topicinfo = item;
     selfDur.forEach(element => {
