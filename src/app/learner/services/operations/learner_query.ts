@@ -2328,33 +2328,6 @@ export const getGTULearnerCourseReport = gql`
                 completed_moduleduration
                 completed_topic
             }
-            topicdetails{
-                _id
-                batchid
-                user_id
-                course_id
-                module_id
-                topic_name
-                link
-                id
-                status
-                start_timestamp
-                session_time
-                estimated_time
-                topic{
-                    topic_name
-                    estimated_time
-                    id
-                    link
-                    topicsequence
-                    modulesequence
-                    start_timestamp
-                    status
-                    lesson_location
-                    location
-                    session_time
-                }
-            }
         }
         _id{
             user_id

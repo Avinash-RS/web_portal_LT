@@ -12,7 +12,11 @@ declare const Chart;
 })
 export class AssessmentReportB2cComponent implements OnInit {
   topicinfo: any;
+  noDataCard:boolean = false;
+  viewInfo:any;
+  reportData:any;
   routerDetails: any;
+  showreport:boolean = false;
   userDetail: any;
   doughnutChartData;
   public chartPlugins = [pluginDataLabels];
@@ -115,13 +119,11 @@ export class AssessmentReportB2cComponent implements OnInit {
       }
     }
   ]  
+  
   constructor(public route: Router, private activeRoute: ActivatedRoute, private learnerService  : LearnerServicesService) { }
 
   ngOnInit(): void {
     this.userDetail = JSON.parse(localStorage.getItem('UserDetails'));
-    console.log("$$$$$$$$$$$$$$$$$$$$",this.userDetail);
-    
-    this.topicinfo = this.SelfDuration[0];
     this.activeRoute.queryParams.subscribe(res => {
       this.routerDetails = res
     });
@@ -136,27 +138,41 @@ export class AssessmentReportB2cComponent implements OnInit {
       batch_start_date : data.batchStartDate,
       batch_end_date : data.batchEndDate
     }
-    this.learnerService.getGTULearnerCourseReport(this.userDetail.user_id,atob(data.id),atob(data.batchId),data.batchStartDate,data.batchEndDate).subscribe(response => {
-      console.log("response!!!!!!!!!!!!!!!!!!", response);
-      
+    this.learnerService.getGTULearnerCourseReport(this.userDetail.user_id,atob(data.id),atob(data.batchId),data.batchStartDate,data.batchEndDate).subscribe((result:any) => {
+      if(result.data && result.data.get_GTU_assess_report && result.data.get_GTU_assess_report.success && result.data.get_GTU_assess_report.data.length){
+     this.reportData = result.data['get_GTU_assess_report'].data[0];
+     this.reportData.gradepoint = (this.reportData.gradepoint.toString()).padStart(2,0)
+     this.topicinfo = this.reportData.module[0];
+     this.showreport = true;
+    }else{
+      this.showreport = false;
+      this.noDataCard = true;
+    }
     })
     
   }
 
 
-  viewTopicDetails(item, selfDur) {
+  viewTopicDetails(item) {
     this.topicinfo = item;
-    selfDur.forEach(element => {
-      if(element.Week == item.Week) {
-        element.isActive = true;
-      } else {
-        element.isActive = false;
-      }
-    })
   }
 
+  viewInfoIcon(item, type){
+    if(type === 'weekly' && item != null){
+      this.viewInfo = item;
+     let totalMinutes= this.getMinuted(this.viewInfo?.selflearning?.actual_moduleduration);
+     this.viewInfo.selflearning.totalDuration = totalMinutes;
+     let completedMinutes= this.getMinuted(this.viewInfo?.selflearning?.completed_moduleduration);
+     this.viewInfo.selflearning.completedDuration = completedMinutes;
+    }
+  }
+  getMinuted(value:any){
+    let hms = value || '00:00:00';
+    let a = hms.split(':'); 
+    let minutes = (+a[0]) * 60 + (+a[1]);
+    return minutes
+  }
   backButton() {
     this.route.navigate(['/Landing/MyCourse']);
   }
-
 }
