@@ -2273,6 +2273,72 @@ export const getLearnerNewCourseReport = gql`
   }
 `;
 
+export const getGTULearnerCourseReport = gql`
+  query get_GTU_assess_report(
+    $user_id: String!
+    $course_id: String!
+    $batchid: String!
+    $batch_start_date: String!
+    $batch_end_date: String!
+  ) {
+    get_GTU_assess_report(
+      user_id: $user_id
+      course_id: $course_id
+      batchid: $batchid
+      batch_start_date: $batch_start_date
+      batch_end_date: $batch_end_date
+    ) {
+      success
+      message
+      data{
+        total_topic
+        completed_topic
+        inprogress_topic
+        yettostart_topic
+        total_duration_spent
+        completed_week_count
+        current_week
+        total_week
+        rawscore
+        totalWeekScore
+        total_slf_learning_pts
+        grade
+        gradepoint
+        assessment{
+            userid
+            marksobtained
+            totalmarks
+            batch_id
+            courseid
+        }
+        session_time
+        module{
+            id
+            status
+            count
+            modulesequence
+            module_name
+            week
+            selflearningpercentage
+            selflearningscore
+            weekScore
+            selflearning{
+                no_of_topic
+                actual_moduleduration
+                completed_moduleduration
+                completed_topic
+            }
+        }
+        _id{
+            user_id
+            course_id
+            batchid
+            course_name
+        }
+    }
+    }
+  }
+`;
 export const getCourseReportByUserid = gql`
   query getCourseReportByUserid($user_id: String!, $course_id: String!) {
     getCourseReportByUserid(user_id: $user_id, course_id: $course_id) {
