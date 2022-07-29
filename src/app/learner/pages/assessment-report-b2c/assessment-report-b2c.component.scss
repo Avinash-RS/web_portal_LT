@@ -65,6 +65,9 @@
             @include xl {
                 width: calc(100% - 350px);
             }
+            @media only screen and (min-width: 1540px) {
+                width: calc(100% - 430px);
+            }
             h1 {
                 color: $blackcolor;
                 font-size: 14px;
@@ -213,12 +216,16 @@
                         @include xl {
                             width: calc(100% - 375px);
                         }
+                        @media only screen and (min-width: 1540px) {
+                            width: calc(100% - 415px);
+                        }
                         .headerTable {
                             padding: 20px;
                             display: flex;
                             flex-direction: row;
                             justify-content: space-between;
                             label {
+                                width: 100%;
                                 font-weight: 500;
                                 font-size: 16px;
                             }
@@ -349,6 +356,9 @@
                             width: 345px;
                             height: 345px;
                         }
+                        @media only screen and (min-width: 1540px) {
+                            width: 385px;
+                        }
                         h1 {
                             font-size: 18px;
                             font-weight: 400;
@@ -362,9 +372,12 @@
                                 box-shadow: 0 0 7px $blackshade3;
                             }
                             .durInfo {
-                                display: flex;
+                                display: block;
                                 justify-content: space-between;
                                 align-items: center;
+                                @include sm {
+                                    display: flex;
+                                }
                                 @include md {
                                     display: block;
                                     // justify-content: center;
@@ -374,7 +387,13 @@
                                     justify-content: space-between;
                                 }
                                 .durationLeft {
-                                    width: 30%;
+                                    width: 100%;
+                                    display: flex;
+                                    justify-content: space-between;
+                                    @include sm {
+                                        width: 30%;
+                                        display: block;
+                                    }
                                     @include md {
                                         width: 100%;
                                         display: flex;
@@ -400,8 +419,11 @@
                                     }
                                 }
                                 .durationRight {
-                                    width: 65%;
-                                    line-height: 2.8;
+                                    width: 100%;
+                                    @include sm {
+                                        width: 65%;
+                                        line-height: 2.8;
+                                    }
                                     @include md {
                                         width: 100%;
                                         line-height: normal;
@@ -454,6 +476,9 @@
             }
             @include xl {
                 width: 330px;
+            }
+            @media only screen and (min-width: 1540px) {
+                width: 405px;
             }
             .finalScoreLabel {
                 display: flex;
