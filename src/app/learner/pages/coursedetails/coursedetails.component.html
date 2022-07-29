@@ -6,6 +6,9 @@
     <div class="titlebar">
 
         <div class="titleBack animateAnimate d-flex justify-content-between align-items-center" [ngClass]="titleBar==true?'fadeOutUp':'fadeInDown'">
+            <button class="rewindArrow pointer d-flex justify-content-between align-items-center">
+                <em class="lxp-Rewind_Arrow" (click)="navigateToMycourse()"></em>
+            </button>
             <div class="breadCrumbWrapper">
                 <ul class="breadcrumb" [ngClass]="checkDetails?.toc != '0' ? 'no':'yes'">
                     <li [ngClass]="drawersOpen ? 'no':'yes'">
