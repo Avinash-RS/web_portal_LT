@@ -20,7 +20,7 @@
     </figure>
     <div class="aicteRightCol">
         <div class="content">
-            <h3 class="titleClass" title="{{course.course_name}}">{{course.course_name}}</h3>
+            <h3 class="titleClass pointer" (click)="gotoDesc(course,'direct','free')" title="{{course.course_name}}">{{course.course_name}}</h3>
             <p [ngClass]="!course.isReadMore ? 'addEllipsis': ''">{{course.course_description}}</p>
         </div>
         <div class="learningProgression d-flex justify-content-between align-items-end">
@@ -66,7 +66,7 @@
   </figure>
   <div class="rightCol">
       <div class="d-flex justify-content-between align-items-center">
-          <h3 class="titleClass" title="{{course.course_name}}">{{course.course_name}}</h3>
+          <h3 class="titleClass pointer" (click)="gotoDesc(course,'direct','free')" title="{{course.course_name}}">{{course.course_name}}</h3>
           <div *ngIf="course?.batchid" class="searchProgression d-flex justify-content-end align-items-center" [ngClass]="userDetail.org_type === 'collegeconnect' ? 'yes':'no'">
               <div class="percentage" *ngIf="userDetail.org_type === 'collegeconnect'&& course?.batchStarted">
                   <circle-progress percent="{{course.course_week_Percent}}" [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2" [outerStrokeColor]="'#56b35a'" [innerStrokeColor]="'#ededed'" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [titleFontSize]="4.5" [subtitleFontSize]="5.5" [animation]="true" [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week" [subtitle]="course.current_week_count + '/' + course.actual_total_week" [showUnits]="false" [showSubtitle]="true" subtitleFontWeight=800> </circle-progress>
