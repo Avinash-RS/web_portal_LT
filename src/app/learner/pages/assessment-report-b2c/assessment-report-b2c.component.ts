@@ -144,6 +144,7 @@ export class AssessmentReportB2cComponent implements OnInit {
      this.reportData.gradepoint = (this.reportData.gradepoint.toString()).padStart(2,0)
      this.topicinfo = this.reportData.module[0];
      this.showreport = true;
+     this.noDataCard = false;
     }else{
       this.showreport = false;
       this.noDataCard = true;
