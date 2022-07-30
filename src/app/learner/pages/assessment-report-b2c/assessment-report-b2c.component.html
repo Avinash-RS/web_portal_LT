@@ -83,7 +83,7 @@
                                     </circle-progress>
                                 </div>
                                 <div class="scoreCount">
-                                    <label>{{item.weekScore}}</label>
+                                    <label>{{item.weekScore == '00' ? 0 : item.weekScore}}</label>
                                     <div class="popoverInfoFinal" (mouseover)="viewInfoIcon(item, 'weekly')" (mouseleave)="viewInfoIcon(null, 'weekly')">
                                         <button class="popover-info" (mouseover)="viewInfoIcon(item, 'weekly')">
                                           <img alt="" src="https://assets.lntedutech.com/application_images/Group 14025.svg"/>
@@ -232,7 +232,7 @@
         </div>
     </div>
 
-    <div class="assessmentContainer"  *ngIf=true>
+    <div class="assessmentContainer"  *ngIf="noDataCard">
         <div  class="noCard">
             <figure>
               <img src="https://assets.lntedutech.com/application_images/noquiz.webp" alt="quiz">
