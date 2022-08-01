@@ -745,6 +745,10 @@ export class CoursedetailsComponent implements OnInit {
     });
   }
 
+  navigateToMycourse() {
+    this.route.navigate(['/Landing/MyCourse']);
+  }
+
   gettopicOnModule(week, modul, parent, body) {
     // this.topicData$ = this.gettopicapi(week,module,parent);
     if (this.filterkey === 'Bookmarked') {
