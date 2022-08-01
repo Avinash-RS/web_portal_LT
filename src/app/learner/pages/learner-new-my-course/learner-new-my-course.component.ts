@@ -553,8 +553,8 @@ export class LearnerNewMyCourseComponent implements OnInit {
             this.enrolledCourses = EcourseDetail && EcourseDetail !== null ? EcourseDetail : [];
             this.courseDetailsList.push(...this.enrolledCourses);
               this.courseDetailsList.forEach((value) => {
-                var startDate = moment(value.batch_start_date);
-                var endDate = moment(value.batch_end_date)
+                var startDate = moment(value.batch_start_date).startOf("day");
+                var endDate = moment(value.batch_end_date).endOf("day");
                 if(moment() > startDate){
                   value['batchStarted'] = true;
                 } else {
