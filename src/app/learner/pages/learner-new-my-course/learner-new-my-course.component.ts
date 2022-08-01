@@ -941,7 +941,7 @@ changeWeekDate() {
 }
 
 goToCourse(c){
-  if( moment() > moment(c.batchenddate)){
+  if( moment() > moment(c.batchenddate).endOf("day")){
     this.toast.warning('Your subscription for this course has expired');
     return false;
   }
