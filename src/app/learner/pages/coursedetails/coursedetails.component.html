@@ -456,7 +456,7 @@
                         <div class="QuestionMeta">
                             <p>{{'Asked on' | translate}} {{item.askDate}},&nbsp;{{item.askTime}}</p>
                         </div>
-                        <p class="quesiton">{{item.que}}</p>
+                        <p class="quesiton" [innerHTML]="item?.que">{{item.que}}</p>
                         <div class="QuestionMeta">
                             <div class="font-weight-lighter" [ngClass]="item.ansDate?'badge-success':'badge-warning'">{{item.ansDate?'Answered':'Unanswered'}} </div>
                             &nbsp;<p *ngIf="item.ansDate">{{item.ansDate}}, &nbsp;{{item.ansTime}}</p>
