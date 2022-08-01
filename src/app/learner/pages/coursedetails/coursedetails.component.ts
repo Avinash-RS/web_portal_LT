@@ -313,8 +313,7 @@ export class CoursedetailsComponent implements OnInit {
       this.batchEndTime = localStorage.getItem('currentBatchEndDate');
       debugger;
       console.log('Batch started 1',this.batchEndTime);
-      if(moment() > moment(this.batchEndTime)){
-        console.log('Batch started');
+      if(moment() > moment(this.batchEndTime).endOf("day")){
         this.toastr.warning('Your subscription for this course has expired');
         this.route.navigateByUrl("/Landing/MyCourse");
         return;

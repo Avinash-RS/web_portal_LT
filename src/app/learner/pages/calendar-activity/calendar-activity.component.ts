@@ -360,11 +360,11 @@ export class CalendarActivityComponent implements OnInit {
       window.open(value);
     }
     batchRestriction(course){
-      if(moment() < moment(course.batch_start_date)){
+      if(moment() < moment(course.batch_start_date).startOf("day")){
         this.toastr.warning('We understand your interest. Please come back on '+ this.datePipe.transform(course?.batch_start_date, 'dd/MM/yyyy') + ' to start the course.');
         return false;
       } 
-      else if(moment() > moment(course.batch_end_date)){
+      else if(moment() > moment(course.batch_end_date).endOf("day")){
         this.toastr.warning('Your subscription for this course has expired');
         return false;
       } 
