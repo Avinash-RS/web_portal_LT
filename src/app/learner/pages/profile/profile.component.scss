@@ -751,6 +751,7 @@ div.account {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00b0ed', endColorstr='#53aa34',GradientType=1 );
   color: $color-white;
   width: 30%;
+  cursor: pointer;
   border-radius: 50px !important;
   margin: auto;
   display: block;
@@ -1238,6 +1239,17 @@ hr {
   .mat-form-field-suffix {
     top: -0.21em !important;
     font-size: 15px;
+  }
+}
+#message {
+
+  .col {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    p {
+      width: 50%;
+    }
   }
 }
 
