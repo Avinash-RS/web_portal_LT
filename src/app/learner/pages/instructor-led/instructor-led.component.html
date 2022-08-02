@@ -279,7 +279,7 @@
         </tr>
         <tr *ngFor="let atd of sessionAttendance; let i = index" [attr.data-index]="i">
           <td class="tableCol">{{i+1}}</td>
-          <td>{{atd.activity.activityname}}</td>
+          <td>{{atd.activity.topicname}}</td>
           <td>{{atd.activity.startdate | date: 'dd/MM/yyyy hh:mm a'}}</td>
           <td class="tableCol">
             <mat-icon
