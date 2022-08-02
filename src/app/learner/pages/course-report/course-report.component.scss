@@ -178,12 +178,13 @@
           margin-bottom: 0px; 
           label{
             font-size:14px;
-            width:70%;
+            width:73%;
+            margin-right: 5px;
           }
           span{
             font-size:14px;
             font-weight: 600;
-            width:30%;
+            width:27%;
            
           }
         }
@@ -265,8 +266,13 @@
           font-size: 13px;
           font-weight: 500;
           position: absolute;
-          left: 40px;
-          bottom :25px;
+          left: 10px;
+          bottom: 30px;
+          @media only screen and (min-width: 720px) {
+            position: absolute;
+            left: 40px;
+            bottom: 25px;
+          }
         }
         .graph{
           margin-left: 10px;
