@@ -638,7 +638,7 @@
                           <textarea disabled class="textArea" [value]='project.projectActivity.comments'></textarea>
                       </div>
                     </div>
-                    <div class="">
+                    <div class="" *ngIf="project?.projectActivity?.assessmentreport?.length > 0">
                       <div class="">
                         <button mat-stroked-button class="AssignmentBtn w-100" (click)="openDocument(projectPreviewDialog, project.projectActivity.assessmentreport ? project.projectActivity.assessmentreport[0] : null, project?.projectActivity?.assessmentreport)">
                           <mat-icon class="assignmentIcon mr-2">wysiwyg</mat-icon>
