@@ -399,7 +399,7 @@ export class ActivitiesComponent implements OnInit {
   }
   uploadDoc(event, project, submitAction) {
     const filePath = event.target.files[0].name;
-    const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.mp4|\.mov|\.pdf)$/i;
+    const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.mp4|\.mov|\.pdf|\.xlsx|\.csv|\.xls)$/i;
     if (!allowedExtensions.exec(filePath)) {
       this.toastr.warning('Please upload a valid file');
       if (this.uploadInput) {
@@ -484,6 +484,7 @@ export class ActivitiesComponent implements OnInit {
       this.assignmentLoader = false;
       if (data.data.getAssignmentmoduleData.success) {
        this.assignmentContent = data?.data?.getAssignmentmoduleData?.data;
+       console.log(this.assignmentContent, 'assignment Content')
        this.assignmentpreContent = data?.data?.getAssignmentmoduleData;
        if (this.assignmentContent == null) {
           this.emptyAssignment = true;
@@ -589,7 +590,7 @@ export class ActivitiesComponent implements OnInit {
 
   uploadAssignmentsFile(event, assignemnt) {
     const filePath = event.target.files[0].name;
-    const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.pdf)$/i;
+    const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.pdf|\.xlsx|\.csv|\.xls)$/i;
     if (!allowedExtensions.exec(filePath)) {
       this.toastr.warning('Please upload a valid file');
       if (this.fileInput) {
@@ -980,7 +981,7 @@ export class ActivitiesComponent implements OnInit {
     // this.selectPerformfile.push(event.target.files[0] as File);
     if (event.target.files.length === 1) {
     const filePath = event.target.files[0].name;
-    const allowedExtensions = /(\.mp4|\.mov|\.pdf)$/i;
+    const allowedExtensions = /(\.mp4|\.mov|\.pdf|\.xlsx|\.csv|\.xls)$/i;
     if (!allowedExtensions.exec(filePath)) {
       this.toastr.warning('Please upload a valid file.');
       if (this.videoInput) {

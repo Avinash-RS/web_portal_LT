@@ -354,6 +354,7 @@
                         }
                         @include xl {
                             width: 345px;
+                            height: 345px;
                         }
                         @media only screen and (min-width: 1540px) {
                             width: 385px;
@@ -658,7 +659,20 @@
         }
     }
 }
-
+.noCard {
+    text-align: center;
+    padding-top: 5em;
+    figure {
+        margin: 15px 0;
+    }
+    p {
+        font-size: 14px;
+        color: #000000;
+        font-weight: 500;
+        line-height: normal;
+        margin-bottom: 30px ​!important;
+    }
+  }
 // Active weekly score
 
 // .weeklyScoreList .active:after,   .weeklyScoreList .active:before  {

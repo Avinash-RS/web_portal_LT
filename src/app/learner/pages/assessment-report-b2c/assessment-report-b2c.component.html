@@ -1,7 +1,7 @@
 <app-header></app-header>
-<div class="assessmentContainer">
+<div class="assessmentContainer" *ngIf="showreport">
     <ul class="breadcrumb">
-        <li><em (click)="backButton()" class="lxp-Go backArrow"></em> Node.Js, Express And MongoDB Dev To Deployment </li>
+        <li><em (click)="backButton()" class="lxp-Go backArrow"></em> {{routerDetails.name}} </li>
         <li>{{'Assessment Report' | translate}}</li>
     </ul>
     <div class="progressionContainer">
@@ -11,26 +11,26 @@
                     <h1>Self Learning Progression</h1>
                     <div class="selfContent">
                         <div class="percentageCircle">
-                            <circle-progress [title]="" [suubtitle]="" [titleFontSize]="10" [titleFontWeight]="600" [showUnits]="false" [clockwise]="false"
-                                [percent]="62" [radius]=26 [space]=-10 [outerStrokeGradient]=true [outerStrokeWidth]=10
+                            <circle-progress  percent="{{reportData?.totalWeekScore}}" [title]="" [suubtitle]="" [titleFontSize]="10" [titleFontWeight]="600" [showUnits]="false" [clockwise]="false"
+                                [radius]=26 [space]=-10 [outerStrokeGradient]=true [outerStrokeWidth]=10
                                 [outerStrokeColor]="'#5AB64C'" [outerStrokeGradientStopColor]="'#5AB64C'" [innerStrokeColor]="'#e7e8ea'"
-                                [innerStrokeWidth]=10 [animation]="true" [animationDuration]="300" [responsive]="true" [showSubtitle]="false">
+                                [innerStrokeWidth]=10 [animation]="true" [animationDuration]="300" [responsive]="true"[subtitle]="reportData?.totalWeekScore  + '/ ' + reportData?.total_slf_learning_pts" [showSubtitle]="true" subtitleFontWeight=800 [showTitle]="false" [subtitleColor]="'#333333'">
                             </circle-progress>
                         </div>
                         <div class="textContent">
                             <ul>
                                 <li>
                                     <label>No. of weeks elapsed</label>
-                                    <span>05/08</span>
+                                    <span>{{reportData?.current_week}}/{{reportData?.total_week}}</span>
                                     <!-- <label class="contentlist">No. of weeks elapsed<span>05/08</span></label> -->
                                 </li>
                                 <li> 
                                     <label> No. of topics completed </label>
-                                    <span>06</span>
+                                    <span>{{reportData?.completed_topic}}</span>
                                 </li>
                                 <li> 
                                     <label>{{'Total duration spent' | translate}} </label>
-                                    <span>00:46:36</span>
+                                    <span>{{reportData?.total_duration_spent}}</span>
                                 </li>
                             </ul>
                         </div>
@@ -40,21 +40,21 @@
                     <h1>Final Assessment</h1>
                     <div class="finalContent">
                         <div class="percentageCircle">
-                            <circle-progress [title]="" [Subtitle]="" [titleFontSize]="10" [titleFontWeight]="600" [showUnits]="false"
+                            <circle-progress  percent="{{reportData?.assessment[0].marksobtained}}"  [title]="" [titleFontSize]="10" [titleFontWeight]="600" [showUnits]="false"
                                 [clockwise]="false" [radius]=26 [space]=-10 [outerStrokeGradient]=true [outerStrokeWidth]=10
-                                [outerStrokeColor]="'#4FC5EE'" [percent]="60" [outerStrokeGradientStopColor]="'#4FC5EE'"
+                                [outerStrokeColor]="'#4FC5EE'" [outerStrokeGradientStopColor]="'#4FC5EE'"
                                 [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]=10 [animation]="true" [animationDuration]="300"
-                                [responsive]="true" [showSubtitle]="false"></circle-progress>
+                                [responsive]="true" [subtitle]="reportData?.assessment[0].marksobtained  + '/ ' + reportData?.assessment[0].totalmarks" [showSubtitle]="true" subtitleFontWeight=800 [showTitle]="false" [subtitleColor]="'#333333'"></circle-progress>
                         </div>
                         <div class="textfinal">
                             <ul>
                                 <li>
                                     <label>Total Marks</label>
-                                    <span>75</span>
+                                    <span>{{reportData?.assessment.length? reportData?.assessment[0].totalmarks : 0}}</span>
                                 </li>
                                 <li> 
                                     <label> Marks Obtained</label>
-                                    <span>52</span>
+                                    <span>{{reportData?.assessment.length? reportData?.assessment[0].marksobtained : 0}}</span>
                                 </li>
                             </ul>
                         </div>
@@ -72,29 +72,29 @@
                             <label>Weekly Score</label>
                         </div>
                         <ul class="weeklyScoreList">
-                            <li *ngFor="let item of SelfDuration" [class.active]="item.isActive" (click)="viewTopicDetails(item,SelfDuration)">
-                                <label>{{item.Week}}</label>
+                            <li *ngFor="let item of reportData?.module" [class.active]="item.isActive" (click)="viewTopicDetails(item)">
+                                <label>{{item.week}}</label>
                                 <div class="progressStatus">
                                     <circle-progress 
-                                    [titleFontSize] = "14" [titleFontWeight] = "600" [showUnits]= "true" [percent]="item.Percentage"
+                                    [titleFontSize] = "14" [titleFontWeight] = "600" [showUnits]= "true" [percent]="item?.selflearningpercentage"
                                     [radius]=25  [space]=-6 [outerStrokeGradient]=true [outerStrokeWidth]=6 [outerStrokeColor]='item.Percentage?"#00A99D":"#FF5F25"'
                                     [outerStrokeGradientStopColor]="'#5AB64C'" [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]=6 [clockwise]="false" [startFromZero]="false" [lazy]="true"
                                     [animation]="true" [animationDuration]="300" [responsive]="true" [showSubtitle]="false" >
                                     </circle-progress>
                                 </div>
                                 <div class="scoreCount">
-                                    <label>{{item.WeeklyScore}}</label>
-                                    <div class="popoverInfoFinal">
-                                        <button class="popover-info">
-                                          <img alt="" src="https://assets.lntedutech.com/application_images/Group 14025.svg" />
+                                    <label>{{item.weekScore == '00' ? 0 : item.weekScore}}</label>
+                                    <div class="popoverInfoFinal" (mouseover)="viewInfoIcon(item, 'weekly')" (mouseleave)="viewInfoIcon(null, 'weekly')">
+                                        <button class="popover-info" (mouseover)="viewInfoIcon(item, 'weekly')">
+                                          <img alt="" src="https://assets.lntedutech.com/application_images/Group 14025.svg"/>
                                         </button>
                                         <div class="popoverContainer">
-                                          <div class="items">{{'(A) Topics Completed - ' | translate}}<span>5/5</span></div>
-                                          <div class="items">{{'(B) Estimated Duration - ' | translate}}<span>62 Mins</span></div>
-                                          <div class="items">{{'(C) Actual Duration - ' | translate}}<span>128 Mins</span></div>
+                                          <div class="items">{{'(A) Topics Completed - ' | translate}}<span>{{viewInfo?.selflearning.completed_topic}}/{{viewInfo?.selflearning.no_of_topic}}</span></div>
+                                          <div class="items">{{'(B) Estimated Duration - ' | translate}}<span>{{viewInfo?.selflearning.totalDuration}} Mins</span></div>
+                                          <div class="items">{{'(C) Actual Duration - ' | translate}}<span>{{viewInfo?.selflearning.completedDuration}} Mins</span></div>
                                           <div class="calculation">{{'Calculation' | translate}}</div>
                                           <div class="calcFormula">= (C/B) x 0.5 x 100</div>
-                                          <div class="calcPercentage">= 103.2</div>
+                                          <div class="calcPercentage">= {{item.weekScore}}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -102,7 +102,7 @@
                         </ul>
                     </div>
                     <div class="activeScoreDetails">
-                        <h1 class="tableHeading">Duration & Topics Information</h1>
+                        <h1 class="tableHeading">Duration & Topics Information </h1>
                         <mat-card class="durationCard">
                             <div class="durInfo">                               
                                 <div class="durationLeft">
@@ -114,11 +114,11 @@
                                 <div class="durationRight">
                                     <div class="durationDetails">
                                         <h1 class="commonHeader">Estimated Duration</h1>
-                                        <h1 class="commonValue">{{topicinfo.duration.estimated}}</h1>
+                                        <h1 class="commonValue">{{topicinfo?.selflearning.actual_moduleduration}}</h1>
                                     </div>
                                     <div class="durationDetails">
                                         <h1 class="commonHeader headerGreen">Duration Spent</h1>
-                                        <h1 class="commonValue headerGreen">{{topicinfo.duration.spent}}</h1>
+                                        <h1 class="commonValue headerGreen">{{topicinfo?.selflearning.completed_moduleduration}}</h1>
                                     </div>
                                 </div>
                             </div>
@@ -134,11 +134,11 @@
                                 <div class="durationRight">
                                     <div class="durationDetails">
                                         <h1 class="commonHeader">Total No. of topics</h1>
-                                        <h1 class="commonValue">{{topicinfo.topics.total}}</h1>
+                                        <h1 class="commonValue">{{topicinfo?.selflearning.no_of_topic}}</h1>
                                     </div>
                                     <div class="durationDetails">
                                         <h1 class="commonHeader headerGreen">No. of Topics Completed</h1>
-                                        <h1 class="commonValue headerGreen">{{topicinfo.topics.completed}}</h1>
+                                        <h1 class="commonValue headerGreen">{{topicinfo?.selflearning.completed_topic}}</h1>
                                     </div>
                                 </div>
                             </div>
@@ -156,7 +156,7 @@
                     </button>
                     <div class="popoverContainer">
                       <div class="items">Self Learning + Final Assessment</div>
-                      <div class="calcFormula">= Final Score</div>
+                      <div class="calcFormula">= {{reportData?.rawscore}}</div>
                     </div>
                 </div>
             </div>
@@ -168,7 +168,7 @@
                 [chartType]="doughnutChartType">
             </canvas>
                 <div class="Percentage">
-                    <label>89<span>%</span></label>
+                    <label>{{reportData?.rawscore}}<span>%</span></label>
                 </div>
             </div>
             <div class="gradePoints">
@@ -178,13 +178,13 @@
                         <figure>
                             <img src="https://assets.lntedutech.com/application_images/grade.webp" alt=""/>
                         </figure>
-                        <label class="scoreGrades">Grade<span>C</span></label>
+                        <label class="scoreGrades">Grade<span>{{reportData?.grade}}</span></label>
                     </div>
                     <div class="points">
                         <figure>
                             <img src="https://assets.lntedutech.com/application_images/points.webp" alt=""/>
                         </figure>
-                        <label class="scorePoints">Points<span>07</span>
+                        <label class="scorePoints">Points<span>{{reportData?.gradepoint}}</span>
                         </label>
                     </div>
                 </div>
@@ -192,3 +192,51 @@
         </div>
     </div>
 </div>
+
+  
+  <div class="assessmentContainer" *ngIf="!showreport">
+    <ul class="breadcrumb">
+        <li><em (click)="backButton()" class="lxp-Go backArrow"></em> {{routerDetails.name}} </li>
+        <li>{{'Assessment Report' | translate}}</li>
+    </ul>
+    <div class="progressionContainer">
+        <div class="leftSelf">
+            <div class="d-flex justify-content-between" style="width: 100%;">
+                <div class="item" style="width: 48%;" *ngFor="let item of [0,1]">
+                    <div>
+                      <ngx-skeleton-loader count="3" animation="pulse" [theme]="{ display: 'block', 'background-color': '#d2d1d1', width: '100%' , height: '40px'}"></ngx-skeleton-loader>
+                    </div>
+                </div>
+              </div>
+
+              <div class="selfProgressionScore">
+                <div class="d-flex justify-content-between" style="width: 100%;">
+                    <div class="item" style="width: 48%;" *ngFor="let item of [0,1]">
+                        <div>
+                          <ngx-skeleton-loader count="3" animation="pulse" [theme]="{ display: 'block', 'background-color': '#d2d1d1', width: '100%' , height: '40px'}"></ngx-skeleton-loader>
+                        </div>
+                    </div>
+                  </div>
+
+              </div>
+        </div>
+        <div class="rightScore">
+            <div class="d-flex justify-content-between" style="width: 100%;">
+                <div class="item" style="width: 100%;">
+                    <div>
+                      <ngx-skeleton-loader count="3" animation="pulse" [theme]="{ display: 'block', 'background-color': '#d2d1d1', width: '100%' , height: '40px'}"></ngx-skeleton-loader>
+                    </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="assessmentContainer"  *ngIf="noDataCard">
+        <div  class="noCard">
+            <figure>
+              <img src="https://assets.lntedutech.com/application_images/noquiz.webp" alt="quiz">
+            </figure>
+            <p>{{'No Records Found!!' }}</p>
+          </div>
+        </div>
