@@ -70,6 +70,7 @@ export class AssessmentReportB2cComponent implements OnInit {
       this.routerDetails = res
     });
     this.getCourseReport(this.routerDetails);
+    
   };
 
   getCourseReport(data){
@@ -84,6 +85,7 @@ export class AssessmentReportB2cComponent implements OnInit {
       if(result.data && result.data.get_GTU_assess_report && result.data.get_GTU_assess_report.success && result.data.get_GTU_assess_report.data.length){
      this.reportData = result.data['get_GTU_assess_report'].data[0];
      this.reportData.gradepoint = (this.reportData.gradepoint.toString()).padStart(2,0)
+     this.reportData.module[0].isActive =true;
      this.topicinfo = this.reportData.module[0];
      let chartManipulation = 100 - this.reportData?.rawscore;
     //  if(chartManipulation === 0){
@@ -103,7 +105,14 @@ export class AssessmentReportB2cComponent implements OnInit {
 
 
   viewTopicDetails(item) {
+    this.reportData.module.forEach(element => {
+      element.isActive =false;
+      if(element.week == item.week) {
+        item.isActive = true;
+      }
+    })
     this.topicinfo = item;
+
   }
 
   viewInfoIcon(item, type){
