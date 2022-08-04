@@ -123,15 +123,15 @@
                                         width:70%;
                                         font-family: Roboto;
                                         font-weight: 300;
-                                        // margin-right: 10px;
+                                        display: inline-block;
                                       }
                                       span{
-                                        display: inline-flex;
-                                        justify-content: space-evenly;
+                                        display: inline-block;
                                         color:$blackcolor;
                                         font-weight:500;
-                                        width:30%;
+                                        width:20%;
                                         font-size: 12px;
+                                        text-align: right;
                                         font-family: Roboto;
                                       }
                                 }
@@ -168,13 +168,12 @@
                                        color: $blackcolor;
                                         font-size: 12px;
                                         width:80%;
+                                        display: inline-block;
                                         font-family: Roboto;
                                         font-weight: 300;
-                                        // margin-right: 10px;
                                       }
                                       span{
-                                        display: inline-flex;
-                                        justify-content: space-evenly;
+                                        display: inline-block;
                                         font-family: Roboto;
                                         color:$blackcolor;
                                         font-weight:500;
@@ -252,7 +251,7 @@
                                 transition: all .3s ease;
                                 border-top: 0.5px solid #B7B7B7;
                                 // border-right: 0.5px solid #B7B7B7;
-                                border-bottom: 0.5px solid #B7B7B7;
+                                // border-bottom: 0.5px solid #B7B7B7;
                                 cursor: pointer;
                                 label {
                                     margin-left: 2em;
@@ -477,6 +476,7 @@
             padding: 2em 0.85em 1.5 0.85em;
             background-color: $color-white;
             border-radius: 10px;
+            position: relative;
             @include md {
                 width: 215px;
                 height: calc(100vh - 120px);
@@ -490,6 +490,21 @@
             }
             @media only screen and (min-width: 1540px) {
                 width: 405px;
+            }
+            .cornerdesign {
+                background-color: #5CB646;
+                position: absolute;
+                top: 0px;
+                right: 0px;
+                width: 40px;
+                border-bottom-left-radius: 20px;
+                border-top-right-radius: 15px;
+                height: 15px;
+}
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
             }
             .finalScoreLabel {
                 display: flex;
@@ -599,7 +614,10 @@
                       justify-content: center;
                       align-items: center;
                       img {
-                        max-width: 50%;
+                        max-width: 38%;
+                      }
+                      .pointsimg {
+                        max-width: 55%;
                       }
                     }
                     .scoreGrades {
@@ -652,7 +670,7 @@
                     font-size:55px;
                     font-family: 'Roboto';
                     font-weight:700 ;
-                    top:65%;
+                    top:75%;
                     left:37%;
                     text-align:center;
                     color: $blackcolor;
