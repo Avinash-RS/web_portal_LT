@@ -149,7 +149,7 @@
                       <div class="align-center">
                         <input class="form-control border-right-0" type='file' accept="image/png,image/jpeg,image/jpg,application/pdf,.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" id="upload-photo" #fileInput (change)="uploadAssignmentsFile($event,assignment.files)">
                         <button mat-stroked-button class="upload-btn" (click)="fileInput.click()" [disabled]="assignment.files.grade_status != 'Evaluated' && !assignment.files?.enableUpload" *ngIf="assignment.files.grade_status !== 'Evaluated'"> <mat-icon class="icon-color m-t-m-2">add</mat-icon> {{'Upload files' | translate}} </button>
-                        <p class="uploadMessage" *ngIf="assignment.files.grade_status !== 'Evaluated'" >{{'Max File Size : 10 MB, Format : JPEG,JPG,PNG,PDF,XLS,CSV' | translate}}</p>
+                        <p class="uploadMessage" *ngIf="assignment.files.grade_status !== 'Evaluated'" >{{'Max File Size : 10 MB, Format : JPEG,JPG,PNG,PDF,XLS,XLSX,CSV' | translate}}</p>
                         <div>
 
                           <ng-container *ngIf="assignment?.files?.filename">
@@ -317,7 +317,7 @@
                       <input type="file" accept="video/mp4,video/quicktime,application/pdf,.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" style="display: none" #videoInput [(ngModel)]="fileName" (change)="uploadDocument($event,itrdata)" />
                         <button class=""uploadbtn *ngIf="itrdata.submit_status == 'notsubmitted'" mat-stroked-button [disabled]="perform.performSubmitType == false || perform.itrationStarted == false" class="upload-btn" (click)="uploadDocuments($event, itrdata, perform, submitType = 'upload')">
                         <mat-icon class="icon-color m-t-m-2 addIcon">add</mat-icon> <span>{{'Upload' | translate}}</span> </button>
-                        <p class="uploadMessage" *ngIf="itrdata.submit_status == 'notsubmitted'" >{{'Max File Size : 150 MB, Format : MP4, MOV, PDF, XLS, CSV' | translate}}</p>
+                        <p class="uploadMessage" *ngIf="itrdata.submit_status == 'notsubmitted'" >{{'Max File Size : 150 MB, Format : MP4, MOV, PDF, XLS, XLSX,CSV' | translate}}</p>
                       <button mat-stroked-button class="submit-btn mt-2"
                         *ngIf="itrdata.submit_status == 'notsubmitted' && itrdata.videodetails.length > 0 && (perform.itrationStarted && perform.performSubmitType)"
                         (click)="submitType = 'submit'; submitDeleteVideo({}, itrdata, perform.performActivity)">
@@ -569,7 +569,7 @@
                           <mat-icon class="icon-color m-t-m-2">add</mat-icon> {{'Add your files' | translate}} 
                         </button>
 
-                        <p class="uploadMessage" *ngIf="project.projectActivity.submitAction !== 'submit'" >{{'Max File Size : 150 MB, Format : JPEG,PNG,PDF,MP4,MOV,XLS,CSV' | translate}}</p>
+                        <p class="uploadMessage" *ngIf="project.projectActivity.submitAction !== 'submit'" >{{'Max File Size : 150 MB, Format : JPEG,PNG,PDF,MP4,MOV,XLS,XLSX,CSV' | translate}}</p>
 
                         <button mat-stroked-button class="submit-btn" [disabled]="project.submitType == false || project.enableSubmit == false" (click)="learnerSumbitdeleteVideo(project, '' ,'submit')" *ngIf="(project.projectActivity.submit_status == 'notsubmitted' || project.projectActivity.submit_status == 'late') && project.projectActivity.videodetails.length > 0 && project.submitType == true && project.projectActivity.submitAction !== 'submit'">{{'Submit' | translate}}</button>
                       
