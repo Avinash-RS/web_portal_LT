@@ -597,7 +597,7 @@
                                 
                                   <em class="lxp-PlayCircle imageIcon" *ngIf="video.doc_type =='video/mp4' || video.doc_type =='video/quicktime'"></em>
                               
-                                  <em class="lxp-pdf pdfIcon"*ngIf="video.doc_type =='application/pdf' || video.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"></em>
+                                  <em class="lxp-pdf pdfIcon"*ngIf="video.doc_type =='application/pdf'"></em>
 
                                   <em class="lxp-ExcelFile imageIcon" *ngIf="video.doc_type == 'text/csv' || video.doc_type == 'application/vnd.ms-excel' || video.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"></em>
 
@@ -619,7 +619,7 @@
 
                                             <span class="text-white actionBtn" *ngIf="video.doc_type =='video/mp4' || video.doc_type =='video/quicktime'">Play</span>
 
-                                            <span class="text-white actionBtn" *ngIf="video.doc_type == 'image/jpeg' || video.doc_type == 'application/pdf' || video.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' || video.doc_type == 'image/jpg' || video.doc_type == 'image/png'">View</span>
+                                            <span class="text-white actionBtn" *ngIf="video.doc_type == 'image/jpeg' || video.doc_type == 'application/pdf' ||  video.doc_type == 'image/jpg' || video.doc_type == 'image/png'">View</span>
 
                                           </div>
                                           <div class="col-7 text-center pr-0 colAction" (click)="downloadProject(video.videourl + blobKey, video.name)">
