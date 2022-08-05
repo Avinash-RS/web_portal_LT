@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
     pullDrag: false,
     dots: true,
     autoplaySpeed: 500,
-    dotsSpeed: 500,
+    dotsSpeed: 1000,
     autoplayHoverPause: true,
     slideBy: 1,
     navText: ['', ''],
