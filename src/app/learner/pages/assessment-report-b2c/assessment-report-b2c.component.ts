@@ -24,7 +24,7 @@ export class AssessmentReportB2cComponent implements OnInit {
   public doughnutChartLabels: Label = [];
   chartData: ChartDataSets[] = [
     {
-      data: [60,0],
+      data: [100,0],
       backgroundColor: [
         "#5CB646","#848484"
       ],
@@ -88,10 +88,7 @@ export class AssessmentReportB2cComponent implements OnInit {
      this.reportData.module[0].isActive =true;
      this.topicinfo = this.reportData.module[0];
      let chartManipulation = 100 - this.reportData?.rawscore;
-    //  if(chartManipulation === 0){
-    //   this.chartData[0].data = [60, 0]
-    //  }                               //100- 0 = 100--> 0%
-     this.chartData[0].data = [60, chartManipulation] //100-100 = 0 is 100%
+     this.chartData[0].data = [this.reportData?.rawscore, chartManipulation];
      this.showreport = true;
      this.noDataCard = false;
     }else{
