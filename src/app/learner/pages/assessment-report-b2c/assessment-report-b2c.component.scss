@@ -495,7 +495,6 @@
                 width: 405px;
             }
             .cornerdesign {
-                background-color: #5CB646;
                 position: absolute;
                 top: 0px;
                 right: 0px;
@@ -503,7 +502,17 @@
                 border-bottom-left-radius: 20px;
                 border-top-right-radius: 15px;
                 height: 15px;
-}
+                & .Color1 {
+                    background-color: $orangecircle;
+                }
+                &.Color2 {
+                    background-color: $lightshadeblue;
+                }
+                &.Color3 {
+                    background-color: $GreenColor1;
+                }
+            
+            }
 * {
     box-sizing: border-box;
     padding: 0;

@@ -152,8 +152,8 @@
                 </div>
             </div>
         </div>
-        <div class="rightScore">
-            <div class="cornerdesign">
+        <div class="rightScore"> 
+            <div class="cornerdesign" [ngClass]="reportData?.rawscore <=50 ? 'Color1' : (reportData?.rawscore >50 && reportData?.rawscore <=80 ? 'Color2' :'Color3')">
             </div>
             <div class="finalScoreLabel">
                 <h1 class="ScoreHeading">Final Score</h1>
@@ -183,13 +183,13 @@
                 <div class="gadeContainer">
                     <div  class="grade">
                         <figure>
-                            <img src="../../../../assets/images/grade.png" alt=""/>
+                            <img src="https://assets.lntedutech.com/application_images/gradeicon2.webp" alt=""/>
                         </figure>
                         <label class="scoreGrades">Grade<span>{{reportData?.grade}}</span></label>
                     </div>
                     <div class="points">
                         <figure>
-                            <img  class=" pointsimg"src="../../../../assets/images/points.png" alt=""/>
+                            <img class="pointsimg" src="https://assets.lntedutech.com/application_images/gradeicon1.webp" alt=""/>
                         </figure>
                         <label class="scorePoints">Points<span>{{reportData?.gradepoint}}</span>
                         </label>
