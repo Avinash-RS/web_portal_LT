@@ -536,6 +536,9 @@ export class ActivitiesComponent implements OnInit {
 
 
   projectPreviewDoc(templateRef: TemplateRef<any>, videoDialog, path, type) {
+    if(path.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'){
+      return false;
+    }
     if (type === 'material') {
       if (path.doc_type !== 'video/mp4' && path.doc_type !== 'video/quicktime') {
         this.dialog.open(templateRef, {
