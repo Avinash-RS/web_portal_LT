@@ -97,6 +97,9 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+  .lxp-Topics:before {
+    content: "\e97a";
+  }
   .lxp-CourseType:before {
     content: "\e979";
   }

@@ -364,7 +364,7 @@
                         }
                         @include xl {
                             width: 345px;
-                            height: 345px;
+                            height: 416px;
                         }
                         @media only screen and (min-width: 1540px) {
                             width: 385px;
@@ -439,22 +439,25 @@
                                         line-height: normal;
                                     }
                                     @include lg {
-                                        width: 65%;
+                                        width: 60%;
                                         line-height: 1.8;
                                     }
                                     .durationDetails {
                                         display: flex;
+                                        // align-items: center;
                                         justify-content: space-between;
                                         line-height: 1.2;          
                                     }
                                     .commonHeader {
                                         font-size: 12px;
                                         font-weight: 500;
+                                        line-height: 1.8;
                                     }
                                     .commonValue {
                                         font-size: 14px;
                                         font-weight: 500;
-                                        margin-left: 10px;
+                                        margin-right: 10px;
+                                        // margin-left: 10px;
                                     }
                                     .headerGreen {
                                         color: $green1;
@@ -471,9 +474,9 @@
             height: 100%;
             order: 2;
             box-shadow: 1px 3px 7px $blackshade1;
-            padding: 20px;
+            padding: 2em;
             // position: relative;
-            padding: 2em 0.85em 1.5 0.85em;
+            // padding: 2em 0.85em 1.5 0.85em;
             background-color: $color-white;
             border-radius: 10px;
             position: relative;
@@ -492,7 +495,6 @@
                 width: 405px;
             }
             .cornerdesign {
-                background-color: #5CB646;
                 position: absolute;
                 top: 0px;
                 right: 0px;
@@ -500,7 +502,17 @@
                 border-bottom-left-radius: 20px;
                 border-top-right-radius: 15px;
                 height: 15px;
-}
+                & .Color1 {
+                    background-color: $orangecircle;
+                }
+                &.Color2 {
+                    background-color: $lightshadeblue;
+                }
+                &.Color3 {
+                    background-color: $GreenColor1;
+                }
+            
+            }
 * {
     box-sizing: border-box;
     padding: 0;
