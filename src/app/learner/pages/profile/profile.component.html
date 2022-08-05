@@ -293,8 +293,7 @@
       <p class=" f_size_14">{{'The password should not be last password' | translate}}</p>
       <mat-form-field class="w-100" appearance="outline">
         <mat-label class="labe l-color">{{'Enter New password' | translate}}</mat-label>
-        <input onpaste="return false" matInput [placeholder]="'Enter password' | translate" [type]="showNew ? 'password' : 'text'" formControlName="newpassword" 
-        onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false"[ngClass]="{ 'is-invalid': c.newpassword.touched && c.newpassword.errors }" (keyup)="change($event)">
+        <input onpaste="return false" matInput [placeholder]="'Enter password' | translate" [type]="showNew ? 'password' : 'text'" formControlName="newpassword" onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false"[ngClass]="{ 'is-invalid': c.newpassword.touched && c.newpassword.errors }" (keyup)="change($event)" required>
         <span mat-icon-button matSuffix (click)="showNew = !showNew" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="showNew">
           <em class="icon-color" [ngClass]="showNew ? 'lxp-VisibilityOff' : 'lxp-Visibility'"></em>
         </span>
