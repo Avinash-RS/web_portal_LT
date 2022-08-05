@@ -11,25 +11,28 @@
                     <h1>Self Learning Progression</h1>
                     <div class="selfContent">
                         <div class="percentageCircle">
-                            <circle-progress  percent="{{reportData?.totalWeekScore}}" [title]="" [suubtitle]="" [titleFontSize]="10" [titleFontWeight]="600" [showUnits]="false" [clockwise]="false"
-                                [radius]=26 [space]=-10 [outerStrokeGradient]=true [outerStrokeWidth]=10
-                                [outerStrokeColor]="'#5AB64C'" [outerStrokeGradientStopColor]="'#5AB64C'" [innerStrokeColor]="'#e7e8ea'"
-                                [innerStrokeWidth]=10 [animation]="true" [animationDuration]="300" [responsive]="true"[subtitle]="reportData?.totalWeekScore  + '/ ' + reportData?.total_slf_learning_pts" [showSubtitle]="true" subtitleFontWeight=800 [showTitle]="false" [subtitleColor]="'#333333'">
+                            <circle-progress percent="{{reportData?.totalWeekScore}}" [title]="" [suubtitle]="" [titleFontSize]="10"
+                                [titleFontWeight]="600" [clockwise]="false" [showUnits]="false" [radius]=26 [outerStrokeGradient]=true [outerStrokeWidth]=10 [space]=-10
+                                [innerStrokeWidth]=10 outerStrokeLinecap=square [outerStrokeColor]="'#5AB64C'"
+                                [outerStrokeGradientStopColor]="'#5AB64C'" [innerStrokeColor]="'#e7e8ea'" [animation]="true"
+                                [animationDuration]="300" [responsive]="true"
+                                [subtitle]="reportData?.totalWeekScore  + '/ ' + reportData?.total_slf_learning_pts" [showSubtitle]="true"
+                                subtitleFontWeight=800 [showTitle]="false" [subtitleColor]="'#333333'">
                             </circle-progress>
                         </div>
                         <div class="textContent">
                             <ul>
                                 <li>
-                                    <label>No. of weeks elapsed</label>
+                                    <label>No. of Weeks Elapsed</label>
                                     <span>{{reportData?.current_week}}/{{reportData?.total_week}}</span>
                                     <!-- <label class="contentlist">No. of weeks elapsed<span>05/08</span></label> -->
                                 </li>
                                 <li> 
-                                    <label> No. of topics completed </label>
+                                    <label> No. of Topics Completed </label>
                                     <span>{{reportData?.completed_topic}}</span>
                                 </li>
                                 <li> 
-                                    <label>{{'Total duration spent' | translate}} </label>
+                                    <label>{{'Total Duration Spent' | translate}} </label>
                                     <span>{{reportData?.total_duration_spent}}</span>
                                 </li>
                             </ul>
@@ -40,11 +43,13 @@
                     <h1>Final Assessment</h1>
                     <div class="finalContent">
                         <div class="percentageCircle">
-                            <circle-progress  percent="{{reportData?.assessment[0].marksobtained}}"  [title]="" [titleFontSize]="10" [titleFontWeight]="600" [showUnits]="false"
-                                [clockwise]="false" [radius]=26 [space]=-10 [outerStrokeGradient]=true [outerStrokeWidth]=10
-                                [outerStrokeColor]="'#4FC5EE'" [outerStrokeGradientStopColor]="'#4FC5EE'"
-                                [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]=10 [animation]="true" [animationDuration]="300"
-                                [responsive]="true" [subtitle]="reportData?.assessment[0].marksobtained  + '/ ' + reportData?.assessment[0].totalmarks" [showSubtitle]="true" subtitleFontWeight=800 [showTitle]="false" [subtitleColor]="'#333333'"></circle-progress>
+                            <circle-progress percent="{{reportData?.assessment[0].marksobtained}}" [title]="" [titleFontSize]="10"
+                                [titleFontWeight]="600" [clockwise]="false" [showUnits]="false" [radius]=26 outerStrokeLinecap=square [space]=-10
+                                [outerStrokeGradient]=true [outerStrokeWidth]=10 [outerStrokeColor]="'#4FC5EE'"
+                                [outerStrokeGradientStopColor]="'#4FC5EE'" [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]=10 [animation]="true"
+                                [animationDuration]="300" [responsive]="true"
+                                [subtitle]="reportData?.assessment[0].marksobtained  + '/ ' + reportData?.assessment[0].totalmarks"
+                                [showSubtitle]="true" subtitleFontWeight=800 [showTitle]="false" [subtitleColor]="'#333333'"></circle-progress>
                         </div>
                         <div class="textfinal">
                             <ul>
@@ -72,13 +77,13 @@
                             <label>Weekly Score</label>
                         </div>
                         <ul class="weeklyScoreList">
-                            <li *ngFor="let item of reportData?.module" [class.active]="item.isActive" (click)="viewTopicDetails(item)">
+                            <li *ngFor="let item of reportData?.module" [class.active]=item.isActive (click)="viewTopicDetails(item)">
                                 <label>{{item.week}}</label>
                                 <div class="progressStatus">
                                     <circle-progress 
-                                    [titleFontSize] = "14" [titleFontWeight] = "600" [showUnits]= "true" [percent]="item?.selflearningpercentage"
-                                    [radius]=25  [space]=-6 [outerStrokeGradient]=true [outerStrokeWidth]=6 [outerStrokeColor]='item.Percentage?"#00A99D":"#FF5F25"'
-                                    [outerStrokeGradientStopColor]="'#5AB64C'" [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]=6 [clockwise]="false" [startFromZero]="false" [lazy]="true"
+                                    [titleFontSize] = "14" [clockwise]="false"  [titleFontWeight] = "600" [showUnits]= "true" [percent]="item?.selflearningpercentage"
+                                    [radius]=25 [startFromZero] = false [space]=-6 [outerStrokeGradient]=true [outerStrokeWidth]=6 [outerStrokeColor]='item.Percentage?"#FF5F25":"#00A99D"'
+                                    [outerStrokeGradientStopColor]="'#5AB64C'" [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]=6  [lazy]="true"
                                     [animation]="true" [animationDuration]="300" [responsive]="true" [showSubtitle]="false" >
                                     </circle-progress>
                                 </div>
@@ -133,7 +138,7 @@
                                 </div>
                                 <div class="durationRight">
                                     <div class="durationDetails">
-                                        <h1 class="commonHeader">Total No. of topics</h1>
+                                        <h1 class="commonHeader">Total No. of Topics</h1>
                                         <h1 class="commonValue">{{topicinfo?.selflearning.no_of_topic}}</h1>
                                     </div>
                                     <div class="durationDetails">
@@ -148,6 +153,8 @@
             </div>
         </div>
         <div class="rightScore">
+            <div class="cornerdesign">
+            </div>
             <div class="finalScoreLabel">
                 <h1 class="ScoreHeading">Final Score</h1>
                 <div class="popoverScore">
@@ -176,13 +183,13 @@
                 <div class="gadeContainer">
                     <div  class="grade">
                         <figure>
-                            <img src="https://assets.lntedutech.com/application_images/grade.webp" alt=""/>
+                            <img src="../../../../assets/images/grade.png" alt=""/>
                         </figure>
                         <label class="scoreGrades">Grade<span>{{reportData?.grade}}</span></label>
                     </div>
                     <div class="points">
                         <figure>
-                            <img src="https://assets.lntedutech.com/application_images/points.webp" alt=""/>
+                            <img  class=" pointsimg"src="../../../../assets/images/points.png" alt=""/>
                         </figure>
                         <label class="scorePoints">Points<span>{{reportData?.gradepoint}}</span>
                         </label>
