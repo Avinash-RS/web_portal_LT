@@ -4,7 +4,7 @@
   background-image: url("../../../../assets/images/login_BG.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -32,10 +32,12 @@
     max-width: 1400px;
     margin: 0 auto;
     width: 90%;
+    display: flex;
+    flex-wrap: wrap;
     flex-grow: 1;
-    padding: 2em 0;
+    padding: 15px 0;
     z-index: 2;
-    @include xl {
+    @include lg {
       padding: 2em 0;
     }
     @media only screen and (min-width: 1540px) {
@@ -45,50 +47,6 @@
       padding: 8em 0;
     }
   }
-  footer {
-    position: relative;
-    border-top: 1px solid rgba(255, 255, 255, 0.35);
-    padding: 10px 0;
-    z-index: 2;
-    .container {
-      max-width: 1400px;
-      width: 90%;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      .copyrights {
-        span {
-          color: $white-grey;
-          font-size: 12px;
-          font-weight: 300;
-          line-height: normal;
-        }
-      }
-      .policy {
-        ul {
-          list-style-type: none;
-          display: flex;
-          li {
-            margin-right: 10px;
-            padding-right: 10px;
-            border-right: 1px solid $color-white;
-            line-height: normal;
-            a {
-              text-decoration: none;
-              color: $color-white;
-              font-size: 12px;
-              font-weight: 300;
-            }
-            &:last-child {
-              border-right: none;
-              margin-right: 0;
-              padding-right: 0;
-            }
-          }
-        }
-      }
-    }
-  }
   .carouselSection {
     width: 60%;
     padding: 30px 0;
@@ -96,14 +54,26 @@
     .logo {
       margin: 0;
     }
-    @include lg {
+    @include md {
       display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 100%;
+      order: 2;
+    }
+    @include lg {
+      width: 60%;
+      order: 1;
     }
     @include xl {
       width: 65%;
     }
     .topImage {
       width: 130px;
+      display: none;
+      @include lg {
+        display: block;
+      }
       .logo {
         img {
           width: 100%;
@@ -111,11 +81,22 @@
       }
     }
     .middleImage {
-      width: 70%;
+      width: 90%;
       flex-grow: 1;
       position: relative;
+      @include lg {
+        width: 85%;
+      }
+      @include xl {
+        width: 70%;
+      }
       > div {
-        margin-top: 10vh;
+        @include md {
+          margin-top: 20px;
+        }
+        @include lg {
+          margin-top: 10vh;
+        }
         @media only screen and (min-width: 1540px) {
           margin-top: 15vh;
         }
@@ -215,9 +196,17 @@
   }
 
   .loginSection {
-    height: 100%;
+    width: 100%;
+    // height: 100%;
     display: flex;
     flex-direction: column;
+    @include md {
+      order: 1;
+    }
+    @include lg {
+      order: 2;
+      width: 40%;
+    }
     @include xl {
       width: 35%;
     }
@@ -240,6 +229,7 @@
     }
     > div {
       height: 100%;
+      flex-grow: 1;
       background-color: $grey1;
       border-radius: 10px;
       box-shadow: 0 0 55px rgba(0, 0, 0, 1);
@@ -256,14 +246,14 @@
         max-width: initial;
       }
       .logo {
-        width: 50%;
+        width: 30%;
         text-align: center;
-        margin: 2em 0 4em 0;
+        margin: 15px 0;
         img {
           max-width: 100%;
         }
-        @media only screen and (min-width: 568px) {
-          width: 35%;
+        @include md {
+          width: 25%;
         }
         @media only screen and (min-width: 992px) {
             display: none;
@@ -272,16 +262,32 @@
       .signIn {
         padding-bottom: 30px;
         h1 {
-          font-size: 42px;
+          font-size: 32px;
           font-weight: 500;
           color: #000000;
-          line-height: 40px;
-          margin-bottom: 30px;
+          line-height: 27px;
+          margin-bottom: 25px;
           text-align: left;
+          @include md {
+            font-size: 37px;
+            line-height: 30px;
+            margin-bottom: 20px;
+          }
+          @include lg {
+            margin-bottom: 30px;
+            line-height: 40px;
+            font-size: 42px;
+          }
           span {
-            font-size: 28px;
+            font-size: 18px;
             font-weight: 300;
             display: block;
+            @include md {
+              font-size: 23px;
+            }
+            @include lg {
+              font-size: 28px;
+            }
           }
         }
         .gradientBtn {
@@ -370,11 +376,73 @@
       margin-bottom: 1em;
     }
   }
+
   .forgot {
     font-size: 12px;
     font-weight: 700;
     color: $lightshadeblue;
     cursor: pointer;
+  }
+
+  //Footer
+  footer {
+    position: relative;
+    border-top: 1px solid rgba(255, 255, 255, 0.35);
+    padding: 10px 0;
+    z-index: 2;
+    .container {
+      max-width: 1400px;
+      width: 90%;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      .copyrights {
+        width: 100%;
+        text-align: center;
+        @include lg {
+          text-align: left;
+          width: 50%;
+        }
+        span {
+          color: $white-grey;
+          font-size: 12px;
+          font-weight: 300;
+          line-height: normal;
+        }
+      }
+      .policy {
+        width: 100%;
+        @include lg {
+          width: 50%;
+        }
+        ul {
+          list-style-type: none;
+          display: flex;
+          justify-content: center;
+          @include lg {
+            justify-content: flex-start;
+          }
+          li {
+            margin-right: 10px;
+            padding-right: 10px;
+            border-right: 1px solid $color-white;
+            line-height: normal;
+            a {
+              text-decoration: none;
+              color: $color-white;
+              font-size: 12px;
+              font-weight: 300;
+            }
+            &:last-child {
+              border-right: none;
+              margin-right: 0;
+              padding-right: 0;
+            }
+          }
+        }
+      }
+    }
   }
   .dontHaveAccount {
     text-align: center;
