@@ -1,33 +1,71 @@
 <div class="loginWrapper">
-    <mat-card class="h-100 loginContainer d-flex justify-content-start">
-      <div class="brandLogo d-lg-flex justify-content-between align-items-center flex-column">
+    <div class="loginContainer d-flex justify-content-start">
+
+      <div class="carouselSection">
         <div class="topImage">
           <figure class="logo">
-            <img alt="" src="https://assets.lntedutech.com/application_images/edutech-logo.webp">
+            <img alt="" src="../../../../assets/images/edutech-logo.png" />
           </figure>
         </div>
         <div class="middleImage">
-          <figure class="obstacles">
-            <img src="https://assets.lntedutech.com/application_images/entryimage.webp" alt="" />
-          </figure>
-        </div>
-        <div class="downloadApp d-flex justify-content-center align-items-center">
-          <span>{{'Download our Mobile app' | translate}}</span>
-          <figure class="googlePlay">
-            <img alt="" src="https://assets.lntedutech.com/application_images/googleplay.webp">
-          </figure>
-          
+          <div>
+            <owl-carousel-o [options]="carourselSection" class="questionList">
+              <ng-template carouselSlide>
+                <div class="promotionSlides">
+                  <h3>
+                    <span>Application</span> 
+                    <span>oriented courses</span>
+                  </h3>
+                  <p>All courses are designed for learner engagement to promote effective learning through hybrid delivery modes. The College Connect series has an immersive learning experience and a competitive edge for participating students.</p>
+                  <a href="https://lntedutech.com/collegeconnect-courses/" target="dontopen" class="explore">Explore <em class="lxp-Right_Direction_Arrow"></em></a>
+                </div>
+              </ng-template>
+              <ng-template carouselSlide>
+                <div class="promotionSlides">
+                  <h3>
+                    <span>Professional</span>
+                    <span>Skilling</span>
+                  </h3>
+                  <p>Certification of workplace readiness in knowledge areas and various skills across Core Engineering, Coding & Industry 4.0 . The training enables learning best practices and industry benchmarks followed by L&T. Individuals and Employers stand to benefit from these programs designed for capability development, up-skilling and re-skilling.</p>
+                  <a href="https://lntedutech.com/professional-skilling/" target="dontopen" class="explore">Explore <em class="lxp-Right_Direction_Arrow"></em></a>
+                </div>
+              </ng-template>
+              <ng-template carouselSlide>
+                <div class="promotionSlides">
+                  <h3>
+                    <span>Assessments &</span>
+                    <span>Certifications</span>
+                  </h3>
+                  <p>Scientifically designed on the premise that Assessments help identify proficiency levels, cause improvement and Certifications indicate readiness in Knowledge, Skills, Abilities and Personality competencies, a variety of offerings in this category aids students, academic institutions and employers in the context of selection and development.</p>
+                  <a href="https://lntedutech.com/assessment/" target="dontopen" class="explore">Explore <em class="lxp-Right_Direction_Arrow"></em></a>
+                </div>
+              </ng-template>
+              <ng-template carouselSlide>
+                <div class="promotionSlides">
+                  <h3>
+                    <span>Skills</span>
+                    <span>Exchange</span>
+                  </h3>
+                  <p>L&T EduTech’s – Skills Exchange is a talent pool of pre-assessed and certified candidates for employers looking to hire. It contains detailed profiles of registered, skilled & talented individuals, derived via Assessments and Certifications. Employers can work directly with the colleges & institutions to conduct placement programs to complete the recruitment process.</p>
+                  <a href="https://lntedutech.com/skills-exchange/" target="dontopen" class="explore">Explore <em class="lxp-Right_Direction_Arrow"></em></a>
+                </div>
+              </ng-template>
+            </owl-carousel-o>
+          </div>
         </div>
       </div>
+
       <div class="loginSection">
-        <div class="signInContainer d-flex justify-content-center align-items-center flex-column h-100">
-          <figure class="logo">
-            <img alt="" src="https://assets.lntedutech.com/application_images/edutech-logo.webp">
-          </figure>
-          <!-- Auth Verification -->
-          <div class="authVerification">
-              <div *ngIf="!secondStep">
-                <h2>{{'Scan this QR Code' | translate}}</h2>
+        <figure class="logo">
+          <img alt="" src="../../../../assets/images/edutech-logo.png" />
+        </figure>
+        <span class="visitWebsite"><a href="https://lntedutech.com/" target="dontopen">www.lntedutech.com</a></span>
+        <div>
+          <div class="signInContainer d-flex justify-content-center align-items-center flex-column h-100">
+            <!-- Auth Verification -->
+            <div class="authVerification">
+              <div class="firstStep" *ngIf="!secondStep">
+                <h1><span>{{'Google' | translate}}</span> {{'Authenticator' | translate}}</h1>
                 <div class="qrCode">
                   <span>
                     <em></em>
@@ -38,7 +76,8 @@
                   </span>
                 </div>
                 <span class="download">
-                  {{'Download' | translate}} <span>&nbsp;{{'Google authenticator' | translate}}&nbsp;</span> {{'App in your mobile to scan this code' | translate}}
+                  {{'Scan this QR code using "Google authenticator"' | translate}}
+                  <!-- {{'Download' | translate}} <span>&nbsp;{{'Google authenticator' | translate}}&nbsp;</span> {{'App in your mobile to scan this code' | translate}} -->
                 </span>
                 <div class="gradientBtn">
                   <button id="login" mat-raised-button (click)="secondStep=true;">
@@ -47,9 +86,10 @@
                 </div>
               </div>
               <div class="secondStep" *ngIf="secondStep">
-                <h2 class="d-flex justify-content-center">{{'Enter the code generated in your Google Authenticator App' | translate}}</h2>
+                <h1><span>Enter</span>{{'OTP' | translate}}</h1>
+                <h4>Enter the code generated in your <br /><span>Google Authenticator</span> App</h4>
                 <div class="d-flex justify-content-center OTPInput mt-5 mb-5 otp">
-                    <ng-otp-input #authInput (onInputChange)="onAuthChange($event)" (keydown.enter)="verifyAuth()"  [config]="{length:6,allowNumbersOnly: true}"></ng-otp-input>
+                  <ng-otp-input #authInput (onInputChange)="onAuthChange($event)" (keydown.enter)="verifyAuth()"  [config]="{length:6,allowNumbersOnly: true}"></ng-otp-input>
                 </div>
                 <div class="d-flex justify-content-center mt-1">
                   <re-captcha  #captchaRef="reCaptcha" (resolved)="resolvedReset2FA($event)" (error)="onError($event)" errorMode="handled" [siteKey]="siteKey" size='invisible'></re-captcha>
@@ -58,9 +98,6 @@
                   <button id="login" mat-raised-button (click)="verifyAuth()">
                     <span *ngIf="!loader">{{'Verify' | translate}}</span>
                     <div *ngIf="loader" class="spinnerLoader">
-                      <!-- <div class="stage">
-                        <div class="dot-falling"></div>
-                      </div> -->
                     </div>
                   </button>
                   <span>
@@ -68,11 +105,48 @@
                   </span>
                 </div>
               </div>
-            <div class="dontHaveAccount">
+              <div class="dontHaveAccount">
                 <span>{{'Go back to ' | translate}}<a class="signup" (click)="backToIn()"> {{'Sign in' | translate}}</a></span>
               </div>
+              <div class="downloadApp d-flex justify-content-center align-items-center">
+                <figure class="googlePlay" (click)="openGooglePlay()">
+                  <img alt="" src="../../../../assets/images/googlePlay.png" />
+                </figure>
+                <figure class="playStore" (click)="openPlayStore()">
+                  <img alt="" src="../../../../assets/images/playstore.png" />
+                </figure>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </mat-card>
+    </div>
+    <footer>
+      <div class="left"></div>
+      <div class="right"></div>
+      <div class="container">
+        <div class="copyrights">
+          <span>© {{currentYear}} L&T EduTech. All rights reserved</span>
+        </div>
+        <div class="policy">
+          <ul>
+            <li>
+              <a href="https://lntedutech.com/support-form/" target="newTab">
+                <span>Technical Support</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://lntedutech.com/feedback-form/" target="newTab">
+                <span>Feedback</span>
+              </a>
+            </li>
+            <li>
+              <a class="privacyPolicy" href="https://lntedutech.com/privacy-policy-2/" target="privacyPolicy">
+                <span>Privacy policies</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </footer>
   </div>

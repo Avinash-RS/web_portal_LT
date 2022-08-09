@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { PlatformLocation } from '@angular/common' ;
 import * as CryptoJS from 'crypto-js';
 import { environment } from '../../../../environments/environment';
+import { OwlOptions } from 'ngx-owl-carousel-o';
 @Component({
   selector: 'app-new-home',
   templateUrl: './new-home.component.html',
@@ -28,6 +29,27 @@ export class NewHomeComponent implements OnInit {
     localStorage.clear();
     sessionStorage.clear();
   }
+  currentYear = new Date().getFullYear();
+  carourselSection: OwlOptions = {
+    loop: true,
+    autoplay: true,
+    mouseDrag: false,
+    touchDrag: false,
+    pullDrag: false,
+    dots: true,
+    autoplaySpeed: 500,
+    dotsSpeed: 1000,
+    margin: 20,
+    autoplayHoverPause: true,
+    slideBy: 1,
+    navText: ['', ''],
+    responsive: {
+      0: {
+        items: 1
+      },
+    },
+    nav: false
+  };
   @HostListener('window:popstate', ['$event'])
   clearStorage1($event: any) {
     localStorage.clear();
@@ -135,6 +157,13 @@ export class NewHomeComponent implements OnInit {
       err => {
         this.toastr.error('Something went wrong');
       });
+  }
+
+  openGooglePlay() {
+    window.open("https://play.google.com/store/apps/details?id=com.lntedutech.collegeconnect", 'googlePlay');
+  }
+  openPlayStore() {
+    window.open("https://apps.apple.com/in/app/l-t-edutech-collegeconnect/id1625255324", 'playStore');
   }
 }
 
