@@ -1,7 +1,7 @@
 @import "variable";
 
 .loginWrapper {
-  background-image: url("../../../../assets/images/login_BG.jpg");
+  background-image: url("https://assets.lntedutech.com/application_images/login-bg.webp");
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 100vh;
@@ -101,9 +101,6 @@
       @include xl {
         width: 70%;
       }
-      // @media only screen and (min-width: 1540px) {
-      //   width: 70%;
-      // }
       > div {
         @include md {
           margin-top: 30px;
@@ -270,10 +267,6 @@
       border-radius: 10px;
       box-shadow: 0 0 55px rgba(0, 0, 0, 1);
     }
-    // @media only screen and (max-width: 992px) {
-    //   width: 100%;
-    //   margin: 0 auto;
-    // }
     .signInContainer {
       width: 90%;
       margin: 0 auto;
@@ -283,7 +276,6 @@
         max-width: 400px;
       }
       .signIn, .forgotPassword {
-        // padding-bottom: 30px;
         h1 {
           font-size: 32px;
           font-weight: 500;
@@ -395,10 +387,6 @@
       margin-bottom: 1em;
     }
   }
-  .forgotPassword {
-
-  }
-
   .forgot {
     font-size: 12px;
     font-weight: 700;
@@ -618,94 +606,6 @@
       background-color: $blue;
   }
 }
-
-// dots css start
-
-// .snippet {
-//   text-align: initial;
-//   display: flex;
-//   justify-content: center;
-//   height: 26px;
-//   padding-top: 0.5em;
-// }
-// .dot-falling {
-//   position: relative;
-//   left: -9999px;
-//   width: 10px;
-//   height: 10px;
-//   font-size: 18px;
-//   border-radius: 5px;
-//   background-color: white;
-//   color: white;
-//   box-shadow: 9999px 0 0 0 white;
-//   animation: dotFalling 1s infinite linear;
-//   animation-delay: .1s;
-//   &::before, &::after {
-//     content: '';
-//     display: inline-block;
-//     position: absolute;
-//     top: 0;
-//   }
-//   &::before {
-//     width: 10px;
-//     height: 10px;
-//     border-radius: 5px;
-//     background-color: white;
-//     color: white;
-//     animation: dotFallingBefore 1s infinite linear;
-//     animation-delay: 0s;
-//   }
-//   &::after {
-//     width: 10px;
-//     height: 10px;
-//     border-radius: 5px;
-//     background-color: white;
-//     color: white;
-//     animation: dotFallingAfter 1s infinite linear;
-//     animation-delay: .2s;
-//   }
-// }
-// @keyframes dotFalling {
-//   0% {
-//     box-shadow: 9999px -15px 0 0 rgba(152, 128, 255, 0);
-//   }
-//   25%,
-//   50%,
-//   75% {
-//     box-shadow: 9999px 0 0 0 white;
-//   }
-//   100% {
-//     box-shadow: 9999px 15px 0 0 rgba(152, 128, 255, 0);
-//   }
-// }
-
-// @keyframes dotFallingBefore {
-//   0% {
-//     box-shadow: 9984px -15px 0 0 rgba(152, 128, 255, 0);
-//   }
-//   25%,
-//   50%,
-//   75% {
-//     box-shadow: 9984px 0 0 0 white;
-//   }
-//   100% {
-//     box-shadow: 9984px 15px 0 0 rgba(152, 128, 255, 0);
-//   }
-// }
-
-// @keyframes dotFallingAfter {
-//   0% {
-//     box-shadow: 10014px -15px 0 0 rgba(152, 128, 255, 0);
-//   }
-//   25%,
-//   50%,
-//   75% {
-//     box-shadow: 10014px 0 0 0 white;
-//   }
-//   100% {
-//     box-shadow: 10014px 15px 0 0 rgba(152, 128, 255, 0);
-//   }
-// }
 
 @keyframes hvr-icon-buzz {
   0% {
