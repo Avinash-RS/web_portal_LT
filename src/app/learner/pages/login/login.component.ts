@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
   registerSuccess = false;
   titleData = [];
   siteKey: any = environment.captachaSiteKey;
-  TopicsOptions: OwlOptions = {
+  carourselSection: OwlOptions = {
     loop: true,
     autoplay: true,
     mouseDrag: false,
@@ -50,7 +50,8 @@ export class LoginComponent implements OnInit {
     pullDrag: false,
     dots: true,
     autoplaySpeed: 500,
-    dotsSpeed: 500,
+    dotsSpeed: 1000,
+    margin: 20,
     autoplayHoverPause: true,
     slideBy: 1,
     navText: ['', ''],
@@ -592,8 +593,11 @@ export class LoginComponent implements OnInit {
     },1000)
   }
 
+  openGooglePlay() {
+    window.open("https://play.google.com/store/apps/details?id=com.lntedutech.collegeconnect", 'googlePlay');
+  }
   openPlayStore() {
-    window.open('https://play.google.com/store/apps/details?id=com.lntedutech.collegeconnect', 'playStore');
+    window.open("https://apps.apple.com/in/app/l-t-edutech-collegeconnect/id1625255324", 'playStore');
   }
 
   onClose() {

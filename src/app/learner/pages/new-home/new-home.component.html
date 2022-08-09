@@ -1,33 +1,55 @@
 <div class="loginWrapper">
-    <mat-card class="h-100 loginContainer d-flex justify-content-start">
-      <div class="brandLogo d-lg-flex justify-content-between align-items-center flex-column">
+    <div class="loginContainer d-flex justify-content-start">
+
+      <div class="carouselSection">
         <div class="topImage">
           <figure class="logo">
-            <img alt="" src="https://assets.lntedutech.com/application_images/edutech-logo.webp">
+            <img alt="" src="https://assets.lntedutech.com/application_images/edutech-logo.webp" />
           </figure>
         </div>
-        <div class="middleImage">
-          <figure class="obstacles">
-            <img src="https://assets.lntedutech.com/application_images/entryimage.webp" alt="" />
-          </figure>
-        </div>
-        <div class="downloadApp d-flex justify-content-center align-items-center">
-          <span>{{'Download our Mobile app' | translate}}</span>
-          <figure class="googlePlay">
-            <img alt="" src="https://assets.lntedutech.com/application_images/googleplay.webp">
-          </figure>
-          
+        <div class="stepsToFollow">
+          <div>
+            <h3>
+              <span>Steps to be followed to</span> 
+              <span>login for the first time</span>
+            </h3>
+            <ul>
+              <li class="animated fadeInDown">
+                <div><span>1</span></div> 
+                <div>In your mobile, install <a>'Google Authenticator'</a> from the Google Play Store or App Store</div>
+              </li>
+              <li class="animated fadeInDown delay1s">
+                <div><span>2</span></div>
+                <div>Click ' <img src="/assets/gPlus.png" alt="google plus" /> ' in Google Authenticator and select <strong>'Scan a QR code'</strong></div>
+              </li>
+              <li class="animated fadeInDown delay2s">
+                <div><span>3</span></div>
+                <div>Scan the QR code displayed on your screen and click <strong>'Next'</strong></div>
+              </li>
+              <li class="animated fadeInDown delay3s">
+                <div><span>4</span></div>
+                <div>Enter the 6 digit code displayed on your Google Authenticator and click <strong>'Verify'</strong></div>
+              </li>
+              <li class="animated fadeInDown delay4s">
+                <div><span>5</span></div>
+                <div>Carry out all the above mentioned steps in your personal device and do not delete the authenticator app. You would require to enter the 6 digit code everytime you login.</div>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
+
       <div class="loginSection">
-        <div class="signInContainer d-flex justify-content-center align-items-center flex-column h-100">
-          <figure class="logo">
-            <img alt="" src="https://assets.lntedutech.com/application_images/edutech-logo.webp">
-          </figure>
-          <!-- Auth Verification -->
-          <div class="authVerification">
-              <div *ngIf="!secondStep">
-                <h2>{{'Scan this QR Code' | translate}}</h2>
+        <figure class="logo">
+          <img alt="" src="https://assets.lntedutech.com/application_images/edutech-logo.webp" />
+        </figure>
+        <span class="visitWebsite"><a href="https://lntedutech.com/" target="dontopen">www.lntedutech.com</a></span>
+        <div>
+          <div class="signInContainer d-flex justify-content-center align-items-center flex-column h-100">
+            <!-- Auth Verification -->
+            <div class="authVerification">
+              <div class="firstStep" *ngIf="!secondStep">
+                <h1><span>{{'Google' | translate}}</span> {{'Authenticator' | translate}}</h1>
                 <div class="qrCode">
                   <span>
                     <em></em>
@@ -38,7 +60,8 @@
                   </span>
                 </div>
                 <span class="download">
-                  {{'Download' | translate}} <span>&nbsp;{{'Google authenticator' | translate}}&nbsp;</span> {{'App in your mobile to scan this code' | translate}}
+                  {{'Scan this QR code using "Google authenticator"' | translate}}
+                  <!-- {{'Download' | translate}} <span>&nbsp;{{'Google authenticator' | translate}}&nbsp;</span> {{'App in your mobile to scan this code' | translate}} -->
                 </span>
                 <div class="gradientBtn">
                   <button id="login" mat-raised-button (click)="secondStep=true;">
@@ -47,9 +70,10 @@
                 </div>
               </div>
               <div class="secondStep" *ngIf="secondStep">
-                <h2 class="d-flex justify-content-center">{{'Enter the code generated in your Google Authenticator App' | translate}}</h2>
+                <h1><span>Enter</span>{{'OTP' | translate}}</h1>
+                <h4>Enter the code generated in your <br /><span>Google Authenticator</span> App</h4>
                 <div class="d-flex justify-content-center OTPInput mt-5 mb-5 otp">
-                    <ng-otp-input #authInput (onInputChange)="onAuthChange($event)" (keydown.enter)="verifyAuth()"  [config]="{length:6,allowNumbersOnly: true}"></ng-otp-input>
+                  <ng-otp-input #authInput (onInputChange)="onAuthChange($event)" (keydown.enter)="verifyAuth()"  [config]="{length:6,allowNumbersOnly: true}"></ng-otp-input>
                 </div>
                 <div class="d-flex justify-content-center mt-1">
                   <re-captcha  #captchaRef="reCaptcha" (resolved)="resolvedReset2FA($event)" (error)="onError($event)" errorMode="handled" [siteKey]="siteKey" size='invisible'></re-captcha>
@@ -58,9 +82,6 @@
                   <button id="login" mat-raised-button (click)="verifyAuth()">
                     <span *ngIf="!loader">{{'Verify' | translate}}</span>
                     <div *ngIf="loader" class="spinnerLoader">
-                      <!-- <div class="stage">
-                        <div class="dot-falling"></div>
-                      </div> -->
                     </div>
                   </button>
                   <span>
@@ -68,11 +89,48 @@
                   </span>
                 </div>
               </div>
-            <div class="dontHaveAccount">
+              <div class="dontHaveAccount">
                 <span>{{'Go back to ' | translate}}<a class="signup" (click)="backToIn()"> {{'Sign in' | translate}}</a></span>
               </div>
+              <div class="downloadApp d-flex justify-content-center align-items-center">
+                <figure class="googlePlay" (click)="openGooglePlay()">
+                  <img alt="" src="https://assets.lntedutech.com/application_images/google-play.webp" />
+                </figure>
+                <figure class="playStore" (click)="openPlayStore()">
+                  <img alt="" src="https://assets.lntedutech.com/application_images/play-store.webp" />
+                </figure>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </mat-card>
+    </div>
+    <footer>
+      <div class="left"></div>
+      <div class="right"></div>
+      <div class="container">
+        <div class="copyrights">
+          <span>© {{currentYear}} L&T EduTech. All rights reserved</span>
+        </div>
+        <div class="policy">
+          <ul>
+            <li>
+              <a href="https://lntedutech.com/support-form/" target="newTab">
+                <span>Technical Support</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://lntedutech.com/feedback-form/" target="newTab">
+                <span>Feedback</span>
+              </a>
+            </li>
+            <li>
+              <a class="privacyPolicy" href="https://lntedutech.com/privacy-policy-2/" target="privacyPolicy">
+                <span>Privacy policies</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </footer>
   </div>
