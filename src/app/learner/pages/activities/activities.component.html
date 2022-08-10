@@ -96,9 +96,10 @@
                               </div>
                               <div class="row ml-0 mr-0 carouselRow">
                                 <div class="materialTxt">
-                                  <span class="carouselText" *ngIf="material.filename?.length > 19"
+                                  <span class="carouselText"matTooltip="{{material.filename}}" matTooltipClass="custom-mat-tooltip" >{{material.filename}}</span>
+                                  <!-- <span class="carouselText" *ngIf="material.filename?.length >= 19"
                                     matTooltip="{{material.filename}}" matTooltipClass="custom-mat-tooltip">{{(material.filename| slice:0:20)+'...'}}</span>
-                                  <span class="carouselText" *ngIf="material.filename?.length < 19">{{material.filename}}</span>
+                                  <span class="carouselText" *ngIf="material.filename?.length < 19">{{material.filename}}</span> -->
                                 </div>
                               </div>
                             </mat-card>
@@ -255,10 +256,11 @@
                             </div>
                           </div>
                           <div class="ml-0 mr-0 carouselRow">
-                            <div class="text-center spacing">
-                              <span class="carouselText" *ngIf="material.filename?.length > 19"
+                            <div class="text-center spacing materialTxt" >
+                              <span class="carouselText"matTooltip="{{material.filename}}" matTooltipClass="custom-mat-tooltip" >{{material.filename}}</span>
+                              <!-- <span class="carouselText" *ngIf="material.filename?.length > 19"
                                 matTooltip="{{material.filename}}" matTooltipClass="custom-mat-tooltip">{{(material.filename| slice:0:20)+'...'}}</span>
-                              <span class="carouselText" *ngIf="material.filename?.length < 19">{{material.filename}}</span>
+                              <span class="carouselText" *ngIf="material.filename?.length < 19">{{material.filename}}</span> -->
                               <br>
                             </div>
                           </div>
@@ -527,9 +529,10 @@
                               </div>
                               <div class="row ml-0 mr-0 carouselRow">
                                 <div class="materialTxt">
-                                  <span class="carouselText" *ngIf="material.filename?.length > 19"
+                                  <span class="carouselText"matTooltip="{{material.filename}}" matTooltipClass="custom-mat-tooltip" >{{material.filename}}</span>
+                                  <!-- <span class="carouselText" *ngIf="material.filename?.length > 19"
                                     matTooltip="{{material.filename}}" matTooltipClass="custom-mat-tooltip">{{(material.filename| slice:0:20)+'...'}}</span>
-                                  <span class="carouselText" *ngIf="material.filename?.length < 19">{{material.filename}}</span>
+                                  <span class="carouselText" *ngIf="material.filename?.length < 19">{{material.filename}}</span> -->
                                 </div>
                               </div>
                             </mat-card>
