@@ -1295,7 +1295,7 @@ export class ActivitiesComponent implements OnInit {
       this.videoSource = path.path;
       this.videoPreview(videoDialog, path.path);
     } else {
-      this.toastr.warning('Invalid format');
+      // this.toastr.warning('Invalid format');
     }
   }
 
