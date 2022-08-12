@@ -72,6 +72,11 @@
               <div class="secondStep" *ngIf="secondStep">
                 <h1><span>Enter</span>{{'OTP' | translate}}</h1>
                 <h4>Enter the code generated in your <br /><span>Google Authenticator</span> App</h4>
+                <div class="Error">
+                  <button class="errormgs">
+                    <span>Incorrect or Expired OTP , Please try Again.</span>
+                  </button>
+                </div>
                 <div class="d-flex justify-content-center OTPInput mt-5 mb-5 otp">
                   <ng-otp-input #authInput (onInputChange)="onAuthChange($event)" (keydown.enter)="verifyAuth()"  [config]="{length:6,allowNumbersOnly: true}"></ng-otp-input>
                 </div>
