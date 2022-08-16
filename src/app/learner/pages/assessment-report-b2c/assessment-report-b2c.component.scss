@@ -263,7 +263,7 @@
                                 .scoreCount {
                                     display: flex;
                                     justify-content: space-between;
-                                    margin-right: 4em;
+                                    margin-right: 5em;
                                     .popoverInfoFinal {
                                         position: relative;
                                         cursor: pointer;
@@ -506,7 +506,7 @@
                     background-color: $orangecircle;
                 }
                 &.Color2 {
-                    background-color: $lightshadeblue;
+                    background-color: $GreenColor1;
                 }
                 &.Color3 {
                     background-color: $GreenColor1;
@@ -543,10 +543,11 @@
                     } 
                     .popoverContainer {
                       position: absolute;
-                      width: 230px;
+                      width: 211px;
                       left: -6px;
                       top: 35px;
                       z-index: 9;
+
                       background-color: $color-white;
                       box-shadow: 0 -3px 6px $blackshade1;
                       border-radius: 10px;
@@ -555,7 +556,7 @@
                       font-size: 13px;
                       @include lg {
                         font-size: 14px;
-                        width: 250px;
+                        // width: 250px;
                       }
                       @include xl {
                         font-size: 16px;
@@ -585,6 +586,29 @@
                         color: $lightblue11;
                         font-size: 12px;
                       }
+                      table {
+                        width: 100%;
+                        font-size: 12px;
+                        font-weight: 400;
+                        tr {
+                          th {
+                            text-align: center;
+                            color: #000000;
+                          }
+                        }
+                        td {
+                            text-align: center;
+                          color: #002581;
+                        }
+                        tbody {
+                          tr {
+                            td {
+                              color: #C02222;
+                            }
+                          }
+                        }
+                      }
+                    
                     }
                     &:hover {
                       .popoverContainer {
@@ -677,16 +701,15 @@
             //     border-radius: 60px !important;
             //   }
               .Percentage {
-                label{
-                    position:absolute;
-                    font-size:55px;
-                    font-family: 'Roboto';
-                    font-weight:700 ;
-                    top:75%;
-                    left:30%;
-                    text-align:center;
-                    color: $blackcolor;
-                }
+                position:absolute;
+                font-size:55px;
+                font-family: 'Roboto';
+                font-weight:700 ;
+                bottom: -10%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                text-align:center;
+                color: $blackcolor;
                 span {
                     font-size:22px;
                     font-family: 'Roboto';
