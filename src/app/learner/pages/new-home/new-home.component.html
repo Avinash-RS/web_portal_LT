@@ -115,6 +115,11 @@
         <div class="policy">
           <ul>
             <li>
+              <a (click)="openTroubleshootPopup()">
+                <span>Have issues? Troubleshoot</span>
+              </a>
+            </li>
+            <li>
               <a href="https://lntedutech.com/support-form/" target="newTab">
                 <span>Technical Support</span>
               </a>
@@ -134,3 +139,37 @@
       </div>
     </footer>
   </div>
+
+  
+  <ng-template #troubleshoot>
+    <div class="rightContent">
+      <em (click)="onClose()" class="lxp-Close"></em>
+    </div>
+    <div class="troubleshootPopupContainer">
+      <div class="mainHeader">
+        <div class="leftHeading">
+          <h3><span>Having issues?</span> Troubleshoot Yourself...</h3>
+          <p>If something isn’t working, running a troubleshooter might help. Troubleshooters can find and fix many common problems for you.</p>
+        </div>
+      </div>
+      <div class="mainContent">
+        <div class="leftQA">
+          <div (click)="showRightContent(query)"  *ngFor="let query of queries">
+           <div class="titleContainer" [ngClass]="query.Active?'active':''">
+             <h5>{{query.title}}</h5>
+             <!-- <em class="lxp-Forward_Arrow"></em> -->
+           </div>
+          </div>
+        </div>
+        <div class="rightSteps">
+          <div class="stepsContent"  *ngFor="let query of rightHeader">
+            <h3>{{query.heading}}</h3>
+            <h5 *ngFor="let line of query.steps">{{line.value}}</h5>
+          </div>
+        </div>
+      </div>
+      <div class="contactSupport">
+         <h5>Still have issues? Contact - <a href="https://lntedutech.com/support-form/" target="newTab"><span>Technical Support</span></a></h5> 
+      </div>
+    </div>
+  </ng-template>
