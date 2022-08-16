@@ -506,7 +506,7 @@
                     background-color: $orangecircle;
                 }
                 &.Color2 {
-                    background-color: $lightshadeblue;
+                    background-color: $GreenColor1;
                 }
                 &.Color3 {
                     background-color: $GreenColor1;
@@ -543,7 +543,7 @@
                     } 
                     .popoverContainer {
                       position: absolute;
-                      width: 230px;
+                      width: 211px;
                       left: -6px;
                       top: 35px;
                       z-index: 9;
@@ -587,11 +587,28 @@
                         font-size: 12px;
                       }
                       table {
-                        text-align: center;
-                        th {
-                            margin-right: 10px;
+                        width: 100%;
+                        font-size: 12px;
+                        font-weight: 400;
+                        tr {
+                          th {
+                            text-align: center;
+                            color: #000000;
+                          }
+                        }
+                        td {
+                            text-align: center;
+                          color: #002581;
+                        }
+                        tbody {
+                          tr {
+                            td {
+                              color: #C02222;
+                            }
+                          }
                         }
                       }
+                    
                     }
                     &:hover {
                       .popoverContainer {
