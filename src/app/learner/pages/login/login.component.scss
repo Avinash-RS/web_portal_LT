@@ -724,6 +724,7 @@
         padding: 16px 10px;
         cursor: pointer;
         background-color: $white-grey;
+        position: relative;
         h5 {
           font-size: 14px;
           font-weight: 300;
@@ -743,6 +744,15 @@
           color: $color-white;
           background-color: $color-white;
           transition: 0.2s ease-in;
+          &::before {
+            content: '';
+            position: absolute;
+            width: 3px;
+            height: 100%;
+            background-image: linear-gradient(to bottom, #26c1f6, #00c4e0, #00c4b7, #00bf82, #5cb646);
+            left: 0;
+            top: 0;
+          }
           h5 {
             color: $darkgrey;
             font-weight: 500;
@@ -751,6 +761,15 @@
         &.active {
          color: $color-white;
          background-color: $color-white;
+         &::before {
+           content: '';
+           position: absolute;
+           width: 3px;
+           height: 100%;
+           background-image: linear-gradient(to bottom, #26c1f6, #00c4e0, #00c4b7, #00bf82, #5cb646);
+           left: 0;
+           top: 0;
+         }
          h5 {
            color: $darkgrey;
            font-weight: 500;
