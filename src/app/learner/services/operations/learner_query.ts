@@ -2275,7 +2275,7 @@ export const getLearnerNewCourseReport = gql`
 
 export const getGTULearnerCourseReport = gql`
   query get_GTU_assess_report(
-    $user_id: String!
+    $user_id: String
     $course_id: String!
     $batchid: String!
     $batch_start_date: String!
@@ -2304,6 +2304,7 @@ export const getGTULearnerCourseReport = gql`
         total_slf_learning_pts
         grade
         gradepoint
+        total_assessment_pts
         assessment{
             userid
             marksobtained
