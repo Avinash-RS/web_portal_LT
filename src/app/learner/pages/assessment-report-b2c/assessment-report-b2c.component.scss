@@ -701,16 +701,15 @@
             //     border-radius: 60px !important;
             //   }
               .Percentage {
-                label{
-                    position:absolute;
-                    font-size:55px;
-                    font-family: 'Roboto';
-                    font-weight:700 ;
-                    top:75%;
-                    left:30%;
-                    text-align:center;
-                    color: $blackcolor;
-                }
+                position:absolute;
+                font-size:55px;
+                font-family: 'Roboto';
+                font-weight:700 ;
+                bottom: -10%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                text-align:center;
+                color: $blackcolor;
                 span {
                     font-size:22px;
                     font-family: 'Roboto';
