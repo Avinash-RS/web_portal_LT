@@ -94,11 +94,11 @@
                                           <img alt="" src="https://assets.lntedutech.com/application_images/Group 14025.svg"/>
                                         </button>
                                         <div class="popoverContainer">
-                                          <div class="items">{{'(A) Topics Completed - ' | translate}}<span>{{viewInfo?.selflearning.completed_topic}}/{{viewInfo?.selflearning.no_of_topic}}</span></div>
-                                          <div class="items">{{'(B) Estimated Duration - ' | translate}}<span>{{viewInfo?.selflearning.totalDuration}} Mins</span></div>
-                                          <div class="items">{{'(C) Actual Duration - ' | translate}}<span>{{viewInfo?.selflearning.completedDuration}} Mins</span></div>
+                                          <div class="items">{{'(A) Modules completed - ' | translate}}<span>{{viewInfo?.selflearning.completed_topic}}/{{viewInfo?.selflearning.no_of_topic}}</span></div>
+                                          <div class="items">{{'(B) Duration Spent - ' | translate}}<span>{{viewInfo?.selflearning.completedDuration}} Mins</span></div>
+                                          <div class="items">{{'(C) Estimated Duration - ' | translate}}<span>{{viewInfo?.selflearning.totalDuration}} Mins</span></div>
                                           <div class="calculation">{{'Calculation' | translate}}</div>
-                                          <div class="calcFormula">= (C/B) x 0.5 x 100</div>
+                                          <div class="calcFormula">= SUM(A*0.5,IF((B/C*0.5)>0.5,0.5,(B/C*0.5)))</div>
                                           <div class="calcPercentage">= {{item.weekScore}}</div>
                                         </div>
                                     </div>
