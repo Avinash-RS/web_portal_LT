@@ -321,7 +321,7 @@
                             justify-content: space-between;
                             width: 50%;
                             font-weight: 700;
-                            color: $blackcolor1;
+                            color: $blackcolor;
                             em {
                                 font-size: 15px;
                                 margin-right: 10px;
@@ -510,7 +510,8 @@
                             }
                             .launch {        
                                 position: absolute;
-                                top: 10px;      
+                                top: 10px;
+                                right: 10px;      
                                 div {
                                     background-color: $darkblue1;
                                     border-radius: 5px;

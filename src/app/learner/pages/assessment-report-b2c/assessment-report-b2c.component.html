@@ -12,7 +12,7 @@
                     <div class="selfContent">
                         <div class="percentageCircle">
                             <circle-progress percent="{{reportData?.totalWeekScore}}" [title]="" [suubtitle]="" [titleFontSize]="10"
-                                [titleFontWeight]="600" [clockwise]="false" [showUnits]="false" [radius]=26 [outerStrokeGradient]=true [outerStrokeWidth]=10 [space]=-10
+                                [titleFontWeight]="600" [clockwise]="true" [showUnits]="false" [radius]=26 [outerStrokeGradient]=true [outerStrokeWidth]=10 [space]=-10
                                 [innerStrokeWidth]=10 outerStrokeLinecap=square [outerStrokeColor]="'#5AB64C'"
                                 [outerStrokeGradientStopColor]="'#5AB64C'" [innerStrokeColor]="'#e7e8ea'" [animation]="true"
                                 [animationDuration]="300" [responsive]="true"
@@ -81,7 +81,7 @@
                                 <label>{{item.week}}</label>
                                 <div class="progressStatus">
                                     <circle-progress 
-                                    [titleFontSize] = "14" [clockwise]="false"  [titleFontWeight] = "600" [showUnits]= "true" [percent]="item?.selflearningpercentage"
+                                    [titleFontSize] = "14" [clockwise]="true"  [titleFontWeight] = "600" [showUnits]= "true" [percent]="item?.selflearningpercentage"
                                     [radius]=25 [startFromZero] = false [space]=-6 [outerStrokeGradient]=true [outerStrokeWidth]=6 [outerStrokeColor]='item.Percentage?"#FF5F25":"#00A99D"'
                                     [outerStrokeGradientStopColor]="'#5AB64C'" [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]=6  [lazy]="true"
                                     [animation]="true" [animationDuration]="300" [responsive]="true" [showSubtitle]="false" >
