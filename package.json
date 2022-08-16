@@ -1,11 +1,11 @@
 {
   "name": "lxpfrontend",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "prebuild": "npm --no-git-tag-version version patch",
-    "build": "node --max-old-space-size=8192 node_modules/@angular/cli/bin/ng build --prod --aot=true --buildOptimizer=true --output-hashing=all",
+    "build": "ng build --prod --aot --outputHashing=all --buildOptimizer=true",
     "go": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build",
     "build:qa": "ng build --prod --configuration qa",
     "build:dev": "ng build --prod",
