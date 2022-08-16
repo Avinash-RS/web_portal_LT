@@ -43,23 +43,23 @@
                     <h1>Final Assessment</h1>
                     <div class="finalContent">
                         <div class="percentageCircle">
-                            <circle-progress percent="{{reportData?.assessment[0].marksobtained}}" [title]="" [titleFontSize]="10"
+                            <circle-progress percent="{{reportData?.assessment_score ? reportData?.assessment_score : 0}}" [title]="" [titleFontSize]="10"
                                 [titleFontWeight]="600" [clockwise]="false" [showUnits]="false" [radius]=26 outerStrokeLinecap=square [space]=-10
                                 [outerStrokeGradient]=true [outerStrokeWidth]=10 [outerStrokeColor]="'#4FC5EE'"
                                 [outerStrokeGradientStopColor]="'#4FC5EE'" [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]=10 [animation]="true"
                                 [animationDuration]="300" [responsive]="true"
-                                [subtitle]="reportData?.assessment[0].marksobtained  + '/ ' + reportData?.total_assessment_pts"
+                                [subtitle]="(reportData?.assessment_score ? reportData?.assessment_score : 0 ) + '/ ' + (reportData?.total_assessment_pts ? reportData?.total_assessment_pts :0)"
                                 [showSubtitle]="true" subtitleFontWeight=800 [showTitle]="false" [subtitleColor]="'#333333'"></circle-progress>
                         </div>
                         <div class="textfinal">
                             <ul>
                                 <li>
                                     <label>Total Marks</label>
-                                    <span>{{reportData?.assessment.length? reportData?.total_assessment_pts : 0}}</span>
+                                    <span>{{reportData?.total_assessment_pts ? reportData?.total_assessment_pts : 0}}</span>
                                 </li>
                                 <li> 
                                     <label> Marks Obtained</label>
-                                    <span>{{reportData?.assessment.length? reportData?.assessment[0].marksobtained : 0}}</span>
+                                    <span>{{reportData?.assessment_score ? reportData?.assessment_score : 0}}</span>
                                 </li>
                             </ul>
                         </div>
