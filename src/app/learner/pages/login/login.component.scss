@@ -639,6 +639,12 @@
     padding: 25px !important;
     border-radius: 0 !important;
     position: relative;
+    margin: 20px 0;
+    height: 90%;
+    @include md {
+      height: 100%;
+      margin: 0;
+    }
   }
   .troubleshootPopupContainer {
     position: relative;
@@ -805,7 +811,7 @@
          h5 {
           font-size: 15px;
           font-weight: 400;
-          line-height: 2;
+          line-height: 1.4;
           color: $black1;
          }
       }
