@@ -19,6 +19,7 @@ export class NewHomeComponent implements OnInit {
   authCode;
   qrCode;
   userDetail;
+  iserror = false;
   secondStep = false;
   recaptchaStr = '';
   rightHeader;
@@ -260,7 +261,8 @@ export class NewHomeComponent implements OnInit {
         } else {
           this.loader = false;
           this.authInput.setValue('');
-          this.toastr.warning(response?.data?.verify_tfa_setup?.message);
+          this.iserror = true;
+          // this.toastr.warning(response?.data?.verify_tfa_setup?.message);
         }
       });
     } else {

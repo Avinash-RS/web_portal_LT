@@ -2305,6 +2305,7 @@ export const getGTULearnerCourseReport = gql`
         grade
         gradepoint
         total_assessment_pts
+        assessment_score
         assessment{
             userid
             marksobtained
