@@ -263,7 +263,7 @@
                                 .scoreCount {
                                     display: flex;
                                     justify-content: space-between;
-                                    margin-right: 4em;
+                                    margin-right: 5em;
                                     .popoverInfoFinal {
                                         position: relative;
                                         cursor: pointer;
@@ -547,6 +547,7 @@
                       left: -6px;
                       top: 35px;
                       z-index: 9;
+
                       background-color: $color-white;
                       box-shadow: 0 -3px 6px $blackshade1;
                       border-radius: 10px;
@@ -555,7 +556,7 @@
                       font-size: 13px;
                       @include lg {
                         font-size: 14px;
-                        width: 250px;
+                        // width: 250px;
                       }
                       @include xl {
                         font-size: 16px;
@@ -584,6 +585,12 @@
                       .calcFormula {
                         color: $lightblue11;
                         font-size: 12px;
+                      }
+                      table {
+                        text-align: center;
+                        th {
+                            margin-right: 10px;
+                        }
                       }
                     }
                     &:hover {
