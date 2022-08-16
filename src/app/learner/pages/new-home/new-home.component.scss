@@ -527,11 +527,13 @@
       padding-top: 2em;
       .errormgs {
         padding: 1em;
+        background-color: #FF572208;
+        color: #FF5722;
         font-size: 14px;
         font-family: 'roboto' ;
         font-weight: 500 ;
-        border: 1px solid  red;
-        border-radius: 10px;
+        border: 0.5px solid  #FF5722;
+        border-radius: 5px;
       }
     }
     .qrCode {

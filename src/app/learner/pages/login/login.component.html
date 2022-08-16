@@ -149,8 +149,8 @@
             <h1><span>Forgot</span>{{'Password?'|translate}}</h1>
             <div>
               <mat-form-field appearance="outline">
-                <mat-label class="label-color">{{'Email or Username' | translate}}</mat-label>
-                <input matInput [placeholder]="'Enter the Email or Username' | translate" [formControl]="username" minlength="3" maxlength="250" required>
+                <mat-label class="label-color">{{'Username' | translate}}</mat-label>
+                <input matInput [placeholder]="'Enter the Username' | translate" [formControl]="username" minlength="3" maxlength="250" required>
                 <em class="icon-color lxp-MailOutline" matPrefix></em>
   
                 <mat-error *ngIf="username.invalid">{{getErrorMessage()}}</mat-error>

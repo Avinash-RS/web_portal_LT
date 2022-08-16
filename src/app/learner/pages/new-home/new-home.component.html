@@ -72,7 +72,7 @@
               <div class="secondStep" *ngIf="secondStep">
                 <h1><span>Enter</span>{{'OTP' | translate}}</h1>
                 <h4>Enter the code generated in your <br /><span>Google Authenticator</span> App</h4>
-                <div class="Error">
+                <div class="Error" *ngIf = "iserror" >
                   <button class="errormgs">
                     <span>Incorrect or Expired OTP , Please try Again.</span>
                   </button>
