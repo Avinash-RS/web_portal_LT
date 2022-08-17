@@ -195,7 +195,7 @@
                     margin-bottom: 20px;
                 }
                 .scoreContainer {
-                    width: 100%;
+                    // width: 100%;
                     display: flex;
                     flex-wrap: wrap;
                     // height: calc(100vh - 120px);
@@ -207,11 +207,9 @@
                         width: 100%;
                         background-color: $grey1;
                         border-radius: 10px;
-                        border-top: 0.5px solid #B7B7B7;
-                        border-left: 0.5px solid #B7B7B7;
-                        border-bottom: 0.5px solid #b7b7b7;
-                        // border: 0.5px solid #B7B7B7;
-                        // box-shadow: 0 0 2px 0 $blackshade3;
+                        border-top: 0.5px solid $greycolorborder;
+                        border-left: 0.5px solid $greycolorborder;
+                        border-bottom: 0.5px solid $greycolorborder;
                         margin: 0 0 20px 0;
                         @include md {
                             width: calc(100% - 172px);
@@ -229,13 +227,11 @@
                         .headerTable {
                             padding: 20px;
                             display: flex;
-                            flex-direction: row;
-                            justify-content: space-between;
+                            // flex-direction: row;
+                            // justify-content: space-between;
                             align-items: center;
-                            // border-right: 0.5px solid #B7B7B7;
-                            // border-radius: 10px;
                             label {
-                                width: 100%;
+                               width: 33%;
                                 font-weight: 500;
                                 font-size: 16px;
                             }
@@ -244,26 +240,34 @@
                             li {
                                 position: relative;
                                 display: flex;
-                                justify-content: space-between;
+                                justify-content: space-around;
                                 align-items: center;
                                 font-weight: 600;
                                 font-size: 18px;
-                                transition: all .3s ease;
-                                border-top: 0.5px solid #B7B7B7;
-                                // border-right: 0.5px solid #B7B7B7;
-                                // border-bottom: 0.5px solid #B7B7B7;
+                                // transition: all .3s ease;
+                                border-top: 0.5px solid $greycolorborder;
                                 cursor: pointer;
-                                label {
-                                    margin-left: 2em;
+                                .weeknumber {
+                                    width: 30%;
+                                    margin-left: 1em;
                                 }
+                                // label {
+                                //     // margin-left: 2em;
+                                // }
                                 .progressStatus {
-                                    width: 15%;
-                                    margin-left: 2em;
+                                    width: 33%;
+                                    .circlewidth {
+                                        width: 50%;
+                                    }
+                                    // margin-left: 2em;
                                 }
                                 .scoreCount {
                                     display: flex;
-                                    justify-content: space-between;
-                                    margin-right: 5em;
+                                    width: 30%;
+                                    margin-left: 1em;
+                                    // justify-content: flex-start;
+                                    // justify-content: space-between;
+                                    // margin-right: 5em;
                                     .popoverInfoFinal {
                                         position: relative;
                                         cursor: pointer;
