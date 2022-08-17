@@ -1954,6 +1954,8 @@ export const get_batchwise_learner_dashboard_data_v2 = gql `
           resume_topic
           topic_id
           module_id
+          course_url_type
+          scorm_launch_url
         }
         ongoing
         all
