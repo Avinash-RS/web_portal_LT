@@ -61,7 +61,8 @@ export class AssessmentReportB2cComponent implements OnInit {
     rotation : Math.PI,
     cutoutPercentage: 90
     }
-  
+    finalpercent:number= 0;
+    learnPercent:number = 0;
   constructor(public route: Router, private activeRoute: ActivatedRoute, private learnerService  : LearnerServicesService) { }
 
   ngOnInit(): void {
@@ -84,6 +85,8 @@ export class AssessmentReportB2cComponent implements OnInit {
     this.learnerService.getGTULearnerCourseReport(this.userDetail.user_id,atob(data.id),atob(data.batchId),data.batchStartDate,data.batchEndDate).subscribe((result:any) => {
       if(result.data && result.data.get_GTU_assess_report && result.data.get_GTU_assess_report.success && result.data.get_GTU_assess_report.data.length){
      this.reportData = result.data['get_GTU_assess_report'].data[0];
+     this.finalpercent = this.reportData?.assessment_score ? Math.round((this.reportData.assessment_score / (this.reportData.total_assessment_pts ? this.reportData.total_assessment_pts : 0)) *100) : 0;
+     this.learnPercent = this.reportData?.totalWeekScore ? Math.round((this.reportData.totalWeekScore / (this.reportData.total_slf_learning_pts ? this.reportData.total_slf_learning_pts : 0)) *100) : 0;
      this.reportData.gradepoint = (this.reportData.gradepoint.toString()).padStart(2,0)
      this.reportData.module[0].isActive =true;
      this.topicinfo = this.reportData.module[0];
